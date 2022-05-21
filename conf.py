@@ -18,8 +18,8 @@ from sphinx.util import logging
 from json import JSONDecodeError
 from sphinx.ext.autodoc import ClassDocumenter
 
-
 sys.path.insert(0, os.path.abspath('doxyrest-sphinx'))
+sys.path.insert(0, os.path.abspath('_themes'))
 
 # -- Project information -----------------------------------------------------
 
@@ -42,7 +42,8 @@ extensions = [
     'cpplexer',
     'sphinx.ext.autodoc',
     'sphinx.ext.autosummary',
-    'sphinx_sitemap'
+    'sphinx_sitemap',
+    'openvino_sphinx_theme'
 ]
 
 html_baseurl = 'https://docs.openvino.ai/latest/'
@@ -58,13 +59,13 @@ html_logo = '_static/logo.svg'
 html_copy_source = False
 
 # Add any paths that contain templates here, relative to this directory.
-#templates_path = ['_templates']
+# templates_path = ['_templates']
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = ['_build', 'Thumbs.db',
-                    '.DS_Store', 'openvino/inference-engine']
+                    '.DS_Store', 'openvino','.venv','_themes']
 
 
 panels_add_bootstrap_css = False
@@ -74,25 +75,21 @@ panels_add_bootstrap_css = False
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
+html_theme_path = ['_themes']
 html_theme = "openvino_sphinx_theme"
 
-#html_theme_path = ['_themes']
 
 html_theme_options = {
     "navigation_depth": 5,
     "use_edit_page_button": True,
     "github_url": "https://github.com/openvinotoolkit/openvino",
-    'github_user': 'openvinotoolkit',
-    'github_repo': 'openvino',
-    'github_version': 'master',
-    'host_url': 'https://github.com'
 }
 
 html_context = {
     'current_language': 'English',
     'languages': (('English', '/latest'), ('Chinese', '/cn/latest')),
-    'doxygen_mapping_file': '/home/kputnam/openvino/build/docs/mapping.json',
-    'doxygen_snippet_root': '/home/kputnam/openvino'
+    'doxygen_mapping_file': '/home/kputnam/openvino-docs/openvino/build/docs/mapping.json',
+    'doxygen_snippet_root': '/home/kputnam/openvino-docs/openvino'
 }
 
 repositories = {
@@ -128,57 +125,57 @@ repositories = {
     }
 }
 
-# try:
-#     doxygen_mapping_file = '/home/kputnam/openvino/build/docs/mapping.json'
-#     with open(doxygen_mapping_file, 'r', encoding='utf-8') as f:
-#         doxygen_mapping_file = json.load(f)
-# except JSONDecodeError:
-#     doxygen_mapping_file = dict()
-# except FileNotFoundError:
-#     doxygen_mapping_file = dict()
+try:
+    doxygen_mapping_file = '/home/kputnam/openvino-docs/openvino/build/docs/mapping.json'
+    with open(doxygen_mapping_file, 'r', encoding='utf-8') as f:
+        doxygen_mapping_file = json.load(f)
+except JSONDecodeError:
+    doxygen_mapping_file = dict()
+except FileNotFoundError:
+    doxygen_mapping_file = dict()
 
-# # Add any paths that contain custom static files (such as style sheets) here,
-# # relative to this directory. They are copied after the builtin static files,
-# # so a file named "default.css" will overwrite the builtin "default.css".
-# html_static_path = ['_static']
+# Add any paths that contain custom static files (such as style sheets) here,
+# relative to this directory. They are copied after the builtin static files,
+# so a file named "default.css" will overwrite the builtin "default.css".
+html_static_path = ['_static']
 
-# # monkeypatch sphinx api doc to prevent showing inheritance from object and enum.Enum
-# add_line = ClassDocumenter.add_line
-
-
-# def add_line_no_base_object(self, line, *args, **kwargs):
-#     if line.strip() in ['Bases: :class:`object`', 'Bases: :class:`enum.Enum`']:
-#         return
-#     else:
-#         add_line(self, line, *args, **kwargs)
+# monkeypatch sphinx api doc to prevent showing inheritance from object and enum.Enum
+add_line = ClassDocumenter.add_line
 
 
-# ClassDocumenter.add_line = add_line_no_base_object
-
-# # OpenVINO Python API Reference Configuration
-# exclude_pyapi_methods = ('__weakref__',
-#                          '__doc__',
-#                          '__module__',
-#                          '__dict__',
-#                          'add_openvino_libs_to_path'
-#                          )
+def add_line_no_base_object(self, line, *args, **kwargs):
+    if line.strip() in ['Bases: :class:`object`', 'Bases: :class:`enum.Enum`']:
+        return
+    else:
+        add_line(self, line, *args, **kwargs)
 
 
-# def autodoc_skip_member(app, what, name, obj, skip, options):
-#     return name in exclude_pyapi_methods
+ClassDocumenter.add_line = add_line_no_base_object
+
+# OpenVINO Python API Reference Configuration
+exclude_pyapi_methods = ('__weakref__',
+                         '__doc__',
+                         '__module__',
+                         '__dict__',
+                         'add_openvino_libs_to_path'
+                         )
 
 
-# def setup(app):
-#     logger = logging.getLogger(__name__)
-#     app.add_config_value('doxygen_mapping_file',
-#                          doxygen_mapping_file, rebuild=True)
-#     app.add_config_value('repositories', repositories, rebuild=True)
-#     app.connect('autodoc-skip-member', autodoc_skip_member)
-#     app.add_js_file('js/custom.js')
-#     app.add_js_file('js/graphs.js')
-#     app.add_js_file('js/graphs_ov_tf.js')
-#     try:
-#         shutil.copytree(os.path.join(app.srcdir, 'csv'), os.path.join(
-#             app.outdir, 'csv'), dirs_exist_ok=True)
-#     except FileNotFoundError:
-#         logger.warning('csv directory not found.')
+def autodoc_skip_member(app, what, name, obj, skip, options):
+    return name in exclude_pyapi_methods
+
+
+def setup(app):
+    logger = logging.getLogger(__name__)
+    app.add_config_value('doxygen_mapping_file',
+                         doxygen_mapping_file, rebuild=True)
+    app.add_config_value('repositories', repositories, rebuild=True)
+    app.connect('autodoc-skip-member', autodoc_skip_member)
+    app.add_js_file('js/custom.js')
+    app.add_js_file('js/graphs.js')
+    app.add_js_file('js/graphs_ov_tf.js')
+    try:
+        shutil.copytree(os.path.join(app.srcdir, 'csv'), os.path.join(
+            app.outdir, 'csv'), dirs_exist_ok=True)
+    except FileNotFoundError:
+        logger.warning('csv directory not found.')
