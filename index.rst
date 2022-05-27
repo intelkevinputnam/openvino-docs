@@ -97,7 +97,7 @@ OpenVINO™ Documentation
    
    pages/get_started
    pages/documentation
-   pages/tutorials
+   tutorials
    api/api_reference
-   pages/model_zoo
+   model_zoo
    pages/resources

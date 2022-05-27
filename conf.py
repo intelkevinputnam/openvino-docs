@@ -43,8 +43,11 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.autosummary',
     'sphinx_sitemap',
-    'openvino_sphinx_theme'
+    'openvino_sphinx_theme',
+    'myst_nb'
 ]
+
+nb_execution_mode = 'off' #keeps sphinx from trying to execute jupyter books
 
 html_baseurl = 'https://docs.openvino.ai/latest/'
 
@@ -67,6 +70,10 @@ html_copy_source = False
 exclude_patterns = ['_build', 'Thumbs.db',
                     '.DS_Store', 'openvino','.venv','_themes']
 
+# use these to reduce build time for debug
+exclude_patterns.append('api')
+# exclude_patterns.append('notebooks')
+# exclude_patterns.append('pages')
 
 panels_add_bootstrap_css = False
 
