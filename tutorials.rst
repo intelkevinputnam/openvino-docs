@@ -34,75 +34,75 @@ Getting Started
 =================
 
 .. toctree::
-    :depth: 1
+    :maxdepth: 1
 
-    notebooks/001-hello-world
-    notebooks/002-openvino-api
-    notebooks/003-hello-segmentation
-    notebooks/004-hello-detection
+    notebooks/001-hello-world-with-output
+    notebooks/002-openvino-api-with-output
+    notebooks/003-hello-segmentation-with-output
+    notebooks/004-hello-detection-with-output
 
 Convert & Optimize
 ======================
 
 .. toctree::
-    :depth:
+    :maxdepth: 1
 
-    notebooks/101-tensorflow-to-openvino
-    notebooks/102-pytorch-onnx-to-openvino
-    notebooks/103-paddle-onnx-to-openvino-classification
-    notebooks/104-model-tools
-    notebooks/105-language-quantize-bert
-    notebooks/106-auto-device
-    notebooks/107-speech-recognition-quantization
-    notebooks/110-ct-segmentation-quantize
-    notebooks/data-preparation-ct-scan
-    notebooks/pytorch-monai-training
-    notebooks/111-detection-quantization
-    notebooks/112-pytorch-post-training-quantization-nncf
-    notebooks/113-image-classification-quantization
-    notebooks/114-quantization-simplified-mode
+    notebooks/101-tensorflow-to-openvino-with-output
+    notebooks/102-pytorch-onnx-to-openvino-with-output
+    notebooks/103-paddle-onnx-to-openvino-classification-with-output
+    notebooks/104-model-tools-with-output
+    notebooks/105-language-quantize-bert-with-output
+    notebooks/106-auto-device-with-output
+    notebooks/107-speech-recognition-quantization-with-output
+    notebooks/110-ct-segmentation-quantize-with-output
+    notebooks/data-preparation-ct-scan-with-output
+    notebooks/pytorch-monai-training-with-output
+    notebooks/111-detection-quantization-with-output
+    notebooks/112-pytorch-post-training-quantization-nncf-with-output
+    notebooks/113-image-classification-quantization-with-output
+    notebooks/114-quantization-simplified-mode-with-output
 
 Model Demos
 ==============
 
 .. toctree::
-    :depth:
+    :maxdepth: 1
 
-    notebooks/201-vision-monodepth
-    notebooks/202-vision-superresolution-image
-    notebooks/202-vision-superresolution-video
-    notebooks/205-vision-background-removal
-    notebooks/206-vision-paddlegan-anime
-    notebooks/207-vision-paddlegan-superresolution
-    notebooks/208-optical-character-recognition
-    notebooks/209-handwritten-ocr
-    notebooks/210-ct-scan-live-inference
-    notebooks/211-speech-to-text
-    notebooks/212-onnx-style-transfer
-    notebooks/213-question-answering
-    notebooks/214-vision-paddle-classification
-    notebooks/215-image-inpainting
-    notebooks/217-vision-deblur
-    notebooks/218-vehicle-detection-and-recognition
+    notebooks/201-vision-monodepth-with-output
+    notebooks/202-vision-superresolution-image-with-output
+    notebooks/202-vision-superresolution-video-with-output
+    notebooks/205-vision-background-removal-with-output
+    notebooks/206-vision-paddlegan-anime-with-output
+    notebooks/207-vision-paddlegan-superresolution-with-output
+    notebooks/208-optical-character-recognition-with-output
+    notebooks/209-handwritten-ocr-with-output
+    notebooks/210-ct-scan-live-inference-with-output
+    notebooks/211-speech-to-text-with-output
+    notebooks/212-onnx-style-transfer-with-output
+    notebooks/213-question-answering-with-output
+    notebooks/214-vision-paddle-classification-with-output
+    notebooks/215-image-inpainting-with-output
+    notebooks/217-vision-deblur-with-output
+    notebooks/218-vehicle-detection-and-recognition-with-output
 
 Model Training
 ===============
 
 .. toctree::
-    :depth:
+    :maxdepth: 1
 
-    notebooks/301-tensorflow-training-openvino
-    notebooks/301-tensorflow-training-openvino-pot
-    notebooks/302-pytorch-quantization-aware-training
-    notebooks/305-tensorflow-quantization-aware-training
+    notebooks/301-tensorflow-training-openvino-with-output
+    notebooks/301-tensorflow-training-openvino-pot-with-output
+    notebooks/302-pytorch-quantization-aware-training-with-output
+    notebooks/305-tensorflow-quantization-aware-training-with-output
 
 Live Demos
 ===========
 
 .. toctree::
-    :depth:
-    
-    notebooks/401-object-detection
-    notebooks/402-pose-estimation
-    notebooks/403-action-recognition-webcam
-    notebooks/405-paddle-ocr-webcam
+    :maxdepth: 1
+
+    notebooks/401-object-detection-with-output
+    notebooks/402-pose-estimation-with-output
+    notebooks/403-action-recognition-webcam-with-output
+    notebooks/405-paddle-ocr-webcam-with-output
