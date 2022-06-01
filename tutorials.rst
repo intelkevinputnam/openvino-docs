@@ -34,6 +34,7 @@ Getting Started
 =================
 
 .. toctree::
+    :depth: 1
 
     notebooks/001-hello-world
     notebooks/002-openvino-api
@@ -44,6 +45,7 @@ Convert & Optimize
 ======================
 
 .. toctree::
+    :depth:
 
     notebooks/101-tensorflow-to-openvino
     notebooks/102-pytorch-onnx-to-openvino
@@ -64,6 +66,7 @@ Model Demos
 ==============
 
 .. toctree::
+    :depth:
 
     notebooks/201-vision-monodepth
     notebooks/202-vision-superresolution-image
@@ -86,6 +89,7 @@ Model Training
 ===============
 
 .. toctree::
+    :depth:
 
     notebooks/301-tensorflow-training-openvino
     notebooks/301-tensorflow-training-openvino-pot
@@ -96,7 +100,8 @@ Live Demos
 ===========
 
 .. toctree::
-
+    :depth:
+    
     notebooks/401-object-detection
     notebooks/402-pose-estimation
     notebooks/403-action-recognition-webcam

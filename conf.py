@@ -44,7 +44,8 @@ extensions = [
     'sphinx.ext.autosummary',
     'sphinx_sitemap',
     'openvino_sphinx_theme',
-    'myst_nb'
+    'myst_nb',
+    'sphinx_md'
 ]
 
 nb_execution_mode = 'off' #keeps sphinx from trying to execute jupyter books

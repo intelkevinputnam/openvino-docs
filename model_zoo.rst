@@ -14,22 +14,22 @@ Model Zoo
    :hidden:
    :caption: Pre-Trained Models
 
-   omz_models_group_intel
-   omz_models_group_public
+   models/intel/index.md
+   models/public/index.md
 
 .. toctree::
    :maxdepth: 1
    :hidden:
    :caption: Demo Applications
 
-   omz_demos
+   demos/README.md
 
 .. toctree::
    :maxdepth: 1
    :hidden:
    :caption: Model API
 
-   omz_model_api_ovms_adapter
+   demos/common/python/openvino/model_zoo/model_api/adapters/ovms_adapter.md
 
 Open Model Zoo for OpenVINO™ toolkit delivers a wide variety of free, pre-trained deep learning models and demo applications that provide full application templates to help you implement deep learning in Python, C++, or OpenCV Graph API (G-API). Models and demos are avalable in the `Open Model Zoo GitHub repo <https://github.com/openvinotoolkit/open_model_zoo>`__ and licensed under Apache License Version 2.0.
 

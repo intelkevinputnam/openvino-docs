@@ -1,4 +1,4 @@
 git clone https://github.com/openvinotoolkit/open_model_zoo.git
-mkdir model_zoo
-python3 move_zoo_models.py
+cp -rf open_model_zoo/models models
+cp -rf open_model_zoo/demos demos
 rm -rf open_model_zoo
