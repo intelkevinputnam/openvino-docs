@@ -8,14 +8,14 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
 
     steps:
     - uses: actions/checkout@v1
     - name: Install dependencies
       run: |
         export PATH="$HOME/.local/bin:$PATH"
-        sudo apt-get install -y python3-setuptools build-essential cmake git texlive-full graphviz doxygen
+        sudo apt-get install -y python3-setuptools build-essential cmake git texlive-full graphviz doxygen libusb-1.0-0-dev
         ./install_dependencies.sh
     - name: Build the docs
       run: |
