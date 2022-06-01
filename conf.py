@@ -72,7 +72,7 @@ exclude_patterns = ['_build', 'Thumbs.db',
                     '.DS_Store', 'openvino','.venv','_themes']
 
 # use these to reduce build time for debug
-exclude_patterns.append('api')
+# exclude_patterns.append('api')
 # exclude_patterns.append('notebooks')
 # exclude_patterns.append('pages')
 
