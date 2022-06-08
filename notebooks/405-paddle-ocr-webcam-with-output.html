@@ -1,0 +1,1077 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PaddleOCR with OpenVINO &#8212; OpenVINO™  documentation</title>
+    
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/blank.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/doxyrest-pygments.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <link href="../_static/css/media/favicon.ico" rel="shortcut icon">
+    <link rel="stylesheet" href="../_static/css/openvino_sphinx_theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/button.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/input.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/textfield.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/tabs.css" type="text/css" />
+    <script src="../_static/js/openvino_sphinx_theme.js"></script>
+    <link rel="stylesheet" href="../_static/css/viewer.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/0.5.7/chartjs-plugin-annotation.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-barchart-background@1.3.0/build/Plugin.Barchart.Background.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-deferred@1"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.1/papaparse.min.js"></script>
+    <script src="../_static/js/viewer.min.js"></script>
+    <script src="/assets/versions_raw.js"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/tabs.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/js/custom.js"></script>
+    <script src="../_static/js/graphs.js"></script>
+    <script src="../_static/js/graphs_ov_tf.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/target-highlight.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <link rel="canonical" href="https://docs.openvino.ai/latest/notebooks/405-paddle-ocr-webcam-with-output.html" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Model Zoo" href="../model_zoo.html" />
+    <link rel="prev" title="Human Action Recognition with OpenVINO" href="403-action-recognition-webcam-with-output.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+      <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+
+<a class="navbar-brand" href="../index.html">
+  <img src="../_static/logo.svg" class="logo" alt="logo">
+</a>
+
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../pages/get_started.html">
+  Get Started
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../pages/documentation.html">
+  Documentation
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../tutorials.html">
+  Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../model_zoo.html">
+  Model Zoo
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../pages/resources.html">
+  Resources
+ </a>
+</li>
+
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/openvinotoolkit/openvino" rel="noopener" target="_blank" title="GitHub">
+            <span><i class="sst-github"></i></span>
+            <label class="sr-only">GitHub</label>
+          </a>
+        </li>
+</ul>
+      </div>
+      
+      <div class="navbar-end-item">
+        
+<div class="dropdown sst-dropdown sst-dropdown-navbar">
+  <button class="btn sst-btn dropdown-toggle" type="button" id="version-selector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+  <div class="dropdown-menu" aria-labelledby="version-selector">
+  </div>
+</div>
+      </div>
+      
+      <div class="navbar-end-item">
+        
+
+<div class="dropdown sst-dropdown sst-dropdown-navbar">
+  <button class="btn sst-btn dropdown-toggle" type="button" id="language-selector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">English</button>
+  <div class="dropdown-menu" aria-labelledby="language-selector">
+    
+      
+        <a class="dropdown-item font-weight-bold" href="/latest/notebooks/405-paddle-ocr-webcam-with-output.html">English</a>
+      
+    
+      
+        <a  class="dropdown-item" href="/cn/latest/notebooks/405-paddle-ocr-webcam-with-output.html">Chinese</a>
+      
+    
+  </div>
+</div>
+
+      </div>
+      
+    </div>
+  </div>
+</div>
+        <div id="collapse-nav-wrapper" class="container-xl">
+          <button id="collapse-nav" class="button bttn-prm button-size-m" type="button" data-toggle="collapse" data-target="#nav-tree" aria-expanded="false" aria-controls="nav-tree">
+            Documentation navigation <i class="fas fa-chevron-down"></i>
+          </button>
+        </div>
+      </nav>
+      <div class="transition-banner container-fluid alert alert-info alert-dismissible fade show" role="alert">
+        <p>OpenVINO 2022.1 introduces a new version of OpenVINO API (API 2.0). For more information on the changes and transition steps, see the <a href="https://docs.openvino.ai/latest/openvino_2_0_transition_guide.html">transition guide</a></p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar" id="nav-tree"><form class="searchForm bd-search d-flex align-items-center" action="../search.html" method="get">
+    <i class="icon fas fa-search"></i>
+    <input type="search" class="form-control" name="query" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="001-hello-world-with-output.html">
+   Hello Image Classification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="002-openvino-api-with-output.html">
+   OpenVINO API Tutorial
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="003-hello-segmentation-with-output.html">
+   Hello Image Segmentation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="004-hello-detection-with-output.html">
+   Hello Object Detection
+  </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="101-tensorflow-to-openvino-with-output.html">
+   Convert a TensorFlow Model to OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="102-pytorch-onnx-to-openvino-with-output.html">
+   Convert a PyTorch Model to ONNX and OpenVINO IR
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="103-paddle-onnx-to-openvino-classification-with-output.html">
+   Convert a PaddlePaddle Model to ONNX and OpenVINO IR
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="104-model-tools-with-output.html">
+   Working with Open Model Zoo Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="105-language-quantize-bert-with-output.html">
+   Quantize NLP models with OpenVINO Post-Training Optimization Tool ​
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="106-auto-device-with-output.html">
+   Automatic Device Selection with OpenVINO™
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="110-ct-segmentation-quantize-with-output.html">
+   Quantize a Segmentation Model and Show Live Inference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="111-detection-quantization-with-output.html">
+   Object Detection Quantization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="112-pytorch-post-training-quantization-nncf-with-output.html">
+   Post-Training Quantization of PyTorch models with NNCF
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="113-image-classification-quantization-with-output.html">
+   Quantization of Image Classification Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="114-quantization-simplified-mode-with-output.html">
+   INT8 Quantization with Post-training Optimization Tool (POT) in Simplified Mode tutorial
+  </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="201-vision-monodepth-with-output.html">
+   Monodepth Estimation with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="202-vision-superresolution-image-with-output.html">
+   Single Image Super Resolution with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="202-vision-superresolution-video-with-output.html">
+   Video Super Resolution with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="205-vision-background-removal-with-output.html">
+   Image Background Removal with U^2-Net and OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="206-vision-paddlegan-anime-with-output.html">
+   Photos to Anime with PaddleGAN and OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="207-vision-paddlegan-superresolution-with-output.html">
+   Super Resolution with PaddleGAN and OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="208-optical-character-recognition-with-output.html">
+   Optical Character Recognition (OCR) with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="209-handwritten-ocr-with-output.html">
+   Handwritten Chinese and Japanese OCR
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="210-ct-scan-live-inference-with-output.html">
+   Live Inference and Benchmark CT-scan Data with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="211-speech-to-text-with-output.html">
+   Speech to Text with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="212-onnx-style-transfer-with-output.html">
+   Style Transfer on ONNX Models with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="213-question-answering-with-output.html">
+   Interactive question answering with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="214-vision-paddle-classification-with-output.html">
+   PaddlePaddle Image Classification with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="215-image-inpainting-with-output.html">
+   Image In-painting with OpenVINO™
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="217-vision-deblur-with-output.html">
+   Deblur Photos with DeblurGAN-v2 and OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="218-vehicle-detection-and-recognition-with-output.html">
+   Vehicle Detection And Recognition with OpenVINO
+  </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="301-tensorflow-training-openvino-with-output.html">
+   From Training to Deployment with TensorFlow and OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="301-tensorflow-training-openvino-pot-with-output.html">
+   Post-Training Quantization with TensorFlow Classification Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="302-pytorch-quantization-aware-training-with-output.html">
+   Quantization Aware Training with NNCF, using PyTorch framework
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="305-tensorflow-quantization-aware-training-with-output.html">
+   Quantization Aware Training with NNCF, using TensorFlow Framework
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="401-object-detection-with-output.html">
+   Live Object Detection with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="402-pose-estimation-with-output.html">
+   Live Human Pose Estimation with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="403-action-recognition-webcam-with-output.html">
+   Human Action Recognition with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   PaddleOCR with OpenVINO
+  </a>
+ </li>
+</ul>
+
+  </div>
+</nav>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+              
+              <div class="toc-item">
+                
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#imports">
+   Imports
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#models-for-paddleocr">
+     Models for PaddleOCR
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#download-the-model-for-text-detection">
+       Download the Model for Text
+       <strong>
+        Detection
+       </strong>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#load-the-model-for-text-detection">
+       Load the Model for Text
+       <strong>
+        Detection
+       </strong>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#download-the-model-for-text-recognition">
+       Download the Model for Text
+       <strong>
+        Recognition
+       </strong>
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#load-the-model-for-text-recognition-with-dynamic-shape">
+       Load the Model for Text
+       <strong>
+        Recognition
+       </strong>
+       with Dynamic Shape
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#preprocessing-image-functions-for-text-detection-and-recognition">
+     Preprocessing image functions for text detection and recognition
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#postprocessing-image-for-text-detection">
+     Postprocessing image for text detection
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#main-processing-function-for-paddleocr">
+     Main processing function for PaddleOCR
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#run-live-paddleocr-with-openvino">
+   Run Live PaddleOCR with OpenVINO
+  </a>
+ </li>
+</ul>
+
+</nav>
+              </div>
+              
+              <div class="toc-item">
+                <div class="tocsection download-docs">
+  <div class="dropdown sst-dropdown">
+    <button class="button bttn-prm button-size-m" data-display="static" type="button" id="download-options"
+      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Download Docs
+    </button>
+    <div class="dropdown-menu" aria-labelledby="download-options">
+      <a class="dropdown-item" href="#" onclick="window.print()">.pdf</a>
+      <a id="download-zip-btn" class="dropdown-item" href="#">.zip</a>
+    </div>
+  </div>
+</div>
+              </div>
+              
+            
+          </div>
+          
+
+          
+          
+              
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+
+<div class="tocsection editthispage">
+    <a href="None">
+        <i class="fas fa-pencil-alt"></i> Edit this page
+    </a>
+</div>
+
+            
+                <div>
+                  
+  <div class="section" id="paddleocr-with-openvino">
+<h1>PaddleOCR with OpenVINO<a class="headerlink" href="#paddleocr-with-openvino" title="Permalink to this headline">¶</a></h1>
+<p>This demo shows how to run PPOCR model on OpenVINO natively. Instead of
+exporting the PaddlePaddle model to ONNX and then convert to the
+Intermediate Representation (IR) format through OpenVINO Model
+Optimizer, we can now read directly from the PaddlePaddle Model without
+any conversions.
+<a class="reference external" href="https://github.com/PaddlePaddle/PaddleOCR">PaddleOCR</a> is an
+ultra-light OCR model trained with PaddlePaddle deep learning framework,
+that aims to create multilingual and practical OCR tools.</p>
+<p>The paddleOCR pre-trained model used in the demo refer to the “Chinese
+and English ultra-lightweight PP-OCR model (9.4M)”. More open-sourced
+pre-trained models could be downloaded at <a class="reference external" href="https://github.com/PaddlePaddle/PaddleOCR">PaddleOCR
+Github</a> or <a class="reference external" href="https://gitee.com/paddlepaddle/PaddleOCR">PaddleOCR
+Gitee</a>. Working pipeline of
+the paddleOCR is as follows:</p>
+<blockquote>
+<div><p>Note: <em>To use this notebook with a webcam, you need to run the
+notebook on a computer with a webcam. If you run the notebook on a
+server, the webcam will not work. You can still do inference on a
+video.</em></p>
+</div></blockquote>
+<div class="section" id="imports">
+<h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">cv2</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">paddle</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">collections</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span> <span class="nn">tarfile</span>
+<span class="kn">import</span> <span class="nn">urllib.request</span>
+
+<span class="kn">from</span> <span class="nn">openvino.runtime</span> <span class="kn">import</span> <span class="n">Core</span>
+<span class="kn">from</span> <span class="nn">IPython</span> <span class="kn">import</span> <span class="n">display</span>
+<span class="kn">import</span> <span class="nn">copy</span>
+
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;../utils&quot;</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">notebook_utils</span> <span class="k">as</span> <span class="nn">utils</span>
+<span class="kn">import</span> <span class="nn">pre_post_processing</span> <span class="k">as</span> <span class="nn">processing</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8</span><span class="o">.</span><span class="mi">12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">paddle</span><span class="o">/</span><span class="n">vision</span><span class="o">/</span><span class="n">transforms</span><span class="o">/</span><span class="n">functional_pil</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">36</span><span class="p">:</span> <span class="ne">DeprecationWarning</span><span class="p">:</span> <span class="n">NEAREST</span> <span class="ow">is</span> <span class="n">deprecated</span> <span class="ow">and</span> <span class="n">will</span> <span class="n">be</span> <span class="n">removed</span> <span class="ow">in</span> <span class="n">Pillow</span> <span class="mi">10</span> <span class="p">(</span><span class="mi">2023</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">01</span><span class="p">)</span><span class="o">.</span> <span class="n">Use</span> <span class="n">Resampling</span><span class="o">.</span><span class="n">NEAREST</span> <span class="ow">or</span> <span class="n">Dither</span><span class="o">.</span><span class="n">NONE</span> <span class="n">instead</span><span class="o">.</span>
+  <span class="s1">&#39;nearest&#39;</span><span class="p">:</span> <span class="n">Image</span><span class="o">.</span><span class="n">NEAREST</span><span class="p">,</span>
+<span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8</span><span class="o">.</span><span class="mi">12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">paddle</span><span class="o">/</span><span class="n">vision</span><span class="o">/</span><span class="n">transforms</span><span class="o">/</span><span class="n">functional_pil</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">37</span><span class="p">:</span> <span class="ne">DeprecationWarning</span><span class="p">:</span> <span class="n">BILINEAR</span> <span class="ow">is</span> <span class="n">deprecated</span> <span class="ow">and</span> <span class="n">will</span> <span class="n">be</span> <span class="n">removed</span> <span class="ow">in</span> <span class="n">Pillow</span> <span class="mi">10</span> <span class="p">(</span><span class="mi">2023</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">01</span><span class="p">)</span><span class="o">.</span> <span class="n">Use</span> <span class="n">Resampling</span><span class="o">.</span><span class="n">BILINEAR</span> <span class="n">instead</span><span class="o">.</span>
+  <span class="s1">&#39;bilinear&#39;</span><span class="p">:</span> <span class="n">Image</span><span class="o">.</span><span class="n">BILINEAR</span><span class="p">,</span>
+<span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8</span><span class="o">.</span><span class="mi">12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">paddle</span><span class="o">/</span><span class="n">vision</span><span class="o">/</span><span class="n">transforms</span><span class="o">/</span><span class="n">functional_pil</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">38</span><span class="p">:</span> <span class="ne">DeprecationWarning</span><span class="p">:</span> <span class="n">BICUBIC</span> <span class="ow">is</span> <span class="n">deprecated</span> <span class="ow">and</span> <span class="n">will</span> <span class="n">be</span> <span class="n">removed</span> <span class="ow">in</span> <span class="n">Pillow</span> <span class="mi">10</span> <span class="p">(</span><span class="mi">2023</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">01</span><span class="p">)</span><span class="o">.</span> <span class="n">Use</span> <span class="n">Resampling</span><span class="o">.</span><span class="n">BICUBIC</span> <span class="n">instead</span><span class="o">.</span>
+  <span class="s1">&#39;bicubic&#39;</span><span class="p">:</span> <span class="n">Image</span><span class="o">.</span><span class="n">BICUBIC</span><span class="p">,</span>
+<span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8</span><span class="o">.</span><span class="mi">12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">paddle</span><span class="o">/</span><span class="n">vision</span><span class="o">/</span><span class="n">transforms</span><span class="o">/</span><span class="n">functional_pil</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">39</span><span class="p">:</span> <span class="ne">DeprecationWarning</span><span class="p">:</span> <span class="n">BOX</span> <span class="ow">is</span> <span class="n">deprecated</span> <span class="ow">and</span> <span class="n">will</span> <span class="n">be</span> <span class="n">removed</span> <span class="ow">in</span> <span class="n">Pillow</span> <span class="mi">10</span> <span class="p">(</span><span class="mi">2023</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">01</span><span class="p">)</span><span class="o">.</span> <span class="n">Use</span> <span class="n">Resampling</span><span class="o">.</span><span class="n">BOX</span> <span class="n">instead</span><span class="o">.</span>
+  <span class="s1">&#39;box&#39;</span><span class="p">:</span> <span class="n">Image</span><span class="o">.</span><span class="n">BOX</span><span class="p">,</span>
+<span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8</span><span class="o">.</span><span class="mi">12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">paddle</span><span class="o">/</span><span class="n">vision</span><span class="o">/</span><span class="n">transforms</span><span class="o">/</span><span class="n">functional_pil</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">40</span><span class="p">:</span> <span class="ne">DeprecationWarning</span><span class="p">:</span> <span class="n">LANCZOS</span> <span class="ow">is</span> <span class="n">deprecated</span> <span class="ow">and</span> <span class="n">will</span> <span class="n">be</span> <span class="n">removed</span> <span class="ow">in</span> <span class="n">Pillow</span> <span class="mi">10</span> <span class="p">(</span><span class="mi">2023</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">01</span><span class="p">)</span><span class="o">.</span> <span class="n">Use</span> <span class="n">Resampling</span><span class="o">.</span><span class="n">LANCZOS</span> <span class="n">instead</span><span class="o">.</span>
+  <span class="s1">&#39;lanczos&#39;</span><span class="p">:</span> <span class="n">Image</span><span class="o">.</span><span class="n">LANCZOS</span><span class="p">,</span>
+<span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8</span><span class="o">.</span><span class="mi">12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">paddle</span><span class="o">/</span><span class="n">vision</span><span class="o">/</span><span class="n">transforms</span><span class="o">/</span><span class="n">functional_pil</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">41</span><span class="p">:</span> <span class="ne">DeprecationWarning</span><span class="p">:</span> <span class="n">HAMMING</span> <span class="ow">is</span> <span class="n">deprecated</span> <span class="ow">and</span> <span class="n">will</span> <span class="n">be</span> <span class="n">removed</span> <span class="ow">in</span> <span class="n">Pillow</span> <span class="mi">10</span> <span class="p">(</span><span class="mi">2023</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">01</span><span class="p">)</span><span class="o">.</span> <span class="n">Use</span> <span class="n">Resampling</span><span class="o">.</span><span class="n">HAMMING</span> <span class="n">instead</span><span class="o">.</span>
+  <span class="s1">&#39;hamming&#39;</span><span class="p">:</span> <span class="n">Image</span><span class="o">.</span><span class="n">HAMMING</span>
+</pre></div>
+</div>
+<div class="section" id="models-for-paddleocr">
+<h3>Models for PaddleOCR<a class="headerlink" href="#models-for-paddleocr" title="Permalink to this headline">¶</a></h3>
+<p>PaddleOCR includes two parts of deep learning models, text detection and
+text recognition. Pre-trained models used in the demo are downloaded and
+stored in the “model” folder. Other pre-trained models for PaddleOCR
+could be download at <a class="reference external" href="https://github.com/PaddlePaddle/PaddleOCR">PaddleOCR
+Github</a> or <a class="reference external" href="https://gitee.com/paddlepaddle/PaddleOCR">PaddleOCR
+Gitee</a>.</p>
+<p>Only a few lines of code are required to run the model. First, we
+initialize the runtime for inference. Then we read the network
+architecture and model weights from the <code class="docutils literal notranslate"><span class="pre">.pdmodel</span></code> and <code class="docutils literal notranslate"><span class="pre">.pdiparams</span></code>
+files to load onto the CPU.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the function to download text detection and recognition models from PaddleOCR resources</span>
+
+<span class="k">def</span> <span class="nf">run_model_download</span><span class="p">(</span><span class="n">model_url</span><span class="p">,</span> <span class="n">model_file_path</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Download pre-trained models from PaddleOCR resources</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        model_url: url link to pre-trained models</span>
+<span class="sd">        model_file_path: file path to store the downloaded model</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">model_name</span> <span class="o">=</span> <span class="n">model_url</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">model_file_path</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Model already exists&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Download the model from the server, and untar it.</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Downloading the pre-trained model... May take a while...&quot;</span><span class="p">)</span>
+
+        <span class="c1"># create a directory</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s2">&quot;model&quot;</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlretrieve</span><span class="p">(</span><span class="n">model_url</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;model/</span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2"> &quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Model Downloaded&quot;</span><span class="p">)</span>
+
+        <span class="n">file</span> <span class="o">=</span> <span class="n">tarfile</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;model/</span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2"> &quot;</span><span class="p">)</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="s2">&quot;model&quot;</span><span class="p">)</span>
+        <span class="n">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">res</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Model Extracted to </span><span class="si">{</span><span class="n">model_file_path</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error Extracting the model. Please check the network.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="section" id="download-the-model-for-text-detection">
+<h4>Download the Model for Text <strong>Detection</strong><a class="headerlink" href="#download-the-model-for-text-detection" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Directory where model will be downloaded</span>
+
+<span class="n">det_model_url</span> <span class="o">=</span> <span class="s2">&quot;https://paddleocr.bj.bcebos.com/dygraph_v2.0/ch/ch_ppocr_mobile_v2.0_det_infer.tar&quot;</span>
+<span class="n">det_model_file_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;model/ch_ppocr_mobile_v2.0_det_infer/inference.pdmodel&quot;</span><span class="p">)</span>
+
+<span class="n">run_model_download</span><span class="p">(</span><span class="n">det_model_url</span><span class="p">,</span> <span class="n">det_model_file_path</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Downloading</span> <span class="n">the</span> <span class="n">pre</span><span class="o">-</span><span class="n">trained</span> <span class="n">model</span><span class="o">...</span> <span class="n">May</span> <span class="n">take</span> <span class="n">a</span> <span class="k">while</span><span class="o">...</span>
+<span class="n">Model</span> <span class="n">Downloaded</span>
+<span class="n">Model</span> <span class="n">Extracted</span> <span class="n">to</span> <span class="n">model</span><span class="o">/</span><span class="n">ch_ppocr_mobile_v2</span><span class="o">.</span><span class="mi">0</span><span class="n">_det_infer</span><span class="o">/</span><span class="n">inference</span><span class="o">.</span><span class="n">pdmodel</span><span class="o">.</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="load-the-model-for-text-detection">
+<h4>Load the Model for Text <strong>Detection</strong><a class="headerlink" href="#load-the-model-for-text-detection" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># initialize inference engine for text detection</span>
+<span class="n">core</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span>
+<span class="n">det_model</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">read_model</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">det_model_file_path</span><span class="p">)</span>
+<span class="n">det_compiled_model</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">det_model</span><span class="p">,</span> <span class="n">device_name</span><span class="o">=</span><span class="s2">&quot;CPU&quot;</span><span class="p">)</span>
+
+<span class="c1"># get input and output nodes for text detection</span>
+<span class="n">det_input_layer</span> <span class="o">=</span> <span class="n">det_compiled_model</span><span class="o">.</span><span class="n">input</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">det_output_layer</span> <span class="o">=</span> <span class="n">det_compiled_model</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="download-the-model-for-text-recognition">
+<h4>Download the Model for Text <strong>Recognition</strong><a class="headerlink" href="#download-the-model-for-text-recognition" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rec_model_url</span> <span class="o">=</span> <span class="s2">&quot;https://paddleocr.bj.bcebos.com/dygraph_v2.0/ch/ch_ppocr_mobile_v2.0_rec_infer.tar&quot;</span>
+<span class="n">rec_model_file_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;model/ch_ppocr_mobile_v2.0_rec_infer/inference.pdmodel&quot;</span><span class="p">)</span>
+
+<span class="n">run_model_download</span><span class="p">(</span><span class="n">rec_model_url</span><span class="p">,</span> <span class="n">rec_model_file_path</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Downloading</span> <span class="n">the</span> <span class="n">pre</span><span class="o">-</span><span class="n">trained</span> <span class="n">model</span><span class="o">...</span> <span class="n">May</span> <span class="n">take</span> <span class="n">a</span> <span class="k">while</span><span class="o">...</span>
+<span class="n">Model</span> <span class="n">Downloaded</span>
+<span class="n">Model</span> <span class="n">Extracted</span> <span class="n">to</span> <span class="n">model</span><span class="o">/</span><span class="n">ch_ppocr_mobile_v2</span><span class="o">.</span><span class="mi">0</span><span class="n">_rec_infer</span><span class="o">/</span><span class="n">inference</span><span class="o">.</span><span class="n">pdmodel</span><span class="o">.</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="load-the-model-for-text-recognition-with-dynamic-shape">
+<h4>Load the Model for Text <strong>Recognition</strong> with Dynamic Shape<a class="headerlink" href="#load-the-model-for-text-recognition-with-dynamic-shape" title="Permalink to this headline">¶</a></h4>
+<p>Input to text recognition model refers to detected bounding boxes with
+different image sizes, i.e, dynamic input shapes. Hence:</p>
+<ol class="arabic simple">
+<li><p>Input dimension with dynamic input shapes needs to be specified
+before loading text recognition model</p></li>
+<li><p>Dynamic shape is specified by assigning -1 to the input dimension or
+by setting the upper bound of the input dimension using, for example,
+Dimension(1, 512)</p></li>
+</ol>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># read the model and corresponding weights from file</span>
+<span class="n">rec_model</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">read_model</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">rec_model_file_path</span><span class="p">)</span>
+
+<span class="c1"># assign dynamic shapes to every input layer on the last dimension</span>
+<span class="k">for</span> <span class="n">input_layer</span> <span class="ow">in</span> <span class="n">rec_model</span><span class="o">.</span><span class="n">inputs</span><span class="p">:</span>
+    <span class="n">input_shape</span> <span class="o">=</span> <span class="n">input_layer</span><span class="o">.</span><span class="n">partial_shape</span>
+    <span class="n">input_shape</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="n">rec_model</span><span class="o">.</span><span class="n">reshape</span><span class="p">({</span><span class="n">input_layer</span><span class="p">:</span> <span class="n">input_shape</span><span class="p">})</span>
+
+<span class="n">rec_compiled_model</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">rec_model</span><span class="p">,</span> <span class="n">device_name</span><span class="o">=</span><span class="s2">&quot;CPU&quot;</span><span class="p">)</span>
+
+<span class="c1"># get input and output nodes</span>
+<span class="n">rec_input_layer</span> <span class="o">=</span> <span class="n">rec_compiled_model</span><span class="o">.</span><span class="n">input</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">rec_output_layer</span> <span class="o">=</span> <span class="n">rec_compiled_model</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="preprocessing-image-functions-for-text-detection-and-recognition">
+<h3>Preprocessing image functions for text detection and recognition<a class="headerlink" href="#preprocessing-image-functions-for-text-detection-and-recognition" title="Permalink to this headline">¶</a></h3>
+<p>Define preprosessing functions for text detection and recognition: 1.
+Preprocessing for text detection: resize and normalize input images 2.
+Preprocessing for text recognition: resize and normalize detected box
+images to the same size (e.g. size (3, 32, 320) for images with Chinese
+text) for easy batching in inference</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Preprocess for text detection</span>
+<span class="k">def</span> <span class="nf">image_preprocess</span><span class="p">(</span><span class="n">input_image</span><span class="p">,</span> <span class="n">size</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Preprocess input image for text detection</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        input_image: input image</span>
+<span class="sd">        size: value for the image to be resized for text detection model</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">input_image</span><span class="p">,</span> <span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">size</span><span class="p">))</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="mi">255</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="c1"># NormalizeImage: {mean: [0.485, 0.456, 0.406], std: [0.229, 0.224, 0.225], is_scale: True}</span>
+    <span class="n">img_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.485</span><span class="p">,</span> <span class="mf">0.456</span><span class="p">,</span> <span class="mf">0.406</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">img_std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.229</span><span class="p">,</span> <span class="mf">0.224</span><span class="p">,</span> <span class="mf">0.225</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">img</span> <span class="o">-=</span> <span class="n">img_mean</span>
+    <span class="n">img</span> <span class="o">/=</span> <span class="n">img_std</span>
+    <span class="k">return</span> <span class="n">img</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Preprocess for text recognition</span>
+<span class="k">def</span> <span class="nf">resize_norm_img</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">max_wh_ratio</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Resize input image for text recognition</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        img: bounding box image from text detection</span>
+<span class="sd">        max_wh_ratio: value for the resizing for text recognition model</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">rec_image_shape</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">320</span><span class="p">]</span>
+    <span class="n">imgC</span><span class="p">,</span> <span class="n">imgH</span><span class="p">,</span> <span class="n">imgW</span> <span class="o">=</span> <span class="n">rec_image_shape</span>
+    <span class="k">assert</span> <span class="n">imgC</span> <span class="o">==</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">character_type</span> <span class="o">=</span> <span class="s2">&quot;ch&quot;</span>
+    <span class="k">if</span> <span class="n">character_type</span> <span class="o">==</span> <span class="s2">&quot;ch&quot;</span><span class="p">:</span>
+        <span class="n">imgW</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="mi">32</span> <span class="o">*</span> <span class="n">max_wh_ratio</span><span class="p">))</span>
+    <span class="n">h</span><span class="p">,</span> <span class="n">w</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">ratio</span> <span class="o">=</span> <span class="n">w</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">imgH</span> <span class="o">*</span> <span class="n">ratio</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">imgW</span><span class="p">:</span>
+        <span class="n">resized_w</span> <span class="o">=</span> <span class="n">imgW</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">resized_w</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">imgH</span> <span class="o">*</span> <span class="n">ratio</span><span class="p">))</span>
+    <span class="n">resized_image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="p">(</span><span class="n">resized_w</span><span class="p">,</span> <span class="n">imgH</span><span class="p">))</span>
+    <span class="n">resized_image</span> <span class="o">=</span> <span class="n">resized_image</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span>
+    <span class="n">resized_image</span> <span class="o">=</span> <span class="n">resized_image</span><span class="o">.</span><span class="n">transpose</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span> <span class="o">/</span> <span class="mi">255</span>
+    <span class="n">resized_image</span> <span class="o">-=</span> <span class="mf">0.5</span>
+    <span class="n">resized_image</span> <span class="o">/=</span> <span class="mf">0.5</span>
+    <span class="n">padding_im</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">imgC</span><span class="p">,</span> <span class="n">imgH</span><span class="p">,</span> <span class="n">imgW</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+    <span class="n">padding_im</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">:</span><span class="n">resized_w</span><span class="p">]</span> <span class="o">=</span> <span class="n">resized_image</span>
+    <span class="k">return</span> <span class="n">padding_im</span>
+
+
+<span class="k">def</span> <span class="nf">batch_text_box</span><span class="p">(</span><span class="n">dt_boxes</span><span class="p">,</span> <span class="n">frame</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Batch the detected bounding boxes for text recognition</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        dt_boxes: detected bounding boxes from text detection</span>
+<span class="sd">        frame: original input frame</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">ori_im</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">img_crop_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">bno</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dt_boxes</span><span class="p">)):</span>
+        <span class="n">tmp_box</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">dt_boxes</span><span class="p">[</span><span class="n">bno</span><span class="p">])</span>
+        <span class="n">img_crop</span> <span class="o">=</span> <span class="n">processing</span><span class="o">.</span><span class="n">get_rotate_crop_image</span><span class="p">(</span><span class="n">ori_im</span><span class="p">,</span> <span class="n">tmp_box</span><span class="p">)</span>
+        <span class="n">img_crop_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">img_crop</span><span class="p">)</span>
+
+    <span class="n">img_num</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">img_crop_list</span><span class="p">)</span>
+    <span class="c1"># Calculate the aspect ratio of all text bars</span>
+    <span class="n">width_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">img</span> <span class="ow">in</span> <span class="n">img_crop_list</span><span class="p">:</span>
+        <span class="n">width_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+    <span class="c1"># Sorting can speed up the recognition process</span>
+    <span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">width_list</span><span class="p">))</span>
+    <span class="n">rec_res</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]]</span> <span class="o">*</span> <span class="n">img_num</span>
+    <span class="n">batch_num</span> <span class="o">=</span> <span class="mi">6</span>
+
+    <span class="c1"># For each detected text box batch, run inference for text recognition</span>
+    <span class="k">for</span> <span class="n">beg_img_no</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">img_num</span><span class="p">,</span> <span class="n">batch_num</span><span class="p">):</span>
+        <span class="n">end_img_no</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">img_num</span><span class="p">,</span> <span class="n">beg_img_no</span> <span class="o">+</span> <span class="n">batch_num</span><span class="p">)</span>
+
+        <span class="n">norm_img_batch</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">max_wh_ratio</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">ino</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">beg_img_no</span><span class="p">,</span> <span class="n">end_img_no</span><span class="p">):</span>
+            <span class="n">h</span><span class="p">,</span> <span class="n">w</span> <span class="o">=</span> <span class="n">img_crop_list</span><span class="p">[</span><span class="n">indices</span><span class="p">[</span><span class="n">ino</span><span class="p">]]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+            <span class="n">wh_ratio</span> <span class="o">=</span> <span class="n">w</span> <span class="o">*</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">h</span>
+            <span class="n">max_wh_ratio</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">max_wh_ratio</span><span class="p">,</span> <span class="n">wh_ratio</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">ino</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">beg_img_no</span><span class="p">,</span> <span class="n">end_img_no</span><span class="p">):</span>
+            <span class="n">norm_img</span> <span class="o">=</span> <span class="n">resize_norm_img</span><span class="p">(</span><span class="n">img_crop_list</span><span class="p">[</span><span class="n">indices</span><span class="p">[</span><span class="n">ino</span><span class="p">]],</span> <span class="n">max_wh_ratio</span><span class="p">)</span>
+            <span class="n">norm_img</span> <span class="o">=</span> <span class="n">norm_img</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:]</span>
+            <span class="n">norm_img_batch</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">norm_img</span><span class="p">)</span>
+
+    <span class="n">norm_img_batch</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">norm_img_batch</span><span class="p">)</span>
+    <span class="n">norm_img_batch</span> <span class="o">=</span> <span class="n">norm_img_batch</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">norm_img_batch</span><span class="p">,</span> <span class="n">rec_res</span><span class="p">,</span> <span class="n">indices</span><span class="p">,</span> <span class="n">beg_img_no</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="postprocessing-image-for-text-detection">
+<h3>Postprocessing image for text detection<a class="headerlink" href="#postprocessing-image-for-text-detection" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">post_processing_detection</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">det_results</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Postprocess the results from text detection into bounding boxes</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        frame: input image</span>
+<span class="sd">        det_results: inference results from text detection model</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ori_im</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;image&#39;</span><span class="p">:</span> <span class="n">frame</span><span class="p">}</span>
+    <span class="n">data_resize</span> <span class="o">=</span> <span class="n">processing</span><span class="o">.</span><span class="n">DetResizeForTest</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">data_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">keep_keys</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;image&#39;</span><span class="p">,</span> <span class="s1">&#39;shape&#39;</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">keep_keys</span><span class="p">:</span>
+        <span class="n">data_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data_resize</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+    <span class="n">img</span><span class="p">,</span> <span class="n">shape_list</span> <span class="o">=</span> <span class="n">data_list</span>
+
+    <span class="n">shape_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">shape_list</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">pred</span> <span class="o">=</span> <span class="n">det_results</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">paddle</span><span class="o">.</span><span class="n">Tensor</span><span class="p">):</span>
+        <span class="n">pred</span> <span class="o">=</span> <span class="n">pred</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+    <span class="n">segmentation</span> <span class="o">=</span> <span class="n">pred</span> <span class="o">&gt;</span> <span class="mf">0.3</span>
+
+    <span class="n">boxes_batch</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">batch_index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">pred</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="n">src_h</span><span class="p">,</span> <span class="n">src_w</span><span class="p">,</span> <span class="n">ratio_h</span><span class="p">,</span> <span class="n">ratio_w</span> <span class="o">=</span> <span class="n">shape_list</span><span class="p">[</span><span class="n">batch_index</span><span class="p">]</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="n">segmentation</span><span class="p">[</span><span class="n">batch_index</span><span class="p">]</span>
+        <span class="n">boxes</span><span class="p">,</span> <span class="n">scores</span> <span class="o">=</span> <span class="n">processing</span><span class="o">.</span><span class="n">boxes_from_bitmap</span><span class="p">(</span><span class="n">pred</span><span class="p">[</span><span class="n">batch_index</span><span class="p">],</span> <span class="n">mask</span><span class="p">,</span> <span class="n">src_w</span><span class="p">,</span> <span class="n">src_h</span><span class="p">)</span>
+        <span class="n">boxes_batch</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;points&#39;</span><span class="p">:</span> <span class="n">boxes</span><span class="p">})</span>
+    <span class="n">post_result</span> <span class="o">=</span> <span class="n">boxes_batch</span>
+    <span class="n">dt_boxes</span> <span class="o">=</span> <span class="n">post_result</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;points&#39;</span><span class="p">]</span>
+    <span class="n">dt_boxes</span> <span class="o">=</span> <span class="n">processing</span><span class="o">.</span><span class="n">filter_tag_det_res</span><span class="p">(</span><span class="n">dt_boxes</span><span class="p">,</span> <span class="n">ori_im</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">dt_boxes</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="main-processing-function-for-paddleocr">
+<h3>Main processing function for PaddleOCR<a class="headerlink" href="#main-processing-function-for-paddleocr" title="Permalink to this headline">¶</a></h3>
+<p>Run paddleOCR function in different operations, either a webcam or a
+video file. See the list of procedures below:</p>
+<ol class="arabic simple">
+<li><p>Create a video player to play with target fps
+(<code class="docutils literal notranslate"><span class="pre">utils.VideoPlayer</span></code>).</p></li>
+<li><p>Prepare a set of frames for text detection and recognition.</p></li>
+<li><p>Run AI inference for both text detection and recognition.</p></li>
+<li><p>Visualize the results.</p></li>
+</ol>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">run_paddle_ocr</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">flip</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">use_popup</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">skip_first_frames</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Main function to run the paddleOCR inference:</span>
+<span class="sd">    1. Create a video player to play with target fps (utils.VideoPlayer).</span>
+<span class="sd">    2. Prepare a set of frames for text detection and recognition.</span>
+<span class="sd">    3. Run AI inference for both text detection and recognition.</span>
+<span class="sd">    4. Visualize the results.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        source: the webcam number to feed the video stream with primary webcam set to &quot;0&quot;, or the video path.</span>
+<span class="sd">        flip: to be used by VideoPlayer function for flipping capture image</span>
+<span class="sd">        use_popup: False for showing encoded frames over this notebook, True for creating a popup window.</span>
+<span class="sd">        skip_first_frames: Number of frames to skip at the beginning of the video.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># create video player to play with target fps</span>
+    <span class="n">player</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">player</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">VideoPlayer</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">source</span><span class="p">,</span> <span class="n">flip</span><span class="o">=</span><span class="n">flip</span><span class="p">,</span> <span class="n">fps</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">skip_first_frames</span><span class="o">=</span><span class="n">skip_first_frames</span><span class="p">)</span>
+        <span class="c1"># Start video capturing</span>
+        <span class="n">player</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">use_popup</span><span class="p">:</span>
+            <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Press ESC to Exit&quot;</span>
+            <span class="n">cv2</span><span class="o">.</span><span class="n">namedWindow</span><span class="p">(</span><span class="n">winname</span><span class="o">=</span><span class="n">title</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">cv2</span><span class="o">.</span><span class="n">WINDOW_GUI_NORMAL</span> <span class="o">|</span> <span class="n">cv2</span><span class="o">.</span><span class="n">WINDOW_AUTOSIZE</span><span class="p">)</span>
+
+        <span class="n">processing_times</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">deque</span><span class="p">()</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="c1"># grab the frame</span>
+            <span class="n">frame</span> <span class="o">=</span> <span class="n">player</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">frame</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Source ended&quot;</span><span class="p">)</span>
+                <span class="k">break</span>
+            <span class="c1"># if frame larger than full HD, reduce size to improve the performance</span>
+            <span class="n">scale</span> <span class="o">=</span> <span class="mi">1280</span> <span class="o">/</span> <span class="nb">max</span><span class="p">(</span><span class="n">frame</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">scale</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">frame</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">src</span><span class="o">=</span><span class="n">frame</span><span class="p">,</span> <span class="n">dsize</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fx</span><span class="o">=</span><span class="n">scale</span><span class="p">,</span> <span class="n">fy</span><span class="o">=</span><span class="n">scale</span><span class="p">,</span>
+                                   <span class="n">interpolation</span><span class="o">=</span><span class="n">cv2</span><span class="o">.</span><span class="n">INTER_AREA</span><span class="p">)</span>
+            <span class="c1"># preprocess image for text detection</span>
+            <span class="n">test_image</span> <span class="o">=</span> <span class="n">image_preprocess</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span><span class="mi">640</span><span class="p">)</span>
+
+            <span class="c1"># measure processing time for text detection</span>
+            <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+            <span class="c1"># perform the inference step</span>
+            <span class="n">det_results</span> <span class="o">=</span> <span class="n">det_compiled_model</span><span class="p">([</span><span class="n">test_image</span><span class="p">])[</span><span class="n">det_output_layer</span><span class="p">]</span>
+            <span class="n">stop_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+            <span class="c1"># Postprocessing for Paddle Detection</span>
+            <span class="n">dt_boxes</span> <span class="o">=</span> <span class="n">post_processing_detection</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">det_results</span><span class="p">)</span>
+
+            <span class="n">processing_times</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">stop_time</span> <span class="o">-</span> <span class="n">start_time</span><span class="p">)</span>
+            <span class="c1"># use processing times from last 200 frames</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">processing_times</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">200</span><span class="p">:</span>
+                <span class="n">processing_times</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>
+            <span class="n">processing_time_det</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">processing_times</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1000</span>
+
+            <span class="c1"># Preprocess detection results for recognition</span>
+            <span class="n">dt_boxes</span> <span class="o">=</span> <span class="n">processing</span><span class="o">.</span><span class="n">sorted_boxes</span><span class="p">(</span><span class="n">dt_boxes</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">dt_boxes</span><span class="p">:</span>
+                <span class="c1"># Recognition starts from here</span>
+                <span class="n">norm_img_batch</span><span class="p">,</span> <span class="n">rec_res</span><span class="p">,</span> <span class="n">indices</span><span class="p">,</span> <span class="n">beg_img_no</span> <span class="o">=</span> <span class="n">batch_text_box</span><span class="p">(</span><span class="n">dt_boxes</span><span class="p">,</span> <span class="n">frame</span><span class="p">)</span>
+
+                <span class="c1"># Run inference for text recognition</span>
+                <span class="n">rec_results</span> <span class="o">=</span> <span class="n">rec_compiled_model</span><span class="p">([</span><span class="n">norm_img_batch</span><span class="p">])[</span><span class="n">rec_output_layer</span><span class="p">]</span>
+
+                <span class="c1"># Postprocessing recognition results</span>
+                <span class="n">postprocess_op</span> <span class="o">=</span> <span class="n">processing</span><span class="o">.</span><span class="n">build_post_process</span><span class="p">(</span><span class="n">processing</span><span class="o">.</span><span class="n">postprocess_params</span><span class="p">)</span>
+                <span class="n">rec_result</span> <span class="o">=</span> <span class="n">postprocess_op</span><span class="p">(</span><span class="n">rec_results</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">rno</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">rec_result</span><span class="p">)):</span>
+                    <span class="n">rec_res</span><span class="p">[</span><span class="n">indices</span><span class="p">[</span><span class="n">beg_img_no</span> <span class="o">+</span> <span class="n">rno</span><span class="p">]]</span> <span class="o">=</span> <span class="n">rec_result</span><span class="p">[</span><span class="n">rno</span><span class="p">]</span>
+
+                <span class="c1"># Text recognition results, rec_res, include two parts:</span>
+                <span class="c1"># txts are the recognized text results, scores are the recognition confidence level</span>
+                <span class="k">if</span> <span class="n">rec_res</span><span class="p">:</span>
+                    <span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2RGB</span><span class="p">))</span>
+                    <span class="n">boxes</span> <span class="o">=</span> <span class="n">dt_boxes</span>
+                    <span class="n">txts</span> <span class="o">=</span> <span class="p">[</span><span class="n">rec_res</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">rec_res</span><span class="p">))]</span>
+                    <span class="n">scores</span> <span class="o">=</span> <span class="p">[</span><span class="n">rec_res</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">rec_res</span><span class="p">))]</span>
+
+                    <span class="c1"># draw text recognition results beside the image</span>
+                    <span class="n">draw_img</span> <span class="o">=</span> <span class="n">processing</span><span class="o">.</span><span class="n">draw_ocr_box_txt</span><span class="p">(</span>
+                        <span class="n">image</span><span class="p">,</span>
+                        <span class="n">boxes</span><span class="p">,</span>
+                        <span class="n">txts</span><span class="p">,</span>
+                        <span class="n">scores</span><span class="p">,</span>
+                        <span class="n">drop_score</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">draw_img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_RGB2BGR</span><span class="p">)</span>
+
+            <span class="c1"># Visualize PaddleOCR results</span>
+            <span class="n">f_height</span><span class="p">,</span> <span class="n">f_width</span> <span class="o">=</span> <span class="n">draw_img</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
+            <span class="n">fps</span> <span class="o">=</span> <span class="mi">1000</span> <span class="o">/</span> <span class="n">processing_time_det</span>
+            <span class="n">cv2</span><span class="o">.</span><span class="n">putText</span><span class="p">(</span><span class="n">img</span><span class="o">=</span><span class="n">draw_img</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Inference time: </span><span class="si">{</span><span class="n">processing_time_det</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">ms (</span><span class="si">{</span><span class="n">fps</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> FPS)&quot;</span><span class="p">,</span>
+                        <span class="n">org</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">40</span><span class="p">),</span><span class="n">fontFace</span><span class="o">=</span><span class="n">cv2</span><span class="o">.</span><span class="n">FONT_HERSHEY_COMPLEX</span><span class="p">,</span> <span class="n">fontScale</span><span class="o">=</span><span class="n">f_height</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">,</span>
+                        <span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span> <span class="n">thickness</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">lineType</span><span class="o">=</span><span class="n">cv2</span><span class="o">.</span><span class="n">LINE_AA</span><span class="p">)</span>
+
+            <span class="c1"># use this workaround if there is flickering</span>
+            <span class="k">if</span> <span class="n">use_popup</span><span class="p">:</span>
+                <span class="n">draw_img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">draw_img</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_RGB2BGR</span><span class="p">)</span>
+                <span class="n">cv2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">winname</span><span class="o">=</span><span class="n">title</span><span class="p">,</span> <span class="n">mat</span><span class="o">=</span><span class="n">draw_img</span><span class="p">)</span>
+                <span class="n">key</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">waitKey</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+                <span class="c1"># escape = 27</span>
+                <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="mi">27</span><span class="p">:</span>
+                    <span class="k">break</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># encode numpy array to jpg</span>
+                <span class="n">draw_img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">draw_img</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_RGB2BGR</span><span class="p">)</span>
+                <span class="n">_</span><span class="p">,</span> <span class="n">encoded_img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imencode</span><span class="p">(</span><span class="n">ext</span><span class="o">=</span><span class="s2">&quot;.jpg&quot;</span><span class="p">,</span> <span class="n">img</span><span class="o">=</span><span class="n">draw_img</span><span class="p">,</span>
+                                              <span class="n">params</span><span class="o">=</span><span class="p">[</span><span class="n">cv2</span><span class="o">.</span><span class="n">IMWRITE_JPEG_QUALITY</span><span class="p">,</span> <span class="mi">100</span><span class="p">])</span>
+                <span class="c1"># create IPython image</span>
+                <span class="n">i</span> <span class="o">=</span> <span class="n">display</span><span class="o">.</span><span class="n">Image</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">encoded_img</span><span class="p">)</span>
+                <span class="c1"># display the image in this notebook</span>
+                <span class="n">display</span><span class="o">.</span><span class="n">clear_output</span><span class="p">(</span><span class="n">wait</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="n">display</span><span class="o">.</span><span class="n">display</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+    <span class="c1"># ctrl-c</span>
+    <span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Interrupted&quot;</span><span class="p">)</span>
+    <span class="c1"># any different error</span>
+    <span class="k">except</span> <span class="ne">RuntimeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">player</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># stop capturing</span>
+            <span class="n">player</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">use_popup</span><span class="p">:</span>
+            <span class="n">cv2</span><span class="o">.</span><span class="n">destroyAllWindows</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="run-live-paddleocr-with-openvino">
+<h2>Run Live PaddleOCR with OpenVINO<a class="headerlink" href="#run-live-paddleocr-with-openvino" title="Permalink to this headline">¶</a></h2>
+<p>Run using a webcam as the video input. By default, the primary webcam is
+set with <code class="docutils literal notranslate"><span class="pre">source=0</span></code>. If you have multiple webcams, each one will be
+assigned a consecutive number starting at 0. Set <code class="docutils literal notranslate"><span class="pre">flip=True</span></code> when
+using a front-facing camera. Some web browsers, especially Mozilla
+Firefox, may cause flickering. If you experience flickering, set
+<code class="docutils literal notranslate"><span class="pre">use_popup=True</span></code>. <em>Note popup mode may not work if you run this
+notebook on a remote computer.</em></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">run_paddle_ocr</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">flip</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">use_popup</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Cannot</span> <span class="nb">open</span> <span class="n">camera</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<p>If you don’t have a webcam, you can still run this demo with a video
+file. Any <a class="reference external" href="https://docs.opencv.org/4.5.1/dd/d43/tutorial_py_video_display.html">format supported by
+OpenCV</a>
+will work.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Test OCR results on video file</span>
+
+<span class="n">video_file</span> <span class="o">=</span> <span class="s2">&quot;https://raw.githubusercontent.com/yoyowz/classification/master/images/test.mp4&quot;</span>
+<span class="n">run_paddle_ocr</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">video_file</span><span class="p">,</span> <span class="n">flip</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">use_popup</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">skip_first_frames</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../_images/405-paddle-ocr-webcam-with-output_27_0.png" src="../_images/405-paddle-ocr-webcam-with-output_27_0.png" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Source</span> <span class="n">ended</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+                </div>
+            
+            
+                <div class='prev-next-bottom'>
+                  
+    <a class='button bttn-sec button-size-l' id="prev-link" href="403-action-recognition-webcam-with-output.html" title="previous page">Prev</a>
+    <a class='button bttn-sec button-size-l' id="next-link" href="../model_zoo.html" title="next page">Next</a>
+
+                </div>
+            
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+<footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2021, Intel®.<br>
+</p>
+    </div>
+    
+    <div class="footer-item">
+      <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

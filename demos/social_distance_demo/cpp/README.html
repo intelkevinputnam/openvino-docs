@@ -1,0 +1,2260 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Social Distance C++ Demo &#8212; OpenVINO™  documentation</title>
+    
+    
+  <link href="../../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/blank.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/doxyrest-pygments.css" />
+    
+  <link rel="preload" as="script" href="../../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <link href="../../../_static/css/media/favicon.ico" rel="shortcut icon">
+    <link rel="stylesheet" href="../../../_static/css/openvino_sphinx_theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/css/button.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/css/input.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/css/textfield.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/css/tabs.css" type="text/css" />
+    <script src="../../../_static/js/openvino_sphinx_theme.js"></script>
+    <link rel="stylesheet" href="../../../_static/css/viewer.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/0.5.7/chartjs-plugin-annotation.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-barchart-background@1.3.0/build/Plugin.Barchart.Background.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-deferred@1"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.1/papaparse.min.js"></script>
+    <script src="../../../_static/js/viewer.min.js"></script>
+    <script src="/assets/versions_raw.js"></script>
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/tabs.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/js/custom.js"></script>
+    <script src="../../../_static/js/graphs.js"></script>
+    <script src="../../../_static/js/graphs_ov_tf.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script src="../../../_static/target-highlight.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <link rel="canonical" href="https://docs.openvino.ai/latest/demos/social_distance_demo/cpp/README.html" />
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Sound Classification Python* Demo" href="../../sound_classification_demo/python/README.html" />
+    <link rel="prev" title="Smartlab Python* Demo" href="../../smartlab_demo/python/README.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+      <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+
+<a class="navbar-brand" href="../../../index.html">
+  <img src="../../../_static/logo.svg" class="logo" alt="logo">
+</a>
+
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../pages/get_started.html">
+  Get Started
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../pages/documentation.html">
+  Documentation
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../tutorials.html">
+  Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 current active nav-item">
+ <a class="reference internal nav-link" href="../../../model_zoo.html">
+  Model Zoo
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../pages/resources.html">
+  Resources
+ </a>
+</li>
+
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/openvinotoolkit/openvino" rel="noopener" target="_blank" title="GitHub">
+            <span><i class="sst-github"></i></span>
+            <label class="sr-only">GitHub</label>
+          </a>
+        </li>
+</ul>
+      </div>
+      
+      <div class="navbar-end-item">
+        
+<div class="dropdown sst-dropdown sst-dropdown-navbar">
+  <button class="btn sst-btn dropdown-toggle" type="button" id="version-selector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+  <div class="dropdown-menu" aria-labelledby="version-selector">
+  </div>
+</div>
+      </div>
+      
+      <div class="navbar-end-item">
+        
+
+<div class="dropdown sst-dropdown sst-dropdown-navbar">
+  <button class="btn sst-btn dropdown-toggle" type="button" id="language-selector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">English</button>
+  <div class="dropdown-menu" aria-labelledby="language-selector">
+    
+      
+        <a class="dropdown-item font-weight-bold" href="/latest/demos/social_distance_demo/cpp/README.html">English</a>
+      
+    
+      
+        <a  class="dropdown-item" href="/cn/latest/demos/social_distance_demo/cpp/README.html">Chinese</a>
+      
+    
+  </div>
+</div>
+
+      </div>
+      
+    </div>
+  </div>
+</div>
+        <div id="collapse-nav-wrapper" class="container-xl">
+          <button id="collapse-nav" class="button bttn-prm button-size-m" type="button" data-toggle="collapse" data-target="#nav-tree" aria-expanded="false" aria-controls="nav-tree">
+            Documentation navigation <i class="fas fa-chevron-down"></i>
+          </button>
+        </div>
+      </nav>
+      <div class="transition-banner container-fluid alert alert-info alert-dismissible fade show" role="alert">
+        <p>OpenVINO 2022.1 introduces a new version of OpenVINO API (API 2.0). For more information on the changes and transition steps, see the <a href="https://docs.openvino.ai/latest/openvino_2_0_transition_guide.html">transition guide</a></p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar" id="nav-tree"><form class="searchForm bd-search d-flex align-items-center" action="../../../search.html" method="get">
+    <i class="icon fas fa-search"></i>
+    <input type="search" class="form-control" name="query" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Pre-Trained Models
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../../models/intel/index.html">
+   Overview of OpenVINO™ Toolkit Intel’s Pre-Trained Models
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/action-recognition-0001/README.html">
+     action-recognition-0001 (composite)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/age-gender-recognition-retail-0013/README.html">
+     age-gender-recognition-retail-0013
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/asl-recognition-0004/README.html">
+     asl-recognition-0004
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/bert-large-uncased-whole-word-masking-squad-0001/README.html">
+     bert-large-uncased-whole-word-masking-squad-0001
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/bert-large-uncased-whole-word-masking-squad-emb-0001/README.html">
+     bert-large-uncased-whole-word-masking-squad-emb-0001
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/bert-large-uncased-whole-word-masking-squad-int8-0001/README.html">
+     bert-large-uncased-whole-word-masking-squad-int8-0001
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/bert-small-uncased-whole-word-masking-squad-0001/README.html">
+     bert-small-uncased-whole-word-masking-squad-0001
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/bert-small-uncased-whole-word-masking-squad-0002/README.html">
+     bert-small-uncased-whole-word-masking-squad-0002
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/bert-small-uncased-whole-word-masking-squad-emb-int8-0001/README.html">
+     bert-small-uncased-whole-word-masking-squad-emb-int8-0001
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/bert-small-uncased-whole-word-masking-squad-int8-0002/README.html">
+     bert-small-uncased-whole-word-masking-squad-int8-0002
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/common-sign-language-0002/README.html">
+     common-sign-language-0002
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/device_support.html">
+     Intel’s Pre-Trained Models Device Support
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/driver-action-recognition-adas-0002/README.html">
+     driver-action-recognition-adas-0002 (composite)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/emotions-recognition-retail-0003/README.html">
+     emotions-recognition-retail-0003
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/face-detection-0200/README.html">
+     face-detection-0200
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/face-detection-0202/README.html">
+     face-detection-0202
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/face-detection-0204/README.html">
+     face-detection-0204
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/face-detection-0205/README.html">
+     face-detection-0205
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/face-detection-0206/README.html">
+     face-detection-0206
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/face-detection-adas-0001/README.html">
+     face-detection-adas-0001
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/face-detection-retail-0004/README.html">
+     face-detection-retail-0004
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/face-detection-retail-0005/README.html">
+     face-detection-retail-0005
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/face-reidentification-retail-0095/README.html">
+     face-reidentification-retail-0095
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/facial-landmarks-35-adas-0002/README.html">
+     facial-landmarks-35-adas-0002
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/facial-landmarks-98-detection-0001/README.html">
+     facial-landmarks-98-detection-0001
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/faster-rcnn-resnet101-coco-sparse-60-0001/README.html">
+     faster-rcnn-resnet101-coco-sparse-60-0001
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/formula-recognition-medium-scan-0001/README.html">
+     formula-recognition-medium-scan-0001 (composite)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/formula-recognition-polynomials-handwritten-0001/README.html">
+     formula-recognition-polynomials-handwritten-0001 (composite)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/gaze-estimation-adas-0002/README.html">
+     gaze-estimation-adas-0002
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/handwritten-english-recognition-0001/README.html">
+     handwritten-english-recognition-0001
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/handwritten-japanese-recognition-0001/README.html">
+     handwritten-japanese-recognition-0001
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/handwritten-score-recognition-0003/README.html">
+     handwritten-score-recognition-0003
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/handwritten-simplified-chinese-recognition-0001/README.html">
+     handwritten-simplified-chinese-recognition-0001
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/head-pose-estimation-adas-0001/README.html">
+     head-pose-estimation-adas-0001
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/horizontal-text-detection-0001/README.html">
+     horizontal-text-detection-0001
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/human-pose-estimation-0001/README.html">
+     human-pose-estimation-0001
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/human-pose-estimation-0005/README.html">
+     human-pose-estimation-0005
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/human-pose-estimation-0006/README.html">
+     human-pose-estimation-0006
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/human-pose-estimation-0007/README.html">
+     human-pose-estimation-0007
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/icnet-camvid-ava-0001/README.html">
+     icnet-camvid-ava-0001
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/icnet-camvid-ava-sparse-30-0001/README.html">
+     icnet-camvid-ava-sparse-30-0001
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/icnet-camvid-ava-sparse-60-0001/README.html">
+     icnet-camvid-ava-sparse-60-0001
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/image-retrieval-0001/README.html">
+     image-retrieval-0001
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/instance-segmentation-person-0007/README.html">
+     instance-segmentation-person-0007
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/instance-segmentation-security-0002/README.html">
+     instance-segmentation-security-0002
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/instance-segmentation-security-0091/README.html">
+     instance-segmentation-security-0091
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/instance-segmentation-security-0228/README.html">
+     instance-segmentation-security-0228
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/instance-segmentation-security-1039/README.html">
+     instance-segmentation-security-1039
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/instance-segmentation-security-1040/README.html">
+     instance-segmentation-security-1040
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/landmarks-regression-retail-0009/README.html">
+     landmarks-regression-retail-0009
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/license-plate-recognition-barrier-0001/README.html">
+     license-plate-recognition-barrier-0001
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/machine-translation-nar-de-en-0002/README.html">
+     machine-translation-nar-de-en-0002
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/machine-translation-nar-en-de-0002/README.html">
+     machine-translation-nar-en-de-0002
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/machine-translation-nar-en-ru-0002/README.html">
+     machine-translation-nar-en-ru-0002
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/machine-translation-nar-ru-en-0002/README.html">
+     machine-translation-nar-ru-en-0002
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/noise-suppression-denseunet-ll-0001/README.html">
+     noise-suppression-denseunet-ll-0001
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/noise-suppression-poconetlike-0001/README.html">
+     noise-suppression-poconetlike-0001
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/pedestrian-and-vehicle-detector-adas-0001/README.html">
+     pedestrian-and-vehicle-detector-adas-0001
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/pedestrian-detection-adas-0002/README.html">
+     pedestrian-detection-adas-0002
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/person-attributes-recognition-crossroad-0230/README.html">
+     person-attributes-recognition-crossroad-0230
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/person-attributes-recognition-crossroad-0234/README.html">
+     person-attributes-recognition-crossroad-0234
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/person-attributes-recognition-crossroad-0238/README.html">
+     person-attributes-recognition-crossroad-0238
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/person-detection-0106/README.html">
+     person-detection-0106
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/person-detection-0200/README.html">
+     person-detection-0200
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/person-detection-0201/README.html">
+     person-detection-0201
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/person-detection-0202/README.html">
+     person-detection-0202
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/person-detection-0203/README.html">
+     person-detection-0203
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/person-detection-0301/README.html">
+     person-detection-0301
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/person-detection-0302/README.html">
+     person-detection-0302
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/person-detection-0303/README.html">
+     person-detection-0303
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/person-detection-action-recognition-0005/README.html">
+     person-detection-action-recognition-0005
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/person-detection-action-recognition-0006/README.html">
+     person-detection-action-recognition-0006
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/person-detection-action-recognition-teacher-0002/README.html">
+     person-detection-action-recognition-teacher-0002
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/person-detection-asl-0001/README.html">
+     person-detection-asl-0001
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/person-detection-raisinghand-recognition-0001/README.html">
+     person-detection-raisinghand-recognition-0001
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/person-detection-retail-0002/README.html">
+     person-detection-retail-0002
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/person-detection-retail-0013/README.html">
+     person-detection-retail-0013
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/person-reidentification-retail-0277/README.html">
+     person-reidentification-retail-0277
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/person-reidentification-retail-0286/README.html">
+     person-reidentification-retail-0286
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/person-reidentification-retail-0287/README.html">
+     person-reidentification-retail-0287
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/person-reidentification-retail-0288/README.html">
+     person-reidentification-retail-0288
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/person-vehicle-bike-detection-2000/README.html">
+     person-vehicle-bike-detection-2000
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/person-vehicle-bike-detection-2001/README.html">
+     person-vehicle-bike-detection-2001
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/person-vehicle-bike-detection-2002/README.html">
+     person-vehicle-bike-detection-2002
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/person-vehicle-bike-detection-2003/README.html">
+     person-vehicle-bike-detection-2003
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/person-vehicle-bike-detection-2004/README.html">
+     person-vehicle-bike-detection-2004
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/person-vehicle-bike-detection-crossroad-0078/README.html">
+     person-vehicle-bike-detection-crossroad-0078
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/person-vehicle-bike-detection-crossroad-1016/README.html">
+     person-vehicle-bike-detection-crossroad-1016
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/person-vehicle-bike-detection-crossroad-yolov3-1020/README.html">
+     person-vehicle-bike-detection-crossroad-yolov3-1020
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/product-detection-0001/README.html">
+     product-detection-0001
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/resnet18-xnor-binary-onnx-0001/README.html">
+     resnet18-xnor-binary-onnx-0001
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/resnet50-binary-0001/README.html">
+     resnet50-binary-0001
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/road-segmentation-adas-0001/README.html">
+     road-segmentation-adas-0001
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/semantic-segmentation-adas-0001/README.html">
+     semantic-segmentation-adas-0001
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/single-image-super-resolution-1032/README.html">
+     single-image-super-resolution-1032
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/single-image-super-resolution-1033/README.html">
+     single-image-super-resolution-1033
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/smartlab-object-detection-0001/README.html">
+     smartlab-object-detection-0001
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/smartlab-object-detection-0002/README.html">
+     smartlab-object-detection-0002
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/smartlab-object-detection-0003/README.html">
+     smartlab-object-detection-0003
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/smartlab-object-detection-0004/README.html">
+     smartlab-object-detection-0004
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/smartlab-sequence-modelling-0001/README.html">
+     smartlab-sequence-modelling-0001
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/text-detection-0003/README.html">
+     text-detection-0003
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/text-detection-0004/README.html">
+     text-detection-0004
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/text-image-super-resolution-0001/README.html">
+     text-image-super-resolution-0001
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/text-recognition-0012/README.html">
+     text-recognition-0012
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/text-recognition-0014/README.html">
+     text-recognition-0014
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/text-recognition-0015/README.html">
+     text-recognition-0015 (composite)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/text-recognition-0016/README.html">
+     text-recognition-0016 (composite)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/text-spotting-0005/README.html">
+     text-spotting-0005 (composite)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/text-to-speech-en-0001/README.html">
+     text-to-speech-en-0001 (composite)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/text-to-speech-en-multi-0001/README.html">
+     text-to-speech-en-multi-0001 (composite)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/time-series-forecasting-electricity-0001/README.html">
+     time-series-forecasting-electricity-0001
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/unet-camvid-onnx-0001/README.html">
+     unet-camvid-onnx-0001
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/vehicle-attributes-recognition-barrier-0039/README.html">
+     vehicle-attributes-recognition-barrier-0039
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/vehicle-attributes-recognition-barrier-0042/README.html">
+     vehicle-attributes-recognition-barrier-0042
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/vehicle-detection-0200/README.html">
+     vehicle-detection-0200
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/vehicle-detection-0201/README.html">
+     vehicle-detection-0201
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/vehicle-detection-0202/README.html">
+     vehicle-detection-0202
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/vehicle-detection-adas-0002/README.html">
+     vehicle-detection-adas-0002
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/vehicle-license-plate-detection-barrier-0106/README.html">
+     vehicle-license-plate-detection-barrier-0106
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/weld-porosity-detection-0001/README.html">
+     weld-porosity-detection-0001
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/yolo-v2-ava-0001/README.html">
+     yolo-v2-ava-0001
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/yolo-v2-ava-sparse-35-0001/README.html">
+     yolo-v2-ava-sparse-35-0001
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/yolo-v2-ava-sparse-70-0001/README.html">
+     yolo-v2-ava-sparse-70-0001
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/yolo-v2-tiny-ava-0001/README.html">
+     yolo-v2-tiny-ava-0001
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/yolo-v2-tiny-ava-sparse-30-0001/README.html">
+     yolo-v2-tiny-ava-sparse-30-0001
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/yolo-v2-tiny-ava-sparse-60-0001/README.html">
+     yolo-v2-tiny-ava-sparse-60-0001
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/intel/yolo-v2-tiny-vehicle-detection-0001/README.html">
+     yolo-v2-tiny-vehicle-detection-0001
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../../models/public/index.html">
+   Overview of OpenVINO™ Toolkit Public Pre-Trained Models
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/Sphereface/README.html">
+     Sphereface
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/aclnet/README.html">
+     aclnet
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/aclnet-int8/README.html">
+     aclnet-int8
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/alexnet/README.html">
+     alexnet
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/anti-spoof-mn3/README.html">
+     anti-spoof-mn3
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/background-matting-mobilenetv2/README.html">
+     background-matting-mobilenetv2
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/bert-base-ner/README.html">
+     bert-base-ner
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/brain-tumor-segmentation-0001/README.html">
+     brain-tumor-segmentation-0001
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/brain-tumor-segmentation-0002/README.html">
+     brain-tumor-segmentation-0002
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/caffenet/README.html">
+     caffenet
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/cocosnet/README.html">
+     cocosnet
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/colorization-siggraph/README.html">
+     colorization-siggraph
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/colorization-v2/README.html">
+     colorization-v2
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/common-sign-language-0001/README.html">
+     common-sign-language-0001
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/convnext-tiny/README.html">
+     convnext-tiny
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/ctdet_coco_dlav0_512/README.html">
+     ctdet_coco_dlav0_512
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/ctpn/README.html">
+     ctpn
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/deblurgan-v2/README.html">
+     deblurgan-v2
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/deeplabv3/README.html">
+     deeplabv3
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/densenet-121/README.html">
+     densenet-121
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/densenet-121-tf/README.html">
+     densenet-121-tf
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/detr-resnet50/README.html">
+     detr-resnet50
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/device_support.html">
+     Public Pre-Trained Models Device Support
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/dla-34/README.html">
+     dla-34
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/drn-d-38/README.html">
+     drn-d-38
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/efficientdet-d0-tf/README.html">
+     efficientdet-d0-tf
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/efficientdet-d1-tf/README.html">
+     efficientdet-d1-tf
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/efficientnet-b0/README.html">
+     efficientnet-b0
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/efficientnet-b0-pytorch/README.html">
+     efficientnet-b0-pytorch
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/efficientnet-v2-b0/README.html">
+     efficientnet-v2-b0
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/efficientnet-v2-s/README.html">
+     efficientnet-v2-s
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/f3net/README.html">
+     f3net
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/face-detection-retail-0044/README.html">
+     face-detection-retail-0044
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/face-recognition-resnet100-arcface-onnx/README.html">
+     face-recognition-resnet100-arcface-onnx
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/faceboxes-pytorch/README.html">
+     faceboxes-pytorch
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/facenet-20180408-102900/README.html">
+     facenet-20180408-102900
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/fast-neural-style-mosaic-onnx/README.html">
+     fast-neural-style-mosaic-onnx
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/faster_rcnn_inception_resnet_v2_atrous_coco/README.html">
+     faster_rcnn_inception_resnet_v2_atrous_coco
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/faster_rcnn_resnet50_coco/README.html">
+     faster_rcnn_resnet50_coco
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/fastseg-large/README.html">
+     fastseg-large
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/fastseg-small/README.html">
+     fastseg-small
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/fbcnn/README.html">
+     fbcnn
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/fcrn-dp-nyu-depth-v2-tf/README.html">
+     fcrn-dp-nyu-depth-v2-tf
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/forward-tacotron/README.html">
+     forward-tacotron (composite)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/gmcnn-places2-tf/README.html">
+     gmcnn-places2-tf
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/googlenet-v1/README.html">
+     googlenet-v1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/googlenet-v1-tf/README.html">
+     googlenet-v1-tf
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/googlenet-v2/README.html">
+     googlenet-v2
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/googlenet-v2-tf/README.html">
+     googlenet-v2-tf
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/googlenet-v3/README.html">
+     googlenet-v3
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/googlenet-v3-pytorch/README.html">
+     googlenet-v3-pytorch
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/googlenet-v4-tf/README.html">
+     googlenet-v4-tf
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/gpt-2/README.html">
+     gpt-2
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/hbonet-0.25/README.html">
+     hbonet-0.25
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/hbonet-1.0/README.html">
+     hbonet-1.0
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/higher-hrnet-w32-human-pose-estimation/README.html">
+     higher-hrnet-w32-human-pose-estimation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/hrnet-v2-c1-segmentation/README.html">
+     hrnet-v2-c1-segmentation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/human-pose-estimation-3d-0001/README.html">
+     human-pose-estimation-3d-0001
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/hybrid-cs-model-mri/README.html">
+     hybrid-cs-model-mri
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/i3d-rgb-tf/README.html">
+     i3d-rgb-tf
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/inception-resnet-v2-tf/README.html">
+     inception-resnet-v2-tf
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/levit-128s/README.html">
+     levit-128s
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/license-plate-recognition-barrier-0007/README.html">
+     license-plate-recognition-barrier-0007
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/mask_rcnn_inception_resnet_v2_atrous_coco/README.html">
+     mask_rcnn_inception_resnet_v2_atrous_coco
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/mask_rcnn_resnet50_atrous_coco/README.html">
+     mask_rcnn_resnet50_atrous_coco
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/midasnet/README.html">
+     midasnet
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/mixnet-l/README.html">
+     mixnet-l
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/mobilefacedet-v1-mxnet/README.html">
+     mobilefacedet-v1-mxnet
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/mobilenet-ssd/README.html">
+     mobilenet-ssd
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/mobilenet-v1-0.25-128/README.html">
+     mobilenet-v1-0.25-128
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/mobilenet-v1-1.0-224/README.html">
+     mobilenet-v1-1.0-224
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/mobilenet-v1-1.0-224-tf/README.html">
+     mobilenet-v1-1.0-224-tf
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/mobilenet-v2/README.html">
+     mobilenet-v2
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/mobilenet-v2-1.0-224/README.html">
+     mobilenet-v2-1.0-224
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/mobilenet-v2-1.4-224/README.html">
+     mobilenet-v2-1.4-224
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/mobilenet-v2-pytorch/README.html">
+     mobilenet-v2-pytorch
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/mobilenet-v3-large-1.0-224-paddle/README.html">
+     mobilenet-v3-large-1.0-224-paddle
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/mobilenet-v3-large-1.0-224-tf/README.html">
+     mobilenet-v3-large-1.0-224-tf
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/mobilenet-v3-small-1.0-224-paddle/README.html">
+     mobilenet-v3-small-1.0-224-paddle
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/mobilenet-v3-small-1.0-224-tf/README.html">
+     mobilenet-v3-small-1.0-224-tf
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/mobilenet-yolo-v4-syg/README.html">
+     mobilenet-yolo-v4-syg
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/modnet-photographic-portrait-matting/README.html">
+     modnet-photographic-portrait-matting
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/modnet-webcam-portrait-matting/README.html">
+     modnet-webcam-portrait-matting
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/mozilla-deepspeech-0.6.1/README.html">
+     mozilla-deepspeech-0.6.1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/mozilla-deepspeech-0.8.2/README.html">
+     mozilla-deepspeech-0.8.2
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/mtcnn/README.html">
+     mtcnn (composite)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/nanodet-m-1.5x-416/README.html">
+     nanodet-m-1.5x-416
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/nanodet-plus-m-1.5x-416/README.html">
+     nanodet-plus-m-1.5x-416
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/netvlad-tf/README.html">
+     netvlad-tf
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/nfnet-f0/README.html">
+     nfnet-f0
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/ocrnet-hrnet-w48-paddle/README.html">
+     ocrnet-hrnet-w48-paddle
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/octave-resnet-26-0.25/README.html">
+     octave-resnet-26-0.25
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/open-closed-eye-0001/README.html">
+     open-closed-eye-0001
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/pelee-coco/README.html">
+     pelee-coco
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/pspnet-pytorch/README.html">
+     pspnet-pytorch
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/quartznet-15x5-en/README.html">
+     quartznet-15x5-en
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/regnetx-3.2gf/README.html">
+     regnetx-3.2gf
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/repvgg-a0/README.html">
+     repvgg-a0
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/repvgg-b1/README.html">
+     repvgg-b1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/repvgg-b3/README.html">
+     repvgg-b3
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/resnest-50-pytorch/README.html">
+     resnest-50-pytorch
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/resnet-18-pytorch/README.html">
+     resnet-18-pytorch
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/resnet-34-pytorch/README.html">
+     resnet-34-pytorch
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/resnet-50-pytorch/README.html">
+     resnet-50-pytorch
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/resnet-50-tf/README.html">
+     resnet-50-tf
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/retinaface-resnet50-pytorch/README.html">
+     retinaface-resnet50-pytorch
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/retinanet-tf/README.html">
+     retinanet-tf
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/rexnet-v1-x1.0/README.html">
+     rexnet-v1-x1.0
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/rfcn-resnet101-coco-tf/README.html">
+     rfcn-resnet101-coco-tf
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/robust-video-matting-mobilenetv3/README.html">
+     robust-video-matting-mobilenetv3
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/se-inception/README.html">
+     se-inception
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/se-resnet-50/README.html">
+     se-resnet-50
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/se-resnext-50/README.html">
+     se-resnext-50
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/shufflenet-v2-x0.5/README.html">
+     shufflenet-v2-x0.5
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/shufflenet-v2-x1.0/README.html">
+     shufflenet-v2-x1.0
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/single-human-pose-estimation-0001/README.html">
+     single-human-pose-estimation-0001
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/squeezenet1.0/README.html">
+     squeezenet1.0
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/squeezenet1.1/README.html">
+     squeezenet1.1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/ssd-resnet34-1200-onnx/README.html">
+     ssd-resnet34-1200-onnx
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/ssd300/README.html">
+     ssd300
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/ssd512/README.html">
+     ssd512
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/ssd_mobilenet_v1_coco/README.html">
+     ssd_mobilenet_v1_coco
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/ssd_mobilenet_v1_fpn_coco/README.html">
+     ssd_mobilenet_v1_fpn_coco
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/ssdlite_mobilenet_v2/README.html">
+     ssdlite_mobilenet_v2
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/swin-tiny-patch4-window7-224/README.html">
+     swin-tiny-patch4-window7-224
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/t2t-vit-14/README.html">
+     t2t-vit-14
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/text-recognition-resnet-fc/README.html">
+     text-recognition-resnet-fc
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/ultra-lightweight-face-detection-rfb-320/README.html">
+     ultra-lightweight-face-detection-rfb-320
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/ultra-lightweight-face-detection-slim-320/README.html">
+     ultra-lightweight-face-detection-slim-320
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/vehicle-license-plate-detection-barrier-0123/README.html">
+     vehicle-license-plate-detection-barrier-0123
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/vehicle-reid-0001/README.html">
+     vehicle-reid-0001
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/vgg16/README.html">
+     vgg16
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/vgg19/README.html">
+     vgg19
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/vitstr-small-patch16-224/README.html">
+     vitstr-small-patch16-224
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/wav2vec2-base/README.html">
+     wav2vec2-base
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/wavernn/README.html">
+     wavernn (composite)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/yolact-resnet50-fpn-pytorch/README.html">
+     yolact-resnet50-fpn-pytorch
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/yolo-v1-tiny-tf/README.html">
+     yolo-v1-tiny-tf
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/yolo-v2-tf/README.html">
+     yolo-v2-tf
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/yolo-v2-tiny-tf/README.html">
+     yolo-v2-tiny-tf
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/yolo-v3-onnx/README.html">
+     yolo-v3-onnx
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/yolo-v3-tf/README.html">
+     yolo-v3-tf
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/yolo-v3-tiny-onnx/README.html">
+     yolo-v3-tiny-onnx
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/yolo-v3-tiny-tf/README.html">
+     yolo-v3-tiny-tf
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/yolo-v4-tf/README.html">
+     yolo-v4-tf
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/yolo-v4-tiny-tf/README.html">
+     yolo-v4-tiny-tf
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/yolof/README.html">
+     yolof
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../../models/public/yolox-tiny/README.html">
+     yolox-tiny
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Demo Applications
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../../README.html">
+   Open Model Zoo Demos
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../3d_segmentation_demo/python/README.html">
+     3D Segmentation Python* Demo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../action_recognition_demo/python/README.html">
+     Action Recognition Python* Demo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../background_subtraction_demo/cpp_gapi/README.html">
+     G-API Background Subtraction Demo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../background_subtraction_demo/python/README.html">
+     Background subtraction Python* Demo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../bert_named_entity_recognition_demo/python/README.html">
+     BERT Named Entity Recognition Python* Demo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../bert_question_answering_demo/python/README.html">
+     BERT Question Answering Python* Demo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../bert_question_answering_embedding_demo/python/README.html">
+     BERT Question Answering Embedding Python* Demo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../classification_benchmark_demo/cpp/README.html">
+     Classification Benchmark C++ Demo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../classification_demo/python/README.html">
+     Classification Python* Demo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../colorization_demo/python/README.html">
+     Colorization Demo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../crossroad_camera_demo/cpp/README.html">
+     Crossroad Camera C++ Demo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../deblurring_demo/python/README.html">
+     Image Deblurring Python* Demo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../face_detection_mtcnn_demo/cpp_gapi/README.html">
+     G-API Face Detection MTCNN Demo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../face_detection_mtcnn_demo/python/README.html">
+     Face Detection MTCNN Python* Demo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../face_recognition_demo/python/README.html">
+     Face Recognition Python* Demo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../formula_recognition_demo/python/README.html">
+     Formula Recognition Python* Demo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../gaze_estimation_demo/cpp/README.html">
+     Gaze Estimation Demo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../gaze_estimation_demo/cpp_gapi/README.html">
+     G-API Gaze Estimation Demo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../gesture_recognition_demo/cpp_gapi/README.html">
+     G-API Gesture Recognition Demo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../gesture_recognition_demo/python/README.html">
+     Gesture Recognition Python* Demo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../gpt2_text_prediction_demo/python/README.html">
+     GPT-2 Text Prediction Python* Demo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../handwritten_text_recognition_demo/python/README.html">
+     Handwritten Text Recognition Demo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../human_pose_estimation_3d_demo/python/README.html">
+     3D Human Pose Estimation Python* Demo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../human_pose_estimation_demo/cpp/README.html">
+     Human Pose Estimation C++ Demo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../human_pose_estimation_demo/python/README.html">
+     Human Pose Estimation Python* Demo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../image_inpainting_demo/python/README.html">
+     Image Inpainting Python Demo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../image_processing_demo/cpp/README.html">
+     Image Processing C++ Demo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../image_retrieval_demo/python/README.html">
+     Image Retrieval Python* Demo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../image_translation_demo/python/README.html">
+     Image Translation Demo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../instance_segmentation_demo/python/README.html">
+     Instance Segmentation Python* Demo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../interactive_face_detection_demo/cpp/README.html">
+     Interactive Face Detection C++ Demo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../interactive_face_detection_demo/cpp_gapi/README.html">
+     G-API Interactive Face Detection Demo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../machine_translation_demo/python/README.html">
+     Machine Translation Python* Demo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../mask_rcnn_demo/cpp/README.html">
+     TensorFlow* Object Detection Mask R-CNNs Segmentation C++ Demo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../monodepth_demo/python/README.html">
+     MonoDepth Python Demo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../mri_reconstruction_demo/cpp/README.html">
+     MRI Reconstruction C++ Demo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../mri_reconstruction_demo/python/README.html">
+     MRI Reconstruction Python* Demo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../multi_camera_multi_target_tracking_demo/python/README.html">
+     Multi Camera Multi Target Python* Demo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../multi_channel_face_detection_demo/cpp/README.html">
+     Multi-Channel Face Detection C++ Demo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../multi_channel_human_pose_estimation_demo/cpp/README.html">
+     Multi-Channel Human Pose Estimation C++ Demo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../multi_channel_object_detection_demo_yolov3/cpp/README.html">
+     Multi-Channel Object Detection Yolov3 C++ Demo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../noise_suppression_demo/cpp/README.html">
+     Noise Suppression C++* Demo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../noise_suppression_demo/python/README.html">
+     Noise Suppression Python* Demo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../object_detection_demo/cpp/README.html">
+     Object Detection C++ Demo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../object_detection_demo/python/README.html">
+     Object Detection Python* Demo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../pedestrian_tracker_demo/cpp/README.html">
+     Pedestrian Tracker C++ Demo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../place_recognition_demo/python/README.html">
+     Place Recognition Python* Demo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../security_barrier_camera_demo/cpp/README.html">
+     Security Barrier Camera C++ Demo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../segmentation_demo/cpp/README.html">
+     Image Segmentation C++ Demo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../segmentation_demo/python/README.html">
+     Image Segmentation Python* Demo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../single_human_pose_estimation_demo/python/README.html">
+     Single Human Pose Estimation Demo (top-down pipeline)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../smart_classroom_demo/cpp/README.html">
+     Smart Classroom C++ Demo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../smart_classroom_demo/cpp_gapi/README.html">
+     Smart Classroom C++ G-API Demo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../smartlab_demo/python/README.html">
+     Smartlab Python* Demo
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Social Distance C++ Demo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../sound_classification_demo/python/README.html">
+     Sound Classification Python* Demo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../speech_recognition_deepspeech_demo/python/README.html">
+     Speech Recognition DeepSpeech Python* Demo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../speech_recognition_quartznet_demo/python/README.html">
+     Speech Recognition QuartzNet Python* Demo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../speech_recognition_wav2vec_demo/python/README.html">
+     Speech Recognition Wav2Vec Python* Demo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../text_detection_demo/cpp/README.html">
+     Text Detection C++ Demo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../text_spotting_demo/python/README.html">
+     Text Spotting Python* Demo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../text_to_speech_demo/python/README.html">
+     Text-to-speech Python* Demo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../time_series_forecasting_demo/python/README.html">
+     Time Series Forecasting Python* Demo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../whiteboard_inpainting_demo/python/README.html">
+     Whiteboard Inpainting Python* Demo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../common/python/openvino/model_zoo/model_api/adapters/ovms_adapter.html">
+     OpenVINO Model Server Adapter
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Model API
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../common/python/openvino/model_zoo/model_api/adapters/ovms_adapter.html">
+   OpenVINO Model Server Adapter
+  </a>
+ </li>
+</ul>
+
+  </div>
+</nav>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+              
+              <div class="toc-item">
+                
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#how-it-works">
+   How It Works
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#preparing-to-run">
+   Preparing to Run
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#supported-models">
+     Supported Models
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#running">
+   Running
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#demo-output">
+   Demo Output
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#see-also">
+   See Also
+  </a>
+ </li>
+</ul>
+
+</nav>
+              </div>
+              
+              <div class="toc-item">
+                <div class="tocsection download-docs">
+  <div class="dropdown sst-dropdown">
+    <button class="button bttn-prm button-size-m" data-display="static" type="button" id="download-options"
+      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Download Docs
+    </button>
+    <div class="dropdown-menu" aria-labelledby="download-options">
+      <a class="dropdown-item" href="#" onclick="window.print()">.pdf</a>
+      <a id="download-zip-btn" class="dropdown-item" href="#">.zip</a>
+    </div>
+  </div>
+</div>
+              </div>
+              
+            
+          </div>
+          
+
+          
+          
+              
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+
+<div class="tocsection editthispage">
+    <a href="None">
+        <i class="fas fa-pencil-alt"></i> Edit this page
+    </a>
+</div>
+
+            
+                <div>
+                  
+  <div class="section" id="social-distance-c-demo">
+<h1>Social Distance C++ Demo<a class="headerlink" href="#social-distance-c-demo" title="Permalink to this headline">¶</a></h1>
+<p><img alt="" src="../../../_images/social_distance.gif" /></p>
+<p>This demo showcases a retail social distance application that detects people and measures the distance between them. If this distance is less than a value previously provided by the user, then an alert is triggered.</p>
+<p>Other demo objectives are:</p>
+<ul class="simple">
+<li><p>Video/Camera as inputs, via OpenCV*</p></li>
+<li><p>Example of complex asynchronous networks pipelining: Person Re-Identification network is executed on top of the Person Detection results</p></li>
+<li><p>Visualization of the minimum social distancing threshold violation</p></li>
+</ul>
+<div class="section" id="how-it-works">
+<h2>How It Works<a class="headerlink" href="#how-it-works" title="Permalink to this headline">¶</a></h2>
+<p>On the start-up, the application reads command line parameters and loads the specified networks. Both Person Detection and Re-Identification networks are required.</p>
+<p>The core component of the application pipeline is the Worker class, which executes incoming instances of a <code class="docutils literal notranslate"><span class="pre">Task</span></code> class.
+<code class="docutils literal notranslate"><span class="pre">Task</span></code> is an abstract class that describes data to process and how to process the data.
+For example, a <code class="docutils literal notranslate"><span class="pre">Task</span></code> can be to read a frame or to get detection results.
+There is a pool of <code class="docutils literal notranslate"><span class="pre">Task</span></code> instances. These <code class="docutils literal notranslate"><span class="pre">Task</span></code>s are awaiting to be executed.
+When a <code class="docutils literal notranslate"><span class="pre">Task</span></code> from the pool is being executed, it may create and/or submit another <code class="docutils literal notranslate"><span class="pre">Task</span></code> to the pool.
+Each <code class="docutils literal notranslate"><span class="pre">Task</span></code> stores a smart pointer to an instance of <code class="docutils literal notranslate"><span class="pre">VideoFrame</span></code>, which represents an image the <code class="docutils literal notranslate"><span class="pre">Task</span></code> works with.
+When the sequence of <code class="docutils literal notranslate"><span class="pre">Task</span></code>s is completed and none of the <code class="docutils literal notranslate"><span class="pre">Task</span></code>s require a <code class="docutils literal notranslate"><span class="pre">VideoFrame</span></code> instance, the <code class="docutils literal notranslate"><span class="pre">VideoFrame</span></code> is destroyed.
+This triggers creation of a new sequence of <code class="docutils literal notranslate"><span class="pre">Task</span></code>s.
+The pipeline of this demo executes the following sequence of <code class="docutils literal notranslate"><span class="pre">Task</span></code>s:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Reader</span></code>, which reads a new frame</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">InferTask</span></code>, which starts detection inference</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DetectionsProcessor</span></code>, which waits for detection inference to complete and runs a Re-Identification model</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ResAggregator</span></code>, which draws the results of the inference on the frame</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Drawer</span></code>, which shows the frame with the inference results</p></li>
+</ul>
+<p>At the end of the sequence, the <code class="docutils literal notranslate"><span class="pre">VideoFrame</span></code> is destroyed and the sequence starts again for the next frame.</p>
+<blockquote>
+<div><p><strong>NOTE</strong>: By default, Open Model Zoo demos expect input with BGR channels order. If you trained your model to work with RGB order, you need to manually rearrange the default channels order in the demo application or reconvert your model using the Model Optimizer tool with the <code class="docutils literal notranslate"><span class="pre">--reverse_input_channels</span></code> argument specified. For more information about the argument, refer to <strong>When to Reverse Input Channels</strong> section of [Embedding Preprocessing Computation](&#64;ref openvino_docs_MO_DG_Additional_Optimization_Use_Cases).</p>
+</div></blockquote>
+</div>
+<div class="section" id="preparing-to-run">
+<h2>Preparing to Run<a class="headerlink" href="#preparing-to-run" title="Permalink to this headline">¶</a></h2>
+<p>For demo input image or video files, refer to the section <strong>Media Files Available for Demos</strong> in the <a class="reference internal" href="../../README.html"><span class="doc std std-doc">Open Model Zoo Demos Overview</span></a>.
+The list of models supported by the demo is in <code class="docutils literal notranslate"><span class="pre">&lt;omz_dir&gt;/demos/social_distance_demo/cpp/models.lst</span></code> file.
+This file can be used as a parameter for <span class="xref myst">Model Downloader</span> and Converter to download and, if necessary, convert models to OpenVINO IR format (*.xml + *.bin).</p>
+<p>An example of using the Model Downloader:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>omz_downloader --list models.lst
+</pre></div>
+</div>
+<p>An example of using the Model Converter:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>omz_converter --list models.lst
+</pre></div>
+</div>
+<div class="section" id="supported-models">
+<h3>Supported Models<a class="headerlink" href="#supported-models" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>person-detection-0200</p></li>
+<li><p>person-detection-0201</p></li>
+<li><p>person-detection-0202</p></li>
+<li><p>person-detection-retail-0013</p></li>
+<li><p>person-reidentification-retail-0277</p></li>
+<li><p>person-reidentification-retail-0286</p></li>
+<li><p>person-reidentification-retail-0287</p></li>
+<li><p>person-reidentification-retail-0288</p></li>
+</ul>
+<blockquote>
+<div><p><strong>NOTE</strong>: Refer to the tables <a class="reference internal" href="../../../models/intel/device_support.html"><span class="doc std std-doc">Intel’s Pre-Trained Models Device Support</span></a> and <a class="reference internal" href="../../../models/public/device_support.html"><span class="doc std std-doc">Public Pre-Trained Models Device Support</span></a> for the details on models inference support at different devices.</p>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="running">
+<h2>Running<a class="headerlink" href="#running" title="Permalink to this headline">¶</a></h2>
+<p>Running the application with the <code class="docutils literal notranslate"><span class="pre">-h</span></code> option yields the following usage message:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">social_distance_demo</span> <span class="p">[</span><span class="n">OPTION</span><span class="p">]</span>
+<span class="n">Options</span><span class="p">:</span>
+
+    <span class="o">-</span><span class="n">h</span>                         <span class="n">Print</span> <span class="n">a</span> <span class="n">usage</span> <span class="n">message</span><span class="o">.</span>
+    <span class="o">-</span><span class="n">i</span> <span class="s2">&quot;&lt;path1&gt;&quot;</span> <span class="s2">&quot;&lt;path2&gt;&quot;</span>     <span class="n">Required</span> <span class="k">for</span> <span class="n">video</span> <span class="ow">or</span> <span class="n">image</span> <span class="n">files</span> <span class="nb">input</span><span class="o">.</span> <span class="n">Path</span> <span class="n">to</span> <span class="n">video</span> <span class="ow">or</span> <span class="n">image</span> <span class="n">files</span><span class="o">.</span>
+    <span class="o">-</span><span class="n">m_det</span> <span class="s2">&quot;&lt;path&gt;&quot;</span>            <span class="n">Required</span><span class="o">.</span> <span class="n">Path</span> <span class="n">to</span> <span class="n">the</span> <span class="n">Person</span> <span class="n">Detection</span> <span class="n">model</span> <span class="o">.</span><span class="n">xml</span> <span class="n">file</span><span class="o">.</span>
+    <span class="o">-</span><span class="n">m_reid</span> <span class="s2">&quot;&lt;path&gt;&quot;</span>           <span class="n">Optional</span><span class="o">.</span> <span class="n">Path</span> <span class="n">to</span> <span class="n">the</span> <span class="n">Person</span> <span class="n">Re</span><span class="o">-</span><span class="n">Identification</span> <span class="n">model</span> <span class="o">.</span><span class="n">xml</span> <span class="n">file</span><span class="o">.</span>
+    <span class="o">-</span><span class="n">d_det</span> <span class="s2">&quot;&lt;device&gt;&quot;</span>          <span class="n">Optional</span><span class="o">.</span> <span class="n">Specify</span> <span class="n">the</span> <span class="n">target</span> <span class="n">device</span> <span class="k">for</span> <span class="n">Person</span> <span class="n">Detection</span> <span class="p">(</span><span class="n">the</span> <span class="nb">list</span> <span class="n">of</span> <span class="n">available</span> <span class="n">devices</span> <span class="ow">is</span> <span class="n">shown</span> <span class="n">below</span><span class="p">)</span><span class="o">.</span> <span class="n">Default</span> <span class="n">value</span> <span class="ow">is</span> <span class="n">CPU</span><span class="o">.</span> <span class="n">Use</span> <span class="s2">&quot;-d HETERO:&lt;comma-separated_devices_list&gt;&quot;</span> <span class="nb">format</span> <span class="n">to</span> <span class="n">specify</span> <span class="n">HETERO</span> <span class="n">plugin</span><span class="o">.</span> <span class="n">The</span> <span class="n">application</span> <span class="n">looks</span> <span class="k">for</span> <span class="n">a</span> <span class="n">suitable</span> <span class="n">plugin</span> <span class="k">for</span> <span class="n">the</span> <span class="n">specified</span> <span class="n">device</span><span class="o">.</span>
+    <span class="o">-</span><span class="n">d_reid</span> <span class="s2">&quot;&lt;device&gt;&quot;</span>         <span class="n">Optional</span><span class="o">.</span> <span class="n">Specify</span> <span class="n">the</span> <span class="n">target</span> <span class="n">device</span> <span class="k">for</span> <span class="n">Person</span> <span class="n">Re</span><span class="o">-</span><span class="n">Identification</span> <span class="p">(</span><span class="n">the</span> <span class="nb">list</span> <span class="n">of</span> <span class="n">available</span> <span class="n">devices</span> <span class="ow">is</span> <span class="n">shown</span> <span class="n">below</span><span class="p">)</span><span class="o">.</span> <span class="n">Default</span> <span class="n">value</span> <span class="ow">is</span> <span class="n">CPU</span><span class="o">.</span> <span class="n">Use</span> <span class="s2">&quot;-d_reid HETERO:&lt;comma-separated_devices_list&gt;&quot;</span> <span class="nb">format</span> <span class="n">to</span> <span class="n">specify</span> <span class="n">HETERO</span> <span class="n">plugin</span><span class="o">.</span> <span class="n">The</span> <span class="n">application</span> <span class="n">looks</span> <span class="k">for</span> <span class="n">a</span> <span class="n">suitable</span> <span class="n">plugin</span> <span class="k">for</span> <span class="n">the</span> <span class="n">specified</span> <span class="n">device</span><span class="o">.</span>
+    <span class="o">-</span><span class="n">r</span>                         <span class="n">Optional</span><span class="o">.</span> <span class="n">Output</span> <span class="n">inference</span> <span class="n">results</span> <span class="k">as</span> <span class="n">raw</span> <span class="n">values</span><span class="o">.</span>
+    <span class="o">-</span><span class="n">t</span>                         <span class="n">Optional</span><span class="o">.</span> <span class="n">Probability</span> <span class="n">threshold</span> <span class="k">for</span> <span class="n">person</span> <span class="n">detections</span><span class="o">.</span>
+    <span class="o">-</span><span class="n">no_show</span>                   <span class="n">Optional</span><span class="o">.</span> <span class="n">Do</span> <span class="ow">not</span> <span class="n">show</span> <span class="n">processed</span> <span class="n">video</span><span class="o">.</span>
+    <span class="o">-</span><span class="n">auto_resize</span>               <span class="n">Optional</span><span class="o">.</span> <span class="n">Enable</span> <span class="n">resizable</span> <span class="nb">input</span> <span class="k">with</span> <span class="n">support</span> <span class="n">of</span> <span class="n">ROI</span> <span class="n">crop</span> <span class="ow">and</span> <span class="n">auto</span> <span class="n">resize</span><span class="o">.</span>
+    <span class="o">-</span><span class="n">nireq</span>                     <span class="n">Optional</span><span class="o">.</span> <span class="n">Number</span> <span class="n">of</span> <span class="n">infer</span> <span class="n">requests</span><span class="o">.</span> <span class="mi">0</span> <span class="n">sets</span> <span class="n">the</span> <span class="n">number</span> <span class="n">of</span> <span class="n">infer</span> <span class="n">requests</span> <span class="n">equal</span> <span class="n">to</span> <span class="n">the</span> <span class="n">number</span> <span class="n">of</span> <span class="n">inputs</span><span class="o">.</span>
+    <span class="o">-</span><span class="n">nc</span>                        <span class="n">Required</span> <span class="k">for</span> <span class="n">web</span> <span class="n">camera</span> <span class="nb">input</span><span class="o">.</span> <span class="n">Maximum</span> <span class="n">number</span> <span class="n">of</span> <span class="n">processed</span> <span class="n">camera</span> <span class="n">inputs</span> <span class="p">(</span><span class="n">web</span> <span class="n">cameras</span><span class="p">)</span><span class="o">.</span>
+    <span class="o">-</span><span class="n">loop_video</span>                <span class="n">Optional</span><span class="o">.</span> <span class="n">Enable</span> <span class="n">playing</span> <span class="n">video</span> <span class="n">on</span> <span class="n">a</span> <span class="n">loop</span><span class="o">.</span>
+    <span class="o">-</span><span class="n">n_iqs</span>                     <span class="n">Optional</span><span class="o">.</span> <span class="n">Number</span> <span class="n">of</span> <span class="n">allocated</span> <span class="n">frames</span><span class="o">.</span> <span class="n">It</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">multiplier</span> <span class="n">of</span> <span class="n">the</span> <span class="n">number</span> <span class="n">of</span> <span class="n">inputs</span><span class="o">.</span>
+    <span class="o">-</span><span class="n">ni</span>                        <span class="n">Optional</span><span class="o">.</span> <span class="n">Specify</span> <span class="n">the</span> <span class="n">number</span> <span class="n">of</span> <span class="n">channels</span> <span class="n">generated</span> <span class="kn">from</span> <span class="nn">provided</span> <span class="n">inputs</span> <span class="p">(</span><span class="k">with</span> <span class="o">-</span><span class="n">i</span> <span class="ow">and</span> <span class="o">-</span><span class="n">nc</span> <span class="n">keys</span><span class="p">)</span><span class="o">.</span> <span class="n">For</span> <span class="n">example</span><span class="p">,</span> <span class="k">if</span> <span class="n">only</span> <span class="n">one</span> <span class="n">camera</span> <span class="ow">is</span> <span class="n">provided</span><span class="p">,</span> <span class="n">but</span> <span class="o">-</span><span class="n">ni</span> <span class="ow">is</span> <span class="nb">set</span> <span class="n">to</span> <span class="mi">2</span><span class="p">,</span> <span class="n">the</span> <span class="n">demo</span> <span class="n">will</span> <span class="n">process</span> <span class="n">frames</span> <span class="k">as</span> <span class="k">if</span> <span class="n">they</span> <span class="n">are</span> <span class="n">captured</span> <span class="kn">from</span> <span class="nn">two</span> <span class="n">cameras</span><span class="o">.</span> <span class="mi">0</span> <span class="n">sets</span> <span class="n">the</span> <span class="n">number</span> <span class="n">of</span> <span class="nb">input</span> <span class="n">channels</span> <span class="n">equal</span> <span class="n">to</span> <span class="n">the</span> <span class="n">number</span> <span class="n">of</span> <span class="n">provided</span> <span class="n">inputs</span><span class="o">.</span>
+    <span class="o">-</span><span class="n">fps</span>                       <span class="n">Optional</span><span class="o">.</span> <span class="n">Set</span> <span class="n">the</span> <span class="n">playback</span> <span class="n">speed</span> <span class="ow">not</span> <span class="n">faster</span> <span class="n">than</span> <span class="n">the</span> <span class="n">specified</span> <span class="n">FPS</span><span class="o">.</span> <span class="mi">0</span> <span class="n">removes</span> <span class="n">the</span> <span class="n">upper</span> <span class="n">bound</span><span class="o">.</span>
+    <span class="o">-</span><span class="n">n_wt</span>                      <span class="n">Optional</span><span class="o">.</span> <span class="n">Set</span> <span class="n">the</span> <span class="n">number</span> <span class="n">of</span> <span class="n">threads</span> <span class="n">including</span> <span class="n">the</span> <span class="n">main</span> <span class="n">thread</span> <span class="n">a</span> <span class="n">Worker</span> <span class="k">class</span> <span class="nc">will</span> <span class="n">use</span><span class="o">.</span>
+    <span class="o">-</span><span class="n">display_resolution</span>        <span class="n">Optional</span><span class="o">.</span> <span class="n">Specify</span> <span class="n">the</span> <span class="n">maximum</span> <span class="n">output</span> <span class="n">window</span> <span class="n">resolution</span><span class="o">.</span>
+    <span class="o">-</span><span class="n">tag</span>                       <span class="n">Required</span> <span class="k">for</span> <span class="n">HDDL</span> <span class="n">plugin</span> <span class="n">only</span><span class="o">.</span> <span class="n">If</span> <span class="ow">not</span> <span class="nb">set</span><span class="p">,</span> <span class="n">the</span> <span class="n">performance</span> <span class="n">on</span> <span class="n">Intel</span><span class="p">(</span><span class="n">R</span><span class="p">)</span> <span class="n">Movidius</span><span class="p">(</span><span class="n">TM</span><span class="p">)</span> <span class="n">X</span> <span class="n">VPUs</span> <span class="n">will</span> <span class="ow">not</span> <span class="n">be</span> <span class="n">optimal</span><span class="o">.</span> <span class="n">Running</span> <span class="n">each</span> <span class="n">network</span> <span class="n">on</span> <span class="n">a</span> <span class="nb">set</span> <span class="n">of</span> <span class="n">Intel</span><span class="p">(</span><span class="n">R</span><span class="p">)</span> <span class="n">Movidius</span><span class="p">(</span><span class="n">TM</span><span class="p">)</span> <span class="n">X</span> <span class="n">VPUs</span> <span class="k">with</span> <span class="n">a</span> <span class="n">specific</span> <span class="n">tag</span><span class="o">.</span> <span class="n">You</span> <span class="n">must</span> <span class="n">specify</span> <span class="n">the</span> <span class="n">number</span> <span class="n">of</span> <span class="n">VPUs</span> <span class="k">for</span> <span class="n">each</span> <span class="n">network</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">hddl_service</span><span class="o">.</span><span class="n">config</span> <span class="n">file</span><span class="o">.</span> <span class="n">Refer</span> <span class="n">to</span> <span class="n">the</span> <span class="n">corresponding</span> <span class="n">README</span> <span class="n">file</span> <span class="k">for</span> <span class="n">more</span> <span class="n">information</span><span class="o">.</span>
+    <span class="o">-</span><span class="n">nstreams</span> <span class="s2">&quot;&lt;integer&gt;&quot;</span>      <span class="n">Optional</span><span class="o">.</span> <span class="n">Number</span> <span class="n">of</span> <span class="n">streams</span> <span class="n">to</span> <span class="n">use</span> <span class="k">for</span> <span class="n">inference</span> <span class="n">on</span> <span class="n">the</span> <span class="n">CPU</span> <span class="ow">or</span><span class="o">/</span><span class="ow">and</span> <span class="n">GPU</span> <span class="ow">in</span> <span class="n">throughput</span> <span class="n">mode</span> <span class="p">(</span><span class="k">for</span> <span class="n">HETERO</span> <span class="ow">and</span> <span class="n">MULTI</span> <span class="n">device</span> <span class="n">cases</span> <span class="n">use</span> <span class="nb">format</span> <span class="o">&lt;</span><span class="n">device1</span><span class="o">&gt;</span><span class="p">:</span><span class="o">&lt;</span><span class="n">nstreams1</span><span class="o">&gt;</span><span class="p">,</span><span class="o">&lt;</span><span class="n">device2</span><span class="o">&gt;</span><span class="p">:</span><span class="o">&lt;</span><span class="n">nstreams2</span><span class="o">&gt;</span> <span class="ow">or</span> <span class="n">just</span> <span class="o">&lt;</span><span class="n">nstreams</span><span class="o">&gt;</span><span class="p">)</span>
+    <span class="o">-</span><span class="n">nthreads</span> <span class="s2">&quot;&lt;integer&gt;&quot;</span>      <span class="n">Optional</span><span class="o">.</span> <span class="n">Number</span> <span class="n">of</span> <span class="n">threads</span> <span class="n">to</span> <span class="n">use</span> <span class="k">for</span> <span class="n">inference</span> <span class="n">on</span> <span class="n">the</span> <span class="n">CPU</span> <span class="p">(</span><span class="n">including</span> <span class="n">HETERO</span> <span class="ow">and</span> <span class="n">MULTI</span> <span class="n">cases</span><span class="p">)</span><span class="o">.</span>
+    <span class="o">-</span><span class="n">u</span>                         <span class="n">Optional</span><span class="o">.</span> <span class="n">List</span> <span class="n">of</span> <span class="n">monitors</span> <span class="n">to</span> <span class="n">show</span> <span class="n">initially</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>Running the application with an empty list of options yields an error message.</p>
+<p>For example, to do inference on a GPU with the OpenVINO toolkit pre-trained models, run the following command:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>./social_distance_demo -i &lt;path_to_video&gt;/inputVideo.mp4 -m_det &lt;path_to_model&gt;/person-detection-retail-0013.xml -m_reid &lt;path_to_model&gt;/person-reidentification-retail-0277.xml -d_det GPU
+</pre></div>
+</div>
+<p>To do inference for two video inputs using two asynchronous infer request on CPU with the OpenVINO toolkit pre-trained models, run the following command:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>./social_distance_demo -i &lt;path_to_video&gt;/inputVideo_0.mp4 &lt;path_to_video&gt;/inputVideo_1.mp4 -m_det &lt;path_to_model&gt;/person-detection-retail-0013.xml -m_reid &lt;path_to_model&gt;/person-reidentification-retail-0277.xml -d_det CPU -d_reid CPU -nireq <span class="m">2</span>
+</pre></div>
+</div>
+<p>To do inference for video inputs on Intel® Vision Accelerator Design with Intel® Movidius™ VPUs, some optimization hints are suggested to make good use of the computation ability:</p>
+<ul class="simple">
+<li><p>configuring the number of allocated frames (<code class="docutils literal notranslate"><span class="pre">-n_iqs</span></code>) to provide enough inputs for inference;</p></li>
+<li><p>configuring the number of infer request (<code class="docutils literal notranslate"><span class="pre">-nireq</span></code>) to achieve asynchronous inference;</p></li>
+<li><p>configuring the number of threads (<code class="docutils literal notranslate"><span class="pre">-n_wt</span></code>) for multi-threaded processing.</p></li>
+</ul>
+<p>For example, to run the sample on one Intel® Vision Accelerator Design with Intel® Movidius™ VPUs Compact R card, run the following command:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>./social_distance_demo -i &lt;path_to_video&gt;/inputVideo.mp4 -m_det &lt;path_to_model&gt;/person-detection-retail-0013.xml -m_reid &lt;path_to_model&gt;/person-reidentification-retail-0277.xml  -d_det HDDL -d_reid HDDL -n_iqs <span class="m">10</span> -n_wt <span class="m">4</span> -nireq <span class="m">10</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p><strong>NOTE</strong>: For the <code class="docutils literal notranslate"><span class="pre">-tag</span></code> option (HDDL plugin only), you must specify the number of VPUs for each network in the <code class="docutils literal notranslate"><span class="pre">hddl_service.config</span></code> file located in the <code class="docutils literal notranslate"><span class="pre">&lt;INSTALL_DIR&gt;/runtime/3rdparty/hddl/config/</span></code> directory using the following tags:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">tagDetect</span></code> for the Person Detection network</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tagReId</span></code> for the Person Re-Identification network</p></li>
+</ul>
+<p>For example, to run the sample on one Intel® Vision Accelerator Design with Intel® Movidius™ VPUs Compact R card with eight Intel® Movidius™ X VPUs:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="nt">&quot;service_settings&quot;</span><span class="p">:</span>
+<span class="p">{</span>
+ <span class="nt">&quot;graph_tag_map&quot;</span><span class="p">:{</span><span class="nt">&quot;tagDetect&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span> <span class="nt">&quot;tagReId&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="demo-output">
+<h2>Demo Output<a class="headerlink" href="#demo-output" title="Permalink to this headline">¶</a></h2>
+<p>The demo uses OpenCV to display the resulting frame with detections rendered as bounding boxes and text. The demo reports:</p>
+<ul class="simple">
+<li><p><strong>FPS</strong>: average rate of video frame processing (frames per second).</p></li>
+<li><p><strong>Latency</strong>: average time required to process one frame (from reading the frame to displaying the results).</p></li>
+</ul>
+<p>You can use these metrics to measure application-level performance.</p>
+</div>
+<div class="section" id="see-also">
+<h2>See Also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../README.html"><span class="doc std std-doc">Open Model Zoo Demos</span></a></p></li>
+<li><p><a class="reference external" href="https://docs.openvino.ai/latest/openvino_docs_MO_DG_Deep_Learning_Model_Optimizer_DevGuide.html">Model Optimizer</a></p></li>
+<li><p><span class="xref myst">Model Downloader</span></p></li>
+</ul>
+</div>
+</div>
+
+
+                </div>
+            
+            
+                <div class='prev-next-bottom'>
+                  
+    <a class='button bttn-sec button-size-l' id="prev-link" href="../../smartlab_demo/python/README.html" title="previous page">Prev</a>
+    <a class='button bttn-sec button-size-l' id="next-link" href="../../sound_classification_demo/python/README.html" title="next page">Next</a>
+
+                </div>
+            
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="../../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+<footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2021, Intel®.<br>
+</p>
+    </div>
+    
+    <div class="footer-item">
+      <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

@@ -1,0 +1,1629 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Deep Learning Network Intermediate Representation and Operation Sets in OpenVINO™ &#8212; OpenVINO™  documentation</title>
+    
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/blank.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/doxyrest-pygments.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <link href="../_static/css/media/favicon.ico" rel="shortcut icon">
+    <link rel="stylesheet" href="../_static/css/openvino_sphinx_theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/button.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/input.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/textfield.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/tabs.css" type="text/css" />
+    <script src="../_static/js/openvino_sphinx_theme.js"></script>
+    <link rel="stylesheet" href="../_static/css/viewer.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/0.5.7/chartjs-plugin-annotation.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-barchart-background@1.3.0/build/Plugin.Barchart.Background.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-deferred@1"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.1/papaparse.min.js"></script>
+    <script src="../_static/js/viewer.min.js"></script>
+    <script src="/assets/versions_raw.js"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/tabs.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/js/custom.js"></script>
+    <script src="../_static/js/graphs.js"></script>
+    <script src="../_static/js/graphs_ov_tf.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/target-highlight.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <link rel="canonical" href="https://docs.openvino.ai/latest/pages/openvino_docs_MO_DG_IR_and_opsets.html" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Available Operations Sets" href="openvino_docs_ops_opset.html" />
+    <link rel="prev" title="Legal Information" href="openvino_docs_Legal_Information.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+      <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+
+<a class="navbar-brand" href="../index.html">
+  <img src="../_static/logo.svg" class="logo" alt="logo">
+</a>
+
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="get_started.html">
+  Get Started
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="documentation.html">
+  Documentation
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../tutorials.html">
+  Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../model_zoo.html">
+  Model Zoo
+ </a>
+</li>
+
+<li class="toctree-l1 current active nav-item">
+ <a class="reference internal nav-link" href="resources.html">
+  Resources
+ </a>
+</li>
+
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/openvinotoolkit/openvino" rel="noopener" target="_blank" title="GitHub">
+            <span><i class="sst-github"></i></span>
+            <label class="sr-only">GitHub</label>
+          </a>
+        </li>
+</ul>
+      </div>
+      
+      <div class="navbar-end-item">
+        
+<div class="dropdown sst-dropdown sst-dropdown-navbar">
+  <button class="btn sst-btn dropdown-toggle" type="button" id="version-selector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+  <div class="dropdown-menu" aria-labelledby="version-selector">
+  </div>
+</div>
+      </div>
+      
+      <div class="navbar-end-item">
+        
+
+<div class="dropdown sst-dropdown sst-dropdown-navbar">
+  <button class="btn sst-btn dropdown-toggle" type="button" id="language-selector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">English</button>
+  <div class="dropdown-menu" aria-labelledby="language-selector">
+    
+      
+        <a class="dropdown-item font-weight-bold" href="/latest/pages/openvino_docs_MO_DG_IR_and_opsets.html">English</a>
+      
+    
+      
+        <a  class="dropdown-item" href="/cn/latest/pages/openvino_docs_MO_DG_IR_and_opsets.html">Chinese</a>
+      
+    
+  </div>
+</div>
+
+      </div>
+      
+    </div>
+  </div>
+</div>
+        <div id="collapse-nav-wrapper" class="container-xl">
+          <button id="collapse-nav" class="button bttn-prm button-size-m" type="button" data-toggle="collapse" data-target="#nav-tree" aria-expanded="false" aria-controls="nav-tree">
+            Documentation navigation <i class="fas fa-chevron-down"></i>
+          </button>
+        </div>
+      </nav>
+      <div class="transition-banner container-fluid alert alert-info alert-dismissible fade show" role="alert">
+        <p>OpenVINO 2022.1 introduces a new version of OpenVINO API (API 2.0). For more information on the changes and transition steps, see the <a href="https://docs.openvino.ai/latest/openvino_2_0_transition_guide.html">transition guide</a></p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar" id="nav-tree"><form class="searchForm bd-search d-flex align-items-center" action="../search.html" method="get">
+    <i class="icon fas fa-search"></i>
+    <input type="search" class="form-control" name="query" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Additional Resources
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference external" href="https://software.intel.com/content/www/us/en/develop/articles/openvino-relnotes.html">
+   Release Notes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="openvino_docs_OV_UG_supported_plugins_Supported_Devices.html">
+   Supported Devices
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_Supported_Frameworks_Layers.html">
+   Supported Framework Layers
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="openvino_docs_OV_Glossary.html">
+   Glossary
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="openvino_docs_Legal_Information.html">
+   Legal Information
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Intermediate Representation and Operations Sets
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Deep Learning Network Intermediate Representation and Operation Sets in OpenVINO™
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="openvino_docs_ops_opset.html">
+   Available Operations Sets
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_opset9.html">
+     opset9
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_opset8.html">
+     opset8
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_opset7.html">
+     opset7
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_opset6.html">
+     opset6
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_opset5.html">
+     opset5
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_opset4.html">
+     opset4
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_opset3.html">
+     opset3
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_opset2.html">
+     opset2
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_opset1.html">
+     opset1
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="openvino_docs_ops_broadcast_rules.html">
+   Broadcast Rules For Elementwise Operations
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="openvino_docs_operations_specifications.html">
+   Operations Specifications
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_arithmetic_Abs_1.html">
+     Abs-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_arithmetic_Acos_1.html">
+     Acos-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_arithmetic_Acosh_3.html">
+     Acosh-3
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_pooling_AdaptiveAvgPool_8.html">
+     AdaptiveAvgPool-8
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_pooling_AdaptiveMaxPool_8.html">
+     AdaptiveMaxPool-8
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_arithmetic_Add_1.html">
+     Add-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_arithmetic_Asin_1.html">
+     Asin-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_arithmetic_Asinh_3.html">
+     Asinh-3
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_infrastructure_Assign_3.html">
+     Assign-3
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_arithmetic_Atan_1.html">
+     Atan-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_arithmetic_Atanh_3.html">
+     Atanh-3
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_pooling_AvgPool_1.html">
+     AvgPool-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_normalization_BatchNormInference_1.html">
+     BatchNormInference-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_normalization_BatchNormInference_5.html">
+     BatchNormInference-5
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_movement_BatchToSpace_2.html">
+     BatchToSpace-2
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_convolution_BinaryConvolution_1.html">
+     BinaryConvolution-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_movement_Broadcast_1.html">
+     Broadcast-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_movement_Broadcast_3.html">
+     Broadcast-3
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_condition_Bucketize_3.html">
+     Bucketize-3
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_sequence_CTCGreedyDecoder_1.html">
+     CTCGreedyDecoder-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_sequence_CTCGreedyDecoderSeqLen_6.html">
+     CTCGreedyDecoderSeqLen-6
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_arithmetic_Ceiling_1.html">
+     Ceiling-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_activation_Clamp_1.html">
+     Clamp-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_movement_Concat_1.html">
+     Concat-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_infrastructure_Constant_1.html">
+     Constant-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_type_ConvertLike_1.html">
+     ConvertLike-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_type_Convert_1.html">
+     Convert-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_convolution_ConvolutionBackpropData_1.html">
+     ConvolutionBackpropData-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_convolution_Convolution_1.html">
+     Convolution-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_arithmetic_Cos_1.html">
+     Cos-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_arithmetic_Cosh_1.html">
+     Cosh-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_sequence_CTCLoss_4.html">
+     CTCLoss-4
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_arithmetic_CumSum_3.html">
+     CumSum-3
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_convolution_DeformableConvolution_1.html">
+     DeformableConvolution-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_convolution_DeformableConvolution_8.html">
+     DeformableConvolution-8
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_detection_DeformablePSROIPooling_1.html">
+     DeformablePSROIPooling-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_movement_DepthToSpace_1.html">
+     DepthToSpace-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_detection_DetectionOutput_1.html">
+     DetectionOutput-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_detection_DetectionOutput_8.html">
+     DetectionOutput-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_signals_DFT_7.html">
+     DFT-7
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_arithmetic_Divide_1.html">
+     Divide-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_matrix_Einsum_7.html">
+     Einsum-7
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_activation_Elu_1.html">
+     Elu-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_sparse_EmbeddingBagOffsetsSum_3.html">
+     EmbeddingBagOffsetsSum-3
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_sparse_EmbeddingBagPackedSum_3.html">
+     EmbeddingBagPackedSum-3
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_sparse_EmbeddingSegmentsSum_3.html">
+     EmbeddingSegmentsSum-3
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_comparison_Equal_1.html">
+     Equal-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_arithmetic_Erf_1.html">
+     Erf-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_activation_Exp_1.html">
+     Exp-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_detection_ExperimentalDetectronDetectionOutput_6.html">
+     ExperimentalDetectronDetectionOutput-6
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_detection_ExperimentalDetectronGenerateProposalsSingleImage_6.html">
+     ExperimentalDetectronGenerateProposalsSingleImage-6
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_detection_ExperimentalDetectronPriorGridGenerator_6.html">
+     ExperimentalDetectronPriorGridGenerator-6
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_detection_ExperimentalDetectronROIFeatureExtractor_6.html">
+     ExperimentalDetectronROIFeatureExtractor-6
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_sort_ExperimentalDetectronTopKROIs_6.html">
+     ExperimentalDetectronTopKROIs-6
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_movement_ExtractImagePatches_3.html">
+     ExtractImagePatches-3
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_generation_Eye_9.html">
+     Eye-9
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_quantization_FakeQuantize_1.html">
+     FakeQuantize-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_arithmetic_FloorMod_1.html">
+     FloorMod-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_arithmetic_Floor_1.html">
+     Floor-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_normalization_GRN_1.html">
+     GRN-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_sequence_GRUCell_3.html">
+     GRUCell-3
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_sequence_GRUSequence_5.html">
+     GRUSequence-5
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_movement_GatherTree_1.html">
+     GatherTree-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_movement_Gather_1.html">
+     Gather-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_movement_Gather_7.html">
+     Gather-7
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_movement_Gather_8.html">
+     Gather-8
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_movement_GatherElements_6.html">
+     GatherElements-6
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_movement_GatherND_5.html">
+     GatherND-5
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_movement_GatherND_8.html">
+     GatherND-8
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_activation_GELU_2.html">
+     GELU-2
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_activation_GELU_7.html">
+     GELU-7
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_detection_GenerateProposals_9.html">
+     GenerateProposals-9
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_comparison_GreaterEqual_1.html">
+     GreaterEqual-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_comparison_Greater_1.html">
+     Greater-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_convolution_GroupConvolutionBackpropData_1.html">
+     GroupConvolutionBackpropData-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_convolution_GroupConvolution_1.html">
+     GroupConvolution-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_activation_HardSigmoid_1.html">
+     HardSigmoid-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_activation_HSigmoid_5.html">
+     HSigmoid-5
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_activation_HSwish_4.html">
+     HSwish-4
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_image_I420toBGR_8.html">
+     I420toBGR-8
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_image_I420toRGB_8.html">
+     I420toRGB-8
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_signals_IDFT_7.html">
+     IDFT-7
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_signals_IRDFT_9.html">
+     IRDFT-9
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_infrastructure_If_8.html">
+     If-8
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_image_Interpolate_1.html">
+     Interpolate-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_image_Interpolate_4.html">
+     Interpolate-4
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_normalization_LRN_1.html">
+     LRN-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_sequence_LSTMCell_1.html">
+     LSTMCell-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_sequence_LSTMSequence_1.html">
+     LSTMSequence-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_comparison_LessEqual_1.html">
+     LessEqual-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_comparison_Less_1.html">
+     Less-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_arithmetic_Log_1.html">
+     Log-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_logical_LogicalAnd_1.html">
+     LogicalAnd-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_logical_LogicalNot_1.html">
+     LogicalNot-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_logical_LogicalOr_1.html">
+     LogicalOr-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_logical_LogicalXor_1.html">
+     LogicalXor-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_activation_LogSoftmax_5.html">
+     LogSoftmax-5
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_infrastructure_Loop_5.html">
+     Loop-5
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_normalization_MVN_1.html">
+     MVN-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_normalization_MVN_6.html">
+     MVN-6
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_matrix_MatMul_1.html">
+     MatMul-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_sort_MatrixNms_8.html">
+     MatrixNms-8
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_pooling_MaxPool_1.html">
+     MaxPool-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_pooling_MaxPool_8.html">
+     MaxPool-8
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_arithmetic_Maximum_1.html">
+     Maximum-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_arithmetic_Minimum_1.html">
+     Minimum-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_activation_Mish_4.html">
+     Mish-4
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_arithmetic_Mod_1.html">
+     Mod-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_sort_MulticlassNonMaxSuppression_8.html">
+     MulticlassNonMaxSuppression-8
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_sort_MulticlassNonMaxSuppression_9.html">
+     MulticlassNonMaxSuppression-9
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_arithmetic_Multiply_1.html">
+     Multiply-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_arithmetic_Negative_1.html">
+     Negative-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_sort_NonMaxSuppression_1.html">
+     NonMaxSuppression-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_sort_NonMaxSuppression_3.html">
+     NonMaxSuppression-3
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_sort_NonMaxSuppression_4.html">
+     NonMaxSuppression-4
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_sort_NonMaxSuppression_5.html">
+     NonMaxSuppression-5
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_sort_NonMaxSuppression_9.html">
+     NonMaxSuppression-9
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_condition_NonZero_3.html">
+     NonZero-3
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_normalization_NormalizeL2_1.html">
+     NormalizeL2-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_comparison_NotEqual_1.html">
+     NotEqual-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_image_NV12toBGR_8.html">
+     NV12toBGR-8
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_image_NV12toRGB_8.html">
+     NV12toRGB-8
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_sequence_OneHot_1.html">
+     OneHot-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_activation_PReLU_1.html">
+     PReLU-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_detection_PSROIPooling_1.html">
+     PSROIPooling-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_movement_Pad_1.html">
+     Pad-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_infrastructure_Parameter_1.html">
+     Parameter-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_arithmetic_Power_1.html">
+     Power-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_detection_PriorBoxClustered_1.html">
+     PriorBoxClustered-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_detection_PriorBox_1.html">
+     PriorBox-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_detection_PriorBox_8.html">
+     PriorBox-8
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_detection_Proposal_1.html">
+     Proposal-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_detection_Proposal_4.html">
+     Proposal-4
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_generation_RandomUniform_8.html">
+     RandomUniform-8
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_generation_Range_1.html">
+     Range-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_generation_Range_4.html">
+     Range-4
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_signals_RDFT_9.html">
+     RDFT-9
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_infrastructure_ReadValue_3.html">
+     ReadValue-3
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_activation_ReLU_1.html">
+     ReLU-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_reduction_ReduceL1_4.html">
+     ReduceL1-4
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_reduction_ReduceL2_4.html">
+     ReduceL2-4
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_reduction_ReduceLogicalAnd_1.html">
+     ReduceLogicalAnd-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_reduction_ReduceLogicalOr_1.html">
+     ReduceLogicalOr-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_reduction_ReduceMax_1.html">
+     ReduceMax-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_reduction_ReduceMean_1.html">
+     ReduceMean-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_reduction_ReduceMin_1.html">
+     ReduceMin-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_reduction_ReduceProd_1.html">
+     ReduceProd-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_reduction_ReduceSum_1.html">
+     ReduceSum-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_detection_RegionYolo_1.html">
+     RegionYolo-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_detection_ReorgYolo_1.html">
+     ReorgYolo-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_shape_Reshape_1.html">
+     Reshape-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_infrastructure_Result_1.html">
+     Result-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_movement_Reverse_1.html">
+     Reverse-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_movement_ReverseSequence_1.html">
+     ReverseSequence-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_sequence_RNNCell_3.html">
+     RNNCell-3
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_sequence_RNNSequence_5.html">
+     RNNSequence-5
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_detection_ROIAlign_3.html">
+     ROIAlign-3
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_detection_ROIAlign_9.html">
+     ROIAlign-9
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_detection_ROIPooling_1.html">
+     ROIPooling-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_movement_Roll_7.html">
+     Roll-7
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_arithmetic_Round_5.html">
+     Round-5
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_movement_ScatterElementsUpdate_3.html">
+     ScatterElementsUpdate-3
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_movement_ScatterNDUpdate_3.html">
+     ScatterNDUpdate-3
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_movement_ScatterUpdate_3.html">
+     ScatterUpdate-3
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_condition_Select_1.html">
+     Select-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_activation_Selu_1.html">
+     Selu-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_shape_ShapeOf_1.html">
+     ShapeOf-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_shape_ShapeOf_3.html">
+     ShapeOf-3
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_movement_ShuffleChannels_1.html">
+     ShuffleChannels-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_activation_Sigmoid_1.html">
+     Sigmoid-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_arithmetic_Sign_1.html">
+     Sign-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_arithmetic_Sin_1.html">
+     Sin-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_arithmetic_Sinh_1.html">
+     Sinh-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_movement_Slice_8.html">
+     Slice-8
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_activation_SoftMax_1.html">
+     SoftMax-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_activation_SoftMax_8.html">
+     SoftMax-8
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_activation_SoftPlus_4.html">
+     SoftPlus-4
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_activation_SoftSign_9.html">
+     SoftSign-9
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_movement_SpaceToBatch_2.html">
+     SpaceToBatch-2
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_movement_SpaceToDepth_1.html">
+     SpaceToDepth-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_movement_Split_1.html">
+     Split-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_arithmetic_Sqrt_1.html">
+     Sqrt-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_arithmetic_SquaredDifference_1.html">
+     SquaredDifference-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_shape_Squeeze_1.html">
+     Squeeze-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_movement_StridedSlice_1.html">
+     StridedSlice-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_arithmetic_Subtract_1.html">
+     Subtract-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_activation_Swish_4.html">
+     Swish-4
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_arithmetic_Tan_1.html">
+     Tan-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_arithmetic_Tanh_1.html">
+     Tanh-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_infrastructure_TensorIterator_1.html">
+     TensorIterator-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_movement_Tile_1.html">
+     Tile-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_sort_TopK_1.html">
+     TopK-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_sort_TopK_3.html">
+     TopK-3
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_movement_Transpose_1.html">
+     Transpose-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_shape_Unsqueeze_1.html">
+     Unsqueeze-1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ops_movement_VariadicSplit_1.html">
+     VariadicSplit-1
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_IR_suitable_for_INT8_inference.html">
+   Intermediate Representation Suitable for INT8 Inference
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Case Studies
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference external" href="https://www.intel.com/openvino-success-stories">
+   Case Studies
+  </a>
+ </li>
+</ul>
+
+  </div>
+</nav>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+              
+              <div class="toc-item">
+                
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#overview-of-artificial-neural-networks-representation">
+   Overview of Artificial Neural Networks Representation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#intermediate-representation-used-in-openvino">
+   Intermediate Representation Used in OpenVINO™
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#operation-set">
+   Operation Set
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ir-versions-vs-operation-set-versions">
+   IR Versions vs Operation Set Versions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#how-to-read-the-specification">
+   How to Read the Specification
+  </a>
+ </li>
+</ul>
+
+</nav>
+              </div>
+              
+              <div class="toc-item">
+                <div class="tocsection download-docs">
+  <div class="dropdown sst-dropdown">
+    <button class="button bttn-prm button-size-m" data-display="static" type="button" id="download-options"
+      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Download Docs
+    </button>
+    <div class="dropdown-menu" aria-labelledby="download-options">
+      <a class="dropdown-item" href="#" onclick="window.print()">.pdf</a>
+      <a id="download-zip-btn" class="dropdown-item" href="#">.zip</a>
+    </div>
+  </div>
+</div>
+              </div>
+              
+            
+          </div>
+          
+
+          
+          
+              
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+
+<div class="tocsection editthispage">
+    <a href="None">
+        <i class="fas fa-pencil-alt"></i> Edit this page
+    </a>
+</div>
+
+            
+                <div>
+                  
+  <div class="section" id="deep-learning-network-intermediate-representation-and-operation-sets-in-openvino">
+<span id="doxid-openvino-docs-m-o-d-g-i-r-and-opsets"></span><span id="index-0"></span><h1>Deep Learning Network Intermediate Representation and Operation Sets in OpenVINO™<a class="headerlink" href="#deep-learning-network-intermediate-representation-and-operation-sets-in-openvino" title="Permalink to this headline">¶</a></h1>
+<p><span class="target" id="doxid-openvino-docs-m-o-d-g-i-r-and-opsets-1md-openvino-docs-mo-dg-ir-and-opsets"></span> This document provides essential information on the format used for representation of deep learning models in OpenVINO™ toolkit and supported operation sets.</p>
+<div class="section" id="overview-of-artificial-neural-networks-representation">
+<h2>Overview of Artificial Neural Networks Representation<a class="headerlink" href="#overview-of-artificial-neural-networks-representation" title="Permalink to this headline">¶</a></h2>
+<p>This paragraph provides an overview of how a deep learning network is represented in various deep learning frameworks.</p>
+<p>A deep learning network is usually represented as a directed graph describing the flow of data from the network input data to the inference results. Input data can be represented as a photograph, video, audio information or some preprocessed data that represent object from the target area of interest in a convenient way.</p>
+<p>Here is an illustration of a small graph representing a model that consists of a single Convolutional layer and activation function:</p>
+<img alt="../_images/small_IR_graph_demonstration.png" src="../_images/small_IR_graph_demonstration.png" />
+<p>Vertices in the graph represent layers or operation instances, like convolution, pooling or element-wise operations with tensors. Layer and operation terms are used interchangeably along the OpenVINO™ documentation and define how input data is processed to produce output data for a node in a graph. An operation node in a graph may consume data at one or multiple input ports. For example, element-wise addition operation has two input ports which accepts tensors that are added together. Some operations don’t have any input ports, for example Const operation which knowns the data to be produced without any input. An edge between operations represent data flow or data dependency implied from one operation node to another operation node.</p>
+<p>Each operation produces data on one or multiple output ports. For example, convolution produces output tensor with activations at a single output port. Split operation usually has multiple output ports each producing part of an input tensor.</p>
+<p>Depending on a deep learning framework, the graph can also contain extra nodes that explicitly represent tensors between operations. In such representations, operation nodes are not connected directly to each other, rather using data nodes as intermediate stops for data flow. If data nodes are not used, the produced data is associated with an output port of a corresponding operation node that produces the data.</p>
+<p>A set of various operations used in a network is usually fixed for each deep learning framework. It determines expressiveness and level of representation available in that framework. It may happen that a network that can be represented in one framework is hard or impossible to be represented in another one or should use significantly different graph because operation sets used in those two frameworks do not match.</p>
+</div>
+<div class="section" id="intermediate-representation-used-in-openvino">
+<h2>Intermediate Representation Used in OpenVINO™<a class="headerlink" href="#intermediate-representation-used-in-openvino" title="Permalink to this headline">¶</a></h2>
+<p>OpenVINO™ toolkit introduces its own format of graph representation and its own operation set. A graph is represented with two files: an XML file and a binary file. This representation is commonly referred to as the <em>Intermediate Representation</em> or <em>IR</em>.</p>
+<p>The XML file describes a network topology using a <code class="docutils literal notranslate"><span class="pre">&lt;layer&gt;</span></code> tag for an operation node and an <code class="docutils literal notranslate"><span class="pre">&lt;edge&gt;</span></code> tag for a data-flow connection. Each operation has a fixed number of attributes that define operation flavor used for a node. For example, <code class="docutils literal notranslate"><span class="pre">Convolution</span></code> operation has such attributes as <code class="docutils literal notranslate"><span class="pre">dilation</span></code>, <code class="docutils literal notranslate"><span class="pre">stride</span></code>, <code class="docutils literal notranslate"><span class="pre">pads_begin</span></code> and <code class="docutils literal notranslate"><span class="pre">pads_end</span></code>.</p>
+<p>The XML file doesn’t have big constant values, like convolution weights. Instead, it refers to a part of the accompanying binary file that stores such values in a binary format.</p>
+<p>Here is an example of a small IR XML file that corresponds to a graph from the previous section:</p>
+<div class="highlight"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="n">xml</span> <span class="n">version</span><span class="o">=</span><span class="s">&quot;1.0&quot;</span> <span class="o">?&gt;</span>
+<span class="o">&lt;</span><span class="n">net</span> <span class="n">name</span><span class="o">=</span><span class="s">&quot;model_file_name&quot;</span> <span class="n">version</span><span class="o">=</span><span class="s">&quot;10&quot;</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">layers</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">layer</span> <span class="n">id</span><span class="o">=</span><span class="s">&quot;0&quot;</span> <span class="n">name</span><span class="o">=</span><span class="s">&quot;input&quot;</span> <span class="n">type</span><span class="o">=</span><span class="s">&quot;Parameter&quot;</span> <span class="n">version</span><span class="o">=</span><span class="s">&quot;opset1&quot;</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="n">data</span> <span class="n">element_type</span><span class="o">=</span><span class="s">&quot;f32&quot;</span> <span class="n">shape</span><span class="o">=</span><span class="s">&quot;1,3,32,100&quot;</span><span class="o">/&gt;</span> <span class="o">&lt;!--</span> <span class="n">attributes</span> <span class="n">of</span> <span class="n">operation</span> <span class="o">--&gt;</span>
+            <span class="o">&lt;</span><span class="n">output</span><span class="o">&gt;</span>
+                <span class="o">&lt;!--</span> <span class="n">description</span> <span class="n">of</span> <span class="n">output</span> <span class="n">ports</span> <span class="n">with</span> <span class="n">type</span> <span class="n">of</span> <span class="n">element</span> <span class="n">and</span> <span class="n">tensor</span> <span class="n">dimensions</span> <span class="o">--&gt;</span>
+                <span class="o">&lt;</span><span class="n">port</span> <span class="n">id</span><span class="o">=</span><span class="s">&quot;0&quot;</span> <span class="n">precision</span><span class="o">=</span><span class="s">&quot;FP32&quot;</span><span class="o">&gt;</span>
+                    <span class="o">&lt;</span><span class="n">dim</span><span class="o">&gt;</span><span class="mi">1</span><span class="o">&lt;/</span><span class="n">dim</span><span class="o">&gt;</span>
+                    <span class="o">&lt;</span><span class="n">dim</span><span class="o">&gt;</span><span class="mi">3</span><span class="o">&lt;/</span><span class="n">dim</span><span class="o">&gt;</span>
+                    <span class="o">&lt;</span><span class="n">dim</span><span class="o">&gt;</span><span class="mi">32</span><span class="o">&lt;/</span><span class="n">dim</span><span class="o">&gt;</span>
+                    <span class="o">&lt;</span><span class="n">dim</span><span class="o">&gt;</span><span class="mi">100</span><span class="o">&lt;/</span><span class="n">dim</span><span class="o">&gt;</span>
+                <span class="o">&lt;/</span><span class="n">port</span><span class="o">&gt;</span>
+            <span class="o">&lt;/</span><span class="n">output</span><span class="o">&gt;</span>
+        <span class="o">&lt;/</span><span class="n">layer</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">layer</span> <span class="n">id</span><span class="o">=</span><span class="s">&quot;1&quot;</span> <span class="n">name</span><span class="o">=</span><span class="s">&quot;conv1/weights&quot;</span> <span class="n">type</span><span class="o">=</span><span class="s">&quot;Const&quot;</span> <span class="n">version</span><span class="o">=</span><span class="s">&quot;opset1&quot;</span><span class="o">&gt;</span>
+            <span class="o">&lt;!--</span> <span class="n">Const</span> <span class="n">is</span> <span class="n">only</span> <span class="n">operation</span> <span class="n">from</span> <span class="n">opset1</span> <span class="n">that</span> <span class="n">refers</span> <span class="n">to</span> <span class="n">the</span> <span class="n">IR</span> <span class="n">binary</span> <span class="n">file</span> <span class="n">by</span> <span class="n">specifying</span> <span class="n">offset</span> <span class="n">and</span> <span class="n">size</span> <span class="n">in</span> <span class="n">bytes</span> <span class="n">relative</span> <span class="n">to</span> <span class="n">the</span> <span class="n">beginning</span> <span class="n">of</span> <span class="n">the</span> <span class="n">file</span><span class="p">.</span> <span class="o">--&gt;</span>
+            <span class="o">&lt;</span><span class="n">data</span> <span class="n">element_type</span><span class="o">=</span><span class="s">&quot;f32&quot;</span> <span class="n">offset</span><span class="o">=</span><span class="s">&quot;0&quot;</span> <span class="n">shape</span><span class="o">=</span><span class="s">&quot;64,3,3,3&quot;</span> <span class="n">size</span><span class="o">=</span><span class="s">&quot;6912&quot;</span><span class="o">/&gt;</span>
+            <span class="o">&lt;</span><span class="n">output</span><span class="o">&gt;</span>
+                <span class="o">&lt;</span><span class="n">port</span> <span class="n">id</span><span class="o">=</span><span class="s">&quot;1&quot;</span> <span class="n">precision</span><span class="o">=</span><span class="s">&quot;FP32&quot;</span><span class="o">&gt;</span>
+                    <span class="o">&lt;</span><span class="n">dim</span><span class="o">&gt;</span><span class="mi">64</span><span class="o">&lt;/</span><span class="n">dim</span><span class="o">&gt;</span>
+                    <span class="o">&lt;</span><span class="n">dim</span><span class="o">&gt;</span><span class="mi">3</span><span class="o">&lt;/</span><span class="n">dim</span><span class="o">&gt;</span>
+                    <span class="o">&lt;</span><span class="n">dim</span><span class="o">&gt;</span><span class="mi">3</span><span class="o">&lt;/</span><span class="n">dim</span><span class="o">&gt;</span>
+                    <span class="o">&lt;</span><span class="n">dim</span><span class="o">&gt;</span><span class="mi">3</span><span class="o">&lt;/</span><span class="n">dim</span><span class="o">&gt;</span>
+                <span class="o">&lt;/</span><span class="n">port</span><span class="o">&gt;</span>
+            <span class="o">&lt;/</span><span class="n">output</span><span class="o">&gt;</span>
+        <span class="o">&lt;/</span><span class="n">layer</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">layer</span> <span class="n">id</span><span class="o">=</span><span class="s">&quot;2&quot;</span> <span class="n">name</span><span class="o">=</span><span class="s">&quot;conv1&quot;</span> <span class="n">type</span><span class="o">=</span><span class="s">&quot;Convolution&quot;</span> <span class="n">version</span><span class="o">=</span><span class="s">&quot;opset1&quot;</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="n">data</span> <span class="n">auto_pad</span><span class="o">=</span><span class="s">&quot;same_upper&quot;</span> <span class="n">dilations</span><span class="o">=</span><span class="s">&quot;1,1&quot;</span> <span class="n">output_padding</span><span class="o">=</span><span class="s">&quot;0,0&quot;</span> <span class="n">pads_begin</span><span class="o">=</span><span class="s">&quot;1,1&quot;</span> <span class="n">pads_end</span><span class="o">=</span><span class="s">&quot;1,1&quot;</span> <span class="n">strides</span><span class="o">=</span><span class="s">&quot;1,1&quot;</span><span class="o">/&gt;</span>
+            <span class="o">&lt;</span><span class="n">input</span><span class="o">&gt;</span>
+                <span class="o">&lt;</span><span class="n">port</span> <span class="n">id</span><span class="o">=</span><span class="s">&quot;0&quot;</span><span class="o">&gt;</span>
+                    <span class="o">&lt;</span><span class="n">dim</span><span class="o">&gt;</span><span class="mi">1</span><span class="o">&lt;/</span><span class="n">dim</span><span class="o">&gt;</span>
+                    <span class="o">&lt;</span><span class="n">dim</span><span class="o">&gt;</span><span class="mi">3</span><span class="o">&lt;/</span><span class="n">dim</span><span class="o">&gt;</span>
+                    <span class="o">&lt;</span><span class="n">dim</span><span class="o">&gt;</span><span class="mi">32</span><span class="o">&lt;/</span><span class="n">dim</span><span class="o">&gt;</span>
+                    <span class="o">&lt;</span><span class="n">dim</span><span class="o">&gt;</span><span class="mi">100</span><span class="o">&lt;/</span><span class="n">dim</span><span class="o">&gt;</span>
+                <span class="o">&lt;/</span><span class="n">port</span><span class="o">&gt;</span>
+                <span class="o">&lt;</span><span class="n">port</span> <span class="n">id</span><span class="o">=</span><span class="s">&quot;1&quot;</span><span class="o">&gt;</span>
+                    <span class="o">&lt;</span><span class="n">dim</span><span class="o">&gt;</span><span class="mi">64</span><span class="o">&lt;/</span><span class="n">dim</span><span class="o">&gt;</span>
+                    <span class="o">&lt;</span><span class="n">dim</span><span class="o">&gt;</span><span class="mi">3</span><span class="o">&lt;/</span><span class="n">dim</span><span class="o">&gt;</span>
+                    <span class="o">&lt;</span><span class="n">dim</span><span class="o">&gt;</span><span class="mi">3</span><span class="o">&lt;/</span><span class="n">dim</span><span class="o">&gt;</span>
+                    <span class="o">&lt;</span><span class="n">dim</span><span class="o">&gt;</span><span class="mi">3</span><span class="o">&lt;/</span><span class="n">dim</span><span class="o">&gt;</span>
+                <span class="o">&lt;/</span><span class="n">port</span><span class="o">&gt;</span>
+            <span class="o">&lt;/</span><span class="n">input</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="n">output</span><span class="o">&gt;</span>
+                <span class="o">&lt;</span><span class="n">port</span> <span class="n">id</span><span class="o">=</span><span class="s">&quot;2&quot;</span> <span class="n">precision</span><span class="o">=</span><span class="s">&quot;FP32&quot;</span><span class="o">&gt;</span>
+                    <span class="o">&lt;</span><span class="n">dim</span><span class="o">&gt;</span><span class="mi">1</span><span class="o">&lt;/</span><span class="n">dim</span><span class="o">&gt;</span>
+                    <span class="o">&lt;</span><span class="n">dim</span><span class="o">&gt;</span><span class="mi">64</span><span class="o">&lt;/</span><span class="n">dim</span><span class="o">&gt;</span>
+                    <span class="o">&lt;</span><span class="n">dim</span><span class="o">&gt;</span><span class="mi">32</span><span class="o">&lt;/</span><span class="n">dim</span><span class="o">&gt;</span>
+                    <span class="o">&lt;</span><span class="n">dim</span><span class="o">&gt;</span><span class="mi">100</span><span class="o">&lt;/</span><span class="n">dim</span><span class="o">&gt;</span>
+                <span class="o">&lt;/</span><span class="n">port</span><span class="o">&gt;</span>
+            <span class="o">&lt;/</span><span class="n">output</span><span class="o">&gt;</span>
+        <span class="o">&lt;/</span><span class="n">layer</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">layer</span> <span class="n">id</span><span class="o">=</span><span class="s">&quot;3&quot;</span> <span class="n">name</span><span class="o">=</span><span class="s">&quot;conv1/activation&quot;</span> <span class="n">type</span><span class="o">=</span><span class="s">&quot;ReLU&quot;</span> <span class="n">version</span><span class="o">=</span><span class="s">&quot;opset1&quot;</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="n">input</span><span class="o">&gt;</span>
+                <span class="o">&lt;</span><span class="n">port</span> <span class="n">id</span><span class="o">=</span><span class="s">&quot;0&quot;</span><span class="o">&gt;</span>
+                    <span class="o">&lt;</span><span class="n">dim</span><span class="o">&gt;</span><span class="mi">1</span><span class="o">&lt;/</span><span class="n">dim</span><span class="o">&gt;</span>
+                    <span class="o">&lt;</span><span class="n">dim</span><span class="o">&gt;</span><span class="mi">64</span><span class="o">&lt;/</span><span class="n">dim</span><span class="o">&gt;</span>
+                    <span class="o">&lt;</span><span class="n">dim</span><span class="o">&gt;</span><span class="mi">32</span><span class="o">&lt;/</span><span class="n">dim</span><span class="o">&gt;</span>
+                    <span class="o">&lt;</span><span class="n">dim</span><span class="o">&gt;</span><span class="mi">100</span><span class="o">&lt;/</span><span class="n">dim</span><span class="o">&gt;</span>
+                <span class="o">&lt;/</span><span class="n">port</span><span class="o">&gt;</span>
+            <span class="o">&lt;/</span><span class="n">input</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="n">output</span><span class="o">&gt;</span>
+                <span class="o">&lt;</span><span class="n">port</span> <span class="n">id</span><span class="o">=</span><span class="s">&quot;1&quot;</span> <span class="n">precision</span><span class="o">=</span><span class="s">&quot;FP32&quot;</span><span class="o">&gt;</span>
+                    <span class="o">&lt;</span><span class="n">dim</span><span class="o">&gt;</span><span class="mi">1</span><span class="o">&lt;/</span><span class="n">dim</span><span class="o">&gt;</span>
+                    <span class="o">&lt;</span><span class="n">dim</span><span class="o">&gt;</span><span class="mi">64</span><span class="o">&lt;/</span><span class="n">dim</span><span class="o">&gt;</span>
+                    <span class="o">&lt;</span><span class="n">dim</span><span class="o">&gt;</span><span class="mi">32</span><span class="o">&lt;/</span><span class="n">dim</span><span class="o">&gt;</span>
+                    <span class="o">&lt;</span><span class="n">dim</span><span class="o">&gt;</span><span class="mi">100</span><span class="o">&lt;/</span><span class="n">dim</span><span class="o">&gt;</span>
+                <span class="o">&lt;/</span><span class="n">port</span><span class="o">&gt;</span>
+            <span class="o">&lt;/</span><span class="n">output</span><span class="o">&gt;</span>
+        <span class="o">&lt;/</span><span class="n">layer</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">layer</span> <span class="n">id</span><span class="o">=</span><span class="s">&quot;4&quot;</span> <span class="n">name</span><span class="o">=</span><span class="s">&quot;output&quot;</span> <span class="n">type</span><span class="o">=</span><span class="s">&quot;Result&quot;</span> <span class="n">version</span><span class="o">=</span><span class="s">&quot;opset1&quot;</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="n">input</span><span class="o">&gt;</span>
+                <span class="o">&lt;</span><span class="n">port</span> <span class="n">id</span><span class="o">=</span><span class="s">&quot;0&quot;</span><span class="o">&gt;</span>
+                    <span class="o">&lt;</span><span class="n">dim</span><span class="o">&gt;</span><span class="mi">1</span><span class="o">&lt;/</span><span class="n">dim</span><span class="o">&gt;</span>
+                    <span class="o">&lt;</span><span class="n">dim</span><span class="o">&gt;</span><span class="mi">64</span><span class="o">&lt;/</span><span class="n">dim</span><span class="o">&gt;</span>
+                    <span class="o">&lt;</span><span class="n">dim</span><span class="o">&gt;</span><span class="mi">32</span><span class="o">&lt;/</span><span class="n">dim</span><span class="o">&gt;</span>
+                    <span class="o">&lt;</span><span class="n">dim</span><span class="o">&gt;</span><span class="mi">100</span><span class="o">&lt;/</span><span class="n">dim</span><span class="o">&gt;</span>
+                <span class="o">&lt;/</span><span class="n">port</span><span class="o">&gt;</span>
+            <span class="o">&lt;/</span><span class="n">input</span><span class="o">&gt;</span>
+        <span class="o">&lt;/</span><span class="n">layer</span><span class="o">&gt;</span>
+    <span class="o">&lt;/</span><span class="n">layers</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">edges</span><span class="o">&gt;</span>
+        <span class="o">&lt;!--</span> <span class="n">Connections</span> <span class="n">between</span> <span class="n">layer</span> <span class="nl">nodes</span><span class="p">:</span> <span class="n">based</span> <span class="n">on</span> <span class="n">ids</span> <span class="k">for</span> <span class="n">layers</span> <span class="n">and</span> <span class="n">ports</span> <span class="n">used</span> <span class="n">in</span> <span class="n">the</span> <span class="n">descriptions</span> <span class="n">above</span> <span class="o">--&gt;</span>
+        <span class="o">&lt;</span><span class="n">edge</span> <span class="n">from</span><span class="o">-</span><span class="n">layer</span><span class="o">=</span><span class="s">&quot;0&quot;</span> <span class="n">from</span><span class="o">-</span><span class="n">port</span><span class="o">=</span><span class="s">&quot;0&quot;</span> <span class="n">to</span><span class="o">-</span><span class="n">layer</span><span class="o">=</span><span class="s">&quot;2&quot;</span> <span class="n">to</span><span class="o">-</span><span class="n">port</span><span class="o">=</span><span class="s">&quot;0&quot;</span><span class="o">/&gt;</span>
+        <span class="o">&lt;</span><span class="n">edge</span> <span class="n">from</span><span class="o">-</span><span class="n">layer</span><span class="o">=</span><span class="s">&quot;1&quot;</span> <span class="n">from</span><span class="o">-</span><span class="n">port</span><span class="o">=</span><span class="s">&quot;1&quot;</span> <span class="n">to</span><span class="o">-</span><span class="n">layer</span><span class="o">=</span><span class="s">&quot;2&quot;</span> <span class="n">to</span><span class="o">-</span><span class="n">port</span><span class="o">=</span><span class="s">&quot;1&quot;</span><span class="o">/&gt;</span>
+        <span class="o">&lt;</span><span class="n">edge</span> <span class="n">from</span><span class="o">-</span><span class="n">layer</span><span class="o">=</span><span class="s">&quot;2&quot;</span> <span class="n">from</span><span class="o">-</span><span class="n">port</span><span class="o">=</span><span class="s">&quot;2&quot;</span> <span class="n">to</span><span class="o">-</span><span class="n">layer</span><span class="o">=</span><span class="s">&quot;3&quot;</span> <span class="n">to</span><span class="o">-</span><span class="n">port</span><span class="o">=</span><span class="s">&quot;0&quot;</span><span class="o">/&gt;</span>
+        <span class="o">&lt;</span><span class="n">edge</span> <span class="n">from</span><span class="o">-</span><span class="n">layer</span><span class="o">=</span><span class="s">&quot;3&quot;</span> <span class="n">from</span><span class="o">-</span><span class="n">port</span><span class="o">=</span><span class="s">&quot;1&quot;</span> <span class="n">to</span><span class="o">-</span><span class="n">layer</span><span class="o">=</span><span class="s">&quot;4&quot;</span> <span class="n">to</span><span class="o">-</span><span class="n">port</span><span class="o">=</span><span class="s">&quot;0&quot;</span><span class="o">/&gt;</span>
+    <span class="o">&lt;/</span><span class="n">edges</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">meta_data</span><span class="o">&gt;</span>
+        <span class="o">&lt;!--</span> <span class="n">This</span> <span class="n">section</span> <span class="n">that</span> <span class="n">is</span> <span class="n">not</span> <span class="n">related</span> <span class="n">to</span> <span class="n">a</span> <span class="n">topology</span><span class="p">;</span> <span class="n">contains</span> <span class="n">auxiliary</span> <span class="n">information</span> <span class="n">that</span> <span class="n">serves</span> <span class="k">for</span> <span class="n">the</span> <span class="n">debugging</span> <span class="n">purposes</span><span class="p">.</span> <span class="o">--&gt;</span>
+        <span class="o">&lt;</span><span class="n">MO_version</span> <span class="n">value</span><span class="o">=</span><span class="s">&quot;2019.1&quot;</span><span class="o">/&gt;</span>
+        <span class="o">&lt;</span><span class="n">cli_parameters</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="n">blobs_as_inputs</span> <span class="n">value</span><span class="o">=</span><span class="s">&quot;True&quot;</span><span class="o">/&gt;</span>
+            <span class="o">&lt;</span><span class="n">caffe_parser_path</span> <span class="n">value</span><span class="o">=</span><span class="s">&quot;DIR&quot;</span><span class="o">/&gt;</span>
+            <span class="o">&lt;</span><span class="n">data_type</span> <span class="n">value</span><span class="o">=</span><span class="s">&quot;float&quot;</span><span class="o">/&gt;</span>
+
+            <span class="p">...</span>
+
+            <span class="o">&lt;!--</span> <span class="n">Omitted</span> <span class="n">a</span> <span class="kt">long</span> <span class="n">list</span> <span class="n">of</span> <span class="n">CLI</span> <span class="n">options</span> <span class="n">that</span> <span class="n">always</span> <span class="n">are</span> <span class="n">put</span> <span class="n">here</span> <span class="n">by</span> <span class="n">MO</span> <span class="k">for</span> <span class="n">debugging</span> <span class="n">purposes</span><span class="p">.</span> <span class="o">--&gt;</span>
+
+        <span class="o">&lt;/</span><span class="n">cli_parameters</span><span class="o">&gt;</span>
+    <span class="o">&lt;/</span><span class="n">meta_data</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">net</span><span class="o">&gt;</span></pre></div></div><p>The IR doesn’t use explicit data nodes described in the previous section. In contrast, properties of data such as tensor dimensions and their data types are described as properties of input and output ports of operations.</p>
+</div>
+<div class="section" id="operation-set">
+<h2>Operation Set<a class="headerlink" href="#operation-set" title="Permalink to this headline">¶</a></h2>
+<p>Operations in the OpenVINO™ Operation Set are selected based on capabilities of supported deep learning frameworks and hardware capabilities of the target inference device. It consists of several groups of operations:</p>
+<ul class="simple">
+<li><p>Conventional deep learning layers like Convolution, MaxPool, MatMul (also known as FullyConnected).</p></li>
+<li><p>Various activation functions, e.g. ReLU, Tanh, PReLU.</p></li>
+<li><p>Generic element-wise arithmetic tensor operations like Add, Subtract, Multiply.</p></li>
+<li><p>Comparison operations that compare two numeric tensors and produce boolean tensors, for example Less, Equeal, Greater.</p></li>
+<li><p>Logical operations that are dealing with boolean tensors, like And, Xor, Not.</p></li>
+<li><p>Data movement operations which are dealing with parts of tensors: Concat, Split, StridedSlice, Select.</p></li>
+<li><p>Specialized operations that implement complex algorithms dedicated for models of specific type: DetectionOutput, RegionYolo, PriorBox.</p></li>
+</ul>
+<p>Refer to the complete description of the supported operation sets in the <a class="reference internal" href="openvino_docs_ops_opset.html#doxid-openvino-docs-ops-opset"><span class="std std-ref">Available Operation Sets</span></a> document.</p>
+</div>
+<div class="section" id="ir-versions-vs-operation-set-versions">
+<h2>IR Versions vs Operation Set Versions<a class="headerlink" href="#ir-versions-vs-operation-set-versions" title="Permalink to this headline">¶</a></h2>
+<p>The expressiveness of operations in OpenVINO™ is highly dependent on the supported frameworks and target hardware capabilities. As the frameworks and hardware capabilities grow over time, the operation set is constantly evolving to support new models. To maintain backward compatibility and growing demands, both IR format and operation set have versioning.</p>
+<p>Version of IR specifies the rules which are used to read the XML and binary files that represent a model. It defines an XML schema and compatible operation set that can be used to describe operations.</p>
+<p>Historically, there are two major IR version epochs.</p>
+<ol class="arabic simple">
+<li><p>The older one includes IR versions from version 1 to version 7 without versioning of the operation set. During that epoch, the operation set has been growing evolutionally accumulating more layer types and extending existing layer semantics. Changing of the operation set for those versions meant increasing of IR version.</p></li>
+<li><p>OpenVINO™ 2020.1 is the starting point of the next epoch. With IR version 10 introduced in OpenVINO™ 2020.1, the versioning of the operation set is tracked separately from the IR versioning. Also, the operation set was significantly reworked as the result of nGraph integration to the OpenVINO.</p></li>
+</ol>
+<p>The first supported operation set in the new epoch is <code class="docutils literal notranslate"><span class="pre">opset1</span></code>. The number after <code class="docutils literal notranslate"><span class="pre">opset</span></code> is going to be increased each time when new operations are added or old operations deleted at the release cadence.</p>
+<p>The operations from the new epoch cover more TensorFlow* and ONNX* operators in a form that is closer to the original operation semantics from the frameworks in comparison to the operation set used in former versions of IR (7 and lower).</p>
+<p>The name of the opset is specified for each operation in IR. The IR version is specified once per whole IR. Here is an example from the IR snippet:</p>
+<div class="highlight"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="n">xml</span> <span class="n">version</span><span class="o">=</span><span class="s">&quot;1.0&quot;</span> <span class="o">?&gt;</span>
+<span class="o">&lt;</span><span class="n">net</span> <span class="n">name</span><span class="o">=</span><span class="s">&quot;model_file_name&quot;</span> <span class="n">version</span><span class="o">=</span><span class="s">&quot;10&quot;</span><span class="o">&gt;</span>  <span class="o">&lt;!--</span> <span class="n">Version</span> <span class="n">of</span> <span class="n">the</span> <span class="n">whole</span> <span class="n">IR</span> <span class="n">file</span> <span class="n">is</span> <span class="n">here</span><span class="p">;</span> <span class="n">it</span> <span class="n">is</span> <span class="mi">10</span> <span class="o">--&gt;</span>
+    <span class="o">&lt;</span><span class="n">layers</span><span class="o">&gt;</span>
+        <span class="o">&lt;!--</span> <span class="n">Version</span> <span class="n">of</span> <span class="n">operation</span> <span class="n">set</span> <span class="n">that</span> <span class="n">the</span> <span class="n">layer</span> <span class="n">belongs</span> <span class="n">to</span> <span class="n">is</span> <span class="n">described</span> <span class="n">in</span> <span class="o">&lt;</span><span class="n">layer</span><span class="o">&gt;</span>
+             <span class="n">tag</span> <span class="n">attributes</span><span class="p">.</span> <span class="n">For</span> <span class="k">this</span> <span class="n">operation</span><span class="p">,</span> <span class="n">it</span> <span class="n">is</span> <span class="n">version</span><span class="o">=</span><span class="s">&quot;opset1&quot;</span><span class="p">.</span> <span class="o">--&gt;</span>
+        <span class="o">&lt;</span><span class="n">layer</span> <span class="n">id</span><span class="o">=</span><span class="s">&quot;0&quot;</span> <span class="n">name</span><span class="o">=</span><span class="s">&quot;input&quot;</span> <span class="n">type</span><span class="o">=</span><span class="s">&quot;Parameter&quot;</span> <span class="n">version</span><span class="o">=</span><span class="s">&quot;opset1&quot;</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="n">data</span> <span class="n">element_type</span><span class="o">=</span><span class="s">&quot;f32&quot;</span> <span class="n">shape</span><span class="o">=</span><span class="s">&quot;1,3,32,100&quot;</span><span class="o">/&gt;</span> <span class="o">&lt;!--</span> <span class="n">attributes</span> <span class="n">of</span> <span class="n">operation</span> <span class="o">--&gt;</span>
+            <span class="o">&lt;</span><span class="n">output</span><span class="o">&gt;</span>
+                <span class="o">&lt;!--</span> <span class="n">description</span> <span class="n">of</span> <span class="n">output</span> <span class="n">ports</span> <span class="n">with</span> <span class="n">type</span> <span class="n">of</span> <span class="n">element</span> <span class="n">and</span> <span class="n">tensor</span> <span class="n">dimensions</span> <span class="o">--&gt;</span>
+                <span class="o">&lt;</span><span class="n">port</span> <span class="n">id</span><span class="o">=</span><span class="s">&quot;0&quot;</span> <span class="n">precision</span><span class="o">=</span><span class="s">&quot;FP32&quot;</span><span class="o">&gt;</span>
+                    <span class="o">&lt;</span><span class="n">dim</span><span class="o">&gt;</span><span class="mi">1</span><span class="o">&lt;/</span><span class="n">dim</span><span class="o">&gt;</span>
+                    <span class="o">&lt;</span><span class="n">dim</span><span class="o">&gt;</span><span class="mi">3</span><span class="o">&lt;/</span><span class="n">dim</span><span class="o">&gt;</span>
+
+                    <span class="p">...</span></pre></div></div><p>The attributes <code class="docutils literal notranslate"><span class="pre">type=&quot;Parameter&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">version=&quot;opset1&quot;</span></code> in the example above mean “use that version of operation <cite>Parameter</cite> that is included into the operation set <cite>opset1</cite>”.</p>
+<p>When a new operation set is introduced, the significant part of the operations remains unchanged and it is just aliased from the previous operation set within a new one. The goal of operation set versions evolution is adding new operations, and probably changing of small fraction of existing operations (fixing bugs and extending semantics). However such changes affect only new versions of operations from a new operation set, while old operations are used by specifying an appropriate <code class="docutils literal notranslate"><span class="pre">version</span></code>. When the old <code class="docutils literal notranslate"><span class="pre">version</span></code> is specified, the behavior is kept unchanged from that specified version to provide the backward compatibility with older IRs.</p>
+<p>A single <code class="docutils literal notranslate"><span class="pre">xml</span></code> file with IR may contain operations from different opsets. An operation that is included into several opsets may be referred to with <code class="docutils literal notranslate"><span class="pre">version</span></code> which points to any opset that includes that operation. For example, the same <code class="docutils literal notranslate"><span class="pre">Convolution</span></code> can be used with <code class="docutils literal notranslate"><span class="pre">version=&quot;opset1&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">version=&quot;opset2&quot;</span></code> because both opsets have the same operations <code class="docutils literal notranslate"><span class="pre">Convolution</span></code>.</p>
+</div>
+<div class="section" id="how-to-read-the-specification">
+<h2>How to Read the Specification<a class="headerlink" href="#how-to-read-the-specification" title="Permalink to this headline">¶</a></h2>
+<p>In the <a class="reference internal" href="openvino_docs_ops_opset.html#doxid-openvino-docs-ops-opset"><span class="std std-ref">Available Operation Sets</span></a> there are opsets and there are operations. Each opset specification has a list of links to operations descriptions that are included into that specific opset. Two or more opsets may refer to the same operation. That means an operation is kept unchanged from one operation set to another.</p>
+<p>Each operation description has a field <code class="docutils literal notranslate"><span class="pre">Versioned</span> <span class="pre">name</span></code>. For example, <code class="docutils literal notranslate"><span class="pre">ReLU</span></code> entry point in :ref:<code class="docutils literal notranslate"><span class="pre">opset1`</span> <span class="pre">&lt;doxid-openvino_docs_ops_opset1&gt;`</span> <span class="pre">refers</span> <span class="pre">to</span> <span class="pre">`ReLU-1</span> <span class="pre">&lt;doxid-openvino_docs_ops_activation__re_l_u_1&gt;`</span> <span class="pre">as</span> <span class="pre">the</span> <span class="pre">versioned</span> <span class="pre">name.</span> <span class="pre">And</span> <span class="pre">``ReLU</span></code> in <code class="docutils literal notranslate"><span class="pre">opset2</span></code> refers to the same <code class="docutils literal notranslate"><span class="pre">ReLU-1</span></code> and both <code class="docutils literal notranslate"><span class="pre">ReLU</span></code> operations are the same operation and it has a single <a class="reference internal" href="openvino_docs_ops_activation_ReLU_1.html#doxid-openvino-docs-ops-activation-re-l-u-1"><span class="std std-ref">description</span></a>. So <code class="docutils literal notranslate"><span class="pre">opset1</span></code> and <code class="docutils literal notranslate"><span class="pre">opset2</span></code> share the same operation <code class="docutils literal notranslate"><span class="pre">ReLU</span></code>.</p>
+<p>To differentiate versions of the same operation type, like <code class="docutils literal notranslate"><span class="pre">ReLU</span></code>, the suffix <code class="docutils literal notranslate"><span class="pre">-N</span></code> is used in a versioned name of the operation. <code class="docutils literal notranslate"><span class="pre">N</span></code> usually refers to the first <code class="docutils literal notranslate"><span class="pre">opsetN</span></code> where this version of the operation is introduced. It is not guaranteed that new operations will be named according to that rule, the naming convention might be changed, but not for old operations which are frozen completely.</p>
+</div>
+</div>
+
+
+                </div>
+            
+            
+                <div class='prev-next-bottom'>
+                  
+    <a class='button bttn-sec button-size-l' id="prev-link" href="openvino_docs_Legal_Information.html" title="previous page">Prev</a>
+    <a class='button bttn-sec button-size-l' id="next-link" href="openvino_docs_ops_opset.html" title="next page">Next</a>
+
+                </div>
+            
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+<footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2021, Intel®.<br>
+</p>
+    </div>
+    
+    <div class="footer-item">
+      <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

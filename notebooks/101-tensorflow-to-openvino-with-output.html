@@ -1,0 +1,792 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Convert a TensorFlow Model to OpenVINO &#8212; OpenVINO™  documentation</title>
+    
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/blank.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/doxyrest-pygments.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <link href="../_static/css/media/favicon.ico" rel="shortcut icon">
+    <link rel="stylesheet" href="../_static/css/openvino_sphinx_theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/button.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/input.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/textfield.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/tabs.css" type="text/css" />
+    <script src="../_static/js/openvino_sphinx_theme.js"></script>
+    <link rel="stylesheet" href="../_static/css/viewer.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/0.5.7/chartjs-plugin-annotation.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-barchart-background@1.3.0/build/Plugin.Barchart.Background.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-deferred@1"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.1/papaparse.min.js"></script>
+    <script src="../_static/js/viewer.min.js"></script>
+    <script src="/assets/versions_raw.js"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/tabs.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/js/custom.js"></script>
+    <script src="../_static/js/graphs.js"></script>
+    <script src="../_static/js/graphs_ov_tf.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/target-highlight.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <link rel="canonical" href="https://docs.openvino.ai/latest/notebooks/101-tensorflow-to-openvino-with-output.html" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Convert a PyTorch Model to ONNX and OpenVINO IR" href="102-pytorch-onnx-to-openvino-with-output.html" />
+    <link rel="prev" title="Hello Object Detection" href="004-hello-detection-with-output.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+      <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+
+<a class="navbar-brand" href="../index.html">
+  <img src="../_static/logo.svg" class="logo" alt="logo">
+</a>
+
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../pages/get_started.html">
+  Get Started
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../pages/documentation.html">
+  Documentation
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../tutorials.html">
+  Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../model_zoo.html">
+  Model Zoo
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../pages/resources.html">
+  Resources
+ </a>
+</li>
+
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/openvinotoolkit/openvino" rel="noopener" target="_blank" title="GitHub">
+            <span><i class="sst-github"></i></span>
+            <label class="sr-only">GitHub</label>
+          </a>
+        </li>
+</ul>
+      </div>
+      
+      <div class="navbar-end-item">
+        
+<div class="dropdown sst-dropdown sst-dropdown-navbar">
+  <button class="btn sst-btn dropdown-toggle" type="button" id="version-selector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+  <div class="dropdown-menu" aria-labelledby="version-selector">
+  </div>
+</div>
+      </div>
+      
+      <div class="navbar-end-item">
+        
+
+<div class="dropdown sst-dropdown sst-dropdown-navbar">
+  <button class="btn sst-btn dropdown-toggle" type="button" id="language-selector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">English</button>
+  <div class="dropdown-menu" aria-labelledby="language-selector">
+    
+      
+        <a class="dropdown-item font-weight-bold" href="/latest/notebooks/101-tensorflow-to-openvino-with-output.html">English</a>
+      
+    
+      
+        <a  class="dropdown-item" href="/cn/latest/notebooks/101-tensorflow-to-openvino-with-output.html">Chinese</a>
+      
+    
+  </div>
+</div>
+
+      </div>
+      
+    </div>
+  </div>
+</div>
+        <div id="collapse-nav-wrapper" class="container-xl">
+          <button id="collapse-nav" class="button bttn-prm button-size-m" type="button" data-toggle="collapse" data-target="#nav-tree" aria-expanded="false" aria-controls="nav-tree">
+            Documentation navigation <i class="fas fa-chevron-down"></i>
+          </button>
+        </div>
+      </nav>
+      <div class="transition-banner container-fluid alert alert-info alert-dismissible fade show" role="alert">
+        <p>OpenVINO 2022.1 introduces a new version of OpenVINO API (API 2.0). For more information on the changes and transition steps, see the <a href="https://docs.openvino.ai/latest/openvino_2_0_transition_guide.html">transition guide</a></p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar" id="nav-tree"><form class="searchForm bd-search d-flex align-items-center" action="../search.html" method="get">
+    <i class="icon fas fa-search"></i>
+    <input type="search" class="form-control" name="query" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="001-hello-world-with-output.html">
+   Hello Image Classification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="002-openvino-api-with-output.html">
+   OpenVINO API Tutorial
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="003-hello-segmentation-with-output.html">
+   Hello Image Segmentation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="004-hello-detection-with-output.html">
+   Hello Object Detection
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Convert a TensorFlow Model to OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="102-pytorch-onnx-to-openvino-with-output.html">
+   Convert a PyTorch Model to ONNX and OpenVINO IR
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="103-paddle-onnx-to-openvino-classification-with-output.html">
+   Convert a PaddlePaddle Model to ONNX and OpenVINO IR
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="104-model-tools-with-output.html">
+   Working with Open Model Zoo Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="105-language-quantize-bert-with-output.html">
+   Quantize NLP models with OpenVINO Post-Training Optimization Tool ​
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="106-auto-device-with-output.html">
+   Automatic Device Selection with OpenVINO™
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="110-ct-segmentation-quantize-with-output.html">
+   Quantize a Segmentation Model and Show Live Inference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="111-detection-quantization-with-output.html">
+   Object Detection Quantization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="112-pytorch-post-training-quantization-nncf-with-output.html">
+   Post-Training Quantization of PyTorch models with NNCF
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="113-image-classification-quantization-with-output.html">
+   Quantization of Image Classification Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="114-quantization-simplified-mode-with-output.html">
+   INT8 Quantization with Post-training Optimization Tool (POT) in Simplified Mode tutorial
+  </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="201-vision-monodepth-with-output.html">
+   Monodepth Estimation with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="202-vision-superresolution-image-with-output.html">
+   Single Image Super Resolution with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="202-vision-superresolution-video-with-output.html">
+   Video Super Resolution with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="205-vision-background-removal-with-output.html">
+   Image Background Removal with U^2-Net and OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="206-vision-paddlegan-anime-with-output.html">
+   Photos to Anime with PaddleGAN and OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="207-vision-paddlegan-superresolution-with-output.html">
+   Super Resolution with PaddleGAN and OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="208-optical-character-recognition-with-output.html">
+   Optical Character Recognition (OCR) with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="209-handwritten-ocr-with-output.html">
+   Handwritten Chinese and Japanese OCR
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="210-ct-scan-live-inference-with-output.html">
+   Live Inference and Benchmark CT-scan Data with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="211-speech-to-text-with-output.html">
+   Speech to Text with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="212-onnx-style-transfer-with-output.html">
+   Style Transfer on ONNX Models with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="213-question-answering-with-output.html">
+   Interactive question answering with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="214-vision-paddle-classification-with-output.html">
+   PaddlePaddle Image Classification with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="215-image-inpainting-with-output.html">
+   Image In-painting with OpenVINO™
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="217-vision-deblur-with-output.html">
+   Deblur Photos with DeblurGAN-v2 and OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="218-vehicle-detection-and-recognition-with-output.html">
+   Vehicle Detection And Recognition with OpenVINO
+  </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="301-tensorflow-training-openvino-with-output.html">
+   From Training to Deployment with TensorFlow and OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="301-tensorflow-training-openvino-pot-with-output.html">
+   Post-Training Quantization with TensorFlow Classification Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="302-pytorch-quantization-aware-training-with-output.html">
+   Quantization Aware Training with NNCF, using PyTorch framework
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="305-tensorflow-quantization-aware-training-with-output.html">
+   Quantization Aware Training with NNCF, using TensorFlow Framework
+  </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="401-object-detection-with-output.html">
+   Live Object Detection with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="402-pose-estimation-with-output.html">
+   Live Human Pose Estimation with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="403-action-recognition-webcam-with-output.html">
+   Human Action Recognition with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="405-paddle-ocr-webcam-with-output.html">
+   PaddleOCR with OpenVINO
+  </a>
+ </li>
+</ul>
+
+  </div>
+</nav>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+              
+              <div class="toc-item">
+                
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#imports">
+   Imports
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#settings">
+   Settings
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#convert-the-model-to-openvino-ir-format">
+   Convert the Model to OpenVINO IR Format
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#convert-tensorflow-model-to-openvino-ir-format">
+     Convert TensorFlow Model to OpenVINO IR Format
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#test-inference-on-the-converted-model">
+   Test Inference on the Converted Model
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#load-the-model">
+     Load the Model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#get-model-information">
+     Get Model Information
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#load-an-image">
+     Load an Image
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#do-inference">
+     Do Inference
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#timing">
+   Timing
+  </a>
+ </li>
+</ul>
+
+</nav>
+              </div>
+              
+              <div class="toc-item">
+                <div class="tocsection download-docs">
+  <div class="dropdown sst-dropdown">
+    <button class="button bttn-prm button-size-m" data-display="static" type="button" id="download-options"
+      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Download Docs
+    </button>
+    <div class="dropdown-menu" aria-labelledby="download-options">
+      <a class="dropdown-item" href="#" onclick="window.print()">.pdf</a>
+      <a id="download-zip-btn" class="dropdown-item" href="#">.zip</a>
+    </div>
+  </div>
+</div>
+              </div>
+              
+            
+          </div>
+          
+
+          
+          
+              
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+
+<div class="tocsection editthispage">
+    <a href="None">
+        <i class="fas fa-pencil-alt"></i> Edit this page
+    </a>
+</div>
+
+            
+                <div>
+                  
+  <div class="section" id="convert-a-tensorflow-model-to-openvino">
+<h1>Convert a TensorFlow Model to OpenVINO<a class="headerlink" href="#convert-a-tensorflow-model-to-openvino" title="Permalink to this headline">¶</a></h1>
+<p>This short tutorial shows how to convert a TensorFlow
+<a class="reference external" href="https://docs.openvino.ai/latest/omz_models_model_mobilenet_v3_small_1_0_224_tf.html">MobileNetV3</a>
+image classification model to OpenVINO’s <a class="reference external" href="https://docs.openvino.ai/latest/openvino_docs_MO_DG_IR_and_opsets.html">Intermediate
+Representation</a>
+(IR) format using the <a class="reference external" href="https://docs.openvino.ai/latest/openvino_docs_MO_DG_Deep_Learning_Model_Optimizer_DevGuide.html">Model
+Optimizer</a>
+tool. After creating the IR, we load the model in OpenVINO’s <a class="reference external" href="https://docs.openvino.ai/latest/openvino_docs_IE_DG_Deep_Learning_Inference_Engine_DevGuide.html">Inference
+Engine</a>
+and perform inference with a sample image.</p>
+<div class="section" id="imports">
+<h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">import</span> <span class="nn">cv2</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Markdown</span>
+<span class="kn">from</span> <span class="nn">openvino.runtime</span> <span class="kn">import</span> <span class="n">Core</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="settings">
+<h2>Settings<a class="headerlink" href="#settings" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The paths of the source and converted models</span>
+<span class="n">model_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;model/v3-small_224_1.0_float.pb&quot;</span><span class="p">)</span>
+<span class="n">ir_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">model_path</span><span class="p">)</span><span class="o">.</span><span class="n">with_suffix</span><span class="p">(</span><span class="s2">&quot;.xml&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="convert-the-model-to-openvino-ir-format">
+<h2>Convert the Model to OpenVINO IR Format<a class="headerlink" href="#convert-the-model-to-openvino-ir-format" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="convert-tensorflow-model-to-openvino-ir-format">
+<h3>Convert TensorFlow Model to OpenVINO IR Format<a class="headerlink" href="#convert-tensorflow-model-to-openvino-ir-format" title="Permalink to this headline">¶</a></h3>
+<p>Call the OpenVINO Model Optimizer tool to convert the TensorFlow model
+to OpenVINO IR with FP16 precision. The models are saved to the current
+directory. We add the mean values to the model and scale the output with
+the standard deviation with <code class="docutils literal notranslate"><span class="pre">--scale_values</span></code>. With these options, it
+is not necessary to normalize input data before propagating it through
+the network. The original model expects input images in RGB format. The
+converted model also expects images in RGB format. If you want the
+converted model to work with BGR images, you can use the
+<code class="docutils literal notranslate"><span class="pre">--reverse-input-channels</span></code> option. See the <a class="reference external" href="https://docs.openvino.ai/latest/openvino_docs_MO_DG_Deep_Learning_Model_Optimizer_DevGuide.html">Model Optimizer Developer
+Guide</a>
+for more information about Model Optimizer, including a description of
+the command line options. Check the <a class="reference external" href="https://docs.openvino.ai/latest/omz_models_model_mobilenet_v3_small_1_0_224_tf.html">model
+documentation</a>
+for information about the model, including input shape, expected color
+order and mean values.</p>
+<p>We first construct the command for Model Optimizer, and then execute
+this command in the notebook by prepending the command with a <code class="docutils literal notranslate"><span class="pre">!</span></code>.
+There may be some errors or warnings in the output. Model Optimization
+was succesful if the last lines of the output include
+<code class="docutils literal notranslate"><span class="pre">[</span> <span class="pre">SUCCESS</span> <span class="pre">]</span> <span class="pre">Generated</span> <span class="pre">IR</span> <span class="pre">version</span> <span class="pre">11</span> <span class="pre">model.</span></code></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Construct the command for Model Optimizer</span>
+<span class="n">mo_command</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;mo</span>
+<span class="s2">                 --input_model &quot;</span><span class="si">{</span><span class="n">model_path</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="s2">                 --input_shape &quot;[1,224,224,3]&quot;</span>
+<span class="s2">                 --mean_values=&quot;[127.5,127.5,127.5]&quot;</span>
+<span class="s2">                 --scale_values=&quot;[127.5]&quot;</span>
+<span class="s2">                 --data_type FP16</span>
+<span class="s2">                 --output_dir &quot;</span><span class="si">{</span><span class="n">model_path</span><span class="o">.</span><span class="n">parent</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="s2">                 &quot;&quot;&quot;</span>
+<span class="n">mo_command</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">mo_command</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Model Optimizer command to convert TensorFlow to OpenVINO:&quot;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Markdown</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;`</span><span class="si">{</span><span class="n">mo_command</span><span class="si">}</span><span class="s2">`&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Model</span> <span class="n">Optimizer</span> <span class="n">command</span> <span class="n">to</span> <span class="n">convert</span> <span class="n">TensorFlow</span> <span class="n">to</span> <span class="n">OpenVINO</span><span class="p">:</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">mo</span> <span class="pre">--input_model</span> <span class="pre">&quot;model/v3-small_224_1.0_float.pb&quot;</span> <span class="pre">--input_shape</span> <span class="pre">&quot;[1,224,224,3]&quot;</span> <span class="pre">--mean_values=&quot;[127.5,127.5,127.5]&quot;</span> <span class="pre">--scale_values=&quot;[127.5]&quot;</span> <span class="pre">--data_type</span> <span class="pre">FP16</span> <span class="pre">--output_dir</span> <span class="pre">&quot;model&quot;</span></code></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run Model Optimizer if the IR model file does not exist</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">ir_path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Exporting TensorFlow model to IR... This may take a few minutes.&quot;</span><span class="p">)</span>
+    <span class="o">!</span> <span class="nv">$mo_command</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;IR model </span><span class="si">{</span><span class="n">ir_path</span><span class="si">}</span><span class="s2"> already exists.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Exporting</span> <span class="n">TensorFlow</span> <span class="n">model</span> <span class="n">to</span> <span class="n">IR</span><span class="o">...</span> <span class="n">This</span> <span class="n">may</span> <span class="n">take</span> <span class="n">a</span> <span class="n">few</span> <span class="n">minutes</span><span class="o">.</span>
+<span class="n">Model</span> <span class="n">Optimizer</span> <span class="n">arguments</span><span class="p">:</span>
+<span class="n">Common</span> <span class="n">parameters</span><span class="p">:</span>
+    <span class="o">-</span> <span class="n">Path</span> <span class="n">to</span> <span class="n">the</span> <span class="n">Input</span> <span class="n">Model</span><span class="p">:</span>  <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">work</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">notebooks</span><span class="o">/</span><span class="mi">101</span><span class="o">-</span><span class="n">tensorflow</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">openvino</span><span class="o">/</span><span class="n">model</span><span class="o">/</span><span class="n">v3</span><span class="o">-</span><span class="n">small_224_1</span><span class="o">.</span><span class="mi">0</span><span class="n">_float</span><span class="o">.</span><span class="n">pb</span>
+    <span class="o">-</span> <span class="n">Path</span> <span class="k">for</span> <span class="n">generated</span> <span class="n">IR</span><span class="p">:</span>    <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">work</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">notebooks</span><span class="o">/</span><span class="mi">101</span><span class="o">-</span><span class="n">tensorflow</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">openvino</span><span class="o">/</span><span class="n">model</span>
+    <span class="o">-</span> <span class="n">IR</span> <span class="n">output</span> <span class="n">name</span><span class="p">:</span>   <span class="n">v3</span><span class="o">-</span><span class="n">small_224_1</span><span class="o">.</span><span class="mi">0</span><span class="n">_float</span>
+    <span class="o">-</span> <span class="n">Log</span> <span class="n">level</span><span class="p">:</span>    <span class="n">ERROR</span>
+    <span class="o">-</span> <span class="n">Batch</span><span class="p">:</span>    <span class="n">Not</span> <span class="n">specified</span><span class="p">,</span> <span class="n">inherited</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">model</span>
+    <span class="o">-</span> <span class="n">Input</span> <span class="n">layers</span><span class="p">:</span>     <span class="n">Not</span> <span class="n">specified</span><span class="p">,</span> <span class="n">inherited</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">model</span>
+    <span class="o">-</span> <span class="n">Output</span> <span class="n">layers</span><span class="p">:</span>    <span class="n">Not</span> <span class="n">specified</span><span class="p">,</span> <span class="n">inherited</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">model</span>
+    <span class="o">-</span> <span class="n">Input</span> <span class="n">shapes</span><span class="p">:</span>     <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">224</span><span class="p">,</span><span class="mi">224</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+    <span class="o">-</span> <span class="n">Source</span> <span class="n">layout</span><span class="p">:</span>    <span class="n">Not</span> <span class="n">specified</span>
+    <span class="o">-</span> <span class="n">Target</span> <span class="n">layout</span><span class="p">:</span>    <span class="n">Not</span> <span class="n">specified</span>
+    <span class="o">-</span> <span class="n">Layout</span><span class="p">:</span>   <span class="n">Not</span> <span class="n">specified</span>
+    <span class="o">-</span> <span class="n">Mean</span> <span class="n">values</span><span class="p">:</span>  <span class="p">[</span><span class="mf">127.5</span><span class="p">,</span><span class="mf">127.5</span><span class="p">,</span><span class="mf">127.5</span><span class="p">]</span>
+    <span class="o">-</span> <span class="n">Scale</span> <span class="n">values</span><span class="p">:</span>     <span class="p">[</span><span class="mf">127.5</span><span class="p">]</span>
+    <span class="o">-</span> <span class="n">Scale</span> <span class="n">factor</span><span class="p">:</span>     <span class="n">Not</span> <span class="n">specified</span>
+    <span class="o">-</span> <span class="n">Precision</span> <span class="n">of</span> <span class="n">IR</span><span class="p">:</span>  <span class="n">FP16</span>
+    <span class="o">-</span> <span class="n">Enable</span> <span class="n">fusing</span><span class="p">:</span>    <span class="kc">True</span>
+    <span class="o">-</span> <span class="n">User</span> <span class="n">transformations</span><span class="p">:</span>     <span class="n">Not</span> <span class="n">specified</span>
+    <span class="o">-</span> <span class="n">Reverse</span> <span class="nb">input</span> <span class="n">channels</span><span class="p">:</span>   <span class="kc">False</span>
+    <span class="o">-</span> <span class="n">Enable</span> <span class="n">IR</span> <span class="n">generation</span> <span class="k">for</span> <span class="n">fixed</span> <span class="nb">input</span> <span class="n">shape</span><span class="p">:</span>   <span class="kc">False</span>
+    <span class="o">-</span> <span class="n">Use</span> <span class="n">the</span> <span class="n">transformations</span> <span class="n">config</span> <span class="n">file</span><span class="p">:</span>  <span class="kc">None</span>
+<span class="n">Advanced</span> <span class="n">parameters</span><span class="p">:</span>
+    <span class="o">-</span> <span class="n">Force</span> <span class="n">the</span> <span class="n">usage</span> <span class="n">of</span> <span class="n">legacy</span> <span class="n">Frontend</span> <span class="n">of</span> <span class="n">Model</span> <span class="n">Optimizer</span> <span class="k">for</span> <span class="n">model</span> <span class="n">conversion</span> <span class="n">into</span> <span class="n">IR</span><span class="p">:</span>   <span class="kc">False</span>
+    <span class="o">-</span> <span class="n">Force</span> <span class="n">the</span> <span class="n">usage</span> <span class="n">of</span> <span class="n">new</span> <span class="n">Frontend</span> <span class="n">of</span> <span class="n">Model</span> <span class="n">Optimizer</span> <span class="k">for</span> <span class="n">model</span> <span class="n">conversion</span> <span class="n">into</span> <span class="n">IR</span><span class="p">:</span>  <span class="kc">False</span>
+<span class="n">TensorFlow</span> <span class="n">specific</span> <span class="n">parameters</span><span class="p">:</span>
+    <span class="o">-</span> <span class="n">Input</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">text</span> <span class="n">protobuf</span> <span class="nb">format</span><span class="p">:</span>  <span class="kc">False</span>
+    <span class="o">-</span> <span class="n">Path</span> <span class="n">to</span> <span class="n">model</span> <span class="n">dump</span> <span class="k">for</span> <span class="n">TensorBoard</span><span class="p">:</span>   <span class="kc">None</span>
+    <span class="o">-</span> <span class="n">List</span> <span class="n">of</span> <span class="n">shared</span> <span class="n">libraries</span> <span class="k">with</span> <span class="n">TensorFlow</span> <span class="n">custom</span> <span class="n">layers</span> <span class="n">implementation</span><span class="p">:</span>    <span class="kc">None</span>
+    <span class="o">-</span> <span class="n">Update</span> <span class="n">the</span> <span class="n">configuration</span> <span class="n">file</span> <span class="k">with</span> <span class="nb">input</span><span class="o">/</span><span class="n">output</span> <span class="n">node</span> <span class="n">names</span><span class="p">:</span>   <span class="kc">None</span>
+    <span class="o">-</span> <span class="n">Use</span> <span class="n">configuration</span> <span class="n">file</span> <span class="n">used</span> <span class="n">to</span> <span class="n">generate</span> <span class="n">the</span> <span class="n">model</span> <span class="k">with</span> <span class="n">Object</span> <span class="n">Detection</span> <span class="n">API</span><span class="p">:</span>  <span class="kc">None</span>
+    <span class="o">-</span> <span class="n">Use</span> <span class="n">the</span> <span class="n">config</span> <span class="n">file</span><span class="p">:</span>  <span class="kc">None</span>
+<span class="n">OpenVINO</span> <span class="n">runtime</span> <span class="n">found</span> <span class="ow">in</span><span class="p">:</span>  <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8</span><span class="o">.</span><span class="mi">12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">openvino</span>
+<span class="n">OpenVINO</span> <span class="n">runtime</span> <span class="n">version</span><span class="p">:</span>   <span class="mf">2022.1</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="mi">7019</span><span class="o">-</span><span class="n">cdb9bec7210</span><span class="o">-</span><span class="n">releases</span><span class="o">/</span><span class="mi">2022</span><span class="o">/</span><span class="mi">1</span>
+<span class="n">Model</span> <span class="n">Optimizer</span> <span class="n">version</span><span class="p">:</span>    <span class="mf">2022.1</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="mi">7019</span><span class="o">-</span><span class="n">cdb9bec7210</span><span class="o">-</span><span class="n">releases</span><span class="o">/</span><span class="mi">2022</span><span class="o">/</span><span class="mi">1</span>
+<span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8</span><span class="o">.</span><span class="mi">12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">numpy</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">function_base</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">792</span><span class="p">:</span> <span class="n">VisibleDeprecationWarning</span><span class="p">:</span> <span class="n">Creating</span> <span class="n">an</span> <span class="n">ndarray</span> <span class="kn">from</span> <span class="nn">ragged</span> <span class="n">nested</span> <span class="n">sequences</span> <span class="p">(</span><span class="n">which</span> <span class="ow">is</span> <span class="n">a</span> <span class="nb">list</span><span class="o">-</span><span class="ow">or</span><span class="o">-</span><span class="nb">tuple</span> <span class="n">of</span> <span class="n">lists</span><span class="o">-</span><span class="ow">or</span><span class="o">-</span><span class="n">tuples</span><span class="o">-</span><span class="ow">or</span> <span class="n">ndarrays</span> <span class="k">with</span> <span class="n">different</span> <span class="n">lengths</span> <span class="ow">or</span> <span class="n">shapes</span><span class="p">)</span> <span class="ow">is</span> <span class="n">deprecated</span><span class="o">.</span> <span class="n">If</span> <span class="n">you</span> <span class="n">meant</span> <span class="n">to</span> <span class="n">do</span> <span class="n">this</span><span class="p">,</span> <span class="n">you</span> <span class="n">must</span> <span class="n">specify</span> <span class="s1">&#39;dtype=object&#39;</span> <span class="n">when</span> <span class="n">creating</span> <span class="n">the</span> <span class="n">ndarray</span>
+  <span class="k">return</span> <span class="n">array</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="n">order</span><span class="p">,</span> <span class="n">subok</span><span class="o">=</span><span class="n">subok</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">Generated</span> <span class="n">IR</span> <span class="n">version</span> <span class="mi">11</span> <span class="n">model</span><span class="o">.</span>
+<span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">XML</span> <span class="n">file</span><span class="p">:</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">work</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">notebooks</span><span class="o">/</span><span class="mi">101</span><span class="o">-</span><span class="n">tensorflow</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">openvino</span><span class="o">/</span><span class="n">model</span><span class="o">/</span><span class="n">v3</span><span class="o">-</span><span class="n">small_224_1</span><span class="o">.</span><span class="mi">0</span><span class="n">_float</span><span class="o">.</span><span class="n">xml</span>
+<span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">BIN</span> <span class="n">file</span><span class="p">:</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">work</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">notebooks</span><span class="o">/</span><span class="mi">101</span><span class="o">-</span><span class="n">tensorflow</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">openvino</span><span class="o">/</span><span class="n">model</span><span class="o">/</span><span class="n">v3</span><span class="o">-</span><span class="n">small_224_1</span><span class="o">.</span><span class="mi">0</span><span class="n">_float</span><span class="o">.</span><span class="n">bin</span>
+<span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">Total</span> <span class="n">execution</span> <span class="n">time</span><span class="p">:</span> <span class="mf">19.84</span> <span class="n">seconds</span><span class="o">.</span>
+<span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">Memory</span> <span class="n">consumed</span><span class="p">:</span> <span class="mi">382</span> <span class="n">MB</span><span class="o">.</span>
+<span class="n">It</span><span class="s1">&#39;s been a while, check for a new version of Intel(R) Distribution of OpenVINO(TM) toolkit here https://software.intel.com/content/www/us/en/develop/tools/openvino-toolkit/download.html?cid=other&amp;source=prod&amp;campid=ww_2022_bu_IOTG_OpenVINO-2022-1&amp;content=upg_all&amp;medium=organic or on the GitHub*</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">The</span> <span class="n">model</span> <span class="n">was</span> <span class="n">converted</span> <span class="n">to</span> <span class="n">IR</span> <span class="n">v11</span><span class="p">,</span> <span class="n">the</span> <span class="n">latest</span> <span class="n">model</span> <span class="nb">format</span> <span class="n">that</span> <span class="n">corresponds</span> <span class="n">to</span> <span class="n">the</span> <span class="n">source</span> <span class="n">DL</span> <span class="n">framework</span> <span class="nb">input</span><span class="o">/</span><span class="n">output</span> <span class="nb">format</span><span class="o">.</span> <span class="n">While</span> <span class="n">IR</span> <span class="n">v11</span> <span class="ow">is</span> <span class="n">backwards</span> <span class="n">compatible</span> <span class="k">with</span> <span class="n">OpenVINO</span> <span class="n">Inference</span> <span class="n">Engine</span> <span class="n">API</span> <span class="n">v1</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span> <span class="n">please</span> <span class="n">use</span> <span class="n">API</span> <span class="n">v2</span><span class="o">.</span><span class="mi">0</span> <span class="p">(</span><span class="k">as</span> <span class="n">of</span> <span class="mf">2022.1</span><span class="p">)</span> <span class="n">to</span> <span class="n">take</span> <span class="n">advantage</span> <span class="n">of</span> <span class="n">the</span> <span class="n">latest</span> <span class="n">improvements</span> <span class="ow">in</span> <span class="n">IR</span> <span class="n">v11</span><span class="o">.</span>
+<span class="n">Find</span> <span class="n">more</span> <span class="n">information</span> <span class="n">about</span> <span class="n">API</span> <span class="n">v2</span><span class="o">.</span><span class="mi">0</span> <span class="ow">and</span> <span class="n">IR</span> <span class="n">v11</span> <span class="n">at</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">docs</span><span class="o">.</span><span class="n">openvino</span><span class="o">.</span><span class="n">ai</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="test-inference-on-the-converted-model">
+<h2>Test Inference on the Converted Model<a class="headerlink" href="#test-inference-on-the-converted-model" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="load-the-model">
+<h3>Load the Model<a class="headerlink" href="#load-the-model" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ie</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">ie</span><span class="o">.</span><span class="n">read_model</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">ir_path</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">ir_path</span><span class="o">.</span><span class="n">with_suffix</span><span class="p">(</span><span class="s2">&quot;.bin&quot;</span><span class="p">))</span>
+<span class="n">compiled_model</span> <span class="o">=</span> <span class="n">ie</span><span class="o">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">device_name</span><span class="o">=</span><span class="s2">&quot;CPU&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="get-model-information">
+<h3>Get Model Information<a class="headerlink" href="#get-model-information" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">input_key</span> <span class="o">=</span> <span class="n">compiled_model</span><span class="o">.</span><span class="n">input</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">output_key</span> <span class="o">=</span> <span class="n">compiled_model</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">network_input_shape</span> <span class="o">=</span> <span class="n">input_key</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="load-an-image">
+<h3>Load an Image<a class="headerlink" href="#load-an-image" title="Permalink to this headline">¶</a></h3>
+<p>Load an image, resize it, and convert it to the input shape of the
+network.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The MobileNet network expects images in RGB format</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s2">&quot;data/coco.jpg&quot;</span><span class="p">),</span> <span class="n">code</span><span class="o">=</span><span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2RGB</span><span class="p">)</span>
+
+<span class="c1"># Resize image to network input image shape</span>
+<span class="n">resized_image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">src</span><span class="o">=</span><span class="n">image</span><span class="p">,</span> <span class="n">dsize</span><span class="o">=</span><span class="p">(</span><span class="mi">224</span><span class="p">,</span> <span class="mi">224</span><span class="p">))</span>
+
+<span class="c1"># Transpose image to network input shape</span>
+<span class="n">input_image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">resized_image</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image</span><span class="p">);</span>
+</pre></div>
+</div>
+<img alt="../_images/101-tensorflow-to-openvino-with-output_14_0.png" src="../_images/101-tensorflow-to-openvino-with-output_14_0.png" />
+</div>
+<div class="section" id="do-inference">
+<h3>Do Inference<a class="headerlink" href="#do-inference" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">compiled_model</span><span class="p">([</span><span class="n">input_image</span><span class="p">])[</span><span class="n">output_key</span><span class="p">]</span>
+
+<span class="n">result_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert the inference result to a class name.</span>
+<span class="n">imagenet_classes</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;utils/imagenet_2012.txt&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+
+<span class="c1"># The model description states that for this model, class 0 is background,</span>
+<span class="c1"># so we add background at the beginning of imagenet_classes</span>
+<span class="n">imagenet_classes</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;background&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">imagenet_classes</span>
+
+<span class="n">imagenet_classes</span><span class="p">[</span><span class="n">result_index</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;n02099267 flat-coated retriever&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="timing">
+<h2>Timing<a class="headerlink" href="#timing" title="Permalink to this headline">¶</a></h2>
+<p>Measure the time it takes to do inference on thousand images. This gives
+an indication of performance. For more accurate benchmarking, use the
+<a class="reference external" href="https://docs.openvino.ai/latest/openvino_inference_engine_tools_benchmark_tool_README.html">OpenVINO benchmark
+tool</a>.
+Note that many optimizations are possible to improve the performance.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_images</span> <span class="o">=</span> <span class="mi">1000</span>
+
+<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_images</span><span class="p">):</span>
+    <span class="n">compiled_model</span><span class="p">([</span><span class="n">input_image</span><span class="p">])</span>
+
+<span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+<span class="n">time_ir</span> <span class="o">=</span> <span class="n">end</span> <span class="o">-</span> <span class="n">start</span>
+
+<span class="nb">print</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">&quot;IR model in Inference Engine/CPU: </span><span class="si">{</span><span class="n">time_ir</span><span class="o">/</span><span class="n">num_images</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> &quot;</span>
+    <span class="sa">f</span><span class="s2">&quot;seconds per image, FPS: </span><span class="si">{</span><span class="n">num_images</span><span class="o">/</span><span class="n">time_ir</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">IR</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">Inference</span> <span class="n">Engine</span><span class="o">/</span><span class="n">CPU</span><span class="p">:</span> <span class="mf">0.0016</span> <span class="n">seconds</span> <span class="n">per</span> <span class="n">image</span><span class="p">,</span> <span class="n">FPS</span><span class="p">:</span> <span class="mf">612.29</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+                </div>
+            
+            
+                <div class='prev-next-bottom'>
+                  
+    <a class='button bttn-sec button-size-l' id="prev-link" href="004-hello-detection-with-output.html" title="previous page">Prev</a>
+    <a class='button bttn-sec button-size-l' id="next-link" href="102-pytorch-onnx-to-openvino-with-output.html" title="next page">Next</a>
+
+                </div>
+            
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+<footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2021, Intel®.<br>
+</p>
+    </div>
+    
+    <div class="footer-item">
+      <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

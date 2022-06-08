@@ -1,0 +1,666 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hello Object Detection &#8212; OpenVINO™  documentation</title>
+    
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/blank.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/doxyrest-pygments.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <link href="../_static/css/media/favicon.ico" rel="shortcut icon">
+    <link rel="stylesheet" href="../_static/css/openvino_sphinx_theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/button.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/input.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/textfield.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/tabs.css" type="text/css" />
+    <script src="../_static/js/openvino_sphinx_theme.js"></script>
+    <link rel="stylesheet" href="../_static/css/viewer.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/0.5.7/chartjs-plugin-annotation.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-barchart-background@1.3.0/build/Plugin.Barchart.Background.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-deferred@1"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.1/papaparse.min.js"></script>
+    <script src="../_static/js/viewer.min.js"></script>
+    <script src="/assets/versions_raw.js"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/tabs.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/js/custom.js"></script>
+    <script src="../_static/js/graphs.js"></script>
+    <script src="../_static/js/graphs_ov_tf.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/target-highlight.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <link rel="canonical" href="https://docs.openvino.ai/latest/notebooks/004-hello-detection-with-output.html" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Convert a TensorFlow Model to OpenVINO" href="101-tensorflow-to-openvino-with-output.html" />
+    <link rel="prev" title="Hello Image Segmentation" href="003-hello-segmentation-with-output.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+      <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+
+<a class="navbar-brand" href="../index.html">
+  <img src="../_static/logo.svg" class="logo" alt="logo">
+</a>
+
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../pages/get_started.html">
+  Get Started
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../pages/documentation.html">
+  Documentation
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../tutorials.html">
+  Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../model_zoo.html">
+  Model Zoo
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../pages/resources.html">
+  Resources
+ </a>
+</li>
+
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/openvinotoolkit/openvino" rel="noopener" target="_blank" title="GitHub">
+            <span><i class="sst-github"></i></span>
+            <label class="sr-only">GitHub</label>
+          </a>
+        </li>
+</ul>
+      </div>
+      
+      <div class="navbar-end-item">
+        
+<div class="dropdown sst-dropdown sst-dropdown-navbar">
+  <button class="btn sst-btn dropdown-toggle" type="button" id="version-selector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+  <div class="dropdown-menu" aria-labelledby="version-selector">
+  </div>
+</div>
+      </div>
+      
+      <div class="navbar-end-item">
+        
+
+<div class="dropdown sst-dropdown sst-dropdown-navbar">
+  <button class="btn sst-btn dropdown-toggle" type="button" id="language-selector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">English</button>
+  <div class="dropdown-menu" aria-labelledby="language-selector">
+    
+      
+        <a class="dropdown-item font-weight-bold" href="/latest/notebooks/004-hello-detection-with-output.html">English</a>
+      
+    
+      
+        <a  class="dropdown-item" href="/cn/latest/notebooks/004-hello-detection-with-output.html">Chinese</a>
+      
+    
+  </div>
+</div>
+
+      </div>
+      
+    </div>
+  </div>
+</div>
+        <div id="collapse-nav-wrapper" class="container-xl">
+          <button id="collapse-nav" class="button bttn-prm button-size-m" type="button" data-toggle="collapse" data-target="#nav-tree" aria-expanded="false" aria-controls="nav-tree">
+            Documentation navigation <i class="fas fa-chevron-down"></i>
+          </button>
+        </div>
+      </nav>
+      <div class="transition-banner container-fluid alert alert-info alert-dismissible fade show" role="alert">
+        <p>OpenVINO 2022.1 introduces a new version of OpenVINO API (API 2.0). For more information on the changes and transition steps, see the <a href="https://docs.openvino.ai/latest/openvino_2_0_transition_guide.html">transition guide</a></p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar" id="nav-tree"><form class="searchForm bd-search d-flex align-items-center" action="../search.html" method="get">
+    <i class="icon fas fa-search"></i>
+    <input type="search" class="form-control" name="query" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="001-hello-world-with-output.html">
+   Hello Image Classification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="002-openvino-api-with-output.html">
+   OpenVINO API Tutorial
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="003-hello-segmentation-with-output.html">
+   Hello Image Segmentation
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Hello Object Detection
+  </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="101-tensorflow-to-openvino-with-output.html">
+   Convert a TensorFlow Model to OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="102-pytorch-onnx-to-openvino-with-output.html">
+   Convert a PyTorch Model to ONNX and OpenVINO IR
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="103-paddle-onnx-to-openvino-classification-with-output.html">
+   Convert a PaddlePaddle Model to ONNX and OpenVINO IR
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="104-model-tools-with-output.html">
+   Working with Open Model Zoo Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="105-language-quantize-bert-with-output.html">
+   Quantize NLP models with OpenVINO Post-Training Optimization Tool ​
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="106-auto-device-with-output.html">
+   Automatic Device Selection with OpenVINO™
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="110-ct-segmentation-quantize-with-output.html">
+   Quantize a Segmentation Model and Show Live Inference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="111-detection-quantization-with-output.html">
+   Object Detection Quantization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="112-pytorch-post-training-quantization-nncf-with-output.html">
+   Post-Training Quantization of PyTorch models with NNCF
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="113-image-classification-quantization-with-output.html">
+   Quantization of Image Classification Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="114-quantization-simplified-mode-with-output.html">
+   INT8 Quantization with Post-training Optimization Tool (POT) in Simplified Mode tutorial
+  </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="201-vision-monodepth-with-output.html">
+   Monodepth Estimation with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="202-vision-superresolution-image-with-output.html">
+   Single Image Super Resolution with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="202-vision-superresolution-video-with-output.html">
+   Video Super Resolution with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="205-vision-background-removal-with-output.html">
+   Image Background Removal with U^2-Net and OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="206-vision-paddlegan-anime-with-output.html">
+   Photos to Anime with PaddleGAN and OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="207-vision-paddlegan-superresolution-with-output.html">
+   Super Resolution with PaddleGAN and OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="208-optical-character-recognition-with-output.html">
+   Optical Character Recognition (OCR) with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="209-handwritten-ocr-with-output.html">
+   Handwritten Chinese and Japanese OCR
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="210-ct-scan-live-inference-with-output.html">
+   Live Inference and Benchmark CT-scan Data with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="211-speech-to-text-with-output.html">
+   Speech to Text with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="212-onnx-style-transfer-with-output.html">
+   Style Transfer on ONNX Models with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="213-question-answering-with-output.html">
+   Interactive question answering with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="214-vision-paddle-classification-with-output.html">
+   PaddlePaddle Image Classification with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="215-image-inpainting-with-output.html">
+   Image In-painting with OpenVINO™
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="217-vision-deblur-with-output.html">
+   Deblur Photos with DeblurGAN-v2 and OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="218-vehicle-detection-and-recognition-with-output.html">
+   Vehicle Detection And Recognition with OpenVINO
+  </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="301-tensorflow-training-openvino-with-output.html">
+   From Training to Deployment with TensorFlow and OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="301-tensorflow-training-openvino-pot-with-output.html">
+   Post-Training Quantization with TensorFlow Classification Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="302-pytorch-quantization-aware-training-with-output.html">
+   Quantization Aware Training with NNCF, using PyTorch framework
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="305-tensorflow-quantization-aware-training-with-output.html">
+   Quantization Aware Training with NNCF, using TensorFlow Framework
+  </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="401-object-detection-with-output.html">
+   Live Object Detection with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="402-pose-estimation-with-output.html">
+   Live Human Pose Estimation with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="403-action-recognition-webcam-with-output.html">
+   Human Action Recognition with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="405-paddle-ocr-webcam-with-output.html">
+   PaddleOCR with OpenVINO
+  </a>
+ </li>
+</ul>
+
+  </div>
+</nav>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+              
+              <div class="toc-item">
+                
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#imports">
+   Imports
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-the-model">
+   Load the Model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-an-image">
+   Load an Image
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#do-inference">
+   Do Inference
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualize-results">
+   Visualize Results
+  </a>
+ </li>
+</ul>
+
+</nav>
+              </div>
+              
+              <div class="toc-item">
+                <div class="tocsection download-docs">
+  <div class="dropdown sst-dropdown">
+    <button class="button bttn-prm button-size-m" data-display="static" type="button" id="download-options"
+      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Download Docs
+    </button>
+    <div class="dropdown-menu" aria-labelledby="download-options">
+      <a class="dropdown-item" href="#" onclick="window.print()">.pdf</a>
+      <a id="download-zip-btn" class="dropdown-item" href="#">.zip</a>
+    </div>
+  </div>
+</div>
+              </div>
+              
+            
+          </div>
+          
+
+          
+          
+              
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+
+<div class="tocsection editthispage">
+    <a href="None">
+        <i class="fas fa-pencil-alt"></i> Edit this page
+    </a>
+</div>
+
+            
+                <div>
+                  
+  <div class="section" id="hello-object-detection">
+<h1>Hello Object Detection<a class="headerlink" href="#hello-object-detection" title="Permalink to this headline">¶</a></h1>
+<p>A very basic introduction to using object detection models with
+OpenVINO.</p>
+<p>We use the
+<a class="reference external" href="https://docs.openvino.ai/latest/omz_models_model_horizontal_text_detection_0001.html">horizontal-text-detection-0001</a>
+model from the <a class="reference external" href="https://github.com/openvinotoolkit/open_model_zoo/">Open Model
+Zoo</a>. It detects
+horizontal text in images and returns a blob of data in the shape of
+<code class="docutils literal notranslate"><span class="pre">[100,</span> <span class="pre">5]</span></code>. Each detected text box is stored in the format
+<code class="docutils literal notranslate"><span class="pre">[x_min,</span> <span class="pre">y_min,</span> <span class="pre">x_max,</span> <span class="pre">y_max,</span> <span class="pre">conf]</span></code>, where <code class="docutils literal notranslate"><span class="pre">(x_min,</span> <span class="pre">y_min)</span></code> are the
+coordinates of the top left bounding box corner, <code class="docutils literal notranslate"><span class="pre">(x_max,</span> <span class="pre">y_max)</span></code> are
+the coordinates of the bottom right bounding box corner and <code class="docutils literal notranslate"><span class="pre">conf</span></code> is
+the confidence for the predicted class.</p>
+<div class="section" id="imports">
+<h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cv2</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">openvino.runtime</span> <span class="kn">import</span> <span class="n">Core</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="load-the-model">
+<h2>Load the Model<a class="headerlink" href="#load-the-model" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ie</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">ie</span><span class="o">.</span><span class="n">read_model</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s2">&quot;model/horizontal-text-detection-0001.xml&quot;</span><span class="p">)</span>
+<span class="n">compiled_model</span> <span class="o">=</span> <span class="n">ie</span><span class="o">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">device_name</span><span class="o">=</span><span class="s2">&quot;CPU&quot;</span><span class="p">)</span>
+
+<span class="n">input_layer_ir</span> <span class="o">=</span> <span class="n">compiled_model</span><span class="o">.</span><span class="n">input</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">output_layer_ir</span> <span class="o">=</span> <span class="n">compiled_model</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="s2">&quot;boxes&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="load-an-image">
+<h2>Load an Image<a class="headerlink" href="#load-an-image" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Text detection models expects image in BGR format</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">&quot;data/intel_rnb.jpg&quot;</span><span class="p">)</span>
+
+<span class="c1"># N,C,H,W = batch size, number of channels, height, width</span>
+<span class="n">N</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">W</span> <span class="o">=</span> <span class="n">input_layer_ir</span><span class="o">.</span><span class="n">shape</span>
+
+<span class="c1"># Resize image to meet network expected input sizes</span>
+<span class="n">resized_image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="n">H</span><span class="p">))</span>
+
+<span class="c1"># Reshape to network input shape</span>
+<span class="n">input_image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">resized_image</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2RGB</span><span class="p">));</span>
+</pre></div>
+</div>
+<img alt="../_images/004-hello-detection-with-output_6_0.png" src="../_images/004-hello-detection-with-output_6_0.png" />
+</div>
+<div class="section" id="do-inference">
+<h2>Do Inference<a class="headerlink" href="#do-inference" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create inference request</span>
+<span class="n">boxes</span> <span class="o">=</span> <span class="n">compiled_model</span><span class="p">([</span><span class="n">input_image</span><span class="p">])[</span><span class="n">output_layer_ir</span><span class="p">]</span>
+
+<span class="c1"># Remove zero only boxes</span>
+<span class="n">boxes</span> <span class="o">=</span> <span class="n">boxes</span><span class="p">[</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">boxes</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="visualize-results">
+<h2>Visualize Results<a class="headerlink" href="#visualize-results" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># For each detection, the description has the format: [x_min, y_min, x_max, y_max, conf]</span>
+<span class="c1"># Image passed here is in BGR format with changed width and height. To display it in colors expected by matplotlib we use cvtColor function</span>
+<span class="k">def</span> <span class="nf">convert_result_to_image</span><span class="p">(</span><span class="n">bgr_image</span><span class="p">,</span> <span class="n">resized_image</span><span class="p">,</span> <span class="n">boxes</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">conf_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="c1"># Define colors for boxes and descriptions</span>
+    <span class="n">colors</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;red&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="s2">&quot;green&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">)}</span>
+
+    <span class="c1"># Fetch image shapes to calculate ratio</span>
+    <span class="p">(</span><span class="n">real_y</span><span class="p">,</span> <span class="n">real_x</span><span class="p">),</span> <span class="p">(</span><span class="n">resized_y</span><span class="p">,</span> <span class="n">resized_x</span><span class="p">)</span> <span class="o">=</span> <span class="n">bgr_image</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">2</span><span class="p">],</span> <span class="n">resized_image</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">ratio_x</span><span class="p">,</span> <span class="n">ratio_y</span> <span class="o">=</span> <span class="n">real_x</span> <span class="o">/</span> <span class="n">resized_x</span><span class="p">,</span> <span class="n">real_y</span> <span class="o">/</span> <span class="n">resized_y</span>
+
+    <span class="c1"># Convert base image from bgr to rgb format</span>
+    <span class="n">rgb_image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">bgr_image</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2RGB</span><span class="p">)</span>
+
+    <span class="c1"># Iterate through non-zero boxes</span>
+    <span class="k">for</span> <span class="n">box</span> <span class="ow">in</span> <span class="n">boxes</span><span class="p">:</span>
+        <span class="c1"># Pick confidence factor from last place in array</span>
+        <span class="n">conf</span> <span class="o">=</span> <span class="n">box</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">conf</span> <span class="o">&gt;</span> <span class="n">threshold</span><span class="p">:</span>
+            <span class="c1"># Convert float to int and multiply corner position of each box by x and y ratio</span>
+            <span class="c1"># In case that bounding box is found at the top of the image,</span>
+            <span class="c1"># we position upper box bar little lower to make it visible on image</span>
+            <span class="p">(</span><span class="n">x_min</span><span class="p">,</span> <span class="n">y_min</span><span class="p">,</span> <span class="n">x_max</span><span class="p">,</span> <span class="n">y_max</span><span class="p">)</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="nb">int</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">corner_position</span> <span class="o">*</span> <span class="n">ratio_y</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span> <span class="k">if</span> <span class="n">idx</span> <span class="o">%</span> <span class="mi">2</span>
+                <span class="k">else</span> <span class="nb">int</span><span class="p">(</span><span class="n">corner_position</span> <span class="o">*</span> <span class="n">ratio_x</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">corner_position</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">box</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+            <span class="p">]</span>
+
+            <span class="c1"># Draw box based on position, parameters in rectangle function are: image, start_point, end_point, color, thickness</span>
+            <span class="n">rgb_image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">rectangle</span><span class="p">(</span><span class="n">rgb_image</span><span class="p">,</span> <span class="p">(</span><span class="n">x_min</span><span class="p">,</span> <span class="n">y_min</span><span class="p">),</span> <span class="p">(</span><span class="n">x_max</span><span class="p">,</span> <span class="n">y_max</span><span class="p">),</span> <span class="n">colors</span><span class="p">[</span><span class="s2">&quot;green&quot;</span><span class="p">],</span> <span class="mi">3</span><span class="p">)</span>
+
+            <span class="c1"># Add text to image based on position and confidence</span>
+            <span class="c1"># Parameters in text function are: image, text, bottom-left_corner_textfield, font, font_scale, color, thickness, line_type</span>
+            <span class="k">if</span> <span class="n">conf_labels</span><span class="p">:</span>
+                <span class="n">rgb_image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">putText</span><span class="p">(</span>
+                    <span class="n">rgb_image</span><span class="p">,</span>
+                    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">conf</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                    <span class="p">(</span><span class="n">x_min</span><span class="p">,</span> <span class="n">y_min</span> <span class="o">-</span> <span class="mi">10</span><span class="p">),</span>
+                    <span class="n">cv2</span><span class="o">.</span><span class="n">FONT_HERSHEY_SIMPLEX</span><span class="p">,</span>
+                    <span class="mf">0.8</span><span class="p">,</span>
+                    <span class="n">colors</span><span class="p">[</span><span class="s2">&quot;red&quot;</span><span class="p">],</span>
+                    <span class="mi">1</span><span class="p">,</span>
+                    <span class="n">cv2</span><span class="o">.</span><span class="n">LINE_AA</span><span class="p">,</span>
+                <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">rgb_image</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">convert_result_to_image</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">resized_image</span><span class="p">,</span> <span class="n">boxes</span><span class="p">,</span> <span class="n">conf_labels</span><span class="o">=</span><span class="kc">False</span><span class="p">));</span>
+</pre></div>
+</div>
+<img alt="../_images/004-hello-detection-with-output_11_0.png" src="../_images/004-hello-detection-with-output_11_0.png" />
+</div>
+</div>
+
+
+                </div>
+            
+            
+                <div class='prev-next-bottom'>
+                  
+    <a class='button bttn-sec button-size-l' id="prev-link" href="003-hello-segmentation-with-output.html" title="previous page">Prev</a>
+    <a class='button bttn-sec button-size-l' id="next-link" href="101-tensorflow-to-openvino-with-output.html" title="next page">Next</a>
+
+                </div>
+            
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+<footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2021, Intel®.<br>
+</p>
+    </div>
+    
+    <div class="footer-item">
+      <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

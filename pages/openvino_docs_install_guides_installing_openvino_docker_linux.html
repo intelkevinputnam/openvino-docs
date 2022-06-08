@@ -1,0 +1,942 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Install Intel® Distribution of OpenVINO™ toolkit for Linux from a Docker Image &#8212; OpenVINO™  documentation</title>
+    
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/blank.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/doxyrest-pygments.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <link href="../_static/css/media/favicon.ico" rel="shortcut icon">
+    <link rel="stylesheet" href="../_static/css/openvino_sphinx_theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/button.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/input.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/textfield.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/tabs.css" type="text/css" />
+    <script src="../_static/js/openvino_sphinx_theme.js"></script>
+    <link rel="stylesheet" href="../_static/css/viewer.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/0.5.7/chartjs-plugin-annotation.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-barchart-background@1.3.0/build/Plugin.Barchart.Background.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-deferred@1"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.1/papaparse.min.js"></script>
+    <script src="../_static/js/viewer.min.js"></script>
+    <script src="/assets/versions_raw.js"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/tabs.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/js/custom.js"></script>
+    <script src="../_static/js/graphs.js"></script>
+    <script src="../_static/js/graphs_ov_tf.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/target-highlight.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <link rel="canonical" href="https://docs.openvino.ai/latest/pages/openvino_docs_install_guides_installing_openvino_docker_linux.html" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Install and Configure Intel® Distribution of OpenVINO™ toolkit for Windows" href="openvino_docs_install_guides_installing_openvino_windows_header.html" />
+    <link rel="prev" title="Install Intel® Distribution of OpenVINO™ toolkit from Anaconda Cloud" href="openvino_docs_install_guides_installing_openvino_conda.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+      <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+
+<a class="navbar-brand" href="../index.html">
+  <img src="../_static/logo.svg" class="logo" alt="logo">
+</a>
+
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 current active nav-item">
+ <a class="reference internal nav-link" href="get_started.html">
+  Get Started
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="documentation.html">
+  Documentation
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../tutorials.html">
+  Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../model_zoo.html">
+  Model Zoo
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="resources.html">
+  Resources
+ </a>
+</li>
+
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/openvinotoolkit/openvino" rel="noopener" target="_blank" title="GitHub">
+            <span><i class="sst-github"></i></span>
+            <label class="sr-only">GitHub</label>
+          </a>
+        </li>
+</ul>
+      </div>
+      
+      <div class="navbar-end-item">
+        
+<div class="dropdown sst-dropdown sst-dropdown-navbar">
+  <button class="btn sst-btn dropdown-toggle" type="button" id="version-selector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+  <div class="dropdown-menu" aria-labelledby="version-selector">
+  </div>
+</div>
+      </div>
+      
+      <div class="navbar-end-item">
+        
+
+<div class="dropdown sst-dropdown sst-dropdown-navbar">
+  <button class="btn sst-btn dropdown-toggle" type="button" id="language-selector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">English</button>
+  <div class="dropdown-menu" aria-labelledby="language-selector">
+    
+      
+        <a class="dropdown-item font-weight-bold" href="/latest/pages/openvino_docs_install_guides_installing_openvino_docker_linux.html">English</a>
+      
+    
+      
+        <a  class="dropdown-item" href="/cn/latest/pages/openvino_docs_install_guides_installing_openvino_docker_linux.html">Chinese</a>
+      
+    
+  </div>
+</div>
+
+      </div>
+      
+    </div>
+  </div>
+</div>
+        <div id="collapse-nav-wrapper" class="container-xl">
+          <button id="collapse-nav" class="button bttn-prm button-size-m" type="button" data-toggle="collapse" data-target="#nav-tree" aria-expanded="false" aria-controls="nav-tree">
+            Documentation navigation <i class="fas fa-chevron-down"></i>
+          </button>
+        </div>
+      </nav>
+      <div class="transition-banner container-fluid alert alert-info alert-dismissible fade show" role="alert">
+        <p>OpenVINO 2022.1 introduces a new version of OpenVINO API (API 2.0). For more information on the changes and transition steps, see the <a href="https://docs.openvino.ai/latest/openvino_2_0_transition_guide.html">transition guide</a></p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar" id="nav-tree"><form class="searchForm bd-search d-flex align-items-center" action="../search.html" method="get">
+    <i class="icon fas fa-search"></i>
+    <input type="search" class="form-control" name="query" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Install OpenVINO
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="openvino_docs_install_guides_overview.html">
+   Overview
+  </a>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="openvino_docs_install_guides_install_runtime.html">
+   Install OpenVINO Runtime
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2 current active has-children">
+    <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_linux_header.html">
+     Install on Linux
+    </a>
+    <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+    <label for="toctree-checkbox-2">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul class="current">
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_linux.html">
+       Using Installer
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_pip.html">
+       From PyPI
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_apt.html">
+       From APT
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_yum.html">
+       From YUM
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_conda.html">
+       From Anaconda Cloud
+      </a>
+     </li>
+     <li class="toctree-l3 current active">
+      <a class="current reference internal" href="#">
+       Using Docker
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_windows_header.html">
+     Install on Windows
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+    <label for="toctree-checkbox-3">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_windows.html">
+       Using Installer
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_pip.html">
+       From PyPI
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_conda.html">
+       From Anaconda Cloud
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_docker_windows.html">
+       Using Docker
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_macos_header.html">
+     Install on macOS
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+    <label for="toctree-checkbox-4">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_macos.html">
+       Using Installer
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_pip.html">
+       From PyPI
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_conda.html">
+       From Anaconda Cloud
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_raspbian.html">
+     Install on Raspbian OS
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="openvino_docs_install_guides_install_dev_tools.html">
+   Install OpenVINO Development Tools
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference external" href="https://github.com/openvinotoolkit/openvino/wiki/BuildingCode">
+   Build from Source
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_yocto.html">
+   Create a Yocto Image
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="openvino_docs_install_guides_uninstalling_openvino.html">
+   Uninstalling
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Additional Configurations
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="openvino_docs_install_guides_configurations_for_intel_gpu.html">
+   Configurations for GPU
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="openvino_docs_install_guides_configurations_for_ncs2.html">
+   Configurations for NCS2
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_ivad_vpu.html">
+   Configurations for VPU
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_install_guides_movidius_setup_guide.html">
+     Configurations for IEI Mustang-V100-MX8-R10 card
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="openvino_docs_install_guides_configurations_for_intel_gna.html">
+   Configurations for GNA
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Get Started Guides
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="openvino_docs_get_started_get_started_demos.html">
+   Get Started with Step-by-step Demo
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  OpenVINO Code Samples
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="openvino_docs_OV_UG_Samples_Overview.html">
+   OpenVINO Samples
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_inference_engine_samples_classification_sample_async_README.html">
+     Image Classification Async C++ Sample
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_inference_engine_ie_bridges_python_sample_classification_sample_async_README.html">
+     Image Classification Async Python* Sample
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_inference_engine_samples_hello_classification_README.html">
+     Hello Classification C++ Sample
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_inference_engine_ie_bridges_c_samples_hello_classification_README.html">
+     Hello Classification C Sample
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_inference_engine_ie_bridges_python_sample_hello_classification_README.html">
+     Hello Classification Python* Sample
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_inference_engine_samples_hello_reshape_ssd_README.html">
+     Hello Reshape SSD C++ Sample
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_inference_engine_ie_bridges_python_sample_hello_reshape_ssd_README.html">
+     Hello Reshape SSD Python* Sample
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_inference_engine_samples_hello_nv12_input_classification_README.html">
+     Hello NV12 Input Classification C++ Sample
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_inference_engine_ie_bridges_c_samples_hello_nv12_input_classification_README.html">
+     Hello NV12 Input Classification C Sample
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_inference_engine_samples_hello_query_device_README.html">
+     Hello Query Device C++ Sample
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_inference_engine_ie_bridges_python_sample_hello_query_device_README.html">
+     Hello Query Device Python* Sample
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_inference_engine_samples_model_creation_sample_README.html">
+     Model Creation C++ Sample
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_inference_engine_ie_bridges_python_sample_model_creation_sample_README.html">
+     Model Creation Python* Sample
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_inference_engine_samples_speech_sample_README.html">
+     Automatic Speech Recognition C++ Sample
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_inference_engine_ie_bridges_python_sample_speech_sample_README.html">
+     Automatic Speech Recognition Python* Sample
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_inference_engine_samples_benchmark_app_README.html">
+     Benchmark C++ Tool
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_inference_engine_tools_benchmark_tool_README.html">
+     Benchmark Python* Tool
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Troubleshooting
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="openvino_docs_get_started_guide_troubleshooting.html">
+   Installation &amp; Configuration Issues
+  </a>
+ </li>
+</ul>
+
+  </div>
+</nav>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+              
+              <div class="toc-item">
+                
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#system-requirements">
+   System Requirements
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#installation-flow">
+   Installation Flow
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#getting-a-prebuilt-image-from-provided-sources">
+   Getting a Prebuilt Image from Provided Sources
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#preparing-a-dockerfile">
+   Preparing a Dockerfile
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#configuring-the-image-for-different-devices">
+   Configuring the Image for Different Devices
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#configuring-docker-image-for-gpu">
+     Configuring Docker Image for GPU
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#configuring-docker-image-for-intel-vision-accelerator-design-with-intel-movidius-vpus">
+     Configuring Docker Image for Intel® Vision Accelerator Design with Intel® Movidius™ VPUs
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#running-the-docker-image-on-different-devices">
+   Running the Docker Image on Different Devices
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#running-the-image-on-cpu">
+     Running the Image on CPU
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#running-the-image-on-gpu">
+     Running the Image on GPU
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#running-the-image-on-intel-neural-compute-stick-2">
+     Running the Image on Intel® Neural Compute Stick 2
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#known-limitations">
+       Known Limitations
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#running-the-image-on-intel-vision-accelerator-design-with-intel-movidius-vpus">
+     Running the Image on Intel® Vision Accelerator Design with Intel® Movidius™ VPUs
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#if-the-ion-driver-is-not-enabled">
+       If the ion Driver is Not Enabled
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#running-samples-in-docker-image">
+   Running Samples in Docker Image
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#additional-resources">
+   Additional Resources
+  </a>
+ </li>
+</ul>
+
+</nav>
+              </div>
+              
+              <div class="toc-item">
+                <div class="tocsection download-docs">
+  <div class="dropdown sst-dropdown">
+    <button class="button bttn-prm button-size-m" data-display="static" type="button" id="download-options"
+      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Download Docs
+    </button>
+    <div class="dropdown-menu" aria-labelledby="download-options">
+      <a class="dropdown-item" href="#" onclick="window.print()">.pdf</a>
+      <a id="download-zip-btn" class="dropdown-item" href="#">.zip</a>
+    </div>
+  </div>
+</div>
+              </div>
+              
+            
+          </div>
+          
+
+          
+          
+              
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+
+<div class="tocsection editthispage">
+    <a href="None">
+        <i class="fas fa-pencil-alt"></i> Edit this page
+    </a>
+</div>
+
+            
+                <div>
+                  
+  <div class="section" id="install-intel-distribution-of-openvino-toolkit-for-linux-from-a-docker-image">
+<span id="doxid-openvino-docs-install-guides-installing-openvino-docker-linux"></span><span id="index-0"></span><h1>Install Intel® Distribution of OpenVINO™ toolkit for Linux from a Docker Image<a class="headerlink" href="#install-intel-distribution-of-openvino-toolkit-for-linux-from-a-docker-image" title="Permalink to this headline">¶</a></h1>
+<p><span class="target" id="doxid-openvino-docs-install-guides-installing-openvino-docker-linux-1md-openvino-docs-install-guides-installing-openvino-docker-linux"></span> This guide provides steps on creating a Docker image with Intel® Distribution of OpenVINO™ toolkit for Linux and using the image on different devices.</p>
+<div class="section" id="system-requirements">
+<span id="system-requirments"></span><h2>System Requirements<a class="headerlink" href="#system-requirements" title="Permalink to this headline">¶</a></h2>
+<div class="tab-set docutils">
+<input checked="True" class="tab-input" id="tab-set--0-input--1" name="tab-set--0" type="radio"><label class="tab-label" for="tab-set--0-input--1">Target Operating Systems with Python Version</label><div class="tab-content docutils">
+<table class="table">
+<colgroup>
+<col style="width: 64%" />
+<col style="width: 36%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Operating System</p></th>
+<th class="head"><p>Supported Python Version</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Ubuntu 18.04 long-term support (LTS), 64-bit</p></td>
+<td><p>3.6</p></td>
+</tr>
+<tr class="row-odd"><td><p>Ubuntu 20.04 long-term support (LTS), 64-bit</p></td>
+<td><p>3.8</p></td>
+</tr>
+<tr class="row-even"><td><p>Red Hat Enterprise Linux 8, 64-bit</p></td>
+<td><p>3.6</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<input class="tab-input" id="tab-set--0-input--2" name="tab-set--0" type="radio"><label class="tab-label" for="tab-set--0-input--2">Host Operating Systems</label><div class="tab-content docutils">
+<ul class="simple">
+<li><p>Linux</p></li>
+<li><p>Windows Subsystem for Linux 2 (WSL2) on CPU or GPU</p></li>
+<li><p>macOS on CPU only</p></li>
+</ul>
+<p>To launch a Linux image on WSL2 when trying to run inferences on a GPU, make sure that the following requirements are met:</p>
+<ul class="simple">
+<li><p>Only Windows 10 with 21H2 update or above installed and Windows 11 are supported.</p></li>
+<li><p>Intel GPU driver on Windows host with version 30.0.100.9684 or above need be installed. Please see <a class="reference external" href="https://www.intel.com/content/www/us/en/artificial-intelligence/harness-the-power-of-intel-igpu-on-your-machine.html#articleparagraph_983312434">this article</a> for more details.</p></li>
+<li><p>From 2022.1 release, the Docker images contain preinstalled recommended version of OpenCL Runtime with WSL2 support.</p></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="installation-flow">
+<h2>Installation Flow<a class="headerlink" href="#installation-flow" title="Permalink to this headline">¶</a></h2>
+<p>There are two ways to install OpenVINO with Docker. You can choose either of them according to your needs:</p>
+<ul class="simple">
+<li><p>Use a prebuilt image. Do the following steps:</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="#get-prebuilt-image">Get a prebuilt image from provided sources</a>.</p></li>
+<li><p><a class="reference external" href="#run-image">Run the image on different devices</a>. To run inferences on Intel® Vision Accelerator Design with Intel® Movidius™ VPUs, <a class="reference external" href="#set-up-hddldaemon">configure the Docker image</a> first before you run the image.</p></li>
+<li><p><a class="reference external" href="#run-samples">(Optional) Run samples in the Docker image</a>.</p></li>
+</ol>
+</li>
+<li><p>If you want to customize your image, you can also build a Docker image manually by using the following steps:</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="#prepare-dockerfile">Prepare a Dockerfile</a>.</p></li>
+<li><p><a class="reference external" href="#configure-image">Configure the Docker image</a>.</p></li>
+<li><p><a class="reference external" href="#run-image">Run the image on different devices</a>.</p></li>
+<li><p><a class="reference external" href="#run-samples">(Optional) Run samples in the Docker image</a>.</p></li>
+</ol>
+</li>
+</ul>
+</div>
+<div class="section" id="getting-a-prebuilt-image-from-provided-sources">
+<span id="get-prebuilt-image"></span><h2>Getting a Prebuilt Image from Provided Sources<a class="headerlink" href="#getting-a-prebuilt-image-from-provided-sources" title="Permalink to this headline">¶</a></h2>
+<p>You can find prebuilt images on:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://hub.docker.com/u/openvino">Docker Hub</a></p></li>
+<li><p><a class="reference external" href="https://quay.io/organization/openvino">Red Hat Quay.io</a></p></li>
+<li><p><a class="reference external" href="https://catalog.redhat.com/software/containers/intel/openvino-runtime/606ff4d7ecb5241699188fb3">Red Hat Ecosystem Catalog (runtime image)</a></p></li>
+<li><p><a class="reference external" href="https://catalog.redhat.com/software/containers/intel/openvino-dev/613a450dc9bc35f21dc4a1f7">Red Hat Ecosystem Catalog (development image)</a></p></li>
+<li><p><a class="reference external" href="https://azuremarketplace.microsoft.com/en-us/marketplace/apps/intel_corporation.openvino">Azure Marketplace</a></p></li>
+</ul>
+</div>
+<div class="section" id="preparing-a-dockerfile">
+<span id="prepare-dockerfile"></span><h2>Preparing a Dockerfile<a class="headerlink" href="#preparing-a-dockerfile" title="Permalink to this headline">¶</a></h2>
+<p>You can use the <a class="reference external" href="https://github.com/openvinotoolkit/docker_ci/tree/master/dockerfiles">available Dockerfiles on GitHub</a> or generate a Dockerfile with your settings via <a class="reference external" href="https://github.com/openvinotoolkit/docker_ci">DockerHub CI Framework</a> which can generate a Dockerfile, build, test and deploy an image with the Intel® Distribution of OpenVINO™ toolkit. You can also try our <a class="reference external" href="https://github.com/openvinotoolkit/docker_ci/tree/master/docs/tutorials">Tutorials</a> which demonstrate the usage of Docker containers with OpenVINO.</p>
+</div>
+<div class="section" id="configuring-the-image-for-different-devices">
+<span id="configure-image"></span><h2>Configuring the Image for Different Devices<a class="headerlink" href="#configuring-the-image-for-different-devices" title="Permalink to this headline">¶</a></h2>
+<p>If you want to run inferences on a CPU or Intel® Neural Compute Stick 2, no extra configuration is needed. Go to <a class="reference external" href="#run-image">Running the image on different devices</a> for the next step.</p>
+<div class="section" id="configuring-docker-image-for-gpu">
+<h3>Configuring Docker Image for GPU<a class="headerlink" href="#configuring-docker-image-for-gpu" title="Permalink to this headline">¶</a></h3>
+<p>By default, the distributed Docker image for OpenVINO has the recommended version of Intel® Graphics Compute Runtime for oneAPI Level Zero and OpenCL Driver for the operating system installed inside. If you want to build an image with a custom version of OpenCL Runtime included, you need to modify the Dockerfile using the lines below (the 19.41.14441 version is used as an example) and build the image manually:</p>
+<p><strong>Ubuntu 18.04/20.04</strong> :</p>
+<div class="highlight"><div class="highlight"><pre><span></span><span class="n">WORKDIR</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">opencl</span>
+<span class="n">RUN</span> <span class="n">useradd</span> <span class="o">-</span><span class="n">ms</span> <span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">bash</span> <span class="o">-</span><span class="n">G</span> <span class="n">video</span><span class="p">,</span><span class="n">users</span> <span class="n">openvino</span> <span class="o">&amp;&amp;</span> \
+    <span class="n">chown</span> <span class="n">openvino</span> <span class="o">-</span><span class="n">R</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">openvino</span>
+
+<span class="n">RUN</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">update</span> <span class="o">&amp;&amp;</span> \
+    <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="o">-</span><span class="n">y</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">install</span><span class="o">-</span><span class="n">recommends</span> <span class="n">ocl</span><span class="o">-</span><span class="n">icd</span><span class="o">-</span><span class="n">libopencl1</span> <span class="o">&amp;&amp;</span> \
+    <span class="n">rm</span> <span class="o">-</span><span class="n">rf</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">apt</span><span class="o">/</span><span class="n">lists</span><span class="o">/</span><span class="err">\</span><span class="o">*</span> <span class="o">&amp;&amp;</span> \
+    <span class="n">curl</span> <span class="o">-</span><span class="n">L</span> <span class="s">&quot;https://github.com/intel/compute-runtime/releases/download/19.41.14441/intel-gmmlib_19.3.2_amd64.deb&quot;</span> <span class="o">--</span><span class="n">output</span> <span class="s">&quot;intel-gmmlib_19.3.2_amd64.deb&quot;</span> <span class="o">&amp;&amp;</span> \
+    <span class="n">curl</span> <span class="o">-</span><span class="n">L</span> <span class="s">&quot;https://github.com/intel/compute-runtime/releases/download/19.41.14441/intel-igc-core_1.0.2597_amd64.deb&quot;</span> <span class="o">--</span><span class="n">output</span> <span class="s">&quot;intel-igc-core_1.0.2597_amd64.deb&quot;</span> <span class="o">&amp;&amp;</span> \
+    <span class="n">curl</span> <span class="o">-</span><span class="n">L</span> <span class="s">&quot;https://github.com/intel/compute-runtime/releases/download/19.41.14441/intel-igc-opencl_1.0.2597_amd64.deb&quot;</span> <span class="o">--</span><span class="n">output</span> <span class="s">&quot;intel-igc-opencl_1.0.2597_amd64.deb&quot;</span> <span class="o">&amp;&amp;</span> \
+    <span class="n">curl</span> <span class="o">-</span><span class="n">L</span> <span class="s">&quot;https://github.com/intel/compute-runtime/releases/download/19.41.14441/intel-opencl_19.41.14441_amd64.deb&quot;</span> <span class="o">--</span><span class="n">output</span> <span class="s">&quot;intel-opencl_19.41.14441_amd64.deb&quot;</span> <span class="o">&amp;&amp;</span> \
+    <span class="n">curl</span> <span class="o">-</span><span class="n">L</span> <span class="s">&quot;https://github.com/intel/compute-runtime/releases/download/19.41.14441/intel-ocloc_19.41.14441_amd64.deb&quot;</span> <span class="o">--</span><span class="n">output</span> <span class="s">&quot;intel-ocloc_19.04.12237_amd64.deb&quot;</span> <span class="o">&amp;&amp;</span> \
+    <span class="n">dpkg</span> <span class="o">-</span><span class="n">i</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">opencl</span><span class="o">/</span><span class="err">\</span><span class="o">*</span><span class="p">.</span><span class="n">deb</span> <span class="o">&amp;&amp;</span> \
+    <span class="n">ldconfig</span> <span class="o">&amp;&amp;</span> \
+    <span class="n">rm</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">opencl</span></pre></div></div><p><strong>RHEL 8</strong> :</p>
+<div class="highlight"><div class="highlight"><pre><span></span><span class="n">WORKDIR</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">opencl</span>
+<span class="n">RUN</span> <span class="n">useradd</span> <span class="o">-</span><span class="n">ms</span> <span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">bash</span> <span class="o">-</span><span class="n">G</span> <span class="n">video</span><span class="p">,</span><span class="n">users</span> <span class="n">openvino</span> <span class="o">&amp;&amp;</span> \
+    <span class="n">chown</span> <span class="n">openvino</span> <span class="o">-</span><span class="n">R</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">openvino</span>
+<span class="n">RUN</span> <span class="n">groupmod</span> <span class="o">-</span><span class="n">g</span> <span class="mi">44</span> <span class="n">video</span>
+
+<span class="n">RUN</span> <span class="n">yum</span> <span class="n">update</span> <span class="o">-</span><span class="n">y</span> <span class="o">&amp;&amp;</span> <span class="n">yum</span> <span class="n">install</span> <span class="o">-</span><span class="n">y</span> <span class="nl">https</span><span class="p">:</span><span class="c1">//dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm &amp;&amp; \</span>
+<span class="c1">    yum update -y &amp;&amp; yum install -y ocl-icd ocl-icd-devel &amp;&amp; \</span>
+<span class="c1">    yum clean all &amp;&amp; rm -rf /var/cache/yum &amp;&amp; \</span>
+<span class="c1">    curl -L https://sourceforge.net/projects/intel-compute-runtime/files/19.41.14441/centos-7/intel-gmmlib-19.3.2-1.el7.x86_64.rpm/download -o intel-gmmlib-19.3.2-1.el7.x86_64.rpm &amp;&amp; \</span>
+<span class="c1">    curl -L https://sourceforge.net/projects/intel-compute-runtime/files/19.41.14441/centos-7/intel-gmmlib-devel-19.3.2-1.el7.x86_64.rpm/download -o intel-gmmlib-devel-19.3.2-1.el7.x86_64.rpm &amp;&amp; \</span>
+<span class="c1">    curl -L https://sourceforge.net/projects/intel-compute-runtime/files/19.41.14441/centos-7/intel-igc-core-1.0.2597-1.el7.x86_64.rpm/download -o intel-igc-core-1.0.2597-1.el7.x86_64.rpm &amp;&amp; \</span>
+<span class="c1">    curl -L https://sourceforge.net/projects/intel-compute-runtime/files/19.41.14441/centos-7/intel-igc-opencl-1.0.2597-1.el7.x86_64.rpm/download -o intel-igc-opencl-1.0.2597-1.el7.x86_64.rpm &amp;&amp; \</span>
+<span class="c1">    curl -L https://sourceforge.net/projects/intel-compute-runtime/files/19.41.14441/centos-7/intel-igc-opencl-devel-1.0.2597-1.el7.x86_64.rpm/download -o  intel-igc-opencl-devel-1.0.2597-1.el7.x86_64.rpm &amp;&amp; \</span>
+<span class="c1">    curl -L https://sourceforge.net/projects/intel-compute-runtime/files/19.41.14441/centos-7/intel-opencl-19.41.14441-1.el7.x86_64.rpm/download -o intel-opencl-19.41.14441-1.el7.x86_64.rpm \</span>
+<span class="c1">    rpm -ivh ${TEMP_DIR}/\*.rpm &amp;&amp; \</span>
+<span class="c1">    ldconfig &amp;&amp; \</span>
+<span class="c1">    rm -rf ${TEMP_DIR} &amp;&amp; \</span>
+<span class="c1">    yum remove -y epel-release</span></pre></div></div></div>
+<div class="section" id="configuring-docker-image-for-intel-vision-accelerator-design-with-intel-movidius-vpus">
+<span id="set-up-hddldaemon"></span><h3>Configuring Docker Image for Intel® Vision Accelerator Design with Intel® Movidius™ VPUs<a class="headerlink" href="#configuring-docker-image-for-intel-vision-accelerator-design-with-intel-movidius-vpus" title="Permalink to this headline">¶</a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When building the Docker image, create a user in the Dockerfile that has the same UID (User Identifier) and GID (Group Identifier) as the user which that runs hddldaemon on the host, and then run the application in the Docker image with this user. This step is necessary to run the container as a non-root user.</p>
+</div>
+<p>To use the Docker container for inference on Intel® Vision Accelerator Design with Intel® Movidius™ VPUs, do the following steps:</p>
+<ol class="arabic simple">
+<li><p>Set up the environment on the host machine to be used for running Docker. It is required to execute <code class="docutils literal notranslate"><span class="pre">hddldaemon</span></code>, which is responsible for communication between the HDDL plugin and the board. To learn how to set up the environment (the OpenVINO package or HDDL package must be pre-installed), see <a class="reference external" href="https://github.com/openvinotoolkit/docker_ci/blob/master/install_guide_vpu_hddl.md">Configuration guide for HDDL device</a> or <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_ivad_vpu.html#doxid-openvino-docs-install-guides-installing-openvino-ivad-vpu"><span class="std std-ref">Configurations for Intel® Vision Accelerator Design with Intel® Movidius™ VPUs on Linux</span></a>.</p></li>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">hddldaemon</span></code> on the host in a separate terminal session using the following command: <code class="docutils literal notranslate"><span class="pre">`sh</span> <span class="pre">$HDDL_INSTALL_DIR/hddldaemon</span> <span class="pre">`</span></code></p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="running-the-docker-image-on-different-devices">
+<span id="run-image"></span><h2>Running the Docker Image on Different Devices<a class="headerlink" href="#running-the-docker-image-on-different-devices" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="running-the-image-on-cpu">
+<h3>Running the Image on CPU<a class="headerlink" href="#running-the-image-on-cpu" title="Permalink to this headline">¶</a></h3>
+<p>Run the Docker image with the following command:</p>
+<div class="highlight"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">it</span> <span class="o">--</span><span class="n">rm</span> <span class="o">&lt;</span><span class="n">image_name</span><span class="o">&gt;</span></pre></div></div><p>Note the following things:</p>
+<ul class="simple">
+<li><p>Kernel reports the same information for all containers as for native application, for example, CPU, memory information.</p></li>
+<li><p>All instructions that are available to host process available for process in container, including, for example, AVX2, AVX512. No restrictions.</p></li>
+<li><p>Docker does not use virtualization or emulation. The process in Docker is just a regular Linux process, but it is isolated from external world on kernel level. Performance loss is minor.</p></li>
+</ul>
+</div>
+<div class="section" id="running-the-image-on-gpu">
+<h3>Running the Image on GPU<a class="headerlink" href="#running-the-image-on-gpu" title="Permalink to this headline">¶</a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Only Intel® integrated graphics are supported.</p>
+</div>
+<p>Note the following things:</p>
+<ul class="simple">
+<li><p>GPU is not available in the container by default. You must attach it to the container.</p></li>
+<li><p>Kernel driver must be installed on the host.</p></li>
+<li><p>In the container, non-root user must be in the <code class="docutils literal notranslate"><span class="pre">video</span></code> and <code class="docutils literal notranslate"><span class="pre">render</span></code> groups. To add a user to the render group, follow the <a class="reference external" href="https://github.com/openvinotoolkit/docker_ci/blob/master/configure_gpu_ubuntu20.md">Configuration Guide for the Intel® Graphics Compute Runtime for OpenCL™ on Ubuntu 20.04</a>.</p></li>
+</ul>
+<p>To make GPU available in the container, attach the GPU to the container using <code class="docutils literal notranslate"><span class="pre">--device</span> <span class="pre">/dev/dri</span></code> option and run the container:</p>
+<ul class="simple">
+<li><p>Ubuntu 18 or RHEL 8: <code class="docutils literal notranslate"><span class="pre">`sh</span> <span class="pre">docker</span> <span class="pre">run</span> <span class="pre">-it</span> <span class="pre">rm</span> <span class="pre">device</span> <span class="pre">/dev/dri</span> <span class="pre">&lt;image_name&gt;</span> <span class="pre">`</span></code> &gt; <strong>NOTE</strong> : If your host system is Ubuntu 20, follow the <a class="reference external" href="https://github.com/openvinotoolkit/docker_ci/blob/master/configure_gpu_ubuntu20.md">Configuration Guide for the Intel® Graphics Compute Runtime for OpenCL™ on Ubuntu* 20.04</a>.</p></li>
+<li><p>WSL2: <code class="docutils literal notranslate"><span class="pre">`sh</span> <span class="pre">docker</span> <span class="pre">run</span> <span class="pre">-it</span> <span class="pre">rm</span> <span class="pre">device</span> <span class="pre">/dev/dxg</span> <span class="pre">volume</span> <span class="pre">/usr/lib/wsl:/usr/lib/wsl</span> <span class="pre">&lt;image_name&gt;</span> <span class="pre">`</span></code> &gt; <strong>NOTE</strong> : To launch a Linux image on WSL2, make sure that the additional requirements in <a class="reference external" href="#system-requirements">System Requirements</a> are met.</p></li>
+</ul>
+</div>
+<div class="section" id="running-the-image-on-intel-neural-compute-stick-2">
+<h3>Running the Image on Intel® Neural Compute Stick 2<a class="headerlink" href="#running-the-image-on-intel-neural-compute-stick-2" title="Permalink to this headline">¶</a></h3>
+<p>Run the Docker image with the following command:</p>
+<div class="highlight"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">it</span> <span class="o">--</span><span class="n">rm</span> <span class="o">--</span><span class="n">device</span><span class="o">-</span><span class="n">cgroup</span><span class="o">-</span><span class="n">rule</span><span class="o">=</span><span class="sc">&#39;c 189:\* rmw&#39;</span> <span class="o">-</span><span class="n">v</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">bus</span><span class="o">/</span><span class="nl">usb</span><span class="p">:</span><span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">bus</span><span class="o">/</span><span class="n">usb</span> <span class="o">&lt;</span><span class="n">image_name</span><span class="o">&gt;</span></pre></div></div><p>While the command above is not working, you can also run container in the privileged mode, enable the Docker network configuration as host, and mount all devices to the container. Run the following command:</p>
+<div class="highlight"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">it</span> <span class="o">--</span><span class="n">rm</span> <span class="o">--</span><span class="n">privileged</span> <span class="o">-</span><span class="n">v</span> <span class="o">/</span><span class="nl">dev</span><span class="p">:</span><span class="o">/</span><span class="n">dev</span> <span class="o">--</span><span class="n">network</span><span class="o">=</span><span class="n">host</span> <span class="o">&lt;</span><span class="n">image_name</span><span class="o">&gt;</span></pre></div></div><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This option is not recommended, as conflicts with Kubernetes and other tools that use orchestration and private networks may occur. Please use it with caution and only for troubleshooting purposes.</p>
+</div>
+<div class="section" id="known-limitations">
+<h4>Known Limitations<a class="headerlink" href="#known-limitations" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>Intel® Neural Compute Stick 2 device changes its VendorID and DeviceID during execution and each time looks for a host system as a brand new device. It means it cannot be mounted as usual.</p></li>
+<li><p>UDEV events are not forwarded to the container by default, and it does not know about the device reconnection. The prebuilt Docker images and provided Dockerfiles include <code class="docutils literal notranslate"><span class="pre">libusb</span></code> rebuilt without UDEV support.</p></li>
+<li><p>Only one NCS2 device connected to the host can be used when running inference in a container.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="running-the-image-on-intel-vision-accelerator-design-with-intel-movidius-vpus">
+<h3>Running the Image on Intel® Vision Accelerator Design with Intel® Movidius™ VPUs<a class="headerlink" href="#running-the-image-on-intel-vision-accelerator-design-with-intel-movidius-vpus" title="Permalink to this headline">¶</a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To run inferences on Intel® Vision Accelerator Design with Intel® Movidius™ VPUs, make sure that you have <a class="reference external" href="#set-up-hddldaemon">configured the Docker image</a> first.</p>
+</div>
+<p>Use the following command:</p>
+<div class="highlight"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">it</span> <span class="o">--</span><span class="n">rm</span> <span class="o">--</span><span class="n">device</span><span class="o">=/</span><span class="n">dev</span><span class="o">/</span><span class="nl">ion</span><span class="p">:</span><span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">ion</span> <span class="o">-</span><span class="n">v</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="nl">tmp</span><span class="p">:</span><span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">tmp</span> <span class="o">&lt;</span><span class="n">image_name</span><span class="o">&gt;</span></pre></div></div><p>If your application runs inference of a network with a big size (&gt;4MB) of input/output, the HDDL plugin will use shared memory. In this case, you must mount <code class="docutils literal notranslate"><span class="pre">/dev/shm</span></code> as volume:</p>
+<div class="highlight"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">it</span> <span class="o">--</span><span class="n">rm</span> <span class="o">--</span><span class="n">device</span><span class="o">=/</span><span class="n">dev</span><span class="o">/</span><span class="nl">ion</span><span class="p">:</span><span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">ion</span> <span class="o">-</span><span class="n">v</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="nl">tmp</span><span class="p">:</span><span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">tmp</span> <span class="o">-</span><span class="n">v</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="nl">shm</span><span class="p">:</span><span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">shm</span> <span class="o">&lt;</span><span class="n">image_name</span><span class="o">&gt;</span></pre></div></div><p>Note the following things:</p>
+<ul class="simple">
+<li><p>The device <code class="docutils literal notranslate"><span class="pre">/dev/ion</span></code> needs to be shared to be able to use ion buffers among the plugin, <code class="docutils literal notranslate"><span class="pre">hddldaemon</span></code> and the kernel.</p></li>
+<li><p>Since separate inference tasks share the same HDDL service communication interface (the service creates mutexes and a socket file in <code class="docutils literal notranslate"><span class="pre">/var/tmp</span></code>), <code class="docutils literal notranslate"><span class="pre">/var/tmp</span></code> needs to be mounted and shared among them.</p></li>
+</ul>
+<div class="section" id="if-the-ion-driver-is-not-enabled">
+<h4>If the ion Driver is Not Enabled<a class="headerlink" href="#if-the-ion-driver-is-not-enabled" title="Permalink to this headline">¶</a></h4>
+<p>In some cases, the ion driver is not enabled (for example, due to a newer kernel version or iommu (Input-Output Memory Management Unit) incompatibility). <code class="docutils literal notranslate"><span class="pre">lsmod</span> <span class="pre">|</span> <span class="pre">grep</span> <span class="pre">myd_ion</span></code> returns empty output. To resolve this issue, use the following command:</p>
+<div class="highlight"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">it</span> <span class="o">--</span><span class="n">rm</span> <span class="o">--</span><span class="n">ipc</span><span class="o">=</span><span class="n">host</span> <span class="o">--</span><span class="n">net</span><span class="o">=</span><span class="n">host</span> <span class="o">-</span><span class="n">v</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="nl">tmp</span><span class="p">:</span><span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">tmp</span> <span class="o">&lt;</span><span class="n">image_name</span><span class="o">&gt;</span></pre></div></div><p>If that still does not solve the issue, try starting <code class="docutils literal notranslate"><span class="pre">hddldaemon</span></code> with the root user on host. However, this approach is not recommended. Please use with caution.</p>
+</div>
+</div>
+</div>
+<div class="section" id="running-samples-in-docker-image">
+<span id="run-samples"></span><h2>Running Samples in Docker Image<a class="headerlink" href="#running-samples-in-docker-image" title="Permalink to this headline">¶</a></h2>
+<p>To run the <code class="docutils literal notranslate"><span class="pre">Hello</span> <span class="pre">Classification</span> <span class="pre">Sample</span></code> on a specific inference device, run the following commands:</p>
+<p><strong>CPU</strong> :</p>
+<div class="highlight"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">it</span> <span class="o">--</span><span class="n">rm</span> <span class="o">&lt;</span><span class="n">image_name</span><span class="o">&gt;</span>
+<span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">bash</span> <span class="o">-</span><span class="n">c</span> <span class="s">&quot;cd ~ &amp;&amp; omz_downloader --name googlenet-v1 --precisions FP16 &amp;&amp; omz_converter --name googlenet-v1 --precision FP16 &amp;&amp; curl -O https://storage.openvinotoolkit.org/data/test_data/images/car_1.bmp &amp;&amp; python3 /opt/intel/openvino/samples/python/hello_classification/hello_classification.py public/googlenet-v1/FP16/googlenet-v1.xml car_1.bmp CPU&quot;</span></pre></div></div><p><strong>GPU</strong> :</p>
+<div class="highlight"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">itu</span> <span class="nl">root</span><span class="p">:</span><span class="n">root</span>  <span class="o">--</span><span class="n">rm</span> <span class="o">--</span><span class="n">device</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="nl">dri</span><span class="p">:</span><span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">dri</span> <span class="o">&lt;</span><span class="n">image_name</span><span class="o">&gt;</span>
+<span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">bash</span> <span class="o">-</span><span class="n">c</span> <span class="s">&quot;omz_downloader --name googlenet-v1 --precisions FP16 &amp;&amp; omz_converter --name googlenet-v1 --precision FP16 &amp;&amp; curl -O https://storage.openvinotoolkit.org/data/test_data/images/car_1.bmp &amp;&amp; python3 samples/python/hello_classification/hello_classification.py public/googlenet-v1/FP16/googlenet-v1.xml car_1.bmp GPU&quot;</span></pre></div></div><p><strong>MYRIAD</strong> :</p>
+<div class="highlight"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">itu</span> <span class="nl">root</span><span class="p">:</span><span class="n">root</span> <span class="o">--</span><span class="n">rm</span> <span class="o">--</span><span class="n">device</span><span class="o">-</span><span class="n">cgroup</span><span class="o">-</span><span class="n">rule</span><span class="o">=</span><span class="sc">&#39;c 189:\* rmw&#39;</span> <span class="o">-</span><span class="n">v</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">bus</span><span class="o">/</span><span class="nl">usb</span><span class="p">:</span><span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">bus</span><span class="o">/</span><span class="n">usb</span> <span class="o">&lt;</span><span class="n">image_name</span><span class="o">&gt;</span>
+<span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">bash</span> <span class="o">-</span><span class="n">c</span> <span class="s">&quot;omz_downloader --name googlenet-v1 --precisions FP16 &amp;&amp; omz_converter --name googlenet-v1 --precision FP16 &amp;&amp; curl -O https://storage.openvinotoolkit.org/data/test_data/images/car_1.bmp &amp;&amp; python3 samples/python/hello_classification/hello_classification.py public/googlenet-v1/FP16/googlenet-v1.xml car_1.bmp MYRIAD&quot;</span></pre></div></div><p><strong>HDDL</strong> :</p>
+<div class="highlight"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">itu</span> <span class="nl">root</span><span class="p">:</span><span class="n">root</span> <span class="o">--</span><span class="n">rm</span> <span class="o">--</span><span class="n">device</span><span class="o">=/</span><span class="n">dev</span><span class="o">/</span><span class="nl">ion</span><span class="p">:</span><span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">ion</span> <span class="o">-</span><span class="n">v</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="nl">tmp</span><span class="p">:</span><span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">tmp</span> <span class="o">-</span><span class="n">v</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="nl">shm</span><span class="p">:</span><span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">shm</span> <span class="o">&lt;</span><span class="n">image_name</span><span class="o">&gt;</span>
+<span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">bash</span> <span class="o">-</span><span class="n">c</span> <span class="s">&quot;omz_downloader --name googlenet-v1 --precisions FP16 &amp;&amp; omz_converter --name googlenet-v1 --precision FP16 &amp;&amp; curl -O https://storage.openvinotoolkit.org/data/test_data/images/car_1.bmp &amp;&amp; umask 000 &amp;&amp; python3 samples/python/hello_classification/hello_classification.py public/googlenet-v1/FP16/googlenet-v1.xml car_1.bmp HDDL&quot;</span></pre></div></div></div>
+<div class="section" id="additional-resources">
+<h2>Additional Resources<a class="headerlink" href="#additional-resources" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/openvinotoolkit/docker_ci">DockerHub CI Framework</a> for Intel® Distribution of OpenVINO™ toolkit. The Framework can generate a Dockerfile, build, test, and deploy an image with the Intel® Distribution of OpenVINO™ toolkit. You can reuse available Dockerfiles, add your layer and customize the image of OpenVINO™ for your needs.</p></li>
+<li><p>Intel® Distribution of OpenVINO™ toolkit home page: <a class="reference external" href="https://software.intel.com/en-us/openvino-toolkit">https://software.intel.com/en-us/openvino-toolkit</a></p></li>
+<li><p>Intel® Neural Compute Stick 2 Get Started: <a class="reference external" href="https://software.intel.com/en-us/neural-compute-stick/get-started">https://software.intel.com/en-us/neural-compute-stick/get-started</a></p></li>
+</ul>
+</div>
+</div>
+
+
+                </div>
+            
+            
+                <div class='prev-next-bottom'>
+                  
+    <a class='button bttn-sec button-size-l' id="prev-link" href="openvino_docs_install_guides_installing_openvino_conda.html" title="previous page">Prev</a>
+    <a class='button bttn-sec button-size-l' id="next-link" href="openvino_docs_install_guides_installing_openvino_windows_header.html" title="next page">Next</a>
+
+                </div>
+            
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+<footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2021, Intel®.<br>
+</p>
+    </div>
+    
+    <div class="footer-item">
+      <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

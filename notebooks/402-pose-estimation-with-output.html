@@ -1,0 +1,948 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Live Human Pose Estimation with OpenVINO &#8212; OpenVINO™  documentation</title>
+    
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/blank.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/doxyrest-pygments.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <link href="../_static/css/media/favicon.ico" rel="shortcut icon">
+    <link rel="stylesheet" href="../_static/css/openvino_sphinx_theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/button.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/input.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/textfield.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/tabs.css" type="text/css" />
+    <script src="../_static/js/openvino_sphinx_theme.js"></script>
+    <link rel="stylesheet" href="../_static/css/viewer.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/0.5.7/chartjs-plugin-annotation.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-barchart-background@1.3.0/build/Plugin.Barchart.Background.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-deferred@1"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.1/papaparse.min.js"></script>
+    <script src="../_static/js/viewer.min.js"></script>
+    <script src="/assets/versions_raw.js"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/tabs.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/js/custom.js"></script>
+    <script src="../_static/js/graphs.js"></script>
+    <script src="../_static/js/graphs_ov_tf.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/target-highlight.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <link rel="canonical" href="https://docs.openvino.ai/latest/notebooks/402-pose-estimation-with-output.html" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Human Action Recognition with OpenVINO" href="403-action-recognition-webcam-with-output.html" />
+    <link rel="prev" title="Live Object Detection with OpenVINO" href="401-object-detection-with-output.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+      <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+
+<a class="navbar-brand" href="../index.html">
+  <img src="../_static/logo.svg" class="logo" alt="logo">
+</a>
+
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../pages/get_started.html">
+  Get Started
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../pages/documentation.html">
+  Documentation
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../tutorials.html">
+  Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../model_zoo.html">
+  Model Zoo
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../pages/resources.html">
+  Resources
+ </a>
+</li>
+
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/openvinotoolkit/openvino" rel="noopener" target="_blank" title="GitHub">
+            <span><i class="sst-github"></i></span>
+            <label class="sr-only">GitHub</label>
+          </a>
+        </li>
+</ul>
+      </div>
+      
+      <div class="navbar-end-item">
+        
+<div class="dropdown sst-dropdown sst-dropdown-navbar">
+  <button class="btn sst-btn dropdown-toggle" type="button" id="version-selector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+  <div class="dropdown-menu" aria-labelledby="version-selector">
+  </div>
+</div>
+      </div>
+      
+      <div class="navbar-end-item">
+        
+
+<div class="dropdown sst-dropdown sst-dropdown-navbar">
+  <button class="btn sst-btn dropdown-toggle" type="button" id="language-selector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">English</button>
+  <div class="dropdown-menu" aria-labelledby="language-selector">
+    
+      
+        <a class="dropdown-item font-weight-bold" href="/latest/notebooks/402-pose-estimation-with-output.html">English</a>
+      
+    
+      
+        <a  class="dropdown-item" href="/cn/latest/notebooks/402-pose-estimation-with-output.html">Chinese</a>
+      
+    
+  </div>
+</div>
+
+      </div>
+      
+    </div>
+  </div>
+</div>
+        <div id="collapse-nav-wrapper" class="container-xl">
+          <button id="collapse-nav" class="button bttn-prm button-size-m" type="button" data-toggle="collapse" data-target="#nav-tree" aria-expanded="false" aria-controls="nav-tree">
+            Documentation navigation <i class="fas fa-chevron-down"></i>
+          </button>
+        </div>
+      </nav>
+      <div class="transition-banner container-fluid alert alert-info alert-dismissible fade show" role="alert">
+        <p>OpenVINO 2022.1 introduces a new version of OpenVINO API (API 2.0). For more information on the changes and transition steps, see the <a href="https://docs.openvino.ai/latest/openvino_2_0_transition_guide.html">transition guide</a></p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar" id="nav-tree"><form class="searchForm bd-search d-flex align-items-center" action="../search.html" method="get">
+    <i class="icon fas fa-search"></i>
+    <input type="search" class="form-control" name="query" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="001-hello-world-with-output.html">
+   Hello Image Classification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="002-openvino-api-with-output.html">
+   OpenVINO API Tutorial
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="003-hello-segmentation-with-output.html">
+   Hello Image Segmentation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="004-hello-detection-with-output.html">
+   Hello Object Detection
+  </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="101-tensorflow-to-openvino-with-output.html">
+   Convert a TensorFlow Model to OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="102-pytorch-onnx-to-openvino-with-output.html">
+   Convert a PyTorch Model to ONNX and OpenVINO IR
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="103-paddle-onnx-to-openvino-classification-with-output.html">
+   Convert a PaddlePaddle Model to ONNX and OpenVINO IR
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="104-model-tools-with-output.html">
+   Working with Open Model Zoo Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="105-language-quantize-bert-with-output.html">
+   Quantize NLP models with OpenVINO Post-Training Optimization Tool ​
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="106-auto-device-with-output.html">
+   Automatic Device Selection with OpenVINO™
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="110-ct-segmentation-quantize-with-output.html">
+   Quantize a Segmentation Model and Show Live Inference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="111-detection-quantization-with-output.html">
+   Object Detection Quantization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="112-pytorch-post-training-quantization-nncf-with-output.html">
+   Post-Training Quantization of PyTorch models with NNCF
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="113-image-classification-quantization-with-output.html">
+   Quantization of Image Classification Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="114-quantization-simplified-mode-with-output.html">
+   INT8 Quantization with Post-training Optimization Tool (POT) in Simplified Mode tutorial
+  </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="201-vision-monodepth-with-output.html">
+   Monodepth Estimation with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="202-vision-superresolution-image-with-output.html">
+   Single Image Super Resolution with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="202-vision-superresolution-video-with-output.html">
+   Video Super Resolution with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="205-vision-background-removal-with-output.html">
+   Image Background Removal with U^2-Net and OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="206-vision-paddlegan-anime-with-output.html">
+   Photos to Anime with PaddleGAN and OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="207-vision-paddlegan-superresolution-with-output.html">
+   Super Resolution with PaddleGAN and OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="208-optical-character-recognition-with-output.html">
+   Optical Character Recognition (OCR) with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="209-handwritten-ocr-with-output.html">
+   Handwritten Chinese and Japanese OCR
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="210-ct-scan-live-inference-with-output.html">
+   Live Inference and Benchmark CT-scan Data with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="211-speech-to-text-with-output.html">
+   Speech to Text with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="212-onnx-style-transfer-with-output.html">
+   Style Transfer on ONNX Models with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="213-question-answering-with-output.html">
+   Interactive question answering with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="214-vision-paddle-classification-with-output.html">
+   PaddlePaddle Image Classification with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="215-image-inpainting-with-output.html">
+   Image In-painting with OpenVINO™
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="217-vision-deblur-with-output.html">
+   Deblur Photos with DeblurGAN-v2 and OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="218-vehicle-detection-and-recognition-with-output.html">
+   Vehicle Detection And Recognition with OpenVINO
+  </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="301-tensorflow-training-openvino-with-output.html">
+   From Training to Deployment with TensorFlow and OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="301-tensorflow-training-openvino-pot-with-output.html">
+   Post-Training Quantization with TensorFlow Classification Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="302-pytorch-quantization-aware-training-with-output.html">
+   Quantization Aware Training with NNCF, using PyTorch framework
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="305-tensorflow-quantization-aware-training-with-output.html">
+   Quantization Aware Training with NNCF, using TensorFlow Framework
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="401-object-detection-with-output.html">
+   Live Object Detection with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Live Human Pose Estimation with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="403-action-recognition-webcam-with-output.html">
+   Human Action Recognition with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="405-paddle-ocr-webcam-with-output.html">
+   PaddleOCR with OpenVINO
+  </a>
+ </li>
+</ul>
+
+  </div>
+</nav>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+              
+              <div class="toc-item">
+                
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#imports">
+   Imports
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-model">
+   The model
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#download-the-model">
+     Download the model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#load-the-model">
+     Load the model
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#processing">
+   Processing
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#openposedecoder">
+     OpenPoseDecoder
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#process-results">
+     Process Results
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#draw-pose-overlays">
+     Draw Pose Overlays
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#main-processing-function">
+     Main Processing Function
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#run">
+   Run
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#run-live-pose-estimation">
+     Run Live Pose Estimation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#run-pose-estimation-on-a-video-file">
+     Run Pose Estimation on a Video File
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+</nav>
+              </div>
+              
+              <div class="toc-item">
+                <div class="tocsection download-docs">
+  <div class="dropdown sst-dropdown">
+    <button class="button bttn-prm button-size-m" data-display="static" type="button" id="download-options"
+      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Download Docs
+    </button>
+    <div class="dropdown-menu" aria-labelledby="download-options">
+      <a class="dropdown-item" href="#" onclick="window.print()">.pdf</a>
+      <a id="download-zip-btn" class="dropdown-item" href="#">.zip</a>
+    </div>
+  </div>
+</div>
+              </div>
+              
+            
+          </div>
+          
+
+          
+          
+              
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+
+<div class="tocsection editthispage">
+    <a href="None">
+        <i class="fas fa-pencil-alt"></i> Edit this page
+    </a>
+</div>
+
+            
+                <div>
+                  
+  <div class="section" id="live-human-pose-estimation-with-openvino">
+<h1>Live Human Pose Estimation with OpenVINO<a class="headerlink" href="#live-human-pose-estimation-with-openvino" title="Permalink to this headline">¶</a></h1>
+<p>This notebook demonstrates live pose estimation with OpenVINO. We use
+the OpenPose model
+<a class="reference external" href="https://github.com/openvinotoolkit/open_model_zoo/tree/master/models/intel/human-pose-estimation-0001">human-pose-estimation-0001</a>
+from <a class="reference external" href="https://github.com/openvinotoolkit/open_model_zoo/">Open Model
+Zoo</a>. At the
+bottom of this notebook, you will see live inference results from your
+webcam. You can also upload a video file.</p>
+<blockquote>
+<div><p>NOTE: <em>To use the webcam, you must run this Jupyter notebook on a
+computer with a webcam. If you run on a server, the webcam will not
+work. However, you can still do inference on a video in the final
+step.</em></p>
+</div></blockquote>
+<div class="section" id="imports">
+<h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">collections</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="kn">import</span> <span class="nn">cv2</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">IPython</span> <span class="kn">import</span> <span class="n">display</span>
+<span class="kn">from</span> <span class="nn">numpy.lib.stride_tricks</span> <span class="kn">import</span> <span class="n">as_strided</span>
+<span class="kn">from</span> <span class="nn">openvino.runtime</span> <span class="kn">import</span> <span class="n">Core</span>
+
+<span class="kn">from</span> <span class="nn">decoder</span> <span class="kn">import</span> <span class="n">OpenPoseDecoder</span>
+
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;../utils&quot;</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">notebook_utils</span> <span class="k">as</span> <span class="nn">utils</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="the-model">
+<h2>The model<a class="headerlink" href="#the-model" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="download-the-model">
+<h3>Download the model<a class="headerlink" href="#download-the-model" title="Permalink to this headline">¶</a></h3>
+<p>We use <code class="docutils literal notranslate"><span class="pre">omz_downloader</span></code>, which is a command line tool from the
+<code class="docutils literal notranslate"><span class="pre">openvino-dev</span></code> package. <code class="docutils literal notranslate"><span class="pre">omz_downloader</span></code> automatically creates a
+directory structure and downloads the selected model.</p>
+<p>If you want to download another model, please change the model name and
+precision. <em>Note: This will require a different pose decoder</em>.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># directory where model will be downloaded</span>
+<span class="n">base_model_dir</span> <span class="o">=</span> <span class="s2">&quot;model&quot;</span>
+
+<span class="c1"># model name as named in Open Model Zoo</span>
+<span class="n">model_name</span> <span class="o">=</span> <span class="s2">&quot;human-pose-estimation-0001&quot;</span>
+<span class="c1"># selected precision (FP32, FP16, FP16-INT8)</span>
+<span class="n">precision</span> <span class="o">=</span> <span class="s2">&quot;FP16-INT8&quot;</span>
+
+<span class="n">model_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;model/intel/</span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">precision</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2">.xml&quot;</span>
+<span class="n">model_weights_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;model/intel/</span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">precision</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2">.bin&quot;</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">model_path</span><span class="p">):</span>
+    <span class="n">download_command</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;omz_downloader &quot;</span> \
+                       <span class="sa">f</span><span class="s2">&quot;--name </span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2"> &quot;</span> \
+                       <span class="sa">f</span><span class="s2">&quot;--precision </span><span class="si">{</span><span class="n">precision</span><span class="si">}</span><span class="s2"> &quot;</span> \
+                       <span class="sa">f</span><span class="s2">&quot;--output_dir </span><span class="si">{</span><span class="n">base_model_dir</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="o">!</span> <span class="nv">$download_command</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">################|| Downloading human-pose-estimation-0001 ||################</span>
+
+<span class="o">==========</span> <span class="n">Downloading</span> <span class="n">model</span><span class="o">/</span><span class="n">intel</span><span class="o">/</span><span class="n">human</span><span class="o">-</span><span class="n">pose</span><span class="o">-</span><span class="n">estimation</span><span class="o">-</span><span class="mi">0001</span><span class="o">/</span><span class="n">FP16</span><span class="o">-</span><span class="n">INT8</span><span class="o">/</span><span class="n">human</span><span class="o">-</span><span class="n">pose</span><span class="o">-</span><span class="n">estimation</span><span class="o">-</span><span class="mf">0001.</span><span class="n">xml</span>
+
+
+<span class="o">==========</span> <span class="n">Downloading</span> <span class="n">model</span><span class="o">/</span><span class="n">intel</span><span class="o">/</span><span class="n">human</span><span class="o">-</span><span class="n">pose</span><span class="o">-</span><span class="n">estimation</span><span class="o">-</span><span class="mi">0001</span><span class="o">/</span><span class="n">FP16</span><span class="o">-</span><span class="n">INT8</span><span class="o">/</span><span class="n">human</span><span class="o">-</span><span class="n">pose</span><span class="o">-</span><span class="n">estimation</span><span class="o">-</span><span class="mf">0001.</span><span class="n">bin</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="load-the-model">
+<h3>Load the model<a class="headerlink" href="#load-the-model" title="Permalink to this headline">¶</a></h3>
+<p>Downloaded models are located in a fixed structure, which indicates
+vendor, model name and precision.</p>
+<p>Only a few lines of code are required to run the model. First, we
+initialize the Inference Engine. Then we read the network architecture
+and model weights from the .bin and .xml files to compile it for the
+desired device.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># initialize inference engine</span>
+<span class="n">ie_core</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span>
+<span class="c1"># read the network and corresponding weights from file</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">ie_core</span><span class="o">.</span><span class="n">read_model</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model_path</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">model_weights_path</span><span class="p">)</span>
+<span class="c1"># load the model on the CPU (you can use GPU or MYRIAD as well)</span>
+<span class="n">compiled_model</span> <span class="o">=</span> <span class="n">ie_core</span><span class="o">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">device_name</span><span class="o">=</span><span class="s2">&quot;CPU&quot;</span><span class="p">)</span>
+
+<span class="c1"># get input and output names of nodes</span>
+<span class="n">input_layer</span> <span class="o">=</span> <span class="n">compiled_model</span><span class="o">.</span><span class="n">input</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">output_layers</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">compiled_model</span><span class="o">.</span><span class="n">outputs</span><span class="p">)</span>
+
+<span class="c1"># get input size</span>
+<span class="n">height</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">input_layer</span><span class="o">.</span><span class="n">shape</span><span class="p">)[</span><span class="mi">2</span><span class="p">:]</span>
+</pre></div>
+</div>
+<p>Input layer has the name of the input node and output layers contain
+names of output nodes of the network. In the case of the OpenPose Model,
+we have one input and two outputs: pafs and keypoints heatmap.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">input_layer</span><span class="o">.</span><span class="n">any_name</span><span class="p">,</span> <span class="p">[</span><span class="n">o</span><span class="o">.</span><span class="n">any_name</span> <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">output_layers</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;Mconv7_stage2_L1&#39;</span><span class="p">,</span> <span class="s1">&#39;Mconv7_stage2_L2&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="processing">
+<h2>Processing<a class="headerlink" href="#processing" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="openposedecoder">
+<h3>OpenPoseDecoder<a class="headerlink" href="#openposedecoder" title="Permalink to this headline">¶</a></h3>
+<p>We need a decoder to transform the raw results from the neural network
+into pose estimations. This magic happens inside Open Pose Decoder,
+which is provided in the <a class="reference external" href="https://github.com/openvinotoolkit/open_model_zoo/blob/master/demos/common/python/openvino/model_zoo/model_api/models/open_pose.py">Open Model
+Zoo</a>
+and compatible with the <code class="docutils literal notranslate"><span class="pre">human-pose-estimation-0001</span></code> model.</p>
+<p>If you choose a model other than <code class="docutils literal notranslate"><span class="pre">human-pose-estimation-0001</span></code> you will
+need another decoder (e.g. AssociativeEmbeddingDecoder), which is
+available in the <a class="reference external" href="https://github.com/openvinotoolkit/open_model_zoo/blob/master/demos/common/python/openvino/model_zoo/model_api/models/hpe_associative_embedding.py">demos
+section</a>
+of Open Model Zoo.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">decoder</span> <span class="o">=</span> <span class="n">OpenPoseDecoder</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="process-results">
+<h3>Process Results<a class="headerlink" href="#process-results" title="Permalink to this headline">¶</a></h3>
+<p>A bunch of useful functions to transform results into poses.</p>
+<p>First, we will pool the heatmap. Since pooling is not available in
+numpy, we use a simple method to do it directly with numpy. Then, we use
+non-maximum suppression to get the keypoints from the heatmap. After
+that, we decode poses using the decoder. Since the input image is bigger
+than the network outputs, we need to multiply all pose coordinates by a
+scaling factor.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 2d pooling in numpy (from: htt11ps://stackoverflow.com/a/54966908/1624463)</span>
+<span class="k">def</span> <span class="nf">pool2d</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">kernel_size</span><span class="p">,</span> <span class="n">stride</span><span class="p">,</span> <span class="n">padding</span><span class="p">,</span> <span class="n">pool_mode</span><span class="o">=</span><span class="s2">&quot;max&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    2D Pooling</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        A: input 2D array</span>
+<span class="sd">        kernel_size: int, the size of the window</span>
+<span class="sd">        stride: int, the stride of the window</span>
+<span class="sd">        padding: int, implicit zero paddings on both sides of the input</span>
+<span class="sd">        pool_mode: string, &#39;max&#39; or &#39;avg&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Padding</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">padding</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;constant&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Window view of A</span>
+    <span class="n">output_shape</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">kernel_size</span><span class="p">)</span> <span class="o">//</span> <span class="n">stride</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">kernel_size</span><span class="p">)</span> <span class="o">//</span> <span class="n">stride</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">kernel_size</span> <span class="o">=</span> <span class="p">(</span><span class="n">kernel_size</span><span class="p">,</span> <span class="n">kernel_size</span><span class="p">)</span>
+    <span class="n">A_w</span> <span class="o">=</span> <span class="n">as_strided</span><span class="p">(</span>
+        <span class="n">A</span><span class="p">,</span>
+        <span class="n">shape</span><span class="o">=</span><span class="n">output_shape</span> <span class="o">+</span> <span class="n">kernel_size</span><span class="p">,</span>
+        <span class="n">strides</span><span class="o">=</span><span class="p">(</span><span class="n">stride</span> <span class="o">*</span> <span class="n">A</span><span class="o">.</span><span class="n">strides</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">stride</span> <span class="o">*</span> <span class="n">A</span><span class="o">.</span><span class="n">strides</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="n">A</span><span class="o">.</span><span class="n">strides</span>
+    <span class="p">)</span>
+    <span class="n">A_w</span> <span class="o">=</span> <span class="n">A_w</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">*</span><span class="n">kernel_size</span><span class="p">)</span>
+
+    <span class="c1"># Return the result of pooling</span>
+    <span class="k">if</span> <span class="n">pool_mode</span> <span class="o">==</span> <span class="s2">&quot;max&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">A_w</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">output_shape</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">pool_mode</span> <span class="o">==</span> <span class="s2">&quot;avg&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">A_w</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">output_shape</span><span class="p">)</span>
+
+
+<span class="c1"># non maximum suppression</span>
+<span class="k">def</span> <span class="nf">heatmap_nms</span><span class="p">(</span><span class="n">heatmaps</span><span class="p">,</span> <span class="n">pooled_heatmaps</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">heatmaps</span> <span class="o">*</span> <span class="p">(</span><span class="n">heatmaps</span> <span class="o">==</span> <span class="n">pooled_heatmaps</span><span class="p">)</span>
+
+
+<span class="c1"># get poses from results</span>
+<span class="k">def</span> <span class="nf">process_results</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">pafs</span><span class="p">,</span> <span class="n">heatmaps</span><span class="p">):</span>
+    <span class="c1"># this processing comes from</span>
+    <span class="c1"># https://github.com/openvinotoolkit/open_model_zoo/blob/master/demos/common/python/models/open_pose.py</span>
+    <span class="n">pooled_heatmaps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+        <span class="p">[[</span><span class="n">pool2d</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">stride</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">pool_mode</span><span class="o">=</span><span class="s2">&quot;max&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">heatmaps</span><span class="p">[</span><span class="mi">0</span><span class="p">]]]</span>
+    <span class="p">)</span>
+    <span class="n">nms_heatmaps</span> <span class="o">=</span> <span class="n">heatmap_nms</span><span class="p">(</span><span class="n">heatmaps</span><span class="p">,</span> <span class="n">pooled_heatmaps</span><span class="p">)</span>
+
+    <span class="c1"># decode poses</span>
+    <span class="n">poses</span><span class="p">,</span> <span class="n">scores</span> <span class="o">=</span> <span class="n">decoder</span><span class="p">(</span><span class="n">heatmaps</span><span class="p">,</span> <span class="n">nms_heatmaps</span><span class="p">,</span> <span class="n">pafs</span><span class="p">)</span>
+    <span class="n">output_shape</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">compiled_model</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">partial_shape</span><span class="p">)</span>
+    <span class="n">output_scale</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">output_shape</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">get_length</span><span class="p">(),</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">output_shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">get_length</span><span class="p">()</span>
+    <span class="c1"># multiply coordinates by scaling factor</span>
+    <span class="n">poses</span><span class="p">[:,</span> <span class="p">:,</span> <span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="o">*=</span> <span class="n">output_scale</span>
+    <span class="k">return</span> <span class="n">poses</span><span class="p">,</span> <span class="n">scores</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="draw-pose-overlays">
+<h3>Draw Pose Overlays<a class="headerlink" href="#draw-pose-overlays" title="Permalink to this headline">¶</a></h3>
+<p>Draw pose overlays on the image to visualize estimated poses. Joints are
+drawn as circles and limbs are drawn as lines. The code is based on the
+<a class="reference external" href="https://github.com/openvinotoolkit/open_model_zoo/tree/master/demos/human_pose_estimation_demo/python">Human Pose Estimation
+Demo</a>
+from Open Model Zoo.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">colors</span> <span class="o">=</span> <span class="p">((</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span> <span class="p">(</span><span class="mi">170</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">85</span><span class="p">),</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">170</span><span class="p">),</span> <span class="p">(</span><span class="mi">85</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+          <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">170</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">85</span><span class="p">),</span> <span class="p">(</span><span class="mi">170</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span>
+          <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">170</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span> <span class="p">(</span><span class="mi">85</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">170</span><span class="p">,</span> <span class="mi">255</span><span class="p">))</span>
+
+<span class="n">default_skeleton</span> <span class="o">=</span> <span class="p">((</span><span class="mi">15</span><span class="p">,</span> <span class="mi">13</span><span class="p">),</span> <span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span> <span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">14</span><span class="p">),</span> <span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span> <span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span>
+                    <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+
+<span class="k">def</span> <span class="nf">draw_poses</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">poses</span><span class="p">,</span> <span class="n">point_score_threshold</span><span class="p">,</span> <span class="n">skeleton</span><span class="o">=</span><span class="n">default_skeleton</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">poses</span><span class="o">.</span><span class="n">size</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">img</span>
+
+    <span class="n">img_limbs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">pose</span> <span class="ow">in</span> <span class="n">poses</span><span class="p">:</span>
+        <span class="n">points</span> <span class="o">=</span> <span class="n">pose</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+        <span class="n">points_scores</span> <span class="o">=</span> <span class="n">pose</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span>
+        <span class="c1"># Draw joints.</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">points_scores</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">v</span> <span class="o">&gt;</span> <span class="n">point_score_threshold</span><span class="p">:</span>
+                <span class="n">cv2</span><span class="o">.</span><span class="n">circle</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">p</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="c1"># Draw limbs.</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">skeleton</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">points_scores</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">point_score_threshold</span> <span class="ow">and</span> <span class="n">points_scores</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">point_score_threshold</span><span class="p">:</span>
+                <span class="n">cv2</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">img_limbs</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">points</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">points</span><span class="p">[</span><span class="n">j</span><span class="p">]),</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">thickness</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+    <span class="n">cv2</span><span class="o">.</span><span class="n">addWeighted</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="n">img_limbs</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">dst</span><span class="o">=</span><span class="n">img</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">img</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="main-processing-function">
+<h3>Main Processing Function<a class="headerlink" href="#main-processing-function" title="Permalink to this headline">¶</a></h3>
+<p>Run pose estimation on the specified source. Either a webcam or a video
+file.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># main processing function to run pose estimation</span>
+<span class="k">def</span> <span class="nf">run_pose_estimation</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">flip</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">use_popup</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">skip_first_frames</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="n">pafs_output_key</span> <span class="o">=</span> <span class="n">compiled_model</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="s2">&quot;Mconv7_stage2_L1&quot;</span><span class="p">)</span>
+    <span class="n">heatmaps_output_key</span> <span class="o">=</span> <span class="n">compiled_model</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="s2">&quot;Mconv7_stage2_L2&quot;</span><span class="p">)</span>
+    <span class="n">player</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># create video player to play with target fps</span>
+        <span class="n">player</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">VideoPlayer</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">flip</span><span class="o">=</span><span class="n">flip</span><span class="p">,</span> <span class="n">fps</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">skip_first_frames</span><span class="o">=</span><span class="n">skip_first_frames</span><span class="p">)</span>
+        <span class="c1"># start capturing</span>
+        <span class="n">player</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">use_popup</span><span class="p">:</span>
+            <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Press ESC to Exit&quot;</span>
+            <span class="n">cv2</span><span class="o">.</span><span class="n">namedWindow</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">WINDOW_GUI_NORMAL</span> <span class="o">|</span> <span class="n">cv2</span><span class="o">.</span><span class="n">WINDOW_AUTOSIZE</span><span class="p">)</span>
+
+        <span class="n">processing_times</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">deque</span><span class="p">()</span>
+
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="c1"># grab the frame</span>
+            <span class="n">frame</span> <span class="o">=</span> <span class="n">player</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">frame</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Source ended&quot;</span><span class="p">)</span>
+                <span class="k">break</span>
+            <span class="c1"># if frame larger than full HD, reduce size to improve the performance</span>
+            <span class="n">scale</span> <span class="o">=</span> <span class="mi">1280</span> <span class="o">/</span> <span class="nb">max</span><span class="p">(</span><span class="n">frame</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">scale</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">frame</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">fx</span><span class="o">=</span><span class="n">scale</span><span class="p">,</span> <span class="n">fy</span><span class="o">=</span><span class="n">scale</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="n">cv2</span><span class="o">.</span><span class="n">INTER_AREA</span><span class="p">)</span>
+
+            <span class="c1"># resize image and change dims to fit neural network input</span>
+            <span class="c1"># (see https://github.com/openvinotoolkit/open_model_zoo/tree/master/models/intel/human-pose-estimation-0001)</span>
+            <span class="n">input_img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">),</span> <span class="n">interpolation</span><span class="o">=</span><span class="n">cv2</span><span class="o">.</span><span class="n">INTER_AREA</span><span class="p">)</span>
+            <span class="c1"># create batch of images (size = 1)</span>
+            <span class="n">input_img</span> <span class="o">=</span> <span class="n">input_img</span><span class="o">.</span><span class="n">transpose</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">))[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+
+            <span class="c1"># measure processing time</span>
+            <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+            <span class="c1"># get results</span>
+            <span class="n">results</span> <span class="o">=</span> <span class="n">compiled_model</span><span class="p">([</span><span class="n">input_img</span><span class="p">])</span>
+            <span class="n">stop_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+            <span class="n">pafs</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="n">pafs_output_key</span><span class="p">]</span>
+            <span class="n">heatmaps</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="n">heatmaps_output_key</span><span class="p">]</span>
+            <span class="c1"># get poses from network results</span>
+            <span class="n">poses</span><span class="p">,</span> <span class="n">scores</span> <span class="o">=</span> <span class="n">process_results</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">pafs</span><span class="p">,</span> <span class="n">heatmaps</span><span class="p">)</span>
+
+            <span class="c1"># draw poses on a frame</span>
+            <span class="n">frame</span> <span class="o">=</span> <span class="n">draw_poses</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">poses</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+
+            <span class="n">processing_times</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">stop_time</span> <span class="o">-</span> <span class="n">start_time</span><span class="p">)</span>
+            <span class="c1"># use processing times from last 200 frames</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">processing_times</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">200</span><span class="p">:</span>
+                <span class="n">processing_times</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>
+
+            <span class="n">_</span><span class="p">,</span> <span class="n">f_width</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
+            <span class="c1"># mean processing time [ms]</span>
+            <span class="n">processing_time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">processing_times</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1000</span>
+            <span class="n">fps</span> <span class="o">=</span> <span class="mi">1000</span> <span class="o">/</span> <span class="n">processing_time</span>
+            <span class="n">cv2</span><span class="o">.</span><span class="n">putText</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Inference time: </span><span class="si">{</span><span class="n">processing_time</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">ms (</span><span class="si">{</span><span class="n">fps</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> FPS)&quot;</span><span class="p">,</span> <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">40</span><span class="p">),</span>
+                        <span class="n">cv2</span><span class="o">.</span><span class="n">FONT_HERSHEY_COMPLEX</span><span class="p">,</span> <span class="n">f_width</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">LINE_AA</span><span class="p">)</span>
+
+            <span class="c1"># use this workaround if there is flickering</span>
+            <span class="k">if</span> <span class="n">use_popup</span><span class="p">:</span>
+                <span class="n">cv2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">frame</span><span class="p">)</span>
+                <span class="n">key</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">waitKey</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+                <span class="c1"># escape = 27</span>
+                <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="mi">27</span><span class="p">:</span>
+                    <span class="k">break</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># encode numpy array to jpg</span>
+                <span class="n">_</span><span class="p">,</span> <span class="n">encoded_img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imencode</span><span class="p">(</span><span class="s2">&quot;.jpg&quot;</span><span class="p">,</span> <span class="n">frame</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">[</span><span class="n">cv2</span><span class="o">.</span><span class="n">IMWRITE_JPEG_QUALITY</span><span class="p">,</span> <span class="mi">90</span><span class="p">])</span>
+                <span class="c1"># create IPython image</span>
+                <span class="n">i</span> <span class="o">=</span> <span class="n">display</span><span class="o">.</span><span class="n">Image</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">encoded_img</span><span class="p">)</span>
+                <span class="c1"># display the image in this notebook</span>
+                <span class="n">display</span><span class="o">.</span><span class="n">clear_output</span><span class="p">(</span><span class="n">wait</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="n">display</span><span class="o">.</span><span class="n">display</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="c1"># ctrl-c</span>
+    <span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Interrupted&quot;</span><span class="p">)</span>
+    <span class="c1"># any different error</span>
+    <span class="k">except</span> <span class="ne">RuntimeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">player</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># stop capturing</span>
+            <span class="n">player</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">use_popup</span><span class="p">:</span>
+            <span class="n">cv2</span><span class="o">.</span><span class="n">destroyAllWindows</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="run">
+<h2>Run<a class="headerlink" href="#run" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="run-live-pose-estimation">
+<h3>Run Live Pose Estimation<a class="headerlink" href="#run-live-pose-estimation" title="Permalink to this headline">¶</a></h3>
+<p>Run using a webcam as the video input. By default, the primary webcam is
+set with <code class="docutils literal notranslate"><span class="pre">source=0</span></code>. If you have multiple webcams, each one will be
+assigned a consecutive number starting at 0. Set <code class="docutils literal notranslate"><span class="pre">flip=True</span></code> when
+using a front-facing camera. Some web browsers, especially Mozilla
+Firefox, may cause flickering. If you experience flickering, set
+<code class="docutils literal notranslate"><span class="pre">use_popup=True</span></code>.</p>
+<p><em>Note: To use this notebook with a webcam, you need to run the notebook
+on a computer with a webcam. If you run the notebook on a server
+(e.g. Binder), the webcam will not work.</em></p>
+<p><em>Note: Popup mode may not work if you run this notebook on a remote
+computer (e.g. Binder).</em></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">run_pose_estimation</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">flip</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">use_popup</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Cannot</span> <span class="nb">open</span> <span class="n">camera</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="run-pose-estimation-on-a-video-file">
+<h3>Run Pose Estimation on a Video File<a class="headerlink" href="#run-pose-estimation-on-a-video-file" title="Permalink to this headline">¶</a></h3>
+<p>If you don’t have a webcam, you can still run this demo with a video
+file. Any <a class="reference external" href="https://docs.opencv.org/4.5.1/dd/d43/tutorial_py_video_display.html">format supported by
+OpenCV</a>
+will work. You can skip first N frames to fast forward video.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">video_file</span> <span class="o">=</span> <span class="s2">&quot;https://github.com/intel-iot-devkit/sample-videos/blob/master/store-aisle-detection.mp4?raw=true&quot;</span>
+
+<span class="n">run_pose_estimation</span><span class="p">(</span><span class="n">video_file</span><span class="p">,</span> <span class="n">flip</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">use_popup</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">skip_first_frames</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../_images/402-pose-estimation-with-output_20_0.png" src="../_images/402-pose-estimation-with-output_20_0.png" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Source</span> <span class="n">ended</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+                </div>
+            
+            
+                <div class='prev-next-bottom'>
+                  
+    <a class='button bttn-sec button-size-l' id="prev-link" href="401-object-detection-with-output.html" title="previous page">Prev</a>
+    <a class='button bttn-sec button-size-l' id="next-link" href="403-action-recognition-webcam-with-output.html" title="next page">Next</a>
+
+                </div>
+            
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+<footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2021, Intel®.<br>
+</p>
+    </div>
+    
+    <div class="footer-item">
+      <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

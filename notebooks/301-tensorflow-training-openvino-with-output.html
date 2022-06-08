@@ -1,0 +1,1410 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>From Training to Deployment with TensorFlow and OpenVINO &#8212; OpenVINO™  documentation</title>
+    
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/blank.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/doxyrest-pygments.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <link href="../_static/css/media/favicon.ico" rel="shortcut icon">
+    <link rel="stylesheet" href="../_static/css/openvino_sphinx_theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/button.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/input.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/textfield.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/tabs.css" type="text/css" />
+    <script src="../_static/js/openvino_sphinx_theme.js"></script>
+    <link rel="stylesheet" href="../_static/css/viewer.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/0.5.7/chartjs-plugin-annotation.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-barchart-background@1.3.0/build/Plugin.Barchart.Background.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-deferred@1"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.1/papaparse.min.js"></script>
+    <script src="../_static/js/viewer.min.js"></script>
+    <script src="/assets/versions_raw.js"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/tabs.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/js/custom.js"></script>
+    <script src="../_static/js/graphs.js"></script>
+    <script src="../_static/js/graphs_ov_tf.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/target-highlight.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <link rel="canonical" href="https://docs.openvino.ai/latest/notebooks/301-tensorflow-training-openvino-with-output.html" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Post-Training Quantization with TensorFlow Classification Model" href="301-tensorflow-training-openvino-pot-with-output.html" />
+    <link rel="prev" title="Vehicle Detection And Recognition with OpenVINO" href="218-vehicle-detection-and-recognition-with-output.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+      <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+
+<a class="navbar-brand" href="../index.html">
+  <img src="../_static/logo.svg" class="logo" alt="logo">
+</a>
+
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../pages/get_started.html">
+  Get Started
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../pages/documentation.html">
+  Documentation
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../tutorials.html">
+  Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../model_zoo.html">
+  Model Zoo
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../pages/resources.html">
+  Resources
+ </a>
+</li>
+
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/openvinotoolkit/openvino" rel="noopener" target="_blank" title="GitHub">
+            <span><i class="sst-github"></i></span>
+            <label class="sr-only">GitHub</label>
+          </a>
+        </li>
+</ul>
+      </div>
+      
+      <div class="navbar-end-item">
+        
+<div class="dropdown sst-dropdown sst-dropdown-navbar">
+  <button class="btn sst-btn dropdown-toggle" type="button" id="version-selector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+  <div class="dropdown-menu" aria-labelledby="version-selector">
+  </div>
+</div>
+      </div>
+      
+      <div class="navbar-end-item">
+        
+
+<div class="dropdown sst-dropdown sst-dropdown-navbar">
+  <button class="btn sst-btn dropdown-toggle" type="button" id="language-selector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">English</button>
+  <div class="dropdown-menu" aria-labelledby="language-selector">
+    
+      
+        <a class="dropdown-item font-weight-bold" href="/latest/notebooks/301-tensorflow-training-openvino-with-output.html">English</a>
+      
+    
+      
+        <a  class="dropdown-item" href="/cn/latest/notebooks/301-tensorflow-training-openvino-with-output.html">Chinese</a>
+      
+    
+  </div>
+</div>
+
+      </div>
+      
+    </div>
+  </div>
+</div>
+        <div id="collapse-nav-wrapper" class="container-xl">
+          <button id="collapse-nav" class="button bttn-prm button-size-m" type="button" data-toggle="collapse" data-target="#nav-tree" aria-expanded="false" aria-controls="nav-tree">
+            Documentation navigation <i class="fas fa-chevron-down"></i>
+          </button>
+        </div>
+      </nav>
+      <div class="transition-banner container-fluid alert alert-info alert-dismissible fade show" role="alert">
+        <p>OpenVINO 2022.1 introduces a new version of OpenVINO API (API 2.0). For more information on the changes and transition steps, see the <a href="https://docs.openvino.ai/latest/openvino_2_0_transition_guide.html">transition guide</a></p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar" id="nav-tree"><form class="searchForm bd-search d-flex align-items-center" action="../search.html" method="get">
+    <i class="icon fas fa-search"></i>
+    <input type="search" class="form-control" name="query" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="001-hello-world-with-output.html">
+   Hello Image Classification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="002-openvino-api-with-output.html">
+   OpenVINO API Tutorial
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="003-hello-segmentation-with-output.html">
+   Hello Image Segmentation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="004-hello-detection-with-output.html">
+   Hello Object Detection
+  </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="101-tensorflow-to-openvino-with-output.html">
+   Convert a TensorFlow Model to OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="102-pytorch-onnx-to-openvino-with-output.html">
+   Convert a PyTorch Model to ONNX and OpenVINO IR
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="103-paddle-onnx-to-openvino-classification-with-output.html">
+   Convert a PaddlePaddle Model to ONNX and OpenVINO IR
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="104-model-tools-with-output.html">
+   Working with Open Model Zoo Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="105-language-quantize-bert-with-output.html">
+   Quantize NLP models with OpenVINO Post-Training Optimization Tool ​
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="106-auto-device-with-output.html">
+   Automatic Device Selection with OpenVINO™
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="110-ct-segmentation-quantize-with-output.html">
+   Quantize a Segmentation Model and Show Live Inference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="111-detection-quantization-with-output.html">
+   Object Detection Quantization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="112-pytorch-post-training-quantization-nncf-with-output.html">
+   Post-Training Quantization of PyTorch models with NNCF
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="113-image-classification-quantization-with-output.html">
+   Quantization of Image Classification Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="114-quantization-simplified-mode-with-output.html">
+   INT8 Quantization with Post-training Optimization Tool (POT) in Simplified Mode tutorial
+  </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="201-vision-monodepth-with-output.html">
+   Monodepth Estimation with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="202-vision-superresolution-image-with-output.html">
+   Single Image Super Resolution with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="202-vision-superresolution-video-with-output.html">
+   Video Super Resolution with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="205-vision-background-removal-with-output.html">
+   Image Background Removal with U^2-Net and OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="206-vision-paddlegan-anime-with-output.html">
+   Photos to Anime with PaddleGAN and OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="207-vision-paddlegan-superresolution-with-output.html">
+   Super Resolution with PaddleGAN and OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="208-optical-character-recognition-with-output.html">
+   Optical Character Recognition (OCR) with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="209-handwritten-ocr-with-output.html">
+   Handwritten Chinese and Japanese OCR
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="210-ct-scan-live-inference-with-output.html">
+   Live Inference and Benchmark CT-scan Data with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="211-speech-to-text-with-output.html">
+   Speech to Text with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="212-onnx-style-transfer-with-output.html">
+   Style Transfer on ONNX Models with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="213-question-answering-with-output.html">
+   Interactive question answering with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="214-vision-paddle-classification-with-output.html">
+   PaddlePaddle Image Classification with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="215-image-inpainting-with-output.html">
+   Image In-painting with OpenVINO™
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="217-vision-deblur-with-output.html">
+   Deblur Photos with DeblurGAN-v2 and OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="218-vehicle-detection-and-recognition-with-output.html">
+   Vehicle Detection And Recognition with OpenVINO
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   From Training to Deployment with TensorFlow and OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="301-tensorflow-training-openvino-pot-with-output.html">
+   Post-Training Quantization with TensorFlow Classification Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="302-pytorch-quantization-aware-training-with-output.html">
+   Quantization Aware Training with NNCF, using PyTorch framework
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="305-tensorflow-quantization-aware-training-with-output.html">
+   Quantization Aware Training with NNCF, using TensorFlow Framework
+  </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="401-object-detection-with-output.html">
+   Live Object Detection with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="402-pose-estimation-with-output.html">
+   Live Human Pose Estimation with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="403-action-recognition-webcam-with-output.html">
+   Human Action Recognition with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="405-paddle-ocr-webcam-with-output.html">
+   PaddleOCR with OpenVINO
+  </a>
+ </li>
+</ul>
+
+  </div>
+</nav>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+              
+              <div class="toc-item">
+                
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tensorflow-image-classification-training">
+   TensorFlow Image Classification Training
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#import-tensorflow-and-other-libraries">
+   Import TensorFlow and Other Libraries
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#download-and-explore-the-dataset">
+   Download and Explore the Dataset
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-using-keras-preprocessing">
+   Load Using keras.preprocessing
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#create-a-dataset">
+   Create a Dataset
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualize-the-data">
+   Visualize the Data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#configure-the-dataset-for-performance">
+   Configure the Dataset for Performance
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#standardize-the-data">
+   Standardize the Data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#create-the-model">
+   Create the Model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#compile-the-model">
+   Compile the Model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#model-summary">
+   Model Summary
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#train-the-model">
+   Train the Model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualize-training-results">
+   Visualize Training Results
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#overfitting">
+   Overfitting
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-augmentation">
+   Data Augmentation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dropout">
+   Dropout
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#compile-and-train-the-model">
+   Compile and Train the Model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   Visualize Training Results
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#predict-on-new-data">
+   Predict on New Data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#save-the-tensorflow-model">
+   Save the TensorFlow Model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#convert-the-tensorflow-model-with-openvino-model-optimizer">
+   Convert the TensorFlow model with OpenVINO Model Optimizer
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#preprocessing-image-function">
+   Preprocessing Image Function
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#openvino-inference-engine-setup">
+   OpenVINO Inference Engine Setup
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#run-the-inference-step">
+   Run the Inference Step
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-next-steps">
+   The Next Steps
+  </a>
+ </li>
+</ul>
+
+</nav>
+              </div>
+              
+              <div class="toc-item">
+                <div class="tocsection download-docs">
+  <div class="dropdown sst-dropdown">
+    <button class="button bttn-prm button-size-m" data-display="static" type="button" id="download-options"
+      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Download Docs
+    </button>
+    <div class="dropdown-menu" aria-labelledby="download-options">
+      <a class="dropdown-item" href="#" onclick="window.print()">.pdf</a>
+      <a id="download-zip-btn" class="dropdown-item" href="#">.zip</a>
+    </div>
+  </div>
+</div>
+              </div>
+              
+            
+          </div>
+          
+
+          
+          
+              
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+
+<div class="tocsection editthispage">
+    <a href="None">
+        <i class="fas fa-pencil-alt"></i> Edit this page
+    </a>
+</div>
+
+            
+                <div>
+                  
+  <div class="section" id="from-training-to-deployment-with-tensorflow-and-openvino">
+<h1>From Training to Deployment with TensorFlow and OpenVINO<a class="headerlink" href="#from-training-to-deployment-with-tensorflow-and-openvino" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># @title Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1"># https://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+
+<span class="c1"># Copyright 2018 The TensorFlow Authors</span>
+<span class="c1">#</span>
+<span class="c1"># Modified for OpenVINO Notebooks</span>
+</pre></div>
+</div>
+<p>This tutorial demonstrates how to train, convert, and deploy an image
+classification model with TensorFlow and OpenVINO. This particular
+notebook shows the process where we perform the inference step on the
+freshly trained model that is converted to OpenVINO IR with Model
+Optimizer. For faster inference speed on the model created in this
+notebook, check out the <a class="reference external" href="./301-tensorflow-training-openvino-pot.ipynb">Post-Training Quantization with TensorFlow
+Classification Model</a>
+notebook.</p>
+<p>The training code is based on the official <a class="reference external" href="https://www.tensorflow.org/tutorials/images/classification">TensorFlow Image
+Classification
+Tutorial</a>.</p>
+<p>The <strong>flower_ir.bin</strong> and <strong>flower_ir.xml</strong> (pre-trained models) can be
+obtained by executing the code with ‘Runtime-&gt;Run All’ or the Ctrl+F9
+command.</p>
+<div class="section" id="tensorflow-image-classification-training">
+<h2>TensorFlow Image Classification Training<a class="headerlink" href="#tensorflow-image-classification-training" title="Permalink to this headline">¶</a></h2>
+<p>The first part of the tutorial shows how to classify images of flowers
+(based on the TensorFlow’s official tutorial). It creates an image
+classifier using a <code class="docutils literal notranslate"><span class="pre">keras.Sequential</span></code> model, and loads data using
+<code class="docutils literal notranslate"><span class="pre">preprocessing.image_dataset_from_directory</span></code>. You will gain practical
+experience with the following concepts:</p>
+<ul class="simple">
+<li><p>Efficiently loading a dataset off disk.</p></li>
+<li><p>Identifying overfitting and applying techniques to mitigate it,
+including data augmentation and Dropout.</p></li>
+</ul>
+<p>This tutorial follows a basic machine learning workflow:</p>
+<ol class="arabic simple">
+<li><p>Examine and understand data</p></li>
+<li><p>Build an input pipeline</p></li>
+<li><p>Build the model</p></li>
+<li><p>Train the model</p></li>
+<li><p>Test the model</p></li>
+</ol>
+</div>
+<div class="section" id="import-tensorflow-and-other-libraries">
+<h2>Import TensorFlow and Other Libraries<a class="headerlink" href="#import-tensorflow-and-other-libraries" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">import</span> <span class="nn">PIL</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="kn">from</span> <span class="nn">openvino.runtime</span> <span class="kn">import</span> <span class="n">Core</span>
+<span class="kn">from</span> <span class="nn">openvino.tools.mo</span> <span class="kn">import</span> <span class="n">mo_tf</span>
+<span class="kn">from</span> <span class="nn">tensorflow</span> <span class="kn">import</span> <span class="n">keras</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras</span> <span class="kn">import</span> <span class="n">layers</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.models</span> <span class="kn">import</span> <span class="n">Sequential</span>
+
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;../utils&quot;</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">notebook_utils</span> <span class="kn">import</span> <span class="n">download_file</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="download-and-explore-the-dataset">
+<h2>Download and Explore the Dataset<a class="headerlink" href="#download-and-explore-the-dataset" title="Permalink to this headline">¶</a></h2>
+<p>This tutorial uses a dataset of about 3,700 photos of flowers. The
+dataset contains 5 sub-directories, one per class:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">flower_photo</span><span class="o">/</span>
+  <span class="n">daisy</span><span class="o">/</span>
+  <span class="n">dandelion</span><span class="o">/</span>
+  <span class="n">roses</span><span class="o">/</span>
+  <span class="n">sunflowers</span><span class="o">/</span>
+  <span class="n">tulips</span><span class="o">/</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pathlib</span>
+<span class="n">dataset_url</span> <span class="o">=</span> <span class="s2">&quot;https://storage.googleapis.com/download.tensorflow.org/example_images/flower_photos.tgz&quot;</span>
+<span class="n">data_dir</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">get_file</span><span class="p">(</span><span class="s1">&#39;flower_photos&#39;</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="n">dataset_url</span><span class="p">,</span> <span class="n">untar</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">data_dir</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">data_dir</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>After downloading, you should now have a copy of the dataset available.
+There are 3,670 total images:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image_count</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">data_dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;*/*.jpg&#39;</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">image_count</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">3670</span>
+</pre></div>
+</div>
+<p>Here are some roses:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">roses</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">data_dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;roses/*&#39;</span><span class="p">))</span>
+<span class="n">PIL</span><span class="o">.</span><span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">roses</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+</pre></div>
+</div>
+<img alt="../_images/301-tensorflow-training-openvino-with-output_13_0.png" src="../_images/301-tensorflow-training-openvino-with-output_13_0.png" />
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">PIL</span><span class="o">.</span><span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">roses</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+</pre></div>
+</div>
+<img alt="../_images/301-tensorflow-training-openvino-with-output_14_0.png" src="../_images/301-tensorflow-training-openvino-with-output_14_0.png" />
+<p>And some tulips:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tulips</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">data_dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;tulips/*&#39;</span><span class="p">))</span>
+<span class="n">PIL</span><span class="o">.</span><span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">tulips</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+</pre></div>
+</div>
+<img alt="../_images/301-tensorflow-training-openvino-with-output_16_0.png" src="../_images/301-tensorflow-training-openvino-with-output_16_0.png" />
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">PIL</span><span class="o">.</span><span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">tulips</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+</pre></div>
+</div>
+<img alt="../_images/301-tensorflow-training-openvino-with-output_17_0.png" src="../_images/301-tensorflow-training-openvino-with-output_17_0.png" />
+</div>
+<div class="section" id="load-using-keras-preprocessing">
+<h2>Load Using keras.preprocessing<a class="headerlink" href="#load-using-keras-preprocessing" title="Permalink to this headline">¶</a></h2>
+<p>Let’s load these images off disk using the helpful
+<a class="reference external" href="https://www.tensorflow.org/api_docs/python/tf/keras/preprocessing/image_dataset_from_directory">image_dataset_from_directory</a>
+utility. This will take you from a directory of images on disk to a
+<code class="docutils literal notranslate"><span class="pre">tf.data.Dataset</span></code> in just a couple lines of code. If you like, you can
+also write your own data loading code from scratch by visiting the <a class="reference external" href="https://www.tensorflow.org/tutorials/load_data/images">load
+images</a>
+tutorial.</p>
+</div>
+<div class="section" id="create-a-dataset">
+<h2>Create a Dataset<a class="headerlink" href="#create-a-dataset" title="Permalink to this headline">¶</a></h2>
+<p>Define some parameters for the loader:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">batch_size</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="n">img_height</span> <span class="o">=</span> <span class="mi">180</span>
+<span class="n">img_width</span> <span class="o">=</span> <span class="mi">180</span>
+</pre></div>
+</div>
+<p>It’s good practice to use a validation split when developing your model.
+Let’s use 80% of the images for training, and 20% for validation.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_ds</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">preprocessing</span><span class="o">.</span><span class="n">image_dataset_from_directory</span><span class="p">(</span>
+  <span class="n">data_dir</span><span class="p">,</span>
+  <span class="n">validation_split</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+  <span class="n">subset</span><span class="o">=</span><span class="s2">&quot;training&quot;</span><span class="p">,</span>
+  <span class="n">seed</span><span class="o">=</span><span class="mi">123</span><span class="p">,</span>
+  <span class="n">image_size</span><span class="o">=</span><span class="p">(</span><span class="n">img_height</span><span class="p">,</span> <span class="n">img_width</span><span class="p">),</span>
+  <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Found</span> <span class="mi">3670</span> <span class="n">files</span> <span class="n">belonging</span> <span class="n">to</span> <span class="mi">5</span> <span class="n">classes</span><span class="o">.</span>
+<span class="n">Using</span> <span class="mi">2936</span> <span class="n">files</span> <span class="k">for</span> <span class="n">training</span><span class="o">.</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">val_ds</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">preprocessing</span><span class="o">.</span><span class="n">image_dataset_from_directory</span><span class="p">(</span>
+  <span class="n">data_dir</span><span class="p">,</span>
+  <span class="n">validation_split</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+  <span class="n">subset</span><span class="o">=</span><span class="s2">&quot;validation&quot;</span><span class="p">,</span>
+  <span class="n">seed</span><span class="o">=</span><span class="mi">123</span><span class="p">,</span>
+  <span class="n">image_size</span><span class="o">=</span><span class="p">(</span><span class="n">img_height</span><span class="p">,</span> <span class="n">img_width</span><span class="p">),</span>
+  <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Found</span> <span class="mi">3670</span> <span class="n">files</span> <span class="n">belonging</span> <span class="n">to</span> <span class="mi">5</span> <span class="n">classes</span><span class="o">.</span>
+<span class="n">Using</span> <span class="mi">734</span> <span class="n">files</span> <span class="k">for</span> <span class="n">validation</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>You can find the class names in the <code class="docutils literal notranslate"><span class="pre">class_names</span></code> attribute on these
+datasets. These correspond to the directory names in alphabetical order.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">class_names</span> <span class="o">=</span> <span class="n">train_ds</span><span class="o">.</span><span class="n">class_names</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">class_names</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="s1">&#39;daisy&#39;</span><span class="p">,</span> <span class="s1">&#39;dandelion&#39;</span><span class="p">,</span> <span class="s1">&#39;roses&#39;</span><span class="p">,</span> <span class="s1">&#39;sunflowers&#39;</span><span class="p">,</span> <span class="s1">&#39;tulips&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="visualize-the-data">
+<h2>Visualize the Data<a class="headerlink" href="#visualize-the-data" title="Permalink to this headline">¶</a></h2>
+<p>Here are the first 9 images from the training dataset.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">images</span><span class="p">,</span> <span class="n">labels</span> <span class="ow">in</span> <span class="n">train_ds</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="mi">1</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">images</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;uint8&quot;</span><span class="p">))</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">class_names</span><span class="p">[</span><span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">]])</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../_images/301-tensorflow-training-openvino-with-output_28_0.png" src="../_images/301-tensorflow-training-openvino-with-output_28_0.png" />
+<p>You will train a model using these datasets by passing them to
+<code class="docutils literal notranslate"><span class="pre">model.fit</span></code> in a moment. If you like, you can also manually iterate
+over the dataset and retrieve batches of images:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">image_batch</span><span class="p">,</span> <span class="n">labels_batch</span> <span class="ow">in</span> <span class="n">train_ds</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">image_batch</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">labels_batch</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="k">break</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="p">(</span><span class="mi">32</span><span class="p">,)</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">image_batch</span></code> is a tensor of the shape <code class="docutils literal notranslate"><span class="pre">(32,</span> <span class="pre">180,</span> <span class="pre">180,</span> <span class="pre">3)</span></code>. This
+is a batch of 32 images of shape <code class="docutils literal notranslate"><span class="pre">180x180x3</span></code> (the last dimension
+refers to color channels RGB). The <code class="docutils literal notranslate"><span class="pre">label_batch</span></code> is a tensor of the
+shape <code class="docutils literal notranslate"><span class="pre">(32,)</span></code>, these are corresponding labels to the 32 images.</p>
+<p>You can call <code class="docutils literal notranslate"><span class="pre">.numpy()</span></code> on the <code class="docutils literal notranslate"><span class="pre">image_batch</span></code> and <code class="docutils literal notranslate"><span class="pre">labels_batch</span></code>
+tensors to convert them to a <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>.</p>
+</div>
+<div class="section" id="configure-the-dataset-for-performance">
+<h2>Configure the Dataset for Performance<a class="headerlink" href="#configure-the-dataset-for-performance" title="Permalink to this headline">¶</a></h2>
+<p>Let’s make sure to use buffered prefetching so you can yield data from
+disk without having I/O become blocking. These are two important methods
+you should use when loading data.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Dataset.cache()</span></code> keeps the images in memory after they’re loaded off
+disk during the first epoch. This will ensure the dataset does not
+become a bottleneck while training your model. If your dataset is too
+large to fit into memory, you can also use this method to create a
+performant on-disk cache.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Dataset.prefetch()</span></code> overlaps data preprocessing and model execution
+while training.</p>
+<p>Interested readers can learn more about both methods, as well as how to
+cache data to disk in the <a class="reference external" href="https://www.tensorflow.org/guide/data_performance#prefetching">data performance
+guide</a>.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># AUTOTUNE = tf.data.AUTOTUNE</span>
+<span class="n">AUTOTUNE</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">experimental</span><span class="o">.</span><span class="n">AUTOTUNE</span>
+<span class="n">train_ds</span> <span class="o">=</span> <span class="n">train_ds</span><span class="o">.</span><span class="n">cache</span><span class="p">()</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span><span class="o">.</span><span class="n">prefetch</span><span class="p">(</span><span class="n">buffer_size</span><span class="o">=</span><span class="n">AUTOTUNE</span><span class="p">)</span>
+<span class="n">val_ds</span> <span class="o">=</span> <span class="n">val_ds</span><span class="o">.</span><span class="n">cache</span><span class="p">()</span><span class="o">.</span><span class="n">prefetch</span><span class="p">(</span><span class="n">buffer_size</span><span class="o">=</span><span class="n">AUTOTUNE</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="standardize-the-data">
+<h2>Standardize the Data<a class="headerlink" href="#standardize-the-data" title="Permalink to this headline">¶</a></h2>
+<p>The RGB channel values are in the <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">255]</span></code> range. This is not ideal
+for a neural network; in general you should seek to make your input
+values small. Here, you will standardize values to be in the <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">1]</span></code>
+range by using a Rescaling layer.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">normalization_layer</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">experimental</span><span class="o">.</span><span class="n">preprocessing</span><span class="o">.</span><span class="n">Rescaling</span><span class="p">(</span><span class="mf">1.</span><span class="o">/</span><span class="mi">255</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note: The Keras Preprocessing utilities and layers introduced in this
+section are currently experimental and may change.</p>
+<p>There are two ways to use this layer. You can apply it to the dataset by
+calling map:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">normalized_ds</span> <span class="o">=</span> <span class="n">train_ds</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="p">(</span><span class="n">normalization_layer</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">y</span><span class="p">))</span>
+<span class="n">image_batch</span><span class="p">,</span> <span class="n">labels_batch</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">normalized_ds</span><span class="p">))</span>
+<span class="n">first_image</span> <span class="o">=</span> <span class="n">image_batch</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="c1"># Notice the pixels values are now in `[0,1]`.</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">first_image</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">first_image</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">0.0</span> <span class="mf">0.9993465</span>
+</pre></div>
+</div>
+<p>Or, you can include the layer inside your model definition, which can
+simplify deployment. Let’s use the second approach here.</p>
+<p>Note: you previously resized images using the <code class="docutils literal notranslate"><span class="pre">image_size</span></code> argument of
+<code class="docutils literal notranslate"><span class="pre">image_dataset_from_directory</span></code>. If you want to include the resizing
+logic in your model as well, you can use the
+<a class="reference external" href="https://www.tensorflow.org/api_docs/python/tf/keras/layers/experimental/preprocessing/Resizing">Resizing</a>
+layer.</p>
+</div>
+<div class="section" id="create-the-model">
+<h2>Create the Model<a class="headerlink" href="#create-the-model" title="Permalink to this headline">¶</a></h2>
+<p>The model consists of three convolution blocks with a max pool layer in
+each of them. There’s a fully connected layer with 128 units on top of
+it that is activated by a <code class="docutils literal notranslate"><span class="pre">relu</span></code> activation function. This model has
+not been tuned for high accuracy, the goal of this tutorial is to show a
+standard approach.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_classes</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">([</span>
+  <span class="n">layers</span><span class="o">.</span><span class="n">experimental</span><span class="o">.</span><span class="n">preprocessing</span><span class="o">.</span><span class="n">Rescaling</span><span class="p">(</span><span class="mf">1.</span><span class="o">/</span><span class="mi">255</span><span class="p">,</span> <span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="n">img_height</span><span class="p">,</span> <span class="n">img_width</span><span class="p">,</span> <span class="mi">3</span><span class="p">)),</span>
+  <span class="n">layers</span><span class="o">.</span><span class="n">Conv2D</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">),</span>
+  <span class="n">layers</span><span class="o">.</span><span class="n">MaxPooling2D</span><span class="p">(),</span>
+  <span class="n">layers</span><span class="o">.</span><span class="n">Conv2D</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">),</span>
+  <span class="n">layers</span><span class="o">.</span><span class="n">MaxPooling2D</span><span class="p">(),</span>
+  <span class="n">layers</span><span class="o">.</span><span class="n">Conv2D</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">),</span>
+  <span class="n">layers</span><span class="o">.</span><span class="n">MaxPooling2D</span><span class="p">(),</span>
+  <span class="n">layers</span><span class="o">.</span><span class="n">Flatten</span><span class="p">(),</span>
+  <span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">),</span>
+  <span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="n">num_classes</span><span class="p">)</span>
+<span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="compile-the-model">
+<h2>Compile the Model<a class="headerlink" href="#compile-the-model" title="Permalink to this headline">¶</a></h2>
+<p>For this tutorial, choose the <code class="docutils literal notranslate"><span class="pre">optimizers.Adam</span></code> optimizer and
+<code class="docutils literal notranslate"><span class="pre">losses.SparseCategoricalCrossentropy</span></code> loss function. To view training
+and validation accuracy for each training epoch, pass the <code class="docutils literal notranslate"><span class="pre">metrics</span></code>
+argument.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;adam&#39;</span><span class="p">,</span>
+              <span class="n">loss</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">losses</span><span class="o">.</span><span class="n">SparseCategoricalCrossentropy</span><span class="p">(</span><span class="n">from_logits</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+              <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="model-summary">
+<h2>Model Summary<a class="headerlink" href="#model-summary" title="Permalink to this headline">¶</a></h2>
+<p>View all the layers of the network using the model’s <code class="docutils literal notranslate"><span class="pre">summary</span></code> method.</p>
+<blockquote>
+<div><p><strong>NOTE:</strong> This section is commented out for performance reasons.
+Please feel free to uncomment these to compare the results.</p>
+</div></blockquote>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># model.summary()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="train-the-model">
+<h2>Train the Model<a class="headerlink" href="#train-the-model" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># epochs=10</span>
+<span class="c1"># history = model.fit(</span>
+<span class="c1">#   train_ds,</span>
+<span class="c1">#   validation_data=val_ds,</span>
+<span class="c1">#   epochs=epochs</span>
+<span class="c1"># )</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="visualize-training-results">
+<h2>Visualize Training Results<a class="headerlink" href="#visualize-training-results" title="Permalink to this headline">¶</a></h2>
+<p>Create plots of loss and accuracy on the training and validation sets.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># acc = history.history[&#39;accuracy&#39;]</span>
+<span class="c1"># val_acc = history.history[&#39;val_accuracy&#39;]</span>
+
+<span class="c1"># loss = history.history[&#39;loss&#39;]</span>
+<span class="c1"># val_loss = history.history[&#39;val_loss&#39;]</span>
+
+<span class="c1"># epochs_range = range(epochs)</span>
+
+<span class="c1"># plt.figure(figsize=(8, 8))</span>
+<span class="c1"># plt.subplot(1, 2, 1)</span>
+<span class="c1"># plt.plot(epochs_range, acc, label=&#39;Training Accuracy&#39;)</span>
+<span class="c1"># plt.plot(epochs_range, val_acc, label=&#39;Validation Accuracy&#39;)</span>
+<span class="c1"># plt.legend(loc=&#39;lower right&#39;)</span>
+<span class="c1"># plt.title(&#39;Training and Validation Accuracy&#39;)</span>
+
+<span class="c1"># plt.subplot(1, 2, 2)</span>
+<span class="c1"># plt.plot(epochs_range, loss, label=&#39;Training Loss&#39;)</span>
+<span class="c1"># plt.plot(epochs_range, val_loss, label=&#39;Validation Loss&#39;)</span>
+<span class="c1"># plt.legend(loc=&#39;upper right&#39;)</span>
+<span class="c1"># plt.title(&#39;Training and Validation Loss&#39;)</span>
+<span class="c1"># plt.show()</span>
+</pre></div>
+</div>
+<p>As you can see from the plots, training accuracy and validation accuracy
+are off by large margin and the model has achieved only around 60%
+accuracy on the validation set.</p>
+<p>Let’s look at what went wrong and try to increase the overall
+performance of the model.</p>
+</div>
+<div class="section" id="overfitting">
+<h2>Overfitting<a class="headerlink" href="#overfitting" title="Permalink to this headline">¶</a></h2>
+<p>In the plots above, the training accuracy is increasing linearly over
+time, whereas validation accuracy stalls around 60% in the training
+process. Also, the difference in accuracy between training and
+validation accuracy is noticeable — a sign of
+<a class="reference external" href="https://www.tensorflow.org/tutorials/keras/overfit_and_underfit">overfitting</a>.</p>
+<p>When there are a small number of training examples, the model sometimes
+learns from noises or unwanted details from training examples—to an
+extent that it negatively impacts the performance of the model on new
+examples. This phenomenon is known as overfitting. It means that the
+model will have a difficult time generalizing on a new dataset.</p>
+<p>There are multiple ways to fight overfitting in the training process. In
+this tutorial, you’ll use <em>data augmentation</em> and add <em>Dropout</em> to your
+model.</p>
+</div>
+<div class="section" id="data-augmentation">
+<h2>Data Augmentation<a class="headerlink" href="#data-augmentation" title="Permalink to this headline">¶</a></h2>
+<p>Overfitting generally occurs when there are a small number of training
+examples. <a class="reference external" href="https://www.tensorflow.org/tutorials/images/data_augmentation">Data
+augmentation</a>
+takes the approach of generating additional training data from your
+existing examples by augmenting them using random transformations that
+yield believable-looking images. This helps expose the model to more
+aspects of the data and generalize better.</p>
+<p>You will implement data augmentation using the layers from
+<code class="docutils literal notranslate"><span class="pre">tf.keras.layers.experimental.preprocessing</span></code>. These can be included
+inside your model like other layers, and run on the GPU.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_augmentation</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+  <span class="p">[</span>
+    <span class="n">layers</span><span class="o">.</span><span class="n">experimental</span><span class="o">.</span><span class="n">preprocessing</span><span class="o">.</span><span class="n">RandomFlip</span><span class="p">(</span><span class="s2">&quot;horizontal&quot;</span><span class="p">,</span>
+                                                 <span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="n">img_height</span><span class="p">,</span>
+                                                              <span class="n">img_width</span><span class="p">,</span>
+                                                              <span class="mi">3</span><span class="p">)),</span>
+    <span class="n">layers</span><span class="o">.</span><span class="n">experimental</span><span class="o">.</span><span class="n">preprocessing</span><span class="o">.</span><span class="n">RandomRotation</span><span class="p">(</span><span class="mf">0.1</span><span class="p">),</span>
+    <span class="n">layers</span><span class="o">.</span><span class="n">experimental</span><span class="o">.</span><span class="n">preprocessing</span><span class="o">.</span><span class="n">RandomZoom</span><span class="p">(</span><span class="mf">0.1</span><span class="p">),</span>
+  <span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Let’s visualize what a few augmented examples look like by applying data
+augmentation to the same image several times:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">images</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">train_ds</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="mi">1</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+        <span class="n">augmented_images</span> <span class="o">=</span> <span class="n">data_augmentation</span><span class="p">(</span><span class="n">images</span><span class="p">)</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">augmented_images</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;uint8&quot;</span><span class="p">))</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../_images/301-tensorflow-training-openvino-with-output_56_0.png" src="../_images/301-tensorflow-training-openvino-with-output_56_0.png" />
+<p>You will use data augmentation to train a model in a moment.</p>
+</div>
+<div class="section" id="dropout">
+<h2>Dropout<a class="headerlink" href="#dropout" title="Permalink to this headline">¶</a></h2>
+<p>Another technique to reduce overfitting is to introduce
+<a class="reference external" href="https://developers.google.com/machine-learning/glossary#dropout_regularization">Dropout</a>
+to the network, a form of <em>regularization</em>.</p>
+<p>When you apply Dropout to a layer it randomly drops out (by setting the
+activation to zero) a number of output units from the layer during the
+training process. Dropout takes a fractional number as its input value,
+in the form such as 0.1, 0.2, 0.4, etc. This means dropping out 10%, 20%
+or 40% of the output units randomly from the applied layer.</p>
+<p>Let’s create a new neural network using <code class="docutils literal notranslate"><span class="pre">layers.Dropout</span></code>, then train
+it using augmented images.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">([</span>
+  <span class="n">data_augmentation</span><span class="p">,</span>
+  <span class="n">layers</span><span class="o">.</span><span class="n">experimental</span><span class="o">.</span><span class="n">preprocessing</span><span class="o">.</span><span class="n">Rescaling</span><span class="p">(</span><span class="mf">1.</span><span class="o">/</span><span class="mi">255</span><span class="p">),</span>
+  <span class="n">layers</span><span class="o">.</span><span class="n">Conv2D</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">),</span>
+  <span class="n">layers</span><span class="o">.</span><span class="n">MaxPooling2D</span><span class="p">(),</span>
+  <span class="n">layers</span><span class="o">.</span><span class="n">Conv2D</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">),</span>
+  <span class="n">layers</span><span class="o">.</span><span class="n">MaxPooling2D</span><span class="p">(),</span>
+  <span class="n">layers</span><span class="o">.</span><span class="n">Conv2D</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">),</span>
+  <span class="n">layers</span><span class="o">.</span><span class="n">MaxPooling2D</span><span class="p">(),</span>
+  <span class="n">layers</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.2</span><span class="p">),</span>
+  <span class="n">layers</span><span class="o">.</span><span class="n">Flatten</span><span class="p">(),</span>
+  <span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">),</span>
+  <span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="n">num_classes</span><span class="p">)</span>
+<span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="compile-and-train-the-model">
+<h2>Compile and Train the Model<a class="headerlink" href="#compile-and-train-the-model" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;adam&#39;</span><span class="p">,</span>
+              <span class="n">loss</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">losses</span><span class="o">.</span><span class="n">SparseCategoricalCrossentropy</span><span class="p">(</span><span class="n">from_logits</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+              <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Model</span><span class="p">:</span> <span class="s2">&quot;sequential_2&quot;</span>
+<span class="n">_________________________________________________________________</span>
+<span class="n">Layer</span> <span class="p">(</span><span class="nb">type</span><span class="p">)</span>                 <span class="n">Output</span> <span class="n">Shape</span>              <span class="n">Param</span> <span class="c1">#</span>
+<span class="o">=================================================================</span>
+<span class="n">sequential_1</span> <span class="p">(</span><span class="n">Sequential</span><span class="p">)</span>    <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>       <span class="mi">0</span>
+<span class="n">_________________________________________________________________</span>
+<span class="n">rescaling_2</span> <span class="p">(</span><span class="n">Rescaling</span><span class="p">)</span>      <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>       <span class="mi">0</span>
+<span class="n">_________________________________________________________________</span>
+<span class="n">conv2d_3</span> <span class="p">(</span><span class="n">Conv2D</span><span class="p">)</span>            <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>      <span class="mi">448</span>
+<span class="n">_________________________________________________________________</span>
+<span class="n">max_pooling2d_3</span> <span class="p">(</span><span class="n">MaxPooling2</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>        <span class="mi">0</span>
+<span class="n">_________________________________________________________________</span>
+<span class="n">conv2d_4</span> <span class="p">(</span><span class="n">Conv2D</span><span class="p">)</span>            <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">32</span><span class="p">)</span>        <span class="mi">4640</span>
+<span class="n">_________________________________________________________________</span>
+<span class="n">max_pooling2d_4</span> <span class="p">(</span><span class="n">MaxPooling2</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">32</span><span class="p">)</span>        <span class="mi">0</span>
+<span class="n">_________________________________________________________________</span>
+<span class="n">conv2d_5</span> <span class="p">(</span><span class="n">Conv2D</span><span class="p">)</span>            <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">64</span><span class="p">)</span>        <span class="mi">18496</span>
+<span class="n">_________________________________________________________________</span>
+<span class="n">max_pooling2d_5</span> <span class="p">(</span><span class="n">MaxPooling2</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">64</span><span class="p">)</span>        <span class="mi">0</span>
+<span class="n">_________________________________________________________________</span>
+<span class="n">dropout</span> <span class="p">(</span><span class="n">Dropout</span><span class="p">)</span>            <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">64</span><span class="p">)</span>        <span class="mi">0</span>
+<span class="n">_________________________________________________________________</span>
+<span class="n">flatten_1</span> <span class="p">(</span><span class="n">Flatten</span><span class="p">)</span>          <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="mi">30976</span><span class="p">)</span>             <span class="mi">0</span>
+<span class="n">_________________________________________________________________</span>
+<span class="n">dense_2</span> <span class="p">(</span><span class="n">Dense</span><span class="p">)</span>              <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="mi">128</span><span class="p">)</span>               <span class="mi">3965056</span>
+<span class="n">_________________________________________________________________</span>
+<span class="n">dense_3</span> <span class="p">(</span><span class="n">Dense</span><span class="p">)</span>              <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>                 <span class="mi">645</span>
+<span class="o">=================================================================</span>
+<span class="n">Total</span> <span class="n">params</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span><span class="mi">989</span><span class="p">,</span><span class="mi">285</span>
+<span class="n">Trainable</span> <span class="n">params</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span><span class="mi">989</span><span class="p">,</span><span class="mi">285</span>
+<span class="n">Non</span><span class="o">-</span><span class="n">trainable</span> <span class="n">params</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">_________________________________________________________________</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">epochs</span> <span class="o">=</span> <span class="mi">15</span>
+<span class="n">history</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+  <span class="n">train_ds</span><span class="p">,</span>
+  <span class="n">validation_data</span><span class="o">=</span><span class="n">val_ds</span><span class="p">,</span>
+  <span class="n">epochs</span><span class="o">=</span><span class="n">epochs</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Epoch</span> <span class="mi">1</span><span class="o">/</span><span class="mi">15</span>
+<span class="mi">92</span><span class="o">/</span><span class="mi">92</span> <span class="p">[</span><span class="o">==============================</span><span class="p">]</span> <span class="o">-</span> <span class="mi">56</span><span class="n">s</span> <span class="mi">599</span><span class="n">ms</span><span class="o">/</span><span class="n">step</span> <span class="o">-</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">1.4446</span> <span class="o">-</span> <span class="n">accuracy</span><span class="p">:</span> <span class="mf">0.3760</span> <span class="o">-</span> <span class="n">val_loss</span><span class="p">:</span> <span class="mf">1.1347</span> <span class="o">-</span> <span class="n">val_accuracy</span><span class="p">:</span> <span class="mf">0.5123</span>
+<span class="n">Epoch</span> <span class="mi">2</span><span class="o">/</span><span class="mi">15</span>
+<span class="mi">92</span><span class="o">/</span><span class="mi">92</span> <span class="p">[</span><span class="o">==============================</span><span class="p">]</span> <span class="o">-</span> <span class="mi">54</span><span class="n">s</span> <span class="mi">589</span><span class="n">ms</span><span class="o">/</span><span class="n">step</span> <span class="o">-</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">1.1168</span> <span class="o">-</span> <span class="n">accuracy</span><span class="p">:</span> <span class="mf">0.5416</span> <span class="o">-</span> <span class="n">val_loss</span><span class="p">:</span> <span class="mf">1.0295</span> <span class="o">-</span> <span class="n">val_accuracy</span><span class="p">:</span> <span class="mf">0.5817</span>
+<span class="n">Epoch</span> <span class="mi">3</span><span class="o">/</span><span class="mi">15</span>
+<span class="mi">92</span><span class="o">/</span><span class="mi">92</span> <span class="p">[</span><span class="o">==============================</span><span class="p">]</span> <span class="o">-</span> <span class="mi">54</span><span class="n">s</span> <span class="mi">588</span><span class="n">ms</span><span class="o">/</span><span class="n">step</span> <span class="o">-</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">1.0017</span> <span class="o">-</span> <span class="n">accuracy</span><span class="p">:</span> <span class="mf">0.6063</span> <span class="o">-</span> <span class="n">val_loss</span><span class="p">:</span> <span class="mf">0.9799</span> <span class="o">-</span> <span class="n">val_accuracy</span><span class="p">:</span> <span class="mf">0.6131</span>
+<span class="n">Epoch</span> <span class="mi">4</span><span class="o">/</span><span class="mi">15</span>
+<span class="mi">92</span><span class="o">/</span><span class="mi">92</span> <span class="p">[</span><span class="o">==============================</span><span class="p">]</span> <span class="o">-</span> <span class="mi">54</span><span class="n">s</span> <span class="mi">590</span><span class="n">ms</span><span class="o">/</span><span class="n">step</span> <span class="o">-</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">0.9265</span> <span class="o">-</span> <span class="n">accuracy</span><span class="p">:</span> <span class="mf">0.6434</span> <span class="o">-</span> <span class="n">val_loss</span><span class="p">:</span> <span class="mf">0.9750</span> <span class="o">-</span> <span class="n">val_accuracy</span><span class="p">:</span> <span class="mf">0.5967</span>
+<span class="n">Epoch</span> <span class="mi">5</span><span class="o">/</span><span class="mi">15</span>
+<span class="mi">92</span><span class="o">/</span><span class="mi">92</span> <span class="p">[</span><span class="o">==============================</span><span class="p">]</span> <span class="o">-</span> <span class="mi">53</span><span class="n">s</span> <span class="mi">581</span><span class="n">ms</span><span class="o">/</span><span class="n">step</span> <span class="o">-</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">0.8904</span> <span class="o">-</span> <span class="n">accuracy</span><span class="p">:</span> <span class="mf">0.6536</span> <span class="o">-</span> <span class="n">val_loss</span><span class="p">:</span> <span class="mf">0.9029</span> <span class="o">-</span> <span class="n">val_accuracy</span><span class="p">:</span> <span class="mf">0.6431</span>
+<span class="n">Epoch</span> <span class="mi">6</span><span class="o">/</span><span class="mi">15</span>
+<span class="mi">92</span><span class="o">/</span><span class="mi">92</span> <span class="p">[</span><span class="o">==============================</span><span class="p">]</span> <span class="o">-</span> <span class="mi">53</span><span class="n">s</span> <span class="mi">581</span><span class="n">ms</span><span class="o">/</span><span class="n">step</span> <span class="o">-</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">0.8468</span> <span class="o">-</span> <span class="n">accuracy</span><span class="p">:</span> <span class="mf">0.6700</span> <span class="o">-</span> <span class="n">val_loss</span><span class="p">:</span> <span class="mf">0.9127</span> <span class="o">-</span> <span class="n">val_accuracy</span><span class="p">:</span> <span class="mf">0.6553</span>
+<span class="n">Epoch</span> <span class="mi">7</span><span class="o">/</span><span class="mi">15</span>
+<span class="mi">92</span><span class="o">/</span><span class="mi">92</span> <span class="p">[</span><span class="o">==============================</span><span class="p">]</span> <span class="o">-</span> <span class="mi">53</span><span class="n">s</span> <span class="mi">579</span><span class="n">ms</span><span class="o">/</span><span class="n">step</span> <span class="o">-</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">0.8005</span> <span class="o">-</span> <span class="n">accuracy</span><span class="p">:</span> <span class="mf">0.6907</span> <span class="o">-</span> <span class="n">val_loss</span><span class="p">:</span> <span class="mf">0.8890</span> <span class="o">-</span> <span class="n">val_accuracy</span><span class="p">:</span> <span class="mf">0.6649</span>
+<span class="n">Epoch</span> <span class="mi">8</span><span class="o">/</span><span class="mi">15</span>
+<span class="mi">92</span><span class="o">/</span><span class="mi">92</span> <span class="p">[</span><span class="o">==============================</span><span class="p">]</span> <span class="o">-</span> <span class="mi">53</span><span class="n">s</span> <span class="mi">578</span><span class="n">ms</span><span class="o">/</span><span class="n">step</span> <span class="o">-</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">0.7623</span> <span class="o">-</span> <span class="n">accuracy</span><span class="p">:</span> <span class="mf">0.7013</span> <span class="o">-</span> <span class="n">val_loss</span><span class="p">:</span> <span class="mf">0.8555</span> <span class="o">-</span> <span class="n">val_accuracy</span><span class="p">:</span> <span class="mf">0.6703</span>
+<span class="n">Epoch</span> <span class="mi">9</span><span class="o">/</span><span class="mi">15</span>
+<span class="mi">92</span><span class="o">/</span><span class="mi">92</span> <span class="p">[</span><span class="o">==============================</span><span class="p">]</span> <span class="o">-</span> <span class="mi">53</span><span class="n">s</span> <span class="mi">577</span><span class="n">ms</span><span class="o">/</span><span class="n">step</span> <span class="o">-</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">0.7329</span> <span class="o">-</span> <span class="n">accuracy</span><span class="p">:</span> <span class="mf">0.7204</span> <span class="o">-</span> <span class="n">val_loss</span><span class="p">:</span> <span class="mf">0.8012</span> <span class="o">-</span> <span class="n">val_accuracy</span><span class="p">:</span> <span class="mf">0.6771</span>
+<span class="n">Epoch</span> <span class="mi">10</span><span class="o">/</span><span class="mi">15</span>
+<span class="mi">92</span><span class="o">/</span><span class="mi">92</span> <span class="p">[</span><span class="o">==============================</span><span class="p">]</span> <span class="o">-</span> <span class="mi">53</span><span class="n">s</span> <span class="mi">578</span><span class="n">ms</span><span class="o">/</span><span class="n">step</span> <span class="o">-</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">0.7114</span> <span class="o">-</span> <span class="n">accuracy</span><span class="p">:</span> <span class="mf">0.7204</span> <span class="o">-</span> <span class="n">val_loss</span><span class="p">:</span> <span class="mf">0.8284</span> <span class="o">-</span> <span class="n">val_accuracy</span><span class="p">:</span> <span class="mf">0.6880</span>
+<span class="n">Epoch</span> <span class="mi">11</span><span class="o">/</span><span class="mi">15</span>
+<span class="mi">92</span><span class="o">/</span><span class="mi">92</span> <span class="p">[</span><span class="o">==============================</span><span class="p">]</span> <span class="o">-</span> <span class="mi">53</span><span class="n">s</span> <span class="mi">580</span><span class="n">ms</span><span class="o">/</span><span class="n">step</span> <span class="o">-</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">0.6600</span> <span class="o">-</span> <span class="n">accuracy</span><span class="p">:</span> <span class="mf">0.7473</span> <span class="o">-</span> <span class="n">val_loss</span><span class="p">:</span> <span class="mf">0.7646</span> <span class="o">-</span> <span class="n">val_accuracy</span><span class="p">:</span> <span class="mf">0.6907</span>
+<span class="n">Epoch</span> <span class="mi">12</span><span class="o">/</span><span class="mi">15</span>
+<span class="mi">92</span><span class="o">/</span><span class="mi">92</span> <span class="p">[</span><span class="o">==============================</span><span class="p">]</span> <span class="o">-</span> <span class="mi">53</span><span class="n">s</span> <span class="mi">579</span><span class="n">ms</span><span class="o">/</span><span class="n">step</span> <span class="o">-</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">0.6557</span> <span class="o">-</span> <span class="n">accuracy</span><span class="p">:</span> <span class="mf">0.7469</span> <span class="o">-</span> <span class="n">val_loss</span><span class="p">:</span> <span class="mf">0.8184</span> <span class="o">-</span> <span class="n">val_accuracy</span><span class="p">:</span> <span class="mf">0.7057</span>
+<span class="n">Epoch</span> <span class="mi">13</span><span class="o">/</span><span class="mi">15</span>
+<span class="mi">92</span><span class="o">/</span><span class="mi">92</span> <span class="p">[</span><span class="o">==============================</span><span class="p">]</span> <span class="o">-</span> <span class="mi">53</span><span class="n">s</span> <span class="mi">580</span><span class="n">ms</span><span class="o">/</span><span class="n">step</span> <span class="o">-</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">0.6292</span> <span class="o">-</span> <span class="n">accuracy</span><span class="p">:</span> <span class="mf">0.7517</span> <span class="o">-</span> <span class="n">val_loss</span><span class="p">:</span> <span class="mf">0.7617</span> <span class="o">-</span> <span class="n">val_accuracy</span><span class="p">:</span> <span class="mf">0.7044</span>
+<span class="n">Epoch</span> <span class="mi">14</span><span class="o">/</span><span class="mi">15</span>
+<span class="mi">92</span><span class="o">/</span><span class="mi">92</span> <span class="p">[</span><span class="o">==============================</span><span class="p">]</span> <span class="o">-</span> <span class="mi">53</span><span class="n">s</span> <span class="mi">580</span><span class="n">ms</span><span class="o">/</span><span class="n">step</span> <span class="o">-</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">0.5891</span> <span class="o">-</span> <span class="n">accuracy</span><span class="p">:</span> <span class="mf">0.7769</span> <span class="o">-</span> <span class="n">val_loss</span><span class="p">:</span> <span class="mf">0.7623</span> <span class="o">-</span> <span class="n">val_accuracy</span><span class="p">:</span> <span class="mf">0.7207</span>
+<span class="n">Epoch</span> <span class="mi">15</span><span class="o">/</span><span class="mi">15</span>
+<span class="mi">92</span><span class="o">/</span><span class="mi">92</span> <span class="p">[</span><span class="o">==============================</span><span class="p">]</span> <span class="o">-</span> <span class="mi">53</span><span class="n">s</span> <span class="mi">579</span><span class="n">ms</span><span class="o">/</span><span class="n">step</span> <span class="o">-</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">0.5639</span> <span class="o">-</span> <span class="n">accuracy</span><span class="p">:</span> <span class="mf">0.7864</span> <span class="o">-</span> <span class="n">val_loss</span><span class="p">:</span> <span class="mf">0.7957</span> <span class="o">-</span> <span class="n">val_accuracy</span><span class="p">:</span> <span class="mf">0.6935</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id1">
+<h2>Visualize Training Results<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>After applying data augmentation and Dropout, there is less overfitting
+than before, and training and validation accuracy are closer aligned.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">acc</span> <span class="o">=</span> <span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">]</span>
+<span class="n">val_acc</span> <span class="o">=</span> <span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;val_accuracy&#39;</span><span class="p">]</span>
+
+<span class="n">loss</span> <span class="o">=</span> <span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;loss&#39;</span><span class="p">]</span>
+<span class="n">val_loss</span> <span class="o">=</span> <span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;val_loss&#39;</span><span class="p">]</span>
+
+<span class="n">epochs_range</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">epochs_range</span><span class="p">,</span> <span class="n">acc</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Training Accuracy&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">epochs_range</span><span class="p">,</span> <span class="n">val_acc</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Validation Accuracy&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;lower right&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Training and Validation Accuracy&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">epochs_range</span><span class="p">,</span> <span class="n">loss</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Training Loss&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">epochs_range</span><span class="p">,</span> <span class="n">val_loss</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Validation Loss&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Training and Validation Loss&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/301-tensorflow-training-openvino-with-output_65_0.png" src="../_images/301-tensorflow-training-openvino-with-output_65_0.png" />
+</div>
+<div class="section" id="predict-on-new-data">
+<h2>Predict on New Data<a class="headerlink" href="#predict-on-new-data" title="Permalink to this headline">¶</a></h2>
+<p>Finally, let’s use our model to classify an image that wasn’t included
+in the training or validation sets.</p>
+<p>Note: Data augmentation and Dropout layers are inactive at inference
+time.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sunflower_url</span> <span class="o">=</span> <span class="s2">&quot;https://storage.googleapis.com/download.tensorflow.org/example_images/592px-Red_sunflower.jpg&quot;</span>
+<span class="n">sunflower_path</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">get_file</span><span class="p">(</span><span class="s1">&#39;Red_sunflower&#39;</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="n">sunflower_url</span><span class="p">)</span>
+
+<span class="n">img</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">preprocessing</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">load_img</span><span class="p">(</span>
+    <span class="n">sunflower_path</span><span class="p">,</span> <span class="n">target_size</span><span class="o">=</span><span class="p">(</span><span class="n">img_height</span><span class="p">,</span> <span class="n">img_width</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">img_array</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">preprocessing</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">img_to_array</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+<span class="n">img_array</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">img_array</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># Create a batch</span>
+
+<span class="n">predictions</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">img_array</span><span class="p">)</span>
+<span class="n">score</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">predictions</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span>
+    <span class="s2">&quot;This image most likely belongs to </span><span class="si">{}</span><span class="s2"> with a </span><span class="si">{:.2f}</span><span class="s2"> percent confidence.&quot;</span>
+    <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">class_names</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">score</span><span class="p">)],</span> <span class="mi">100</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">score</span><span class="p">))</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">This</span> <span class="n">image</span> <span class="n">most</span> <span class="n">likely</span> <span class="n">belongs</span> <span class="n">to</span> <span class="n">sunflowers</span> <span class="k">with</span> <span class="n">a</span> <span class="mf">99.76</span> <span class="n">percent</span> <span class="n">confidence</span><span class="o">.</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="save-the-tensorflow-model">
+<h2>Save the TensorFlow Model<a class="headerlink" href="#save-the-tensorflow-model" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#save the trained model - a new folder flower will be created</span>
+<span class="c1">#and the file &quot;saved_model.pb&quot; is the pre-trained model</span>
+<span class="n">model_dir</span> <span class="o">=</span> <span class="s2">&quot;model&quot;</span>
+<span class="n">model_fname</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">model_dir</span><span class="si">}</span><span class="s2">/flower&quot;</span>
+<span class="n">model</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">model_fname</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">INFO</span><span class="p">:</span><span class="n">tensorflow</span><span class="p">:</span><span class="n">Assets</span> <span class="n">written</span> <span class="n">to</span><span class="p">:</span> <span class="n">model</span><span class="o">/</span><span class="n">flower</span><span class="o">/</span><span class="n">assets</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="convert-the-tensorflow-model-with-openvino-model-optimizer">
+<h2>Convert the TensorFlow model with OpenVINO Model Optimizer<a class="headerlink" href="#convert-the-tensorflow-model-with-openvino-model-optimizer" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The paths of the source and converted models</span>
+<span class="n">model_name</span> <span class="o">=</span> <span class="s2">&quot;flower&quot;</span>
+<span class="n">model_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">model_fname</span><span class="p">)</span>
+<span class="n">ir_data_type</span> <span class="o">=</span> <span class="s2">&quot;FP16&quot;</span>
+<span class="n">ir_model_name</span> <span class="o">=</span> <span class="s2">&quot;flower_ir&quot;</span>
+
+<span class="c1"># Get the path to the Model Optimizer script</span>
+
+<span class="c1"># Construct the command for Model Optimizer</span>
+<span class="n">mo_command</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;mo</span>
+<span class="s2">                 --saved_model_dir &quot;</span><span class="si">{</span><span class="n">model_fname</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="s2">                 --input_shape &quot;[1,180,180,3]&quot;</span>
+<span class="s2">                 --data_type &quot;</span><span class="si">{</span><span class="n">ir_data_type</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="s2">                 --output_dir &quot;</span><span class="si">{</span><span class="n">model_fname</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="s2">                 --model_name &quot;</span><span class="si">{</span><span class="n">ir_model_name</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="s2">                 &quot;&quot;&quot;</span>
+<span class="n">mo_command</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">mo_command</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Model Optimizer command to convert TensorFlow to OpenVINO:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mo_command</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Model</span> <span class="n">Optimizer</span> <span class="n">command</span> <span class="n">to</span> <span class="n">convert</span> <span class="n">TensorFlow</span> <span class="n">to</span> <span class="n">OpenVINO</span><span class="p">:</span>
+<span class="n">mo</span> <span class="o">--</span><span class="n">saved_model_dir</span> <span class="s2">&quot;model/flower&quot;</span> <span class="o">--</span><span class="n">input_shape</span> <span class="s2">&quot;[1,180,180,3]&quot;</span> <span class="o">--</span><span class="n">data_type</span> <span class="s2">&quot;FP16&quot;</span> <span class="o">--</span><span class="n">output_dir</span> <span class="s2">&quot;model/flower&quot;</span> <span class="o">--</span><span class="n">model_name</span> <span class="s2">&quot;flower_ir&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run the Model Optimizer (overwrites the older model)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Exporting TensorFlow model to IR... This may take a few minutes.&quot;</span><span class="p">)</span>
+<span class="n">mo_result</span> <span class="o">=</span> <span class="o">%</span><span class="k">sx</span> <span class="nv">$mo_command</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">mo_result</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Exporting</span> <span class="n">TensorFlow</span> <span class="n">model</span> <span class="n">to</span> <span class="n">IR</span><span class="o">...</span> <span class="n">This</span> <span class="n">may</span> <span class="n">take</span> <span class="n">a</span> <span class="n">few</span> <span class="n">minutes</span><span class="o">.</span>
+<span class="n">Model</span> <span class="n">Optimizer</span> <span class="n">arguments</span><span class="p">:</span>
+<span class="n">Common</span> <span class="n">parameters</span><span class="p">:</span>
+    <span class="o">-</span> <span class="n">Path</span> <span class="n">to</span> <span class="n">the</span> <span class="n">Input</span> <span class="n">Model</span><span class="p">:</span>  <span class="kc">None</span>
+    <span class="o">-</span> <span class="n">Path</span> <span class="k">for</span> <span class="n">generated</span> <span class="n">IR</span><span class="p">:</span>    <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">work</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">notebooks</span><span class="o">/</span><span class="mi">301</span><span class="o">-</span><span class="n">tensorflow</span><span class="o">-</span><span class="n">training</span><span class="o">-</span><span class="n">openvino</span><span class="o">/</span><span class="n">model</span><span class="o">/</span><span class="n">flower</span>
+    <span class="o">-</span> <span class="n">IR</span> <span class="n">output</span> <span class="n">name</span><span class="p">:</span>   <span class="n">flower_ir</span>
+    <span class="o">-</span> <span class="n">Log</span> <span class="n">level</span><span class="p">:</span>    <span class="n">ERROR</span>
+    <span class="o">-</span> <span class="n">Batch</span><span class="p">:</span>    <span class="n">Not</span> <span class="n">specified</span><span class="p">,</span> <span class="n">inherited</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">model</span>
+    <span class="o">-</span> <span class="n">Input</span> <span class="n">layers</span><span class="p">:</span>     <span class="n">Not</span> <span class="n">specified</span><span class="p">,</span> <span class="n">inherited</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">model</span>
+    <span class="o">-</span> <span class="n">Output</span> <span class="n">layers</span><span class="p">:</span>    <span class="n">Not</span> <span class="n">specified</span><span class="p">,</span> <span class="n">inherited</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">model</span>
+    <span class="o">-</span> <span class="n">Input</span> <span class="n">shapes</span><span class="p">:</span>     <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">180</span><span class="p">,</span><span class="mi">180</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+    <span class="o">-</span> <span class="n">Source</span> <span class="n">layout</span><span class="p">:</span>    <span class="n">Not</span> <span class="n">specified</span>
+    <span class="o">-</span> <span class="n">Target</span> <span class="n">layout</span><span class="p">:</span>    <span class="n">Not</span> <span class="n">specified</span>
+    <span class="o">-</span> <span class="n">Layout</span><span class="p">:</span>   <span class="n">Not</span> <span class="n">specified</span>
+    <span class="o">-</span> <span class="n">Mean</span> <span class="n">values</span><span class="p">:</span>  <span class="n">Not</span> <span class="n">specified</span>
+    <span class="o">-</span> <span class="n">Scale</span> <span class="n">values</span><span class="p">:</span>     <span class="n">Not</span> <span class="n">specified</span>
+    <span class="o">-</span> <span class="n">Scale</span> <span class="n">factor</span><span class="p">:</span>     <span class="n">Not</span> <span class="n">specified</span>
+    <span class="o">-</span> <span class="n">Precision</span> <span class="n">of</span> <span class="n">IR</span><span class="p">:</span>  <span class="n">FP16</span>
+    <span class="o">-</span> <span class="n">Enable</span> <span class="n">fusing</span><span class="p">:</span>    <span class="kc">True</span>
+    <span class="o">-</span> <span class="n">User</span> <span class="n">transformations</span><span class="p">:</span>     <span class="n">Not</span> <span class="n">specified</span>
+    <span class="o">-</span> <span class="n">Reverse</span> <span class="nb">input</span> <span class="n">channels</span><span class="p">:</span>   <span class="kc">False</span>
+    <span class="o">-</span> <span class="n">Enable</span> <span class="n">IR</span> <span class="n">generation</span> <span class="k">for</span> <span class="n">fixed</span> <span class="nb">input</span> <span class="n">shape</span><span class="p">:</span>   <span class="kc">False</span>
+    <span class="o">-</span> <span class="n">Use</span> <span class="n">the</span> <span class="n">transformations</span> <span class="n">config</span> <span class="n">file</span><span class="p">:</span>  <span class="kc">None</span>
+<span class="n">Advanced</span> <span class="n">parameters</span><span class="p">:</span>
+    <span class="o">-</span> <span class="n">Force</span> <span class="n">the</span> <span class="n">usage</span> <span class="n">of</span> <span class="n">legacy</span> <span class="n">Frontend</span> <span class="n">of</span> <span class="n">Model</span> <span class="n">Optimizer</span> <span class="k">for</span> <span class="n">model</span> <span class="n">conversion</span> <span class="n">into</span> <span class="n">IR</span><span class="p">:</span>   <span class="kc">False</span>
+    <span class="o">-</span> <span class="n">Force</span> <span class="n">the</span> <span class="n">usage</span> <span class="n">of</span> <span class="n">new</span> <span class="n">Frontend</span> <span class="n">of</span> <span class="n">Model</span> <span class="n">Optimizer</span> <span class="k">for</span> <span class="n">model</span> <span class="n">conversion</span> <span class="n">into</span> <span class="n">IR</span><span class="p">:</span>  <span class="kc">False</span>
+<span class="n">TensorFlow</span> <span class="n">specific</span> <span class="n">parameters</span><span class="p">:</span>
+    <span class="o">-</span> <span class="n">Input</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">text</span> <span class="n">protobuf</span> <span class="nb">format</span><span class="p">:</span>  <span class="kc">False</span>
+    <span class="o">-</span> <span class="n">Path</span> <span class="n">to</span> <span class="n">model</span> <span class="n">dump</span> <span class="k">for</span> <span class="n">TensorBoard</span><span class="p">:</span>   <span class="kc">None</span>
+    <span class="o">-</span> <span class="n">List</span> <span class="n">of</span> <span class="n">shared</span> <span class="n">libraries</span> <span class="k">with</span> <span class="n">TensorFlow</span> <span class="n">custom</span> <span class="n">layers</span> <span class="n">implementation</span><span class="p">:</span>    <span class="kc">None</span>
+    <span class="o">-</span> <span class="n">Update</span> <span class="n">the</span> <span class="n">configuration</span> <span class="n">file</span> <span class="k">with</span> <span class="nb">input</span><span class="o">/</span><span class="n">output</span> <span class="n">node</span> <span class="n">names</span><span class="p">:</span>   <span class="kc">None</span>
+    <span class="o">-</span> <span class="n">Use</span> <span class="n">configuration</span> <span class="n">file</span> <span class="n">used</span> <span class="n">to</span> <span class="n">generate</span> <span class="n">the</span> <span class="n">model</span> <span class="k">with</span> <span class="n">Object</span> <span class="n">Detection</span> <span class="n">API</span><span class="p">:</span>  <span class="kc">None</span>
+    <span class="o">-</span> <span class="n">Use</span> <span class="n">the</span> <span class="n">config</span> <span class="n">file</span><span class="p">:</span>  <span class="kc">None</span>
+<span class="n">OpenVINO</span> <span class="n">runtime</span> <span class="n">found</span> <span class="ow">in</span><span class="p">:</span>  <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8</span><span class="o">.</span><span class="mi">12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">openvino</span>
+<span class="n">OpenVINO</span> <span class="n">runtime</span> <span class="n">version</span><span class="p">:</span>   <span class="mf">2022.1</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="mi">7019</span><span class="o">-</span><span class="n">cdb9bec7210</span><span class="o">-</span><span class="n">releases</span><span class="o">/</span><span class="mi">2022</span><span class="o">/</span><span class="mi">1</span>
+<span class="n">Model</span> <span class="n">Optimizer</span> <span class="n">version</span><span class="p">:</span>    <span class="mf">2022.1</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="mi">7019</span><span class="o">-</span><span class="n">cdb9bec7210</span><span class="o">-</span><span class="n">releases</span><span class="o">/</span><span class="mi">2022</span><span class="o">/</span><span class="mi">1</span>
+<span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">Generated</span> <span class="n">IR</span> <span class="n">version</span> <span class="mi">11</span> <span class="n">model</span><span class="o">.</span>
+<span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">XML</span> <span class="n">file</span><span class="p">:</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">work</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">notebooks</span><span class="o">/</span><span class="mi">301</span><span class="o">-</span><span class="n">tensorflow</span><span class="o">-</span><span class="n">training</span><span class="o">-</span><span class="n">openvino</span><span class="o">/</span><span class="n">model</span><span class="o">/</span><span class="n">flower</span><span class="o">/</span><span class="n">flower_ir</span><span class="o">.</span><span class="n">xml</span>
+<span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">BIN</span> <span class="n">file</span><span class="p">:</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">work</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">notebooks</span><span class="o">/</span><span class="mi">301</span><span class="o">-</span><span class="n">tensorflow</span><span class="o">-</span><span class="n">training</span><span class="o">-</span><span class="n">openvino</span><span class="o">/</span><span class="n">model</span><span class="o">/</span><span class="n">flower</span><span class="o">/</span><span class="n">flower_ir</span><span class="o">.</span><span class="n">bin</span>
+<span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">Total</span> <span class="n">execution</span> <span class="n">time</span><span class="p">:</span> <span class="mf">5.32</span> <span class="n">seconds</span><span class="o">.</span>
+<span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">Memory</span> <span class="n">consumed</span><span class="p">:</span> <span class="mi">582</span> <span class="n">MB</span><span class="o">.</span>
+<span class="n">It</span><span class="s1">&#39;s been a while, check for a new version of Intel(R) Distribution of OpenVINO(TM) toolkit here https://software.intel.com/content/www/us/en/develop/tools/openvino-toolkit/download.html?cid=other&amp;source=prod&amp;campid=ww_2022_bu_IOTG_OpenVINO-2022-1&amp;content=upg_all&amp;medium=organic or on the GitHub*</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">The</span> <span class="n">model</span> <span class="n">was</span> <span class="n">converted</span> <span class="n">to</span> <span class="n">IR</span> <span class="n">v11</span><span class="p">,</span> <span class="n">the</span> <span class="n">latest</span> <span class="n">model</span> <span class="nb">format</span> <span class="n">that</span> <span class="n">corresponds</span> <span class="n">to</span> <span class="n">the</span> <span class="n">source</span> <span class="n">DL</span> <span class="n">framework</span> <span class="nb">input</span><span class="o">/</span><span class="n">output</span> <span class="nb">format</span><span class="o">.</span> <span class="n">While</span> <span class="n">IR</span> <span class="n">v11</span> <span class="ow">is</span> <span class="n">backwards</span> <span class="n">compatible</span> <span class="k">with</span> <span class="n">OpenVINO</span> <span class="n">Inference</span> <span class="n">Engine</span> <span class="n">API</span> <span class="n">v1</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span> <span class="n">please</span> <span class="n">use</span> <span class="n">API</span> <span class="n">v2</span><span class="o">.</span><span class="mi">0</span> <span class="p">(</span><span class="k">as</span> <span class="n">of</span> <span class="mf">2022.1</span><span class="p">)</span> <span class="n">to</span> <span class="n">take</span> <span class="n">advantage</span> <span class="n">of</span> <span class="n">the</span> <span class="n">latest</span> <span class="n">improvements</span> <span class="ow">in</span> <span class="n">IR</span> <span class="n">v11</span><span class="o">.</span>
+<span class="n">Find</span> <span class="n">more</span> <span class="n">information</span> <span class="n">about</span> <span class="n">API</span> <span class="n">v2</span><span class="o">.</span><span class="mi">0</span> <span class="ow">and</span> <span class="n">IR</span> <span class="n">v11</span> <span class="n">at</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">docs</span><span class="o">.</span><span class="n">openvino</span><span class="o">.</span><span class="n">ai</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="preprocessing-image-function">
+<h2>Preprocessing Image Function<a class="headerlink" href="#preprocessing-image-function" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">pre_process_image</span><span class="p">(</span><span class="n">imagePath</span><span class="p">,</span> <span class="n">img_height</span><span class="o">=</span><span class="mi">180</span><span class="p">):</span>
+    <span class="c1"># Model input format</span>
+    <span class="n">n</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">img_height</span><span class="p">,</span> <span class="n">img_height</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">imagePath</span><span class="p">)</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">resize</span><span class="p">((</span><span class="n">h</span><span class="p">,</span> <span class="n">w</span><span class="p">),</span> <span class="n">resample</span><span class="o">=</span><span class="n">Image</span><span class="o">.</span><span class="n">BILINEAR</span><span class="p">)</span>
+
+    <span class="c1"># Convert to array and change data layout from HWC to CHW</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+    <span class="n">input_image</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">c</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">input_image</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="openvino-inference-engine-setup">
+<h2>OpenVINO Inference Engine Setup<a class="headerlink" href="#openvino-inference-engine-setup" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">class_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;daisy&quot;</span><span class="p">,</span> <span class="s2">&quot;dandelion&quot;</span><span class="p">,</span> <span class="s2">&quot;roses&quot;</span><span class="p">,</span> <span class="s2">&quot;sunflowers&quot;</span><span class="p">,</span> <span class="s2">&quot;tulips&quot;</span><span class="p">]</span>
+
+<span class="n">model_xml</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">model_fname</span><span class="si">}</span><span class="s2">/flower_ir.xml&quot;</span>
+
+<span class="c1"># Load model</span>
+<span class="n">ie</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">ie</span><span class="o">.</span><span class="n">read_model</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model_xml</span><span class="p">)</span>
+
+<span class="c1"># Neural Compute Stick</span>
+<span class="c1"># compiled_model = ie.compile_model(model=model, device_name=&quot;MYRIAD&quot;)</span>
+<span class="n">compiled_model</span> <span class="o">=</span> <span class="n">ie</span><span class="o">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">device_name</span><span class="o">=</span><span class="s2">&quot;CPU&quot;</span><span class="p">)</span>
+
+<span class="k">del</span> <span class="n">model</span>
+
+<span class="n">input_layer</span> <span class="o">=</span> <span class="n">compiled_model</span><span class="o">.</span><span class="n">input</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">output_layer</span> <span class="o">=</span> <span class="n">compiled_model</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="run-the-inference-step">
+<h2>Run the Inference Step<a class="headerlink" href="#run-the-inference-step" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run inference on the input image...</span>
+<span class="n">inp_img_url</span> <span class="o">=</span> <span class="s2">&quot;https://upload.wikimedia.org/wikipedia/commons/4/48/A_Close_Up_Photo_of_a_Dandelion.jpg&quot;</span>
+<span class="n">OUTPUT_DIR</span> <span class="o">=</span> <span class="s2">&quot;output&quot;</span>
+<span class="n">inp_file_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;A_Close_Up_Photo_of_a_Dandelion.jpg&quot;</span>
+<span class="n">file_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">OUTPUT_DIR</span><span class="p">)</span><span class="o">/</span><span class="n">Path</span><span class="p">(</span><span class="n">inp_file_name</span><span class="p">)</span>
+
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">OUTPUT_DIR</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Download the image</span>
+<span class="n">download_file</span><span class="p">(</span><span class="n">inp_img_url</span><span class="p">,</span> <span class="n">inp_file_name</span><span class="p">,</span> <span class="n">directory</span><span class="o">=</span><span class="n">OUTPUT_DIR</span><span class="p">)</span>
+
+<span class="c1"># Pre-process the image and get it ready for inference.</span>
+<span class="n">input_image</span> <span class="o">=</span> <span class="n">pre_process_image</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">input_image</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">input_layer</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">compiled_model</span><span class="p">([</span><span class="n">input_image</span><span class="p">])[</span><span class="n">output_layer</span><span class="p">]</span>
+
+<span class="n">score</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="c1"># Show the results</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="s2">&quot;This image most likely belongs to </span><span class="si">{}</span><span class="s2"> with a </span><span class="si">{:.2f}</span><span class="s2"> percent confidence.&quot;</span>
+    <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">class_names</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">score</span><span class="p">)],</span> <span class="mi">100</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">score</span><span class="p">))</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;output/A_Close_Up_Photo_of_a_Dandelion.jpg&#39;</span> <span class="n">already</span> <span class="n">exists</span><span class="o">.</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="mi">3</span><span class="p">}</span>
+<span class="n">This</span> <span class="n">image</span> <span class="n">most</span> <span class="n">likely</span> <span class="n">belongs</span> <span class="n">to</span> <span class="n">dandelion</span> <span class="k">with</span> <span class="n">a</span> <span class="mf">98.70</span> <span class="n">percent</span> <span class="n">confidence</span><span class="o">.</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">34</span><span class="o">-</span><span class="mi">57303</span><span class="n">fd7ddec</span><span class="o">&gt;</span><span class="p">:</span><span class="mi">5</span><span class="p">:</span> <span class="ne">DeprecationWarning</span><span class="p">:</span> <span class="n">BILINEAR</span> <span class="ow">is</span> <span class="n">deprecated</span> <span class="ow">and</span> <span class="n">will</span> <span class="n">be</span> <span class="n">removed</span> <span class="ow">in</span> <span class="n">Pillow</span> <span class="mi">10</span> <span class="p">(</span><span class="mi">2023</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">01</span><span class="p">)</span><span class="o">.</span> <span class="n">Use</span> <span class="n">Resampling</span><span class="o">.</span><span class="n">BILINEAR</span> <span class="n">instead</span><span class="o">.</span>
+  <span class="n">image</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">resize</span><span class="p">((</span><span class="n">h</span><span class="p">,</span> <span class="n">w</span><span class="p">),</span> <span class="n">resample</span><span class="o">=</span><span class="n">Image</span><span class="o">.</span><span class="n">BILINEAR</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../_images/301-tensorflow-training-openvino-with-output_78_2.png" src="../_images/301-tensorflow-training-openvino-with-output_78_2.png" />
+</div>
+<div class="section" id="the-next-steps">
+<h2>The Next Steps<a class="headerlink" href="#the-next-steps" title="Permalink to this headline">¶</a></h2>
+<p>This tutorial showed how to train a TensorFlow model, how to convert
+that model to OpenVINO’s IR format, and how to do inference on the
+converted model. For faster inference speed, you can quantize the IR
+model. To see how to quantize this model with OpenVINO’s <a class="reference external" href="https://docs.openvino.ai/2021.4/pot_README.html">Post-Training
+Optimization Tool</a>,
+check out the <a class="reference external" href="./301-tensorflow-training-openvino-pot.ipynb">Post-Training Quantization with TensorFlow Classification
+Model</a> notebook.</p>
+</div>
+</div>
+
+
+                </div>
+            
+            
+                <div class='prev-next-bottom'>
+                  
+    <a class='button bttn-sec button-size-l' id="prev-link" href="218-vehicle-detection-and-recognition-with-output.html" title="previous page">Prev</a>
+    <a class='button bttn-sec button-size-l' id="next-link" href="301-tensorflow-training-openvino-pot-with-output.html" title="next page">Next</a>
+
+                </div>
+            
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+<footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2021, Intel®.<br>
+</p>
+    </div>
+    
+    <div class="footer-item">
+      <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

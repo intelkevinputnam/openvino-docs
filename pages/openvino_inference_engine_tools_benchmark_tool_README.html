@@ -1,0 +1,886 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Benchmark Python* Tool &#8212; OpenVINO™  documentation</title>
+    
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/blank.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/doxyrest-pygments.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <link href="../_static/css/media/favicon.ico" rel="shortcut icon">
+    <link rel="stylesheet" href="../_static/css/openvino_sphinx_theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/button.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/input.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/textfield.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/tabs.css" type="text/css" />
+    <script src="../_static/js/openvino_sphinx_theme.js"></script>
+    <link rel="stylesheet" href="../_static/css/viewer.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/0.5.7/chartjs-plugin-annotation.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-barchart-background@1.3.0/build/Plugin.Barchart.Background.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-deferred@1"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.1/papaparse.min.js"></script>
+    <script src="../_static/js/viewer.min.js"></script>
+    <script src="/assets/versions_raw.js"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/tabs.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/js/custom.js"></script>
+    <script src="../_static/js/graphs.js"></script>
+    <script src="../_static/js/graphs_ov_tf.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/target-highlight.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <link rel="canonical" href="https://docs.openvino.ai/latest/pages/openvino_inference_engine_tools_benchmark_tool_README.html" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Troubleshooting Issues with OpenVINO™ Installation &amp; Configuration" href="openvino_docs_get_started_guide_troubleshooting.html" />
+    <link rel="prev" title="Benchmark C++ Tool" href="openvino_inference_engine_samples_benchmark_app_README.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+      <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+
+<a class="navbar-brand" href="../index.html">
+  <img src="../_static/logo.svg" class="logo" alt="logo">
+</a>
+
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 current active nav-item">
+ <a class="reference internal nav-link" href="get_started.html">
+  Get Started
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="documentation.html">
+  Documentation
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../tutorials.html">
+  Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../model_zoo.html">
+  Model Zoo
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="resources.html">
+  Resources
+ </a>
+</li>
+
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/openvinotoolkit/openvino" rel="noopener" target="_blank" title="GitHub">
+            <span><i class="sst-github"></i></span>
+            <label class="sr-only">GitHub</label>
+          </a>
+        </li>
+</ul>
+      </div>
+      
+      <div class="navbar-end-item">
+        
+<div class="dropdown sst-dropdown sst-dropdown-navbar">
+  <button class="btn sst-btn dropdown-toggle" type="button" id="version-selector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+  <div class="dropdown-menu" aria-labelledby="version-selector">
+  </div>
+</div>
+      </div>
+      
+      <div class="navbar-end-item">
+        
+
+<div class="dropdown sst-dropdown sst-dropdown-navbar">
+  <button class="btn sst-btn dropdown-toggle" type="button" id="language-selector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">English</button>
+  <div class="dropdown-menu" aria-labelledby="language-selector">
+    
+      
+        <a class="dropdown-item font-weight-bold" href="/latest/pages/openvino_inference_engine_tools_benchmark_tool_README.html">English</a>
+      
+    
+      
+        <a  class="dropdown-item" href="/cn/latest/pages/openvino_inference_engine_tools_benchmark_tool_README.html">Chinese</a>
+      
+    
+  </div>
+</div>
+
+      </div>
+      
+    </div>
+  </div>
+</div>
+        <div id="collapse-nav-wrapper" class="container-xl">
+          <button id="collapse-nav" class="button bttn-prm button-size-m" type="button" data-toggle="collapse" data-target="#nav-tree" aria-expanded="false" aria-controls="nav-tree">
+            Documentation navigation <i class="fas fa-chevron-down"></i>
+          </button>
+        </div>
+      </nav>
+      <div class="transition-banner container-fluid alert alert-info alert-dismissible fade show" role="alert">
+        <p>OpenVINO 2022.1 introduces a new version of OpenVINO API (API 2.0). For more information on the changes and transition steps, see the <a href="https://docs.openvino.ai/latest/openvino_2_0_transition_guide.html">transition guide</a></p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar" id="nav-tree"><form class="searchForm bd-search d-flex align-items-center" action="../search.html" method="get">
+    <i class="icon fas fa-search"></i>
+    <input type="search" class="form-control" name="query" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Install OpenVINO
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="openvino_docs_install_guides_overview.html">
+   Overview
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="openvino_docs_install_guides_install_runtime.html">
+   Install OpenVINO Runtime
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_linux_header.html">
+     Install on Linux
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+    <label for="toctree-checkbox-2">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_linux.html">
+       Using Installer
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_pip.html">
+       From PyPI
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_apt.html">
+       From APT
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_yum.html">
+       From YUM
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_conda.html">
+       From Anaconda Cloud
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_docker_linux.html">
+       Using Docker
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_windows_header.html">
+     Install on Windows
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+    <label for="toctree-checkbox-3">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_windows.html">
+       Using Installer
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_pip.html">
+       From PyPI
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_conda.html">
+       From Anaconda Cloud
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_docker_windows.html">
+       Using Docker
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_macos_header.html">
+     Install on macOS
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+    <label for="toctree-checkbox-4">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_macos.html">
+       Using Installer
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_pip.html">
+       From PyPI
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_conda.html">
+       From Anaconda Cloud
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_raspbian.html">
+     Install on Raspbian OS
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="openvino_docs_install_guides_install_dev_tools.html">
+   Install OpenVINO Development Tools
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference external" href="https://github.com/openvinotoolkit/openvino/wiki/BuildingCode">
+   Build from Source
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_yocto.html">
+   Create a Yocto Image
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="openvino_docs_install_guides_uninstalling_openvino.html">
+   Uninstalling
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Additional Configurations
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="openvino_docs_install_guides_configurations_for_intel_gpu.html">
+   Configurations for GPU
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="openvino_docs_install_guides_configurations_for_ncs2.html">
+   Configurations for NCS2
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_ivad_vpu.html">
+   Configurations for VPU
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_install_guides_movidius_setup_guide.html">
+     Configurations for IEI Mustang-V100-MX8-R10 card
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="openvino_docs_install_guides_configurations_for_intel_gna.html">
+   Configurations for GNA
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Get Started Guides
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="openvino_docs_get_started_get_started_demos.html">
+   Get Started with Step-by-step Demo
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  OpenVINO Code Samples
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="openvino_docs_OV_UG_Samples_Overview.html">
+   OpenVINO Samples
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_inference_engine_samples_classification_sample_async_README.html">
+     Image Classification Async C++ Sample
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_inference_engine_ie_bridges_python_sample_classification_sample_async_README.html">
+     Image Classification Async Python* Sample
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_inference_engine_samples_hello_classification_README.html">
+     Hello Classification C++ Sample
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_inference_engine_ie_bridges_c_samples_hello_classification_README.html">
+     Hello Classification C Sample
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_inference_engine_ie_bridges_python_sample_hello_classification_README.html">
+     Hello Classification Python* Sample
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_inference_engine_samples_hello_reshape_ssd_README.html">
+     Hello Reshape SSD C++ Sample
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_inference_engine_ie_bridges_python_sample_hello_reshape_ssd_README.html">
+     Hello Reshape SSD Python* Sample
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_inference_engine_samples_hello_nv12_input_classification_README.html">
+     Hello NV12 Input Classification C++ Sample
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_inference_engine_ie_bridges_c_samples_hello_nv12_input_classification_README.html">
+     Hello NV12 Input Classification C Sample
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_inference_engine_samples_hello_query_device_README.html">
+     Hello Query Device C++ Sample
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_inference_engine_ie_bridges_python_sample_hello_query_device_README.html">
+     Hello Query Device Python* Sample
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_inference_engine_samples_model_creation_sample_README.html">
+     Model Creation C++ Sample
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_inference_engine_ie_bridges_python_sample_model_creation_sample_README.html">
+     Model Creation Python* Sample
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_inference_engine_samples_speech_sample_README.html">
+     Automatic Speech Recognition C++ Sample
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_inference_engine_ie_bridges_python_sample_speech_sample_README.html">
+     Automatic Speech Recognition Python* Sample
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_inference_engine_samples_benchmark_app_README.html">
+     Benchmark C++ Tool
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Benchmark Python* Tool
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Troubleshooting
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="openvino_docs_get_started_guide_troubleshooting.html">
+   Installation &amp; Configuration Issues
+  </a>
+ </li>
+</ul>
+
+  </div>
+</nav>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+              
+              <div class="toc-item">
+                
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#how-it-works">
+   How It Works
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#latency-and-throughput-focused-inference-modes">
+     Latency and Throughput-focused Inference Modes
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#defining-the-number-of-inference-executions">
+     Defining the Number of Inference Executions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#run-the-tool">
+   Run the Tool
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#examples-of-running-the-tool">
+   Examples of Running the Tool
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#see-also">
+   See Also
+  </a>
+ </li>
+</ul>
+
+</nav>
+              </div>
+              
+              <div class="toc-item">
+                <div class="tocsection download-docs">
+  <div class="dropdown sst-dropdown">
+    <button class="button bttn-prm button-size-m" data-display="static" type="button" id="download-options"
+      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Download Docs
+    </button>
+    <div class="dropdown-menu" aria-labelledby="download-options">
+      <a class="dropdown-item" href="#" onclick="window.print()">.pdf</a>
+      <a id="download-zip-btn" class="dropdown-item" href="#">.zip</a>
+    </div>
+  </div>
+</div>
+              </div>
+              
+            
+          </div>
+          
+
+          
+          
+              
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+
+<div class="tocsection editthispage">
+    <a href="None">
+        <i class="fas fa-pencil-alt"></i> Edit this page
+    </a>
+</div>
+
+            
+                <div>
+                  
+  <div class="section" id="benchmark-python-tool">
+<span id="doxid-openvino-inference-engine-tools-benchmark-tool-r-e-a-d-m-e"></span><span id="index-0"></span><h1>Benchmark Python* Tool<a class="headerlink" href="#benchmark-python-tool" title="Permalink to this headline">¶</a></h1>
+<p><span class="target" id="doxid-openvino-inference-engine-tools-benchmark-tool-r-e-a-d-m-e-1md-openvino-tools-benchmark-tool-readme"></span> This topic demonstrates how to run the Benchmark Python* Tool, which performs inference using convolutional networks. Performance can be measured for two inference modes: latency- and throughput-oriented.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This topic describes usage of Python implementation of the Benchmark Tool. For the C++ implementation, refer to <a class="reference internal" href="openvino_inference_engine_samples_benchmark_app_README.html#doxid-openvino-inference-engine-samples-benchmark-app-r-e-a-d-m-e"><span class="std std-ref">Benchmark C++ Tool</span></a>.</p>
+</div>
+<div class="section" id="how-it-works">
+<h2>How It Works<a class="headerlink" href="#how-it-works" title="Permalink to this headline">¶</a></h2>
+<p>Upon start-up, the application reads command-line parameters and loads a network and inputs (images/binary files) to the specified device. Device-specific execution parameters (number of streams, threads, and so on) can be either explicitly specified through the command line or left default. In the latter case, the sample logic will select the values for the optimal throughput. While further experimenting with individual parameters (like number of streams and requests, batch size, etc) allows to find the performance sweet spot, usually, the resulting values are not very performance-portable, so the values from one machine or device are not necessarily optimal for another. From this perspective, the most portable way is experimenting only the performance hints. To learn more, refer to the section below.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>By default, OpenVINO samples, tools and demos expect input with BGR channels order. If you trained your model to work with RGB order, you need to manually rearrange the default channels order in the sample or demo application or reconvert your model using the Model Optimizer tool with <code class="docutils literal notranslate"><span class="pre">--reverse_input_channels</span></code> argument specified. For more information about the argument, refer to <strong>When to Reverse Input Channels</strong> section of <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_Converting_Model.html#doxid-openvino-docs-m-o-d-g-prepare-model-convert-model-converting-model"><span class="std std-ref">Converting a Model to Intermediate Representation (IR)</span></a>.</p>
+</div>
+<div class="section" id="latency-and-throughput-focused-inference-modes">
+<h3>Latency and Throughput-focused Inference Modes<a class="headerlink" href="#latency-and-throughput-focused-inference-modes" title="Permalink to this headline">¶</a></h3>
+<p>In many cases the primary performance metric is the time (in milliseconds) for an individual inference request. For conventional devices the best latency is usually achieved when the application operates single inference request. Similarly, while for some devices the synchronous API (<code class="docutils literal notranslate"><span class="pre">Infer</span></code> method) was slightly better for the latency. However, advanced devices like multi-socket CPUs, modern GPUs and so on, are capable to run multiple inference requests, while delivering the same latency (as with the single request). Also, the asynchronous API is more general/flexible (with respect to handling multiple inference requests). Overall, the legacy way of measuring latency (triggered by ‘-api sync’) with a single request and synchronous API is discouraged in favor of the dedicated ‘-hint latency’ that lets the <em>device</em> to apply the right settings to minimize the time to request.</p>
+<p>Throughput-oriented scenarios, in contrast, are focused on fully saturating the machine with enough data to crunch, as opposite to the time of the individual request. So, the primary performance metric is rather FPS (frames per second). Yet, just like with the latency case, the optimal execution parameters may differ between machines and devices. So, again, as explained in the previous section, the most portable way is to use the dedicated performance hint, rather than playing individual parameters. The hints allow the device to configure actual settings for the specified mode. The sample then queries/executes the optimal number of inference requests.</p>
+<p>During the execution, the application collects/reports two types of metrics:</p>
+<ul class="simple">
+<li><p>Wall-clock time (latency) of each infer request and resulting latency</p></li>
+<li><p>Duration of all inference executions and resulting throughput By default, the reported latency value is always calculated as the median (i.e. 50th percentile) value of all collected latencies from individual requests. Notice that you can change the desired percentile with the command-line flag. The throughput value is derived from the overall inference execution time and number of completed requests (respecting the batch size).</p></li>
+</ul>
+</div>
+<div class="section" id="defining-the-number-of-inference-executions">
+<h3>Defining the Number of Inference Executions<a class="headerlink" href="#defining-the-number-of-inference-executions" title="Permalink to this headline">¶</a></h3>
+<p>A number of executions is defined by one of the two values:</p>
+<ul class="simple">
+<li><p>Explicitly, with the <code class="docutils literal notranslate"><span class="pre">-niter</span></code> command-line argument</p></li>
+<li><p>As <em>time</em> duration specified with the <code class="docutils literal notranslate"><span class="pre">-t</span></code> command-line argument</p></li>
+<li><p>Both of them (execution will continue until both conditions are met)</p></li>
+<li><p>Predefined duration if neither <code class="docutils literal notranslate"><span class="pre">-niter</span></code> nor <code class="docutils literal notranslate"><span class="pre">-t</span></code> are not specified. Predefined duration value depends on the device.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="run-the-tool">
+<h2>Run the Tool<a class="headerlink" href="#run-the-tool" title="Permalink to this headline">¶</a></h2>
+<p>Before running the Benchmark tool, install <a class="reference internal" href="openvino_docs_install_guides_install_dev_tools.html#doxid-openvino-docs-install-guides-install-dev-tools"><span class="std std-ref">OpenVINO™ Development Tools</span></a>.</p>
+<p>Notice that the benchmark_app usually produces optimal performance for any device out of the box. <strong>So in most cases you don’t need to play the app options explicitly and the plain device name is enough</strong>, for example, for CPU:</p>
+<div class="highlight"><div class="highlight"><pre><span></span><span class="n">benchmark_app</span> <span class="o">-</span><span class="n">m</span> <span class="o">&lt;</span><span class="n">model</span><span class="o">&gt;</span> <span class="o">-</span><span class="n">i</span> <span class="o">&lt;</span><span class="n">input</span><span class="o">&gt;</span> <span class="o">-</span><span class="n">d</span> <span class="n">CPU</span></pre></div></div><p>But it is still may be sub-optimal for some cases, especially for very small networks. More details can read in <a class="reference internal" href="openvino_docs_optimization_guide_dldt_optimization_guide.html#doxid-openvino-docs-optimization-guide-dldt-optimization-guide"><span class="std std-ref">Performance Optimization Guide</span></a>.</p>
+<p>Running the application with the <code class="docutils literal notranslate"><span class="pre">-h</span></code> or <code class="docutils literal notranslate"><span class="pre">--help</span></code> ‘ option yields the following usage message:</p>
+<div class="highlight"><div class="highlight"><pre><span></span><span class="nl">usage</span><span class="p">:</span> <span class="n">benchmark_app</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span> <span class="p">[</span><span class="n">HELP</span><span class="p">]]</span> <span class="p">[</span><span class="o">-</span><span class="n">i</span> <span class="n">PATHS_TO_INPUT</span> <span class="p">[</span><span class="n">PATHS_TO_INPUT</span> <span class="p">...]]</span> <span class="o">-</span><span class="n">m</span> <span class="n">PATH_TO_MODEL</span>
+                     <span class="p">[</span><span class="o">-</span><span class="n">d</span> <span class="n">TARGET_DEVICE</span><span class="p">]</span>
+                     <span class="p">[</span><span class="o">-</span><span class="n">l</span> <span class="n">PATH_TO_EXTENSION</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">c</span> <span class="n">PATH_TO_CLDNN_CONFIG</span><span class="p">]</span>
+                     <span class="p">[</span><span class="o">-</span><span class="n">api</span> <span class="p">{</span><span class="n">sync</span><span class="p">,</span><span class="n">async</span><span class="p">}]</span>
+                     <span class="p">[</span><span class="o">-</span><span class="n">niter</span> <span class="n">NUMBER_ITERATIONS</span><span class="p">]</span>
+                     <span class="p">[</span><span class="o">-</span><span class="n">nireq</span> <span class="n">NUMBER_INFER_REQUESTS</span><span class="p">]</span>
+                     <span class="p">[</span><span class="o">-</span><span class="n">b</span> <span class="n">BATCH_SIZE</span><span class="p">]</span>
+                     <span class="p">[</span><span class="o">-</span><span class="n">stream_output</span> <span class="p">[</span><span class="n">STREAM_OUTPUT</span><span class="p">]]</span>
+                     <span class="p">[</span><span class="o">-</span><span class="n">t</span> <span class="n">TIME</span><span class="p">]</span>
+                     <span class="p">[</span><span class="o">-</span><span class="n">progress</span> <span class="p">[</span><span class="n">PROGRESS</span><span class="p">]]</span>
+                     <span class="p">[</span><span class="o">-</span><span class="n">shape</span> <span class="n">SHAPE</span><span class="p">]</span>
+                     <span class="p">[</span><span class="o">-</span><span class="n">layout</span> <span class="n">LAYOUT</span><span class="p">]</span>
+                     <span class="p">[</span><span class="o">-</span><span class="n">nstreams</span> <span class="n">NUMBER_STREAMS</span><span class="p">]</span>
+                     <span class="p">[</span><span class="o">-</span><span class="n">enforcebf16</span> <span class="p">[{</span><span class="n">True</span><span class="p">,</span><span class="n">False</span><span class="p">}]]</span>
+                     <span class="p">[</span><span class="o">-</span><span class="n">nthreads</span> <span class="n">NUMBER_THREADS</span><span class="p">]</span>
+                     <span class="p">[</span><span class="o">-</span><span class="n">pin</span> <span class="p">{</span><span class="n">YES</span><span class="p">,</span><span class="n">NO</span><span class="p">,</span><span class="n">NUMA</span><span class="p">,</span><span class="n">HYBRID_AWARE</span><span class="p">}]</span>
+                     <span class="p">[</span><span class="o">-</span><span class="n">exec_graph_path</span> <span class="n">EXEC_GRAPH_PATH</span><span class="p">]</span>
+                     <span class="p">[</span><span class="o">-</span><span class="n">pc</span> <span class="p">[</span><span class="n">PERF_COUNTS</span><span class="p">]]</span>
+                     <span class="p">[</span><span class="o">-</span><span class="n">report_type</span> <span class="p">{</span><span class="n">no_counters</span><span class="p">,</span><span class="n">average_counters</span><span class="p">,</span><span class="n">detailed_counters</span><span class="p">}]</span>
+                     <span class="p">[</span><span class="o">-</span><span class="n">report_folder</span> <span class="n">REPORT_FOLDER</span><span class="p">]</span>
+                     <span class="p">[</span><span class="o">-</span><span class="n">dump_config</span> <span class="n">DUMP_CONFIG</span><span class="p">]</span>
+                     <span class="p">[</span><span class="o">-</span><span class="n">load_config</span> <span class="n">LOAD_CONFIG</span><span class="p">]</span>
+                     <span class="p">[</span><span class="o">-</span><span class="n">qb</span> <span class="p">{</span><span class="mi">8</span><span class="p">,</span><span class="mi">16</span><span class="p">}]</span>
+                     <span class="p">[</span><span class="o">-</span><span class="n">ip</span> <span class="p">{</span><span class="n">U8</span><span class="p">,</span><span class="n">FP16</span><span class="p">,</span><span class="n">FP32</span><span class="p">}]</span>
+                     <span class="p">[</span><span class="o">-</span><span class="n">op</span> <span class="p">{</span><span class="n">U8</span><span class="p">,</span><span class="n">FP16</span><span class="p">,</span><span class="n">FP32</span><span class="p">}]</span>
+                     <span class="p">[</span><span class="o">-</span><span class="n">iop</span> <span class="n">INPUT_OUTPUT_PRECISION</span><span class="p">]</span>
+                     <span class="p">[</span><span class="o">-</span><span class="n">cdir</span> <span class="n">CACHE_DIR</span><span class="p">]</span>
+                     <span class="p">[</span><span class="o">-</span><span class="n">lfile</span> <span class="p">[</span><span class="n">LOAD_FROM_FILE</span><span class="p">]]</span>
+
+<span class="nl">Options</span><span class="p">:</span>
+  <span class="o">-</span><span class="n">h</span> <span class="p">[</span><span class="n">HELP</span><span class="p">],</span> <span class="o">--</span><span class="n">help</span> <span class="p">[</span><span class="n">HELP</span><span class="p">]</span>
+                        <span class="n">Show</span> <span class="k">this</span> <span class="n">help</span> <span class="n">message</span> <span class="n">and</span> <span class="n">exit</span><span class="p">.</span>
+  <span class="o">-</span><span class="n">i</span> <span class="n">PATHS_TO_INPUT</span> <span class="p">[</span><span class="n">PATHS_TO_INPUT</span> <span class="p">...],</span> <span class="o">--</span><span class="n">paths_to_input</span> <span class="n">PATHS_TO_INPUT</span> <span class="p">[</span><span class="n">PATHS_TO_INPUT</span> <span class="p">...]</span>
+                        <span class="n">Optional</span><span class="p">.</span> <span class="n">Path</span> <span class="n">to</span> <span class="n">a</span> <span class="n">folder</span> <span class="n">with</span> <span class="n">images</span> <span class="n">and</span><span class="o">/</span><span class="n">or</span> <span class="n">binaries</span> <span class="n">or</span> <span class="n">to</span> <span class="n">specific</span> <span class="n">image</span> <span class="n">or</span> <span class="n">binary</span> <span class="n">file</span><span class="p">.</span>
+  <span class="o">-</span><span class="n">m</span> <span class="n">PATH_TO_MODEL</span><span class="p">,</span> <span class="o">--</span><span class="n">path_to_model</span> <span class="n">PATH_TO_MODEL</span>
+                        <span class="n">Required</span><span class="p">.</span> <span class="n">Path</span> <span class="n">to</span> <span class="n">an</span> <span class="p">.</span><span class="n">xml</span><span class="o">/</span><span class="p">.</span><span class="n">onnx</span><span class="o">/</span><span class="p">.</span><span class="n">prototxt</span> <span class="n">file</span> <span class="n">with</span> <span class="n">a</span> <span class="n">trained</span> <span class="n">model</span> <span class="n">or</span> <span class="n">to</span> <span class="n">a</span> <span class="p">.</span><span class="n">blob</span> <span class="n">file</span> <span class="n">with</span> <span class="n">a</span> <span class="n">trained</span> <span class="n">compiled</span> <span class="n">model</span><span class="p">.</span>
+  <span class="o">-</span><span class="n">d</span> <span class="n">TARGET_DEVICE</span><span class="p">,</span> <span class="o">--</span><span class="n">target_device</span> <span class="n">TARGET_DEVICE</span>
+                        <span class="n">Optional</span><span class="p">.</span> <span class="n">Specify</span> <span class="n">a</span> <span class="n">target</span> <span class="n">device</span> <span class="n">to</span> <span class="n">infer</span> <span class="n">on</span> <span class="p">(</span><span class="n">the</span> <span class="n">list</span> <span class="n">of</span> <span class="n">available</span> <span class="n">devices</span> <span class="n">is</span> <span class="n">shown</span> <span class="n">below</span><span class="p">).</span> <span class="n">Default</span> <span class="n">value</span> <span class="n">is</span> <span class="n">CPU</span><span class="p">.</span> <span class="n">Use</span> <span class="sc">&#39;-d HETERO:&lt;comma separated devices list&gt;&#39;</span> <span class="n">format</span> <span class="n">to</span> <span class="n">specify</span>
+                        <span class="n">HETERO</span> <span class="n">plugin</span><span class="p">.</span> <span class="n">Use</span> <span class="sc">&#39;-d MULTI:&lt;comma separated devices list&gt;&#39;</span> <span class="n">format</span> <span class="n">to</span> <span class="n">specify</span> <span class="n">MULTI</span> <span class="n">plugin</span><span class="p">.</span> <span class="n">The</span> <span class="n">application</span> <span class="n">looks</span> <span class="k">for</span> <span class="n">a</span> <span class="n">suitable</span> <span class="n">plugin</span> <span class="k">for</span> <span class="n">the</span> <span class="n">specified</span> <span class="n">device</span><span class="p">.</span>
+  <span class="o">-</span><span class="n">l</span> <span class="n">PATH_TO_EXTENSION</span><span class="p">,</span> <span class="o">--</span><span class="n">path_to_extension</span> <span class="n">PATH_TO_EXTENSION</span>
+                        <span class="n">Optional</span><span class="p">.</span> <span class="n">Required</span> <span class="k">for</span> <span class="n">CPU</span> <span class="n">custom</span> <span class="n">layers</span><span class="p">.</span> <span class="n">Absolute</span> <span class="n">path</span> <span class="n">to</span> <span class="n">a</span> <span class="n">shared</span> <span class="n">library</span> <span class="n">with</span> <span class="n">the</span> <span class="n">kernels</span> <span class="n">implementations</span><span class="p">.</span>
+  <span class="o">-</span><span class="n">c</span> <span class="n">PATH_TO_CLDNN_CONFIG</span><span class="p">,</span> <span class="o">--</span><span class="n">path_to_cldnn_config</span> <span class="n">PATH_TO_CLDNN_CONFIG</span>
+                        <span class="n">Optional</span><span class="p">.</span> <span class="n">Required</span> <span class="k">for</span> <span class="n">GPU</span> <span class="n">custom</span> <span class="n">kernels</span><span class="p">.</span> <span class="n">Absolute</span> <span class="n">path</span> <span class="n">to</span> <span class="n">an</span> <span class="p">.</span><span class="n">xml</span> <span class="n">file</span> <span class="n">with</span> <span class="n">the</span> <span class="n">kernels</span> <span class="n">description</span><span class="p">.</span>
+  <span class="o">-</span><span class="n">api</span> <span class="p">{</span><span class="n">sync</span><span class="p">,</span><span class="n">async</span><span class="p">},</span> <span class="o">--</span><span class="n">api_type</span> <span class="p">{</span><span class="n">sync</span><span class="p">,</span><span class="n">async</span><span class="p">}</span>
+                        <span class="n">Optional</span><span class="p">.</span> <span class="n">Enable</span> <span class="k">using</span> <span class="n">sync</span><span class="o">/</span><span class="n">async</span> <span class="n">API</span><span class="p">.</span> <span class="n">Default</span> <span class="n">value</span> <span class="n">is</span> <span class="n">async</span><span class="p">.</span>
+  <span class="o">-</span><span class="n">niter</span> <span class="n">NUMBER_ITERATIONS</span><span class="p">,</span> <span class="o">--</span><span class="n">number_iterations</span> <span class="n">NUMBER_ITERATIONS</span>
+                        <span class="n">Optional</span><span class="p">.</span> <span class="n">Number</span> <span class="n">of</span> <span class="n">iterations</span><span class="p">.</span> <span class="n">If</span> <span class="n">not</span> <span class="n">specified</span><span class="p">,</span> <span class="n">the</span> <span class="n">number</span> <span class="n">of</span> <span class="n">iterations</span> <span class="n">is</span> <span class="n">calculated</span> <span class="n">depending</span> <span class="n">on</span> <span class="n">a</span> <span class="n">device</span><span class="p">.</span>
+  <span class="o">-</span><span class="n">nireq</span> <span class="n">NUMBER_INFER_REQUESTS</span><span class="p">,</span> <span class="o">--</span><span class="n">number_infer_requests</span> <span class="n">NUMBER_INFER_REQUESTS</span>
+                        <span class="n">Optional</span><span class="p">.</span> <span class="n">Number</span> <span class="n">of</span> <span class="n">infer</span> <span class="n">requests</span><span class="p">.</span> <span class="n">Default</span> <span class="n">value</span> <span class="n">is</span> <span class="n">determined</span> <span class="n">automatically</span> <span class="k">for</span> <span class="n">device</span><span class="p">.</span>
+  <span class="o">-</span><span class="n">b</span> <span class="n">BATCH_SIZE</span><span class="p">,</span> <span class="o">--</span><span class="n">batch_size</span> <span class="n">BATCH_SIZE</span>
+                        <span class="n">Optional</span><span class="p">.</span> <span class="n">Batch</span> <span class="n">size</span> <span class="n">value</span><span class="p">.</span> <span class="n">If</span> <span class="n">not</span> <span class="n">specified</span><span class="p">,</span> <span class="n">the</span> <span class="n">batch</span> <span class="n">size</span> <span class="n">value</span> <span class="n">is</span> <span class="n">determined</span> <span class="n">from</span> <span class="n">Intermediate</span> <span class="n">Representation</span>
+  <span class="o">-</span><span class="n">stream_output</span> <span class="p">[</span><span class="n">STREAM_OUTPUT</span><span class="p">]</span>
+                        <span class="n">Optional</span><span class="p">.</span> <span class="n">Print</span> <span class="n">progress</span> <span class="n">as</span> <span class="n">a</span> <span class="n">plain</span> <span class="n">text</span><span class="p">.</span> <span class="n">When</span> <span class="n">specified</span><span class="p">,</span> <span class="n">an</span> <span class="n">interactive</span> <span class="n">progress</span> <span class="n">bar</span> <span class="n">is</span> <span class="n">replaced</span> <span class="n">with</span> <span class="n">a</span> <span class="n">multi</span><span class="o">-</span><span class="n">line</span> <span class="n">output</span><span class="p">.</span>
+  <span class="o">-</span><span class="n">t</span> <span class="n">TIME</span><span class="p">,</span> <span class="o">--</span><span class="n">time</span> <span class="n">TIME</span>  <span class="n">Optional</span><span class="p">.</span> <span class="n">Time</span> <span class="n">in</span> <span class="n">seconds</span> <span class="n">to</span> <span class="n">execute</span> <span class="n">topology</span><span class="p">.</span>
+  <span class="o">-</span><span class="n">progress</span> <span class="p">[</span><span class="n">PROGRESS</span><span class="p">]</span>  <span class="n">Optional</span><span class="p">.</span> <span class="n">Show</span> <span class="n">progress</span> <span class="n">bar</span> <span class="p">(</span><span class="n">can</span> <span class="n">affect</span> <span class="n">performance</span> <span class="n">measurement</span><span class="p">).</span> <span class="n">Default</span> <span class="n">values</span> <span class="n">is</span> <span class="sc">&#39;False&#39;</span><span class="p">.</span>
+  <span class="o">-</span><span class="n">shape</span> <span class="n">SHAPE</span>          <span class="n">Optional</span><span class="p">.</span> <span class="n">Set</span> <span class="n">shape</span> <span class="k">for</span> <span class="n">input</span><span class="p">.</span> <span class="n">For</span> <span class="n">example</span><span class="p">,</span> <span class="s">&quot;input1[1,3,224,224],input2[1,4]&quot;</span> <span class="n">or</span> <span class="s">&quot;[1,3,224,224]&quot;</span> <span class="n">in</span> <span class="k">case</span> <span class="n">of</span> <span class="n">one</span> <span class="n">input</span> <span class="n">size</span><span class="p">.</span>
+  <span class="o">-</span><span class="n">layout</span> <span class="n">LAYOUT</span>        <span class="n">Optional</span><span class="p">.</span> <span class="n">Prompts</span> <span class="n">how</span> <span class="n">network</span> <span class="n">layouts</span> <span class="n">should</span> <span class="n">be</span> <span class="n">treated</span> <span class="n">by</span> <span class="n">application</span><span class="p">.</span> <span class="n">For</span> <span class="n">example</span><span class="p">,</span> <span class="s">&quot;input1[NCHW],input2[NC]&quot;</span> <span class="n">or</span> <span class="s">&quot;[NCHW]&quot;</span> <span class="n">in</span> <span class="k">case</span> <span class="n">of</span> <span class="n">one</span> <span class="n">input</span> <span class="n">size</span><span class="p">.</span>
+  <span class="o">-</span><span class="n">nstreams</span> <span class="n">NUMBER_STREAMS</span><span class="p">,</span> <span class="o">--</span><span class="n">number_streams</span> <span class="n">NUMBER_STREAMS</span>
+                        <span class="n">Optional</span><span class="p">.</span> <span class="n">Number</span> <span class="n">of</span> <span class="n">streams</span> <span class="n">to</span> <span class="n">use</span> <span class="k">for</span> <span class="n">inference</span> <span class="n">on</span> <span class="n">the</span> <span class="n">CPU</span><span class="o">/</span><span class="n">GPU</span><span class="o">/</span><span class="n">MYRIAD</span> <span class="p">(</span><span class="k">for</span> <span class="n">HETERO</span> <span class="n">and</span> <span class="n">MULTI</span> <span class="n">device</span> <span class="n">cases</span> <span class="n">use</span> <span class="n">format</span> <span class="o">&lt;</span><span class="n">device1</span><span class="o">&gt;:&lt;</span><span class="n">nstreams1</span><span class="o">&gt;</span><span class="p">,</span><span class="o">&lt;</span><span class="n">device2</span><span class="o">&gt;:&lt;</span><span class="n">nstreams2</span><span class="o">&gt;</span> <span class="n">or</span> <span class="n">just</span> <span class="o">&lt;</span><span class="n">nstreams</span><span class="o">&gt;</span><span class="p">).</span>
+                        <span class="n">Default</span> <span class="n">value</span> <span class="n">is</span> <span class="n">determined</span> <span class="n">automatically</span> <span class="k">for</span> <span class="n">a</span> <span class="n">device</span><span class="p">.</span> <span class="n">Please</span> <span class="n">note</span> <span class="n">that</span> <span class="n">although</span> <span class="n">the</span> <span class="n">automatic</span> <span class="n">selection</span> <span class="n">usually</span> <span class="n">provides</span> <span class="n">a</span> <span class="n">reasonable</span> <span class="n">performance</span><span class="p">,</span> <span class="n">it</span> <span class="n">still</span> <span class="n">may</span> <span class="n">be</span> <span class="n">non</span> <span class="o">-</span> <span class="n">optimal</span> <span class="k">for</span>
+                        <span class="n">some</span> <span class="n">cases</span><span class="p">,</span> <span class="n">especially</span> <span class="k">for</span> <span class="n">very</span> <span class="n">small</span> <span class="n">networks</span><span class="p">.</span> <span class="n">Also</span><span class="p">,</span> <span class="k">using</span> <span class="n">nstreams</span><span class="o">&gt;</span><span class="mi">1</span> <span class="n">is</span> <span class="n">inherently</span> <span class="n">throughput</span><span class="o">-</span><span class="n">oriented</span> <span class="n">option</span><span class="p">,</span> <span class="k">while</span> <span class="k">for</span> <span class="n">the</span> <span class="n">best</span><span class="o">-</span><span class="n">latency</span> <span class="n">estimations</span> <span class="n">the</span> <span class="n">number</span> <span class="n">of</span> <span class="n">streams</span> <span class="n">should</span> <span class="n">be</span>
+                        <span class="n">set</span> <span class="n">to</span> <span class="mf">1.</span> <span class="n">See</span> <span class="n">samples</span> <span class="n">README</span> <span class="k">for</span> <span class="n">more</span> <span class="n">details</span><span class="p">.</span>
+  <span class="o">-</span><span class="n">enforcebf16</span> <span class="p">[{</span><span class="n">True</span><span class="p">,</span><span class="n">False</span><span class="p">}],</span> <span class="o">--</span><span class="n">enforce_bfloat16</span> <span class="p">[{</span><span class="n">True</span><span class="p">,</span><span class="n">False</span><span class="p">}]</span>
+                        <span class="n">Optional</span><span class="p">.</span> <span class="n">By</span> <span class="k">default</span> <span class="n">floating</span> <span class="n">point</span> <span class="n">operations</span> <span class="n">execution</span> <span class="n">in</span> <span class="n">bfloat16</span> <span class="n">precision</span> <span class="n">are</span> <span class="n">enforced</span> <span class="k">if</span> <span class="n">supported</span> <span class="n">by</span> <span class="n">platform</span><span class="p">.</span> <span class="sc">&#39;true&#39;</span> <span class="o">-</span> <span class="n">enable</span> <span class="n">bfloat16</span> <span class="n">regardless</span> <span class="n">of</span> <span class="n">platform</span> <span class="n">support</span><span class="p">.</span> <span class="sc">&#39;false&#39;</span> <span class="o">-</span>
+                        <span class="n">disable</span> <span class="n">bfloat16</span> <span class="n">regardless</span> <span class="n">of</span> <span class="n">platform</span> <span class="n">support</span><span class="p">.</span>
+  <span class="o">-</span><span class="n">nthreads</span> <span class="n">NUMBER_THREADS</span><span class="p">,</span> <span class="o">--</span><span class="n">number_threads</span> <span class="n">NUMBER_THREADS</span>
+                        <span class="n">Number</span> <span class="n">of</span> <span class="n">threads</span> <span class="n">to</span> <span class="n">use</span> <span class="k">for</span> <span class="n">inference</span> <span class="n">on</span> <span class="n">the</span> <span class="n">CPU</span><span class="p">,</span> <span class="n">GNA</span> <span class="p">(</span><span class="n">including</span> <span class="n">HETERO</span> <span class="n">and</span> <span class="n">MULTI</span> <span class="n">cases</span><span class="p">).</span>
+  <span class="o">-</span><span class="n">pin</span> <span class="p">{</span><span class="n">YES</span><span class="p">,</span><span class="n">NO</span><span class="p">,</span><span class="n">NUMA</span><span class="p">,</span><span class="n">HYBRID_AWARE</span><span class="p">},</span> <span class="o">--</span><span class="n">infer_threads_pinning</span> <span class="p">{</span><span class="n">YES</span><span class="p">,</span><span class="n">NO</span><span class="p">,</span><span class="n">NUMA</span><span class="p">,</span><span class="n">HYBRID_AWARE</span><span class="p">}</span>
+                        <span class="n">Optional</span><span class="p">.</span> <span class="n">Enable</span> <span class="n">threads</span><span class="o">-&gt;</span><span class="n">cores</span> <span class="p">(</span><span class="sc">&#39;YES&#39;</span> <span class="n">which</span> <span class="n">is</span> <span class="n">OpenVINO</span> <span class="n">runtime</span><span class="sc">&#39;s default for conventional CPUs), threads-&gt;(NUMA)nodes (&#39;</span><span class="n">NUMA</span><span class="sc">&#39;), threads-&gt;appropriate core types (&#39;</span><span class="n">HYBRID_AWARE</span><span class="sc">&#39;, which</span>
+                        <span class="n">is</span> <span class="n">OpenVINO</span> <span class="n">runtime</span><span class="sc">&#39;s default for Hybrid CPUs)or completely disable (&#39;</span><span class="n">NO</span><span class="sc">&#39;)CPU threads pinning for CPU-involved inference.</span>
+  <span class="o">-</span><span class="n">exec_graph_path</span> <span class="n">EXEC_GRAPH_PATH</span><span class="p">,</span> <span class="o">--</span><span class="n">exec_graph_path</span> <span class="n">EXEC_GRAPH_PATH</span>
+                        <span class="n">Optional</span><span class="p">.</span> <span class="n">Path</span> <span class="n">to</span> <span class="n">a</span> <span class="n">file</span> <span class="n">where</span> <span class="n">to</span> <span class="n">store</span> <span class="n">executable</span> <span class="n">graph</span> <span class="n">information</span> <span class="n">serialized</span><span class="p">.</span>
+  <span class="o">-</span><span class="n">pc</span> <span class="p">[</span><span class="n">PERF_COUNTS</span><span class="p">],</span> <span class="o">--</span><span class="n">perf_counts</span> <span class="p">[</span><span class="n">PERF_COUNTS</span><span class="p">]</span>
+                        <span class="n">Optional</span><span class="p">.</span> <span class="n">Report</span> <span class="n">performance</span> <span class="n">counters</span><span class="p">.</span>
+  <span class="o">-</span><span class="n">report_type</span> <span class="p">{</span><span class="n">no_counters</span><span class="p">,</span><span class="n">average_counters</span><span class="p">,</span><span class="n">detailed_counters</span><span class="p">},</span> <span class="o">--</span><span class="n">report_type</span> <span class="p">{</span><span class="n">no_counters</span><span class="p">,</span><span class="n">average_counters</span><span class="p">,</span><span class="n">detailed_counters</span><span class="p">}</span>
+                        <span class="n">Optional</span><span class="p">.</span> <span class="n">Enable</span> <span class="n">collecting</span> <span class="n">statistics</span> <span class="n">report</span><span class="p">.</span> <span class="s">&quot;no_counters&quot;</span> <span class="n">report</span> <span class="n">contains</span> <span class="n">configuration</span> <span class="n">options</span> <span class="n">specified</span><span class="p">,</span> <span class="n">resulting</span> <span class="n">FPS</span> <span class="n">and</span> <span class="n">latency</span><span class="p">.</span> <span class="s">&quot;average_counters&quot;</span> <span class="n">report</span> <span class="n">extends</span> <span class="s">&quot;no_counters&quot;</span>
+                        <span class="n">report</span> <span class="n">and</span> <span class="n">additionally</span> <span class="n">includes</span> <span class="n">average</span> <span class="n">PM</span> <span class="n">counters</span> <span class="n">values</span> <span class="k">for</span> <span class="n">each</span> <span class="n">layer</span> <span class="n">from</span> <span class="n">the</span> <span class="n">network</span><span class="p">.</span> <span class="s">&quot;detailed_counters&quot;</span> <span class="n">report</span> <span class="n">extends</span> <span class="s">&quot;average_counters&quot;</span> <span class="n">report</span> <span class="n">and</span> <span class="n">additionally</span> <span class="n">includes</span> <span class="n">per</span><span class="o">-</span>
+                        <span class="n">layer</span> <span class="n">PM</span> <span class="n">counters</span> <span class="n">and</span> <span class="n">latency</span> <span class="k">for</span> <span class="n">each</span> <span class="n">executed</span> <span class="n">infer</span> <span class="n">request</span><span class="p">.</span>
+  <span class="o">-</span><span class="n">report_folder</span> <span class="n">REPORT_FOLDER</span><span class="p">,</span> <span class="o">--</span><span class="n">report_folder</span> <span class="n">REPORT_FOLDER</span>
+                        <span class="n">Optional</span><span class="p">.</span> <span class="n">Path</span> <span class="n">to</span> <span class="n">a</span> <span class="n">folder</span> <span class="n">where</span> <span class="n">statistics</span> <span class="n">report</span> <span class="n">is</span> <span class="n">stored</span><span class="p">.</span>
+  <span class="o">-</span><span class="n">dump_config</span> <span class="n">DUMP_CONFIG</span>
+                        <span class="n">Optional</span><span class="p">.</span> <span class="n">Path</span> <span class="n">to</span> <span class="n">JSON</span> <span class="n">file</span> <span class="n">to</span> <span class="n">dump</span> <span class="n">IE</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">which</span> <span class="n">were</span> <span class="n">set</span> <span class="n">by</span> <span class="n">application</span><span class="p">.</span>
+  <span class="o">-</span><span class="n">load_config</span> <span class="n">LOAD_CONFIG</span>
+                        <span class="n">Optional</span><span class="p">.</span> <span class="n">Path</span> <span class="n">to</span> <span class="n">JSON</span> <span class="n">file</span> <span class="n">to</span> <span class="n">load</span> <span class="n">custom</span> <span class="n">IE</span> <span class="n">parameters</span><span class="p">.</span> <span class="n">Please</span> <span class="n">note</span><span class="p">,</span> <span class="n">command</span> <span class="n">line</span> <span class="n">parameters</span> <span class="n">have</span> <span class="n">higher</span> <span class="n">priority</span> <span class="n">then</span> <span class="n">parameters</span> <span class="n">from</span> <span class="n">configuration</span> <span class="n">file</span><span class="p">.</span>
+  <span class="o">-</span><span class="n">qb</span> <span class="p">{</span><span class="mi">8</span><span class="p">,</span><span class="mi">16</span><span class="p">},</span> <span class="o">--</span><span class="n">quantization_bits</span> <span class="p">{</span><span class="mi">8</span><span class="p">,</span><span class="mi">16</span><span class="p">}</span>
+                        <span class="n">Optional</span><span class="p">.</span> <span class="n">Weight</span> <span class="n">bits</span> <span class="k">for</span> <span class="nl">quantization</span><span class="p">:</span> <span class="mi">8</span> <span class="p">(</span><span class="n">I8</span><span class="p">)</span> <span class="n">or</span> <span class="mi">16</span> <span class="p">(</span><span class="n">I16</span><span class="p">)</span>
+  <span class="o">-</span><span class="n">ip</span> <span class="p">{</span><span class="n">U8</span><span class="p">,</span><span class="n">FP16</span><span class="p">,</span><span class="n">FP32</span><span class="p">},</span> <span class="o">--</span><span class="n">input_precision</span> <span class="p">{</span><span class="n">U8</span><span class="p">,</span><span class="n">FP16</span><span class="p">,</span><span class="n">FP32</span><span class="p">}</span>
+                        <span class="n">Optional</span><span class="p">.</span> <span class="n">Specifies</span> <span class="n">precision</span> <span class="k">for</span> <span class="n">all</span> <span class="n">input</span> <span class="n">layers</span> <span class="n">of</span> <span class="n">the</span> <span class="n">network</span><span class="p">.</span>
+  <span class="o">-</span><span class="n">op</span> <span class="p">{</span><span class="n">U8</span><span class="p">,</span><span class="n">FP16</span><span class="p">,</span><span class="n">FP32</span><span class="p">},</span> <span class="o">--</span><span class="n">output_precision</span> <span class="p">{</span><span class="n">U8</span><span class="p">,</span><span class="n">FP16</span><span class="p">,</span><span class="n">FP32</span><span class="p">}</span>
+                        <span class="n">Optional</span><span class="p">.</span> <span class="n">Specifies</span> <span class="n">precision</span> <span class="k">for</span> <span class="n">all</span> <span class="n">output</span> <span class="n">layers</span> <span class="n">of</span> <span class="n">the</span> <span class="n">network</span><span class="p">.</span>
+  <span class="o">-</span><span class="n">iop</span> <span class="n">INPUT_OUTPUT_PRECISION</span><span class="p">,</span> <span class="o">--</span><span class="n">input_output_precision</span> <span class="n">INPUT_OUTPUT_PRECISION</span>
+                        <span class="n">Optional</span><span class="p">.</span> <span class="n">Specifies</span> <span class="n">precision</span> <span class="k">for</span> <span class="n">input</span> <span class="n">and</span> <span class="n">output</span> <span class="n">layers</span> <span class="n">by</span> <span class="n">name</span><span class="p">.</span> <span class="nl">Example</span><span class="p">:</span> <span class="o">-</span><span class="n">iop</span> <span class="s">&quot;input:FP16, output:FP16&quot;</span><span class="p">.</span> <span class="n">Notice</span> <span class="n">that</span> <span class="n">quotes</span> <span class="n">are</span> <span class="n">required</span><span class="p">.</span> <span class="n">Overwrites</span> <span class="n">precision</span> <span class="n">from</span> <span class="n">ip</span> <span class="n">and</span> <span class="n">op</span> <span class="n">options</span>
+                        <span class="k">for</span> <span class="n">specified</span> <span class="n">layers</span><span class="p">.</span>
+  <span class="o">-</span><span class="n">cdir</span> <span class="n">CACHE_DIR</span><span class="p">,</span> <span class="o">--</span><span class="n">cache_dir</span> <span class="n">CACHE_DIR</span>
+                        <span class="n">Optional</span><span class="p">.</span> <span class="n">Enable</span> <span class="n">model</span> <span class="n">caching</span> <span class="n">to</span> <span class="n">specified</span> <span class="n">directory</span>
+  <span class="o">-</span><span class="n">lfile</span> <span class="p">[</span><span class="n">LOAD_FROM_FILE</span><span class="p">],</span> <span class="o">--</span><span class="n">load_from_file</span> <span class="p">[</span><span class="n">LOAD_FROM_FILE</span><span class="p">]</span>
+                        <span class="n">Optional</span><span class="p">.</span> <span class="n">Loads</span> <span class="n">model</span> <span class="n">from</span> <span class="n">file</span> <span class="n">directly</span> <span class="n">without</span> <span class="n">read_network</span><span class="p">.</span></pre></div></div><p>Running the application with the empty list of options yields the usage message given above and an error message.</p>
+<p>Application supports topologies with one or more inputs. If a topology is not data sensitive, you can skip the input parameter. In this case, inputs are filled with random values. If a model has only image input(s), please a provide folder with images or a path to an image as input. If a model has some specific input(s) (not images), please prepare a binary file(s), which is filled with data of appropriate precision and provide a path to them as input. If a model has mixed input types, input folder should contain all required files. Image inputs are filled with image files one by one. Binary inputs are filled with binary inputs one by one.</p>
+<p>To run the tool, you can use public or Intel’s pre-trained models from the Open Model Zoo. The models can be downloaded using the Model Downloader.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Before running the tool with a trained model, make sure the model is converted to the OpenVINO format (*.xml + *.bin) using the <a class="reference internal" href="openvino_docs_MO_DG_Deep_Learning_Model_Optimizer_DevGuide.html#doxid-openvino-docs-m-o-d-g-deep-learning-model-optimizer-dev-guide"><span class="std std-ref">Model Optimizer tool</span></a>.</p>
+</div>
+</div>
+<div class="section" id="examples-of-running-the-tool">
+<h2>Examples of Running the Tool<a class="headerlink" href="#examples-of-running-the-tool" title="Permalink to this headline">¶</a></h2>
+<p>This section provides step-by-step instructions on how to run the Benchmark Tool with the <code class="docutils literal notranslate"><span class="pre">googlenet-v1</span></code> public model on CPU or GPU devices. The <a class="reference external" href="https://storage.openvinotoolkit.org/data/test_data/images/224x224/dog.bmp">dog.bmp</a> file is used as an input.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The Internet access is required to execute the following steps successfully. If you have access to the Internet through the proxy server only, please make sure that it is configured in your OS environment.</p>
+</div>
+<ol class="arabic simple">
+<li><p>Install OpenVINO Development Tools to work with Caffe* models:</p></li>
+</ol>
+<div class="highlight"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">openvino</span><span class="o">-</span><span class="n">dev</span><span class="p">[</span><span class="n">caffe</span><span class="p">]</span></pre></div></div><ol class="arabic simple">
+<li><p>Download the model. Go to the Model Downloader directory and run the <code class="docutils literal notranslate"><span class="pre">omz_downloader</span></code> tool with the model name and directory to download the model to:</p></li>
+</ol>
+<div class="highlight"><div class="highlight"><pre><span></span><span class="n">omz_downloader</span> <span class="o">--</span><span class="n">name</span> <span class="n">googlenet</span><span class="o">-</span><span class="n">v1</span> <span class="o">-</span><span class="n">o</span> <span class="o">&lt;</span><span class="n">models_dir</span><span class="o">&gt;</span></pre></div></div><ol class="arabic">
+<li><p>Convert the model to the OpenVINO IR format. Run Model Optimizer with the path to the model, model format and output directory to generate the IR files:</p>
+<div class="highlight"><div class="highlight"><pre><span></span><span class="n">mo</span> <span class="o">--</span><span class="n">input_model</span> <span class="o">&lt;</span><span class="n">models_dir</span><span class="o">&gt;/</span><span class="k">public</span><span class="o">/</span><span class="n">googlenet</span><span class="o">-</span><span class="n">v1</span><span class="o">/</span><span class="n">googlenet</span><span class="o">-</span><span class="n">v1</span><span class="p">.</span><span class="n">caffemodel</span> <span class="o">--</span><span class="n">data_type</span> <span class="n">FP32</span> <span class="o">--</span><span class="n">output_dir</span> <span class="o">&lt;</span><span class="n">ir_dir</span><span class="o">&gt;</span></pre></div></div></li>
+<li><p>Run the tool with specifying the <code class="docutils literal notranslate"><span class="pre">dog.bmp</span></code> file as an input image, the IR of the <code class="docutils literal notranslate"><span class="pre">googlenet-v1</span></code> model and a device to perform inference on. The following commands demonstrate running the Benchmark Tool in the asynchronous mode on CPU and GPU devices:</p>
+<ul>
+<li><p>On CPU:</p>
+<div class="highlight"><div class="highlight"><pre><span></span><span class="n">benchmark_app</span> <span class="o">-</span><span class="n">m</span> <span class="o">&lt;</span><span class="n">ir_dir</span><span class="o">&gt;/</span><span class="n">googlenet</span><span class="o">-</span><span class="n">v1</span><span class="p">.</span><span class="n">xml</span> <span class="o">-</span><span class="n">d</span> <span class="n">CPU</span> <span class="o">-</span><span class="n">api</span> <span class="n">async</span> <span class="o">-</span><span class="n">i</span> <span class="n">dog</span><span class="p">.</span><span class="n">bmp</span> <span class="o">-</span><span class="n">progress</span> <span class="o">-</span><span class="n">b</span> <span class="mi">1</span></pre></div></div></li>
+<li><p>On GPU:</p>
+<div class="highlight"><div class="highlight"><pre><span></span><span class="n">benchmark_app</span> <span class="o">-</span><span class="n">m</span> <span class="o">&lt;</span><span class="n">ir_dir</span><span class="o">&gt;/</span><span class="n">googlenet</span><span class="o">-</span><span class="n">v1</span><span class="p">.</span><span class="n">xml</span> <span class="o">-</span><span class="n">d</span> <span class="n">GPU</span> <span class="o">-</span><span class="n">api</span> <span class="n">async</span> <span class="o">-</span><span class="n">i</span> <span class="n">dog</span><span class="p">.</span><span class="n">bmp</span> <span class="o">-</span><span class="n">progress</span> <span class="o">-</span><span class="n">b</span> <span class="mi">1</span></pre></div></div></li>
+</ul>
+</li>
+</ol>
+<p>The application outputs number of executed iterations, total duration of execution, latency and throughput. Additionally, if you set the <code class="docutils literal notranslate"><span class="pre">-pc</span></code> parameter, the application outputs performance counters. If you set <code class="docutils literal notranslate"><span class="pre">-exec_graph_path</span></code>, the application reports executable graph information serialized.</p>
+<p>Below are fragments of sample output for static and dynamic models:</p>
+<ul>
+<li><p>For static model:</p>
+<div class="highlight"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">Step</span> <span class="mi">10</span><span class="o">/</span><span class="mi">11</span><span class="p">]</span> <span class="n">Measuring</span> <span class="n">performance</span> <span class="p">(</span><span class="n">Start</span> <span class="n">inference</span> <span class="n">asynchronously</span><span class="p">,</span> <span class="mi">4</span> <span class="n">inference</span> <span class="n">requests</span> <span class="k">using</span> <span class="mi">4</span> <span class="n">streams</span> <span class="k">for</span> <span class="n">CPU</span><span class="p">,</span> <span class="n">inference</span> <span class="nl">only</span><span class="p">:</span> <span class="n">True</span><span class="p">,</span> <span class="nl">limits</span><span class="p">:</span> <span class="mi">60000</span> <span class="n">ms</span> <span class="n">duration</span><span class="p">)</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Benchmarking</span> <span class="n">in</span> <span class="n">inference</span> <span class="n">only</span> <span class="n">mode</span> <span class="p">(</span><span class="n">inputs</span> <span class="n">filling</span> <span class="n">are</span> <span class="n">not</span> <span class="n">included</span> <span class="n">in</span> <span class="n">measurement</span> <span class="n">loop</span><span class="p">).</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">First</span> <span class="n">inference</span> <span class="n">took</span> <span class="mf">5.00</span> <span class="n">ms</span>
+<span class="p">[</span><span class="n">Step</span> <span class="mi">11</span><span class="o">/</span><span class="mi">11</span><span class="p">]</span> <span class="n">Dumping</span> <span class="n">statistics</span> <span class="n">report</span>
+<span class="nl">Count</span><span class="p">:</span>          <span class="mi">29936</span> <span class="n">iterations</span>
+<span class="nl">Duration</span><span class="p">:</span>       <span class="mf">60010.13</span> <span class="n">ms</span>
+<span class="nl">Latency</span><span class="p">:</span>
+   <span class="nl">Median</span><span class="p">:</span>     <span class="mf">7.30</span> <span class="n">ms</span>
+   <span class="nl">AVG</span><span class="p">:</span>        <span class="mf">7.97</span> <span class="n">ms</span>
+   <span class="nl">MIN</span><span class="p">:</span>        <span class="mf">5.02</span> <span class="n">ms</span>
+   <span class="nl">MAX</span><span class="p">:</span>        <span class="mf">29.26</span> <span class="n">ms</span>
+<span class="nl">Throughput</span><span class="p">:</span> <span class="mf">498.85</span> <span class="n">FPS</span></pre></div></div></li>
+<li><p>For dynamic model:</p>
+<div class="highlight"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">Step</span> <span class="mi">10</span><span class="o">/</span><span class="mi">11</span><span class="p">]</span> <span class="n">Measuring</span> <span class="n">performance</span> <span class="p">(</span><span class="n">Start</span> <span class="n">inference</span> <span class="n">asynchronously</span><span class="p">,</span> <span class="mi">4</span> <span class="n">inference</span> <span class="n">requests</span> <span class="k">using</span> <span class="mi">4</span> <span class="n">streams</span> <span class="k">for</span> <span class="n">CPU</span><span class="p">,</span> <span class="n">inference</span> <span class="nl">only</span><span class="p">:</span> <span class="n">False</span><span class="p">,</span> <span class="nl">limits</span><span class="p">:</span> <span class="mi">60000</span> <span class="n">ms</span> <span class="n">duration</span><span class="p">)</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Benchmarking</span> <span class="n">in</span> <span class="n">full</span> <span class="n">mode</span> <span class="p">(</span><span class="n">inputs</span> <span class="n">filling</span> <span class="n">are</span> <span class="n">included</span> <span class="n">in</span> <span class="n">measurement</span> <span class="n">loop</span><span class="p">).</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">First</span> <span class="n">inference</span> <span class="n">took</span> <span class="mf">5.10</span> <span class="n">ms</span>
+<span class="p">[</span><span class="n">Step</span> <span class="mi">11</span><span class="o">/</span><span class="mi">11</span><span class="p">]</span> <span class="n">Dumping</span> <span class="n">statistics</span> <span class="n">report</span>
+<span class="nl">Count</span><span class="p">:</span>          <span class="mi">13596</span> <span class="n">iterations</span>
+<span class="nl">Duration</span><span class="p">:</span>       <span class="mf">60028.12</span> <span class="n">ms</span>
+<span class="nl">Latency</span><span class="p">:</span>
+   <span class="nl">AVG</span><span class="p">:</span>        <span class="mf">17.53</span> <span class="n">ms</span>
+   <span class="nl">MIN</span><span class="p">:</span>        <span class="mf">2.88</span> <span class="n">ms</span>
+   <span class="nl">MAX</span><span class="p">:</span>        <span class="mf">63.54</span> <span class="n">ms</span>
+<span class="n">Latency</span> <span class="k">for</span> <span class="n">each</span> <span class="n">data</span> <span class="n">shape</span> <span class="nl">group</span><span class="p">:</span>
+<span class="nl">data</span><span class="p">:</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">}</span>
+   <span class="nl">AVG</span><span class="p">:</span>        <span class="mf">5.09</span> <span class="n">ms</span>
+   <span class="nl">MIN</span><span class="p">:</span>        <span class="mf">2.88</span> <span class="n">ms</span>
+   <span class="nl">MAX</span><span class="p">:</span>        <span class="mf">23.30</span> <span class="n">ms</span>
+<span class="nl">data</span><span class="p">:</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">224</span><span class="p">,</span> <span class="mi">224</span><span class="p">}</span>
+   <span class="nl">AVG</span><span class="p">:</span>        <span class="mf">10.67</span> <span class="n">ms</span>
+   <span class="nl">MIN</span><span class="p">:</span>        <span class="mf">5.97</span> <span class="n">ms</span>
+   <span class="nl">MAX</span><span class="p">:</span>        <span class="mf">31.79</span> <span class="n">ms</span>
+<span class="nl">data</span><span class="p">:</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">448</span><span class="p">,</span> <span class="mi">448</span><span class="p">}</span>
+   <span class="nl">AVG</span><span class="p">:</span>        <span class="mf">36.84</span> <span class="n">ms</span>
+   <span class="nl">MIN</span><span class="p">:</span>        <span class="mf">24.76</span> <span class="n">ms</span>
+   <span class="nl">MAX</span><span class="p">:</span>        <span class="mf">63.54</span> <span class="n">ms</span>
+<span class="nl">Throughput</span><span class="p">:</span> <span class="mf">226.49</span> <span class="n">FPS</span></pre></div></div></li>
+</ul>
+</div>
+<div class="section" id="see-also">
+<h2>See Also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="openvino_docs_OV_UG_Samples_Overview.html#doxid-openvino-docs-o-v-u-g-samples-overview"><span class="std std-ref">Using OpenVINO Samples</span></a></p></li>
+<li><p><a class="reference internal" href="openvino_docs_MO_DG_Deep_Learning_Model_Optimizer_DevGuide.html#doxid-openvino-docs-m-o-d-g-deep-learning-model-optimizer-dev-guide"><span class="std std-ref">Model Optimizer</span></a></p></li>
+<li><p>Model Downloader</p></li>
+</ul>
+</div>
+</div>
+
+
+                </div>
+            
+            
+                <div class='prev-next-bottom'>
+                  
+    <a class='button bttn-sec button-size-l' id="prev-link" href="openvino_inference_engine_samples_benchmark_app_README.html" title="previous page">Prev</a>
+    <a class='button bttn-sec button-size-l' id="next-link" href="openvino_docs_get_started_guide_troubleshooting.html" title="next page">Next</a>
+
+                </div>
+            
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+<footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2021, Intel®.<br>
+</p>
+    </div>
+    
+    <div class="footer-item">
+      <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

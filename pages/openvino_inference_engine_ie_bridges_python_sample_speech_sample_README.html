@@ -1,0 +1,1044 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Automatic Speech Recognition Python* Sample &#8212; OpenVINO™  documentation</title>
+    
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/blank.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/doxyrest-pygments.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <link href="../_static/css/media/favicon.ico" rel="shortcut icon">
+    <link rel="stylesheet" href="../_static/css/openvino_sphinx_theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/button.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/input.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/textfield.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/tabs.css" type="text/css" />
+    <script src="../_static/js/openvino_sphinx_theme.js"></script>
+    <link rel="stylesheet" href="../_static/css/viewer.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/0.5.7/chartjs-plugin-annotation.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-barchart-background@1.3.0/build/Plugin.Barchart.Background.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-deferred@1"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.1/papaparse.min.js"></script>
+    <script src="../_static/js/viewer.min.js"></script>
+    <script src="/assets/versions_raw.js"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/tabs.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/js/custom.js"></script>
+    <script src="../_static/js/graphs.js"></script>
+    <script src="../_static/js/graphs_ov_tf.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/target-highlight.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <link rel="canonical" href="https://docs.openvino.ai/latest/pages/openvino_inference_engine_ie_bridges_python_sample_speech_sample_README.html" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Benchmark C++ Tool" href="openvino_inference_engine_samples_benchmark_app_README.html" />
+    <link rel="prev" title="Automatic Speech Recognition C++ Sample" href="openvino_inference_engine_samples_speech_sample_README.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+      <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+
+<a class="navbar-brand" href="../index.html">
+  <img src="../_static/logo.svg" class="logo" alt="logo">
+</a>
+
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 current active nav-item">
+ <a class="reference internal nav-link" href="get_started.html">
+  Get Started
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="documentation.html">
+  Documentation
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../tutorials.html">
+  Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../model_zoo.html">
+  Model Zoo
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="resources.html">
+  Resources
+ </a>
+</li>
+
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/openvinotoolkit/openvino" rel="noopener" target="_blank" title="GitHub">
+            <span><i class="sst-github"></i></span>
+            <label class="sr-only">GitHub</label>
+          </a>
+        </li>
+</ul>
+      </div>
+      
+      <div class="navbar-end-item">
+        
+<div class="dropdown sst-dropdown sst-dropdown-navbar">
+  <button class="btn sst-btn dropdown-toggle" type="button" id="version-selector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+  <div class="dropdown-menu" aria-labelledby="version-selector">
+  </div>
+</div>
+      </div>
+      
+      <div class="navbar-end-item">
+        
+
+<div class="dropdown sst-dropdown sst-dropdown-navbar">
+  <button class="btn sst-btn dropdown-toggle" type="button" id="language-selector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">English</button>
+  <div class="dropdown-menu" aria-labelledby="language-selector">
+    
+      
+        <a class="dropdown-item font-weight-bold" href="/latest/pages/openvino_inference_engine_ie_bridges_python_sample_speech_sample_README.html">English</a>
+      
+    
+      
+        <a  class="dropdown-item" href="/cn/latest/pages/openvino_inference_engine_ie_bridges_python_sample_speech_sample_README.html">Chinese</a>
+      
+    
+  </div>
+</div>
+
+      </div>
+      
+    </div>
+  </div>
+</div>
+        <div id="collapse-nav-wrapper" class="container-xl">
+          <button id="collapse-nav" class="button bttn-prm button-size-m" type="button" data-toggle="collapse" data-target="#nav-tree" aria-expanded="false" aria-controls="nav-tree">
+            Documentation navigation <i class="fas fa-chevron-down"></i>
+          </button>
+        </div>
+      </nav>
+      <div class="transition-banner container-fluid alert alert-info alert-dismissible fade show" role="alert">
+        <p>OpenVINO 2022.1 introduces a new version of OpenVINO API (API 2.0). For more information on the changes and transition steps, see the <a href="https://docs.openvino.ai/latest/openvino_2_0_transition_guide.html">transition guide</a></p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar" id="nav-tree"><form class="searchForm bd-search d-flex align-items-center" action="../search.html" method="get">
+    <i class="icon fas fa-search"></i>
+    <input type="search" class="form-control" name="query" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Install OpenVINO
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="openvino_docs_install_guides_overview.html">
+   Overview
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="openvino_docs_install_guides_install_runtime.html">
+   Install OpenVINO Runtime
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_linux_header.html">
+     Install on Linux
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+    <label for="toctree-checkbox-2">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_linux.html">
+       Using Installer
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_pip.html">
+       From PyPI
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_apt.html">
+       From APT
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_yum.html">
+       From YUM
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_conda.html">
+       From Anaconda Cloud
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_docker_linux.html">
+       Using Docker
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_windows_header.html">
+     Install on Windows
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+    <label for="toctree-checkbox-3">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_windows.html">
+       Using Installer
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_pip.html">
+       From PyPI
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_conda.html">
+       From Anaconda Cloud
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_docker_windows.html">
+       Using Docker
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_macos_header.html">
+     Install on macOS
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+    <label for="toctree-checkbox-4">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_macos.html">
+       Using Installer
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_pip.html">
+       From PyPI
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_conda.html">
+       From Anaconda Cloud
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_raspbian.html">
+     Install on Raspbian OS
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="openvino_docs_install_guides_install_dev_tools.html">
+   Install OpenVINO Development Tools
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference external" href="https://github.com/openvinotoolkit/openvino/wiki/BuildingCode">
+   Build from Source
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_yocto.html">
+   Create a Yocto Image
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="openvino_docs_install_guides_uninstalling_openvino.html">
+   Uninstalling
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Additional Configurations
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="openvino_docs_install_guides_configurations_for_intel_gpu.html">
+   Configurations for GPU
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="openvino_docs_install_guides_configurations_for_ncs2.html">
+   Configurations for NCS2
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_ivad_vpu.html">
+   Configurations for VPU
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_install_guides_movidius_setup_guide.html">
+     Configurations for IEI Mustang-V100-MX8-R10 card
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="openvino_docs_install_guides_configurations_for_intel_gna.html">
+   Configurations for GNA
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Get Started Guides
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="openvino_docs_get_started_get_started_demos.html">
+   Get Started with Step-by-step Demo
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  OpenVINO Code Samples
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="openvino_docs_OV_UG_Samples_Overview.html">
+   OpenVINO Samples
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_inference_engine_samples_classification_sample_async_README.html">
+     Image Classification Async C++ Sample
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_inference_engine_ie_bridges_python_sample_classification_sample_async_README.html">
+     Image Classification Async Python* Sample
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_inference_engine_samples_hello_classification_README.html">
+     Hello Classification C++ Sample
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_inference_engine_ie_bridges_c_samples_hello_classification_README.html">
+     Hello Classification C Sample
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_inference_engine_ie_bridges_python_sample_hello_classification_README.html">
+     Hello Classification Python* Sample
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_inference_engine_samples_hello_reshape_ssd_README.html">
+     Hello Reshape SSD C++ Sample
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_inference_engine_ie_bridges_python_sample_hello_reshape_ssd_README.html">
+     Hello Reshape SSD Python* Sample
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_inference_engine_samples_hello_nv12_input_classification_README.html">
+     Hello NV12 Input Classification C++ Sample
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_inference_engine_ie_bridges_c_samples_hello_nv12_input_classification_README.html">
+     Hello NV12 Input Classification C Sample
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_inference_engine_samples_hello_query_device_README.html">
+     Hello Query Device C++ Sample
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_inference_engine_ie_bridges_python_sample_hello_query_device_README.html">
+     Hello Query Device Python* Sample
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_inference_engine_samples_model_creation_sample_README.html">
+     Model Creation C++ Sample
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_inference_engine_ie_bridges_python_sample_model_creation_sample_README.html">
+     Model Creation Python* Sample
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_inference_engine_samples_speech_sample_README.html">
+     Automatic Speech Recognition C++ Sample
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Automatic Speech Recognition Python* Sample
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_inference_engine_samples_benchmark_app_README.html">
+     Benchmark C++ Tool
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_inference_engine_tools_benchmark_tool_README.html">
+     Benchmark Python* Tool
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Troubleshooting
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="openvino_docs_get_started_guide_troubleshooting.html">
+   Installation &amp; Configuration Issues
+  </a>
+ </li>
+</ul>
+
+  </div>
+</nav>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+              
+              <div class="toc-item">
+                
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#how-it-works">
+   How It Works
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gna-specific-details">
+   GNA-specific details
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#quantization">
+     Quantization
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#execution-modes">
+     Execution Modes
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#loading-and-saving-models">
+     Loading and Saving Models
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#running">
+   Running
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#model-preparation">
+   Model Preparation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#speech-inference">
+   Speech Inference
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sample-output">
+   Sample Output
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#see-also">
+   See Also
+  </a>
+ </li>
+</ul>
+
+</nav>
+              </div>
+              
+              <div class="toc-item">
+                <div class="tocsection download-docs">
+  <div class="dropdown sst-dropdown">
+    <button class="button bttn-prm button-size-m" data-display="static" type="button" id="download-options"
+      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Download Docs
+    </button>
+    <div class="dropdown-menu" aria-labelledby="download-options">
+      <a class="dropdown-item" href="#" onclick="window.print()">.pdf</a>
+      <a id="download-zip-btn" class="dropdown-item" href="#">.zip</a>
+    </div>
+  </div>
+</div>
+              </div>
+              
+            
+          </div>
+          
+
+          
+          
+              
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+
+<div class="tocsection editthispage">
+    <a href="None">
+        <i class="fas fa-pencil-alt"></i> Edit this page
+    </a>
+</div>
+
+            
+                <div>
+                  
+  <div class="section" id="automatic-speech-recognition-python-sample">
+<span id="doxid-openvino-inference-engine-ie-bridges-python-sample-speech-sample-r-e-a-d-m-e"></span><span id="index-0"></span><h1>Automatic Speech Recognition Python* Sample<a class="headerlink" href="#automatic-speech-recognition-python-sample" title="Permalink to this headline">¶</a></h1>
+<p><span class="target" id="doxid-openvino-inference-engine-ie-bridges-python-sample-speech-sample-r-e-a-d-m-e-1md-openvino-samples-python-speech-sample-readme"></span> This sample demonstrates how to do a Synchronous Inference of acoustic model based on Kaldi* neural models and speech feature vectors.</p>
+<p>The sample works with Kaldi ARK or Numpy* uncompressed NPZ files, so it does not cover an end-to-end speech recognition scenario (speech to text), requiring additional preprocessing (feature extraction) to get a feature vector from a speech signal, as well as postprocessing (decoding) to produce text from scores.</p>
+<p>Automatic Speech Recognition Python sample application demonstrates how to use the following Python API in applications:</p>
+<table class="table">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Feature</p></th>
+<th class="head"><p>API</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Import/Export Model</p></td>
+<td><p>[openvino.runtime.Core.import_model], <a class="reference external" href="[openvino.runtime.Model.add_outputs]:">openvino.runtime.CompiledModel.export_model</a></p></td>
+<td><p>The GNA plugin supports loading and saving of the GNA-optimized model</p></td>
+</tr>
+<tr class="row-odd"><td><p>Model Operations</p></td>
+<td><p>[openvino.runtime.Model.add_outputs], <a class="reference external" href="[openvino.runtime.CompiledModel.inputs]:">openvino.runtime.set_batch</a> , [openvino.runtime.CompiledModel.inputs], <a class="reference external" href="[openvino.runtime.ConstOutput.any_name]:">openvino.runtime.CompiledModel.outputs</a> , [openvino.runtime.ConstOutput.any_name]</p></td>
+<td><p>Managing of model: configure batch_size, input and output tensors</p></td>
+</tr>
+<tr class="row-even"><td><p>Synchronous Infer</p></td>
+<td><p><a class="reference external" href="[openvino.runtime.InferRequest.infer]:">openvino.runtime.CompiledModel.create_infer_request</a> , [openvino.runtime.InferRequest.infer]</p></td>
+<td><p>Do synchronous inference</p></td>
+</tr>
+<tr class="row-odd"><td><p>InferRequest Operations</p></td>
+<td><p><a class="reference external" href="[openvino.runtime.InferRequest.model_outputs]:">openvino.runtime.InferRequest.get_input_tensor</a> , [openvino.runtime.InferRequest.model_outputs], <a class="reference external" href="[openvino.runtime.InferRequest.query_state]:">openvino.runtime.InferRequest.model_inputs</a> ,</p></td>
+<td><p>Get info about model using infer request API</p></td>
+</tr>
+<tr class="row-even"><td><p>InferRequest Operations</p></td>
+<td><p>[openvino.runtime.InferRequest.query_state], <a class="reference external" href="[openvino.runtime.InferRequest.profiling_info]:">openvino.runtime.VariableState.reset</a></p></td>
+<td><p>Gets and resets CompiledModel state control</p></td>
+</tr>
+<tr class="row-odd"><td><p>Profiling</p></td>
+<td><p>[openvino.runtime.InferRequest.profiling_info], [openvino.runtime.ProfilingInfo.real_time]</p></td>
+<td><p>Get infer request profiling info</p></td>
+</tr>
+</tbody>
+</table>
+<p>Basic OpenVINO™ Runtime API is covered by <a class="reference internal" href="openvino_inference_engine_ie_bridges_python_sample_hello_classification_README.html#doxid-openvino-inference-engine-ie-bridges-python-sample-hello-classification-r-e-a-d-m-e"><span class="std std-ref">Hello Classification Python* Sample</span></a>.</p>
+<table class="table">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Options</p></th>
+<th class="head"><p>Values</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Validated Models</p></td>
+<td><p>Acoustic model based on Kaldi* neural models (see <a class="reference external" href="#model-preparation">Model Preparation</a> section)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Model Format</p></td>
+<td><p>OpenVINO™ toolkit Intermediate Representation (.xml + .bin)</p></td>
+</tr>
+<tr class="row-even"><td><p>Supported devices</p></td>
+<td><p>See <a class="reference external" href="#execution-modes">Execution Modes</a> section below and <a class="reference internal" href="openvino_docs_OV_UG_supported_plugins_Supported_Devices.html#doxid-openvino-docs-o-v-u-g-supported-plugins-supported-devices"><span class="std std-ref">List Supported Devices</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Other language realization</p></td>
+<td><p><a class="reference internal" href="openvino_inference_engine_samples_speech_sample_README.html#doxid-openvino-inference-engine-samples-speech-sample-r-e-a-d-m-e"><span class="std std-ref">C++</span></a></p></td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="how-it-works">
+<h2>How It Works<a class="headerlink" href="#how-it-works" title="Permalink to this headline">¶</a></h2>
+<p>At startup, the sample application reads command-line parameters, loads a specified model and input data to the OpenVINO™ Runtime plugin, performs synchronous inference on all speech utterances stored in the input file, logging each step in a standard output stream.</p>
+<p>You can see the explicit description of each sample step at <a class="reference internal" href="openvino_docs_OV_UG_Integrate_OV_with_your_application.html#doxid-openvino-docs-o-v-u-g-integrate-o-v-with-your-application"><span class="std std-ref">Integration Steps</span></a> section of “Integrate OpenVINO™ Runtime with Your Application” guide.</p>
+</div>
+<div class="section" id="gna-specific-details">
+<h2>GNA-specific details<a class="headerlink" href="#gna-specific-details" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="quantization">
+<h3>Quantization<a class="headerlink" href="#quantization" title="Permalink to this headline">¶</a></h3>
+<p>If the GNA device is selected (for example, using the <code class="docutils literal notranslate"><span class="pre">-d</span></code> GNA flag), the GNA OpenVINO™ Runtime plugin quantizes the model and input feature vector sequence to integer representation before performing inference.</p>
+<p>Several neural model quantization modes:</p>
+<ul class="simple">
+<li><p><em>static</em> - The first utterance in the input file is scanned for dynamic range. The scale factor (floating point scalar multiplier) required to scale the maximum input value of the first utterance to 16384 (15 bits) is used for all subsequent inputs. The neural model is quantized to accommodate the scaled input dynamic range.</p></li>
+<li><p><em>user-defined</em> - The user may specify a scale factor via the <code class="docutils literal notranslate"><span class="pre">-sf</span></code> flag that will be used for static quantization.</p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">-qb</span></code> flag provides a hint to the GNA plugin regarding the preferred target weight resolution for all layers.</p>
+<p>For example, when <code class="docutils literal notranslate"><span class="pre">-qb</span> <span class="pre">8</span></code> is specified, the plugin will use 8-bit weights wherever possible in the model.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>It is not always possible to use 8-bit weights due to GNA hardware limitations. For example, convolutional layers always use 16-bit weights (GNA hardware version 1 and 2). This limitation will be removed in GNA hardware version 3 and higher.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="execution-modes">
+<h3>Execution Modes<a class="headerlink" href="#execution-modes" title="Permalink to this headline">¶</a></h3>
+<p>Several execution modes are supported via the <code class="docutils literal notranslate"><span class="pre">-d</span></code> flag:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">CPU</span></code> - All calculation are performed on CPU device using CPU Plugin.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">GPU</span></code> - All calculation are performed on GPU device using GPU Plugin.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MYRIAD</span></code> - All calculation are performed on Intel® Neural Compute Stick 2 device using VPU MYRIAD Plugin.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">GNA_AUTO</span></code> - GNA hardware is used if available and the driver is installed. Otherwise, the GNA device is emulated in fast-but-not-bit-exact mode.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">GNA_HW</span></code> - GNA hardware is used if available and the driver is installed. Otherwise, an error will occur.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">GNA_SW</span></code> - Deprecated. The GNA device is emulated in fast-but-not-bit-exact mode.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">GNA_SW_FP32</span></code> - Substitutes parameters and calculations from low precision to floating point (FP32).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">GNA_SW_EXACT</span></code> - GNA device is emulated in bit-exact mode.</p></li>
+</ul>
+</div>
+<div class="section" id="loading-and-saving-models">
+<h3>Loading and Saving Models<a class="headerlink" href="#loading-and-saving-models" title="Permalink to this headline">¶</a></h3>
+<p>The GNA plugin supports loading and saving of the GNA-optimized model (non-IR) via the <code class="docutils literal notranslate"><span class="pre">-rg</span></code> and <code class="docutils literal notranslate"><span class="pre">-wg</span></code> flags.</p>
+<p>Thereby, it is possible to avoid the cost of full model quantization at run time.</p>
+<p>The GNA plugin also supports export of firmware-compatible embedded model images for the Intel® Speech Enabling Developer Kit and Amazon Alexa* Premium Far-Field Voice Development Kit via the <code class="docutils literal notranslate"><span class="pre">-we</span></code> flag (save only).</p>
+<p>In addition to performing inference directly from a GNA model file, these options make it possible to:</p>
+<ul class="simple">
+<li><p>Convert from IR format to GNA format model file (<code class="docutils literal notranslate"><span class="pre">-m</span></code>, <code class="docutils literal notranslate"><span class="pre">-wg</span></code>)</p></li>
+<li><p>Convert from IR format to embedded format model file (<code class="docutils literal notranslate"><span class="pre">-m</span></code>, <code class="docutils literal notranslate"><span class="pre">-we</span></code>)</p></li>
+<li><p>Convert from GNA format to embedded format model file (<code class="docutils literal notranslate"><span class="pre">-rg</span></code>, <code class="docutils literal notranslate"><span class="pre">-we</span></code>)</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="running">
+<h2>Running<a class="headerlink" href="#running" title="Permalink to this headline">¶</a></h2>
+<p>Run the application with the <code class="docutils literal notranslate"><span class="pre">-h</span></code> option to see the usage message:</p>
+<div class="highlight"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">speech_sample</span><span class="p">.</span><span class="n">py</span> <span class="o">-</span><span class="n">h</span></pre></div></div><p>Usage message:</p>
+<div class="highlight"><div class="highlight"><pre><span></span><span class="nl">usage</span><span class="p">:</span> <span class="n">speech_sample</span><span class="p">.</span><span class="n">py</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">(</span><span class="o">-</span><span class="n">m</span> <span class="n">MODEL</span> <span class="o">|</span> <span class="o">-</span><span class="n">rg</span> <span class="n">IMPORT_GNA_MODEL</span><span class="p">)</span> <span class="o">-</span><span class="n">i</span> <span class="n">INPUT</span> <span class="p">[</span><span class="o">-</span><span class="n">o</span> <span class="n">OUTPUT</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">r</span> <span class="n">REFERENCE</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">d</span> <span class="n">DEVICE</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">bs</span> <span class="p">[</span><span class="mi">1</span><span class="o">-</span><span class="mi">8</span><span class="p">]]</span>
+                        <span class="p">[</span><span class="o">-</span><span class="n">layout</span> <span class="n">LAYOUT</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">qb</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">16</span><span class="p">]]</span> <span class="p">[</span><span class="o">-</span><span class="n">sf</span> <span class="n">SCALE_FACTOR</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">wg</span> <span class="n">EXPORT_GNA_MODEL</span><span class="p">]</span>
+                        <span class="p">[</span><span class="o">-</span><span class="n">we</span> <span class="n">EXPORT_EMBEDDED_GNA_MODEL</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">we_gen</span> <span class="p">[</span><span class="n">GNA1</span><span class="p">,</span> <span class="n">GNA3</span><span class="p">]]</span>
+                        <span class="p">[</span><span class="o">--</span><span class="n">exec_target</span> <span class="p">[</span><span class="n">GNA_TARGET_2_0</span><span class="p">,</span> <span class="n">GNA_TARGET_3_0</span><span class="p">]]</span> <span class="p">[</span><span class="o">-</span><span class="n">pc</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">a</span> <span class="p">[</span><span class="n">CORE</span><span class="p">,</span> <span class="n">ATOM</span><span class="p">]]</span> <span class="p">[</span><span class="o">-</span><span class="n">iname</span> <span class="n">INPUT_LAYERS</span><span class="p">]</span>
+                        <span class="p">[</span><span class="o">-</span><span class="n">oname</span> <span class="n">OUTPUT_LAYERS</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">cw_l</span> <span class="n">CONTEXT_WINDOW_LEFT</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">cw_r</span> <span class="n">CONTEXT_WINDOW_RIGHT</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">pwl_me</span> <span class="n">PWL_ME</span><span class="p">]</span>
+
+<span class="n">optional</span> <span class="nl">arguments</span><span class="p">:</span>
+  <span class="o">-</span><span class="n">m</span> <span class="n">MODEL</span><span class="p">,</span> <span class="o">--</span><span class="n">model</span> <span class="n">MODEL</span>
+                        <span class="n">Path</span> <span class="n">to</span> <span class="n">an</span> <span class="p">.</span><span class="n">xml</span> <span class="n">file</span> <span class="n">with</span> <span class="n">a</span> <span class="n">trained</span> <span class="n">model</span> <span class="p">(</span><span class="n">required</span> <span class="k">if</span> <span class="o">-</span><span class="n">rg</span> <span class="n">is</span> <span class="n">missing</span><span class="p">).</span>
+  <span class="o">-</span><span class="n">rg</span> <span class="n">IMPORT_GNA_MODEL</span><span class="p">,</span> <span class="o">--</span><span class="n">import_gna_model</span> <span class="n">IMPORT_GNA_MODEL</span>
+                        <span class="n">Read</span> <span class="n">GNA</span> <span class="n">model</span> <span class="n">from</span> <span class="n">file</span> <span class="k">using</span> <span class="n">path</span><span class="o">/</span><span class="n">filename</span> <span class="n">provided</span> <span class="p">(</span><span class="n">required</span> <span class="k">if</span> <span class="o">-</span><span class="n">m</span> <span class="n">is</span> <span class="n">missing</span><span class="p">).</span>
+
+<span class="nl">Options</span><span class="p">:</span>
+  <span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>            <span class="n">Show</span> <span class="k">this</span> <span class="n">help</span> <span class="n">message</span> <span class="n">and</span> <span class="n">exit</span><span class="p">.</span>
+  <span class="o">-</span><span class="n">i</span> <span class="n">INPUT</span><span class="p">,</span> <span class="o">--</span><span class="n">input</span> <span class="n">INPUT</span>
+                        <span class="n">Required</span><span class="p">.</span> <span class="n">Path</span> <span class="n">to</span> <span class="n">an</span> <span class="n">input</span> <span class="n">file</span> <span class="p">(.</span><span class="n">ark</span> <span class="n">or</span> <span class="p">.</span><span class="n">npz</span><span class="p">).</span>
+  <span class="o">-</span><span class="n">o</span> <span class="n">OUTPUT</span><span class="p">,</span> <span class="o">--</span><span class="n">output</span> <span class="n">OUTPUT</span>
+                        <span class="n">Optional</span><span class="p">.</span> <span class="n">Output</span> <span class="n">file</span> <span class="n">name</span> <span class="n">to</span> <span class="n">save</span> <span class="n">inference</span> <span class="n">results</span> <span class="p">(.</span><span class="n">ark</span> <span class="n">or</span> <span class="p">.</span><span class="n">npz</span><span class="p">).</span>
+  <span class="o">-</span><span class="n">r</span> <span class="n">REFERENCE</span><span class="p">,</span> <span class="o">--</span><span class="n">reference</span> <span class="n">REFERENCE</span>
+                        <span class="n">Optional</span><span class="p">.</span> <span class="n">Read</span> <span class="n">reference</span> <span class="n">score</span> <span class="n">file</span> <span class="n">and</span> <span class="n">compare</span> <span class="n">scores</span><span class="p">.</span>
+  <span class="o">-</span><span class="n">d</span> <span class="n">DEVICE</span><span class="p">,</span> <span class="o">--</span><span class="n">device</span> <span class="n">DEVICE</span>
+                        <span class="n">Optional</span><span class="p">.</span> <span class="n">Specify</span> <span class="n">a</span> <span class="n">target</span> <span class="n">device</span> <span class="n">to</span> <span class="n">infer</span> <span class="n">on</span><span class="p">.</span> <span class="n">CPU</span><span class="p">,</span> <span class="n">GPU</span><span class="p">,</span> <span class="n">MYRIAD</span><span class="p">,</span> <span class="n">GNA_AUTO</span><span class="p">,</span> <span class="n">GNA_HW</span><span class="p">,</span> <span class="n">GNA_SW_FP32</span><span class="p">,</span>
+                        <span class="n">GNA_SW_EXACT</span> <span class="n">and</span> <span class="n">HETERO</span> <span class="n">with</span> <span class="n">combination</span> <span class="n">of</span> <span class="n">GNA</span> <span class="n">as</span> <span class="n">the</span> <span class="n">primary</span> <span class="n">device</span> <span class="n">and</span> <span class="n">CPU</span> <span class="n">as</span> <span class="n">a</span> <span class="n">secondary</span> <span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">g</span><span class="p">.</span>
+                        <span class="nl">HETERO</span><span class="p">:</span><span class="n">GNA</span><span class="p">,</span><span class="n">CPU</span><span class="p">)</span> <span class="n">are</span> <span class="n">supported</span><span class="p">.</span> <span class="n">The</span> <span class="n">sample</span> <span class="n">will</span> <span class="n">look</span> <span class="k">for</span> <span class="n">a</span> <span class="n">suitable</span> <span class="n">plugin</span> <span class="k">for</span> <span class="n">device</span> <span class="n">specified</span><span class="p">.</span>
+                        <span class="n">Default</span> <span class="n">value</span> <span class="n">is</span> <span class="n">CPU</span><span class="p">.</span>
+  <span class="o">-</span><span class="n">bs</span> <span class="p">[</span><span class="mi">1</span><span class="o">-</span><span class="mi">8</span><span class="p">],</span> <span class="o">--</span><span class="n">batch_size</span> <span class="p">[</span><span class="mi">1</span><span class="o">-</span><span class="mi">8</span><span class="p">]</span>
+                        <span class="n">Optional</span><span class="p">.</span> <span class="n">Batch</span> <span class="n">size</span> <span class="mi">1</span><span class="o">-</span><span class="mf">8.</span>
+  <span class="o">-</span><span class="n">layout</span> <span class="n">LAYOUT</span>        <span class="n">Optional</span><span class="p">.</span> <span class="n">Custom</span> <span class="n">layout</span> <span class="n">in</span> <span class="nl">format</span><span class="p">:</span> <span class="s">&quot;input0[value0],input1[value1]&quot;</span> <span class="n">or</span> <span class="s">&quot;[value]&quot;</span> <span class="p">(</span><span class="n">applied</span> <span class="n">to</span> <span class="n">all</span>
+                        <span class="n">inputs</span><span class="p">)</span>
+  <span class="o">-</span><span class="n">qb</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">16</span><span class="p">],</span> <span class="o">--</span><span class="n">quantization_bits</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">16</span><span class="p">]</span>
+                        <span class="n">Optional</span><span class="p">.</span> <span class="n">Weight</span> <span class="n">bits</span> <span class="k">for</span> <span class="nl">quantization</span><span class="p">:</span> <span class="mi">8</span> <span class="n">or</span> <span class="mi">16</span> <span class="p">(</span><span class="k">default</span> <span class="mi">16</span><span class="p">).</span>
+  <span class="o">-</span><span class="n">sf</span> <span class="n">SCALE_FACTOR</span><span class="p">,</span> <span class="o">--</span><span class="n">scale_factor</span> <span class="n">SCALE_FACTOR</span>
+                        <span class="n">Optional</span><span class="p">.</span> <span class="n">The</span> <span class="n">user</span><span class="o">-</span><span class="n">specified</span> <span class="n">input</span> <span class="n">scale</span> <span class="n">factor</span> <span class="k">for</span> <span class="n">quantization</span><span class="p">.</span> <span class="n">If</span> <span class="n">the</span> <span class="n">model</span> <span class="n">contains</span> <span class="n">multiple</span>
+                        <span class="n">inputs</span><span class="p">,</span> <span class="n">provide</span> <span class="n">scale</span> <span class="n">factors</span> <span class="n">by</span> <span class="n">separating</span> <span class="n">them</span> <span class="n">with</span> <span class="n">commas</span><span class="p">.</span>
+  <span class="o">-</span><span class="n">wg</span> <span class="n">EXPORT_GNA_MODEL</span><span class="p">,</span> <span class="o">--</span><span class="n">export_gna_model</span> <span class="n">EXPORT_GNA_MODEL</span>
+                        <span class="n">Optional</span><span class="p">.</span> <span class="n">Write</span> <span class="n">GNA</span> <span class="n">model</span> <span class="n">to</span> <span class="n">file</span> <span class="k">using</span> <span class="n">path</span><span class="o">/</span><span class="n">filename</span> <span class="n">provided</span><span class="p">.</span>
+  <span class="o">-</span><span class="n">we</span> <span class="n">EXPORT_EMBEDDED_GNA_MODEL</span><span class="p">,</span> <span class="o">--</span><span class="n">export_embedded_gna_model</span> <span class="n">EXPORT_EMBEDDED_GNA_MODEL</span>
+                        <span class="n">Optional</span><span class="p">.</span> <span class="n">Write</span> <span class="n">GNA</span> <span class="n">embedded</span> <span class="n">model</span> <span class="n">to</span> <span class="n">file</span> <span class="k">using</span> <span class="n">path</span><span class="o">/</span><span class="n">filename</span> <span class="n">provided</span><span class="p">.</span>
+  <span class="o">-</span><span class="n">we_gen</span> <span class="p">[</span><span class="n">GNA1</span><span class="p">,</span> <span class="n">GNA3</span><span class="p">],</span> <span class="o">--</span><span class="n">embedded_gna_configuration</span> <span class="p">[</span><span class="n">GNA1</span><span class="p">,</span> <span class="n">GNA3</span><span class="p">]</span>
+                        <span class="n">Optional</span><span class="p">.</span> <span class="n">GNA</span> <span class="n">generation</span> <span class="n">configuration</span> <span class="n">string</span> <span class="k">for</span> <span class="n">embedded</span> <span class="k">export</span><span class="p">.</span> <span class="n">Can</span> <span class="n">be</span> <span class="n">GNA1</span> <span class="p">(</span><span class="k">default</span><span class="p">)</span> <span class="n">or</span> <span class="n">GNA3</span><span class="p">.</span>
+  <span class="o">--</span><span class="n">exec_target</span> <span class="p">[</span><span class="n">GNA_TARGET_2_0</span><span class="p">,</span> <span class="n">GNA_TARGET_3_0</span><span class="p">]</span>
+                        <span class="n">Optional</span><span class="p">.</span> <span class="n">Specify</span> <span class="n">GNA</span> <span class="n">execution</span> <span class="n">target</span> <span class="n">generation</span><span class="p">.</span> <span class="n">By</span> <span class="k">default</span><span class="p">,</span> <span class="n">generation</span> <span class="n">corresponds</span> <span class="n">to</span> <span class="n">the</span> <span class="n">GNA</span> <span class="n">HW</span>
+                        <span class="n">available</span> <span class="n">in</span> <span class="n">the</span> <span class="n">system</span> <span class="n">or</span> <span class="n">the</span> <span class="n">latest</span> <span class="n">fully</span> <span class="n">supported</span> <span class="n">generation</span> <span class="n">by</span> <span class="n">the</span> <span class="n">software</span><span class="p">.</span> <span class="n">See</span> <span class="n">the</span> <span class="n">GNA</span>
+                        <span class="n">Plugin</span><span class="sc">&#39;s GNA_EXEC_TARGET config option description.</span>
+  <span class="o">-</span><span class="n">pc</span><span class="p">,</span> <span class="o">--</span><span class="n">performance_counter</span>
+                        <span class="n">Optional</span><span class="p">.</span> <span class="n">Enables</span> <span class="n">performance</span> <span class="n">report</span> <span class="p">(</span><span class="n">specify</span> <span class="o">-</span><span class="n">a</span> <span class="n">to</span> <span class="n">ensure</span> <span class="n">arch</span> <span class="n">accurate</span> <span class="n">results</span><span class="p">).</span>
+  <span class="o">-</span><span class="n">a</span> <span class="p">[</span><span class="n">CORE</span><span class="p">,</span> <span class="n">ATOM</span><span class="p">],</span> <span class="o">--</span><span class="n">arch</span> <span class="p">[</span><span class="n">CORE</span><span class="p">,</span> <span class="n">ATOM</span><span class="p">]</span>
+                        <span class="n">Optional</span><span class="p">.</span> <span class="n">Specify</span> <span class="n">architecture</span><span class="p">.</span> <span class="n">CORE</span><span class="p">,</span> <span class="n">ATOM</span> <span class="n">with</span> <span class="n">the</span> <span class="n">combination</span> <span class="n">of</span> <span class="o">-</span><span class="n">pc</span><span class="p">.</span>
+  <span class="o">-</span><span class="n">iname</span> <span class="n">INPUT_LAYERS</span><span class="p">,</span> <span class="o">--</span><span class="n">input_layers</span> <span class="n">INPUT_LAYERS</span>
+                        <span class="n">Optional</span><span class="p">.</span> <span class="n">Layer</span> <span class="n">names</span> <span class="k">for</span> <span class="n">input</span> <span class="n">blobs</span><span class="p">.</span> <span class="n">The</span> <span class="n">names</span> <span class="n">are</span> <span class="n">separated</span> <span class="n">with</span> <span class="s">&quot;,&quot;</span><span class="p">.</span> <span class="n">Allows</span> <span class="n">to</span> <span class="n">change</span> <span class="n">the</span> <span class="n">order</span>
+                        <span class="n">of</span> <span class="n">input</span> <span class="n">layers</span> <span class="k">for</span> <span class="o">-</span><span class="n">i</span> <span class="n">flag</span><span class="p">.</span> <span class="nl">Example</span><span class="p">:</span> <span class="n">Input1</span><span class="p">,</span><span class="n">Input2</span>
+  <span class="o">-</span><span class="n">oname</span> <span class="n">OUTPUT_LAYERS</span><span class="p">,</span> <span class="o">--</span><span class="n">output_layers</span> <span class="n">OUTPUT_LAYERS</span>
+                        <span class="n">Optional</span><span class="p">.</span> <span class="n">Layer</span> <span class="n">names</span> <span class="k">for</span> <span class="n">output</span> <span class="n">blobs</span><span class="p">.</span> <span class="n">The</span> <span class="n">names</span> <span class="n">are</span> <span class="n">separated</span> <span class="n">with</span> <span class="s">&quot;,&quot;</span><span class="p">.</span> <span class="n">Allows</span> <span class="n">to</span> <span class="n">change</span> <span class="n">the</span>
+                        <span class="n">order</span> <span class="n">of</span> <span class="n">output</span> <span class="n">layers</span> <span class="k">for</span> <span class="o">-</span><span class="n">o</span> <span class="n">flag</span><span class="p">.</span> <span class="nl">Example</span><span class="p">:</span> <span class="nl">Output1</span><span class="p">:</span><span class="n">port</span><span class="p">,</span><span class="nl">Output2</span><span class="p">:</span><span class="n">port</span><span class="p">.</span>
+  <span class="o">-</span><span class="n">cw_l</span> <span class="n">CONTEXT_WINDOW_LEFT</span><span class="p">,</span> <span class="o">--</span><span class="n">context_window_left</span> <span class="n">CONTEXT_WINDOW_LEFT</span>
+                        <span class="n">Optional</span><span class="p">.</span> <span class="n">Number</span> <span class="n">of</span> <span class="n">frames</span> <span class="k">for</span> <span class="n">left</span> <span class="n">context</span> <span class="n">windows</span> <span class="p">(</span><span class="k">default</span> <span class="n">is</span> <span class="mi">0</span><span class="p">).</span> <span class="n">Works</span> <span class="n">only</span> <span class="n">with</span> <span class="n">context</span> <span class="n">window</span>
+                        <span class="n">models</span><span class="p">.</span> <span class="n">If</span> <span class="n">you</span> <span class="n">use</span> <span class="n">the</span> <span class="n">cw_l</span> <span class="n">or</span> <span class="n">cw_r</span> <span class="n">flag</span><span class="p">,</span> <span class="n">then</span> <span class="n">batch</span> <span class="n">size</span> <span class="n">argument</span> <span class="n">is</span> <span class="n">ignored</span><span class="p">.</span>
+  <span class="o">-</span><span class="n">cw_r</span> <span class="n">CONTEXT_WINDOW_RIGHT</span><span class="p">,</span> <span class="o">--</span><span class="n">context_window_right</span> <span class="n">CONTEXT_WINDOW_RIGHT</span>
+                        <span class="n">Optional</span><span class="p">.</span> <span class="n">Number</span> <span class="n">of</span> <span class="n">frames</span> <span class="k">for</span> <span class="n">right</span> <span class="n">context</span> <span class="n">windows</span> <span class="p">(</span><span class="k">default</span> <span class="n">is</span> <span class="mi">0</span><span class="p">).</span> <span class="n">Works</span> <span class="n">only</span> <span class="n">with</span> <span class="n">context</span> <span class="n">window</span>
+                        <span class="n">models</span><span class="p">.</span> <span class="n">If</span> <span class="n">you</span> <span class="n">use</span> <span class="n">the</span> <span class="n">cw_l</span> <span class="n">or</span> <span class="n">cw_r</span> <span class="n">flag</span><span class="p">,</span> <span class="n">then</span> <span class="n">batch</span> <span class="n">size</span> <span class="n">argument</span> <span class="n">is</span> <span class="n">ignored</span><span class="p">.</span>
+  <span class="o">-</span><span class="n">pwl_me</span> <span class="n">PWL_ME</span>        <span class="n">Optional</span><span class="p">.</span> <span class="n">The</span> <span class="n">maximum</span> <span class="n">percent</span> <span class="n">of</span> <span class="n">error</span> <span class="k">for</span> <span class="n">PWL</span> <span class="n">function</span><span class="p">.</span> <span class="n">The</span> <span class="n">value</span> <span class="n">must</span> <span class="n">be</span> <span class="n">in</span> <span class="o">&lt;</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="o">&gt;</span> <span class="n">range</span><span class="p">.</span> <span class="n">The</span>
+                        <span class="k">default</span> <span class="n">value</span> <span class="n">is</span> <span class="mf">1.0</span><span class="p">.</span></pre></div></div></div>
+<div class="section" id="model-preparation">
+<h2>Model Preparation<a class="headerlink" href="#model-preparation" title="Permalink to this headline">¶</a></h2>
+<p>You can use the following model optimizer command to convert a Kaldi nnet1 or nnet2 neural model to OpenVINO™ toolkit Intermediate Representation format:</p>
+<div class="highlight"><div class="highlight"><pre><span></span><span class="n">mo</span> <span class="o">--</span><span class="n">framework</span> <span class="n">kaldi</span> <span class="o">--</span><span class="n">input_model</span> <span class="n">wsj_dnn5b</span><span class="p">.</span><span class="n">nnet</span> <span class="o">--</span><span class="n">counts</span> <span class="n">wsj_dnn5b</span><span class="p">.</span><span class="n">counts</span> <span class="o">--</span><span class="n">remove_output_softmax</span> <span class="o">--</span><span class="n">output_dir</span> <span class="o">&lt;</span><span class="n">OUTPUT_MODEL_DIR</span><span class="o">&gt;</span></pre></div></div><p>The following pre-trained models are available:</p>
+<ul class="simple">
+<li><p>wsj_dnn5b_smbr</p></li>
+<li><p>rm_lstm4f</p></li>
+<li><p>rm_cnn4a_smbr</p></li>
+</ul>
+<p>All of them can be downloaded from <a class="reference external" href="https://storage.openvinotoolkit.org/models_contrib/speech/2021.2">https://storage.openvinotoolkit.org/models_contrib/speech/2021.2</a>.</p>
+</div>
+<div class="section" id="speech-inference">
+<h2>Speech Inference<a class="headerlink" href="#speech-inference" title="Permalink to this headline">¶</a></h2>
+<p>You can do inference on Intel® Processors with the GNA co-processor (or emulation library):</p>
+<div class="highlight"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">speech_sample</span><span class="p">.</span><span class="n">py</span> <span class="o">-</span><span class="n">m</span> <span class="n">wsj_dnn5b</span><span class="p">.</span><span class="n">xml</span> <span class="o">-</span><span class="n">i</span> <span class="n">dev93_10</span><span class="p">.</span><span class="n">ark</span> <span class="o">-</span><span class="n">r</span> <span class="n">dev93_scores_10</span><span class="p">.</span><span class="n">ark</span> <span class="o">-</span><span class="n">d</span> <span class="n">GNA_AUTO</span> <span class="o">-</span><span class="n">o</span> <span class="n">result</span><span class="p">.</span><span class="n">npz</span></pre></div></div><p><strong>NOTES</strong> :</p>
+<ul class="simple">
+<li><p>Before running the sample with a trained model, make sure the model is converted to the intermediate representation (IR) format (*.xml + *.bin) using the <a class="reference internal" href="openvino_docs_MO_DG_Deep_Learning_Model_Optimizer_DevGuide.html#doxid-openvino-docs-m-o-d-g-deep-learning-model-optimizer-dev-guide"><span class="std std-ref">Model Optimizer tool</span></a>.</p></li>
+<li><p>The sample supports input and output in numpy file format (.npz)</p></li>
+</ul>
+</div>
+<div class="section" id="sample-output">
+<h2>Sample Output<a class="headerlink" href="#sample-output" title="Permalink to this headline">¶</a></h2>
+<p>The sample application logs each step in a standard output stream.</p>
+<div class="highlight"><div class="highlight"><pre><span></span><span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Creating</span> <span class="n">OpenVINO</span> <span class="n">Runtime</span> <span class="n">Core</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Reading</span> <span class="n">the</span> <span class="nl">model</span><span class="p">:</span> <span class="o">/</span><span class="n">models</span><span class="o">/</span><span class="n">wsj_dnn5b_smbr_fp32</span><span class="p">.</span><span class="n">xml</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Using</span> <span class="n">scale</span> <span class="n">factor</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="n">calculated</span> <span class="n">from</span> <span class="n">first</span> <span class="n">utterance</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">For</span> <span class="n">input</span> <span class="mi">0</span> <span class="k">using</span> <span class="n">scale</span> <span class="n">factor</span> <span class="n">of</span> <span class="mf">2175.4322418</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Loading</span> <span class="n">the</span> <span class="n">model</span> <span class="n">to</span> <span class="n">the</span> <span class="n">plugin</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Starting</span> <span class="n">inference</span> <span class="n">in</span> <span class="n">synchronous</span> <span class="n">mode</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Utterance</span> <span class="mi">0</span><span class="o">:</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Total</span> <span class="n">time</span> <span class="n">in</span> <span class="n">Infer</span> <span class="p">(</span><span class="n">HW</span> <span class="n">and</span> <span class="n">SW</span><span class="p">)</span><span class="o">:</span> <span class="mf">6326.06</span><span class="n">ms</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Frames</span> <span class="n">in</span> <span class="nl">utterance</span><span class="p">:</span> <span class="mi">1294</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Average</span> <span class="n">Infer</span> <span class="n">time</span> <span class="n">per</span> <span class="nl">frame</span><span class="p">:</span> <span class="mf">4.89</span><span class="n">ms</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Output</span> <span class="n">blob</span> <span class="nl">name</span><span class="p">:</span> <span class="n">affinetransform14</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Number</span> <span class="n">scores</span> <span class="n">per</span> <span class="nl">frame</span><span class="p">:</span> <span class="mi">3425</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">max</span> <span class="nl">error</span><span class="p">:</span> <span class="mf">0.7051840</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">avg</span> <span class="nl">error</span><span class="p">:</span> <span class="mf">0.0448388</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">avg</span> <span class="n">rms</span> <span class="nl">error</span><span class="p">:</span> <span class="mf">0.0582387</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">stdev</span> <span class="nl">error</span><span class="p">:</span> <span class="mf">0.0371650</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Utterance</span> <span class="mi">1</span><span class="o">:</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Total</span> <span class="n">time</span> <span class="n">in</span> <span class="n">Infer</span> <span class="p">(</span><span class="n">HW</span> <span class="n">and</span> <span class="n">SW</span><span class="p">)</span><span class="o">:</span> <span class="mf">4526.57</span><span class="n">ms</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Frames</span> <span class="n">in</span> <span class="nl">utterance</span><span class="p">:</span> <span class="mi">1005</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Average</span> <span class="n">Infer</span> <span class="n">time</span> <span class="n">per</span> <span class="nl">frame</span><span class="p">:</span> <span class="mf">4.50</span><span class="n">ms</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Output</span> <span class="n">blob</span> <span class="nl">name</span><span class="p">:</span> <span class="n">affinetransform14</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Number</span> <span class="n">scores</span> <span class="n">per</span> <span class="nl">frame</span><span class="p">:</span> <span class="mi">3425</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">max</span> <span class="nl">error</span><span class="p">:</span> <span class="mf">0.7575974</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">avg</span> <span class="nl">error</span><span class="p">:</span> <span class="mf">0.0452166</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">avg</span> <span class="n">rms</span> <span class="nl">error</span><span class="p">:</span> <span class="mf">0.0586013</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">stdev</span> <span class="nl">error</span><span class="p">:</span> <span class="mf">0.0372769</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Utterance</span> <span class="mi">2</span><span class="o">:</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Total</span> <span class="n">time</span> <span class="n">in</span> <span class="n">Infer</span> <span class="p">(</span><span class="n">HW</span> <span class="n">and</span> <span class="n">SW</span><span class="p">)</span><span class="o">:</span> <span class="mf">6636.56</span><span class="n">ms</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Frames</span> <span class="n">in</span> <span class="nl">utterance</span><span class="p">:</span> <span class="mi">1471</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Average</span> <span class="n">Infer</span> <span class="n">time</span> <span class="n">per</span> <span class="nl">frame</span><span class="p">:</span> <span class="mf">4.51</span><span class="n">ms</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Output</span> <span class="n">blob</span> <span class="nl">name</span><span class="p">:</span> <span class="n">affinetransform14</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Number</span> <span class="n">scores</span> <span class="n">per</span> <span class="nl">frame</span><span class="p">:</span> <span class="mi">3425</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">max</span> <span class="nl">error</span><span class="p">:</span> <span class="mf">0.7191710</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">avg</span> <span class="nl">error</span><span class="p">:</span> <span class="mf">0.0472226</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">avg</span> <span class="n">rms</span> <span class="nl">error</span><span class="p">:</span> <span class="mf">0.0612991</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">stdev</span> <span class="nl">error</span><span class="p">:</span> <span class="mf">0.0390846</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Utterance</span> <span class="mi">3</span><span class="o">:</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Total</span> <span class="n">time</span> <span class="n">in</span> <span class="n">Infer</span> <span class="p">(</span><span class="n">HW</span> <span class="n">and</span> <span class="n">SW</span><span class="p">)</span><span class="o">:</span> <span class="mf">3927.01</span><span class="n">ms</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Frames</span> <span class="n">in</span> <span class="nl">utterance</span><span class="p">:</span> <span class="mi">845</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Average</span> <span class="n">Infer</span> <span class="n">time</span> <span class="n">per</span> <span class="nl">frame</span><span class="p">:</span> <span class="mf">4.65</span><span class="n">ms</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Output</span> <span class="n">blob</span> <span class="nl">name</span><span class="p">:</span> <span class="n">affinetransform14</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Number</span> <span class="n">scores</span> <span class="n">per</span> <span class="nl">frame</span><span class="p">:</span> <span class="mi">3425</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">max</span> <span class="nl">error</span><span class="p">:</span> <span class="mf">0.7436461</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">avg</span> <span class="nl">error</span><span class="p">:</span> <span class="mf">0.0477581</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">avg</span> <span class="n">rms</span> <span class="nl">error</span><span class="p">:</span> <span class="mf">0.0621334</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">stdev</span> <span class="nl">error</span><span class="p">:</span> <span class="mf">0.0397457</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Utterance</span> <span class="mi">4</span><span class="o">:</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Total</span> <span class="n">time</span> <span class="n">in</span> <span class="n">Infer</span> <span class="p">(</span><span class="n">HW</span> <span class="n">and</span> <span class="n">SW</span><span class="p">)</span><span class="o">:</span> <span class="mf">3891.49</span><span class="n">ms</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Frames</span> <span class="n">in</span> <span class="nl">utterance</span><span class="p">:</span> <span class="mi">855</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Average</span> <span class="n">Infer</span> <span class="n">time</span> <span class="n">per</span> <span class="nl">frame</span><span class="p">:</span> <span class="mf">4.55</span><span class="n">ms</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Output</span> <span class="n">blob</span> <span class="nl">name</span><span class="p">:</span> <span class="n">affinetransform14</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Number</span> <span class="n">scores</span> <span class="n">per</span> <span class="nl">frame</span><span class="p">:</span> <span class="mi">3425</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">max</span> <span class="nl">error</span><span class="p">:</span> <span class="mf">0.7071600</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">avg</span> <span class="nl">error</span><span class="p">:</span> <span class="mf">0.0449147</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">avg</span> <span class="n">rms</span> <span class="nl">error</span><span class="p">:</span> <span class="mf">0.0585048</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">stdev</span> <span class="nl">error</span><span class="p">:</span> <span class="mf">0.0374897</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Utterance</span> <span class="mi">5</span><span class="o">:</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Total</span> <span class="n">time</span> <span class="n">in</span> <span class="n">Infer</span> <span class="p">(</span><span class="n">HW</span> <span class="n">and</span> <span class="n">SW</span><span class="p">)</span><span class="o">:</span> <span class="mf">3378.61</span><span class="n">ms</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Frames</span> <span class="n">in</span> <span class="nl">utterance</span><span class="p">:</span> <span class="mi">699</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Average</span> <span class="n">Infer</span> <span class="n">time</span> <span class="n">per</span> <span class="nl">frame</span><span class="p">:</span> <span class="mf">4.83</span><span class="n">ms</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Output</span> <span class="n">blob</span> <span class="nl">name</span><span class="p">:</span> <span class="n">affinetransform14</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Number</span> <span class="n">scores</span> <span class="n">per</span> <span class="nl">frame</span><span class="p">:</span> <span class="mi">3425</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">max</span> <span class="nl">error</span><span class="p">:</span> <span class="mf">0.8870468</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">avg</span> <span class="nl">error</span><span class="p">:</span> <span class="mf">0.0479243</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">avg</span> <span class="n">rms</span> <span class="nl">error</span><span class="p">:</span> <span class="mf">0.0625490</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">stdev</span> <span class="nl">error</span><span class="p">:</span> <span class="mf">0.0401951</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Utterance</span> <span class="mi">6</span><span class="o">:</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Total</span> <span class="n">time</span> <span class="n">in</span> <span class="n">Infer</span> <span class="p">(</span><span class="n">HW</span> <span class="n">and</span> <span class="n">SW</span><span class="p">)</span><span class="o">:</span> <span class="mf">4034.31</span><span class="n">ms</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Frames</span> <span class="n">in</span> <span class="nl">utterance</span><span class="p">:</span> <span class="mi">790</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Average</span> <span class="n">Infer</span> <span class="n">time</span> <span class="n">per</span> <span class="nl">frame</span><span class="p">:</span> <span class="mf">5.11</span><span class="n">ms</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Output</span> <span class="n">blob</span> <span class="nl">name</span><span class="p">:</span> <span class="n">affinetransform14</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Number</span> <span class="n">scores</span> <span class="n">per</span> <span class="nl">frame</span><span class="p">:</span> <span class="mi">3425</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">max</span> <span class="nl">error</span><span class="p">:</span> <span class="mf">0.7648273</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">avg</span> <span class="nl">error</span><span class="p">:</span> <span class="mf">0.0482702</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">avg</span> <span class="n">rms</span> <span class="nl">error</span><span class="p">:</span> <span class="mf">0.0629734</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">stdev</span> <span class="nl">error</span><span class="p">:</span> <span class="mf">0.0404429</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Utterance</span> <span class="mi">7</span><span class="o">:</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Total</span> <span class="n">time</span> <span class="n">in</span> <span class="n">Infer</span> <span class="p">(</span><span class="n">HW</span> <span class="n">and</span> <span class="n">SW</span><span class="p">)</span><span class="o">:</span> <span class="mf">2854.04</span><span class="n">ms</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Frames</span> <span class="n">in</span> <span class="nl">utterance</span><span class="p">:</span> <span class="mi">622</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Average</span> <span class="n">Infer</span> <span class="n">time</span> <span class="n">per</span> <span class="nl">frame</span><span class="p">:</span> <span class="mf">4.59</span><span class="n">ms</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Output</span> <span class="n">blob</span> <span class="nl">name</span><span class="p">:</span> <span class="n">affinetransform14</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Number</span> <span class="n">scores</span> <span class="n">per</span> <span class="nl">frame</span><span class="p">:</span> <span class="mi">3425</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">max</span> <span class="nl">error</span><span class="p">:</span> <span class="mf">0.7389560</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">avg</span> <span class="nl">error</span><span class="p">:</span> <span class="mf">0.0465543</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">avg</span> <span class="n">rms</span> <span class="nl">error</span><span class="p">:</span> <span class="mf">0.0604941</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">stdev</span> <span class="nl">error</span><span class="p">:</span> <span class="mf">0.0386294</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Utterance</span> <span class="mi">8</span><span class="o">:</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Total</span> <span class="n">time</span> <span class="n">in</span> <span class="n">Infer</span> <span class="p">(</span><span class="n">HW</span> <span class="n">and</span> <span class="n">SW</span><span class="p">)</span><span class="o">:</span> <span class="mf">2493.28</span><span class="n">ms</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Frames</span> <span class="n">in</span> <span class="nl">utterance</span><span class="p">:</span> <span class="mi">548</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Average</span> <span class="n">Infer</span> <span class="n">time</span> <span class="n">per</span> <span class="nl">frame</span><span class="p">:</span> <span class="mf">4.55</span><span class="n">ms</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Output</span> <span class="n">blob</span> <span class="nl">name</span><span class="p">:</span> <span class="n">affinetransform14</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Number</span> <span class="n">scores</span> <span class="n">per</span> <span class="nl">frame</span><span class="p">:</span> <span class="mi">3425</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">max</span> <span class="nl">error</span><span class="p">:</span> <span class="mf">0.6680136</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">avg</span> <span class="nl">error</span><span class="p">:</span> <span class="mf">0.0439341</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">avg</span> <span class="n">rms</span> <span class="nl">error</span><span class="p">:</span> <span class="mf">0.0574614</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">stdev</span> <span class="nl">error</span><span class="p">:</span> <span class="mf">0.0370353</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Utterance</span> <span class="mi">9</span><span class="o">:</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Total</span> <span class="n">time</span> <span class="n">in</span> <span class="n">Infer</span> <span class="p">(</span><span class="n">HW</span> <span class="n">and</span> <span class="n">SW</span><span class="p">)</span><span class="o">:</span> <span class="mf">1654.67</span><span class="n">ms</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Frames</span> <span class="n">in</span> <span class="nl">utterance</span><span class="p">:</span> <span class="mi">368</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Average</span> <span class="n">Infer</span> <span class="n">time</span> <span class="n">per</span> <span class="nl">frame</span><span class="p">:</span> <span class="mf">4.50</span><span class="n">ms</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Output</span> <span class="n">blob</span> <span class="nl">name</span><span class="p">:</span> <span class="n">affinetransform14</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Number</span> <span class="n">scores</span> <span class="n">per</span> <span class="nl">frame</span><span class="p">:</span> <span class="mi">3425</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">max</span> <span class="nl">error</span><span class="p">:</span> <span class="mf">0.6550579</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">avg</span> <span class="nl">error</span><span class="p">:</span> <span class="mf">0.0467643</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">avg</span> <span class="n">rms</span> <span class="nl">error</span><span class="p">:</span> <span class="mf">0.0605045</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">stdev</span> <span class="nl">error</span><span class="p">:</span> <span class="mf">0.0383914</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Total</span> <span class="n">sample</span> <span class="nl">time</span><span class="p">:</span> <span class="mf">39722.60</span><span class="n">ms</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">File</span> <span class="n">result</span><span class="p">.</span><span class="n">npz</span> <span class="n">was</span> <span class="n">created</span><span class="o">!</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">This</span> <span class="n">sample</span> <span class="n">is</span> <span class="n">an</span> <span class="n">API</span> <span class="n">example</span><span class="p">,</span> <span class="k">for</span> <span class="n">any</span> <span class="n">performance</span> <span class="n">measurements</span> <span class="n">please</span> <span class="n">use</span> <span class="n">the</span> <span class="n">dedicated</span> <span class="n">benchmark_app</span> <span class="n">tool</span></pre></div></div></div>
+<div class="section" id="see-also">
+<h2>See Also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="openvino_docs_OV_UG_Integrate_OV_with_your_application.html#doxid-openvino-docs-o-v-u-g-integrate-o-v-with-your-application"><span class="std std-ref">Integrate the OpenVINO™ Runtime with Your Application</span></a></p></li>
+<li><p><a class="reference internal" href="openvino_docs_OV_UG_Samples_Overview.html#doxid-openvino-docs-o-v-u-g-samples-overview"><span class="std std-ref">Using OpenVINO™ Toolkit Samples</span></a></p></li>
+<li><p>Model Downloader</p></li>
+<li><p><a class="reference internal" href="openvino_docs_MO_DG_Deep_Learning_Model_Optimizer_DevGuide.html#doxid-openvino-docs-m-o-d-g-deep-learning-model-optimizer-dev-guide"><span class="std std-ref">Model Optimizer</span></a></p></li>
+</ul>
+</div>
+</div>
+
+
+                </div>
+            
+            
+                <div class='prev-next-bottom'>
+                  
+    <a class='button bttn-sec button-size-l' id="prev-link" href="openvino_inference_engine_samples_speech_sample_README.html" title="previous page">Prev</a>
+    <a class='button bttn-sec button-size-l' id="next-link" href="openvino_inference_engine_samples_benchmark_app_README.html" title="next page">Next</a>
+
+                </div>
+            
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+<footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2021, Intel®.<br>
+</p>
+    </div>
+    
+    <div class="footer-item">
+      <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

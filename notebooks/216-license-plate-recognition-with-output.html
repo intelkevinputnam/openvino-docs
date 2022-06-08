@@ -1,0 +1,679 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>License Plate Recognition with OpenVINO &#8212; OpenVINO™  documentation</title>
+    
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/blank.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/doxyrest-pygments.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <link href="../_static/css/media/favicon.ico" rel="shortcut icon">
+    <link rel="stylesheet" href="../_static/css/openvino_sphinx_theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/button.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/input.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/textfield.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/tabs.css" type="text/css" />
+    <script src="../_static/js/openvino_sphinx_theme.js"></script>
+    <link rel="stylesheet" href="../_static/css/viewer.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/0.5.7/chartjs-plugin-annotation.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-barchart-background@1.3.0/build/Plugin.Barchart.Background.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-deferred@1"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.1/papaparse.min.js"></script>
+    <script src="../_static/js/viewer.min.js"></script>
+    <script src="/assets/versions_raw.js"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/tabs.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/js/custom.js"></script>
+    <script src="../_static/js/graphs.js"></script>
+    <script src="../_static/js/graphs_ov_tf.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/target-highlight.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <link rel="canonical" href="https://docs.openvino.ai/latest/notebooks/216-license-plate-recognition-with-output.html" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+      <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+
+<a class="navbar-brand" href="../index.html">
+  <img src="../_static/logo.svg" class="logo" alt="logo">
+</a>
+
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../pages/get_started.html">
+  Get Started
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../pages/documentation.html">
+  Documentation
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../tutorials.html">
+  Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../model_zoo.html">
+  Model Zoo
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../pages/resources.html">
+  Resources
+ </a>
+</li>
+
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/openvinotoolkit/openvino" rel="noopener" target="_blank" title="GitHub">
+            <span><i class="sst-github"></i></span>
+            <label class="sr-only">GitHub</label>
+          </a>
+        </li>
+</ul>
+      </div>
+      
+      <div class="navbar-end-item">
+        
+<div class="dropdown sst-dropdown sst-dropdown-navbar">
+  <button class="btn sst-btn dropdown-toggle" type="button" id="version-selector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+  <div class="dropdown-menu" aria-labelledby="version-selector">
+  </div>
+</div>
+      </div>
+      
+      <div class="navbar-end-item">
+        
+
+<div class="dropdown sst-dropdown sst-dropdown-navbar">
+  <button class="btn sst-btn dropdown-toggle" type="button" id="language-selector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">English</button>
+  <div class="dropdown-menu" aria-labelledby="language-selector">
+    
+      
+        <a class="dropdown-item font-weight-bold" href="/latest/notebooks/216-license-plate-recognition-with-output.html">English</a>
+      
+    
+      
+        <a  class="dropdown-item" href="/cn/latest/notebooks/216-license-plate-recognition-with-output.html">Chinese</a>
+      
+    
+  </div>
+</div>
+
+      </div>
+      
+    </div>
+  </div>
+</div>
+        <div id="collapse-nav-wrapper" class="container-xl">
+          <button id="collapse-nav" class="button bttn-prm button-size-m" type="button" data-toggle="collapse" data-target="#nav-tree" aria-expanded="false" aria-controls="nav-tree">
+            Documentation navigation <i class="fas fa-chevron-down"></i>
+          </button>
+        </div>
+      </nav>
+      <div class="transition-banner container-fluid alert alert-info alert-dismissible fade show" role="alert">
+        <p>OpenVINO 2022.1 introduces a new version of OpenVINO API (API 2.0). For more information on the changes and transition steps, see the <a href="https://docs.openvino.ai/latest/openvino_2_0_transition_guide.html">transition guide</a></p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar" id="nav-tree"><form class="searchForm bd-search d-flex align-items-center" action="../search.html" method="get">
+    <i class="icon fas fa-search"></i>
+    <input type="search" class="form-control" name="query" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    
+  </div>
+</nav>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+              
+              <div class="toc-item">
+                
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#imports">
+   Imports
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-model">
+   The Model
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#download-the-model">
+     Download the Model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#load-the-model">
+     Load the Model
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#inference">
+   Inference
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#using-imageloader-to-process-image">
+     Using ImageLoader to Process Image
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#model-input">
+       Model Input:
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#notes">
+       Notes:
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#do-the-inference">
+     Do the Inference
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#process-the-image">
+       Process the Image
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#input-the-data-and-get-the-result">
+       Input the Data and Get the Result
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#match-the-output-array-into-correct-recognition-results">
+       Match the Output Array into Correct Recognition Results
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#print-out-the-result">
+       Print out the result
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
+ </li>
+</ul>
+
+</nav>
+              </div>
+              
+              <div class="toc-item">
+                <div class="tocsection download-docs">
+  <div class="dropdown sst-dropdown">
+    <button class="button bttn-prm button-size-m" data-display="static" type="button" id="download-options"
+      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Download Docs
+    </button>
+    <div class="dropdown-menu" aria-labelledby="download-options">
+      <a class="dropdown-item" href="#" onclick="window.print()">.pdf</a>
+      <a id="download-zip-btn" class="dropdown-item" href="#">.zip</a>
+    </div>
+  </div>
+</div>
+              </div>
+              
+            
+          </div>
+          
+
+          
+          
+              
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+
+<div class="tocsection editthispage">
+    <a href="None">
+        <i class="fas fa-pencil-alt"></i> Edit this page
+    </a>
+</div>
+
+            
+                <div>
+                  
+  <div class="section" id="license-plate-recognition-with-openvino">
+<h1>License Plate Recognition with OpenVINO<a class="headerlink" href="#license-plate-recognition-with-openvino" title="Permalink to this headline">¶</a></h1>
+<p>This notebook demonstrates license plate recognition with OpenVINO. We
+use the <a class="reference external" href="https://github.com/openvinotoolkit/open_model_zoo/tree/master/models/intel/license-plate-recognition-barrier-0001">License Plate Recognition
+Model</a>
+from <a class="reference external" href="https://github.com/openvinotoolkit/open_model_zoo/">Open Model
+Zoo</a>. This model
+uses a small-footprint network trained end-to-end to recognize Chinese
+license plates in traffic.</p>
+<p>License plate recognition model helps you get the chinese license plate
+number precisely in no time. The input of the color license plate image
+can be any size. It will be resized and augmented before put into the
+model. After matching the result to correct character, we can get the
+license plate number. In the notebook we show how to create the
+following pipeline:</p>
+<div class="figure align-default" id="id1">
+<img alt="flowchart.png" src="https://user-images.githubusercontent.com/15709723/162659593-3f620d7a-44d2-4f49-a558-94c35a244a8e.png" />
+<p class="caption"><span class="caption-text">flowchart.png</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
+<blockquote>
+<div><p>Note: Augmentation method on image is optional and it may lead to the
+wrong recognition result. Thus, we recommend you to use it under
+special conditions like image overexposure or too dark.</p>
+</div></blockquote>
+<p>Example image data comes from <a class="reference external" href="https://github.com/detectRecog/CCPD">CCPD (Chinese City Parking Dataset,
+ECCV)</a></p>
+<div class="section" id="imports">
+<h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cv2</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">openvino.runtime</span> <span class="kn">import</span> <span class="n">Core</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="the-model">
+<h2>The Model<a class="headerlink" href="#the-model" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="download-the-model">
+<h3>Download the Model<a class="headerlink" href="#download-the-model" title="Permalink to this headline">¶</a></h3>
+<p>We use <code class="docutils literal notranslate"><span class="pre">omz_downloader</span></code>, the tool from the <code class="docutils literal notranslate"><span class="pre">openvino-dev</span></code> package to
+download the selected model. It will be retrieved from the cache if the
+model is already downloaded.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># directory where model will be downloaded</span>
+<span class="n">base_model_dir</span> <span class="o">=</span> <span class="s2">&quot;model&quot;</span>
+
+<span class="c1"># model name as named in Open Model Zoo</span>
+<span class="n">model_name</span> <span class="o">=</span> <span class="s2">&quot;license-plate-recognition-barrier-0001&quot;</span>
+
+<span class="c1"># &quot;FP16&quot;, &quot;FP32&quot; or &quot;FP16-INT8&quot;</span>
+<span class="n">precision</span> <span class="o">=</span> <span class="s2">&quot;FP16&quot;</span>
+
+<span class="c1"># it will be retrieved from the cache if the model is already downloaded.</span>
+<span class="n">download_command</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="sa">f</span><span class="s2">&quot;omz_downloader &quot;</span>
+    <span class="sa">f</span><span class="s2">&quot;--name </span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2"> &quot;</span>
+    <span class="sa">f</span><span class="s2">&quot;--precision </span><span class="si">{</span><span class="n">precision</span><span class="si">}</span><span class="s2"> &quot;</span>
+    <span class="sa">f</span><span class="s2">&quot;--output_dir </span><span class="si">{</span><span class="n">base_model_dir</span><span class="si">}</span><span class="s2"> &quot;</span>
+    <span class="sa">f</span><span class="s2">&quot;--cache_dir </span><span class="si">{</span><span class="n">base_model_dir</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="p">)</span>
+
+<span class="c1"># this code is provided for the first download of the model</span>
+<span class="o">!</span> <span class="nv">$download_command</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">################|| Downloading license-plate-recognition-barrier-0001 ||################</span>
+
+<span class="o">==========</span> <span class="n">Downloading</span> <span class="n">model</span><span class="o">/</span><span class="n">intel</span><span class="o">/</span><span class="n">license</span><span class="o">-</span><span class="n">plate</span><span class="o">-</span><span class="n">recognition</span><span class="o">-</span><span class="n">barrier</span><span class="o">-</span><span class="mi">0001</span><span class="o">/</span><span class="n">FP16</span><span class="o">/</span><span class="n">license</span><span class="o">-</span><span class="n">plate</span><span class="o">-</span><span class="n">recognition</span><span class="o">-</span><span class="n">barrier</span><span class="o">-</span><span class="mf">0001.</span><span class="n">xml</span>
+
+
+<span class="o">==========</span> <span class="n">Downloading</span> <span class="n">model</span><span class="o">/</span><span class="n">intel</span><span class="o">/</span><span class="n">license</span><span class="o">-</span><span class="n">plate</span><span class="o">-</span><span class="n">recognition</span><span class="o">-</span><span class="n">barrier</span><span class="o">-</span><span class="mi">0001</span><span class="o">/</span><span class="n">FP16</span><span class="o">/</span><span class="n">license</span><span class="o">-</span><span class="n">plate</span><span class="o">-</span><span class="n">recognition</span><span class="o">-</span><span class="n">barrier</span><span class="o">-</span><span class="mf">0001.</span><span class="n">bin</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="load-the-model">
+<h3>Load the Model<a class="headerlink" href="#load-the-model" title="Permalink to this headline">¶</a></h3>
+<p>First, we initialize OpenVINO Runtime. Then we read the network
+architecture and model weights from the .bin and .xml files to compile
+for the desired device. You can choose manually CPU, GPU, MYRIAD etc.</p>
+<p>If you want OpenVINO to decide which hardware offers the best
+performance, you need to use <code class="docutils literal notranslate"><span class="pre">AUTO</span></code>.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># output path for the conversion</span>
+<span class="n">converted_model_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;model/intel/</span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">precision</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2">.xml&quot;</span>
+
+<span class="c1"># initialize inference engine</span>
+<span class="n">ie_core</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span>
+<span class="c1"># read the network and corresponding weights from file</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">ie_core</span><span class="o">.</span><span class="n">read_model</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">converted_model_path</span><span class="p">)</span>
+<span class="c1"># compile the model for the CPU (you can choose manually CPU, GPU, MYRIAD etc.)</span>
+<span class="c1"># or let the engine choose the best available device (AUTO)</span>
+<span class="n">compiled_model</span> <span class="o">=</span> <span class="n">ie_core</span><span class="o">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">device_name</span><span class="o">=</span><span class="s2">&quot;CPU&quot;</span><span class="p">)</span>
+
+<span class="c1"># get input and output nodes</span>
+<span class="n">input_layer</span> <span class="o">=</span> <span class="n">compiled_model</span><span class="o">.</span><span class="n">input</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">output_layer</span> <span class="o">=</span> <span class="n">compiled_model</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># get input size</span>
+<span class="n">input_height</span><span class="p">,</span> <span class="n">input_width</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">input_layer</span><span class="o">.</span><span class="n">shape</span><span class="p">)[</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="inference">
+<h2>Inference<a class="headerlink" href="#inference" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="using-imageloader-to-process-image">
+<h3>Using ImageLoader to Process Image<a class="headerlink" href="#using-imageloader-to-process-image" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p><em>Model Limitations: Only “blue” license plates, which are common in
+public, were tested thoroughly. Other types of license plates may
+underperform.</em></p>
+</div></blockquote>
+<div class="section" id="model-input">
+<h4>Model Input:<a class="headerlink" href="#model-input" title="Permalink to this headline">¶</a></h4>
+<p>name: “data” , shape: [1x3x24x94] - An input image in following format
+[1xCxHxW]. Expected color order is BGR.</p>
+<p>name: “seq_ind” , shape: [88, 1] - An auxiliary blob that is needed for
+correct decoding. Set this to [1, 1, …, 1].</p>
+</div>
+<div class="section" id="notes">
+<h4>Notes:<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h4>
+<p>Since the license plate image could be any size, we need to use
+ImageLoader to resize it to fit the model input requirements.
+Augmentation method on image is optional and it may lead to the wrong
+recognition result. Thus, we recommend you to use it under special
+conditions like image overexposure or too dark.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">show_image</span><span class="p">(</span>
+    <span class="n">origin_image</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">input_image</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">matplotlib</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">Figure</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Visualise how the image we processed.</span>
+
+<span class="sd">    :param origin_image: Any size of color image.</span>
+<span class="sd">    :param input_image: The input of the model before dimension transposed and expanded.</span>
+<span class="sd">    :returns: Matplotlib figure.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">figure</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="n">squeeze</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="c1"># adjust the image channels to the correct order.</span>
+    <span class="n">origin_image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">origin_image</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2RGB</span><span class="p">)</span>
+    <span class="n">axis</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">origin_image</span><span class="p">)</span>
+    <span class="n">axis</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Source Image&quot;</span><span class="p">)</span>
+
+    <span class="c1"># adjust the image channels to the correct order.</span>
+    <span class="n">input_image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">input_image</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2RGB</span><span class="p">)</span>
+    <span class="n">axis</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">input_image</span><span class="p">)</span>
+    <span class="n">axis</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Input Image&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">figure</span>
+
+
+<span class="k">def</span> <span class="nf">image_loader</span><span class="p">(</span><span class="n">image_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">augmentation</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;None&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Process the image if neccessary and then</span>
+<span class="sd">    resize its shape to fit the input requirements.</span>
+
+<span class="sd">    :param image_path: Relative storage path of color image.</span>
+<span class="sd">    :param augmentation: Image augmentation method, if &#39;None&#39;, do nothing.</span>
+<span class="sd">                         Including &#39;None&#39;, &#39;Laplace&#39; and &#39;EquaHist&#39;.</span>
+<span class="sd">    :returns: The input of the model. The dimension is 1x3x24x94.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ori_img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">image_path</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># if gray image passed in, the programme will stop.</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">ori_img</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;Failed to load image.&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Origin image shape: </span><span class="si">{</span><span class="n">ori_img</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># if invalid augmentation method passed in, the programme will stop.</span>
+    <span class="k">assert</span> <span class="n">augmentation</span> <span class="ow">in</span> <span class="p">[</span>
+        <span class="s2">&quot;None&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Laplace&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;EquaHist&quot;</span>
+    <span class="p">],</span> <span class="s2">&quot;Invalid Augmentation.&quot;</span>
+
+    <span class="k">if</span> <span class="n">augmentation</span> <span class="o">==</span> <span class="s2">&quot;None&quot;</span><span class="p">:</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">ori_img</span>
+
+    <span class="k">elif</span> <span class="n">augmentation</span> <span class="o">==</span> <span class="s2">&quot;Laplace&quot;</span><span class="p">:</span>
+        <span class="n">kernel_sharpen</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">filter2D</span><span class="p">(</span><span class="n">ori_img</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">kernel_sharpen</span><span class="p">)</span>
+
+    <span class="k">elif</span> <span class="n">augmentation</span> <span class="o">==</span> <span class="s2">&quot;EquaHist&quot;</span><span class="p">:</span>
+        <span class="n">img0</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">equalizeHist</span><span class="p">(</span><span class="n">ori_img</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">])</span>
+        <span class="n">img1</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">equalizeHist</span><span class="p">(</span><span class="n">ori_img</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">])</span>
+        <span class="n">img2</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">equalizeHist</span><span class="p">(</span><span class="n">ori_img</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">2</span><span class="p">])</span>
+
+        <span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">merge</span><span class="p">([</span><span class="n">img0</span><span class="p">,</span> <span class="n">img1</span><span class="p">,</span> <span class="n">img2</span><span class="p">])</span>
+
+    <span class="c1"># resize its shape to fit the model input requirements.</span>
+    <span class="n">resized_img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="p">(</span><span class="n">input_width</span><span class="p">,</span> <span class="n">input_height</span><span class="p">))</span>
+
+    <span class="c1"># visualise how the image we process.</span>
+    <span class="n">show_image</span><span class="p">(</span><span class="n">origin_image</span><span class="o">=</span><span class="n">ori_img</span><span class="p">,</span> <span class="n">input_image</span><span class="o">=</span><span class="n">resized_img</span><span class="p">)</span>
+    <span class="n">trans_img</span> <span class="o">=</span> <span class="n">resized_img</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">input_img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">trans_img</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">input_img</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="do-the-inference">
+<h3>Do the Inference<a class="headerlink" href="#do-the-inference" title="Permalink to this headline">¶</a></h3>
+<p>Match the output array into correct recognition results Run license
+plate recognition model with the input and then match the result.</p>
+<div class="section" id="process-the-image">
+<h4>Process the Image<a class="headerlink" href="#process-the-image" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># the path of the test license plate image.</span>
+<span class="n">test_image_path</span> <span class="o">=</span> <span class="s2">&quot;data/example.png&quot;</span>
+
+<span class="n">input_img</span> <span class="o">=</span> <span class="n">image_loader</span><span class="p">(</span><span class="n">image_path</span><span class="o">=</span><span class="n">test_image_path</span><span class="p">,</span> <span class="n">augmentation</span><span class="o">=</span><span class="s2">&quot;None&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Origin</span> <span class="n">image</span> <span class="n">shape</span><span class="p">:</span> <span class="p">(</span><span class="mi">96</span><span class="p">,</span> <span class="mi">181</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../_images/216-license-plate-recognition-with-output_11_1.png" src="../_images/216-license-plate-recognition-with-output_11_1.png" />
+</div>
+<div class="section" id="input-the-data-and-get-the-result">
+<h4>Input the Data and Get the Result<a class="headerlink" href="#input-the-data-and-get-the-result" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># an auxiliary blob that is needed for correct decoding.</span>
+<span class="c1"># set this to [1, 1, ..., 1].</span>
+<span class="n">auxiliary_blob</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="mi">88</span><span class="p">)</span>
+<span class="c1"># resize it to fit the shape: [88, 1].</span>
+<span class="n">auxiliary_blob</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">auxiliary_blob</span><span class="p">,</span> <span class="p">(</span><span class="mi">88</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+<span class="c1"># get the result.</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">compiled_model</span><span class="p">([</span><span class="n">input_img</span><span class="p">,</span> <span class="n">auxiliary_blob</span><span class="p">])[</span><span class="n">output_layer</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="match-the-output-array-into-correct-recognition-results">
+<h4>Match the Output Array into Correct Recognition Results<a class="headerlink" href="#match-the-output-array-into-correct-recognition-results" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">result_to_string</span><span class="p">(</span><span class="n">result</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Match the output array into correct recognition results.</span>
+
+<span class="sd">    :param result: The output of the model. The dimension is 1x88x1x1.</span>
+<span class="sd">    :returns: The license plate recognition results.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># each float is an integer number encoding a character according to this dictionary</span>
+    <span class="n">match_dictionary</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;data/match_dictionary.txt&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+    <span class="n">str_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+
+    <span class="c1"># result is an encoded vector of floats, whose shape is [1, 88, 1, 1].</span>
+    <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">flatten</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">idx</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">str_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">match_dictionary</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">idx</span><span class="p">)])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">break</span>
+
+    <span class="n">ans</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">str_list</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ans</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="print-out-the-result">
+<h4>Print out the result<a class="headerlink" href="#print-out-the-result" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># get the result.</span>
+<span class="n">plate_recognition</span> <span class="o">=</span> <span class="n">result_to_string</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+<span class="c1"># print out the match result.</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The license plate recognition result is: </span><span class="si">{</span><span class="n">plate_recognition</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># compare to the origin image.</span>
+<span class="n">compare</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">test_image_path</span><span class="p">)</span>
+
+<span class="c1"># adjust the image channels to the correct order.</span>
+<span class="n">compare</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">compare</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2RGB</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">compare</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">The</span> <span class="n">license</span> <span class="n">plate</span> <span class="n">recognition</span> <span class="n">result</span> <span class="ow">is</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">Anhui</span><span class="o">&gt;</span><span class="n">AUJ299</span>
+</pre></div>
+</div>
+<img alt="../_images/216-license-plate-recognition-with-output_17_1.png" src="../_images/216-license-plate-recognition-with-output_17_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://github.com/openvinotoolkit/open_model_zoo/tree/master/models/intel/license-plate-recognition-barrier-0001">License Plate Recognition
+Model</a></p></li>
+<li><p><a class="reference external" href="https://github.com/openvinotoolkit/open_model_zoo/">Open Model
+Zoo</a></p></li>
+</ol>
+</div>
+</div>
+
+
+                </div>
+            
+            
+                <div class='prev-next-bottom'>
+                  
+
+                </div>
+            
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+<footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2021, Intel®.<br>
+</p>
+    </div>
+    
+    <div class="footer-item">
+      <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

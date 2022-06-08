@@ -1,0 +1,827 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Troubleshooting Issues with OpenVINO™ Installation &amp; Configuration &#8212; OpenVINO™  documentation</title>
+    
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/blank.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/doxyrest-pygments.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <link href="../_static/css/media/favicon.ico" rel="shortcut icon">
+    <link rel="stylesheet" href="../_static/css/openvino_sphinx_theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/button.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/input.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/textfield.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/tabs.css" type="text/css" />
+    <script src="../_static/js/openvino_sphinx_theme.js"></script>
+    <link rel="stylesheet" href="../_static/css/viewer.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/0.5.7/chartjs-plugin-annotation.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-barchart-background@1.3.0/build/Plugin.Barchart.Background.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-deferred@1"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.1/papaparse.min.js"></script>
+    <script src="../_static/js/viewer.min.js"></script>
+    <script src="/assets/versions_raw.js"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/tabs.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/js/custom.js"></script>
+    <script src="../_static/js/graphs.js"></script>
+    <script src="../_static/js/graphs_ov_tf.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/target-highlight.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <link rel="canonical" href="https://docs.openvino.ai/latest/pages/openvino_docs_get_started_guide_troubleshooting.html" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Documentation" href="documentation.html" />
+    <link rel="prev" title="Benchmark Python* Tool" href="openvino_inference_engine_tools_benchmark_tool_README.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+      <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+
+<a class="navbar-brand" href="../index.html">
+  <img src="../_static/logo.svg" class="logo" alt="logo">
+</a>
+
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 current active nav-item">
+ <a class="reference internal nav-link" href="get_started.html">
+  Get Started
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="documentation.html">
+  Documentation
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../tutorials.html">
+  Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../model_zoo.html">
+  Model Zoo
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="resources.html">
+  Resources
+ </a>
+</li>
+
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/openvinotoolkit/openvino" rel="noopener" target="_blank" title="GitHub">
+            <span><i class="sst-github"></i></span>
+            <label class="sr-only">GitHub</label>
+          </a>
+        </li>
+</ul>
+      </div>
+      
+      <div class="navbar-end-item">
+        
+<div class="dropdown sst-dropdown sst-dropdown-navbar">
+  <button class="btn sst-btn dropdown-toggle" type="button" id="version-selector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+  <div class="dropdown-menu" aria-labelledby="version-selector">
+  </div>
+</div>
+      </div>
+      
+      <div class="navbar-end-item">
+        
+
+<div class="dropdown sst-dropdown sst-dropdown-navbar">
+  <button class="btn sst-btn dropdown-toggle" type="button" id="language-selector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">English</button>
+  <div class="dropdown-menu" aria-labelledby="language-selector">
+    
+      
+        <a class="dropdown-item font-weight-bold" href="/latest/pages/openvino_docs_get_started_guide_troubleshooting.html">English</a>
+      
+    
+      
+        <a  class="dropdown-item" href="/cn/latest/pages/openvino_docs_get_started_guide_troubleshooting.html">Chinese</a>
+      
+    
+  </div>
+</div>
+
+      </div>
+      
+    </div>
+  </div>
+</div>
+        <div id="collapse-nav-wrapper" class="container-xl">
+          <button id="collapse-nav" class="button bttn-prm button-size-m" type="button" data-toggle="collapse" data-target="#nav-tree" aria-expanded="false" aria-controls="nav-tree">
+            Documentation navigation <i class="fas fa-chevron-down"></i>
+          </button>
+        </div>
+      </nav>
+      <div class="transition-banner container-fluid alert alert-info alert-dismissible fade show" role="alert">
+        <p>OpenVINO 2022.1 introduces a new version of OpenVINO API (API 2.0). For more information on the changes and transition steps, see the <a href="https://docs.openvino.ai/latest/openvino_2_0_transition_guide.html">transition guide</a></p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar" id="nav-tree"><form class="searchForm bd-search d-flex align-items-center" action="../search.html" method="get">
+    <i class="icon fas fa-search"></i>
+    <input type="search" class="form-control" name="query" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Install OpenVINO
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="openvino_docs_install_guides_overview.html">
+   Overview
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="openvino_docs_install_guides_install_runtime.html">
+   Install OpenVINO Runtime
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_linux_header.html">
+     Install on Linux
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+    <label for="toctree-checkbox-2">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_linux.html">
+       Using Installer
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_pip.html">
+       From PyPI
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_apt.html">
+       From APT
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_yum.html">
+       From YUM
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_conda.html">
+       From Anaconda Cloud
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_docker_linux.html">
+       Using Docker
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_windows_header.html">
+     Install on Windows
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+    <label for="toctree-checkbox-3">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_windows.html">
+       Using Installer
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_pip.html">
+       From PyPI
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_conda.html">
+       From Anaconda Cloud
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_docker_windows.html">
+       Using Docker
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_macos_header.html">
+     Install on macOS
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+    <label for="toctree-checkbox-4">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_macos.html">
+       Using Installer
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_pip.html">
+       From PyPI
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_conda.html">
+       From Anaconda Cloud
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_raspbian.html">
+     Install on Raspbian OS
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="openvino_docs_install_guides_install_dev_tools.html">
+   Install OpenVINO Development Tools
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference external" href="https://github.com/openvinotoolkit/openvino/wiki/BuildingCode">
+   Build from Source
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_yocto.html">
+   Create a Yocto Image
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="openvino_docs_install_guides_uninstalling_openvino.html">
+   Uninstalling
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Additional Configurations
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="openvino_docs_install_guides_configurations_for_intel_gpu.html">
+   Configurations for GPU
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="openvino_docs_install_guides_configurations_for_ncs2.html">
+   Configurations for NCS2
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_ivad_vpu.html">
+   Configurations for VPU
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_install_guides_movidius_setup_guide.html">
+     Configurations for IEI Mustang-V100-MX8-R10 card
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="openvino_docs_install_guides_configurations_for_intel_gna.html">
+   Configurations for GNA
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Get Started Guides
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="openvino_docs_get_started_get_started_demos.html">
+   Get Started with Step-by-step Demo
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  OpenVINO Code Samples
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="openvino_docs_OV_UG_Samples_Overview.html">
+   OpenVINO Samples
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_inference_engine_samples_classification_sample_async_README.html">
+     Image Classification Async C++ Sample
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_inference_engine_ie_bridges_python_sample_classification_sample_async_README.html">
+     Image Classification Async Python* Sample
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_inference_engine_samples_hello_classification_README.html">
+     Hello Classification C++ Sample
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_inference_engine_ie_bridges_c_samples_hello_classification_README.html">
+     Hello Classification C Sample
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_inference_engine_ie_bridges_python_sample_hello_classification_README.html">
+     Hello Classification Python* Sample
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_inference_engine_samples_hello_reshape_ssd_README.html">
+     Hello Reshape SSD C++ Sample
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_inference_engine_ie_bridges_python_sample_hello_reshape_ssd_README.html">
+     Hello Reshape SSD Python* Sample
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_inference_engine_samples_hello_nv12_input_classification_README.html">
+     Hello NV12 Input Classification C++ Sample
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_inference_engine_ie_bridges_c_samples_hello_nv12_input_classification_README.html">
+     Hello NV12 Input Classification C Sample
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_inference_engine_samples_hello_query_device_README.html">
+     Hello Query Device C++ Sample
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_inference_engine_ie_bridges_python_sample_hello_query_device_README.html">
+     Hello Query Device Python* Sample
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_inference_engine_samples_model_creation_sample_README.html">
+     Model Creation C++ Sample
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_inference_engine_ie_bridges_python_sample_model_creation_sample_README.html">
+     Model Creation Python* Sample
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_inference_engine_samples_speech_sample_README.html">
+     Automatic Speech Recognition C++ Sample
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_inference_engine_ie_bridges_python_sample_speech_sample_README.html">
+     Automatic Speech Recognition Python* Sample
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_inference_engine_samples_benchmark_app_README.html">
+     Benchmark C++ Tool
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_inference_engine_tools_benchmark_tool_README.html">
+     Benchmark Python* Tool
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Troubleshooting
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Installation &amp; Configuration Issues
+  </a>
+ </li>
+</ul>
+
+  </div>
+</nav>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+              
+              <div class="toc-item">
+                
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#errors-with-installing-via-pip-for-prc-users">
+   Errors with Installing via PIP for PRC Users
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#issues-with-installing-openvino-on-linux-from-docker">
+   Issues with Installing OpenVINO on Linux from Docker
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#proxy-issues">
+     Proxy Issues
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#permission-errors-for-dev-shm">
+     Permission Errors for /dev/shm
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#issues-with-configurations-for-intel-vision-accelerator-design-with-intel-movidius-vpus">
+   Issues with Configurations for Intel® Vision Accelerator Design with Intel® Movidius™ VPUs
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#unable-to-run-inference-with-the-myriad-plugin-after-running-with-the-hddl-plugin">
+     Unable to run inference with the MYRIAD Plugin after running with the HDDL Plugin
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#no-space-left-on-device-error-while-loading-a-network">
+     “No space left on device” error while loading a network
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#solutions-to-the-permission-issue">
+     Solutions to the permission issue
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#setup-sh-doesn-t-install-the-driver-binaries-to-lib-modules-on-centos-systems">
+     setup.sh doesn’t install the driver binaries to /lib/modules on CentOS systems
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#host-machine-reboots-after-running-an-inference-application-with-the-hddl-plugin">
+     Host machine reboots after running an inference application with the HDDL plugin
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#cannot-reset-vpu-device-and-cannot-find-any-0x20-0x27-raw-data-card-with-hw-version-fab-b-and-before-i2c-addresses-on-smbus-using-i2c-tools">
+     Cannot reset VPU device and cannot find any 0x20-0x27 (Raw data card with HW version Fab-B and before) I2C addresses on SMBUS (using i2c-tools)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#error-ipc-connection-linux-uds-bind-failed-in-hddldaemon-log">
+     “Error: ipc_connection_linux_UDS : bind() failed” in hddldaemon log
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#i2c-bus-smbus-i801-adapter-at-not-found-in-hddldaemon-log">
+     “I2C bus: SMBus I801 adapter at not found!” in hddldaemon log
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#open-dev-ion-failed-in-hddldaemon-log">
+     “open /dev/ion failed!” in hddldaemon log
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#constantly-getting-name-mapping-open-failed-err-2-no-such-file-or-directory-in-hddldaemon-log">
+     Constantly getting “_name_mapping open failed err=2,No such file or directory” in hddldaemon log
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#required-key-not-available-appears-when-trying-to-install-the-myd-ion-or-myd-vsc-modules">
+     “Required key not available” appears when trying to install the myd_ion or myd_vsc modules
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+</nav>
+              </div>
+              
+              <div class="toc-item">
+                <div class="tocsection download-docs">
+  <div class="dropdown sst-dropdown">
+    <button class="button bttn-prm button-size-m" data-display="static" type="button" id="download-options"
+      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Download Docs
+    </button>
+    <div class="dropdown-menu" aria-labelledby="download-options">
+      <a class="dropdown-item" href="#" onclick="window.print()">.pdf</a>
+      <a id="download-zip-btn" class="dropdown-item" href="#">.zip</a>
+    </div>
+  </div>
+</div>
+              </div>
+              
+            
+          </div>
+          
+
+          
+          
+              
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+
+<div class="tocsection editthispage">
+    <a href="None">
+        <i class="fas fa-pencil-alt"></i> Edit this page
+    </a>
+</div>
+
+            
+                <div>
+                  
+  <div class="section" id="troubleshooting-issues-with-openvino-installation-configuration">
+<span id="doxid-openvino-docs-get-started-guide-troubleshooting"></span><span id="index-0"></span><h1>Troubleshooting Issues with OpenVINO™ Installation &amp; Configuration<a class="headerlink" href="#troubleshooting-issues-with-openvino-installation-configuration" title="Permalink to this headline">¶</a></h1>
+<p><span class="target" id="doxid-openvino-docs-get-started-guide-troubleshooting-1md-openvino-docs-install-guides-troubleshooting"></span></p>
+<div class="section" id="errors-with-installing-via-pip-for-prc-users">
+<h2>Errors with Installing via PIP for PRC Users<a class="headerlink" href="#errors-with-installing-via-pip-for-prc-users" title="Permalink to this headline">¶</a></h2>
+<p>PRC users might encounter errors while downloading sources via PIP during OpenVINO™ installation. To resolve the issues, try one of the following options:</p>
+<ul class="simple">
+<li><p>Add the download source using the <code class="docutils literal notranslate"><span class="pre">-i</span></code> parameter with the Python <code class="docutils literal notranslate"><span class="pre">pip</span></code> command. For example:</p></li>
+</ul>
+<div class="highlight"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">openvino</span><span class="o">-</span><span class="n">dev</span> <span class="o">-</span><span class="n">i</span> <span class="nl">https</span><span class="p">:</span><span class="c1">//mirrors.aliyun.com/pypi/simple/</span></pre></div></div><p>Use the <code class="docutils literal notranslate"><span class="pre">--trusted-host</span></code> parameter if the URL above is <code class="docutils literal notranslate"><span class="pre">http</span></code> instead of <code class="docutils literal notranslate"><span class="pre">https</span></code>. You can also run the following command to install specific framework. For example:</p>
+<div class="highlight"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">openvino</span><span class="o">-</span><span class="n">dev</span><span class="p">[</span><span class="n">tensorflow2</span><span class="p">]</span> <span class="o">-</span><span class="n">i</span> <span class="nl">https</span><span class="p">:</span><span class="c1">//mirrors.aliyun.com/pypi/simple/</span></pre></div></div><ul class="simple">
+<li><p>If you run into incompatibility issues between components after installing OpenVINO, try running <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> with the following command:</p></li>
+</ul>
+<div class="highlight"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="o">&lt;</span><span class="n">INSTALL_DIR</span><span class="o">&gt;/</span><span class="n">tools</span><span class="o">/</span><span class="n">requirements</span><span class="p">.</span><span class="n">txt</span></pre></div></div></div>
+<div class="section" id="issues-with-installing-openvino-on-linux-from-docker">
+<h2>Issues with Installing OpenVINO on Linux from Docker<a class="headerlink" href="#issues-with-installing-openvino-on-linux-from-docker" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="proxy-issues">
+<h3>Proxy Issues<a class="headerlink" href="#proxy-issues" title="Permalink to this headline">¶</a></h3>
+<p>If you met proxy issues during the installation with Docker, please set up proxy settings for Docker. See the Proxy section in the <a class="reference external" href="https://docs.openvino.ai/latest/workbench_docs_Workbench_DG_Prerequisites.html#set-proxy">Install the DL Workbench from DockerHub</a> topic.</p>
+</div>
+<div class="section" id="permission-errors-for-dev-shm">
+<h3>Permission Errors for /dev/shm<a class="headerlink" href="#permission-errors-for-dev-shm" title="Permalink to this headline">¶</a></h3>
+<p>If you encounter a permission error for files in <code class="docutils literal notranslate"><span class="pre">/dev/shm</span></code> (see <code class="docutils literal notranslate"><span class="pre">hddldaemon.log</span></code>). A possible cause is that the uid and gid of the container user are different from the uid and gid of the user who created <code class="docutils literal notranslate"><span class="pre">hddldaemon</span></code> service on the host.</p>
+<p>Try one of these solutions:</p>
+<ul class="simple">
+<li><p>Create the user in the Docker container with the same uid and gid as the HDDL daemon user.</p></li>
+<li><p>Set the container user umask to 0000: <code class="docutils literal notranslate"><span class="pre">umask</span> <span class="pre">000</span></code>.</p></li>
+<li><p>(NOT RECOMMENDED) Start HDDL daemon on the host as root and start the container as root with the <code class="docutils literal notranslate"><span class="pre">-u</span> <span class="pre">root:root</span></code> option.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="issues-with-configurations-for-intel-vision-accelerator-design-with-intel-movidius-vpus">
+<h2>Issues with Configurations for Intel® Vision Accelerator Design with Intel® Movidius™ VPUs<a class="headerlink" href="#issues-with-configurations-for-intel-vision-accelerator-design-with-intel-movidius-vpus" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="unable-to-run-inference-with-the-myriad-plugin-after-running-with-the-hddl-plugin">
+<h3>Unable to run inference with the MYRIAD Plugin after running with the HDDL Plugin<a class="headerlink" href="#unable-to-run-inference-with-the-myriad-plugin-after-running-with-the-hddl-plugin" title="Permalink to this headline">¶</a></h3>
+<p>Running inference with the MYRIAD Plugin after running with the HDDL Plugin is failed with the following error generated:</p>
+<div class="highlight"><div class="highlight"><pre><span></span><span class="nl">E</span><span class="p">:</span> <span class="p">[</span><span class="n">ncAPI</span><span class="p">]</span> <span class="p">[</span>    <span class="mi">965618</span><span class="p">]</span> <span class="p">[</span><span class="n">MainThread</span><span class="p">]</span> <span class="nl">ncDeviceOpen</span><span class="p">:</span><span class="mi">677</span>   <span class="n">Failed</span> <span class="n">to</span> <span class="n">find</span> <span class="n">a</span> <span class="n">device</span><span class="p">,</span> <span class="nl">rc</span><span class="p">:</span> <span class="n">X_LINK_ERROR</span></pre></div></div><p><strong>Possible solutions (use one of the following):</strong></p>
+<ul>
+<li><p>Reboot the host system and run with the MYRIAD Plugin</p></li>
+<li><p>Kill the HDDL Plugin backend service (<code class="docutils literal notranslate"><span class="pre">hddldaemon</span></code>) and reset all Intel® Movidius™ VPUs before running an application that uses the MYRIAD Plugin:</p>
+<div class="highlight"><div class="highlight"><pre><span></span><span class="n">kill</span> <span class="o">-</span><span class="mi">9</span> <span class="err">$</span><span class="p">(</span><span class="n">pidof</span> <span class="n">hddldaemon</span> <span class="n">autoboot</span><span class="p">)</span>
+<span class="n">pidof</span> <span class="n">hddldaemon</span> <span class="n">autoboot</span> <span class="err">#</span> <span class="n">Make</span> <span class="n">sure</span> <span class="n">none</span> <span class="n">of</span> <span class="n">them</span> <span class="n">is</span> <span class="n">alive</span>
+<span class="n">source</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">intel</span><span class="o">/</span><span class="n">openvino_2022</span><span class="o">/</span><span class="n">setupvars</span><span class="p">.</span><span class="n">sh</span>
+<span class="err">$</span><span class="p">{</span><span class="n">HDDL_INSTALL_DIR</span><span class="p">}</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">bsl_reset</span></pre></div></div></li>
+</ul>
+</div>
+<div class="section" id="no-space-left-on-device-error-while-loading-a-network">
+<h3>“No space left on device” error while loading a network<a class="headerlink" href="#no-space-left-on-device-error-while-loading-a-network" title="Permalink to this headline">¶</a></h3>
+<p>When the application runs inference of a network with a big size(&gt;4MB) of input/output or if the system is running out of the DMA buffer, the HDDL Plugin will fall back to use shared memory. In this case, if the application exits abnormally, the shared memory is not released automatically. To release it manually, remove files with the <code class="docutils literal notranslate"><span class="pre">hddl_</span></code> prefix from the <code class="docutils literal notranslate"><span class="pre">/dev/shm</span></code> directory:</p>
+<div class="highlight"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">rm</span> <span class="o">-</span><span class="n">f</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">shm</span><span class="o">/</span><span class="n">hddl_</span><span class="err">\</span><span class="o">*</span></pre></div></div></div>
+<div class="section" id="solutions-to-the-permission-issue">
+<h3>Solutions to the permission issue<a class="headerlink" href="#solutions-to-the-permission-issue" title="Permalink to this headline">¶</a></h3>
+<p>Make sure that the following udev rules exist:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">/etc/udev/rules.d/97-myriad-usbboot.rules</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/etc/udev/rules.d/98-hddlbsl.rules</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/etc/udev/rules.d/99-hddl-ion.rules</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/etc/udev/rules.d/99-myriad-vsc.rules</span></code></p></li>
+</ul>
+<p>Also make sure that the current user is included in the users groups. If not, run the command below to include:</p>
+<div class="highlight"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">usermod</span> <span class="o">-</span><span class="n">a</span> <span class="o">-</span><span class="n">G</span> <span class="n">users</span> <span class="s">&quot;$(whoami)&quot;</span></pre></div></div></div>
+<div class="section" id="setup-sh-doesn-t-install-the-driver-binaries-to-lib-modules-on-centos-systems">
+<h3>setup.sh doesn’t install the driver binaries to /lib/modules on CentOS systems<a class="headerlink" href="#setup-sh-doesn-t-install-the-driver-binaries-to-lib-modules-on-centos-systems" title="Permalink to this headline">¶</a></h3>
+<p>As a temporary workaround, run the commands below to install the drivers. This issue will be fixed in future releases.</p>
+<div class="highlight"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">mkdir</span> <span class="o">-</span><span class="n">p</span> <span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">modules</span><span class="o">/</span><span class="err">$</span><span class="p">(</span><span class="n">uname</span> <span class="o">-</span><span class="n">r</span><span class="p">)</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">drivers</span><span class="o">/</span><span class="n">myd</span><span class="o">/</span></pre></div></div><div class="highlight"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">cp</span> <span class="n">drv_vsc</span><span class="o">/</span><span class="n">myd_vsc</span><span class="p">.</span><span class="n">ko</span> <span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">modules</span><span class="o">/</span><span class="err">$</span><span class="p">(</span><span class="n">uname</span> <span class="o">-</span><span class="n">r</span><span class="p">)</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">drivers</span><span class="o">/</span><span class="n">myd</span><span class="o">/</span></pre></div></div><div class="highlight"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">cp</span> <span class="n">drv_ion</span><span class="o">/</span><span class="n">myd_ion</span><span class="p">.</span><span class="n">ko</span> <span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">modules</span><span class="o">/</span><span class="err">$</span><span class="p">(</span><span class="n">uname</span> <span class="o">-</span><span class="n">r</span><span class="p">)</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">drivers</span><span class="o">/</span><span class="n">myd</span><span class="o">/</span></pre></div></div><div class="highlight"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">touch</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">modules</span><span class="o">-</span><span class="n">load</span><span class="p">.</span><span class="n">d</span><span class="o">/</span><span class="n">intel_vision_accelerator</span><span class="p">.</span><span class="n">conf</span></pre></div></div><div class="highlight"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">echo</span> <span class="s">&quot;myd_vsc&quot;</span> <span class="o">&gt;&gt;</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">modules</span><span class="o">-</span><span class="n">load</span><span class="p">.</span><span class="n">d</span><span class="o">/</span><span class="n">intel_vision_accelerator</span><span class="p">.</span><span class="n">conf</span></pre></div></div><div class="highlight"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">echo</span> <span class="s">&quot;myd_ion&quot;</span> <span class="o">&gt;&gt;</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">modules</span><span class="o">-</span><span class="n">load</span><span class="p">.</span><span class="n">d</span><span class="o">/</span><span class="n">intel_vision_accelerator</span><span class="p">.</span><span class="n">conf</span></pre></div></div><div class="highlight"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">depmod</span></pre></div></div><div class="highlight"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">modprobe</span> <span class="n">myd_vsc</span></pre></div></div><div class="highlight"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">modprobe</span> <span class="n">myd_ion</span></pre></div></div></div>
+<div class="section" id="host-machine-reboots-after-running-an-inference-application-with-the-hddl-plugin">
+<h3>Host machine reboots after running an inference application with the HDDL plugin<a class="headerlink" href="#host-machine-reboots-after-running-an-inference-application-with-the-hddl-plugin" title="Permalink to this headline">¶</a></h3>
+<p><strong>Symptom:</strong> Boot up the host machine, run the inference application with the HDDL plugin. System reboots in a uncertain time.</p>
+<p><strong>Root Cause:</strong> The I2C address of the reset device of the Intel® Vision Accelerator Design with Intel® Movidius™ VPUs conflicts with another device I2C address in 0x20-0x27 range. If the target Intel® Vision Accelerator Design with Intel® Movidius™ VPUs device needs to be reset (for example, in case of device errors), the <code class="docutils literal notranslate"><span class="pre">libbsl</span></code> library, which is responsible for reset, expects that the target reset device I2C address is in the 0x20-0x27 range on SMBUS. If there is another device on SMBUS in this address range, <code class="docutils literal notranslate"><span class="pre">libbsl</span></code> treats this device as the target reset device and writes an unexpected value to this address. This causes system reboot.</p>
+<p><strong>Solution:</strong> Detect if there is any I2C device on SMBUS with address in 0x20-0x27 range. If yes, do the following:</p>
+<ol class="arabic simple">
+<li><p>Change the DIP switch on the target PCIE card</p></li>
+<li><p>Disable autoscan for the reset device by setting <code class="docutils literal notranslate"><span class="pre">&quot;autoscan&quot;:</span> <span class="pre">false</span></code> in <code class="docutils literal notranslate"><span class="pre">${HDDL_INSTALL_DIR}/config/bsl.json</span></code></p></li>
+<li><p>Set the correct address of the I2C reset device (for example, <code class="docutils literal notranslate"><span class="pre">0x21</span></code>) in <code class="docutils literal notranslate"><span class="pre">${HDDL_INSTALL_DIR}/config/bsl.json</span></code></p></li>
+</ol>
+<div class="highlight"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s">&quot;autoscan&quot;</span><span class="o">:</span> <span class="nb">false</span><span class="p">,</span>
+  <span class="s">&quot;ioexpander&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s">&quot;enabled&quot;</span><span class="o">:</span> <span class="nb">true</span><span class="p">,</span>
+    <span class="s">&quot;i2c_addr&quot;</span><span class="o">:</span> <span class="p">[</span> <span class="mi">33</span> <span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">}</span></pre></div></div></div>
+<div class="section" id="cannot-reset-vpu-device-and-cannot-find-any-0x20-0x27-raw-data-card-with-hw-version-fab-b-and-before-i2c-addresses-on-smbus-using-i2c-tools">
+<h3>Cannot reset VPU device and cannot find any 0x20-0x27 (Raw data card with HW version Fab-B and before) I2C addresses on SMBUS (using i2c-tools)<a class="headerlink" href="#cannot-reset-vpu-device-and-cannot-find-any-0x20-0x27-raw-data-card-with-hw-version-fab-b-and-before-i2c-addresses-on-smbus-using-i2c-tools" title="Permalink to this headline">¶</a></h3>
+<p>Please contact your motherboard vendor to verify SMBUS pins are connected to the PCIe slot.</p>
+</div>
+<div class="section" id="error-ipc-connection-linux-uds-bind-failed-in-hddldaemon-log">
+<h3>“Error: ipc_connection_linux_UDS : bind() failed” in hddldaemon log<a class="headerlink" href="#error-ipc-connection-linux-uds-bind-failed-in-hddldaemon-log" title="Permalink to this headline">¶</a></h3>
+<p>You may have run hddldaemon under another user. Run the command below and try again:</p>
+<div class="highlight"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">rm</span> <span class="o">-</span><span class="n">rf</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">hddl_</span><span class="err">\</span><span class="o">*</span></pre></div></div></div>
+<div class="section" id="i2c-bus-smbus-i801-adapter-at-not-found-in-hddldaemon-log">
+<h3>“I2C bus: SMBus I801 adapter at not found!” in hddldaemon log<a class="headerlink" href="#i2c-bus-smbus-i801-adapter-at-not-found-in-hddldaemon-log" title="Permalink to this headline">¶</a></h3>
+<p>Run the following command to check if a SMBUS I801 adapter can be found:</p>
+<div class="highlight"><div class="highlight"><pre><span></span><span class="n">i2cdetect</span> <span class="o">-</span><span class="n">l</span></pre></div></div><p>Then run:</p>
+<div class="highlight"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">modprobe</span> <span class="n">i2c</span><span class="o">-</span><span class="n">i801</span></pre></div></div></div>
+<div class="section" id="open-dev-ion-failed-in-hddldaemon-log">
+<h3>“open /dev/ion failed!” in hddldaemon log<a class="headerlink" href="#open-dev-ion-failed-in-hddldaemon-log" title="Permalink to this headline">¶</a></h3>
+<p>Check if <code class="docutils literal notranslate"><span class="pre">myd_ion</span></code> kernel module is installed by running the following command:</p>
+<div class="highlight"><div class="highlight"><pre><span></span><span class="n">lsmod</span> <span class="o">|</span> <span class="n">grep</span> <span class="n">myd_ion</span></pre></div></div><p>If you do not see any output from the command, reinstall the <code class="docutils literal notranslate"><span class="pre">myd_ion</span></code> module.</p>
+</div>
+<div class="section" id="constantly-getting-name-mapping-open-failed-err-2-no-such-file-or-directory-in-hddldaemon-log">
+<h3>Constantly getting “_name_mapping open failed err=2,No such file or directory” in hddldaemon log<a class="headerlink" href="#constantly-getting-name-mapping-open-failed-err-2-no-such-file-or-directory-in-hddldaemon-log" title="Permalink to this headline">¶</a></h3>
+<p>Check if myd_vsc kernel module is installed by running the following command:</p>
+<div class="highlight"><div class="highlight"><pre><span></span><span class="n">lsmod</span> <span class="o">|</span> <span class="n">grep</span> <span class="n">myd_vsc</span></pre></div></div><p>If you do not see any output from the command reinstall the <code class="docutils literal notranslate"><span class="pre">myd_vsc</span></code> module.</p>
+</div>
+<div class="section" id="required-key-not-available-appears-when-trying-to-install-the-myd-ion-or-myd-vsc-modules">
+<h3>“Required key not available” appears when trying to install the myd_ion or myd_vsc modules<a class="headerlink" href="#required-key-not-available-appears-when-trying-to-install-the-myd-ion-or-myd-vsc-modules" title="Permalink to this headline">¶</a></h3>
+<p>Run the following commands:</p>
+<div class="highlight"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">mokutil</span></pre></div></div><div class="highlight"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">mokutil</span> <span class="o">--</span><span class="n">disable</span><span class="o">-</span><span class="n">validation</span></pre></div></div></div>
+</div>
+</div>
+
+
+                </div>
+            
+            
+                <div class='prev-next-bottom'>
+                  
+    <a class='button bttn-sec button-size-l' id="prev-link" href="openvino_inference_engine_tools_benchmark_tool_README.html" title="previous page">Prev</a>
+    <a class='button bttn-sec button-size-l' id="next-link" href="documentation.html" title="next page">Next</a>
+
+                </div>
+            
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+<footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2021, Intel®.<br>
+</p>
+    </div>
+    
+    <div class="footer-item">
+      <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

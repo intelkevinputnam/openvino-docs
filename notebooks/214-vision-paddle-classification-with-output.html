@@ -1,0 +1,940 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PaddlePaddle Image Classification with OpenVINO &#8212; OpenVINO™  documentation</title>
+    
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/blank.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/doxyrest-pygments.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <link href="../_static/css/media/favicon.ico" rel="shortcut icon">
+    <link rel="stylesheet" href="../_static/css/openvino_sphinx_theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/button.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/input.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/textfield.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/tabs.css" type="text/css" />
+    <script src="../_static/js/openvino_sphinx_theme.js"></script>
+    <link rel="stylesheet" href="../_static/css/viewer.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/0.5.7/chartjs-plugin-annotation.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-barchart-background@1.3.0/build/Plugin.Barchart.Background.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-deferred@1"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.1/papaparse.min.js"></script>
+    <script src="../_static/js/viewer.min.js"></script>
+    <script src="/assets/versions_raw.js"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/tabs.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/js/custom.js"></script>
+    <script src="../_static/js/graphs.js"></script>
+    <script src="../_static/js/graphs_ov_tf.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/target-highlight.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <link rel="canonical" href="https://docs.openvino.ai/latest/notebooks/214-vision-paddle-classification-with-output.html" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Image In-painting with OpenVINO™" href="215-image-inpainting-with-output.html" />
+    <link rel="prev" title="Interactive question answering with OpenVINO" href="213-question-answering-with-output.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+      <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+
+<a class="navbar-brand" href="../index.html">
+  <img src="../_static/logo.svg" class="logo" alt="logo">
+</a>
+
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../pages/get_started.html">
+  Get Started
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../pages/documentation.html">
+  Documentation
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../tutorials.html">
+  Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../model_zoo.html">
+  Model Zoo
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../pages/resources.html">
+  Resources
+ </a>
+</li>
+
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/openvinotoolkit/openvino" rel="noopener" target="_blank" title="GitHub">
+            <span><i class="sst-github"></i></span>
+            <label class="sr-only">GitHub</label>
+          </a>
+        </li>
+</ul>
+      </div>
+      
+      <div class="navbar-end-item">
+        
+<div class="dropdown sst-dropdown sst-dropdown-navbar">
+  <button class="btn sst-btn dropdown-toggle" type="button" id="version-selector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+  <div class="dropdown-menu" aria-labelledby="version-selector">
+  </div>
+</div>
+      </div>
+      
+      <div class="navbar-end-item">
+        
+
+<div class="dropdown sst-dropdown sst-dropdown-navbar">
+  <button class="btn sst-btn dropdown-toggle" type="button" id="language-selector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">English</button>
+  <div class="dropdown-menu" aria-labelledby="language-selector">
+    
+      
+        <a class="dropdown-item font-weight-bold" href="/latest/notebooks/214-vision-paddle-classification-with-output.html">English</a>
+      
+    
+      
+        <a  class="dropdown-item" href="/cn/latest/notebooks/214-vision-paddle-classification-with-output.html">Chinese</a>
+      
+    
+  </div>
+</div>
+
+      </div>
+      
+    </div>
+  </div>
+</div>
+        <div id="collapse-nav-wrapper" class="container-xl">
+          <button id="collapse-nav" class="button bttn-prm button-size-m" type="button" data-toggle="collapse" data-target="#nav-tree" aria-expanded="false" aria-controls="nav-tree">
+            Documentation navigation <i class="fas fa-chevron-down"></i>
+          </button>
+        </div>
+      </nav>
+      <div class="transition-banner container-fluid alert alert-info alert-dismissible fade show" role="alert">
+        <p>OpenVINO 2022.1 introduces a new version of OpenVINO API (API 2.0). For more information on the changes and transition steps, see the <a href="https://docs.openvino.ai/latest/openvino_2_0_transition_guide.html">transition guide</a></p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar" id="nav-tree"><form class="searchForm bd-search d-flex align-items-center" action="../search.html" method="get">
+    <i class="icon fas fa-search"></i>
+    <input type="search" class="form-control" name="query" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="001-hello-world-with-output.html">
+   Hello Image Classification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="002-openvino-api-with-output.html">
+   OpenVINO API Tutorial
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="003-hello-segmentation-with-output.html">
+   Hello Image Segmentation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="004-hello-detection-with-output.html">
+   Hello Object Detection
+  </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="101-tensorflow-to-openvino-with-output.html">
+   Convert a TensorFlow Model to OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="102-pytorch-onnx-to-openvino-with-output.html">
+   Convert a PyTorch Model to ONNX and OpenVINO IR
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="103-paddle-onnx-to-openvino-classification-with-output.html">
+   Convert a PaddlePaddle Model to ONNX and OpenVINO IR
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="104-model-tools-with-output.html">
+   Working with Open Model Zoo Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="105-language-quantize-bert-with-output.html">
+   Quantize NLP models with OpenVINO Post-Training Optimization Tool ​
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="106-auto-device-with-output.html">
+   Automatic Device Selection with OpenVINO™
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="110-ct-segmentation-quantize-with-output.html">
+   Quantize a Segmentation Model and Show Live Inference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="111-detection-quantization-with-output.html">
+   Object Detection Quantization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="112-pytorch-post-training-quantization-nncf-with-output.html">
+   Post-Training Quantization of PyTorch models with NNCF
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="113-image-classification-quantization-with-output.html">
+   Quantization of Image Classification Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="114-quantization-simplified-mode-with-output.html">
+   INT8 Quantization with Post-training Optimization Tool (POT) in Simplified Mode tutorial
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="201-vision-monodepth-with-output.html">
+   Monodepth Estimation with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="202-vision-superresolution-image-with-output.html">
+   Single Image Super Resolution with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="202-vision-superresolution-video-with-output.html">
+   Video Super Resolution with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="205-vision-background-removal-with-output.html">
+   Image Background Removal with U^2-Net and OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="206-vision-paddlegan-anime-with-output.html">
+   Photos to Anime with PaddleGAN and OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="207-vision-paddlegan-superresolution-with-output.html">
+   Super Resolution with PaddleGAN and OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="208-optical-character-recognition-with-output.html">
+   Optical Character Recognition (OCR) with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="209-handwritten-ocr-with-output.html">
+   Handwritten Chinese and Japanese OCR
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="210-ct-scan-live-inference-with-output.html">
+   Live Inference and Benchmark CT-scan Data with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="211-speech-to-text-with-output.html">
+   Speech to Text with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="212-onnx-style-transfer-with-output.html">
+   Style Transfer on ONNX Models with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="213-question-answering-with-output.html">
+   Interactive question answering with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   PaddlePaddle Image Classification with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="215-image-inpainting-with-output.html">
+   Image In-painting with OpenVINO™
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="217-vision-deblur-with-output.html">
+   Deblur Photos with DeblurGAN-v2 and OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="218-vehicle-detection-and-recognition-with-output.html">
+   Vehicle Detection And Recognition with OpenVINO
+  </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="301-tensorflow-training-openvino-with-output.html">
+   From Training to Deployment with TensorFlow and OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="301-tensorflow-training-openvino-pot-with-output.html">
+   Post-Training Quantization with TensorFlow Classification Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="302-pytorch-quantization-aware-training-with-output.html">
+   Quantization Aware Training with NNCF, using PyTorch framework
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="305-tensorflow-quantization-aware-training-with-output.html">
+   Quantization Aware Training with NNCF, using TensorFlow Framework
+  </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="401-object-detection-with-output.html">
+   Live Object Detection with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="402-pose-estimation-with-output.html">
+   Live Human Pose Estimation with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="403-action-recognition-webcam-with-output.html">
+   Human Action Recognition with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="405-paddle-ocr-webcam-with-output.html">
+   PaddleOCR with OpenVINO
+  </a>
+ </li>
+</ul>
+
+  </div>
+</nav>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+              
+              <div class="toc-item">
+                
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#import">
+   Import
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#download-the-mobilenetv3-large-x1-0-model">
+   Download the MobileNetV3_large_x1_0 Model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#define-the-callback-function-for-postprocessing">
+   Define the callback function for postprocessing
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#read-the-model">
+   Read the model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#integrate-preprocessing-steps-into-the-execution-graph-with-preprocessing-api">
+   Integrate preprocessing steps into the execution graph with Preprocessing API
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#run-inference">
+   Run Inference
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#performance-hints-latency-and-throughput">
+   Performance Hints: Latency and Throughput
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#benchmark-app">
+   benchmark_app
+  </a>
+ </li>
+</ul>
+
+</nav>
+              </div>
+              
+              <div class="toc-item">
+                <div class="tocsection download-docs">
+  <div class="dropdown sst-dropdown">
+    <button class="button bttn-prm button-size-m" data-display="static" type="button" id="download-options"
+      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Download Docs
+    </button>
+    <div class="dropdown-menu" aria-labelledby="download-options">
+      <a class="dropdown-item" href="#" onclick="window.print()">.pdf</a>
+      <a id="download-zip-btn" class="dropdown-item" href="#">.zip</a>
+    </div>
+  </div>
+</div>
+              </div>
+              
+            
+          </div>
+          
+
+          
+          
+              
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+
+<div class="tocsection editthispage">
+    <a href="None">
+        <i class="fas fa-pencil-alt"></i> Edit this page
+    </a>
+</div>
+
+            
+                <div>
+                  
+  <div class="section" id="paddlepaddle-image-classification-with-openvino">
+<h1>PaddlePaddle Image Classification with OpenVINO<a class="headerlink" href="#paddlepaddle-image-classification-with-openvino" title="Permalink to this headline">¶</a></h1>
+<p>This demo shows how to run a MobileNetV3 Large PaddePaddle model using
+OpenVINO Runtime. Instead of exporting the PaddlePaddle model to ONNX
+and converting to Intermediate Representation (IR) format using Model
+Optimizer, we can now read the Paddle model directly without conversion.</p>
+<div class="section" id="import">
+<h2>Import<a class="headerlink" href="#import" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># model download</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">urllib.request</span>
+<span class="kn">import</span> <span class="nn">tarfile</span>
+
+<span class="c1"># inference</span>
+<span class="kn">from</span> <span class="nn">openvino.runtime</span> <span class="kn">import</span> <span class="n">Core</span>
+
+<span class="c1"># preprocessing</span>
+<span class="kn">import</span> <span class="nn">cv2</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">openvino.preprocess</span> <span class="kn">import</span> <span class="n">PrePostProcessor</span><span class="p">,</span> <span class="n">ResizeAlgorithm</span>
+<span class="kn">from</span> <span class="nn">openvino.runtime</span> <span class="kn">import</span> <span class="n">Layout</span><span class="p">,</span> <span class="n">Type</span><span class="p">,</span> <span class="n">AsyncInferQueue</span><span class="p">,</span> <span class="n">PartialShape</span>
+
+<span class="c1"># results visualization</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="download-the-mobilenetv3-large-x1-0-model">
+<h2>Download the MobileNetV3_large_x1_0 Model<a class="headerlink" href="#download-the-mobilenetv3-large-x1-0-model" title="Permalink to this headline">¶</a></h2>
+<p>Download the pre-trained model directly from the server. More details
+about the pre-trained model can be found in the PaddleClas documentation
+below.</p>
+<p>Source:
+<a class="reference external" href="https://github.com/PaddlePaddle/PaddleClas/blob/release/2.2/deploy/lite/readme_en.md">https://github.com/PaddlePaddle/PaddleClas/blob/release/2.2/deploy/lite/readme_en.md</a></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mobilenet_url</span> <span class="o">=</span> <span class="s2">&quot;https://paddle-imagenet-models-name.bj.bcebos.com/dygraph/inference/MobileNetV3_large_x1_0_infer.tar&quot;</span>
+<span class="n">mobilenetv3_model_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;model/MobileNetV3_large_x1_0_infer/inference.pdmodel&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">mobilenetv3_model_path</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Model MobileNetV3_large_x1_0 already exists&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="c1"># Download the model from the server, and untar it.</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Downloading the MobileNetV3_large_x1_0_infer model (20Mb)... May take a while...&quot;</span><span class="p">)</span>
+    <span class="c1"># create a directory</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s2">&quot;model&quot;</span><span class="p">)</span>
+    <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlretrieve</span><span class="p">(</span><span class="n">mobilenet_url</span><span class="p">,</span> <span class="s2">&quot;model/MobileNetV3_large_x1_0_infer.tar&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Model Downloaded&quot;</span><span class="p">)</span>
+
+    <span class="n">file</span> <span class="o">=</span> <span class="n">tarfile</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;model/MobileNetV3_large_x1_0_infer.tar&quot;</span><span class="p">)</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="s2">&quot;model&quot;</span><span class="p">)</span>
+    <span class="n">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">res</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Model Extracted to </span><span class="si">{</span><span class="n">mobilenetv3_model_path</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error Extracting the model. Please check the network.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Downloading</span> <span class="n">the</span> <span class="n">MobileNetV3_large_x1_0_infer</span> <span class="n">model</span> <span class="p">(</span><span class="mi">20</span><span class="n">Mb</span><span class="p">)</span><span class="o">...</span> <span class="n">May</span> <span class="n">take</span> <span class="n">a</span> <span class="k">while</span><span class="o">...</span>
+<span class="n">Model</span> <span class="n">Downloaded</span>
+<span class="n">Model</span> <span class="n">Extracted</span> <span class="n">to</span> <span class="n">model</span><span class="o">/</span><span class="n">MobileNetV3_large_x1_0_infer</span><span class="o">/</span><span class="n">inference</span><span class="o">.</span><span class="n">pdmodel</span><span class="o">.</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="define-the-callback-function-for-postprocessing">
+<h2>Define the callback function for postprocessing<a class="headerlink" href="#define-the-callback-function-for-postprocessing" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">callback</span><span class="p">(</span><span class="n">infer_request</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Define the callback function for postprocessing</span>
+
+<span class="sd">    :param: infer_request: the infer_request object</span>
+<span class="sd">            i: the iteration of inference</span>
+<span class="sd">    :retuns:</span>
+<span class="sd">            None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">imagenet_classes</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s2">&quot;utils/imagenet_class_index.json&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+    <span class="n">predictions</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">infer_request</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
+    <span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="o">-</span><span class="n">predictions</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="c1"># Calculate the first inference time</span>
+        <span class="n">latency</span> <span class="o">=</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1000</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;first inference latency: </span><span class="si">{:.2f}</span><span class="s2"> ms&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">latency</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span>
+                <span class="s2">&quot;class name: </span><span class="si">{}</span><span class="s2">, probability: </span><span class="si">{:.5f}</span><span class="s2">&quot;</span>
+                <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">imagenet_classes</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">indices</span><span class="p">)[</span><span class="n">n</span><span class="p">])][</span><span class="mi">1</span><span class="p">],</span> <span class="n">predictions</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="nb">list</span><span class="p">(</span><span class="n">indices</span><span class="p">)[</span><span class="n">n</span><span class="p">]])</span>
+            <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="read-the-model">
+<h2>Read the model<a class="headerlink" href="#read-the-model" title="Permalink to this headline">¶</a></h2>
+<p>OpenVINO Runtime reads the <code class="docutils literal notranslate"><span class="pre">PaddlePaddle</span></code> model directly.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Intialize Inference Engine with Core()</span>
+<span class="n">ie</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span>
+<span class="c1"># MobileNetV3_large_x1_0</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">ie</span><span class="o">.</span><span class="n">read_model</span><span class="p">(</span><span class="n">mobilenetv3_model_path</span><span class="p">)</span>
+<span class="c1"># get the information of intput and output layer</span>
+<span class="n">input_layer</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">input</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">output_layer</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="integrate-preprocessing-steps-into-the-execution-graph-with-preprocessing-api">
+<h2>Integrate preprocessing steps into the execution graph with Preprocessing API<a class="headerlink" href="#integrate-preprocessing-steps-into-the-execution-graph-with-preprocessing-api" title="Permalink to this headline">¶</a></h2>
+<p>If your input data does not fit perfectly in the model input tensor
+additional operations/steps are needed to transform the data to a format
+expected by the model. These operations are known as “preprocessing”.
+Preprocessing steps are integrated into the execution graph and
+performed on the selected device(s) (CPU/GPU/VPU/etc.) rather than
+always executed on CPU. This improves utilization on the selected
+device(s).</p>
+<p>Overview of <code class="docutils literal notranslate"><span class="pre">Preprocessing</span> <span class="pre">API</span></code>:
+<a class="reference external" href="https://docs.openvino.ai/latest/openvino_docs_OV_Runtime_UG_Preprocessing_Overview.html">https://docs.openvino.ai/latest/openvino_docs_OV_Runtime_UG_Preprocessing_Overview.html</a></p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;../001-hello-world/data/coco.jpg&quot;</span>
+<span class="n">test_image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+<span class="n">test_image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">test_image</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">/</span> <span class="mi">255</span>
+<span class="n">_</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">test_image</span><span class="o">.</span><span class="n">shape</span>
+
+<span class="c1"># Adjust model input shape to improve the performance</span>
+<span class="n">model</span><span class="o">.</span><span class="n">reshape</span><span class="p">({</span><span class="n">input_layer</span><span class="o">.</span><span class="n">any_name</span><span class="p">:</span> <span class="n">PartialShape</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">224</span><span class="p">,</span> <span class="mi">224</span><span class="p">])})</span>
+<span class="n">ppp</span> <span class="o">=</span> <span class="n">PrePostProcessor</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+<span class="c1"># Set input tensor information:</span>
+<span class="c1"># - input() provides information about a single model input</span>
+<span class="c1"># - layout of data is &quot;NHWC&quot;</span>
+<span class="c1"># - set static spatial dimensions to input tensor to resize from</span>
+<span class="n">ppp</span><span class="o">.</span><span class="n">input</span><span class="p">()</span><span class="o">.</span><span class="n">tensor</span><span class="p">()</span> \
+    <span class="o">.</span><span class="n">set_spatial_static_shape</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span> \
+    <span class="o">.</span><span class="n">set_layout</span><span class="p">(</span><span class="n">Layout</span><span class="p">(</span><span class="s2">&quot;NHWC&quot;</span><span class="p">))</span>
+<span class="n">inputs</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">inputs</span>
+<span class="c1"># Here we assume the model has &quot;NCHW&quot; layout for input</span>
+<span class="n">ppp</span><span class="o">.</span><span class="n">input</span><span class="p">()</span><span class="o">.</span><span class="n">model</span><span class="p">()</span><span class="o">.</span><span class="n">set_layout</span><span class="p">(</span><span class="n">Layout</span><span class="p">(</span><span class="s2">&quot;NCHW&quot;</span><span class="p">))</span>
+<span class="c1"># Do prepocessing:</span>
+<span class="c1"># - apply linear resize from tensor spatial dims to model spatial dims</span>
+<span class="c1"># - Subtract mean from each channel</span>
+<span class="c1"># - Divide each pixel data to appropriate scale value</span>
+<span class="n">ppp</span><span class="o">.</span><span class="n">input</span><span class="p">()</span><span class="o">.</span><span class="n">preprocess</span><span class="p">()</span> \
+    <span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">ResizeAlgorithm</span><span class="o">.</span><span class="n">RESIZE_LINEAR</span><span class="p">,</span> <span class="mi">224</span><span class="p">,</span> <span class="mi">224</span><span class="p">)</span> \
+    <span class="o">.</span><span class="n">mean</span><span class="p">([</span><span class="mf">0.485</span><span class="p">,</span> <span class="mf">0.456</span><span class="p">,</span> <span class="mf">0.406</span><span class="p">])</span> \
+    <span class="o">.</span><span class="n">scale</span><span class="p">([</span><span class="mf">0.229</span><span class="p">,</span> <span class="mf">0.224</span><span class="p">,</span> <span class="mf">0.225</span><span class="p">])</span>
+<span class="c1"># Set output tensor information:</span>
+<span class="c1"># - precision of tensor is supposed to be &#39;f32&#39;</span>
+<span class="n">ppp</span><span class="o">.</span><span class="n">output</span><span class="p">()</span><span class="o">.</span><span class="n">tensor</span><span class="p">()</span><span class="o">.</span><span class="n">set_element_type</span><span class="p">(</span><span class="n">Type</span><span class="o">.</span><span class="n">f32</span><span class="p">)</span>
+<span class="c1"># Apply preprocessing to modify the original &#39;model&#39;</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">ppp</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="run-inference">
+<h2>Run Inference<a class="headerlink" href="#run-inference" title="Permalink to this headline">¶</a></h2>
+<p>Use <code class="docutils literal notranslate"><span class="pre">AUTO</span></code> as the device name to delegate device selection to
+OpenVINO. The Auto device plugin internally recognizes and selects
+devices from among Intel CPU and GPU depending on the device
+capabilities and the characteristics of the model(s) (for example,
+precision). Then it assigns inference requests to the best device.
+<code class="docutils literal notranslate"><span class="pre">AUTO</span></code> starts inference immediately on the CPU and then transparently
+shifts to the GPU (or VPU) once it is ready, dramatically reducing time
+to first inference.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check the available devices in your system</span>
+<span class="n">devices</span> <span class="o">=</span> <span class="n">ie</span><span class="o">.</span><span class="n">available_devices</span>
+<span class="k">for</span> <span class="n">device</span> <span class="ow">in</span> <span class="n">devices</span><span class="p">:</span>
+    <span class="n">device_name</span> <span class="o">=</span> <span class="n">ie</span><span class="o">.</span><span class="n">get_property</span><span class="p">(</span><span class="n">device_name</span><span class="o">=</span><span class="n">device</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;FULL_DEVICE_NAME&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">device</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">device_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Load model to a device selected by AUTO from the available devices list</span>
+<span class="n">compiled_model</span> <span class="o">=</span> <span class="n">ie</span><span class="o">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">device_name</span><span class="o">=</span><span class="s2">&quot;AUTO&quot;</span><span class="p">)</span>
+<span class="c1"># Create infer request queue</span>
+<span class="n">infer_queue</span> <span class="o">=</span> <span class="n">AsyncInferQueue</span><span class="p">(</span><span class="n">compiled_model</span><span class="p">)</span>
+<span class="n">infer_queue</span><span class="o">.</span><span class="n">set_callback</span><span class="p">(</span><span class="n">callback</span><span class="p">)</span>
+<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="c1"># Do inference</span>
+<span class="n">infer_queue</span><span class="o">.</span><span class="n">start_async</span><span class="p">({</span><span class="n">input_layer</span><span class="o">.</span><span class="n">any_name</span><span class="p">:</span> <span class="n">test_image</span><span class="p">},</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">infer_queue</span><span class="o">.</span><span class="n">wait_all</span><span class="p">()</span>
+<span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CPU</span><span class="p">:</span> <span class="n">Intel</span><span class="p">(</span><span class="n">R</span><span class="p">)</span> <span class="n">Xeon</span><span class="p">(</span><span class="n">R</span><span class="p">)</span> <span class="n">Platinum</span> <span class="mi">8272</span><span class="n">CL</span> <span class="n">CPU</span> <span class="o">@</span> <span class="mf">2.60</span><span class="n">GHz</span>
+<span class="n">first</span> <span class="n">inference</span> <span class="n">latency</span><span class="p">:</span> <span class="mf">18.38</span> <span class="n">ms</span>
+<span class="k">class</span> <span class="nc">name</span><span class="p">:</span> <span class="n">Labrador_retriever</span><span class="p">,</span> <span class="n">probability</span><span class="p">:</span> <span class="mf">0.59148</span>
+<span class="k">class</span> <span class="nc">name</span><span class="p">:</span> <span class="n">flat</span><span class="o">-</span><span class="n">coated_retriever</span><span class="p">,</span> <span class="n">probability</span><span class="p">:</span> <span class="mf">0.11678</span>
+<span class="k">class</span> <span class="nc">name</span><span class="p">:</span> <span class="n">Staffordshire_bullterrier</span><span class="p">,</span> <span class="n">probability</span><span class="p">:</span> <span class="mf">0.04089</span>
+<span class="k">class</span> <span class="nc">name</span><span class="p">:</span> <span class="n">Newfoundland</span><span class="p">,</span> <span class="n">probability</span><span class="p">:</span> <span class="mf">0.02689</span>
+<span class="k">class</span> <span class="nc">name</span><span class="p">:</span> <span class="n">Tibetan_mastiff</span><span class="p">,</span> <span class="n">probability</span><span class="p">:</span> <span class="mf">0.01735</span>
+</pre></div>
+</div>
+<img alt="../_images/214-vision-paddle-classification-with-output_12_1.jpg" src="../_images/214-vision-paddle-classification-with-output_12_1.jpg" />
+</div>
+<div class="section" id="performance-hints-latency-and-throughput">
+<h2>Performance Hints: Latency and Throughput<a class="headerlink" href="#performance-hints-latency-and-throughput" title="Permalink to this headline">¶</a></h2>
+<p>Throughput and latency are some of the most widely used metrics that
+measure the overall performance of an application.</p>
+<ul class="simple">
+<li><p><strong>Latency</strong> measures inference time (ms) required to process a single
+input or First inference.</p></li>
+<li><p>To calculate <strong>throughput</strong>, divide number of inputs that were
+processed by the processing time.</p></li>
+</ul>
+<p>The OpenVINO performance hints are the new way to configure the
+performance with the portability in mind. Performance Hints will let the
+device to configure itself, rather than map the application needs to the
+low-level performance settings, and keep an associated application logic
+to configure each possible device separately.</p>
+<p>High-level Performance Hints:
+<a class="reference external" href="https://docs.openvino.ai/latest/openvino_docs_OV_UG_Performance_Hints.html">https://docs.openvino.ai/latest/openvino_docs_OV_UG_Performance_Hints.html</a></p>
+<p><strong>Run Inference with “LATENCY” Performance Hint</strong></p>
+<p>It is possible to define application-specific performance settings with
+a config key, letting the device adjust to achieve better <code class="docutils literal notranslate"><span class="pre">LATENCY</span></code>
+oriented performance.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loop</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="c1"># AUTO sets device config based on hints</span>
+<span class="n">compiled_model</span> <span class="o">=</span> <span class="n">ie</span><span class="o">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">device_name</span><span class="o">=</span><span class="s2">&quot;AUTO&quot;</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;PERFORMANCE_HINT&quot;</span><span class="p">:</span> <span class="s2">&quot;LATENCY&quot;</span><span class="p">})</span>
+<span class="n">infer_queue</span> <span class="o">=</span> <span class="n">AsyncInferQueue</span><span class="p">(</span><span class="n">compiled_model</span><span class="p">)</span>
+<span class="c1"># implement AsyncInferQueue Python API to boost the performance in Async mode</span>
+<span class="n">infer_queue</span><span class="o">.</span><span class="n">set_callback</span><span class="p">(</span><span class="n">callback</span><span class="p">)</span>
+<span class="c1"># run infernce for 100 times to get the average FPS</span>
+<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">loop</span><span class="p">):</span>
+    <span class="n">infer_queue</span><span class="o">.</span><span class="n">start_async</span><span class="p">({</span><span class="n">input_layer</span><span class="o">.</span><span class="n">any_name</span><span class="p">:</span> <span class="n">test_image</span><span class="p">},</span> <span class="n">i</span><span class="p">)</span>
+<span class="n">infer_queue</span><span class="o">.</span><span class="n">wait_all</span><span class="p">()</span>
+<span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="c1"># Calculate the average FPS</span>
+<span class="n">fps</span> <span class="o">=</span> <span class="n">loop</span> <span class="o">/</span> <span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;throughput: </span><span class="si">{:.2f}</span><span class="s2"> fps&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">fps</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">first</span> <span class="n">inference</span> <span class="n">latency</span><span class="p">:</span> <span class="mf">13.06</span> <span class="n">ms</span>
+<span class="k">class</span> <span class="nc">name</span><span class="p">:</span> <span class="n">Labrador_retriever</span><span class="p">,</span> <span class="n">probability</span><span class="p">:</span> <span class="mf">0.59148</span>
+<span class="k">class</span> <span class="nc">name</span><span class="p">:</span> <span class="n">flat</span><span class="o">-</span><span class="n">coated_retriever</span><span class="p">,</span> <span class="n">probability</span><span class="p">:</span> <span class="mf">0.11678</span>
+<span class="k">class</span> <span class="nc">name</span><span class="p">:</span> <span class="n">Staffordshire_bullterrier</span><span class="p">,</span> <span class="n">probability</span><span class="p">:</span> <span class="mf">0.04089</span>
+<span class="k">class</span> <span class="nc">name</span><span class="p">:</span> <span class="n">Newfoundland</span><span class="p">,</span> <span class="n">probability</span><span class="p">:</span> <span class="mf">0.02689</span>
+<span class="k">class</span> <span class="nc">name</span><span class="p">:</span> <span class="n">Tibetan_mastiff</span><span class="p">,</span> <span class="n">probability</span><span class="p">:</span> <span class="mf">0.01735</span>
+<span class="n">throughput</span><span class="p">:</span> <span class="mf">116.84</span> <span class="n">fps</span>
+</pre></div>
+</div>
+<p><strong>Run Inference with “TRHOUGHPUT” Performance Hint</strong></p>
+<p>It is possible to define application-specific performance settings with
+a config key, letting the device adjust to achieve better <code class="docutils literal notranslate"><span class="pre">THROUGHPUT</span></code>
+performance.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># AUTO sets device config based on hints</span>
+<span class="n">compiled_model</span> <span class="o">=</span> <span class="n">ie</span><span class="o">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">device_name</span><span class="o">=</span><span class="s2">&quot;AUTO&quot;</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;PERFORMANCE_HINT&quot;</span><span class="p">:</span> <span class="s2">&quot;THROUGHPUT&quot;</span><span class="p">})</span>
+<span class="n">infer_queue</span> <span class="o">=</span> <span class="n">AsyncInferQueue</span><span class="p">(</span><span class="n">compiled_model</span><span class="p">)</span>
+<span class="n">infer_queue</span><span class="o">.</span><span class="n">set_callback</span><span class="p">(</span><span class="n">callback</span><span class="p">)</span>
+<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">loop</span><span class="p">):</span>
+    <span class="n">infer_queue</span><span class="o">.</span><span class="n">start_async</span><span class="p">({</span><span class="n">input_layer</span><span class="o">.</span><span class="n">any_name</span><span class="p">:</span> <span class="n">test_image</span><span class="p">},</span> <span class="n">i</span><span class="p">)</span>
+<span class="n">infer_queue</span><span class="o">.</span><span class="n">wait_all</span><span class="p">()</span>
+<span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="c1"># Calculate the average FPS</span>
+<span class="n">fps</span> <span class="o">=</span> <span class="n">loop</span> <span class="o">/</span> <span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;throughput: </span><span class="si">{:.2f}</span><span class="s2"> fps&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">fps</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">first</span> <span class="n">inference</span> <span class="n">latency</span><span class="p">:</span> <span class="mf">11.64</span> <span class="n">ms</span>
+<span class="k">class</span> <span class="nc">name</span><span class="p">:</span> <span class="n">Labrador_retriever</span><span class="p">,</span> <span class="n">probability</span><span class="p">:</span> <span class="mf">0.59148</span>
+<span class="k">class</span> <span class="nc">name</span><span class="p">:</span> <span class="n">flat</span><span class="o">-</span><span class="n">coated_retriever</span><span class="p">,</span> <span class="n">probability</span><span class="p">:</span> <span class="mf">0.11678</span>
+<span class="k">class</span> <span class="nc">name</span><span class="p">:</span> <span class="n">Staffordshire_bullterrier</span><span class="p">,</span> <span class="n">probability</span><span class="p">:</span> <span class="mf">0.04089</span>
+<span class="k">class</span> <span class="nc">name</span><span class="p">:</span> <span class="n">Newfoundland</span><span class="p">,</span> <span class="n">probability</span><span class="p">:</span> <span class="mf">0.02689</span>
+<span class="k">class</span> <span class="nc">name</span><span class="p">:</span> <span class="n">Tibetan_mastiff</span><span class="p">,</span> <span class="n">probability</span><span class="p">:</span> <span class="mf">0.01735</span>
+<span class="n">throughput</span><span class="p">:</span> <span class="mf">117.52</span> <span class="n">fps</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="benchmark-app">
+<h2>benchmark_app<a class="headerlink" href="#benchmark-app" title="Permalink to this headline">¶</a></h2>
+<p>To generate more accurate performance measurements, use the OpenVINO
+<a class="reference external" href="https://docs.openvino.ai/latest/openvino_inference_engine_tools_benchmark_tool_README.html">Benchmark
+Tool</a>.
+we can trigger the “Performance hint” by using <code class="docutils literal notranslate"><span class="pre">-hint</span></code> parameter,
+which instructs the OpenVINO device plugin to use the best
+network-specific settings for <code class="docutils literal notranslate"><span class="pre">latency</span></code> OR <code class="docutils literal notranslate"><span class="pre">throughput</span></code>.</p>
+<p>NOTE: The performance results from <code class="docutils literal notranslate"><span class="pre">benchmark_app</span></code> exclude model
+“compilation and load time”.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># &#39;latency&#39;: device performance optimized for LATENCY.</span>
+<span class="o">!</span> benchmark_app -m <span class="nv">$mobilenetv3_model_path</span> -data_shape <span class="o">[</span><span class="m">1</span>,3,224,224<span class="o">]</span> -hint <span class="s2">&quot;latency&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[Step 1/11] Parsing and validating input arguments
+[ WARNING ]  -nstreams default value is determined automatically for a device. Although the automatic selection usually provides a reasonable performance, but it still may be non-optimal for some cases, for more information look at README.
+[Step 2/11] Loading OpenVINO
+[ INFO ] OpenVINO:
+         API version............. 2022.1.0-7019-cdb9bec7210-releases/2022/1
+[ INFO ] Device info
+         CPU
+         openvino_intel_cpu_plugin version 2022.1
+         Build................... 2022.1.0-7019-cdb9bec7210-releases/2022/1
+
+[Step 3/11] Setting device configuration
+[Step 4/11] Reading network files
+[ INFO ] Read model took 44.09 ms
+[Step 5/11] Resizing network to match image sizes and given batch
+[ INFO ] Network batch size: ?
+[Step 6/11] Configuring input of the model
+[ INFO ] Model input &#39;inputs&#39; precision u8, dimensions ([N,C,H,W]): ? 3 224 224
+[ INFO ] Model output &#39;save_infer_model/scale_0.tmp_1&#39; precision f32, dimensions ([...]): ? 1000
+[Step 7/11] Loading the model to the device
+[ INFO ] Compile model took 143.06 ms
+[Step 8/11] Querying optimal runtime parameters
+[ INFO ] DEVICE: CPU
+[ INFO ]   AVAILABLE_DEVICES  , [&#39;&#39;]
+[ INFO ]   RANGE_FOR_ASYNC_INFER_REQUESTS  , (1, 1, 1)
+[ INFO ]   RANGE_FOR_STREAMS  , (1, 2)
+[ INFO ]   FULL_DEVICE_NAME  , Intel(R) Xeon(R) Platinum 8272CL CPU @ 2.60GHz
+[ INFO ]   OPTIMIZATION_CAPABILITIES  , [&#39;WINOGRAD&#39;, &#39;FP32&#39;, &#39;FP16&#39;, &#39;INT8&#39;, &#39;BIN&#39;, &#39;EXPORT_IMPORT&#39;]
+[ INFO ]   CACHE_DIR  ,
+[ INFO ]   NUM_STREAMS  , 1
+[ INFO ]   INFERENCE_NUM_THREADS  , 0
+[ INFO ]   PERF_COUNT  , False
+[ INFO ]   PERFORMANCE_HINT_NUM_REQUESTS  , 0
+[Step 9/11] Creating infer requests and preparing input data
+[ INFO ] Create 1 infer requests took 0.10 ms
+[ WARNING ] No input files were given for input &#39;inputs&#39;!. This input will be filled with random values!
+[ INFO ] Fill input &#39;inputs&#39; with random values
+[Step 10/11] Measuring performance (Start inference asynchronously, 1 inference requests, inference only: False, limits: 60000 ms duration)
+[ INFO ] Benchmarking in full mode (inputs filling are included in measurement loop).
+[ INFO ] First inference took 34.74 ms
+[Step 11/11] Dumping statistics report
+Count:          14409 iterations
+Duration:       60005.49 ms
+Latency:
+    AVG:        4.08 ms
+    MIN:        3.67 ms
+    MAX:        11.74 ms
+Throughput: 240.13 FPS
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># &#39;throughput&#39; or &#39;tput&#39;: device performance optimized for THROUGHPUT.</span>
+<span class="o">!</span> benchmark_app -m <span class="nv">$mobilenetv3_model_path</span> -data_shape <span class="o">[</span><span class="m">1</span>,3,224,224<span class="o">]</span> -hint <span class="s2">&quot;throughput&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[Step 1/11] Parsing and validating input arguments
+[ WARNING ]  -nstreams default value is determined automatically for a device. Although the automatic selection usually provides a reasonable performance, but it still may be non-optimal for some cases, for more information look at README.
+[Step 2/11] Loading OpenVINO
+[ INFO ] OpenVINO:
+         API version............. 2022.1.0-7019-cdb9bec7210-releases/2022/1
+[ INFO ] Device info
+         CPU
+         openvino_intel_cpu_plugin version 2022.1
+         Build................... 2022.1.0-7019-cdb9bec7210-releases/2022/1
+
+[Step 3/11] Setting device configuration
+[Step 4/11] Reading network files
+[ INFO ] Read model took 43.46 ms
+[Step 5/11] Resizing network to match image sizes and given batch
+[ INFO ] Network batch size: ?
+[Step 6/11] Configuring input of the model
+[ INFO ] Model input &#39;inputs&#39; precision u8, dimensions ([N,C,H,W]): ? 3 224 224
+[ INFO ] Model output &#39;save_infer_model/scale_0.tmp_1&#39; precision f32, dimensions ([...]): ? 1000
+[Step 7/11] Loading the model to the device
+[ INFO ] Compile model took 144.01 ms
+[Step 8/11] Querying optimal runtime parameters
+[ INFO ] DEVICE: CPU
+[ INFO ]   AVAILABLE_DEVICES  , [&#39;&#39;]
+[ INFO ]   RANGE_FOR_ASYNC_INFER_REQUESTS  , (1, 1, 1)
+[ INFO ]   RANGE_FOR_STREAMS  , (1, 2)
+[ INFO ]   FULL_DEVICE_NAME  , Intel(R) Xeon(R) Platinum 8272CL CPU @ 2.60GHz
+[ INFO ]   OPTIMIZATION_CAPABILITIES  , [&#39;WINOGRAD&#39;, &#39;FP32&#39;, &#39;FP16&#39;, &#39;INT8&#39;, &#39;BIN&#39;, &#39;EXPORT_IMPORT&#39;]
+[ INFO ]   CACHE_DIR  ,
+[ INFO ]   NUM_STREAMS  , 1
+[ INFO ]   INFERENCE_NUM_THREADS  , 0
+[ INFO ]   PERF_COUNT  , False
+[ INFO ]   PERFORMANCE_HINT_NUM_REQUESTS  , 0
+[Step 9/11] Creating infer requests and preparing input data
+[ INFO ] Create 1 infer requests took 0.11 ms
+[ WARNING ] No input files were given for input &#39;inputs&#39;!. This input will be filled with random values!
+[ INFO ] Fill input &#39;inputs&#39; with random values
+[Step 10/11] Measuring performance (Start inference asynchronously, 1 inference requests, inference only: False, limits: 60000 ms duration)
+[ INFO ] Benchmarking in full mode (inputs filling are included in measurement loop).
+[ INFO ] First inference took 35.29 ms
+[Step 11/11] Dumping statistics report
+Count:          14166 iterations
+Duration:       60008.18 ms
+Latency:
+    AVG:        4.15 ms
+    MIN:        3.67 ms
+    MAX:        19.90 ms
+Throughput: 236.07 FPS
+</pre></div>
+</div>
+</div>
+</div>
+
+
+                </div>
+            
+            
+                <div class='prev-next-bottom'>
+                  
+    <a class='button bttn-sec button-size-l' id="prev-link" href="213-question-answering-with-output.html" title="previous page">Prev</a>
+    <a class='button bttn-sec button-size-l' id="next-link" href="215-image-inpainting-with-output.html" title="next page">Next</a>
+
+                </div>
+            
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+<footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2021, Intel®.<br>
+</p>
+    </div>
+    
+    <div class="footer-item">
+      <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

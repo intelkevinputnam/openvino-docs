@@ -1,0 +1,1209 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Single Image Super Resolution with OpenVINO &#8212; OpenVINO™  documentation</title>
+    
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/blank.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/doxyrest-pygments.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <link href="../_static/css/media/favicon.ico" rel="shortcut icon">
+    <link rel="stylesheet" href="../_static/css/openvino_sphinx_theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/button.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/input.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/textfield.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/tabs.css" type="text/css" />
+    <script src="../_static/js/openvino_sphinx_theme.js"></script>
+    <link rel="stylesheet" href="../_static/css/viewer.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/0.5.7/chartjs-plugin-annotation.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-barchart-background@1.3.0/build/Plugin.Barchart.Background.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-deferred@1"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.1/papaparse.min.js"></script>
+    <script src="../_static/js/viewer.min.js"></script>
+    <script src="/assets/versions_raw.js"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/tabs.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/js/custom.js"></script>
+    <script src="../_static/js/graphs.js"></script>
+    <script src="../_static/js/graphs_ov_tf.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/target-highlight.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <link rel="canonical" href="https://docs.openvino.ai/latest/notebooks/202-vision-superresolution-image-with-output.html" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Video Super Resolution with OpenVINO" href="202-vision-superresolution-video-with-output.html" />
+    <link rel="prev" title="Monodepth Estimation with OpenVINO" href="201-vision-monodepth-with-output.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+      <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+
+<a class="navbar-brand" href="../index.html">
+  <img src="../_static/logo.svg" class="logo" alt="logo">
+</a>
+
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../pages/get_started.html">
+  Get Started
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../pages/documentation.html">
+  Documentation
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../tutorials.html">
+  Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../model_zoo.html">
+  Model Zoo
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../pages/resources.html">
+  Resources
+ </a>
+</li>
+
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/openvinotoolkit/openvino" rel="noopener" target="_blank" title="GitHub">
+            <span><i class="sst-github"></i></span>
+            <label class="sr-only">GitHub</label>
+          </a>
+        </li>
+</ul>
+      </div>
+      
+      <div class="navbar-end-item">
+        
+<div class="dropdown sst-dropdown sst-dropdown-navbar">
+  <button class="btn sst-btn dropdown-toggle" type="button" id="version-selector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+  <div class="dropdown-menu" aria-labelledby="version-selector">
+  </div>
+</div>
+      </div>
+      
+      <div class="navbar-end-item">
+        
+
+<div class="dropdown sst-dropdown sst-dropdown-navbar">
+  <button class="btn sst-btn dropdown-toggle" type="button" id="language-selector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">English</button>
+  <div class="dropdown-menu" aria-labelledby="language-selector">
+    
+      
+        <a class="dropdown-item font-weight-bold" href="/latest/notebooks/202-vision-superresolution-image-with-output.html">English</a>
+      
+    
+      
+        <a  class="dropdown-item" href="/cn/latest/notebooks/202-vision-superresolution-image-with-output.html">Chinese</a>
+      
+    
+  </div>
+</div>
+
+      </div>
+      
+    </div>
+  </div>
+</div>
+        <div id="collapse-nav-wrapper" class="container-xl">
+          <button id="collapse-nav" class="button bttn-prm button-size-m" type="button" data-toggle="collapse" data-target="#nav-tree" aria-expanded="false" aria-controls="nav-tree">
+            Documentation navigation <i class="fas fa-chevron-down"></i>
+          </button>
+        </div>
+      </nav>
+      <div class="transition-banner container-fluid alert alert-info alert-dismissible fade show" role="alert">
+        <p>OpenVINO 2022.1 introduces a new version of OpenVINO API (API 2.0). For more information on the changes and transition steps, see the <a href="https://docs.openvino.ai/latest/openvino_2_0_transition_guide.html">transition guide</a></p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar" id="nav-tree"><form class="searchForm bd-search d-flex align-items-center" action="../search.html" method="get">
+    <i class="icon fas fa-search"></i>
+    <input type="search" class="form-control" name="query" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="001-hello-world-with-output.html">
+   Hello Image Classification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="002-openvino-api-with-output.html">
+   OpenVINO API Tutorial
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="003-hello-segmentation-with-output.html">
+   Hello Image Segmentation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="004-hello-detection-with-output.html">
+   Hello Object Detection
+  </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="101-tensorflow-to-openvino-with-output.html">
+   Convert a TensorFlow Model to OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="102-pytorch-onnx-to-openvino-with-output.html">
+   Convert a PyTorch Model to ONNX and OpenVINO IR
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="103-paddle-onnx-to-openvino-classification-with-output.html">
+   Convert a PaddlePaddle Model to ONNX and OpenVINO IR
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="104-model-tools-with-output.html">
+   Working with Open Model Zoo Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="105-language-quantize-bert-with-output.html">
+   Quantize NLP models with OpenVINO Post-Training Optimization Tool ​
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="106-auto-device-with-output.html">
+   Automatic Device Selection with OpenVINO™
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="110-ct-segmentation-quantize-with-output.html">
+   Quantize a Segmentation Model and Show Live Inference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="111-detection-quantization-with-output.html">
+   Object Detection Quantization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="112-pytorch-post-training-quantization-nncf-with-output.html">
+   Post-Training Quantization of PyTorch models with NNCF
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="113-image-classification-quantization-with-output.html">
+   Quantization of Image Classification Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="114-quantization-simplified-mode-with-output.html">
+   INT8 Quantization with Post-training Optimization Tool (POT) in Simplified Mode tutorial
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="201-vision-monodepth-with-output.html">
+   Monodepth Estimation with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Single Image Super Resolution with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="202-vision-superresolution-video-with-output.html">
+   Video Super Resolution with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="205-vision-background-removal-with-output.html">
+   Image Background Removal with U^2-Net and OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="206-vision-paddlegan-anime-with-output.html">
+   Photos to Anime with PaddleGAN and OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="207-vision-paddlegan-superresolution-with-output.html">
+   Super Resolution with PaddleGAN and OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="208-optical-character-recognition-with-output.html">
+   Optical Character Recognition (OCR) with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="209-handwritten-ocr-with-output.html">
+   Handwritten Chinese and Japanese OCR
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="210-ct-scan-live-inference-with-output.html">
+   Live Inference and Benchmark CT-scan Data with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="211-speech-to-text-with-output.html">
+   Speech to Text with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="212-onnx-style-transfer-with-output.html">
+   Style Transfer on ONNX Models with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="213-question-answering-with-output.html">
+   Interactive question answering with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="214-vision-paddle-classification-with-output.html">
+   PaddlePaddle Image Classification with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="215-image-inpainting-with-output.html">
+   Image In-painting with OpenVINO™
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="217-vision-deblur-with-output.html">
+   Deblur Photos with DeblurGAN-v2 and OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="218-vehicle-detection-and-recognition-with-output.html">
+   Vehicle Detection And Recognition with OpenVINO
+  </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="301-tensorflow-training-openvino-with-output.html">
+   From Training to Deployment with TensorFlow and OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="301-tensorflow-training-openvino-pot-with-output.html">
+   Post-Training Quantization with TensorFlow Classification Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="302-pytorch-quantization-aware-training-with-output.html">
+   Quantization Aware Training with NNCF, using PyTorch framework
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="305-tensorflow-quantization-aware-training-with-output.html">
+   Quantization Aware Training with NNCF, using TensorFlow Framework
+  </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="401-object-detection-with-output.html">
+   Live Object Detection with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="402-pose-estimation-with-output.html">
+   Live Human Pose Estimation with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="403-action-recognition-webcam-with-output.html">
+   Human Action Recognition with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="405-paddle-ocr-webcam-with-output.html">
+   PaddleOCR with OpenVINO
+  </a>
+ </li>
+</ul>
+
+  </div>
+</nav>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+              
+              <div class="toc-item">
+                
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#preparation">
+   Preparation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#imports">
+     Imports
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#settings">
+     Settings
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#functions">
+     Functions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-the-superresolution-model">
+   Load the Superresolution Model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-and-show-the-input-image">
+   Load and Show the Input Image
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#superresolution-on-a-crop-of-the-image">
+   Superresolution on a Crop of the Image
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#take-one-crop-of-the-input-image">
+     Take One Crop of the Input Image
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#reshape-resize-crop-for-model-input">
+     Reshape/Resize Crop for Model Input
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#do-inference">
+     Do Inference
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#show-and-save-results">
+     Show and Save Results
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#save-superresolution-and-bicubic-image-crop">
+       Save Superresolution and Bicubic Image Crop
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#write-animated-gif-with-bicubic-superresolution-comparison">
+       Write Animated GIF with Bicubic/Superresolution Comparison
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#create-video-with-sliding-bicubic-superresolution-comparison">
+       Create video with sliding bicubic/superresolution comparison
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#superresolution-on-full-input-image">
+   Superresolution on full input image
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#compute-patches">
+     Compute patches
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Do Inference
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#save-superresolution-image-and-the-bicubic-image">
+     Save superresolution image and the bicubic image
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+</nav>
+              </div>
+              
+              <div class="toc-item">
+                <div class="tocsection download-docs">
+  <div class="dropdown sst-dropdown">
+    <button class="button bttn-prm button-size-m" data-display="static" type="button" id="download-options"
+      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Download Docs
+    </button>
+    <div class="dropdown-menu" aria-labelledby="download-options">
+      <a class="dropdown-item" href="#" onclick="window.print()">.pdf</a>
+      <a id="download-zip-btn" class="dropdown-item" href="#">.zip</a>
+    </div>
+  </div>
+</div>
+              </div>
+              
+            
+          </div>
+          
+
+          
+          
+              
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+
+<div class="tocsection editthispage">
+    <a href="None">
+        <i class="fas fa-pencil-alt"></i> Edit this page
+    </a>
+</div>
+
+            
+                <div>
+                  
+  <div class="section" id="single-image-super-resolution-with-openvino">
+<h1>Single Image Super Resolution with OpenVINO<a class="headerlink" href="#single-image-super-resolution-with-openvino" title="Permalink to this headline">¶</a></h1>
+<p>Super Resolution is the process of enhancing the quality of an image by
+increasing the pixel count using deep learning. This notebook shows the
+Single Image Super Resolution (SISR) which takes just one low resolution
+image. We use a model called
+<a class="reference external" href="https://docs.openvino.ai/latest/omz_models_model_single_image_super_resolution_1032.html">single-image-super-resolution-1032</a>
+which is available from the Open Model Zoo. It is based on the research
+paper cited below.</p>
+<p>Y. Liu et al., <a class="reference external" href="https://arxiv.org/abs/1807.06779">“An Attention-Based Approach for Single Image Super
+Resolution,”</a> 2018 24th
+International Conference on Pattern Recognition (ICPR), 2018,
+pp. 2777-2784, doi: 10.1109/ICPR.2018.8545760.</p>
+<div class="section" id="preparation">
+<h2>Preparation<a class="headerlink" href="#preparation" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="imports">
+<h3>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">urllib</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">import</span> <span class="nn">cv2</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">HTML</span><span class="p">,</span> <span class="n">FileLink</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span> <span class="k">as</span> <span class="n">DisplayImage</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Pretty</span><span class="p">,</span> <span class="n">ProgressBar</span><span class="p">,</span> <span class="n">clear_output</span><span class="p">,</span> <span class="n">display</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="kn">from</span> <span class="nn">openvino.runtime</span> <span class="kn">import</span> <span class="n">Core</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="settings">
+<h3>Settings<a class="headerlink" href="#settings" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Device to use for inference. For example, &quot;CPU&quot;, or &quot;GPU&quot;</span>
+<span class="n">DEVICE</span> <span class="o">=</span> <span class="s2">&quot;CPU&quot;</span>
+<span class="c1"># 1032: 4x superresolution, 1033: 3x superresolution</span>
+<span class="n">MODEL_FILE</span> <span class="o">=</span> <span class="s2">&quot;model/single-image-super-resolution-1032.xml&quot;</span>
+<span class="n">model_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">MODEL_FILE</span><span class="p">)</span>
+<span class="n">model_xml_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">MODEL_FILE</span><span class="p">)</span><span class="o">.</span><span class="n">with_suffix</span><span class="p">(</span><span class="s2">&quot;.xml&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">write_text_on_image</span><span class="p">(</span><span class="n">image</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Write the specified text in the top left corner of the image</span>
+<span class="sd">    as white text with a black border.</span>
+
+<span class="sd">    :param image: image as numpy arry with HWC shape, RGB or BGR</span>
+<span class="sd">    :param text: text to write</span>
+<span class="sd">    :return: image with written text, as numpy array</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">font</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">FONT_HERSHEY_PLAIN</span>
+    <span class="n">org</span> <span class="o">=</span> <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+    <span class="n">font_scale</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="n">font_color</span> <span class="o">=</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
+    <span class="n">line_type</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">font_thickness</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">text_color_bg</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">org</span>
+
+    <span class="n">image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">UMat</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+    <span class="p">(</span><span class="n">text_w</span><span class="p">,</span> <span class="n">text_h</span><span class="p">),</span> <span class="n">_</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">getTextSize</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">font</span><span class="p">,</span> <span class="n">font_scale</span><span class="p">,</span> <span class="n">font_thickness</span><span class="p">)</span>
+    <span class="n">result_im</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">rectangle</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">org</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">text_w</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">text_h</span><span class="p">),</span> <span class="n">text_color_bg</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">textim</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">putText</span><span class="p">(</span>
+        <span class="n">result_im</span><span class="p">,</span>
+        <span class="n">text</span><span class="p">,</span>
+        <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">text_h</span> <span class="o">+</span> <span class="n">font_scale</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span>
+        <span class="n">font</span><span class="p">,</span>
+        <span class="n">font_scale</span><span class="p">,</span>
+        <span class="n">font_color</span><span class="p">,</span>
+        <span class="n">font_thickness</span><span class="p">,</span>
+        <span class="n">line_type</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">textim</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">load_image</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Loads an image from `path` and returns it as BGR numpy array.</span>
+
+<span class="sd">    :param path: path to an image filename or url</span>
+<span class="sd">    :return: image as numpy array, with BGR channel order</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;http&quot;</span><span class="p">):</span>
+        <span class="c1"># Set User-Agent to Mozilla because some websites block requests</span>
+        <span class="c1"># with User-Agent Python</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">Request</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;User-Agent&quot;</span><span class="p">:</span> <span class="s2">&quot;Mozilla/5.0&quot;</span><span class="p">})</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+        <span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="nb">bytearray</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">read</span><span class="p">()),</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;uint8&quot;</span><span class="p">)</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imdecode</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Loads the image as BGR</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">image</span>
+
+
+<span class="k">def</span> <span class="nf">convert_result_to_image</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert network result of floating point numbers to image with integer</span>
+<span class="sd">    values from 0-255. Values outside this range are clipped to 0 and 255.</span>
+
+<span class="sd">    :param result: a single superresolution network result in N,C,H,W shape</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">*=</span> <span class="mi">255</span>
+    <span class="n">result</span><span class="p">[</span><span class="n">result</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">result</span><span class="p">[</span><span class="n">result</span> <span class="o">&gt;</span> <span class="mi">255</span><span class="p">]</span> <span class="o">=</span> <span class="mi">255</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+
+<span class="k">def</span> <span class="nf">to_rgb</span><span class="p">(</span><span class="n">image_data</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert image_data from BGR to RGB</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">image_data</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2RGB</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="load-the-superresolution-model">
+<h2>Load the Superresolution Model<a class="headerlink" href="#load-the-superresolution-model" title="Permalink to this headline">¶</a></h2>
+<p>The Super Resolution model expects two inputs: 1) the input image, 2) a
+bicubic interpolation of the input image to a size of 1920x1080. It
+returns the super resolution version of the image in 1920x1800 (for the
+default superresolution model (1032)).</p>
+<p>Load the model in Inference Engine with <code class="docutils literal notranslate"><span class="pre">ie.read_model</span></code>, compile it
+for the specified device with <code class="docutils literal notranslate"><span class="pre">ie.compile_model</span></code>, and get information
+about the network inputs and outputs.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ie</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">ie</span><span class="o">.</span><span class="n">read_model</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model_xml_path</span><span class="p">)</span>
+<span class="n">compiled_model</span> <span class="o">=</span> <span class="n">ie</span><span class="o">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">device_name</span><span class="o">=</span><span class="n">DEVICE</span><span class="p">)</span>
+
+<span class="c1"># Network inputs and outputs are dictionaries. Get the keys for the</span>
+<span class="c1"># dictionaries.</span>
+<span class="n">original_image_key</span><span class="p">,</span> <span class="n">bicubic_image_key</span> <span class="o">=</span> <span class="n">compiled_model</span><span class="o">.</span><span class="n">inputs</span>
+<span class="n">output_key</span> <span class="o">=</span> <span class="n">compiled_model</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Get the expected input and target shape. `.dims[2:]` returns the height</span>
+<span class="c1"># and width. OpenCV&#39;s resize function expects the shape as (width, height),</span>
+<span class="c1"># so we reverse the shape with `[::-1]` and convert it to a tuple</span>
+<span class="n">input_height</span><span class="p">,</span> <span class="n">input_width</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">original_image_key</span><span class="o">.</span><span class="n">shape</span><span class="p">)[</span><span class="mi">2</span><span class="p">:]</span>
+<span class="n">target_height</span><span class="p">,</span> <span class="n">target_width</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">bicubic_image_key</span><span class="o">.</span><span class="n">shape</span><span class="p">)[</span><span class="mi">2</span><span class="p">:]</span>
+
+<span class="n">upsample_factor</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">target_height</span> <span class="o">/</span> <span class="n">input_height</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The network expects inputs with a width of </span><span class="si">{</span><span class="n">input_width</span><span class="si">}</span><span class="s2">, &quot;</span> <span class="sa">f</span><span class="s2">&quot;height of </span><span class="si">{</span><span class="n">input_height</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The network returns images with a width of </span><span class="si">{</span><span class="n">target_width</span><span class="si">}</span><span class="s2">, &quot;</span> <span class="sa">f</span><span class="s2">&quot;height of </span><span class="si">{</span><span class="n">target_height</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">&quot;The image sides are upsampled by a factor </span><span class="si">{</span><span class="n">upsample_factor</span><span class="si">}</span><span class="s2">. &quot;</span>
+    <span class="sa">f</span><span class="s2">&quot;The new image is </span><span class="si">{</span><span class="n">upsample_factor</span><span class="o">**</span><span class="mi">2</span><span class="si">}</span><span class="s2"> times as large as the &quot;</span>
+    <span class="s2">&quot;original image&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">The</span> <span class="n">network</span> <span class="n">expects</span> <span class="n">inputs</span> <span class="k">with</span> <span class="n">a</span> <span class="n">width</span> <span class="n">of</span> <span class="mi">480</span><span class="p">,</span> <span class="n">height</span> <span class="n">of</span> <span class="mi">270</span>
+<span class="n">The</span> <span class="n">network</span> <span class="n">returns</span> <span class="n">images</span> <span class="k">with</span> <span class="n">a</span> <span class="n">width</span> <span class="n">of</span> <span class="mi">1920</span><span class="p">,</span> <span class="n">height</span> <span class="n">of</span> <span class="mi">1080</span>
+<span class="n">The</span> <span class="n">image</span> <span class="n">sides</span> <span class="n">are</span> <span class="n">upsampled</span> <span class="n">by</span> <span class="n">a</span> <span class="n">factor</span> <span class="mf">4.</span> <span class="n">The</span> <span class="n">new</span> <span class="n">image</span> <span class="ow">is</span> <span class="mi">16</span> <span class="n">times</span> <span class="k">as</span> <span class="n">large</span> <span class="k">as</span> <span class="n">the</span> <span class="n">original</span> <span class="n">image</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="load-and-show-the-input-image">
+<h2>Load and Show the Input Image<a class="headerlink" href="#load-and-show-the-input-image" title="Permalink to this headline">¶</a></h2>
+<p><strong>NOTE:</strong> For best results, use raw images (like TIFF, BMP or PNG).
+Compressed images (like JPEG) may appear distorted after processing with
+the super resolution model.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">IMAGE_PATH</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;data/tower.jpg&quot;</span><span class="p">)</span>
+<span class="n">OUTPUT_PATH</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;output/&quot;</span><span class="p">)</span>
+
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">OUTPUT_PATH</span><span class="p">),</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">full_image</span> <span class="o">=</span> <span class="n">load_image</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">IMAGE_PATH</span><span class="p">))</span>
+
+<span class="c1"># Uncomment these lines to load a raw image as BGR</span>
+<span class="c1"># import rawpy</span>
+<span class="c1"># with rawpy.imread(IMAGE_PATH) as raw:</span>
+<span class="c1">#     full_image = raw.postprocess()[:,:,(2,1,0)]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">to_rgb</span><span class="p">(</span><span class="n">full_image</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Showing full image with width </span><span class="si">{</span><span class="n">full_image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> &quot;</span> <span class="sa">f</span><span class="s2">&quot;and height </span><span class="si">{</span><span class="n">full_image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Showing</span> <span class="n">full</span> <span class="n">image</span> <span class="k">with</span> <span class="n">width</span> <span class="mi">5976</span> <span class="ow">and</span> <span class="n">height</span> <span class="mi">3770</span>
+</pre></div>
+</div>
+<img alt="../_images/202-vision-superresolution-image-with-output_10_1.png" src="../_images/202-vision-superresolution-image-with-output_10_1.png" />
+</div>
+<div class="section" id="superresolution-on-a-crop-of-the-image">
+<h2>Superresolution on a Crop of the Image<a class="headerlink" href="#superresolution-on-a-crop-of-the-image" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="take-one-crop-of-the-input-image">
+<h3>Take One Crop of the Input Image<a class="headerlink" href="#take-one-crop-of-the-input-image" title="Permalink to this headline">¶</a></h3>
+<p>Take a crop of network input size. Give the X (width) and Y (height)
+coordinates for the top left corner of the crop. Set the CROP_FACTOR
+variable to 2 to make a crop that is larger than the network input size
+(this only works with the 1032 superresolution model). The crop will be
+downsampled before propagating to the network. This is useful for very
+high resolution images, where a crop of network input size is too small
+to show enough information. It can also improve the result. Note though
+that with a CROP_FACTOR or 2 the net upsampling factor will be halved.
+If the superresolution network increases the side lengths of the image
+by a factor four, it upsamples a 480x270 crop to 1920x1080. With a
+CROP_FACTOR of two, a 960x540 crop is upsampled to the same 1920x1080:
+the side lengths are twice as large as the crop size.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set CROP_FACTOR to 2 to take crops with twice the input width and height</span>
+<span class="c1"># This only works with the 1032 (4x) superresolution model!</span>
+<span class="c1"># Set it to 1 to take crops of exactly input size</span>
+<span class="n">CROP_FACTOR</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">adjusted_upsample_factor</span> <span class="o">=</span> <span class="n">upsample_factor</span> <span class="o">//</span> <span class="n">CROP_FACTOR</span>
+
+<span class="n">image_id</span> <span class="o">=</span> <span class="s2">&quot;flag&quot;</span>  <span class="c1"># A tag to recognize the saved images</span>
+<span class="n">starty</span> <span class="o">=</span> <span class="mi">3200</span>
+<span class="n">startx</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="c1"># Perform the crop</span>
+<span class="n">image_crop</span> <span class="o">=</span> <span class="n">full_image</span><span class="p">[</span>
+    <span class="n">starty</span> <span class="p">:</span> <span class="n">starty</span> <span class="o">+</span> <span class="n">input_height</span> <span class="o">*</span> <span class="n">CROP_FACTOR</span><span class="p">,</span>
+    <span class="n">startx</span> <span class="p">:</span> <span class="n">startx</span> <span class="o">+</span> <span class="n">input_width</span> <span class="o">*</span> <span class="n">CROP_FACTOR</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="c1"># Show the cropped image</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Showing image crop with width </span><span class="si">{</span><span class="n">image_crop</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> and &quot;</span> <span class="sa">f</span><span class="s2">&quot;height </span><span class="si">{</span><span class="n">image_crop</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">to_rgb</span><span class="p">(</span><span class="n">image_crop</span><span class="p">));</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Showing</span> <span class="n">image</span> <span class="n">crop</span> <span class="k">with</span> <span class="n">width</span> <span class="mi">960</span> <span class="ow">and</span> <span class="n">height</span> <span class="mf">540.</span>
+</pre></div>
+</div>
+<img alt="../_images/202-vision-superresolution-image-with-output_12_1.png" src="../_images/202-vision-superresolution-image-with-output_12_1.png" />
+</div>
+<div class="section" id="reshape-resize-crop-for-model-input">
+<h3>Reshape/Resize Crop for Model Input<a class="headerlink" href="#reshape-resize-crop-for-model-input" title="Permalink to this headline">¶</a></h3>
+<p>The input image is resized to network input size, and reshaped to
+(N,C,H,W) (N=number of images, C=number of channels, H=height, W=width).
+. The image is also resized to network output size, with bicubic
+interpolation. This bicubic image is the second input to the network.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Resize the image to the target shape with bicubic interpolation</span>
+<span class="n">bicubic_image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span>
+    <span class="n">src</span><span class="o">=</span><span class="n">image_crop</span><span class="p">,</span> <span class="n">dsize</span><span class="o">=</span><span class="p">(</span><span class="n">target_width</span><span class="p">,</span> <span class="n">target_height</span><span class="p">),</span> <span class="n">interpolation</span><span class="o">=</span><span class="n">cv2</span><span class="o">.</span><span class="n">INTER_CUBIC</span>
+<span class="p">)</span>
+
+<span class="c1"># If required, resize image to input image shape</span>
+<span class="k">if</span> <span class="n">CROP_FACTOR</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+    <span class="n">image_crop</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">src</span><span class="o">=</span><span class="n">image_crop</span><span class="p">,</span> <span class="n">dsize</span><span class="o">=</span><span class="p">(</span><span class="n">input_width</span><span class="p">,</span> <span class="n">input_height</span><span class="p">))</span>
+
+<span class="c1"># Reshape the images from (H,W,C) to (N,C,H,W)</span>
+<span class="n">input_image_original</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">image_crop</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">input_image_bicubic</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">bicubic_image</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="do-inference">
+<h3>Do Inference<a class="headerlink" href="#do-inference" title="Permalink to this headline">¶</a></h3>
+<p>Do inference and convert the inference result to an RGB image</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">compiled_model</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="n">original_image_key</span><span class="o">.</span><span class="n">any_name</span><span class="p">:</span> <span class="n">input_image_original</span><span class="p">,</span>
+        <span class="n">bicubic_image_key</span><span class="o">.</span><span class="n">any_name</span><span class="p">:</span> <span class="n">input_image_bicubic</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">)[</span><span class="n">output_key</span><span class="p">]</span>
+
+<span class="c1"># Get inference result as numpy array and reshape to image shape and data type</span>
+<span class="n">result_image</span> <span class="o">=</span> <span class="n">convert_result_to_image</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="show-and-save-results">
+<h3>Show and Save Results<a class="headerlink" href="#show-and-save-results" title="Permalink to this headline">¶</a></h3>
+<p>Show the bicubic image and the enhanced superresolution image.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">15</span><span class="p">))</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">to_rgb</span><span class="p">(</span><span class="n">bicubic_image</span><span class="p">))</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">to_rgb</span><span class="p">(</span><span class="n">result_image</span><span class="p">))</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Bicubic&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Superresolution&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Text</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;Superresolution&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../_images/202-vision-superresolution-image-with-output_18_1.png" src="../_images/202-vision-superresolution-image-with-output_18_1.png" />
+<div class="section" id="save-superresolution-and-bicubic-image-crop">
+<h4>Save Superresolution and Bicubic Image Crop<a class="headerlink" href="#save-superresolution-and-bicubic-image-crop" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add text with &quot;SUPER&quot; or &quot;BICUBIC&quot; to the superresolution or bicubic image</span>
+<span class="n">image_super</span> <span class="o">=</span> <span class="n">write_text_on_image</span><span class="p">(</span><span class="n">image</span><span class="o">=</span><span class="n">result_image</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;SUPER&quot;</span><span class="p">)</span>
+<span class="n">image_bicubic</span> <span class="o">=</span> <span class="n">write_text_on_image</span><span class="p">(</span><span class="n">image</span><span class="o">=</span><span class="n">bicubic_image</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;BICUBIC&quot;</span><span class="p">)</span>
+
+<span class="c1"># Store the image and the results</span>
+<span class="n">crop_image_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">OUTPUT_PATH</span><span class="o">.</span><span class="n">stem</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">image_id</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">adjusted_upsample_factor</span><span class="si">}</span><span class="s2">x_crop.png&quot;</span><span class="p">)</span>
+<span class="n">superres_image_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">OUTPUT_PATH</span><span class="o">.</span><span class="n">stem</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">image_id</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">adjusted_upsample_factor</span><span class="si">}</span><span class="s2">x_crop_superres.png&quot;</span>
+<span class="p">)</span>
+<span class="n">bicubic_image_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">OUTPUT_PATH</span><span class="o">.</span><span class="n">stem</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">image_id</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">adjusted_upsample_factor</span><span class="si">}</span><span class="s2">x_crop_bicubic.png&quot;</span>
+<span class="p">)</span>
+<span class="n">cv2</span><span class="o">.</span><span class="n">imwrite</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">crop_image_path</span><span class="p">),</span> <span class="n">img</span><span class="o">=</span><span class="n">image_crop</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">[</span><span class="n">cv2</span><span class="o">.</span><span class="n">IMWRITE_PNG_COMPRESSION</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">cv2</span><span class="o">.</span><span class="n">imwrite</span><span class="p">(</span>
+    <span class="n">filename</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">superres_image_path</span><span class="p">),</span> <span class="n">img</span><span class="o">=</span><span class="n">image_super</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">[</span><span class="n">cv2</span><span class="o">.</span><span class="n">IMWRITE_PNG_COMPRESSION</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="n">cv2</span><span class="o">.</span><span class="n">imwrite</span><span class="p">(</span>
+    <span class="n">filename</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">bicubic_image_path</span><span class="p">),</span> <span class="n">img</span><span class="o">=</span><span class="n">image_bicubic</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">[</span><span class="n">cv2</span><span class="o">.</span><span class="n">IMWRITE_PNG_COMPRESSION</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Images written to directory: </span><span class="si">{</span><span class="n">OUTPUT_PATH</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Images</span> <span class="n">written</span> <span class="n">to</span> <span class="n">directory</span><span class="p">:</span> <span class="n">output</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="write-animated-gif-with-bicubic-superresolution-comparison">
+<h4>Write Animated GIF with Bicubic/Superresolution Comparison<a class="headerlink" href="#write-animated-gif-with-bicubic-superresolution-comparison" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">image_bicubic</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">image_super</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="n">result_pil</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">to_rgb</span><span class="p">(</span><span class="n">image_super</span><span class="p">))</span>
+<span class="n">bicubic_pil</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">to_rgb</span><span class="p">(</span><span class="n">image_bicubic</span><span class="p">))</span>
+<span class="n">gif_image_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">OUTPUT_PATH</span><span class="o">.</span><span class="n">stem</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">image_id</span><span class="si">}</span><span class="s2">_comparison_</span><span class="si">{</span><span class="n">adjusted_upsample_factor</span><span class="si">}</span><span class="s2">x.gif&quot;</span><span class="p">)</span>
+
+<span class="n">result_pil</span><span class="o">.</span><span class="n">save</span><span class="p">(</span>
+    <span class="n">fp</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">gif_image_path</span><span class="p">),</span>
+    <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;GIF&quot;</span><span class="p">,</span>
+    <span class="n">append_images</span><span class="o">=</span><span class="p">[</span><span class="n">bicubic_pil</span><span class="p">],</span>
+    <span class="n">save_all</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">duration</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+    <span class="n">loop</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># DisplayImage(str(gif_image_path)) doesn&#39;t work in Colab</span>
+<span class="n">DisplayImage</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="nb">open</span><span class="p">(</span><span class="n">gif_image_path</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">(),</span> <span class="n">width</span><span class="o">=</span><span class="mi">1920</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">1080</span><span class="p">,</span> <span class="mi">1920</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="p">(</span><span class="mi">1080</span><span class="p">,</span> <span class="mi">1920</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../_images/202-vision-superresolution-image-with-output_22_1.png"><img alt="../_images/202-vision-superresolution-image-with-output_22_1.png" src="../_images/202-vision-superresolution-image-with-output_22_1.png" style="width: 960px;" /></a>
+</div>
+<div class="section" id="create-video-with-sliding-bicubic-superresolution-comparison">
+<h4>Create video with sliding bicubic/superresolution comparison<a class="headerlink" href="#create-video-with-sliding-bicubic-superresolution-comparison" title="Permalink to this headline">¶</a></h4>
+<p>This may take a while. For the video, the superresolution and bicubic
+image are resized by a factor two to improve processing speed. This
+gives an indication of the superresolution effect. The video is saved as
+an .avi video. You can click on the link to download the video, or open
+it directly from the images directory, and play it locally.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">FOURCC</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">VideoWriter_fourcc</span><span class="p">(</span><span class="o">*</span><span class="s2">&quot;MJPG&quot;</span><span class="p">)</span>
+
+<span class="n">result_video_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">OUTPUT_PATH</span><span class="o">.</span><span class="n">stem</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">image_id</span><span class="si">}</span><span class="s2">_crop_comparison_</span><span class="si">{</span><span class="n">adjusted_upsample_factor</span><span class="si">}</span><span class="s2">x.avi&quot;</span>
+<span class="p">)</span>
+<span class="n">video_target_height</span><span class="p">,</span> <span class="n">video_target_width</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">result_image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="n">result_image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">out_video</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">VideoWriter</span><span class="p">(</span>
+    <span class="n">filename</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">result_video_path</span><span class="p">),</span>
+    <span class="n">fourcc</span><span class="o">=</span><span class="n">FOURCC</span><span class="p">,</span>
+    <span class="n">fps</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span>
+    <span class="n">frameSize</span><span class="o">=</span><span class="p">(</span><span class="n">video_target_width</span><span class="p">,</span> <span class="n">video_target_height</span><span class="p">),</span>
+<span class="p">)</span>
+
+<span class="n">resized_result_image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">src</span><span class="o">=</span><span class="n">result_image</span><span class="p">,</span> <span class="n">dsize</span><span class="o">=</span><span class="p">(</span><span class="n">video_target_width</span><span class="p">,</span> <span class="n">video_target_height</span><span class="p">))</span>
+<span class="n">resized_bicubic_image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span>
+    <span class="n">src</span><span class="o">=</span><span class="n">bicubic_image</span><span class="p">,</span> <span class="n">dsize</span><span class="o">=</span><span class="p">(</span><span class="n">video_target_width</span><span class="p">,</span> <span class="n">video_target_height</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">progress_bar</span> <span class="o">=</span> <span class="n">ProgressBar</span><span class="p">(</span><span class="n">total</span><span class="o">=</span><span class="n">video_target_width</span><span class="p">)</span>
+<span class="n">progress_bar</span><span class="o">.</span><span class="n">display</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">video_target_width</span><span class="p">):</span>
+    <span class="c1"># Create a frame where the left part (until i pixels width) contains the</span>
+    <span class="c1"># superresolution image, and the right part (from i pixels width) contains</span>
+    <span class="c1"># the bicubic image</span>
+    <span class="n">comparison_frame</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">(</span>
+        <span class="p">(</span>
+            <span class="n">resized_result_image</span><span class="p">[:,</span> <span class="p">:</span><span class="n">i</span><span class="p">,</span> <span class="p">:],</span>
+            <span class="n">resized_bicubic_image</span><span class="p">[:,</span> <span class="n">i</span><span class="p">:,</span> <span class="p">:],</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+    <span class="c1"># create a small black border line between the superresolution</span>
+    <span class="c1"># and bicubic part of the image</span>
+    <span class="n">comparison_frame</span><span class="p">[:,</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span> <span class="p">:</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">out_video</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">image</span><span class="o">=</span><span class="n">comparison_frame</span><span class="p">)</span>
+    <span class="n">progress_bar</span><span class="o">.</span><span class="n">progress</span> <span class="o">=</span> <span class="n">i</span>
+    <span class="n">progress_bar</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+<span class="n">out_video</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+<span class="n">clear_output</span><span class="p">()</span>
+
+<span class="n">video_link</span> <span class="o">=</span> <span class="n">FileLink</span><span class="p">(</span><span class="n">result_video_path</span><span class="p">)</span>
+<span class="n">video_link</span><span class="o">.</span><span class="n">html_link_str</span> <span class="o">=</span> <span class="s2">&quot;&lt;a href=&#39;</span><span class="si">%s</span><span class="s2">&#39; download&gt;</span><span class="si">%s</span><span class="s2">&lt;/a&gt;&quot;</span>
+<span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The video has been saved to </span><span class="si">{</span><span class="n">video_link</span><span class="o">.</span><span class="n">_repr_html_</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+The video has been saved to output/flag_crop_comparison_2x.avi<br></div>
+</div>
+</div>
+<div class="section" id="superresolution-on-full-input-image">
+<h2>Superresolution on full input image<a class="headerlink" href="#superresolution-on-full-input-image" title="Permalink to this headline">¶</a></h2>
+<p>Superresolution on the full image is done by dividing the image into
+patches of equal size, doing superresolution on each path, and then
+stitching the resulting patches together again. For this demo, patches
+near the border of the image are ignored.</p>
+<p>Adjust the <code class="docutils literal notranslate"><span class="pre">CROPLINES</span></code> setting in the next cell if you see boundary
+effects.</p>
+<div class="section" id="compute-patches">
+<h3>Compute patches<a class="headerlink" href="#compute-patches" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set the number of lines to crop from the network result to prevent</span>
+<span class="c1"># boundary effects. Should be an integer &gt;= 1.</span>
+<span class="n">CROPLINES</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="c1"># See Superresolution on one crop of the image for description of CROP_FACTOR</span>
+<span class="n">CROP_FACTOR</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="n">full_image_height</span><span class="p">,</span> <span class="n">full_image_width</span> <span class="o">=</span> <span class="n">full_image</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
+
+<span class="c1"># Compute x and y coordinates of left top of image tiles</span>
+<span class="n">x_coords</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">full_image_width</span><span class="p">,</span> <span class="n">input_width</span> <span class="o">*</span> <span class="n">CROP_FACTOR</span> <span class="o">-</span> <span class="n">CROPLINES</span> <span class="o">*</span> <span class="mi">2</span><span class="p">))</span>
+<span class="k">while</span> <span class="n">full_image_width</span> <span class="o">-</span> <span class="n">x_coords</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">input_width</span> <span class="o">*</span> <span class="n">CROP_FACTOR</span><span class="p">:</span>
+    <span class="n">x_coords</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">y_coords</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">full_image_height</span><span class="p">,</span> <span class="n">input_height</span> <span class="o">*</span> <span class="n">CROP_FACTOR</span> <span class="o">-</span> <span class="n">CROPLINES</span> <span class="o">*</span> <span class="mi">2</span><span class="p">))</span>
+<span class="k">while</span> <span class="n">full_image_height</span> <span class="o">-</span> <span class="n">y_coords</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">input_height</span> <span class="o">*</span> <span class="n">CROP_FACTOR</span><span class="p">:</span>
+    <span class="n">y_coords</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Compute the width and height to crop the full image. The full image is</span>
+<span class="c1"># cropped at the border to tiles of input size</span>
+<span class="n">crop_width</span> <span class="o">=</span> <span class="n">x_coords</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">input_width</span> <span class="o">*</span> <span class="n">CROP_FACTOR</span>
+<span class="n">crop_height</span> <span class="o">=</span> <span class="n">y_coords</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">input_height</span> <span class="o">*</span> <span class="n">CROP_FACTOR</span>
+
+<span class="c1"># Compute the width and height of the target superresolution image</span>
+<span class="n">new_width</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">x_coords</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">upsample_factor</span> <span class="o">//</span> <span class="n">CROP_FACTOR</span><span class="p">)</span>
+    <span class="o">+</span> <span class="n">target_width</span>
+    <span class="o">-</span> <span class="n">CROPLINES</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">upsample_factor</span> <span class="o">//</span> <span class="n">CROP_FACTOR</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">new_height</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">y_coords</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">upsample_factor</span> <span class="o">//</span> <span class="n">CROP_FACTOR</span><span class="p">)</span>
+    <span class="o">+</span> <span class="n">target_height</span>
+    <span class="o">-</span> <span class="n">CROPLINES</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">upsample_factor</span> <span class="o">//</span> <span class="n">CROP_FACTOR</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The output image will have a width of </span><span class="si">{</span><span class="n">new_width</span><span class="si">}</span><span class="s2"> &quot;</span> <span class="sa">f</span><span class="s2">&quot;and a height of </span><span class="si">{</span><span class="n">new_height</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">The</span> <span class="n">output</span> <span class="n">image</span> <span class="n">will</span> <span class="n">have</span> <span class="n">a</span> <span class="n">width</span> <span class="n">of</span> <span class="mi">11280</span> <span class="ow">and</span> <span class="n">a</span> <span class="n">height</span> <span class="n">of</span> <span class="mi">7280</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id1">
+<h3>Do Inference<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>The code in this cell reads one patch of the image at a time. Each patch
+is reshaped to network input shape and upsampled with bicubic
+interpolation to target shape. Both the original and the bicubic image
+are propagated through the network. The network result is a numpy array
+with floating point values, with a shape of <code class="docutils literal notranslate"><span class="pre">(1,3,1920,1080)</span></code>. This
+array is converted to an 8-bit image with shape <code class="docutils literal notranslate"><span class="pre">(1080,1920,3)</span></code> and
+written to <code class="docutils literal notranslate"><span class="pre">full_superresolution_image</span></code>. The bicubic image is written
+to <code class="docutils literal notranslate"><span class="pre">full_bicubic_image</span></code> for comparison. A progress bar shows the
+progress of the process. Inference time is measured, as well as total
+time to process each patch.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+<span class="n">patch_nr</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">num_patches</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x_coords</span><span class="p">)</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_coords</span><span class="p">)</span>
+<span class="n">progress_bar</span> <span class="o">=</span> <span class="n">ProgressBar</span><span class="p">(</span><span class="n">total</span><span class="o">=</span><span class="n">num_patches</span><span class="p">)</span>
+<span class="n">progress_bar</span><span class="o">.</span><span class="n">display</span><span class="p">()</span>
+
+<span class="c1"># Crop image to fit tiles of input size</span>
+<span class="n">full_image_crop</span> <span class="o">=</span> <span class="n">full_image</span><span class="o">.</span><span class="n">copy</span><span class="p">()[:</span><span class="n">crop_height</span><span class="p">,</span> <span class="p">:</span><span class="n">crop_width</span><span class="p">,</span> <span class="p">:]</span>
+
+<span class="c1"># Create empty array of target size.</span>
+<span class="n">full_superresolution_image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">new_height</span><span class="p">,</span> <span class="n">new_width</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+
+<span class="c1"># Create bicubic upsampled image of target size for comparison</span>
+<span class="n">full_bicubic_image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span>
+    <span class="n">src</span><span class="o">=</span><span class="n">full_image_crop</span><span class="p">[</span><span class="n">CROPLINES</span><span class="p">:</span><span class="o">-</span><span class="n">CROPLINES</span><span class="p">,</span> <span class="n">CROPLINES</span><span class="p">:</span><span class="o">-</span><span class="n">CROPLINES</span><span class="p">,</span> <span class="p">:],</span>
+    <span class="n">dsize</span><span class="o">=</span><span class="p">(</span><span class="n">new_width</span><span class="p">,</span> <span class="n">new_height</span><span class="p">),</span>
+    <span class="n">interpolation</span><span class="o">=</span><span class="n">cv2</span><span class="o">.</span><span class="n">INTER_CUBIC</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">total_inference_duration</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">y_coords</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">x_coords</span><span class="p">:</span>
+        <span class="n">patch_nr</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="c1"># Take a crop of the input image</span>
+        <span class="n">image_crop</span> <span class="o">=</span> <span class="n">full_image_crop</span><span class="p">[</span>
+            <span class="n">y</span> <span class="p">:</span> <span class="n">y</span> <span class="o">+</span> <span class="n">input_height</span> <span class="o">*</span> <span class="n">CROP_FACTOR</span><span class="p">,</span>
+            <span class="n">x</span> <span class="p">:</span> <span class="n">x</span> <span class="o">+</span> <span class="n">input_width</span> <span class="o">*</span> <span class="n">CROP_FACTOR</span><span class="p">,</span>
+        <span class="p">]</span>
+
+        <span class="c1"># Resize the images to the target shape with bicubic interpolation</span>
+        <span class="n">bicubic_image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span>
+            <span class="n">src</span><span class="o">=</span><span class="n">image_crop</span><span class="p">,</span>
+            <span class="n">dsize</span><span class="o">=</span><span class="p">(</span><span class="n">target_width</span><span class="p">,</span> <span class="n">target_height</span><span class="p">),</span>
+            <span class="n">interpolation</span><span class="o">=</span><span class="n">cv2</span><span class="o">.</span><span class="n">INTER_CUBIC</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">CROP_FACTOR</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">image_crop</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">src</span><span class="o">=</span><span class="n">image_crop</span><span class="p">,</span> <span class="n">dsize</span><span class="o">=</span><span class="p">(</span><span class="n">input_width</span><span class="p">,</span> <span class="n">input_height</span><span class="p">))</span>
+
+        <span class="n">input_image_original</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">image_crop</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="n">input_image_bicubic</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">bicubic_image</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="c1"># Do inference</span>
+        <span class="n">inference_start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="n">compiled_model</span><span class="p">(</span>
+            <span class="p">{</span>
+                <span class="n">original_image_key</span><span class="o">.</span><span class="n">any_name</span><span class="p">:</span> <span class="n">input_image_original</span><span class="p">,</span>
+                <span class="n">bicubic_image_key</span><span class="o">.</span><span class="n">any_name</span><span class="p">:</span> <span class="n">input_image_bicubic</span><span class="p">,</span>
+            <span class="p">}</span>
+        <span class="p">)[</span><span class="n">output_key</span><span class="p">]</span>
+
+        <span class="n">inference_stop_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+        <span class="n">inference_duration</span> <span class="o">=</span> <span class="n">inference_stop_time</span> <span class="o">-</span> <span class="n">inference_start_time</span>
+        <span class="n">total_inference_duration</span> <span class="o">+=</span> <span class="n">inference_duration</span>
+
+        <span class="c1"># Reshape inference result to image shape and data type</span>
+        <span class="n">result_image</span> <span class="o">=</span> <span class="n">convert_result_to_image</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+        <span class="c1"># Add the inference result of this patch to the full superresolution</span>
+        <span class="c1"># image</span>
+        <span class="n">adjusted_upsample_factor</span> <span class="o">=</span> <span class="n">upsample_factor</span> <span class="o">//</span> <span class="n">CROP_FACTOR</span>
+        <span class="n">new_y</span> <span class="o">=</span> <span class="n">y</span> <span class="o">*</span> <span class="n">adjusted_upsample_factor</span>
+        <span class="n">new_x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">adjusted_upsample_factor</span>
+        <span class="n">full_superresolution_image</span><span class="p">[</span>
+            <span class="n">new_y</span> <span class="p">:</span> <span class="n">new_y</span> <span class="o">+</span> <span class="n">target_height</span> <span class="o">-</span> <span class="n">CROPLINES</span> <span class="o">*</span> <span class="n">adjusted_upsample_factor</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="n">new_x</span> <span class="p">:</span> <span class="n">new_x</span> <span class="o">+</span> <span class="n">target_width</span> <span class="o">-</span> <span class="n">CROPLINES</span> <span class="o">*</span> <span class="n">adjusted_upsample_factor</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="p">]</span> <span class="o">=</span> <span class="n">result_image</span><span class="p">[</span>
+            <span class="n">CROPLINES</span> <span class="o">*</span> <span class="n">adjusted_upsample_factor</span> <span class="p">:</span> <span class="o">-</span><span class="n">CROPLINES</span> <span class="o">*</span> <span class="n">adjusted_upsample_factor</span><span class="p">,</span>
+            <span class="n">CROPLINES</span> <span class="o">*</span> <span class="n">adjusted_upsample_factor</span> <span class="p">:</span> <span class="o">-</span><span class="n">CROPLINES</span> <span class="o">*</span> <span class="n">adjusted_upsample_factor</span><span class="p">,</span>
+            <span class="p">:,</span>
+        <span class="p">]</span>
+
+        <span class="n">progress_bar</span><span class="o">.</span><span class="n">progress</span> <span class="o">=</span> <span class="n">patch_nr</span>
+        <span class="n">progress_bar</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">patch_nr</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">clear_output</span><span class="p">(</span><span class="n">wait</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">progress_bar</span><span class="o">.</span><span class="n">display</span><span class="p">()</span>
+            <span class="n">display</span><span class="p">(</span>
+                <span class="n">Pretty</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Processed patch </span><span class="si">{</span><span class="n">patch_nr</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">num_patches</span><span class="si">}</span><span class="s2">. &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;Inference time: </span><span class="si">{</span><span class="n">inference_duration</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> seconds &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;(</span><span class="si">{</span><span class="mi">1</span><span class="o">/</span><span class="n">inference_duration</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> FPS)&quot;</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+
+<span class="n">end_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+<span class="n">duration</span> <span class="o">=</span> <span class="n">end_time</span> <span class="o">-</span> <span class="n">start_time</span>
+<span class="n">clear_output</span><span class="p">(</span><span class="n">wait</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">&quot;Processed </span><span class="si">{</span><span class="n">num_patches</span><span class="si">}</span><span class="s2"> patches in </span><span class="si">{</span><span class="n">duration</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> seconds. &quot;</span>
+    <span class="sa">f</span><span class="s2">&quot;Total patches per second (including processing): &quot;</span>
+    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">num_patches</span><span class="o">/</span><span class="n">duration</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">.</span><span class="se">\n</span><span class="s2">Inference patches per second: &quot;</span>
+    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">num_patches</span><span class="o">/</span><span class="n">total_inference_duration</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> &quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Processed</span> <span class="mi">42</span> <span class="n">patches</span> <span class="ow">in</span> <span class="mf">18.75</span> <span class="n">seconds</span><span class="o">.</span> <span class="n">Total</span> <span class="n">patches</span> <span class="n">per</span> <span class="n">second</span> <span class="p">(</span><span class="n">including</span> <span class="n">processing</span><span class="p">):</span> <span class="mf">2.24</span><span class="o">.</span>
+<span class="n">Inference</span> <span class="n">patches</span> <span class="n">per</span> <span class="n">second</span><span class="p">:</span> <span class="mf">2.69</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="save-superresolution-image-and-the-bicubic-image">
+<h3>Save superresolution image and the bicubic image<a class="headerlink" href="#save-superresolution-image-and-the-bicubic-image" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">full_superresolution_image_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">OUTPUT_PATH</span><span class="o">.</span><span class="n">stem</span><span class="si">}</span><span class="s2">/full_superres_</span><span class="si">{</span><span class="n">adjusted_upsample_factor</span><span class="si">}</span><span class="s2">x.jpg&quot;</span>
+<span class="p">)</span>
+<span class="n">full_bicubic_image_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">OUTPUT_PATH</span><span class="o">.</span><span class="n">stem</span><span class="si">}</span><span class="s2">/full_bicubic_</span><span class="si">{</span><span class="n">adjusted_upsample_factor</span><span class="si">}</span><span class="s2">x.jpg&quot;</span><span class="p">)</span>
+
+<span class="n">cv2</span><span class="o">.</span><span class="n">imwrite</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">full_superresolution_image_path</span><span class="p">),</span> <span class="n">full_superresolution_image</span><span class="p">)</span>
+<span class="n">cv2</span><span class="o">.</span><span class="n">imwrite</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">full_bicubic_image_path</span><span class="p">),</span> <span class="n">full_bicubic_image</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bicubic_link</span> <span class="o">=</span> <span class="n">FileLink</span><span class="p">(</span><span class="n">full_bicubic_image_path</span><span class="p">)</span>
+<span class="n">image_link</span> <span class="o">=</span> <span class="n">FileLink</span><span class="p">(</span><span class="n">full_superresolution_image_path</span><span class="p">)</span>
+<span class="n">bicubic_link</span><span class="o">.</span><span class="n">html_link_str</span> <span class="o">=</span> <span class="s2">&quot;&lt;a href=&#39;</span><span class="si">%s</span><span class="s2">&#39; download&gt;</span><span class="si">%s</span><span class="s2">&lt;/a&gt;&quot;</span>
+<span class="n">image_link</span><span class="o">.</span><span class="n">html_link_str</span> <span class="o">=</span> <span class="s2">&quot;&lt;a href=&#39;</span><span class="si">%s</span><span class="s2">&#39; download&gt;</span><span class="si">%s</span><span class="s2">&lt;/a&gt;&quot;</span>
+<span class="n">display</span><span class="p">(</span>
+    <span class="n">HTML</span><span class="p">(</span>
+        <span class="s2">&quot;The images are saved in the images directory. You can also download &quot;</span>
+        <span class="s2">&quot;them by clicking on these links:&quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;&lt;ul&gt;&lt;li&gt;</span><span class="si">{</span><span class="n">image_link</span><span class="o">.</span><span class="n">_repr_html_</span><span class="p">()</span><span class="si">}</span><span class="s2">&lt;li&gt;</span><span class="si">{</span><span class="n">bicubic_link</span><span class="o">.</span><span class="n">_repr_html_</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+The images are saved in the images directory. You can also download them by clicking on these links:<ul><li>output/full_bicubic_2x.jpg<br></div>
+</div>
+</div>
+
+
+                </div>
+            
+            
+                <div class='prev-next-bottom'>
+                  
+    <a class='button bttn-sec button-size-l' id="prev-link" href="201-vision-monodepth-with-output.html" title="previous page">Prev</a>
+    <a class='button bttn-sec button-size-l' id="next-link" href="202-vision-superresolution-video-with-output.html" title="next page">Next</a>
+
+                </div>
+            
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+<footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2021, Intel®.<br>
+</p>
+    </div>
+    
+    <div class="footer-item">
+      <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

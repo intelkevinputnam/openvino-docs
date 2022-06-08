@@ -1,0 +1,1017 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Working with Open Model Zoo Models &#8212; OpenVINO™  documentation</title>
+    
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/blank.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/doxyrest-pygments.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <link href="../_static/css/media/favicon.ico" rel="shortcut icon">
+    <link rel="stylesheet" href="../_static/css/openvino_sphinx_theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/button.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/input.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/textfield.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/tabs.css" type="text/css" />
+    <script src="../_static/js/openvino_sphinx_theme.js"></script>
+    <link rel="stylesheet" href="../_static/css/viewer.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/0.5.7/chartjs-plugin-annotation.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-barchart-background@1.3.0/build/Plugin.Barchart.Background.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-deferred@1"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.1/papaparse.min.js"></script>
+    <script src="../_static/js/viewer.min.js"></script>
+    <script src="/assets/versions_raw.js"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/tabs.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/js/custom.js"></script>
+    <script src="../_static/js/graphs.js"></script>
+    <script src="../_static/js/graphs_ov_tf.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/target-highlight.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <link rel="canonical" href="https://docs.openvino.ai/latest/notebooks/104-model-tools-with-output.html" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Quantize NLP models with OpenVINO Post-Training Optimization Tool ​" href="105-language-quantize-bert-with-output.html" />
+    <link rel="prev" title="Convert a PaddlePaddle Model to ONNX and OpenVINO IR" href="103-paddle-onnx-to-openvino-classification-with-output.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+      <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+
+<a class="navbar-brand" href="../index.html">
+  <img src="../_static/logo.svg" class="logo" alt="logo">
+</a>
+
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../pages/get_started.html">
+  Get Started
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../pages/documentation.html">
+  Documentation
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../tutorials.html">
+  Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../model_zoo.html">
+  Model Zoo
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../pages/resources.html">
+  Resources
+ </a>
+</li>
+
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/openvinotoolkit/openvino" rel="noopener" target="_blank" title="GitHub">
+            <span><i class="sst-github"></i></span>
+            <label class="sr-only">GitHub</label>
+          </a>
+        </li>
+</ul>
+      </div>
+      
+      <div class="navbar-end-item">
+        
+<div class="dropdown sst-dropdown sst-dropdown-navbar">
+  <button class="btn sst-btn dropdown-toggle" type="button" id="version-selector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+  <div class="dropdown-menu" aria-labelledby="version-selector">
+  </div>
+</div>
+      </div>
+      
+      <div class="navbar-end-item">
+        
+
+<div class="dropdown sst-dropdown sst-dropdown-navbar">
+  <button class="btn sst-btn dropdown-toggle" type="button" id="language-selector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">English</button>
+  <div class="dropdown-menu" aria-labelledby="language-selector">
+    
+      
+        <a class="dropdown-item font-weight-bold" href="/latest/notebooks/104-model-tools-with-output.html">English</a>
+      
+    
+      
+        <a  class="dropdown-item" href="/cn/latest/notebooks/104-model-tools-with-output.html">Chinese</a>
+      
+    
+  </div>
+</div>
+
+      </div>
+      
+    </div>
+  </div>
+</div>
+        <div id="collapse-nav-wrapper" class="container-xl">
+          <button id="collapse-nav" class="button bttn-prm button-size-m" type="button" data-toggle="collapse" data-target="#nav-tree" aria-expanded="false" aria-controls="nav-tree">
+            Documentation navigation <i class="fas fa-chevron-down"></i>
+          </button>
+        </div>
+      </nav>
+      <div class="transition-banner container-fluid alert alert-info alert-dismissible fade show" role="alert">
+        <p>OpenVINO 2022.1 introduces a new version of OpenVINO API (API 2.0). For more information on the changes and transition steps, see the <a href="https://docs.openvino.ai/latest/openvino_2_0_transition_guide.html">transition guide</a></p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar" id="nav-tree"><form class="searchForm bd-search d-flex align-items-center" action="../search.html" method="get">
+    <i class="icon fas fa-search"></i>
+    <input type="search" class="form-control" name="query" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="001-hello-world-with-output.html">
+   Hello Image Classification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="002-openvino-api-with-output.html">
+   OpenVINO API Tutorial
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="003-hello-segmentation-with-output.html">
+   Hello Image Segmentation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="004-hello-detection-with-output.html">
+   Hello Object Detection
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="101-tensorflow-to-openvino-with-output.html">
+   Convert a TensorFlow Model to OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="102-pytorch-onnx-to-openvino-with-output.html">
+   Convert a PyTorch Model to ONNX and OpenVINO IR
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="103-paddle-onnx-to-openvino-classification-with-output.html">
+   Convert a PaddlePaddle Model to ONNX and OpenVINO IR
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Working with Open Model Zoo Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="105-language-quantize-bert-with-output.html">
+   Quantize NLP models with OpenVINO Post-Training Optimization Tool ​
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="106-auto-device-with-output.html">
+   Automatic Device Selection with OpenVINO™
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="110-ct-segmentation-quantize-with-output.html">
+   Quantize a Segmentation Model and Show Live Inference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="111-detection-quantization-with-output.html">
+   Object Detection Quantization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="112-pytorch-post-training-quantization-nncf-with-output.html">
+   Post-Training Quantization of PyTorch models with NNCF
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="113-image-classification-quantization-with-output.html">
+   Quantization of Image Classification Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="114-quantization-simplified-mode-with-output.html">
+   INT8 Quantization with Post-training Optimization Tool (POT) in Simplified Mode tutorial
+  </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="201-vision-monodepth-with-output.html">
+   Monodepth Estimation with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="202-vision-superresolution-image-with-output.html">
+   Single Image Super Resolution with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="202-vision-superresolution-video-with-output.html">
+   Video Super Resolution with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="205-vision-background-removal-with-output.html">
+   Image Background Removal with U^2-Net and OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="206-vision-paddlegan-anime-with-output.html">
+   Photos to Anime with PaddleGAN and OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="207-vision-paddlegan-superresolution-with-output.html">
+   Super Resolution with PaddleGAN and OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="208-optical-character-recognition-with-output.html">
+   Optical Character Recognition (OCR) with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="209-handwritten-ocr-with-output.html">
+   Handwritten Chinese and Japanese OCR
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="210-ct-scan-live-inference-with-output.html">
+   Live Inference and Benchmark CT-scan Data with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="211-speech-to-text-with-output.html">
+   Speech to Text with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="212-onnx-style-transfer-with-output.html">
+   Style Transfer on ONNX Models with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="213-question-answering-with-output.html">
+   Interactive question answering with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="214-vision-paddle-classification-with-output.html">
+   PaddlePaddle Image Classification with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="215-image-inpainting-with-output.html">
+   Image In-painting with OpenVINO™
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="217-vision-deblur-with-output.html">
+   Deblur Photos with DeblurGAN-v2 and OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="218-vehicle-detection-and-recognition-with-output.html">
+   Vehicle Detection And Recognition with OpenVINO
+  </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="301-tensorflow-training-openvino-with-output.html">
+   From Training to Deployment with TensorFlow and OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="301-tensorflow-training-openvino-pot-with-output.html">
+   Post-Training Quantization with TensorFlow Classification Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="302-pytorch-quantization-aware-training-with-output.html">
+   Quantization Aware Training with NNCF, using PyTorch framework
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="305-tensorflow-quantization-aware-training-with-output.html">
+   Quantization Aware Training with NNCF, using TensorFlow Framework
+  </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="401-object-detection-with-output.html">
+   Live Object Detection with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="402-pose-estimation-with-output.html">
+   Live Human Pose Estimation with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="403-action-recognition-webcam-with-output.html">
+   Human Action Recognition with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="405-paddle-ocr-webcam-with-output.html">
+   PaddleOCR with OpenVINO
+  </a>
+ </li>
+</ul>
+
+  </div>
+</nav>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+              
+              <div class="toc-item">
+                
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#openvino-and-open-model-zoo-tools">
+   OpenVINO and Open Model Zoo Tools
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#preparation">
+   Preparation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#model-name">
+     Model Name
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#imports">
+     Imports
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#settings-and-configuration">
+     Settings and Configuration
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#download-model-from-open-model-zoo">
+   Download Model from Open Model Zoo
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#convert-model-to-openvino-ir-format">
+   Convert Model to OpenVINO IR format
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#get-model-information">
+   Get Model Information
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#run-benchmark-tool">
+   Run Benchmark Tool
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#benchmark-with-different-settings">
+     Benchmark with Different Settings
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+</nav>
+              </div>
+              
+              <div class="toc-item">
+                <div class="tocsection download-docs">
+  <div class="dropdown sst-dropdown">
+    <button class="button bttn-prm button-size-m" data-display="static" type="button" id="download-options"
+      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Download Docs
+    </button>
+    <div class="dropdown-menu" aria-labelledby="download-options">
+      <a class="dropdown-item" href="#" onclick="window.print()">.pdf</a>
+      <a id="download-zip-btn" class="dropdown-item" href="#">.zip</a>
+    </div>
+  </div>
+</div>
+              </div>
+              
+            
+          </div>
+          
+
+          
+          
+              
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+
+<div class="tocsection editthispage">
+    <a href="None">
+        <i class="fas fa-pencil-alt"></i> Edit this page
+    </a>
+</div>
+
+            
+                <div>
+                  
+  <div class="section" id="working-with-open-model-zoo-models">
+<h1>Working with Open Model Zoo Models<a class="headerlink" href="#working-with-open-model-zoo-models" title="Permalink to this headline">¶</a></h1>
+<p>This tutorial shows how to download a model from the <a class="reference external" href="https://github.com/openvinotoolkit/open_model_zoo">Open Model
+Zoo</a>, convert it
+to OpenVINO’s IR format, show information about the model, and benchmark
+the model.</p>
+<div class="section" id="openvino-and-open-model-zoo-tools">
+<h2>OpenVINO and Open Model Zoo Tools<a class="headerlink" href="#openvino-and-open-model-zoo-tools" title="Permalink to this headline">¶</a></h2>
+<p>The OpenVINO and Open Model Zoo tools are listed in the table below.</p>
+<table class="table">
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 21%" />
+<col style="width: 61%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Tool</p></th>
+<th class="head"><p>Command</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Model
+Downloader</p></td>
+<td><p>omz_download
+er</p></td>
+<td><p>Download models from Open Model Zoo</p></td>
+</tr>
+<tr class="row-odd"><td><p>Model
+Converter</p></td>
+<td><p>omz_converte
+r</p></td>
+<td><p>Convert Open Model Zoo models to
+OpenVINO’s IR format</p></td>
+</tr>
+<tr class="row-even"><td><p>Info
+Dumper</p></td>
+<td><p>omz_info_dum
+per</p></td>
+<td><p>Print information about Open Model Zoo
+models</p></td>
+</tr>
+<tr class="row-odd"><td><p>Benchmark
+Tool</p></td>
+<td><p>benchmark_ap
+p</p></td>
+<td><p>Benchmark model performance by
+computing inference time</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="preparation">
+<h2>Preparation<a class="headerlink" href="#preparation" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="model-name">
+<h3>Model Name<a class="headerlink" href="#model-name" title="Permalink to this headline">¶</a></h3>
+<p>Set <code class="docutils literal notranslate"><span class="pre">model_name</span></code> to the name of the Open Model Zoo model to use in
+this notebook. Refer to the list of
+<a class="reference external" href="https://github.com/openvinotoolkit/open_model_zoo/blob/master/models/public/index.md">public</a>
+and
+<a class="reference external" href="https://github.com/openvinotoolkit/open_model_zoo/blob/master/models/intel/index.md">Intel</a>
+pre-trained models for a full list of models that can be used. Set the
+<code class="docutils literal notranslate"><span class="pre">model_name</span></code> to the model you want to use.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># model_name = &quot;resnet-50-pytorch&quot;</span>
+<span class="n">model_name</span> <span class="o">=</span> <span class="s2">&quot;mobilenet-v2-pytorch&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="imports">
+<h3>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Markdown</span><span class="p">,</span> <span class="n">display</span>
+<span class="kn">from</span> <span class="nn">openvino.runtime</span> <span class="kn">import</span> <span class="n">Core</span>
+
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;../utils&quot;</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">notebook_utils</span> <span class="kn">import</span> <span class="n">DeviceNotFoundAlert</span><span class="p">,</span> <span class="n">NotebookAlert</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="settings-and-configuration">
+<h3>Settings and Configuration<a class="headerlink" href="#settings-and-configuration" title="Permalink to this headline">¶</a></h3>
+<p>Set the file and directory paths. By default, this demo notebook
+downloads models from Open Model Zoo to a directory
+<code class="docutils literal notranslate"><span class="pre">open_model_zoo_models</span></code> in your <code class="docutils literal notranslate"><span class="pre">$HOME</span></code> directory. On Windows, the
+$HOME directory is usually <code class="docutils literal notranslate"><span class="pre">c:\users\username</span></code>, on Linux
+<code class="docutils literal notranslate"><span class="pre">/home/username</span></code>. If you want to change the folder, change
+<code class="docutils literal notranslate"><span class="pre">base_model_dir</span></code> in the cell below.</p>
+<p>You can change the following settings:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">base_model_dir</span></code>: Models will be downloaded into the <code class="docutils literal notranslate"><span class="pre">intel</span></code> and
+<code class="docutils literal notranslate"><span class="pre">public</span></code> folders in this directory.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">omz_cache_dir</span></code>: Cache folder for Open Model Zoo. Specifying a
+cache directory is not required for Model Downloader and Model
+Converter, but it speeds up subsequent downloads.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">precision</span></code>: If specified, only models with this precision will be
+downloaded and converted.</p></li>
+</ul>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">base_model_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;~/open_model_zoo_models&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">expanduser</span><span class="p">()</span>
+<span class="n">omz_cache_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;~/open_model_zoo_cache&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">expanduser</span><span class="p">()</span>
+<span class="n">precision</span> <span class="o">=</span> <span class="s2">&quot;FP16&quot;</span>
+
+<span class="c1"># Check if an iGPU is available on this system to use with Benchmark App</span>
+<span class="n">ie</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span>
+<span class="n">gpu_available</span> <span class="o">=</span> <span class="s2">&quot;GPU&quot;</span> <span class="ow">in</span> <span class="n">ie</span><span class="o">.</span><span class="n">available_devices</span>
+
+<span class="nb">print</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">&quot;base_model_dir: </span><span class="si">{</span><span class="n">base_model_dir</span><span class="si">}</span><span class="s2">, omz_cache_dir: </span><span class="si">{</span><span class="n">omz_cache_dir</span><span class="si">}</span><span class="s2">, gpu_availble: </span><span class="si">{</span><span class="n">gpu_available</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">base_model_dir</span><span class="p">:</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">open_model_zoo_models</span><span class="p">,</span> <span class="n">omz_cache_dir</span><span class="p">:</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">open_model_zoo_cache</span><span class="p">,</span> <span class="n">gpu_availble</span><span class="p">:</span> <span class="kc">False</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="download-model-from-open-model-zoo">
+<h2>Download Model from Open Model Zoo<a class="headerlink" href="#download-model-from-open-model-zoo" title="Permalink to this headline">¶</a></h2>
+<p>Specify, display and run the Model Downloader command to download the
+model</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Uncomment the next line to show omz_downloader&#39;s help which explains the command line options</span>
+
+<span class="c1"># !omz_downloader --help</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download_command</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="sa">f</span><span class="s2">&quot;omz_downloader --name </span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2"> --output_dir </span><span class="si">{</span><span class="n">base_model_dir</span><span class="si">}</span><span class="s2"> --cache_dir </span><span class="si">{</span><span class="n">omz_cache_dir</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Markdown</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Download command: `</span><span class="si">{</span><span class="n">download_command</span><span class="si">}</span><span class="s2">`&quot;</span><span class="p">))</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Markdown</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Downloading </span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">))</span>
+<span class="o">!</span> <span class="nv">$download_command</span>
+</pre></div>
+</div>
+<p>Download command:
+<code class="docutils literal notranslate"><span class="pre">omz_downloader</span> <span class="pre">--name</span> <span class="pre">mobilenet-v2-pytorch</span> <span class="pre">--output_dir</span> <span class="pre">/home/runner/open_model_zoo_models</span> <span class="pre">--cache_dir</span> <span class="pre">/home/runner/open_model_zoo_cache</span></code></p>
+<p>Downloading mobilenet-v2-pytorch…</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">################|| Downloading mobilenet-v2-pytorch ||################</span>
+
+<span class="o">==========</span> <span class="n">Downloading</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">open_model_zoo_models</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">mobilenet</span><span class="o">-</span><span class="n">v2</span><span class="o">-</span><span class="n">pytorch</span><span class="o">/</span><span class="n">mobilenet_v2</span><span class="o">-</span><span class="n">b0353104</span><span class="o">.</span><span class="n">pth</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="convert-model-to-openvino-ir-format">
+<h2>Convert Model to OpenVINO IR format<a class="headerlink" href="#convert-model-to-openvino-ir-format" title="Permalink to this headline">¶</a></h2>
+<p>Specify, display and run the Model Converter command to convert the
+model to IR format. Model Conversion may take a while. The output of the
+Model Converter command will be displayed. Conversion succeeded if the
+last lines of the output include
+<code class="docutils literal notranslate"><span class="pre">[</span> <span class="pre">SUCCESS</span> <span class="pre">]</span> <span class="pre">Generated</span> <span class="pre">IR</span> <span class="pre">version</span> <span class="pre">11</span> <span class="pre">model.</span></code> For downloaded models
+that are already in IR format, conversion will be skipped.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Uncomment the next line to show omz_converter&#39;s help which explains the command line options</span>
+
+<span class="c1"># !omz_converter --help</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">convert_command</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;omz_converter --name </span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2"> --precisions </span><span class="si">{</span><span class="n">precision</span><span class="si">}</span><span class="s2"> --download_dir </span><span class="si">{</span><span class="n">base_model_dir</span><span class="si">}</span><span class="s2"> --output_dir </span><span class="si">{</span><span class="n">base_model_dir</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Markdown</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Convert command: `</span><span class="si">{</span><span class="n">convert_command</span><span class="si">}</span><span class="s2">`&quot;</span><span class="p">))</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Markdown</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Converting </span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">))</span>
+
+<span class="o">!</span> <span class="nv">$convert_command</span>
+</pre></div>
+</div>
+<p>Convert command:
+<code class="docutils literal notranslate"><span class="pre">omz_converter</span> <span class="pre">--name</span> <span class="pre">mobilenet-v2-pytorch</span> <span class="pre">--precisions</span> <span class="pre">FP16</span> <span class="pre">--download_dir</span> <span class="pre">/home/runner/open_model_zoo_models</span> <span class="pre">--output_dir</span> <span class="pre">/home/runner/open_model_zoo_models</span></code></p>
+<p>Converting mobilenet-v2-pytorch…</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">==========</span> <span class="n">Converting</span> <span class="n">mobilenet</span><span class="o">-</span><span class="n">v2</span><span class="o">-</span><span class="n">pytorch</span> <span class="n">to</span> <span class="n">ONNX</span>
+<span class="n">Conversion</span> <span class="n">to</span> <span class="n">ONNX</span> <span class="n">command</span><span class="p">:</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8</span><span class="o">.</span><span class="mi">12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">python</span> <span class="o">--</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8</span><span class="o">.</span><span class="mi">12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">openvino</span><span class="o">/</span><span class="n">model_zoo</span><span class="o">/</span><span class="n">internal_scripts</span><span class="o">/</span><span class="n">pytorch_to_onnx</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">model</span><span class="o">-</span><span class="n">name</span><span class="o">=</span><span class="n">mobilenet_v2</span> <span class="o">--</span><span class="n">weights</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">open_model_zoo_models</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">mobilenet</span><span class="o">-</span><span class="n">v2</span><span class="o">-</span><span class="n">pytorch</span><span class="o">/</span><span class="n">mobilenet_v2</span><span class="o">-</span><span class="n">b0353104</span><span class="o">.</span><span class="n">pth</span> <span class="o">--</span><span class="n">import</span><span class="o">-</span><span class="n">module</span><span class="o">=</span><span class="n">torchvision</span><span class="o">.</span><span class="n">models</span> <span class="o">--</span><span class="nb">input</span><span class="o">-</span><span class="n">shape</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">224</span><span class="p">,</span><span class="mi">224</span> <span class="o">--</span><span class="n">output</span><span class="o">-</span><span class="n">file</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">open_model_zoo_models</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">mobilenet</span><span class="o">-</span><span class="n">v2</span><span class="o">-</span><span class="n">pytorch</span><span class="o">/</span><span class="n">mobilenet</span><span class="o">-</span><span class="n">v2</span><span class="o">.</span><span class="n">onnx</span> <span class="o">--</span><span class="nb">input</span><span class="o">-</span><span class="n">names</span><span class="o">=</span><span class="n">data</span> <span class="o">--</span><span class="n">output</span><span class="o">-</span><span class="n">names</span><span class="o">=</span><span class="n">prob</span>
+
+<span class="n">ONNX</span> <span class="n">check</span> <span class="n">passed</span> <span class="n">successfully</span><span class="o">.</span>
+
+<span class="o">==========</span> <span class="n">Converting</span> <span class="n">mobilenet</span><span class="o">-</span><span class="n">v2</span><span class="o">-</span><span class="n">pytorch</span> <span class="n">to</span> <span class="n">IR</span> <span class="p">(</span><span class="n">FP16</span><span class="p">)</span>
+<span class="n">Conversion</span> <span class="n">command</span><span class="p">:</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8</span><span class="o">.</span><span class="mi">12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">python</span> <span class="o">--</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8</span><span class="o">.</span><span class="mi">12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">mo</span> <span class="o">--</span><span class="n">framework</span><span class="o">=</span><span class="n">onnx</span> <span class="o">--</span><span class="n">data_type</span><span class="o">=</span><span class="n">FP16</span> <span class="o">--</span><span class="n">output_dir</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">open_model_zoo_models</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">mobilenet</span><span class="o">-</span><span class="n">v2</span><span class="o">-</span><span class="n">pytorch</span><span class="o">/</span><span class="n">FP16</span> <span class="o">--</span><span class="n">model_name</span><span class="o">=</span><span class="n">mobilenet</span><span class="o">-</span><span class="n">v2</span><span class="o">-</span><span class="n">pytorch</span> <span class="o">--</span><span class="nb">input</span><span class="o">=</span><span class="n">data</span> <span class="s1">&#39;--mean_values=data[123.675,116.28,103.53]&#39;</span> <span class="s1">&#39;--scale_values=data[58.624,57.12,57.375]&#39;</span> <span class="o">--</span><span class="n">reverse_input_channels</span> <span class="o">--</span><span class="n">output</span><span class="o">=</span><span class="n">prob</span> <span class="o">--</span><span class="n">input_model</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">open_model_zoo_models</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">mobilenet</span><span class="o">-</span><span class="n">v2</span><span class="o">-</span><span class="n">pytorch</span><span class="o">/</span><span class="n">mobilenet</span><span class="o">-</span><span class="n">v2</span><span class="o">.</span><span class="n">onnx</span> <span class="s1">&#39;--layout=data(NCHW)&#39;</span> <span class="s1">&#39;--input_shape=[1, 3, 224, 224]&#39;</span>
+
+<span class="n">Model</span> <span class="n">Optimizer</span> <span class="n">arguments</span><span class="p">:</span>
+<span class="n">Common</span> <span class="n">parameters</span><span class="p">:</span>
+    <span class="o">-</span> <span class="n">Path</span> <span class="n">to</span> <span class="n">the</span> <span class="n">Input</span> <span class="n">Model</span><span class="p">:</span>  <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">open_model_zoo_models</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">mobilenet</span><span class="o">-</span><span class="n">v2</span><span class="o">-</span><span class="n">pytorch</span><span class="o">/</span><span class="n">mobilenet</span><span class="o">-</span><span class="n">v2</span><span class="o">.</span><span class="n">onnx</span>
+    <span class="o">-</span> <span class="n">Path</span> <span class="k">for</span> <span class="n">generated</span> <span class="n">IR</span><span class="p">:</span>    <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">open_model_zoo_models</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">mobilenet</span><span class="o">-</span><span class="n">v2</span><span class="o">-</span><span class="n">pytorch</span><span class="o">/</span><span class="n">FP16</span>
+    <span class="o">-</span> <span class="n">IR</span> <span class="n">output</span> <span class="n">name</span><span class="p">:</span>   <span class="n">mobilenet</span><span class="o">-</span><span class="n">v2</span><span class="o">-</span><span class="n">pytorch</span>
+    <span class="o">-</span> <span class="n">Log</span> <span class="n">level</span><span class="p">:</span>    <span class="n">ERROR</span>
+    <span class="o">-</span> <span class="n">Batch</span><span class="p">:</span>    <span class="n">Not</span> <span class="n">specified</span><span class="p">,</span> <span class="n">inherited</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">model</span>
+    <span class="o">-</span> <span class="n">Input</span> <span class="n">layers</span><span class="p">:</span>     <span class="n">data</span>
+    <span class="o">-</span> <span class="n">Output</span> <span class="n">layers</span><span class="p">:</span>    <span class="n">prob</span>
+    <span class="o">-</span> <span class="n">Input</span> <span class="n">shapes</span><span class="p">:</span>     <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">224</span><span class="p">,</span> <span class="mi">224</span><span class="p">]</span>
+    <span class="o">-</span> <span class="n">Source</span> <span class="n">layout</span><span class="p">:</span>    <span class="n">Not</span> <span class="n">specified</span>
+    <span class="o">-</span> <span class="n">Target</span> <span class="n">layout</span><span class="p">:</span>    <span class="n">Not</span> <span class="n">specified</span>
+    <span class="o">-</span> <span class="n">Layout</span><span class="p">:</span>   <span class="n">data</span><span class="p">(</span><span class="n">NCHW</span><span class="p">)</span>
+    <span class="o">-</span> <span class="n">Mean</span> <span class="n">values</span><span class="p">:</span>  <span class="n">data</span><span class="p">[</span><span class="mf">123.675</span><span class="p">,</span><span class="mf">116.28</span><span class="p">,</span><span class="mf">103.53</span><span class="p">]</span>
+    <span class="o">-</span> <span class="n">Scale</span> <span class="n">values</span><span class="p">:</span>     <span class="n">data</span><span class="p">[</span><span class="mf">58.624</span><span class="p">,</span><span class="mf">57.12</span><span class="p">,</span><span class="mf">57.375</span><span class="p">]</span>
+    <span class="o">-</span> <span class="n">Scale</span> <span class="n">factor</span><span class="p">:</span>     <span class="n">Not</span> <span class="n">specified</span>
+    <span class="o">-</span> <span class="n">Precision</span> <span class="n">of</span> <span class="n">IR</span><span class="p">:</span>  <span class="n">FP16</span>
+    <span class="o">-</span> <span class="n">Enable</span> <span class="n">fusing</span><span class="p">:</span>    <span class="kc">True</span>
+    <span class="o">-</span> <span class="n">User</span> <span class="n">transformations</span><span class="p">:</span>     <span class="n">Not</span> <span class="n">specified</span>
+    <span class="o">-</span> <span class="n">Reverse</span> <span class="nb">input</span> <span class="n">channels</span><span class="p">:</span>   <span class="kc">True</span>
+    <span class="o">-</span> <span class="n">Enable</span> <span class="n">IR</span> <span class="n">generation</span> <span class="k">for</span> <span class="n">fixed</span> <span class="nb">input</span> <span class="n">shape</span><span class="p">:</span>   <span class="kc">False</span>
+    <span class="o">-</span> <span class="n">Use</span> <span class="n">the</span> <span class="n">transformations</span> <span class="n">config</span> <span class="n">file</span><span class="p">:</span>  <span class="kc">None</span>
+<span class="n">Advanced</span> <span class="n">parameters</span><span class="p">:</span>
+    <span class="o">-</span> <span class="n">Force</span> <span class="n">the</span> <span class="n">usage</span> <span class="n">of</span> <span class="n">legacy</span> <span class="n">Frontend</span> <span class="n">of</span> <span class="n">Model</span> <span class="n">Optimizer</span> <span class="k">for</span> <span class="n">model</span> <span class="n">conversion</span> <span class="n">into</span> <span class="n">IR</span><span class="p">:</span>   <span class="kc">False</span>
+    <span class="o">-</span> <span class="n">Force</span> <span class="n">the</span> <span class="n">usage</span> <span class="n">of</span> <span class="n">new</span> <span class="n">Frontend</span> <span class="n">of</span> <span class="n">Model</span> <span class="n">Optimizer</span> <span class="k">for</span> <span class="n">model</span> <span class="n">conversion</span> <span class="n">into</span> <span class="n">IR</span><span class="p">:</span>  <span class="kc">False</span>
+<span class="n">OpenVINO</span> <span class="n">runtime</span> <span class="n">found</span> <span class="ow">in</span><span class="p">:</span>  <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8</span><span class="o">.</span><span class="mi">12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">openvino</span>
+<span class="n">OpenVINO</span> <span class="n">runtime</span> <span class="n">version</span><span class="p">:</span>   <span class="mf">2022.1</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="mi">7019</span><span class="o">-</span><span class="n">cdb9bec7210</span><span class="o">-</span><span class="n">releases</span><span class="o">/</span><span class="mi">2022</span><span class="o">/</span><span class="mi">1</span>
+<span class="n">Model</span> <span class="n">Optimizer</span> <span class="n">version</span><span class="p">:</span>    <span class="mf">2022.1</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="mi">7019</span><span class="o">-</span><span class="n">cdb9bec7210</span><span class="o">-</span><span class="n">releases</span><span class="o">/</span><span class="mi">2022</span><span class="o">/</span><span class="mi">1</span>
+<span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">Generated</span> <span class="n">IR</span> <span class="n">version</span> <span class="mi">11</span> <span class="n">model</span><span class="o">.</span>
+<span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">XML</span> <span class="n">file</span><span class="p">:</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">open_model_zoo_models</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">mobilenet</span><span class="o">-</span><span class="n">v2</span><span class="o">-</span><span class="n">pytorch</span><span class="o">/</span><span class="n">FP16</span><span class="o">/</span><span class="n">mobilenet</span><span class="o">-</span><span class="n">v2</span><span class="o">-</span><span class="n">pytorch</span><span class="o">.</span><span class="n">xml</span>
+<span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">BIN</span> <span class="n">file</span><span class="p">:</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">open_model_zoo_models</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">mobilenet</span><span class="o">-</span><span class="n">v2</span><span class="o">-</span><span class="n">pytorch</span><span class="o">/</span><span class="n">FP16</span><span class="o">/</span><span class="n">mobilenet</span><span class="o">-</span><span class="n">v2</span><span class="o">-</span><span class="n">pytorch</span><span class="o">.</span><span class="n">bin</span>
+<span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">Total</span> <span class="n">execution</span> <span class="n">time</span><span class="p">:</span> <span class="mf">0.73</span> <span class="n">seconds</span><span class="o">.</span>
+<span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">Memory</span> <span class="n">consumed</span><span class="p">:</span> <span class="mi">95</span> <span class="n">MB</span><span class="o">.</span>
+<span class="n">It</span><span class="s1">&#39;s been a while, check for a new version of Intel(R) Distribution of OpenVINO(TM) toolkit here https://software.intel.com/content/www/us/en/develop/tools/openvino-toolkit/download.html?cid=other&amp;source=prod&amp;campid=ww_2022_bu_IOTG_OpenVINO-2022-1&amp;content=upg_all&amp;medium=organic or on the GitHub*</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">The</span> <span class="n">model</span> <span class="n">was</span> <span class="n">converted</span> <span class="n">to</span> <span class="n">IR</span> <span class="n">v11</span><span class="p">,</span> <span class="n">the</span> <span class="n">latest</span> <span class="n">model</span> <span class="nb">format</span> <span class="n">that</span> <span class="n">corresponds</span> <span class="n">to</span> <span class="n">the</span> <span class="n">source</span> <span class="n">DL</span> <span class="n">framework</span> <span class="nb">input</span><span class="o">/</span><span class="n">output</span> <span class="nb">format</span><span class="o">.</span> <span class="n">While</span> <span class="n">IR</span> <span class="n">v11</span> <span class="ow">is</span> <span class="n">backwards</span> <span class="n">compatible</span> <span class="k">with</span> <span class="n">OpenVINO</span> <span class="n">Inference</span> <span class="n">Engine</span> <span class="n">API</span> <span class="n">v1</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span> <span class="n">please</span> <span class="n">use</span> <span class="n">API</span> <span class="n">v2</span><span class="o">.</span><span class="mi">0</span> <span class="p">(</span><span class="k">as</span> <span class="n">of</span> <span class="mf">2022.1</span><span class="p">)</span> <span class="n">to</span> <span class="n">take</span> <span class="n">advantage</span> <span class="n">of</span> <span class="n">the</span> <span class="n">latest</span> <span class="n">improvements</span> <span class="ow">in</span> <span class="n">IR</span> <span class="n">v11</span><span class="o">.</span>
+<span class="n">Find</span> <span class="n">more</span> <span class="n">information</span> <span class="n">about</span> <span class="n">API</span> <span class="n">v2</span><span class="o">.</span><span class="mi">0</span> <span class="ow">and</span> <span class="n">IR</span> <span class="n">v11</span> <span class="n">at</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">docs</span><span class="o">.</span><span class="n">openvino</span><span class="o">.</span><span class="n">ai</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="get-model-information">
+<h2>Get Model Information<a class="headerlink" href="#get-model-information" title="Permalink to this headline">¶</a></h2>
+<p>The Info Dumper prints the following information for Open Model Zoo
+models:</p>
+<ul class="simple">
+<li><p>Model name</p></li>
+<li><p>Description</p></li>
+<li><p>Framework that was used to train the model</p></li>
+<li><p>License URL</p></li>
+<li><p>Precisions supported by the model</p></li>
+<li><p>Subdirectory: the location of the downloaded model</p></li>
+<li><p>Task type</p></li>
+</ul>
+<p>This information can be shown by running
+<code class="docutils literal notranslate"><span class="pre">omz_info_dumper</span> <span class="pre">--name</span> <span class="pre">model_name</span></code> in a terminal. The information can
+also be parsed and used in scripts.</p>
+<p>In the next cell, we run Info Dumper and use json to load the
+information in a dictionary.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_info_output</span> <span class="o">=</span> <span class="o">%</span><span class="k">sx</span> omz_info_dumper --name <span class="nv">$model_name</span>
+<span class="n">model_info</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">model_info_output</span><span class="o">.</span><span class="n">get_nlstr</span><span class="p">())</span>
+
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">model_info</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+    <span class="n">NotebookAlert</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;There are multiple IR files for the </span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2"> model. The first model in the &quot;</span>
+        <span class="s2">&quot;omz_info_dumper output will be used for benchmarking. Change &quot;</span>
+        <span class="s2">&quot;`selected_model_info` in the cell below to select a different model from the list.&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;warning&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+<span class="n">model_info</span>
+</pre></div>
+</div>
+<pre class="literal-block">[{'name': 'mobilenet-v2-pytorch',
+  'composite_model_name': None,
+  'description': 'MobileNet V2 is image classification model pre-trained on ImageNet dataset. This is a PyTorch* implementation of MobileNetV2 architecture as described in the paper &quot;Inverted Residuals and Linear Bottlenecks: Mobile Networks for Classification, Detection and Segmentation&quot; &lt;<a class="reference external" href="https://arxiv.org/abs/1801.04381">https://arxiv.org/abs/1801.04381</a>&gt;.nThe model input is a blob that consists of a single image of &quot;1, 3, 224, 224&quot; in &quot;RGB&quot; order.nThe model output is typical object classifier for the 1000 different classifications matching with those in the ImageNet database.',
+  'framework': 'pytorch',
+  'license_url': '<a class="reference external" href="https://raw.githubusercontent.com/pytorch/vision/master/LICENSE">https://raw.githubusercontent.com/pytorch/vision/master/LICENSE</a>',
+  'accuracy_config': '/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/openvino/model_zoo/models/public/mobilenet-v2-pytorch/accuracy-check.yml',
+  'model_config': '/opt/hostedtoolcache/Python/3.8.12/x64/lib/python3.8/site-packages/openvino/model_zoo/models/public/mobilenet-v2-pytorch/model.yml',
+  'precisions': ['FP16', 'FP32'],
+  'quantization_output_precisions': ['FP16-INT8', 'FP32-INT8'],
+  'subdirectory': 'public/mobilenet-v2-pytorch',
+  'task_type': 'classification',
+  'input_info': [{'name': 'data',
+    'shape': [1, 3, 224, 224],
+    'layout': 'NCHW'}],
+  'model_stages': []}]</pre>
+<p>Having the model information in a JSON file allows us to extract the
+path to the model directory, and build the path to the IR file.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">selected_model_info</span> <span class="o">=</span> <span class="n">model_info</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">model_path</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">base_model_dir</span>
+    <span class="o">/</span> <span class="n">Path</span><span class="p">(</span><span class="n">selected_model_info</span><span class="p">[</span><span class="s2">&quot;subdirectory&quot;</span><span class="p">])</span>
+    <span class="o">/</span> <span class="n">Path</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">precision</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">selected_model_info</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">.xml&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">model_path</span><span class="p">,</span> <span class="s2">&quot;exists:&quot;</span><span class="p">,</span> <span class="n">model_path</span><span class="o">.</span><span class="n">exists</span><span class="p">())</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">open_model_zoo_models</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">mobilenet</span><span class="o">-</span><span class="n">v2</span><span class="o">-</span><span class="n">pytorch</span><span class="o">/</span><span class="n">FP16</span><span class="o">/</span><span class="n">mobilenet</span><span class="o">-</span><span class="n">v2</span><span class="o">-</span><span class="n">pytorch</span><span class="o">.</span><span class="n">xml</span> <span class="n">exists</span><span class="p">:</span> <span class="kc">True</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="run-benchmark-tool">
+<h2>Run Benchmark Tool<a class="headerlink" href="#run-benchmark-tool" title="Permalink to this headline">¶</a></h2>
+<p>By default, Benchmark Tool runs inference for 60 seconds in asynchronous
+mode on CPU. It returns inference speed as latency (milliseconds per
+image) and throughput (frames per second) values.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Uncomment the next line to show benchmark_app&#39;s help which explains the command line options</span>
+
+<span class="c1"># !benchmark_app --help</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">benchmark_command</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;benchmark_app -m </span><span class="si">{</span><span class="n">model_path</span><span class="si">}</span><span class="s2"> -t 15&quot;</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Markdown</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Benchmark command: `</span><span class="si">{</span><span class="n">benchmark_command</span><span class="si">}</span><span class="s2">`&quot;</span><span class="p">))</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Markdown</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Benchmarking </span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2"> on CPU with async inference for 15 seconds...&quot;</span><span class="p">))</span>
+
+<span class="o">!</span> <span class="nv">$benchmark_command</span>
+</pre></div>
+</div>
+<p>Benchmark command:
+<code class="docutils literal notranslate"><span class="pre">benchmark_app</span> <span class="pre">-m</span> <span class="pre">/home/runner/open_model_zoo_models/public/mobilenet-v2-pytorch/FP16/mobilenet-v2-pytorch.xml</span> <span class="pre">-t</span> <span class="pre">15</span></code></p>
+<p>Benchmarking mobilenet-v2-pytorch on CPU with async inference for 15
+seconds…</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[Step 1/11] Parsing and validating input arguments
+[ WARNING ]  -nstreams default value is determined automatically for a device. Although the automatic selection usually provides a reasonable performance, but it still may be non-optimal for some cases, for more information look at README.
+[Step 2/11] Loading OpenVINO
+[ WARNING ] PerformanceMode was not explicitly specified in command line. Device CPU performance hint will be set to THROUGHPUT.
+[ INFO ] OpenVINO:
+         API version............. 2022.1.0-7019-cdb9bec7210-releases/2022/1
+[ INFO ] Device info
+         CPU
+         openvino_intel_cpu_plugin version 2022.1
+         Build................... 2022.1.0-7019-cdb9bec7210-releases/2022/1
+
+[Step 3/11] Setting device configuration
+[ WARNING ] -nstreams default value is determined automatically for CPU device. Although the automatic selection usually provides a reasonable performance, but it still may be non-optimal for some cases, for more information look at README.
+[Step 4/11] Reading network files
+[ INFO ] Read model took 16.77 ms
+[Step 5/11] Resizing network to match image sizes and given batch
+[ INFO ] Network batch size: 1
+[Step 6/11] Configuring input of the model
+[ INFO ] Model input &#39;data&#39; precision u8, dimensions ([N,C,H,W]): 1 3 224 224
+[ INFO ] Model output &#39;prob&#39; precision f32, dimensions ([...]): 1 1000
+[Step 7/11] Loading the model to the device
+[ INFO ] Compile model took 94.71 ms
+[Step 8/11] Querying optimal runtime parameters
+[ INFO ] DEVICE: CPU
+[ INFO ]   AVAILABLE_DEVICES  , [&#39;&#39;]
+[ INFO ]   RANGE_FOR_ASYNC_INFER_REQUESTS  , (1, 1, 1)
+[ INFO ]   RANGE_FOR_STREAMS  , (1, 2)
+[ INFO ]   FULL_DEVICE_NAME  , Intel(R) Xeon(R) Platinum 8272CL CPU @ 2.60GHz
+[ INFO ]   OPTIMIZATION_CAPABILITIES  , [&#39;WINOGRAD&#39;, &#39;FP32&#39;, &#39;FP16&#39;, &#39;INT8&#39;, &#39;BIN&#39;, &#39;EXPORT_IMPORT&#39;]
+[ INFO ]   CACHE_DIR  ,
+[ INFO ]   NUM_STREAMS  , 1
+[ INFO ]   INFERENCE_NUM_THREADS  , 0
+[ INFO ]   PERF_COUNT  , False
+[ INFO ]   PERFORMANCE_HINT_NUM_REQUESTS  , 0
+[Step 9/11] Creating infer requests and preparing input data
+[ INFO ] Create 1 infer requests took 0.16 ms
+[ WARNING ] No input files were given for input &#39;data&#39;!. This input will be filled with random values!
+[ INFO ] Fill input &#39;data&#39; with random values
+[Step 10/11] Measuring performance (Start inference asynchronously, 1 inference requests using 1 streams for CPU, inference only: True, limits: 15000 ms duration)
+[ INFO ] Benchmarking in inference only mode (inputs filling are not included in measurement loop).
+[ INFO ] First inference took 9.21 ms
+[Step 11/11] Dumping statistics report
+Count:          4268 iterations
+Duration:       15003.82 ms
+Latency:
+    Median:     3.40 ms
+    AVG:        3.48 ms
+    MIN:        3.19 ms
+    MAX:        6.97 ms
+Throughput: 284.46 FPS
+</pre></div>
+</div>
+<div class="section" id="benchmark-with-different-settings">
+<h3>Benchmark with Different Settings<a class="headerlink" href="#benchmark-with-different-settings" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">benchmark_app</span></code> displays logging information that is not always
+necessary. We parse the output with json and show a more compact result</p>
+<p>The following cells show some examples of <code class="docutils literal notranslate"><span class="pre">benchmark_app</span></code> with
+different parameters. Some useful parameters are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-d</span></code> Device to use for inference. For example: CPU, GPU, MULTI.
+Default: CPU</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-t</span></code> Time in number of seconds to run inference. Default: 60</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-api</span></code> Use asynchronous (async) or synchronous (sync) inference.
+Default: async</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-b</span></code> Batch size. Default: 1</p></li>
+</ul>
+<p>Run <code class="docutils literal notranslate"><span class="pre">!</span> <span class="pre">benchmark_app</span> <span class="pre">--help</span></code> to get an overview of all possible
+command line parameters.</p>
+<p>In the next cell, we define a <code class="docutils literal notranslate"><span class="pre">benchmark_model()</span></code> function that calls
+<code class="docutils literal notranslate"><span class="pre">benchmark_app</span></code>. This makes it easy to try different combinations. In
+the cell below that, we display the available devices on the system.</p>
+<blockquote>
+<div><p><strong>NOTE</strong>: In this notebook we run benchmark_app for 15 seconds to
+give a quick indication of performance. For more accurate
+performance, we recommended running inference for at least one minute
+by setting the <code class="docutils literal notranslate"><span class="pre">t</span></code> parameter to 60 or higher, and running
+<code class="docutils literal notranslate"><span class="pre">benchmark_app</span></code> in a terminal/command prompt after closing other
+applications. You can copy the <em>benchmark command</em> and paste it in a
+command prompt where you have activated the <code class="docutils literal notranslate"><span class="pre">openvino_env</span></code>
+environment.</p>
+</div></blockquote>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">benchmark_model</span><span class="p">(</span><span class="n">model_xml</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s2">&quot;CPU&quot;</span><span class="p">,</span> <span class="n">seconds</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">api</span><span class="o">=</span><span class="s2">&quot;async&quot;</span><span class="p">,</span> <span class="n">batch</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">ie</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span>
+    <span class="n">model_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">model_xml</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="s2">&quot;GPU&quot;</span> <span class="ow">in</span> <span class="n">device</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="s2">&quot;GPU&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ie</span><span class="o">.</span><span class="n">available_devices</span><span class="p">):</span>
+        <span class="n">DeviceNotFoundAlert</span><span class="p">(</span><span class="s2">&quot;GPU&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">benchmark_command</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;benchmark_app -m </span><span class="si">{</span><span class="n">model_path</span><span class="si">}</span><span class="s2"> -d </span><span class="si">{</span><span class="n">device</span><span class="si">}</span><span class="s2"> -t </span><span class="si">{</span><span class="n">seconds</span><span class="si">}</span><span class="s2"> -api </span><span class="si">{</span><span class="n">api</span><span class="si">}</span><span class="s2"> -b </span><span class="si">{</span><span class="n">batch</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">display</span><span class="p">(</span><span class="n">Markdown</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;**Benchmark </span><span class="si">{</span><span class="n">model_path</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> with </span><span class="si">{</span><span class="n">device</span><span class="si">}</span><span class="s2"> for </span><span class="si">{</span><span class="n">seconds</span><span class="si">}</span><span class="s2"> seconds with </span><span class="si">{</span><span class="n">api</span><span class="si">}</span><span class="s2"> inference**&quot;</span><span class="p">))</span>
+        <span class="n">display</span><span class="p">(</span><span class="n">Markdown</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Benchmark command: `</span><span class="si">{</span><span class="n">benchmark_command</span><span class="si">}</span><span class="s2">`&quot;</span><span class="p">))</span>
+
+        <span class="n">benchmark_output</span> <span class="o">=</span> <span class="o">%</span><span class="k">sx</span> <span class="nv">$benchmark_command</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;command ended&quot;</span><span class="p">)</span>
+        <span class="n">benchmark_result</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">benchmark_output</span>
+                            <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;[&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;  &quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">line</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">)]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">benchmark_result</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ie</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span>
+
+<span class="c1"># Show devices available for OpenVINO Inference Engine</span>
+<span class="k">for</span> <span class="n">device</span> <span class="ow">in</span> <span class="n">ie</span><span class="o">.</span><span class="n">available_devices</span><span class="p">:</span>
+    <span class="n">device_name</span> <span class="o">=</span> <span class="n">ie</span><span class="o">.</span><span class="n">get_property</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="s2">&quot;FULL_DEVICE_NAME&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">device</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">device_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CPU</span><span class="p">:</span> <span class="n">Intel</span><span class="p">(</span><span class="n">R</span><span class="p">)</span> <span class="n">Xeon</span><span class="p">(</span><span class="n">R</span><span class="p">)</span> <span class="n">Platinum</span> <span class="mi">8272</span><span class="n">CL</span> <span class="n">CPU</span> <span class="o">@</span> <span class="mf">2.60</span><span class="n">GHz</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">benchmark_model</span><span class="p">(</span><span class="n">model_path</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s2">&quot;CPU&quot;</span><span class="p">,</span> <span class="n">seconds</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">api</span><span class="o">=</span><span class="s2">&quot;async&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Benchmark mobilenet-v2-pytorch.xml with CPU for 15 seconds with async
+inference</strong></p>
+<p>Benchmark command:
+<code class="docutils literal notranslate"><span class="pre">benchmark_app</span> <span class="pre">-m</span> <span class="pre">/home/runner/open_model_zoo_models/public/mobilenet-v2-pytorch/FP16/mobilenet-v2-pytorch.xml</span> <span class="pre">-d</span> <span class="pre">CPU</span> <span class="pre">-t</span> <span class="pre">15</span> <span class="pre">-api</span> <span class="pre">async</span> <span class="pre">-b</span> <span class="pre">1</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">command</span> <span class="n">ended</span>
+<span class="n">Count</span><span class="p">:</span>          <span class="mi">4328</span> <span class="n">iterations</span>
+<span class="n">Duration</span><span class="p">:</span>       <span class="mf">15006.35</span> <span class="n">ms</span>
+<span class="n">Latency</span><span class="p">:</span>
+<span class="n">Throughput</span><span class="p">:</span> <span class="mf">288.41</span> <span class="n">FPS</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">benchmark_model</span><span class="p">(</span><span class="n">model_path</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s2">&quot;AUTO&quot;</span><span class="p">,</span> <span class="n">seconds</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">api</span><span class="o">=</span><span class="s2">&quot;async&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Benchmark mobilenet-v2-pytorch.xml with AUTO for 15 seconds with async
+inference</strong></p>
+<p>Benchmark command:
+<code class="docutils literal notranslate"><span class="pre">benchmark_app</span> <span class="pre">-m</span> <span class="pre">/home/runner/open_model_zoo_models/public/mobilenet-v2-pytorch/FP16/mobilenet-v2-pytorch.xml</span> <span class="pre">-d</span> <span class="pre">AUTO</span> <span class="pre">-t</span> <span class="pre">15</span> <span class="pre">-api</span> <span class="pre">async</span> <span class="pre">-b</span> <span class="pre">1</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">command</span> <span class="n">ended</span>
+<span class="n">Count</span><span class="p">:</span>          <span class="mi">4244</span> <span class="n">iterations</span>
+<span class="n">Duration</span><span class="p">:</span>       <span class="mf">15004.13</span> <span class="n">ms</span>
+<span class="n">Latency</span><span class="p">:</span>
+<span class="n">Throughput</span><span class="p">:</span> <span class="mf">282.86</span> <span class="n">FPS</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">benchmark_model</span><span class="p">(</span><span class="n">model_path</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s2">&quot;GPU&quot;</span><span class="p">,</span> <span class="n">seconds</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">api</span><span class="o">=</span><span class="s2">&quot;async&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="alert alert-warning">Running this cell requires a GPU device, which is not available on this system. The following device is available: CPU<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">benchmark_model</span><span class="p">(</span><span class="n">model_path</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s2">&quot;MULTI:CPU,GPU&quot;</span><span class="p">,</span> <span class="n">seconds</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">api</span><span class="o">=</span><span class="s2">&quot;async&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="alert alert-warning">Running this cell requires a GPU device, which is not available on this system. The following device is available: CPU</div>
+</div>
+</div>
+
+
+                </div>
+            
+            
+                <div class='prev-next-bottom'>
+                  
+    <a class='button bttn-sec button-size-l' id="prev-link" href="103-paddle-onnx-to-openvino-classification-with-output.html" title="previous page">Prev</a>
+    <a class='button bttn-sec button-size-l' id="next-link" href="105-language-quantize-bert-with-output.html" title="next page">Next</a>
+
+                </div>
+            
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+<footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2021, Intel®.<br>
+</p>
+    </div>
+    
+    <div class="footer-item">
+      <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

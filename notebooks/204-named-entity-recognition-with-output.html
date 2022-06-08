@@ -1,0 +1,830 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document Entity Extraction with OpenVINO &#8212; OpenVINO™  documentation</title>
+    
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/blank.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/doxyrest-pygments.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <link href="../_static/css/media/favicon.ico" rel="shortcut icon">
+    <link rel="stylesheet" href="../_static/css/openvino_sphinx_theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/button.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/input.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/textfield.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/tabs.css" type="text/css" />
+    <script src="../_static/js/openvino_sphinx_theme.js"></script>
+    <link rel="stylesheet" href="../_static/css/viewer.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/0.5.7/chartjs-plugin-annotation.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-barchart-background@1.3.0/build/Plugin.Barchart.Background.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-deferred@1"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.1/papaparse.min.js"></script>
+    <script src="../_static/js/viewer.min.js"></script>
+    <script src="/assets/versions_raw.js"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/tabs.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/js/custom.js"></script>
+    <script src="../_static/js/graphs.js"></script>
+    <script src="../_static/js/graphs_ov_tf.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/target-highlight.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <link rel="canonical" href="https://docs.openvino.ai/latest/notebooks/204-named-entity-recognition-with-output.html" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+      <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+
+<a class="navbar-brand" href="../index.html">
+  <img src="../_static/logo.svg" class="logo" alt="logo">
+</a>
+
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../pages/get_started.html">
+  Get Started
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../pages/documentation.html">
+  Documentation
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../tutorials.html">
+  Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../model_zoo.html">
+  Model Zoo
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../pages/resources.html">
+  Resources
+ </a>
+</li>
+
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/openvinotoolkit/openvino" rel="noopener" target="_blank" title="GitHub">
+            <span><i class="sst-github"></i></span>
+            <label class="sr-only">GitHub</label>
+          </a>
+        </li>
+</ul>
+      </div>
+      
+      <div class="navbar-end-item">
+        
+<div class="dropdown sst-dropdown sst-dropdown-navbar">
+  <button class="btn sst-btn dropdown-toggle" type="button" id="version-selector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+  <div class="dropdown-menu" aria-labelledby="version-selector">
+  </div>
+</div>
+      </div>
+      
+      <div class="navbar-end-item">
+        
+
+<div class="dropdown sst-dropdown sst-dropdown-navbar">
+  <button class="btn sst-btn dropdown-toggle" type="button" id="language-selector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">English</button>
+  <div class="dropdown-menu" aria-labelledby="language-selector">
+    
+      
+        <a class="dropdown-item font-weight-bold" href="/latest/notebooks/204-named-entity-recognition-with-output.html">English</a>
+      
+    
+      
+        <a  class="dropdown-item" href="/cn/latest/notebooks/204-named-entity-recognition-with-output.html">Chinese</a>
+      
+    
+  </div>
+</div>
+
+      </div>
+      
+    </div>
+  </div>
+</div>
+        <div id="collapse-nav-wrapper" class="container-xl">
+          <button id="collapse-nav" class="button bttn-prm button-size-m" type="button" data-toggle="collapse" data-target="#nav-tree" aria-expanded="false" aria-controls="nav-tree">
+            Documentation navigation <i class="fas fa-chevron-down"></i>
+          </button>
+        </div>
+      </nav>
+      <div class="transition-banner container-fluid alert alert-info alert-dismissible fade show" role="alert">
+        <p>OpenVINO 2022.1 introduces a new version of OpenVINO API (API 2.0). For more information on the changes and transition steps, see the <a href="https://docs.openvino.ai/latest/openvino_2_0_transition_guide.html">transition guide</a></p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar" id="nav-tree"><form class="searchForm bd-search d-flex align-items-center" action="../search.html" method="get">
+    <i class="icon fas fa-search"></i>
+    <input type="search" class="form-control" name="query" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    
+  </div>
+</nav>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+              
+              <div class="toc-item">
+                
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#imports">
+   Imports
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-model">
+   The model
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#download-the-model">
+     Download the model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#load-the-model-for-entity-extraction-with-dynamic-shape">
+     Load the model for Entity Extraction with Dynamic Shape
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#processing">
+   Processing
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#preprocessing">
+     Preprocessing
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#postprocessing">
+     Postprocessing
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#set-the-entity-recognition-template">
+     Set the Entity Recognition Template
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#run-on-simple-text">
+   Run on Simple Text
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sample-1">
+     Sample 1
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sample-2">
+     Sample 2
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sample-3">
+     Sample 3
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+</nav>
+              </div>
+              
+              <div class="toc-item">
+                <div class="tocsection download-docs">
+  <div class="dropdown sst-dropdown">
+    <button class="button bttn-prm button-size-m" data-display="static" type="button" id="download-options"
+      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Download Docs
+    </button>
+    <div class="dropdown-menu" aria-labelledby="download-options">
+      <a class="dropdown-item" href="#" onclick="window.print()">.pdf</a>
+      <a id="download-zip-btn" class="dropdown-item" href="#">.zip</a>
+    </div>
+  </div>
+</div>
+              </div>
+              
+            
+          </div>
+          
+
+          
+          
+              
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+
+<div class="tocsection editthispage">
+    <a href="None">
+        <i class="fas fa-pencil-alt"></i> Edit this page
+    </a>
+</div>
+
+            
+                <div>
+                  
+  <div class="section" id="document-entity-extraction-with-openvino">
+<h1>Document Entity Extraction with OpenVINO<a class="headerlink" href="#document-entity-extraction-with-openvino" title="Permalink to this headline">¶</a></h1>
+<p>This demo shows named entity recognition from text with OpenVINO. We use
+<a class="reference external" href="https://github.com/openvinotoolkit/open_model_zoo/tree/master/models/intel/bert-small-uncased-whole-word-masking-squad-int8-0002">small BERT-large-like
+model</a>
+distilled and quantized to INT8 on SQuAD v1.1 training set from larger
+BERT-large model. The model comes from <a class="reference external" href="https://github.com/openvinotoolkit/open_model_zoo/">Open Model
+Zoo</a>. At the
+bottom of this notebook, you will see live inference results from your
+inputs and templates. In the notebook we show how to create the
+following pipeline:</p>
+<p align="center" width="100%"></p><div class="section" id="imports">
+<h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">tokens_bert</span> <span class="k">as</span> <span class="nn">tokens</span>
+
+<span class="kn">from</span> <span class="nn">openvino.runtime</span> <span class="kn">import</span> <span class="n">Core</span>
+<span class="kn">from</span> <span class="nn">openvino.runtime</span> <span class="kn">import</span> <span class="n">Dimension</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="the-model">
+<h2>The model<a class="headerlink" href="#the-model" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="download-the-model">
+<h3>Download the model<a class="headerlink" href="#download-the-model" title="Permalink to this headline">¶</a></h3>
+<p>We use <code class="docutils literal notranslate"><span class="pre">omz_downloader</span></code>, which is a command-line tool from the
+<code class="docutils literal notranslate"><span class="pre">openvino-dev</span></code> package. <code class="docutils literal notranslate"><span class="pre">omz_downloader</span></code> automatically creates a
+directory structure and downloads the selected model. If the model is
+already downloaded, this step is skipped.</p>
+<p>You can download and use any of the following models:
+<code class="docutils literal notranslate"><span class="pre">bert-large-uncased-whole-word-masking-squad-0001</span></code>,
+<code class="docutils literal notranslate"><span class="pre">bert-large-uncased-whole-word-masking-squad-int8-0001</span></code>,
+<code class="docutils literal notranslate"><span class="pre">bert-small-uncased-whole-word-masking-squad-0001</span></code>,
+<code class="docutils literal notranslate"><span class="pre">bert-small-uncased-whole-word-masking-squad-0002</span></code>,
+<code class="docutils literal notranslate"><span class="pre">bert-small-uncased-whole-word-masking-squad-int8-0002</span></code>, just change
+the model name below. Any of these models are already converted to
+OpenVINO Intermediate Representation (IR), so there is no need to use
+<code class="docutils literal notranslate"><span class="pre">omz_converter</span></code>.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># directory where model will be downloaded</span>
+<span class="n">base_model_dir</span> <span class="o">=</span> <span class="s2">&quot;model&quot;</span>
+
+<span class="c1"># desired precision</span>
+<span class="n">precision</span> <span class="o">=</span> <span class="s2">&quot;FP16-INT8&quot;</span>
+
+<span class="c1"># model name as named in Open Model Zoo</span>
+<span class="n">model_name</span> <span class="o">=</span> <span class="s2">&quot;bert-small-uncased-whole-word-masking-squad-int8-0002&quot;</span>
+
+<span class="n">model_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;model/intel/</span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">precision</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2">.xml&quot;</span>
+<span class="n">model_weights_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;model/intel/</span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">precision</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2">.bin&quot;</span>
+
+<span class="n">download_command</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;omz_downloader &quot;</span> \
+                   <span class="sa">f</span><span class="s2">&quot;--name </span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2"> &quot;</span> \
+                   <span class="sa">f</span><span class="s2">&quot;--precision </span><span class="si">{</span><span class="n">precision</span><span class="si">}</span><span class="s2"> &quot;</span> \
+                   <span class="sa">f</span><span class="s2">&quot;--output_dir </span><span class="si">{</span><span class="n">base_model_dir</span><span class="si">}</span><span class="s2"> &quot;</span> \
+                   <span class="sa">f</span><span class="s2">&quot;--cache_dir </span><span class="si">{</span><span class="n">base_model_dir</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="o">!</span> <span class="nv">$download_command</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">################|| Downloading bert-small-uncased-whole-word-masking-squad-int8-0002 ||################</span>
+
+<span class="o">==========</span> <span class="n">Downloading</span> <span class="n">model</span><span class="o">/</span><span class="n">intel</span><span class="o">/</span><span class="n">bert</span><span class="o">-</span><span class="n">small</span><span class="o">-</span><span class="n">uncased</span><span class="o">-</span><span class="n">whole</span><span class="o">-</span><span class="n">word</span><span class="o">-</span><span class="n">masking</span><span class="o">-</span><span class="n">squad</span><span class="o">-</span><span class="n">int8</span><span class="o">-</span><span class="mi">0002</span><span class="o">/</span><span class="n">vocab</span><span class="o">.</span><span class="n">txt</span>
+
+
+<span class="o">==========</span> <span class="n">Downloading</span> <span class="n">model</span><span class="o">/</span><span class="n">intel</span><span class="o">/</span><span class="n">bert</span><span class="o">-</span><span class="n">small</span><span class="o">-</span><span class="n">uncased</span><span class="o">-</span><span class="n">whole</span><span class="o">-</span><span class="n">word</span><span class="o">-</span><span class="n">masking</span><span class="o">-</span><span class="n">squad</span><span class="o">-</span><span class="n">int8</span><span class="o">-</span><span class="mi">0002</span><span class="o">/</span><span class="n">FP16</span><span class="o">-</span><span class="n">INT8</span><span class="o">/</span><span class="n">bert</span><span class="o">-</span><span class="n">small</span><span class="o">-</span><span class="n">uncased</span><span class="o">-</span><span class="n">whole</span><span class="o">-</span><span class="n">word</span><span class="o">-</span><span class="n">masking</span><span class="o">-</span><span class="n">squad</span><span class="o">-</span><span class="n">int8</span><span class="o">-</span><span class="mf">0002.</span><span class="n">xml</span>
+
+
+<span class="o">==========</span> <span class="n">Downloading</span> <span class="n">model</span><span class="o">/</span><span class="n">intel</span><span class="o">/</span><span class="n">bert</span><span class="o">-</span><span class="n">small</span><span class="o">-</span><span class="n">uncased</span><span class="o">-</span><span class="n">whole</span><span class="o">-</span><span class="n">word</span><span class="o">-</span><span class="n">masking</span><span class="o">-</span><span class="n">squad</span><span class="o">-</span><span class="n">int8</span><span class="o">-</span><span class="mi">0002</span><span class="o">/</span><span class="n">FP16</span><span class="o">-</span><span class="n">INT8</span><span class="o">/</span><span class="n">bert</span><span class="o">-</span><span class="n">small</span><span class="o">-</span><span class="n">uncased</span><span class="o">-</span><span class="n">whole</span><span class="o">-</span><span class="n">word</span><span class="o">-</span><span class="n">masking</span><span class="o">-</span><span class="n">squad</span><span class="o">-</span><span class="n">int8</span><span class="o">-</span><span class="mf">0002.</span><span class="n">bin</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="load-the-model-for-entity-extraction-with-dynamic-shape">
+<h3>Load the model for Entity Extraction with Dynamic Shape<a class="headerlink" href="#load-the-model-for-entity-extraction-with-dynamic-shape" title="Permalink to this headline">¶</a></h3>
+<p>Input to entity extraction model refers to text with different content
+sizes, i.e, dynamic into shapes. Hence:</p>
+<ol class="arabic simple">
+<li><p>Input dimension with dynamic input shapes needs to be specified
+before loading entity extraction model</p></li>
+<li><p>Dynamic shape is specified by assigning -1 to the input dimension or
+by setting the upper bound of the input dimension using, for example,
+Dimension(1,384)</p></li>
+</ol>
+<p>In scope of this notebook, as we know the upper bound of the dynamic
+input and longest input text allowed is 384 i.e. 380 tokens for content
++ 1 for entity + 3 special (separation) tokens, it is more recommended
+to assign dynamic shape using Dimension(, upper bound) i.e. Dimension(1,
+384) so it’ll use memory more efficiently with OpenVINO 2022.1</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># initialize inference engine</span>
+<span class="n">ie_core</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span>
+<span class="c1"># read the network and corresponding weights from file</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">ie_core</span><span class="o">.</span><span class="n">read_model</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model_path</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">model_weights_path</span><span class="p">)</span>
+
+<span class="c1"># assign dynamic shapes to every input layer on the last dimension</span>
+<span class="k">for</span> <span class="n">input_layer</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">inputs</span><span class="p">:</span>
+    <span class="n">input_shape</span> <span class="o">=</span> <span class="n">input_layer</span><span class="o">.</span><span class="n">partial_shape</span>
+    <span class="n">input_shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">Dimension</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">384</span><span class="p">)</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">reshape</span><span class="p">({</span><span class="n">input_layer</span><span class="p">:</span> <span class="n">input_shape</span><span class="p">})</span>
+
+<span class="c1"># compile the model for the CPU</span>
+<span class="n">compiled_model</span> <span class="o">=</span> <span class="n">ie_core</span><span class="o">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">device_name</span><span class="o">=</span><span class="s2">&quot;CPU&quot;</span><span class="p">)</span>
+
+<span class="c1"># get input names of nodes</span>
+<span class="n">input_keys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">compiled_model</span><span class="o">.</span><span class="n">inputs</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Input keys are the names of the network input nodes. In the case of the
+BERT-large-like model, we have four inputs.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">any_name</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">input_keys</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="s1">&#39;input_ids&#39;</span><span class="p">,</span> <span class="s1">&#39;attention_mask&#39;</span><span class="p">,</span> <span class="s1">&#39;token_type_ids&#39;</span><span class="p">,</span> <span class="s1">&#39;position_ids&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="processing">
+<h2>Processing<a class="headerlink" href="#processing" title="Permalink to this headline">¶</a></h2>
+<p>NLP models usually take a list of tokens as standard input. A token is a
+single word converted to some integer. To provide the proper input, we
+need the vocabulary for such mapping. We also define some special tokens
+like separators and a function to load the content. Content is loaded
+from simple text.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># path to vocabulary file</span>
+<span class="n">vocab_file_path</span> <span class="o">=</span> <span class="s2">&quot;data/vocab.txt&quot;</span>
+
+<span class="c1"># create dictionary with words and their indices</span>
+<span class="n">vocab</span> <span class="o">=</span> <span class="n">tokens</span><span class="o">.</span><span class="n">load_vocab_file</span><span class="p">(</span><span class="n">vocab_file_path</span><span class="p">)</span>
+
+<span class="c1"># define special tokens</span>
+<span class="n">cls_token</span> <span class="o">=</span> <span class="n">vocab</span><span class="p">[</span><span class="s2">&quot;[CLS]&quot;</span><span class="p">]</span>
+<span class="n">sep_token</span> <span class="o">=</span> <span class="n">vocab</span><span class="p">[</span><span class="s2">&quot;[SEP]&quot;</span><span class="p">]</span>
+
+<span class="c1"># set a confidence score threshold</span>
+<span class="n">confidence_threshold</span> <span class="o">=</span> <span class="mf">0.4</span>
+</pre></div>
+</div>
+<div class="section" id="preprocessing">
+<h3>Preprocessing<a class="headerlink" href="#preprocessing" title="Permalink to this headline">¶</a></h3>
+<p>The main input (<code class="docutils literal notranslate"><span class="pre">input_ids</span></code>) to used BERT model consist of two parts:
+entity tokens and context tokens separated by some special tokens. We
+also need to provide: <code class="docutils literal notranslate"><span class="pre">attention_mask</span></code>, which is a sequence of integer
+values representing the mask of valid values in the input;
+<code class="docutils literal notranslate"><span class="pre">token_type_ids</span></code>, which is a sequence of integer values representing
+the segmentation of the <code class="docutils literal notranslate"><span class="pre">input_ids</span></code> into entity and context;
+<code class="docutils literal notranslate"><span class="pre">position_ids</span></code>, which is a sequence of integer values from 0 to length
+of input, extended by separation tokens, representing the position index
+for each input token. To know more about input, please read
+<a class="reference external" href="https://github.com/openvinotoolkit/open_model_zoo/tree/master/models/intel/bert-small-uncased-whole-word-masking-squad-int8-0002#input">this</a>.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># generator of a sequence of inputs</span>
+<span class="k">def</span> <span class="nf">prepare_input</span><span class="p">(</span><span class="n">entity_tokens</span><span class="p">,</span> <span class="n">context_tokens</span><span class="p">):</span>
+    <span class="n">input_ids</span> <span class="o">=</span> <span class="p">[</span><span class="n">cls_token</span><span class="p">]</span> <span class="o">+</span> <span class="n">entity_tokens</span> <span class="o">+</span> <span class="p">[</span><span class="n">sep_token</span><span class="p">]</span> <span class="o">+</span> \
+        <span class="n">context_tokens</span> <span class="o">+</span> <span class="p">[</span><span class="n">sep_token</span><span class="p">]</span>
+    <span class="c1"># 1 for any index</span>
+    <span class="n">attention_mask</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">input_ids</span><span class="p">)</span>
+    <span class="c1"># 0 for entity tokens, 1 for context part</span>
+    <span class="n">token_type_ids</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">entity_tokens</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> \
+        <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">context_tokens</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># create input to feed the model</span>
+    <span class="n">input_dict</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;input_ids&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">input_ids</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">),</span>
+        <span class="s2">&quot;attention_mask&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">attention_mask</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">),</span>
+        <span class="s2">&quot;token_type_ids&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">token_type_ids</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">),</span>
+    <span class="p">}</span>
+
+    <span class="c1"># some models require additional position_ids</span>
+    <span class="k">if</span> <span class="s2">&quot;position_ids&quot;</span> <span class="ow">in</span> <span class="p">[</span><span class="n">i_key</span><span class="o">.</span><span class="n">any_name</span> <span class="k">for</span> <span class="n">i_key</span> <span class="ow">in</span> <span class="n">input_keys</span><span class="p">]:</span>
+        <span class="n">position_ids</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">input_ids</span><span class="p">))</span>
+        <span class="n">input_dict</span><span class="p">[</span><span class="s2">&quot;position_ids&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">position_ids</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">input_dict</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="postprocessing">
+<h3>Postprocessing<a class="headerlink" href="#postprocessing" title="Permalink to this headline">¶</a></h3>
+<p>The results from the network are raw (logits). We need to use the
+softmax function to get the probability distribution. Then, we are
+looking for the best entity extraction in the current part of the
+context (the highest score) and we return the score and the context
+range for the extracted entity.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">postprocess</span><span class="p">(</span><span class="n">output_start</span><span class="p">,</span> <span class="n">output_end</span><span class="p">,</span> <span class="n">entity_tokens</span><span class="p">,</span>
+                <span class="n">context_tokens_start_end</span><span class="p">,</span> <span class="n">input_size</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">get_score</span><span class="p">(</span><span class="n">logits</span><span class="p">):</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">logits</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">out</span> <span class="o">/</span> <span class="n">out</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># get start-end scores for context</span>
+    <span class="n">score_start</span> <span class="o">=</span> <span class="n">get_score</span><span class="p">(</span><span class="n">output_start</span><span class="p">)</span>
+    <span class="n">score_end</span> <span class="o">=</span> <span class="n">get_score</span><span class="p">(</span><span class="n">output_end</span><span class="p">)</span>
+
+    <span class="c1"># index of first context token in tensor</span>
+    <span class="n">context_start_idx</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">entity_tokens</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span>
+    <span class="c1"># index of last+1 context token in tensor</span>
+    <span class="n">context_end_idx</span> <span class="o">=</span> <span class="n">input_size</span> <span class="o">-</span> <span class="mi">1</span>
+
+    <span class="c1"># find product of all start-end combinations to find the best one</span>
+    <span class="n">max_score</span><span class="p">,</span> <span class="n">max_start</span><span class="p">,</span> <span class="n">max_end</span> <span class="o">=</span> <span class="n">find_best_entity_window</span><span class="p">(</span>
+        <span class="n">start_score</span><span class="o">=</span><span class="n">score_start</span><span class="p">,</span> <span class="n">end_score</span><span class="o">=</span><span class="n">score_end</span><span class="p">,</span>
+        <span class="n">context_start_idx</span><span class="o">=</span><span class="n">context_start_idx</span><span class="p">,</span> <span class="n">context_end_idx</span><span class="o">=</span><span class="n">context_end_idx</span>
+    <span class="p">)</span>
+
+    <span class="c1"># convert to context text start-end index</span>
+    <span class="n">max_start</span> <span class="o">=</span> <span class="n">context_tokens_start_end</span><span class="p">[</span><span class="n">max_start</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">max_end</span> <span class="o">=</span> <span class="n">context_tokens_start_end</span><span class="p">[</span><span class="n">max_end</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">max_score</span><span class="p">,</span> <span class="n">max_start</span><span class="p">,</span> <span class="n">max_end</span>
+
+
+<span class="k">def</span> <span class="nf">find_best_entity_window</span><span class="p">(</span><span class="n">start_score</span><span class="p">,</span> <span class="n">end_score</span><span class="p">,</span>
+                            <span class="n">context_start_idx</span><span class="p">,</span> <span class="n">context_end_idx</span><span class="p">):</span>
+    <span class="n">context_len</span> <span class="o">=</span> <span class="n">context_end_idx</span> <span class="o">-</span> <span class="n">context_start_idx</span>
+    <span class="n">score_mat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span>
+        <span class="n">start_score</span><span class="p">[</span><span class="n">context_start_idx</span><span class="p">:</span><span class="n">context_end_idx</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">context_len</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span>
+        <span class="n">end_score</span><span class="p">[</span><span class="n">context_start_idx</span><span class="p">:</span><span class="n">context_end_idx</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span>
+            <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">context_len</span><span class="p">)),</span>
+    <span class="p">)</span>
+    <span class="c1"># reset candidates with end before start</span>
+    <span class="n">score_mat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">triu</span><span class="p">(</span><span class="n">score_mat</span><span class="p">)</span>
+    <span class="c1"># reset long candidates (&gt;16 words)</span>
+    <span class="n">score_mat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tril</span><span class="p">(</span><span class="n">score_mat</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
+    <span class="c1"># find the best start-end pair</span>
+    <span class="n">max_s</span><span class="p">,</span> <span class="n">max_e</span> <span class="o">=</span> <span class="nb">divmod</span><span class="p">(</span><span class="n">score_mat</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span><span class="o">.</span><span class="n">argmax</span><span class="p">(),</span> <span class="n">score_mat</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">max_score</span> <span class="o">=</span> <span class="n">score_mat</span><span class="p">[</span><span class="n">max_s</span><span class="p">,</span> <span class="n">max_e</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">max_score</span><span class="p">,</span> <span class="n">max_s</span><span class="p">,</span> <span class="n">max_e</span>
+</pre></div>
+</div>
+<p>Firstly, we need to create a list of tokens from the context and the
+entity. Then, we are looking for the best extracted entity by trying
+different parts of the context. The best extracted entity should come
+with the highest score.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_best_entity</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="n">context</span><span class="p">,</span> <span class="n">vocab</span><span class="p">):</span>
+    <span class="c1"># convert context string to tokens</span>
+    <span class="n">context_tokens</span><span class="p">,</span> <span class="n">context_tokens_end</span> <span class="o">=</span> <span class="n">tokens</span><span class="o">.</span><span class="n">text_to_tokens</span><span class="p">(</span>
+        <span class="n">text</span><span class="o">=</span><span class="n">context</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span> <span class="n">vocab</span><span class="o">=</span><span class="n">vocab</span><span class="p">)</span>
+    <span class="c1"># convert entity string to tokens</span>
+    <span class="n">entity_tokens</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">tokens</span><span class="o">.</span><span class="n">text_to_tokens</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">entity</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span> <span class="n">vocab</span><span class="o">=</span><span class="n">vocab</span><span class="p">)</span>
+
+    <span class="n">network_input</span> <span class="o">=</span> <span class="n">prepare_input</span><span class="p">(</span><span class="n">entity_tokens</span><span class="p">,</span> <span class="n">context_tokens</span><span class="p">)</span>
+    <span class="n">input_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">context_tokens</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">entity_tokens</span><span class="p">)</span> <span class="o">+</span> <span class="mi">3</span>
+
+    <span class="c1"># openvino inference</span>
+    <span class="n">output_start_key</span> <span class="o">=</span> <span class="n">compiled_model</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="s2">&quot;output_s&quot;</span><span class="p">)</span>
+    <span class="n">output_end_key</span> <span class="o">=</span> <span class="n">compiled_model</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="s2">&quot;output_e&quot;</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">compiled_model</span><span class="p">(</span><span class="n">network_input</span><span class="p">)</span>
+
+    <span class="c1"># postprocess the result getting the score and context range for the answer</span>
+    <span class="n">score_start_end</span> <span class="o">=</span> <span class="n">postprocess</span><span class="p">(</span><span class="n">output_start</span><span class="o">=</span><span class="n">result</span><span class="p">[</span><span class="n">output_start_key</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span>
+                                  <span class="n">output_end</span><span class="o">=</span><span class="n">result</span><span class="p">[</span><span class="n">output_end_key</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span>
+                                  <span class="n">entity_tokens</span><span class="o">=</span><span class="n">entity_tokens</span><span class="p">,</span>
+                                  <span class="n">context_tokens_start_end</span><span class="o">=</span><span class="n">context_tokens_end</span><span class="p">,</span>
+                                  <span class="n">input_size</span><span class="o">=</span><span class="n">input_size</span><span class="p">)</span>
+
+    <span class="c1"># return the part of the context, which is already an answer</span>
+    <span class="k">return</span> <span class="n">context</span><span class="p">[</span><span class="n">score_start_end</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span><span class="n">score_start_end</span><span class="p">[</span><span class="mi">2</span><span class="p">]],</span> <span class="n">score_start_end</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="set-the-entity-recognition-template">
+<h3>Set the Entity Recognition Template<a class="headerlink" href="#set-the-entity-recognition-template" title="Permalink to this headline">¶</a></h3>
+<p>Only the entities which have prediction confidence score more than 0.4
+will be captured in the final output. This can be set by setting the
+variable confidence_threshold above. Sample entities supported by the
+application natural entity recognition template. - building, company,
+persons, city, state, height, floor and address</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">template</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;building&quot;</span><span class="p">,</span> <span class="s2">&quot;company&quot;</span><span class="p">,</span> <span class="s2">&quot;persons&quot;</span><span class="p">,</span> <span class="s2">&quot;city&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;state&quot;</span><span class="p">,</span> <span class="s2">&quot;height&quot;</span><span class="p">,</span> <span class="s2">&quot;floor&quot;</span><span class="p">,</span> <span class="s2">&quot;address&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">run_analyze_entities</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Context: </span><span class="si">{</span><span class="n">context</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">context</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error: Empty context or outside paragraphs&quot;</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">context</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">380</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error: The context is too long for this particular model. &quot;</span>
+              <span class="s2">&quot;Try with context shorter than 380 words.&quot;</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="c1"># measure processing time</span>
+    <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+    <span class="n">extract</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">template</span><span class="p">:</span>
+        <span class="n">entity_to_find</span> <span class="o">=</span> <span class="n">field</span> <span class="o">+</span> <span class="s2">&quot;?&quot;</span>
+        <span class="n">entity</span><span class="p">,</span> <span class="n">score</span> <span class="o">=</span> <span class="n">get_best_entity</span><span class="p">(</span><span class="n">entity</span><span class="o">=</span><span class="n">entity_to_find</span><span class="p">,</span>
+                                        <span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">,</span>
+                                        <span class="n">vocab</span><span class="o">=</span><span class="n">vocab</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="n">confidence_threshold</span><span class="p">:</span>
+            <span class="n">extract</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;Entity&quot;</span><span class="p">:</span> <span class="n">entity</span><span class="p">,</span> <span class="s2">&quot;Type&quot;</span><span class="p">:</span> <span class="n">field</span><span class="p">,</span>
+                            <span class="s2">&quot;Score&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">score</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">})</span>
+    <span class="n">end_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Extraction&quot;</span><span class="p">:</span> <span class="n">extract</span><span class="p">,</span> <span class="s2">&quot;Time&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">end_time</span> <span class="o">-</span> <span class="n">start_time</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">s&quot;</span><span class="p">}</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">JSON Output:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="run-on-simple-text">
+<h2>Run on Simple Text<a class="headerlink" href="#run-on-simple-text" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="sample-1">
+<h3>Sample 1<a class="headerlink" href="#sample-1" title="Permalink to this headline">¶</a></h3>
+<p>Change sources to your own text, supported by the template, to perform
+entity extraction. It supports only one input text at a time. Usually,
+you need to wait a few seconds for the entities to be extracted, but
+longer the context, longer would be the waiting time. The model is very
+limited and sensitive for the input and predefined template. The answer
+can depend on whether it is supported by the template or not. The model
+will try to extract entities even if not supported by the template, so
+in that case, you can see random results.</p>
+<p>Sample source: Intel - Wikipedia (from
+<a class="reference external" href="https://en.wikipedia.org/wiki/Intel">here</a>)</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">source_text</span> <span class="o">=</span> <span class="s2">&quot;Intel Corporation is an American multinational and technology&quot;</span> \
+    <span class="s2">&quot; company headquartered in Santa Clara, California.&quot;</span>
+<span class="n">run_analyze_entities</span><span class="p">(</span><span class="n">source_text</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Context</span><span class="p">:</span> <span class="n">Intel</span> <span class="n">Corporation</span> <span class="ow">is</span> <span class="n">an</span> <span class="n">American</span> <span class="n">multinational</span> <span class="ow">and</span> <span class="n">technology</span> <span class="n">company</span> <span class="n">headquartered</span> <span class="ow">in</span> <span class="n">Santa</span> <span class="n">Clara</span><span class="p">,</span> <span class="n">California</span><span class="o">.</span>
+
+
+<span class="n">JSON</span> <span class="n">Output</span><span class="p">:</span>
+<span class="p">{</span>
+    <span class="s2">&quot;Extraction&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;Entity&quot;</span><span class="p">:</span> <span class="s2">&quot;Intel Corporation&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Type&quot;</span><span class="p">:</span> <span class="s2">&quot;company&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Score&quot;</span><span class="p">:</span> <span class="s2">&quot;0.51&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;Entity&quot;</span><span class="p">:</span> <span class="s2">&quot;Santa Clara&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Type&quot;</span><span class="p">:</span> <span class="s2">&quot;city&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Score&quot;</span><span class="p">:</span> <span class="s2">&quot;0.96&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;Entity&quot;</span><span class="p">:</span> <span class="s2">&quot;California&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Type&quot;</span><span class="p">:</span> <span class="s2">&quot;state&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Score&quot;</span><span class="p">:</span> <span class="s2">&quot;0.99&quot;</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;Time&quot;</span><span class="p">:</span> <span class="s2">&quot;0.12s&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="sample-2">
+<h3>Sample 2<a class="headerlink" href="#sample-2" title="Permalink to this headline">¶</a></h3>
+<p>Sample source: Intel - Wikipedia (from
+<a class="reference external" href="https://en.wikipedia.org/wiki/Intel">here</a>)</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">source_text</span> <span class="o">=</span> <span class="s2">&quot;Intel was founded in Mountain View, California, &quot;</span> \
+    <span class="s2">&quot;in 1968 by Gordon E. Moore, a chemist, and Robert Noyce, &quot;</span> \
+    <span class="s2">&quot;a physicist and co-inventor of the integrated circuit.&quot;</span>
+<span class="n">run_analyze_entities</span><span class="p">(</span><span class="n">source_text</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Context</span><span class="p">:</span> <span class="n">Intel</span> <span class="n">was</span> <span class="n">founded</span> <span class="ow">in</span> <span class="n">Mountain</span> <span class="n">View</span><span class="p">,</span> <span class="n">California</span><span class="p">,</span> <span class="ow">in</span> <span class="mi">1968</span> <span class="n">by</span> <span class="n">Gordon</span> <span class="n">E</span><span class="o">.</span> <span class="n">Moore</span><span class="p">,</span> <span class="n">a</span> <span class="n">chemist</span><span class="p">,</span> <span class="ow">and</span> <span class="n">Robert</span> <span class="n">Noyce</span><span class="p">,</span> <span class="n">a</span> <span class="n">physicist</span> <span class="ow">and</span> <span class="n">co</span><span class="o">-</span><span class="n">inventor</span> <span class="n">of</span> <span class="n">the</span> <span class="n">integrated</span> <span class="n">circuit</span><span class="o">.</span>
+
+
+<span class="n">JSON</span> <span class="n">Output</span><span class="p">:</span>
+<span class="p">{</span>
+    <span class="s2">&quot;Extraction&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;Entity&quot;</span><span class="p">:</span> <span class="s2">&quot;Intel&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Type&quot;</span><span class="p">:</span> <span class="s2">&quot;company&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Score&quot;</span><span class="p">:</span> <span class="s2">&quot;0.98&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;Entity&quot;</span><span class="p">:</span> <span class="s2">&quot;Gordon E. Moore, a chemist, and Robert Noyce&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Type&quot;</span><span class="p">:</span> <span class="s2">&quot;persons&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Score&quot;</span><span class="p">:</span> <span class="s2">&quot;0.83&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;Entity&quot;</span><span class="p">:</span> <span class="s2">&quot;Mountain View&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Type&quot;</span><span class="p">:</span> <span class="s2">&quot;city&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Score&quot;</span><span class="p">:</span> <span class="s2">&quot;0.79&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;Entity&quot;</span><span class="p">:</span> <span class="s2">&quot;California&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Type&quot;</span><span class="p">:</span> <span class="s2">&quot;state&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Score&quot;</span><span class="p">:</span> <span class="s2">&quot;0.98&quot;</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;Time&quot;</span><span class="p">:</span> <span class="s2">&quot;0.12s&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="sample-3">
+<h3>Sample 3<a class="headerlink" href="#sample-3" title="Permalink to this headline">¶</a></h3>
+<p>Sample source: Converted Paragraph (from
+<a class="reference external" href="https://www.emporis.com/buildings/338440/robert-noyce-building-santa-clara-ca-usa">here</a>)</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">source_text</span> <span class="o">=</span> <span class="s2">&quot;The Robert Noyce Building in Santa Clara, California, &quot;</span> \
+    <span class="s2">&quot;is the headquarters for Intel Corporation. It was constructed in 1992 &quot;</span> \
+    <span class="s2">&quot;and is located at 2200 Mission College Boulevard - 95054. It has an &quot;</span> \
+    <span class="s2">&quot;estimated height of 22.20 meters and 6 floors above ground.&quot;</span>
+<span class="n">run_analyze_entities</span><span class="p">(</span><span class="n">source_text</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Context</span><span class="p">:</span> <span class="n">The</span> <span class="n">Robert</span> <span class="n">Noyce</span> <span class="n">Building</span> <span class="ow">in</span> <span class="n">Santa</span> <span class="n">Clara</span><span class="p">,</span> <span class="n">California</span><span class="p">,</span> <span class="ow">is</span> <span class="n">the</span> <span class="n">headquarters</span> <span class="k">for</span> <span class="n">Intel</span> <span class="n">Corporation</span><span class="o">.</span> <span class="n">It</span> <span class="n">was</span> <span class="n">constructed</span> <span class="ow">in</span> <span class="mi">1992</span> <span class="ow">and</span> <span class="ow">is</span> <span class="n">located</span> <span class="n">at</span> <span class="mi">2200</span> <span class="n">Mission</span> <span class="n">College</span> <span class="n">Boulevard</span> <span class="o">-</span> <span class="mf">95054.</span> <span class="n">It</span> <span class="n">has</span> <span class="n">an</span> <span class="n">estimated</span> <span class="n">height</span> <span class="n">of</span> <span class="mf">22.20</span> <span class="n">meters</span> <span class="ow">and</span> <span class="mi">6</span> <span class="n">floors</span> <span class="n">above</span> <span class="n">ground</span><span class="o">.</span>
+
+
+<span class="n">JSON</span> <span class="n">Output</span><span class="p">:</span>
+<span class="p">{</span>
+    <span class="s2">&quot;Extraction&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;Entity&quot;</span><span class="p">:</span> <span class="s2">&quot;Robert Noyce Building&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Type&quot;</span><span class="p">:</span> <span class="s2">&quot;building&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Score&quot;</span><span class="p">:</span> <span class="s2">&quot;0.61&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;Entity&quot;</span><span class="p">:</span> <span class="s2">&quot;Intel Corporation&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Type&quot;</span><span class="p">:</span> <span class="s2">&quot;company&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Score&quot;</span><span class="p">:</span> <span class="s2">&quot;0.56&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;Entity&quot;</span><span class="p">:</span> <span class="s2">&quot;Santa Clara&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Type&quot;</span><span class="p">:</span> <span class="s2">&quot;city&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Score&quot;</span><span class="p">:</span> <span class="s2">&quot;0.63&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;Entity&quot;</span><span class="p">:</span> <span class="s2">&quot;California&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Type&quot;</span><span class="p">:</span> <span class="s2">&quot;state&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Score&quot;</span><span class="p">:</span> <span class="s2">&quot;0.99&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;Entity&quot;</span><span class="p">:</span> <span class="s2">&quot;22.20 meters&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Type&quot;</span><span class="p">:</span> <span class="s2">&quot;height&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Score&quot;</span><span class="p">:</span> <span class="s2">&quot;0.55&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;Entity&quot;</span><span class="p">:</span> <span class="s2">&quot;6 floors above ground&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Type&quot;</span><span class="p">:</span> <span class="s2">&quot;floor&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Score&quot;</span><span class="p">:</span> <span class="s2">&quot;0.48&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;Entity&quot;</span><span class="p">:</span> <span class="s2">&quot;2200 Mission College Boulevard - 95054&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Type&quot;</span><span class="p">:</span> <span class="s2">&quot;address&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Score&quot;</span><span class="p">:</span> <span class="s2">&quot;0.86&quot;</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;Time&quot;</span><span class="p">:</span> <span class="s2">&quot;0.14s&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+                </div>
+            
+            
+                <div class='prev-next-bottom'>
+                  
+
+                </div>
+            
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+<footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2021, Intel®.<br>
+</p>
+    </div>
+    
+    <div class="footer-item">
+      <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

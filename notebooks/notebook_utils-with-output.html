@@ -1,0 +1,1429 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notebook Utils &#8212; OpenVINO™  documentation</title>
+    
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/blank.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/doxyrest-pygments.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <link href="../_static/css/media/favicon.ico" rel="shortcut icon">
+    <link rel="stylesheet" href="../_static/css/openvino_sphinx_theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/button.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/input.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/textfield.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/tabs.css" type="text/css" />
+    <script src="../_static/js/openvino_sphinx_theme.js"></script>
+    <link rel="stylesheet" href="../_static/css/viewer.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/0.5.7/chartjs-plugin-annotation.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-barchart-background@1.3.0/build/Plugin.Barchart.Background.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-deferred@1"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.1/papaparse.min.js"></script>
+    <script src="../_static/js/viewer.min.js"></script>
+    <script src="/assets/versions_raw.js"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/tabs.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/js/custom.js"></script>
+    <script src="../_static/js/graphs.js"></script>
+    <script src="../_static/js/graphs_ov_tf.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/target-highlight.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <link rel="canonical" href="https://docs.openvino.ai/latest/notebooks/notebook_utils-with-output.html" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+      <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+
+<a class="navbar-brand" href="../index.html">
+  <img src="../_static/logo.svg" class="logo" alt="logo">
+</a>
+
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../pages/get_started.html">
+  Get Started
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../pages/documentation.html">
+  Documentation
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../tutorials.html">
+  Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../model_zoo.html">
+  Model Zoo
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../pages/resources.html">
+  Resources
+ </a>
+</li>
+
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/openvinotoolkit/openvino" rel="noopener" target="_blank" title="GitHub">
+            <span><i class="sst-github"></i></span>
+            <label class="sr-only">GitHub</label>
+          </a>
+        </li>
+</ul>
+      </div>
+      
+      <div class="navbar-end-item">
+        
+<div class="dropdown sst-dropdown sst-dropdown-navbar">
+  <button class="btn sst-btn dropdown-toggle" type="button" id="version-selector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+  <div class="dropdown-menu" aria-labelledby="version-selector">
+  </div>
+</div>
+      </div>
+      
+      <div class="navbar-end-item">
+        
+
+<div class="dropdown sst-dropdown sst-dropdown-navbar">
+  <button class="btn sst-btn dropdown-toggle" type="button" id="language-selector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">English</button>
+  <div class="dropdown-menu" aria-labelledby="language-selector">
+    
+      
+        <a class="dropdown-item font-weight-bold" href="/latest/notebooks/notebook_utils-with-output.html">English</a>
+      
+    
+      
+        <a  class="dropdown-item" href="/cn/latest/notebooks/notebook_utils-with-output.html">Chinese</a>
+      
+    
+  </div>
+</div>
+
+      </div>
+      
+    </div>
+  </div>
+</div>
+        <div id="collapse-nav-wrapper" class="container-xl">
+          <button id="collapse-nav" class="button bttn-prm button-size-m" type="button" data-toggle="collapse" data-target="#nav-tree" aria-expanded="false" aria-controls="nav-tree">
+            Documentation navigation <i class="fas fa-chevron-down"></i>
+          </button>
+        </div>
+      </nav>
+      <div class="transition-banner container-fluid alert alert-info alert-dismissible fade show" role="alert">
+        <p>OpenVINO 2022.1 introduces a new version of OpenVINO API (API 2.0). For more information on the changes and transition steps, see the <a href="https://docs.openvino.ai/latest/openvino_2_0_transition_guide.html">transition guide</a></p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar" id="nav-tree"><form class="searchForm bd-search d-flex align-items-center" action="../search.html" method="get">
+    <i class="icon fas fa-search"></i>
+    <input type="search" class="form-control" name="query" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    
+  </div>
+</nav>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+              
+              <div class="toc-item">
+                
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#files">
+   Files
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#test-file-functions">
+     Test File Functions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#images">
+   Images
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#convert-pixel-data">
+     Convert Pixel Data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#test-data-conversion-functions">
+     Test Data Conversion Functions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#videos">
+   Videos
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#video-player">
+     Video Player
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#test-video-player">
+     Test Video Player
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualization">
+   Visualization
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#segmentation">
+     Segmentation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#network-results">
+     Network Results
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#test-visualization-functions">
+     Test Visualization Functions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#live-inference">
+     Live Inference
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#test-live-inference">
+       Test Live Inference
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#openvino-tools">
+   OpenVINO Tools
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#test-openvino-tools">
+     Test OpenVINO Tools
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#checks-and-alerts">
+   Checks and Alerts
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#test-alerts">
+     Test Alerts
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+</nav>
+              </div>
+              
+              <div class="toc-item">
+                <div class="tocsection download-docs">
+  <div class="dropdown sst-dropdown">
+    <button class="button bttn-prm button-size-m" data-display="static" type="button" id="download-options"
+      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Download Docs
+    </button>
+    <div class="dropdown-menu" aria-labelledby="download-options">
+      <a class="dropdown-item" href="#" onclick="window.print()">.pdf</a>
+      <a id="download-zip-btn" class="dropdown-item" href="#">.zip</a>
+    </div>
+  </div>
+</div>
+              </div>
+              
+            
+          </div>
+          
+
+          
+          
+              
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+
+<div class="tocsection editthispage">
+    <a href="None">
+        <i class="fas fa-pencil-alt"></i> Edit this page
+    </a>
+</div>
+
+            
+                <div>
+                  
+  <div class="section" id="notebook-utils">
+<h1>Notebook Utils<a class="headerlink" href="#notebook-utils" title="Permalink to this headline">¶</a></h1>
+<p>This notebook contains helper functions and classes for use with
+OpenVINO Notebooks. The code is synchronized with the
+<code class="docutils literal notranslate"><span class="pre">notebook_utils.py</span></code> file in the same directory as this notebook.</p>
+<p>There are five categories:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="#Files">Files</a></p></li>
+<li><p><a class="reference external" href="#Images">Images</a></p></li>
+<li><p><a class="reference external" href="#Videos">Videos</a></p></li>
+<li><p><a class="reference external" href="#Visualization">Visualization</a></p></li>
+<li><p><a class="reference external" href="#OpenVINO-Tools">OpenVINO Tools</a></p></li>
+<li><p><a class="reference external" href="#Checks-and-Alerts">Checks and Alerts</a></p></li>
+</ul>
+<p>Each category contains a test cell that also shows how to use the
+functions in the section.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">shutil</span>
+<span class="kn">import</span> <span class="nn">socket</span>
+<span class="kn">import</span> <span class="nn">threading</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">urllib</span>
+<span class="kn">import</span> <span class="nn">urllib.parse</span>
+<span class="kn">import</span> <span class="nn">urllib.request</span>
+<span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">PathLike</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">NamedTuple</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span>
+
+<span class="kn">import</span> <span class="nn">cv2</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">openvino.inference_engine</span>
+<span class="kn">from</span> <span class="nn">async_pipeline</span> <span class="kn">import</span> <span class="n">AsyncPipeline</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">HTML</span><span class="p">,</span> <span class="n">Image</span><span class="p">,</span> <span class="n">Markdown</span><span class="p">,</span> <span class="n">clear_output</span><span class="p">,</span> <span class="n">display</span>
+<span class="kn">from</span> <span class="nn">matplotlib.lines</span> <span class="kn">import</span> <span class="n">Line2D</span>
+<span class="kn">from</span> <span class="nn">models</span> <span class="kn">import</span> <span class="n">model</span>
+<span class="kn">from</span> <span class="nn">openvino.inference_engine</span> <span class="kn">import</span> <span class="n">IECore</span>
+<span class="kn">from</span> <span class="nn">tqdm.notebook</span> <span class="kn">import</span> <span class="n">tqdm_notebook</span>
+</pre></div>
+</div>
+<div class="section" id="files">
+<h2>Files<a class="headerlink" href="#files" title="Permalink to this headline">¶</a></h2>
+<p>Load an image, download a file, download an IR model, and create a
+progress bar to show download progress.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">load_image</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Loads an image from `path` and returns it as BGR numpy array. `path`</span>
+<span class="sd">    should point to an image file, either a local filename or a url. The image is</span>
+<span class="sd">    not stored to the filesystem. Use the `download_file` function to download and</span>
+<span class="sd">    store an image.</span>
+
+<span class="sd">    :param path: Local path name or URL to image.</span>
+<span class="sd">    :return: image as BGR numpy array</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;http&quot;</span><span class="p">):</span>
+        <span class="c1"># Set User-Agent to Mozilla because some websites block</span>
+        <span class="c1"># requests with User-Agent Python</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">Request</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;User-Agent&quot;</span><span class="p">:</span> <span class="s2">&quot;Mozilla/5.0&quot;</span><span class="p">})</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+        <span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="nb">bytearray</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">read</span><span class="p">()),</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;uint8&quot;</span><span class="p">)</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imdecode</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Loads the image as BGR</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">image</span>
+
+
+<span class="k">class</span> <span class="nc">DownloadProgressBar</span><span class="p">(</span><span class="n">tqdm_notebook</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    TQDM Progress bar for downloading files with urllib.request.urlretrieve</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">update_to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">block_num</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">block_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">total_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="n">downloaded</span> <span class="o">=</span> <span class="n">block_num</span> <span class="o">*</span> <span class="n">block_size</span>
+        <span class="k">if</span> <span class="n">downloaded</span> <span class="o">&lt;=</span> <span class="n">total_size</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">downloaded</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">download_file</span><span class="p">(</span>
+    <span class="n">url</span><span class="p">:</span> <span class="n">PathLike</span><span class="p">,</span>
+    <span class="n">filename</span><span class="p">:</span> <span class="n">PathLike</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">directory</span><span class="p">:</span> <span class="n">PathLike</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">show_progress</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">silent</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">timeout</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Download a file from a url and save it to the local filesystem. The file is saved to the</span>
+<span class="sd">    current directory by default, or to `directory` if specified. If a filename is not given,</span>
+<span class="sd">    the filename of the URL will be used.</span>
+
+<span class="sd">    :param url: URL that points to the file to download</span>
+<span class="sd">    :param filename: Name of the local file to save. Should point to the name of the file only,</span>
+<span class="sd">                     not the full path. If None the filename from the url will be used</span>
+<span class="sd">    :param directory: Directory to save the file to. Will be created if it doesn&#39;t exist</span>
+<span class="sd">                      If None the file will be saved to the current working directory</span>
+<span class="sd">    :param show_progress: If True, show an TQDM ProgressBar</span>
+<span class="sd">    :param silent: If True, do not print a message if the file already exists</span>
+<span class="sd">    :param timeout: Number of seconds before cancelling the connection attempt</span>
+<span class="sd">    :return: path to downloaded file</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">opener</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">build_opener</span><span class="p">()</span>
+        <span class="n">opener</span><span class="o">.</span><span class="n">addheaders</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">&quot;User-agent&quot;</span><span class="p">,</span> <span class="s2">&quot;Mozilla/5.0&quot;</span><span class="p">)]</span>
+        <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">install_opener</span><span class="p">(</span><span class="n">opener</span><span class="p">)</span>
+        <span class="n">urlobject</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">filename</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">filename</span> <span class="o">=</span> <span class="n">urlobject</span><span class="o">.</span><span class="n">info</span><span class="p">()</span><span class="o">.</span><span class="n">get_filename</span><span class="p">()</span> <span class="ow">or</span> <span class="n">Path</span><span class="p">(</span><span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">urlparse</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">path</span><span class="p">)</span><span class="o">.</span><span class="n">name</span>
+    <span class="k">except</span> <span class="n">urllib</span><span class="o">.</span><span class="n">error</span><span class="o">.</span><span class="n">HTTPError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;File downloading failed with error: </span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="n">code</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="n">msg</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="kn">from</span> <span class="bp">None</span>
+    <span class="k">except</span> <span class="n">urllib</span><span class="o">.</span><span class="n">error</span><span class="o">.</span><span class="n">URLError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">error</span><span class="o">.</span><span class="n">reason</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">timeout</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+                <span class="s2">&quot;Connection timed out. If you access the internet through a proxy server, please &quot;</span>
+                <span class="s2">&quot;make sure the proxy is set in the shell from where you launched Jupyter. If your &quot;</span>
+                <span class="s2">&quot;internet connection is slow, you can call `download_file(url, timeout=30)` to &quot;</span>
+                <span class="s2">&quot;wait for 30 seconds before raising this error.&quot;</span>
+            <span class="p">)</span> <span class="kn">from</span> <span class="bp">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span>
+
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">filename</span><span class="o">.</span><span class="n">parts</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;`filename` should refer to the name of the file, excluding the directory. &quot;</span>
+            <span class="s2">&quot;Use the `directory` parameter to specify a target directory for the downloaded file.&quot;</span>
+        <span class="p">)</span>
+
+    <span class="c1"># create the directory if it does not exist, and add the directory to the filename</span>
+    <span class="k">if</span> <span class="n">directory</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">directory</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span>
+        <span class="n">directory</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">filename</span> <span class="o">=</span> <span class="n">directory</span> <span class="o">/</span> <span class="n">Path</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+
+    <span class="c1"># download the file if it does not exist, or if it exists with an incorrect file size</span>
+    <span class="n">urlobject_size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">urlobject</span><span class="o">.</span><span class="n">info</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Content-Length&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">filename</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span> <span class="ow">or</span> <span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">stat</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span><span class="o">.</span><span class="n">st_size</span> <span class="o">!=</span> <span class="n">urlobject_size</span><span class="p">):</span>
+        <span class="n">progress_callback</span> <span class="o">=</span> <span class="n">DownloadProgressBar</span><span class="p">(</span>
+            <span class="n">total</span><span class="o">=</span><span class="n">urlobject_size</span><span class="p">,</span>
+            <span class="n">unit</span><span class="o">=</span><span class="s2">&quot;B&quot;</span><span class="p">,</span>
+            <span class="n">unit_scale</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">unit_divisor</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span>
+            <span class="n">desc</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">filename</span><span class="p">),</span>
+            <span class="n">disable</span><span class="o">=</span><span class="ow">not</span> <span class="n">show_progress</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">reporthook</span><span class="o">=</span><span class="n">progress_callback</span><span class="o">.</span><span class="n">update_to</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">stat</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span><span class="o">.</span><span class="n">st_size</span> <span class="o">&gt;=</span> <span class="n">urlobject_size</span><span class="p">:</span>
+            <span class="n">progress_callback</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">urlobject_size</span> <span class="o">-</span> <span class="n">progress_callback</span><span class="o">.</span><span class="n">n</span><span class="p">)</span>
+            <span class="n">progress_callback</span><span class="o">.</span><span class="n">refresh</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">silent</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">&#39; already exists.&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">filename</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">download_ir_model</span><span class="p">(</span><span class="n">model_xml_url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">destination_folder</span><span class="p">:</span> <span class="n">PathLike</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PathLike</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Download IR model from `model_xml_url`. Downloads model xml and bin file; the weights file is</span>
+<span class="sd">    assumed to exist at the same location and name as model_xml_url with a &quot;.bin&quot; extension.</span>
+
+<span class="sd">    :param model_xml_url: URL to model xml file to download</span>
+<span class="sd">    :param destination_folder: Directory where downloaded model xml and bin are saved. If None, model</span>
+<span class="sd">                               files are saved to the current directory</span>
+<span class="sd">    :return: path to downloaded xml model file</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">model_bin_url</span> <span class="o">=</span> <span class="n">model_xml_url</span><span class="p">[:</span><span class="o">-</span><span class="mi">4</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;.bin&quot;</span>
+    <span class="n">model_xml_path</span> <span class="o">=</span> <span class="n">download_file</span><span class="p">(</span><span class="n">model_xml_url</span><span class="p">,</span> <span class="n">directory</span><span class="o">=</span><span class="n">destination_folder</span><span class="p">,</span> <span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">download_file</span><span class="p">(</span><span class="n">model_bin_url</span><span class="p">,</span> <span class="n">directory</span><span class="o">=</span><span class="n">destination_folder</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">model_xml_path</span>
+</pre></div>
+</div>
+<div class="section" id="test-file-functions">
+<h3>Test File Functions<a class="headerlink" href="#test-file-functions" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_url</span> <span class="o">=</span> <span class="s2">&quot;https://github.com/openvinotoolkit/openvino_notebooks/raw/main/notebooks/002-openvino-api/model/segmentation.xml&quot;</span>
+<span class="n">download_ir_model</span><span class="p">(</span><span class="n">model_url</span><span class="p">,</span> <span class="s2">&quot;model&quot;</span><span class="p">)</span>
+
+<span class="k">assert</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">&quot;model/segmentation.xml&quot;</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">&quot;model/segmentation.bin&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>model/segmentation.bin:   0%|          | 0.00/1.09M [00:00&lt;?, ?B/s]
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://github.com/intel-iot-devkit/safety-gear-detector-python/raw/master/resources/Safety_Full_Hat_and_Vest.mp4&quot;</span>
+<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">url</span><span class="p">)):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">url</span><span class="p">))</span>
+<span class="n">video_file</span> <span class="o">=</span> <span class="n">download_file</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">video_file</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">Path</span><span class="p">(</span><span class="n">video_file</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Safety_Full_Hat_and_Vest.mp4:   0%|          | 0.00/26.3M [00:00&lt;?, ?B/s]
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">work</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">notebooks</span><span class="o">/</span><span class="n">utils</span><span class="o">/</span><span class="n">Safety_Full_Hat_and_Vest</span><span class="o">.</span><span class="n">mp4</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://raw.githubusercontent.com/openvinotoolkit/openvino_notebooks/main/README.md&quot;</span>
+<span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;openvino_notebooks_readme.md&quot;</span>
+<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+<span class="n">readme_file</span> <span class="o">=</span> <span class="n">download_file</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">readme_file</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">Path</span><span class="p">(</span><span class="n">readme_file</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>openvino_notebooks_readme.md:   0%|          | 0.00/33.8k [00:00&lt;?, ?B/s]
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">work</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">notebooks</span><span class="o">/</span><span class="n">utils</span><span class="o">/</span><span class="n">openvino_notebooks_readme</span><span class="o">.</span><span class="n">md</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://raw.githubusercontent.com/openvinotoolkit/openvino_notebooks/main/README.md&quot;</span>
+<span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;openvino_notebooks_readme.md&quot;</span>
+<span class="n">directory</span> <span class="o">=</span> <span class="s2">&quot;temp&quot;</span>
+<span class="n">video_file</span> <span class="o">=</span> <span class="n">download_file</span><span class="p">(</span>
+    <span class="n">url</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">,</span> <span class="n">directory</span><span class="o">=</span><span class="n">directory</span><span class="p">,</span> <span class="n">show_progress</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">silent</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">readme_file</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">Path</span><span class="p">(</span><span class="n">readme_file</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span>
+<span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="s2">&quot;temp&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">work</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">notebooks</span><span class="o">/</span><span class="n">utils</span><span class="o">/</span><span class="n">openvino_notebooks_readme</span><span class="o">.</span><span class="n">md</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="images">
+<h2>Images<a class="headerlink" href="#images" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="convert-pixel-data">
+<h3>Convert Pixel Data<a class="headerlink" href="#convert-pixel-data" title="Permalink to this headline">¶</a></h3>
+<p>Normalize image pixel values between 0 and 1, and convert images to RGB
+and BGR.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">normalize_minmax</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Normalizes the values in `data` between 0 and 1</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">==</span> <span class="n">data</span><span class="o">.</span><span class="n">min</span><span class="p">():</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;Normalization is not possible because all elements of&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;`data` have the same value: </span><span class="si">{</span><span class="n">data</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">}</span><span class="s2">.&quot;</span>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">data</span> <span class="o">-</span> <span class="n">data</span><span class="o">.</span><span class="n">min</span><span class="p">())</span> <span class="o">/</span> <span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">data</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
+
+
+<span class="k">def</span> <span class="nf">to_rgb</span><span class="p">(</span><span class="n">image_data</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert image_data from BGR to RGB</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">image_data</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2RGB</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">to_bgr</span><span class="p">(</span><span class="n">image_data</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert image_data from RGB to BGR</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">image_data</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_RGB2BGR</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="test-data-conversion-functions">
+<h3>Test Data Conversion Functions<a class="headerlink" href="#test-data-conversion-functions" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">normalized_array</span> <span class="o">=</span> <span class="n">normalize_minmax</span><span class="p">(</span><span class="n">test_array</span><span class="p">)</span>
+
+<span class="k">assert</span> <span class="n">normalized_array</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span>
+<span class="k">assert</span> <span class="n">normalized_array</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bgr_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+<span class="n">bgr_array</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">bgr_array</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">bgr_array</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">rgb_array</span> <span class="o">=</span> <span class="n">to_rgb</span><span class="p">(</span><span class="n">bgr_array</span><span class="p">)</span>
+
+<span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">bgr_array</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">rgb_array</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">2</span><span class="p">])</span>
+
+<span class="n">bgr_array_converted</span> <span class="o">=</span> <span class="n">to_bgr</span><span class="p">(</span><span class="n">rgb_array</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">bgr_array_converted</span> <span class="o">==</span> <span class="n">bgr_array</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="videos">
+<h2>Videos<a class="headerlink" href="#videos" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="video-player">
+<h3>Video Player<a class="headerlink" href="#video-player" title="Permalink to this headline">¶</a></h3>
+<p>Custom video player to fulfill FPS requirements. You can set target FPS
+and output size, flip the video horizontally or skip first N frames.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">VideoPlayer</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Custom video player to fulfill FPS requirements. You can set target FPS and output size,</span>
+<span class="sd">    flip the video horizontally or skip first N frames.</span>
+
+<span class="sd">    :param source: Video source. It could be either camera device or video file.</span>
+<span class="sd">    :param size: Output frame size.</span>
+<span class="sd">    :param flip: Flip source horizontally.</span>
+<span class="sd">    :param fps: Target FPS.</span>
+<span class="sd">    :param skip_first_frames: Skip first N frames.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">flip</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">fps</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">skip_first_frames</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__cap</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">VideoCapture</span><span class="p">(</span><span class="n">source</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">__cap</span><span class="o">.</span><span class="n">isOpened</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Cannot open </span><span class="si">{</span><span class="s1">&#39;camera&#39;</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">source</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+        <span class="c1"># skip first N frames</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__cap</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">CAP_PROP_POS_FRAMES</span><span class="p">,</span> <span class="n">skip_first_frames</span><span class="p">)</span>
+        <span class="c1"># fps of input file</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__input_fps</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__cap</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">CAP_PROP_FPS</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__input_fps</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__input_fps</span> <span class="o">=</span> <span class="mi">60</span>
+        <span class="c1"># target fps given by user</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__output_fps</span> <span class="o">=</span> <span class="n">fps</span> <span class="k">if</span> <span class="n">fps</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">__input_fps</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__flip</span> <span class="o">=</span> <span class="n">flip</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__size</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__interpolation</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">size</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__size</span> <span class="o">=</span> <span class="n">size</span>
+            <span class="c1"># AREA better for shrinking, LINEAR better for enlarging</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__interpolation</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">cv2</span><span class="o">.</span><span class="n">INTER_AREA</span>
+                <span class="k">if</span> <span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">__cap</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">CAP_PROP_FRAME_WIDTH</span><span class="p">)</span>
+                <span class="k">else</span> <span class="n">cv2</span><span class="o">.</span><span class="n">INTER_LINEAR</span>
+            <span class="p">)</span>
+        <span class="c1"># first frame</span>
+        <span class="n">_</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__frame</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__cap</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__lock</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Lock</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__thread</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__stop</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Start playing.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__stop</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__thread</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__run</span><span class="p">,</span> <span class="n">daemon</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Stop playing and release resources.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__stop</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__thread</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__thread</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__cap</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">__run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">prev_time</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">__stop</span><span class="p">:</span>
+            <span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+            <span class="n">ret</span><span class="p">,</span> <span class="n">frame</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__cap</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">ret</span><span class="p">:</span>
+                <span class="k">break</span>
+
+            <span class="c1"># fulfill target fps</span>
+            <span class="k">if</span> <span class="mi">1</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">__output_fps</span> <span class="o">&lt;</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">prev_time</span><span class="p">:</span>
+                <span class="n">prev_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+                <span class="c1"># replace by current frame</span>
+                <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">__lock</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">__frame</span> <span class="o">=</span> <span class="n">frame</span>
+
+            <span class="n">t2</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+            <span class="c1"># time to wait [s] to fulfill input fps</span>
+            <span class="n">wait_time</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">__input_fps</span> <span class="o">-</span> <span class="p">(</span><span class="n">t2</span> <span class="o">-</span> <span class="n">t1</span><span class="p">)</span>
+            <span class="c1"># wait until</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">wait_time</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__frame</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get current frame.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">next</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">__lock</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__frame</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">None</span>
+            <span class="c1"># need to copy frame, because can be cached and reused if fps is low</span>
+            <span class="n">frame</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__frame</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__size</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">frame</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__size</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__interpolation</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__flip</span><span class="p">:</span>
+            <span class="n">frame</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">flip</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">frame</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="test-video-player">
+<h3>Test Video Player<a class="headerlink" href="#test-video-player" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">video</span> <span class="o">=</span> <span class="s2">&quot;../201-vision-monodepth/data/Coco Walking in Berkeley.mp4&quot;</span>
+
+<span class="n">player</span> <span class="o">=</span> <span class="n">VideoPlayer</span><span class="p">(</span><span class="n">video</span><span class="p">,</span> <span class="n">fps</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">skip_first_frames</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">player</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">50</span><span class="p">):</span>
+    <span class="n">frame</span> <span class="o">=</span> <span class="n">player</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">encoded_img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imencode</span><span class="p">(</span><span class="s2">&quot;.jpg&quot;</span><span class="p">,</span> <span class="n">frame</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">[</span><span class="n">cv2</span><span class="o">.</span><span class="n">IMWRITE_JPEG_QUALITY</span><span class="p">,</span> <span class="mi">90</span><span class="p">])</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">encoded_img</span><span class="p">)</span>
+    <span class="n">clear_output</span><span class="p">(</span><span class="n">wait</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+
+<span class="n">player</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Finished&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../_images/notebook_utils-with-output_19_0.png" src="../_images/notebook_utils-with-output_19_0.png" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Finished</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="visualization">
+<h2>Visualization<a class="headerlink" href="#visualization" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="segmentation">
+<h3>Segmentation<a class="headerlink" href="#segmentation" title="Permalink to this headline">¶</a></h3>
+<p>Define a SegmentationMap NamedTuple that keeps the labels and colormap
+for a segmentation project/dataset. Create CityScapesSegmentation and
+BinarySegmentation SegmentationMaps. Create a function to convert a
+segmentation map to an RGB image with a colormap, and to show the
+segmentation result as an overlay over the original image.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Label</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
+    <span class="n">index</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">color</span><span class="p">:</span> <span class="n">Tuple</span>
+    <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SegmentationMap</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
+    <span class="n">labels</span><span class="p">:</span> <span class="n">List</span>
+
+    <span class="k">def</span> <span class="nf">get_colormap</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">label</span><span class="o">.</span><span class="n">color</span> <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">labels</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">get_labels</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">labelnames</span> <span class="o">=</span> <span class="p">[</span><span class="n">label</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">labels</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">labelnames</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">labelnames</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cityscape_labels</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">Label</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">128</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;road&quot;</span><span class="p">),</span>
+    <span class="n">Label</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="mi">244</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">232</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;sidewalk&quot;</span><span class="p">),</span>
+    <span class="n">Label</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="mi">70</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">70</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;building&quot;</span><span class="p">),</span>
+    <span class="n">Label</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="mi">102</span><span class="p">,</span> <span class="mi">102</span><span class="p">,</span> <span class="mi">156</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;wall&quot;</span><span class="p">),</span>
+    <span class="n">Label</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="mi">190</span><span class="p">,</span> <span class="mi">153</span><span class="p">,</span> <span class="mi">153</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;fence&quot;</span><span class="p">),</span>
+    <span class="n">Label</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="mi">153</span><span class="p">,</span> <span class="mi">153</span><span class="p">,</span> <span class="mi">153</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;pole&quot;</span><span class="p">),</span>
+    <span class="n">Label</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="mi">250</span><span class="p">,</span> <span class="mi">170</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;traffic light&quot;</span><span class="p">),</span>
+    <span class="n">Label</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="mi">220</span><span class="p">,</span> <span class="mi">220</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;traffic sign&quot;</span><span class="p">),</span>
+    <span class="n">Label</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="mi">107</span><span class="p">,</span> <span class="mi">142</span><span class="p">,</span> <span class="mi">35</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;vegetation&quot;</span><span class="p">),</span>
+    <span class="n">Label</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="mi">152</span><span class="p">,</span> <span class="mi">251</span><span class="p">,</span> <span class="mi">152</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;terrain&quot;</span><span class="p">),</span>
+    <span class="n">Label</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="mi">70</span><span class="p">,</span> <span class="mi">130</span><span class="p">,</span> <span class="mi">180</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;sky&quot;</span><span class="p">),</span>
+    <span class="n">Label</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="mi">220</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">60</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;person&quot;</span><span class="p">),</span>
+    <span class="n">Label</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;rider&quot;</span><span class="p">),</span>
+    <span class="n">Label</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">142</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;car&quot;</span><span class="p">),</span>
+    <span class="n">Label</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">70</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;truck&quot;</span><span class="p">),</span>
+    <span class="n">Label</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;bus&quot;</span><span class="p">),</span>
+    <span class="n">Label</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;train&quot;</span><span class="p">),</span>
+    <span class="n">Label</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="mi">17</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">230</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;motorcycle&quot;</span><span class="p">),</span>
+    <span class="n">Label</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="mi">119</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">32</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;bicycle&quot;</span><span class="p">),</span>
+    <span class="n">Label</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="mi">19</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;background&quot;</span><span class="p">),</span>
+<span class="p">]</span>
+
+<span class="n">CityScapesSegmentation</span> <span class="o">=</span> <span class="n">SegmentationMap</span><span class="p">(</span><span class="n">cityscape_labels</span><span class="p">)</span>
+
+<span class="n">binary_labels</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">Label</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;background&quot;</span><span class="p">),</span>
+    <span class="n">Label</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;foreground&quot;</span><span class="p">),</span>
+<span class="p">]</span>
+
+<span class="n">BinarySegmentation</span> <span class="o">=</span> <span class="n">SegmentationMap</span><span class="p">(</span><span class="n">binary_labels</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">segmentation_map_to_image</span><span class="p">(</span>
+    <span class="n">result</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">colormap</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">remove_holes</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert network result of floating point numbers to an RGB image with</span>
+<span class="sd">    integer values from 0-255 by applying a colormap.</span>
+
+<span class="sd">    :param result: A single network result after converting to pixel values in H,W or 1,H,W shape.</span>
+<span class="sd">    :param colormap: A numpy array of shape (num_classes, 3) with an RGB value per class.</span>
+<span class="sd">    :param remove_holes: If True, remove holes in the segmentation result.</span>
+<span class="sd">    :return: An RGB image where each pixel is an int8 value according to colormap.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">result</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Expected result with shape (H,W) or (1,H,W), got result with shape </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">result</span><span class="p">))</span> <span class="o">&gt;</span> <span class="n">colormap</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Expected max </span><span class="si">{</span><span class="n">colormap</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> classes in result, got </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">result</span><span class="p">))</span><span class="si">}</span><span class="s2"> &quot;</span>
+            <span class="s2">&quot;different output values. Please make sure to convert the network output to &quot;</span>
+            <span class="s2">&quot;pixel values before calling this function.&quot;</span>
+        <span class="p">)</span>
+    <span class="k">elif</span> <span class="n">result</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+
+    <span class="n">contour_mode</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">RETR_EXTERNAL</span> <span class="k">if</span> <span class="n">remove_holes</span> <span class="k">else</span> <span class="n">cv2</span><span class="o">.</span><span class="n">RETR_TREE</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">result</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">result</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">3</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">label_index</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">colormap</span><span class="p">):</span>
+        <span class="n">label_index_map</span> <span class="o">=</span> <span class="n">result</span> <span class="o">==</span> <span class="n">label_index</span>
+        <span class="n">label_index_map</span> <span class="o">=</span> <span class="n">label_index_map</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span> <span class="o">*</span> <span class="mi">255</span>
+        <span class="n">contours</span><span class="p">,</span> <span class="n">hierarchies</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">findContours</span><span class="p">(</span>
+            <span class="n">label_index_map</span><span class="p">,</span> <span class="n">contour_mode</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">CHAIN_APPROX_SIMPLE</span>
+        <span class="p">)</span>
+        <span class="n">cv2</span><span class="o">.</span><span class="n">drawContours</span><span class="p">(</span>
+            <span class="n">mask</span><span class="p">,</span>
+            <span class="n">contours</span><span class="p">,</span>
+            <span class="n">contourIdx</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
+            <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+            <span class="n">thickness</span><span class="o">=</span><span class="n">cv2</span><span class="o">.</span><span class="n">FILLED</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">mask</span>
+
+
+<span class="k">def</span> <span class="nf">segmentation_map_to_overlay</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">colormap</span><span class="p">,</span> <span class="n">remove_holes</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns a new image where a segmentation mask (created with colormap) is overlayed on</span>
+<span class="sd">    the source image.</span>
+
+<span class="sd">    :param image: Source image.</span>
+<span class="sd">    :param result: A single network result after converting to pixel values in H,W or 1,H,W shape.</span>
+<span class="sd">    :param alpha: Alpha transparency value for the overlay image.</span>
+<span class="sd">    :param colormap: A numpy array of shape (num_classes, 3) with an RGB value per class.</span>
+<span class="sd">    :param remove_holes: If True, remove holes in the segmentation result.</span>
+<span class="sd">    :return: An RGP image with segmentation mask overlayed on the source image.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="n">segmentation_map_to_image</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">colormap</span><span class="p">,</span> <span class="n">remove_holes</span><span class="p">)</span>
+    <span class="n">image_height</span><span class="p">,</span> <span class="n">image_width</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">src</span><span class="o">=</span><span class="n">mask</span><span class="p">,</span> <span class="n">dsize</span><span class="o">=</span><span class="p">(</span><span class="n">image_width</span><span class="p">,</span> <span class="n">image_height</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">cv2</span><span class="o">.</span><span class="n">addWeighted</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">alpha</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="network-results">
+<h3>Network Results<a class="headerlink" href="#network-results" title="Permalink to this headline">¶</a></h3>
+<p>Show network result image, optionally together with the source image and
+a legend with labels.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">viz_result_image</span><span class="p">(</span>
+    <span class="n">result_image</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+    <span class="n">source_image</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">source_title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">result_title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">labels</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Label</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">resize</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">bgr_to_rgb</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">hide_axes</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">matplotlib</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">Figure</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Show result image, optionally together with source images, and a legend with labels.</span>
+
+<span class="sd">    :param result_image: Numpy array of RGB result image.</span>
+<span class="sd">    :param source_image: Numpy array of source image. If provided this image will be shown</span>
+<span class="sd">                         next to the result image. source_image is expected to be in RGB format.</span>
+<span class="sd">                         Set bgr_to_rgb to True if source_image is in BGR format.</span>
+<span class="sd">    :param source_title: Title to display for the source image.</span>
+<span class="sd">    :param result_title: Title to display for the result image.</span>
+<span class="sd">    :param labels: List of labels. If provided, a legend will be shown with the given labels.</span>
+<span class="sd">    :param resize: If true, resize the result image to the same shape as the source image.</span>
+<span class="sd">    :param bgr_to_rgb: If true, convert the source image from BGR to RGB. Use this option if</span>
+<span class="sd">                       source_image is a BGR image.</span>
+<span class="sd">    :param hide_axes: If true, do not show matplotlib axes.</span>
+<span class="sd">    :return: Matplotlib figure with result image</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">bgr_to_rgb</span><span class="p">:</span>
+        <span class="n">source_image</span> <span class="o">=</span> <span class="n">to_rgb</span><span class="p">(</span><span class="n">source_image</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">resize</span><span class="p">:</span>
+        <span class="n">result_image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">result_image</span><span class="p">,</span> <span class="p">(</span><span class="n">source_image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">source_image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+
+    <span class="n">num_images</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">source_image</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="mi">2</span>
+
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">num_images</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="n">squeeze</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">source_image</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">source_image</span><span class="p">)</span>
+        <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">source_title</span><span class="p">)</span>
+
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">num_images</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">result_image</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">num_images</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">result_title</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">hide_axes</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">ravel</span><span class="p">():</span>
+            <span class="n">a</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">labels</span><span class="p">:</span>
+        <span class="n">colors</span> <span class="o">=</span> <span class="n">labels</span><span class="o">.</span><span class="n">get_colormap</span><span class="p">()</span>
+        <span class="n">lines</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">Line2D</span><span class="p">(</span>
+                <span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                <span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="n">item</span> <span class="o">/</span> <span class="mi">255</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">c</span><span class="o">.</span><span class="n">tolist</span><span class="p">()],</span>
+                <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+                <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">colors</span>
+        <span class="p">]</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span>
+            <span class="n">lines</span><span class="p">,</span>
+            <span class="n">labels</span><span class="o">.</span><span class="n">get_labels</span><span class="p">(),</span>
+            <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+            <span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper left&quot;</span><span class="p">,</span>
+            <span class="n">prop</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">},</span>
+        <span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">fig</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="test-visualization-functions">
+<h3>Test Visualization Functions<a class="headerlink" href="#test-visualization-functions" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">testimage</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+<span class="n">testimage</span><span class="p">[</span><span class="mi">30</span><span class="p">:</span><span class="mi">80</span><span class="p">,</span> <span class="mi">30</span><span class="p">:</span><span class="mi">80</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">testimage</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">testimage</span><span class="p">[</span><span class="mi">40</span><span class="p">:</span><span class="mi">60</span><span class="p">,</span> <span class="mi">40</span><span class="p">:</span><span class="mi">60</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="mi">128</span>
+<span class="n">testimage</span><span class="p">[</span><span class="n">testimage</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">128</span>
+
+
+<span class="n">testmask1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">testimage</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">2</span><span class="p">]))</span>
+<span class="n">testmask1</span><span class="p">[</span><span class="mi">30</span><span class="p">:</span><span class="mi">80</span><span class="p">,</span> <span class="mi">30</span><span class="p">:</span><span class="mi">80</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">testmask1</span><span class="p">[</span><span class="mi">40</span><span class="p">:</span><span class="mi">50</span><span class="p">,</span> <span class="mi">40</span><span class="p">:</span><span class="mi">50</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">testmask1</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">15</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="n">result_image_overlay</span> <span class="o">=</span> <span class="n">segmentation_map_to_overlay</span><span class="p">(</span>
+    <span class="n">image</span><span class="o">=</span><span class="n">testimage</span><span class="p">,</span>
+    <span class="n">result</span><span class="o">=</span><span class="n">testmask1</span><span class="p">,</span>
+    <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span>
+    <span class="n">colormap</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]),</span>
+<span class="p">)</span>
+<span class="n">result_image</span> <span class="o">=</span> <span class="n">segmentation_map_to_image</span><span class="p">(</span><span class="n">testmask1</span><span class="p">,</span> <span class="n">CityScapesSegmentation</span><span class="o">.</span><span class="n">get_colormap</span><span class="p">())</span>
+<span class="n">result_image_no_holes</span> <span class="o">=</span> <span class="n">segmentation_map_to_image</span><span class="p">(</span>
+    <span class="n">testmask1</span><span class="p">,</span> <span class="n">CityScapesSegmentation</span><span class="o">.</span><span class="n">get_colormap</span><span class="p">(),</span> <span class="n">remove_holes</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+<span class="n">resized_result_image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">result_image</span><span class="p">,</span> <span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">))</span>
+<span class="n">overlay_result_image</span> <span class="o">=</span> <span class="n">segmentation_map_to_overlay</span><span class="p">(</span>
+    <span class="n">testimage</span><span class="p">,</span> <span class="n">testmask1</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="n">CityScapesSegmentation</span><span class="o">.</span><span class="n">get_colormap</span><span class="p">(),</span> <span class="n">remove_holes</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">)</span>
+
+<span class="n">fig1</span> <span class="o">=</span> <span class="n">viz_result_image</span><span class="p">(</span><span class="n">result_image</span><span class="p">,</span> <span class="n">testimage</span><span class="p">)</span>
+<span class="n">fig2</span> <span class="o">=</span> <span class="n">viz_result_image</span><span class="p">(</span><span class="n">result_image_no_holes</span><span class="p">,</span> <span class="n">testimage</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">CityScapesSegmentation</span><span class="p">)</span>
+<span class="n">fig3</span> <span class="o">=</span> <span class="n">viz_result_image</span><span class="p">(</span>
+    <span class="n">resized_result_image</span><span class="p">,</span>
+    <span class="n">testimage</span><span class="p">,</span>
+    <span class="n">source_title</span><span class="o">=</span><span class="s2">&quot;Source Image&quot;</span><span class="p">,</span>
+    <span class="n">result_title</span><span class="o">=</span><span class="s2">&quot;Resized Result Image&quot;</span><span class="p">,</span>
+    <span class="n">resize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">fig4</span> <span class="o">=</span> <span class="n">viz_result_image</span><span class="p">(</span>
+    <span class="n">overlay_result_image</span><span class="p">,</span>
+    <span class="n">labels</span><span class="o">=</span><span class="n">CityScapesSegmentation</span><span class="p">,</span>
+    <span class="n">result_title</span><span class="o">=</span><span class="s2">&quot;Image with Result Overlay&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">display</span><span class="p">(</span><span class="n">fig1</span><span class="p">,</span> <span class="n">fig2</span><span class="p">,</span> <span class="n">fig3</span><span class="p">,</span> <span class="n">fig4</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../_images/notebook_utils-with-output_29_0.png" src="../_images/notebook_utils-with-output_29_0.png" />
+<img alt="../_images/notebook_utils-with-output_29_1.png" src="../_images/notebook_utils-with-output_29_1.png" />
+<img alt="../_images/notebook_utils-with-output_29_2.png" src="../_images/notebook_utils-with-output_29_2.png" />
+<img alt="../_images/notebook_utils-with-output_29_3.png" src="../_images/notebook_utils-with-output_29_3.png" />
+</div>
+<div class="section" id="live-inference">
+<h3>Live Inference<a class="headerlink" href="#live-inference" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">showarray</span><span class="p">(</span><span class="n">frame</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">display_handle</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Display array `frame`. Replace information at `display_handle` with `frame`</span>
+<span class="sd">    encoded as jpeg image. `frame` is expected to have data in BGR order.</span>
+
+<span class="sd">    Create a display_handle with: `display_handle = display(display_id=True)`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">frame</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imencode</span><span class="p">(</span><span class="n">ext</span><span class="o">=</span><span class="s2">&quot;.jpeg&quot;</span><span class="p">,</span> <span class="n">img</span><span class="o">=</span><span class="n">frame</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">display_handle</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">display_handle</span> <span class="o">=</span> <span class="n">display</span><span class="p">(</span><span class="n">Image</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">frame</span><span class="o">.</span><span class="n">tobytes</span><span class="p">()),</span> <span class="n">display_id</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">display_handle</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">Image</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">frame</span><span class="o">.</span><span class="n">tobytes</span><span class="p">()))</span>
+    <span class="k">return</span> <span class="n">display_handle</span>
+
+
+<span class="k">def</span> <span class="nf">show_live_inference</span><span class="p">(</span>
+    <span class="n">ie</span><span class="p">,</span> <span class="n">image_paths</span><span class="p">:</span> <span class="n">List</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="n">model</span><span class="o">.</span><span class="n">Model</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">reader</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Do inference of images listed in `image_paths` on `model` on the given `device` and show</span>
+<span class="sd">    the results in real time in a Jupyter Notebook</span>
+
+<span class="sd">    :param image_paths: List of image filenames to load</span>
+<span class="sd">    :param model: Model instance for inference</span>
+<span class="sd">    :param device: Name of device to perform inference on. For example: &quot;CPU&quot;</span>
+<span class="sd">    :param reader: Image reader. Should return a numpy array with image data.</span>
+<span class="sd">                   If None, cv2.imread will be used, with the cv2.IMREAD_UNCHANGED flag</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">display_handle</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">next_frame_id</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">next_frame_id_to_show</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="n">input_layer</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">net</span><span class="o">.</span><span class="n">input_info</span><span class="p">))</span>
+
+    <span class="c1"># Create asynchronous pipeline and print time it takes to load the model</span>
+    <span class="n">load_start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+    <span class="n">pipeline</span> <span class="o">=</span> <span class="n">AsyncPipeline</span><span class="p">(</span>
+        <span class="n">ie</span><span class="o">=</span><span class="n">ie</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">plugin_config</span><span class="o">=</span><span class="p">{},</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">,</span> <span class="n">max_num_requests</span><span class="o">=</span><span class="mi">0</span>
+    <span class="p">)</span>
+    <span class="n">load_end_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+
+    <span class="c1"># Perform asynchronous inference</span>
+    <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+
+    <span class="k">while</span> <span class="n">next_frame_id</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">image_paths</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">get_result</span><span class="p">(</span><span class="n">next_frame_id_to_show</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">results</span><span class="p">:</span>
+            <span class="c1"># Show next result from async pipeline</span>
+            <span class="n">result</span><span class="p">,</span> <span class="n">meta</span> <span class="o">=</span> <span class="n">results</span>
+            <span class="n">display_handle</span> <span class="o">=</span> <span class="n">showarray</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">display_handle</span><span class="p">)</span>
+            <span class="n">next_frame_id_to_show</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">is_ready</span><span class="p">():</span>
+            <span class="c1"># Submit new image to async pipeline</span>
+            <span class="n">image_path</span> <span class="o">=</span> <span class="n">image_paths</span><span class="p">[</span><span class="n">next_frame_id</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">reader</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">image_path</span><span class="p">),</span> <span class="n">flags</span><span class="o">=</span><span class="n">cv2</span><span class="o">.</span><span class="n">IMREAD_UNCHANGED</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">image</span> <span class="o">=</span> <span class="n">reader</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">image_path</span><span class="p">))</span>
+            <span class="n">pipeline</span><span class="o">.</span><span class="n">submit_data</span><span class="p">(</span>
+                <span class="n">inputs</span><span class="o">=</span><span class="p">{</span><span class="n">input_layer</span><span class="p">:</span> <span class="n">image</span><span class="p">},</span> <span class="nb">id</span><span class="o">=</span><span class="n">next_frame_id</span><span class="p">,</span> <span class="n">meta</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;frame&quot;</span><span class="p">:</span> <span class="n">image</span><span class="p">}</span>
+            <span class="p">)</span>
+            <span class="k">del</span> <span class="n">image</span>
+            <span class="n">next_frame_id</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># If the pipeline is not ready yet and there are no results: wait</span>
+            <span class="n">pipeline</span><span class="o">.</span><span class="n">await_any</span><span class="p">()</span>
+
+    <span class="n">pipeline</span><span class="o">.</span><span class="n">await_all</span><span class="p">()</span>
+
+    <span class="c1"># Show all frames that are in the pipeline after all images have been submitted</span>
+    <span class="k">while</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">has_completed_request</span><span class="p">():</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">get_result</span><span class="p">(</span><span class="n">next_frame_id_to_show</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">results</span><span class="p">:</span>
+            <span class="n">result</span><span class="p">,</span> <span class="n">meta</span> <span class="o">=</span> <span class="n">results</span>
+            <span class="n">display_handle</span> <span class="o">=</span> <span class="n">showarray</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">display_handle</span><span class="p">)</span>
+            <span class="n">next_frame_id_to_show</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="n">end_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+    <span class="n">duration</span> <span class="o">=</span> <span class="n">end_time</span> <span class="o">-</span> <span class="n">start_time</span>
+    <span class="n">fps</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">image_paths</span><span class="p">)</span> <span class="o">/</span> <span class="n">duration</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Loaded model to </span><span class="si">{</span><span class="n">device</span><span class="si">}</span><span class="s2"> in </span><span class="si">{</span><span class="n">load_end_time</span><span class="o">-</span><span class="n">load_start_time</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> seconds.&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total time for </span><span class="si">{</span><span class="n">next_frame_id</span><span class="si">}</span><span class="s2"> frames: </span><span class="si">{</span><span class="n">duration</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> seconds, fps:</span><span class="si">{</span><span class="n">fps</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">del</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">exec_net</span>
+    <span class="k">del</span> <span class="n">pipeline</span>
+</pre></div>
+</div>
+<div class="section" id="test-live-inference">
+<h4>Test Live Inference<a class="headerlink" href="#test-live-inference" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Test binary segmentation</span>
+<span class="kn">from</span> <span class="nn">models.custom_segmentation</span> <span class="kn">import</span> <span class="n">SegmentationModel</span>
+
+<span class="n">image_paths</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;../111-detection-quantization/data&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*.jpg&quot;</span><span class="p">)))</span>
+
+<span class="n">ie</span> <span class="o">=</span> <span class="n">IECore</span><span class="p">()</span>
+<span class="n">segmentation_model</span> <span class="o">=</span> <span class="n">SegmentationModel</span><span class="p">(</span>
+    <span class="n">ie</span><span class="p">,</span>
+    <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;model/segmentation.xml&quot;</span><span class="p">),</span>
+    <span class="n">sigmoid</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">colormap</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">]]),</span>
+    <span class="n">rgb</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">rotate_and_flip</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">show_live_inference</span><span class="p">(</span>
+    <span class="n">ie</span><span class="o">=</span><span class="n">ie</span><span class="p">,</span>
+    <span class="n">image_paths</span><span class="o">=</span><span class="n">image_paths</span><span class="p">,</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">segmentation_model</span><span class="p">,</span>
+    <span class="n">device</span><span class="o">=</span><span class="s2">&quot;CPU&quot;</span><span class="p">,</span>
+    <span class="n">reader</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2RGB</span><span class="p">),</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../_images/notebook_utils-with-output_33_0.jpg" src="../_images/notebook_utils-with-output_33_0.jpg" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Loaded</span> <span class="n">model</span> <span class="n">to</span> <span class="n">CPU</span> <span class="ow">in</span> <span class="mf">0.90</span> <span class="n">seconds</span><span class="o">.</span>
+<span class="n">Total</span> <span class="n">time</span> <span class="k">for</span> <span class="mi">9</span> <span class="n">frames</span><span class="p">:</span> <span class="mf">2.97</span> <span class="n">seconds</span><span class="p">,</span> <span class="n">fps</span><span class="p">:</span><span class="mf">3.37</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Test multiclass segmentation with different input shape</span>
+<span class="c1"># This requires running the 102 notebook first, to generate the Fastseg model</span>
+
+<span class="n">fastseg_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;../102-pytorch-onnx-to-openvino/model/fastseg1024.xml&quot;</span><span class="p">)</span>
+<span class="n">image_path</span> <span class="o">=</span> <span class="s2">&quot;../102-pytorch-onnx-to-openvino/data/street.jpg&quot;</span>
+
+<span class="k">if</span> <span class="n">fastseg_path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+    <span class="n">image_paths</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">image_path</span><span class="p">,</span>
+    <span class="p">]</span> <span class="o">*</span> <span class="mi">5</span>
+
+    <span class="n">ie</span> <span class="o">=</span> <span class="n">IECore</span><span class="p">()</span>
+    <span class="n">CityScapesSegmentation</span> <span class="o">=</span> <span class="n">SegmentationMap</span><span class="p">(</span><span class="n">cityscape_labels</span><span class="p">)</span>
+    <span class="n">segmentation_model</span> <span class="o">=</span> <span class="n">SegmentationModel</span><span class="p">(</span>
+        <span class="n">ie</span><span class="p">,</span>
+        <span class="n">fastseg_path</span><span class="p">,</span>
+        <span class="n">sigmoid</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">argmax</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">colormap</span><span class="o">=</span><span class="n">CityScapesSegmentation</span><span class="o">.</span><span class="n">get_colormap</span><span class="p">(),</span>
+        <span class="n">rgb</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">show_live_inference</span><span class="p">(</span><span class="n">ie</span><span class="o">=</span><span class="n">ie</span><span class="p">,</span> <span class="n">image_paths</span><span class="o">=</span><span class="n">image_paths</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="n">segmentation_model</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s2">&quot;CPU&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../_images/notebook_utils-with-output_34_0.jpg" src="../_images/notebook_utils-with-output_34_0.jpg" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Loaded</span> <span class="n">model</span> <span class="n">to</span> <span class="n">CPU</span> <span class="ow">in</span> <span class="mf">0.28</span> <span class="n">seconds</span><span class="o">.</span>
+<span class="n">Total</span> <span class="n">time</span> <span class="k">for</span> <span class="mi">4</span> <span class="n">frames</span><span class="p">:</span> <span class="mf">2.47</span> <span class="n">seconds</span><span class="p">,</span> <span class="n">fps</span><span class="p">:</span><span class="mf">2.02</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="openvino-tools">
+<h2>OpenVINO Tools<a class="headerlink" href="#openvino-tools" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">benchmark_model</span><span class="p">(</span>
+    <span class="n">model_path</span><span class="p">:</span> <span class="n">PathLike</span><span class="p">,</span>
+    <span class="n">device</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;CPU&quot;</span><span class="p">,</span>
+    <span class="n">seconds</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">60</span><span class="p">,</span>
+    <span class="n">api</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;async&quot;</span><span class="p">,</span>
+    <span class="n">batch</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">cache_dir</span><span class="p">:</span> <span class="n">PathLike</span> <span class="o">=</span> <span class="s2">&quot;model_cache&quot;</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Benchmark model `model_path` with `benchmark_app`. Returns the output of `benchmark_app`</span>
+<span class="sd">    without logging info, and information about the device</span>
+
+<span class="sd">    :param model_path: path to IR model xml file, or ONNX model</span>
+<span class="sd">    :param device: device to benchmark on. For example, &quot;CPU&quot; or &quot;MULTI:CPU,GPU&quot;</span>
+<span class="sd">    :param seconds: number of seconds to run benchmark_app</span>
+<span class="sd">    :param api: API. Possible options: sync or async</span>
+<span class="sd">    :param batch: Batch size</span>
+<span class="sd">    :param cache_dir: Directory that contains model/kernel cache files</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ie</span> <span class="o">=</span> <span class="n">IECore</span><span class="p">()</span>
+    <span class="n">model_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">model_path</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="s2">&quot;GPU&quot;</span> <span class="ow">in</span> <span class="n">device</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="s2">&quot;GPU&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ie</span><span class="o">.</span><span class="n">available_devices</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;A GPU device is not available. Available devices are: </span><span class="si">{</span><span class="n">ie</span><span class="o">.</span><span class="n">available_devices</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">benchmark_command</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;benchmark_app -m </span><span class="si">{</span><span class="n">model_path</span><span class="si">}</span><span class="s2"> -d </span><span class="si">{</span><span class="n">device</span><span class="si">}</span><span class="s2"> -t </span><span class="si">{</span><span class="n">seconds</span><span class="si">}</span><span class="s2"> -api </span><span class="si">{</span><span class="n">api</span><span class="si">}</span><span class="s2"> -b </span><span class="si">{</span><span class="n">batch</span><span class="si">}</span><span class="s2"> -cdir </span><span class="si">{</span><span class="n">cache_dir</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">display</span><span class="p">(</span>
+            <span class="n">Markdown</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;**Benchmark </span><span class="si">{</span><span class="n">model_path</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> with </span><span class="si">{</span><span class="n">device</span><span class="si">}</span><span class="s2"> for </span><span class="si">{</span><span class="n">seconds</span><span class="si">}</span><span class="s2"> seconds with </span><span class="si">{</span><span class="n">api</span><span class="si">}</span><span class="s2"> inference**&quot;</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">display</span><span class="p">(</span><span class="n">Markdown</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Benchmark command: `</span><span class="si">{</span><span class="n">benchmark_command</span><span class="si">}</span><span class="s2">`&quot;</span><span class="p">))</span>
+
+        <span class="n">benchmark_output</span> <span class="o">=</span> <span class="n">get_ipython</span><span class="p">()</span><span class="o">.</span><span class="n">run_line_magic</span><span class="p">(</span><span class="s2">&quot;sx&quot;</span><span class="p">,</span> <span class="s2">&quot;$benchmark_command&quot;</span><span class="p">)</span>
+        <span class="n">benchmark_result</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">line</span>
+            <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">benchmark_output</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;[&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;  &quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">line</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="p">]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">benchmark_result</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">()</span>
+        <span class="k">if</span> <span class="s2">&quot;MULTI&quot;</span> <span class="ow">in</span> <span class="n">device</span><span class="p">:</span>
+            <span class="n">devices</span> <span class="o">=</span> <span class="n">device</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;MULTI:&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">single_device</span> <span class="ow">in</span> <span class="n">devices</span><span class="p">:</span>
+                <span class="n">device_name</span> <span class="o">=</span> <span class="n">ie</span><span class="o">.</span><span class="n">get_metric</span><span class="p">(</span>
+                    <span class="n">device_name</span><span class="o">=</span><span class="n">single_device</span><span class="p">,</span> <span class="n">metric_name</span><span class="o">=</span><span class="s2">&quot;FULL_DEVICE_NAME&quot;</span>
+                <span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">single_device</span><span class="si">}</span><span class="s2"> device: </span><span class="si">{</span><span class="n">device_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Device: </span><span class="si">{</span><span class="n">ie</span><span class="o">.</span><span class="n">get_metric</span><span class="p">(</span><span class="n">device_name</span><span class="o">=</span><span class="n">device</span><span class="p">,</span> <span class="n">metric_name</span><span class="o">=</span><span class="s1">&#39;FULL_DEVICE_NAME&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="section" id="test-openvino-tools">
+<h3>Test OpenVINO Tools<a class="headerlink" href="#test-openvino-tools" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ie</span> <span class="o">=</span> <span class="n">IECore</span><span class="p">()</span>
+<span class="n">model_url</span> <span class="o">=</span> <span class="s2">&quot;https://github.com/openvinotoolkit/openvino_notebooks/raw/main/notebooks/002-openvino-api/model/segmentation.xml&quot;</span>
+<span class="n">model_path</span> <span class="o">=</span> <span class="n">download_ir_model</span><span class="p">(</span><span class="n">model_url</span><span class="p">,</span> <span class="s2">&quot;model&quot;</span><span class="p">)</span>
+<span class="n">device</span> <span class="o">=</span> <span class="s2">&quot;MULTI:CPU,GPU&quot;</span> <span class="k">if</span> <span class="s2">&quot;GPU&quot;</span> <span class="ow">in</span> <span class="n">ie</span><span class="o">.</span><span class="n">available_devices</span> <span class="k">else</span> <span class="s2">&quot;CPU&quot;</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Markdown</span><span class="p">(</span><span class="n">device</span><span class="p">))</span>
+<span class="n">benchmark_model</span><span class="p">(</span><span class="n">model_path</span><span class="o">=</span><span class="n">model_path</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">,</span> <span class="n">seconds</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;model/segmentation.xml&#39;</span> <span class="n">already</span> <span class="n">exists</span><span class="o">.</span>
+<span class="s1">&#39;model/segmentation.bin&#39;</span> <span class="n">already</span> <span class="n">exists</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>CPU</p>
+<p><strong>Benchmark segmentation.xml with CPU for 5 seconds with async
+inference</strong></p>
+<p>Benchmark command:
+<code class="docutils literal notranslate"><span class="pre">benchmark_app</span> <span class="pre">-m</span> <span class="pre">/home/runner/work/openvino_notebooks/openvino_notebooks/notebooks/utils/model/segmentation.xml</span> <span class="pre">-d</span> <span class="pre">CPU</span> <span class="pre">-t</span> <span class="pre">5</span> <span class="pre">-api</span> <span class="pre">async</span> <span class="pre">-b</span> <span class="pre">1</span> <span class="pre">-cdir</span> <span class="pre">model_cache</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Count</span><span class="p">:</span>          <span class="mi">20</span> <span class="n">iterations</span>
+<span class="n">Duration</span><span class="p">:</span>       <span class="mf">5745.62</span> <span class="n">ms</span>
+<span class="n">Latency</span><span class="p">:</span>
+<span class="n">Throughput</span><span class="p">:</span> <span class="mf">3.48</span> <span class="n">FPS</span>
+
+<span class="n">Device</span><span class="p">:</span> <span class="n">Intel</span><span class="p">(</span><span class="n">R</span><span class="p">)</span> <span class="n">Xeon</span><span class="p">(</span><span class="n">R</span><span class="p">)</span> <span class="n">Platinum</span> <span class="mi">8272</span><span class="n">CL</span> <span class="n">CPU</span> <span class="o">@</span> <span class="mf">2.60</span><span class="n">GHz</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="checks-and-alerts">
+<h2>Checks and Alerts<a class="headerlink" href="#checks-and-alerts" title="Permalink to this headline">¶</a></h2>
+<p>Create an alert class to show stylized info/error/warning messages and a
+<code class="docutils literal notranslate"><span class="pre">check_device</span></code> function that checks whether a given device is
+available.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">NotebookAlert</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">alert_class</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Show an alert box with the given message.</span>
+
+<span class="sd">        :param message: The message to display.</span>
+<span class="sd">        :param alert_class: The class for styling the message. Options: info, warning, success, danger.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="n">message</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">alert_class</span> <span class="o">=</span> <span class="n">alert_class</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">show_message</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">show_message</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&quot;&quot;&lt;div class=&quot;alert alert-</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">alert_class</span><span class="si">}</span><span class="s2">&quot;&gt;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">message</span><span class="si">}</span><span class="s2">&quot;&quot;&quot;</span><span class="p">))</span>
+
+
+<span class="k">class</span> <span class="nc">DeviceNotFoundAlert</span><span class="p">(</span><span class="n">NotebookAlert</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Show a warning message about an unavailable device. This class does not check whether or</span>
+<span class="sd">        not the device is available, use the `check_device` function to check this. `check_device`</span>
+<span class="sd">        also shows the warning if the device is not found.</span>
+
+<span class="sd">        :param device: The unavailable device.</span>
+<span class="sd">        :return: A formatted alert box with the message that `device` is not available, and a list</span>
+<span class="sd">                 of devices that are available.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ie</span> <span class="o">=</span> <span class="n">IECore</span><span class="p">()</span>
+        <span class="n">supported_devices</span> <span class="o">=</span> <span class="n">ie</span><span class="o">.</span><span class="n">available_devices</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Running this cell requires a </span><span class="si">{</span><span class="n">device</span><span class="si">}</span><span class="s2"> device, &quot;</span>
+            <span class="s2">&quot;which is not available on this system. &quot;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">alert_class</span> <span class="o">=</span> <span class="s2">&quot;warning&quot;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">supported_devices</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">message</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;The following device is available: </span><span class="si">{</span><span class="n">ie</span><span class="o">.</span><span class="n">available_devices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">message</span> <span class="o">+=</span> <span class="p">(</span>
+                <span class="s2">&quot;The following devices are available: &quot;</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ie</span><span class="o">.</span><span class="n">available_devices</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">message</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">alert_class</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">check_device</span><span class="p">(</span><span class="n">device</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Check if the specified device is available on the system.</span>
+
+<span class="sd">    :param device: Device to check. e.g. CPU, GPU</span>
+<span class="sd">    :return: True if the device is available, False if not. If the device is not available,</span>
+<span class="sd">             a DeviceNotFoundAlert will be shown.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ie</span> <span class="o">=</span> <span class="n">IECore</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">device</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ie</span><span class="o">.</span><span class="n">available_devices</span><span class="p">:</span>
+        <span class="n">DeviceNotFoundAlert</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">True</span>
+
+
+<span class="k">def</span> <span class="nf">check_openvino_version</span><span class="p">(</span><span class="n">version</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Check if the specified OpenVINO version is installed.</span>
+
+<span class="sd">    :param version: the OpenVINO version to check. Example: 2021.4</span>
+<span class="sd">    :return: True if the version is installed, False if not. If the version is not installed,</span>
+<span class="sd">             an alert message will be shown.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">installed_version</span> <span class="o">=</span> <span class="n">openvino</span><span class="o">.</span><span class="n">inference_engine</span><span class="o">.</span><span class="n">get_version</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">version</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">installed_version</span><span class="p">:</span>
+        <span class="n">NotebookAlert</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;This notebook requires OpenVINO </span><span class="si">{</span><span class="n">version</span><span class="si">}</span><span class="s2">. &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;The version on your system is: &lt;i&gt;</span><span class="si">{</span><span class="n">installed_version</span><span class="si">}</span><span class="s2">&lt;/i&gt;.&lt;br&gt;&quot;</span>
+            <span class="s2">&quot;Please run &lt;span style=&#39;font-family:monospace&#39;&gt;pip install --upgrade -r requirements.txt&lt;/span&gt; &quot;</span>
+            <span class="s2">&quot;in the openvino_env environment to install this version. &quot;</span>
+            <span class="s2">&quot;See the &lt;a href=&#39;https://github.com/openvinotoolkit/openvino_notebooks&#39;&gt;&quot;</span>
+            <span class="s2">&quot;OpenVINO Notebooks README&lt;/a&gt; for detailed instructions&quot;</span><span class="p">,</span>
+            <span class="n">alert_class</span><span class="o">=</span><span class="s2">&quot;danger&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">True</span>
+</pre></div>
+</div>
+<div class="section" id="test-alerts">
+<h3>Test Alerts<a class="headerlink" href="#test-alerts" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">NotebookAlert</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;Hello, world!&quot;</span><span class="p">,</span> <span class="n">alert_class</span><span class="o">=</span><span class="s2">&quot;info&quot;</span><span class="p">)</span>
+<span class="n">DeviceNotFoundAlert</span><span class="p">(</span><span class="s2">&quot;GPU&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="alert alert-info">Hello, world!<div class="alert alert-warning">Running this cell requires a GPU device, which is not available on this system. The following device is available: CPU<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">assert</span> <span class="n">check_device</span><span class="p">(</span><span class="s2">&quot;CPU&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">check_device</span><span class="p">(</span><span class="s2">&quot;HELLOWORLD&quot;</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello World device found.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="alert alert-warning">Running this cell requires a HELLOWORLD device, which is not available on this system. The following device is available: CPU<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">check_openvino_version</span><span class="p">(</span><span class="s2">&quot;2022.1&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+                </div>
+            
+            
+                <div class='prev-next-bottom'>
+                  
+
+                </div>
+            
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+<footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2021, Intel®.<br>
+</p>
+    </div>
+    
+    <div class="footer-item">
+      <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

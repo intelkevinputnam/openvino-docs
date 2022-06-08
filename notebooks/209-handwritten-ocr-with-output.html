@@ -1,0 +1,859 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Handwritten Chinese and Japanese OCR &#8212; OpenVINO™  documentation</title>
+    
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/blank.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/doxyrest-pygments.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <link href="../_static/css/media/favicon.ico" rel="shortcut icon">
+    <link rel="stylesheet" href="../_static/css/openvino_sphinx_theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/button.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/input.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/textfield.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/tabs.css" type="text/css" />
+    <script src="../_static/js/openvino_sphinx_theme.js"></script>
+    <link rel="stylesheet" href="../_static/css/viewer.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/0.5.7/chartjs-plugin-annotation.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-barchart-background@1.3.0/build/Plugin.Barchart.Background.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-deferred@1"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.1/papaparse.min.js"></script>
+    <script src="../_static/js/viewer.min.js"></script>
+    <script src="/assets/versions_raw.js"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/tabs.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/js/custom.js"></script>
+    <script src="../_static/js/graphs.js"></script>
+    <script src="../_static/js/graphs_ov_tf.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/target-highlight.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <link rel="canonical" href="https://docs.openvino.ai/latest/notebooks/209-handwritten-ocr-with-output.html" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Live Inference and Benchmark CT-scan Data with OpenVINO" href="210-ct-scan-live-inference-with-output.html" />
+    <link rel="prev" title="Optical Character Recognition (OCR) with OpenVINO" href="208-optical-character-recognition-with-output.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+      <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+
+<a class="navbar-brand" href="../index.html">
+  <img src="../_static/logo.svg" class="logo" alt="logo">
+</a>
+
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../pages/get_started.html">
+  Get Started
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../pages/documentation.html">
+  Documentation
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../tutorials.html">
+  Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../model_zoo.html">
+  Model Zoo
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../pages/resources.html">
+  Resources
+ </a>
+</li>
+
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/openvinotoolkit/openvino" rel="noopener" target="_blank" title="GitHub">
+            <span><i class="sst-github"></i></span>
+            <label class="sr-only">GitHub</label>
+          </a>
+        </li>
+</ul>
+      </div>
+      
+      <div class="navbar-end-item">
+        
+<div class="dropdown sst-dropdown sst-dropdown-navbar">
+  <button class="btn sst-btn dropdown-toggle" type="button" id="version-selector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+  <div class="dropdown-menu" aria-labelledby="version-selector">
+  </div>
+</div>
+      </div>
+      
+      <div class="navbar-end-item">
+        
+
+<div class="dropdown sst-dropdown sst-dropdown-navbar">
+  <button class="btn sst-btn dropdown-toggle" type="button" id="language-selector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">English</button>
+  <div class="dropdown-menu" aria-labelledby="language-selector">
+    
+      
+        <a class="dropdown-item font-weight-bold" href="/latest/notebooks/209-handwritten-ocr-with-output.html">English</a>
+      
+    
+      
+        <a  class="dropdown-item" href="/cn/latest/notebooks/209-handwritten-ocr-with-output.html">Chinese</a>
+      
+    
+  </div>
+</div>
+
+      </div>
+      
+    </div>
+  </div>
+</div>
+        <div id="collapse-nav-wrapper" class="container-xl">
+          <button id="collapse-nav" class="button bttn-prm button-size-m" type="button" data-toggle="collapse" data-target="#nav-tree" aria-expanded="false" aria-controls="nav-tree">
+            Documentation navigation <i class="fas fa-chevron-down"></i>
+          </button>
+        </div>
+      </nav>
+      <div class="transition-banner container-fluid alert alert-info alert-dismissible fade show" role="alert">
+        <p>OpenVINO 2022.1 introduces a new version of OpenVINO API (API 2.0). For more information on the changes and transition steps, see the <a href="https://docs.openvino.ai/latest/openvino_2_0_transition_guide.html">transition guide</a></p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar" id="nav-tree"><form class="searchForm bd-search d-flex align-items-center" action="../search.html" method="get">
+    <i class="icon fas fa-search"></i>
+    <input type="search" class="form-control" name="query" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="001-hello-world-with-output.html">
+   Hello Image Classification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="002-openvino-api-with-output.html">
+   OpenVINO API Tutorial
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="003-hello-segmentation-with-output.html">
+   Hello Image Segmentation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="004-hello-detection-with-output.html">
+   Hello Object Detection
+  </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="101-tensorflow-to-openvino-with-output.html">
+   Convert a TensorFlow Model to OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="102-pytorch-onnx-to-openvino-with-output.html">
+   Convert a PyTorch Model to ONNX and OpenVINO IR
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="103-paddle-onnx-to-openvino-classification-with-output.html">
+   Convert a PaddlePaddle Model to ONNX and OpenVINO IR
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="104-model-tools-with-output.html">
+   Working with Open Model Zoo Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="105-language-quantize-bert-with-output.html">
+   Quantize NLP models with OpenVINO Post-Training Optimization Tool ​
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="106-auto-device-with-output.html">
+   Automatic Device Selection with OpenVINO™
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="110-ct-segmentation-quantize-with-output.html">
+   Quantize a Segmentation Model and Show Live Inference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="111-detection-quantization-with-output.html">
+   Object Detection Quantization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="112-pytorch-post-training-quantization-nncf-with-output.html">
+   Post-Training Quantization of PyTorch models with NNCF
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="113-image-classification-quantization-with-output.html">
+   Quantization of Image Classification Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="114-quantization-simplified-mode-with-output.html">
+   INT8 Quantization with Post-training Optimization Tool (POT) in Simplified Mode tutorial
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="201-vision-monodepth-with-output.html">
+   Monodepth Estimation with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="202-vision-superresolution-image-with-output.html">
+   Single Image Super Resolution with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="202-vision-superresolution-video-with-output.html">
+   Video Super Resolution with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="205-vision-background-removal-with-output.html">
+   Image Background Removal with U^2-Net and OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="206-vision-paddlegan-anime-with-output.html">
+   Photos to Anime with PaddleGAN and OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="207-vision-paddlegan-superresolution-with-output.html">
+   Super Resolution with PaddleGAN and OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="208-optical-character-recognition-with-output.html">
+   Optical Character Recognition (OCR) with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Handwritten Chinese and Japanese OCR
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="210-ct-scan-live-inference-with-output.html">
+   Live Inference and Benchmark CT-scan Data with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="211-speech-to-text-with-output.html">
+   Speech to Text with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="212-onnx-style-transfer-with-output.html">
+   Style Transfer on ONNX Models with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="213-question-answering-with-output.html">
+   Interactive question answering with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="214-vision-paddle-classification-with-output.html">
+   PaddlePaddle Image Classification with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="215-image-inpainting-with-output.html">
+   Image In-painting with OpenVINO™
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="217-vision-deblur-with-output.html">
+   Deblur Photos with DeblurGAN-v2 and OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="218-vehicle-detection-and-recognition-with-output.html">
+   Vehicle Detection And Recognition with OpenVINO
+  </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="301-tensorflow-training-openvino-with-output.html">
+   From Training to Deployment with TensorFlow and OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="301-tensorflow-training-openvino-pot-with-output.html">
+   Post-Training Quantization with TensorFlow Classification Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="302-pytorch-quantization-aware-training-with-output.html">
+   Quantization Aware Training with NNCF, using PyTorch framework
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="305-tensorflow-quantization-aware-training-with-output.html">
+   Quantization Aware Training with NNCF, using TensorFlow Framework
+  </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="401-object-detection-with-output.html">
+   Live Object Detection with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="402-pose-estimation-with-output.html">
+   Live Human Pose Estimation with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="403-action-recognition-webcam-with-output.html">
+   Human Action Recognition with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="405-paddle-ocr-webcam-with-output.html">
+   PaddleOCR with OpenVINO
+  </a>
+ </li>
+</ul>
+
+  </div>
+</nav>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+              
+              <div class="toc-item">
+                
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#imports">
+   Imports
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#settings">
+   Settings
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#select-language">
+   Select Language
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#download-model">
+   Download Model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-network-and-execute">
+   Load Network and Execute
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#select-device-name">
+     Select Device Name
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fetch-information-about-input-and-output-layers">
+   Fetch Information About Input and Output Layers
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-an-image">
+   Load an Image
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualise-input-image">
+   Visualise Input Image
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#prepare-charlist">
+   Prepare Charlist
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#run-inference">
+   Run Inference
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#process-output-data">
+   Process Output Data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#print-output">
+   Print Output
+  </a>
+ </li>
+</ul>
+
+</nav>
+              </div>
+              
+              <div class="toc-item">
+                <div class="tocsection download-docs">
+  <div class="dropdown sst-dropdown">
+    <button class="button bttn-prm button-size-m" data-display="static" type="button" id="download-options"
+      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Download Docs
+    </button>
+    <div class="dropdown-menu" aria-labelledby="download-options">
+      <a class="dropdown-item" href="#" onclick="window.print()">.pdf</a>
+      <a id="download-zip-btn" class="dropdown-item" href="#">.zip</a>
+    </div>
+  </div>
+</div>
+              </div>
+              
+            
+          </div>
+          
+
+          
+          
+              
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+
+<div class="tocsection editthispage">
+    <a href="None">
+        <i class="fas fa-pencil-alt"></i> Edit this page
+    </a>
+</div>
+
+            
+                <div>
+                  
+  <div class="section" id="handwritten-chinese-and-japanese-ocr">
+<h1>Handwritten Chinese and Japanese OCR<a class="headerlink" href="#handwritten-chinese-and-japanese-ocr" title="Permalink to this headline">¶</a></h1>
+<p>In this tutorial, we perform optical character recognition (OCR) for
+handwritten Chinese (simplified) and Japanese. An OCR tutorial using the
+Latin alphabet is available in <a class="reference external" href="208-optical-character-recognition-with-output.html">notebook
+208</a>.
+This model is capable of processing only one line of symbols at a time.</p>
+<p>The models used in this notebook are
+<a class="reference external" href="https://docs.openvino.ai/latest/omz_models_model_handwritten_japanese_recognition_0001.html">handwritten-japanese-recognition</a>
+and
+<a class="reference external" href="https://docs.openvino.ai/latest/omz_models_model_handwritten_simplified_chinese_recognition_0001.html">handwritten-simplified-chinese</a>.
+To decode model outputs as readable text
+<a class="reference external" href="https://github.com/openvinotoolkit/open_model_zoo/blob/master/data/dataset_classes/kondate_nakayosi.txt">kondate_nakayosi</a>
+and
+<a class="reference external" href="https://github.com/openvinotoolkit/open_model_zoo/blob/master/data/dataset_classes/scut_ept.txt">scut_ept</a>
+charlists are used. Both models are available on <a class="reference external" href="https://github.com/openvinotoolkit/open_model_zoo/">Open Model
+Zoo</a>.</p>
+<div class="section" id="imports">
+<h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">groupby</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">import</span> <span class="nn">cv2</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">openvino.runtime</span> <span class="kn">import</span> <span class="n">Core</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="settings">
+<h2>Settings<a class="headerlink" href="#settings" title="Permalink to this headline">¶</a></h2>
+<p>Set up all constants and folders used in this notebook</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Directories where data will be placed</span>
+<span class="n">model_folder</span> <span class="o">=</span> <span class="s2">&quot;model&quot;</span>
+<span class="n">data_folder</span> <span class="o">=</span> <span class="s2">&quot;data&quot;</span>
+<span class="n">charlist_folder</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">data_folder</span><span class="si">}</span><span class="s2">/charlists&quot;</span>
+
+<span class="c1"># Precision used by model</span>
+<span class="n">precision</span> <span class="o">=</span> <span class="s2">&quot;FP16&quot;</span>
+</pre></div>
+</div>
+<p>To group files, you have to define the collection. In this case, you can
+use <code class="docutils literal notranslate"><span class="pre">namedtuple</span></code>.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Language</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span>
+    <span class="n">typename</span><span class="o">=</span><span class="s2">&quot;Language&quot;</span><span class="p">,</span> <span class="n">field_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;model_name&quot;</span><span class="p">,</span> <span class="s2">&quot;charlist_name&quot;</span><span class="p">,</span> <span class="s2">&quot;demo_image_name&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="n">chinese_files</span> <span class="o">=</span> <span class="n">Language</span><span class="p">(</span>
+    <span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;handwritten-simplified-chinese-recognition-0001&quot;</span><span class="p">,</span>
+    <span class="n">charlist_name</span><span class="o">=</span><span class="s2">&quot;chinese_charlist.txt&quot;</span><span class="p">,</span>
+    <span class="n">demo_image_name</span><span class="o">=</span><span class="s2">&quot;handwritten_chinese_test.jpg&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">japanese_files</span> <span class="o">=</span> <span class="n">Language</span><span class="p">(</span>
+    <span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;handwritten-japanese-recognition-0001&quot;</span><span class="p">,</span>
+    <span class="n">charlist_name</span><span class="o">=</span><span class="s2">&quot;japanese_charlist.txt&quot;</span><span class="p">,</span>
+    <span class="n">demo_image_name</span><span class="o">=</span><span class="s2">&quot;handwritten_japanese_test.png&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="select-language">
+<h2>Select Language<a class="headerlink" href="#select-language" title="Permalink to this headline">¶</a></h2>
+<p>Depending on your choice you will need to change a line of code in the
+cell below.</p>
+<p>If you want to do Japanese OCR, this line should be set to
+<code class="docutils literal notranslate"><span class="pre">language</span> <span class="pre">=</span> <span class="pre">'japanese'</span></code> for Chinese set <code class="docutils literal notranslate"><span class="pre">language</span> <span class="pre">=</span> <span class="pre">'chinese'</span></code>.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Select language by using either language=&#39;chinese&#39; or language=&#39;japanese&#39;</span>
+<span class="n">language</span> <span class="o">=</span> <span class="s2">&quot;chinese&quot;</span>
+
+<span class="n">languages</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;chinese&quot;</span><span class="p">:</span> <span class="n">chinese_files</span><span class="p">,</span> <span class="s2">&quot;japanese&quot;</span><span class="p">:</span> <span class="n">japanese_files</span><span class="p">}</span>
+
+<span class="n">selected_language</span> <span class="o">=</span> <span class="n">languages</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">language</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="download-model">
+<h2>Download Model<a class="headerlink" href="#download-model" title="Permalink to this headline">¶</a></h2>
+<p>In addition to images and charlists, we need to download the model file.
+In the sections below there are cells for downloading either the Chinese
+or Japanese model.</p>
+<p>If it is your first time running the notebook, the model will download.
+It may take a few minutes.</p>
+<p>We use <code class="docutils literal notranslate"><span class="pre">omz_downloader</span></code>, which is a command-line tool from the
+<code class="docutils literal notranslate"><span class="pre">openvino-dev</span></code> package. <code class="docutils literal notranslate"><span class="pre">omz_downloader</span></code> automatically creates a
+directory structure and downloads the selected model.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">path_to_model_weights</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">model_folder</span><span class="si">}</span><span class="s1">/intel/</span><span class="si">{</span><span class="n">selected_language</span><span class="o">.</span><span class="n">model_name</span><span class="si">}</span><span class="s1">/</span><span class="si">{</span><span class="n">precision</span><span class="si">}</span><span class="s1">/</span><span class="si">{</span><span class="n">selected_language</span><span class="o">.</span><span class="n">model_name</span><span class="si">}</span><span class="s1">.bin&#39;</span><span class="p">)</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">path_to_model_weights</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
+    <span class="n">download_command</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;omz_downloader --name </span><span class="si">{</span><span class="n">selected_language</span><span class="o">.</span><span class="n">model_name</span><span class="si">}</span><span class="s1"> --output_dir </span><span class="si">{</span><span class="n">model_folder</span><span class="si">}</span><span class="s1"> --precision </span><span class="si">{</span><span class="n">precision</span><span class="si">}</span><span class="s1">&#39;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">download_command</span><span class="p">)</span>
+    <span class="o">!</span> <span class="nv">$download_command</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">omz_downloader</span> <span class="o">--</span><span class="n">name</span> <span class="n">handwritten</span><span class="o">-</span><span class="n">simplified</span><span class="o">-</span><span class="n">chinese</span><span class="o">-</span><span class="n">recognition</span><span class="o">-</span><span class="mi">0001</span> <span class="o">--</span><span class="n">output_dir</span> <span class="n">model</span> <span class="o">--</span><span class="n">precision</span> <span class="n">FP16</span>
+<span class="c1">################|| Downloading handwritten-simplified-chinese-recognition-0001 ||################</span>
+
+<span class="o">==========</span> <span class="n">Downloading</span> <span class="n">model</span><span class="o">/</span><span class="n">intel</span><span class="o">/</span><span class="n">handwritten</span><span class="o">-</span><span class="n">simplified</span><span class="o">-</span><span class="n">chinese</span><span class="o">-</span><span class="n">recognition</span><span class="o">-</span><span class="mi">0001</span><span class="o">/</span><span class="n">FP16</span><span class="o">/</span><span class="n">handwritten</span><span class="o">-</span><span class="n">simplified</span><span class="o">-</span><span class="n">chinese</span><span class="o">-</span><span class="n">recognition</span><span class="o">-</span><span class="mf">0001.</span><span class="n">xml</span>
+
+
+<span class="o">==========</span> <span class="n">Downloading</span> <span class="n">model</span><span class="o">/</span><span class="n">intel</span><span class="o">/</span><span class="n">handwritten</span><span class="o">-</span><span class="n">simplified</span><span class="o">-</span><span class="n">chinese</span><span class="o">-</span><span class="n">recognition</span><span class="o">-</span><span class="mi">0001</span><span class="o">/</span><span class="n">FP16</span><span class="o">/</span><span class="n">handwritten</span><span class="o">-</span><span class="n">simplified</span><span class="o">-</span><span class="n">chinese</span><span class="o">-</span><span class="n">recognition</span><span class="o">-</span><span class="mf">0001.</span><span class="n">bin</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="load-network-and-execute">
+<h2>Load Network and Execute<a class="headerlink" href="#load-network-and-execute" title="Permalink to this headline">¶</a></h2>
+<p>When all files are downloaded and language is selected, you need to read
+and compile the network to run inference. The path to the model is
+defined based on the selected language.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ie</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span>
+<span class="n">path_to_model</span> <span class="o">=</span> <span class="n">path_to_model_weights</span><span class="o">.</span><span class="n">with_suffix</span><span class="p">(</span><span class="s2">&quot;.xml&quot;</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">ie</span><span class="o">.</span><span class="n">read_model</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">path_to_model</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="section" id="select-device-name">
+<h3>Select Device Name<a class="headerlink" href="#select-device-name" title="Permalink to this headline">¶</a></h3>
+<p>You may choose to run the network on multiple devices by default it will
+load the model on the CPU (you can choose manually CPU, GPU etc.) or let
+the engine choose the best available device (AUTO).</p>
+<p>To list all available devices that you can use, uncomment and run the
+line <code class="docutils literal notranslate"><span class="pre">print(ie.available_devices)</span></code>.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># To check available device names run the line below</span>
+<span class="c1"># print(ie.available_devices)</span>
+
+<span class="n">compiled_model</span> <span class="o">=</span> <span class="n">ie</span><span class="o">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">device_name</span><span class="o">=</span><span class="s2">&quot;CPU&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="fetch-information-about-input-and-output-layers">
+<h2>Fetch Information About Input and Output Layers<a class="headerlink" href="#fetch-information-about-input-and-output-layers" title="Permalink to this headline">¶</a></h2>
+<p>Now that the model is loaded, you need to fetch information about input
+and output layers. This is information about the input shape and the
+output.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">recognition_output_layer</span> <span class="o">=</span> <span class="n">compiled_model</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">recognition_input_layer</span> <span class="o">=</span> <span class="n">compiled_model</span><span class="o">.</span><span class="n">input</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="load-an-image">
+<h2>Load an Image<a class="headerlink" href="#load-an-image" title="Permalink to this headline">¶</a></h2>
+<p>The next step is to load an image.</p>
+<p>The model expects a single-channel image as input, which is why we read
+the image in grayscale.</p>
+<p>After loading the input image, the next step is getting information that
+you will use for calculating the scale ratio. This describes the ratio
+between required input layer height and the current image height. In the
+cell below, the image will be resized and padded to keep letters
+proportional and meet input shape.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Read file name of demo file based on the selected model</span>
+
+<span class="n">file_name</span> <span class="o">=</span> <span class="n">selected_language</span><span class="o">.</span><span class="n">demo_image_name</span>
+
+<span class="c1"># Text detection models expects an image in grayscale format</span>
+<span class="c1"># IMPORTANT!!! This model allows to read only one line at time</span>
+
+<span class="c1"># Read image</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">data_folder</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">file_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">cv2</span><span class="o">.</span><span class="n">IMREAD_GRAYSCALE</span><span class="p">)</span>
+
+<span class="c1"># Fetch shape</span>
+<span class="n">image_height</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span>
+
+<span class="c1"># B,C,H,W = batch size, number of channels, height, width</span>
+<span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">W</span> <span class="o">=</span> <span class="n">recognition_input_layer</span><span class="o">.</span><span class="n">shape</span>
+
+<span class="c1"># Calculate scale ratio between input shape height and image height to resize image</span>
+<span class="n">scale_ratio</span> <span class="o">=</span> <span class="n">H</span> <span class="o">/</span> <span class="n">image_height</span>
+
+<span class="c1"># Resize image to expected input sizes</span>
+<span class="n">resized_image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span>
+    <span class="n">image</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">fx</span><span class="o">=</span><span class="n">scale_ratio</span><span class="p">,</span> <span class="n">fy</span><span class="o">=</span><span class="n">scale_ratio</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="n">cv2</span><span class="o">.</span><span class="n">INTER_AREA</span>
+<span class="p">)</span>
+
+<span class="c1"># Pad image to match input size, without changing aspect ratio</span>
+<span class="n">resized_image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span>
+    <span class="n">resized_image</span><span class="p">,</span> <span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">W</span> <span class="o">-</span> <span class="n">resized_image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])),</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;edge&quot;</span>
+<span class="p">)</span>
+
+<span class="c1"># Reshape to network the input shape</span>
+<span class="n">input_image</span> <span class="o">=</span> <span class="n">resized_image</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="visualise-input-image">
+<h2>Visualise Input Image<a class="headerlink" href="#visualise-input-image" title="Permalink to this headline">¶</a></h2>
+<p>After preprocessing you can display the image.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">resized_image</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">255</span><span class="p">);</span>
+</pre></div>
+</div>
+<img alt="../_images/209-handwritten-ocr-with-output_20_0.png" src="../_images/209-handwritten-ocr-with-output_20_0.png" />
+</div>
+<div class="section" id="prepare-charlist">
+<h2>Prepare Charlist<a class="headerlink" href="#prepare-charlist" title="Permalink to this headline">¶</a></h2>
+<p>The model is loaded and the image is ready. The only element left is the
+charlist which is downloaded, but before we use it, there is one more
+step. You must add a blank symbol at the beginning of the charlist. This
+is expected for both the Chinese and Japanese models.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get dictionary to encode output, based on model documentation</span>
+<span class="n">used_charlist</span> <span class="o">=</span> <span class="n">selected_language</span><span class="o">.</span><span class="n">charlist_name</span>
+
+<span class="c1"># With both models, there should be blank symbol added at index 0 of each charlist</span>
+<span class="n">blank_char</span> <span class="o">=</span> <span class="s2">&quot;~&quot;</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">charlist_folder</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">used_charlist</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">charlist</span><span class="p">:</span>
+    <span class="n">letters</span> <span class="o">=</span> <span class="n">blank_char</span> <span class="o">+</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">charlist</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="run-inference">
+<h2>Run Inference<a class="headerlink" href="#run-inference" title="Permalink to this headline">¶</a></h2>
+<p>Now run inference. <code class="docutils literal notranslate"><span class="pre">compiled_model()</span></code> takes a list with input(s) in
+the same order as model input(s). Then we can fetch the output from
+output tensors.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run inference on the model</span>
+<span class="n">predictions</span> <span class="o">=</span> <span class="n">compiled_model</span><span class="p">([</span><span class="n">input_image</span><span class="p">])[</span><span class="n">recognition_output_layer</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="process-output-data">
+<h2>Process Output Data<a class="headerlink" href="#process-output-data" title="Permalink to this headline">¶</a></h2>
+<p>The output of model format is W x B x L, where:</p>
+<ul class="simple">
+<li><p>W - output sequence length</p></li>
+<li><p>B - batch size</p></li>
+<li><p>L - confidence distribution across the supported symbols in Kondate
+and Nakayosi.</p></li>
+</ul>
+<p>To get a more human-readable format, select a symbol with the highest
+probability. When you hold a list of indexes that are predicted to have
+the highest probability, due to limitations in <a class="reference external" href="https://towardsdatascience.com/beam-search-decoding-in-ctc-trained-neural-networks-5a889a3d85a7">CTC
+Decoding</a>,
+you will remove concurrent symbols and then remove the blanks.</p>
+<p>The last step is getting the symbols from corresponding indexes in the
+charlist.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Remove batch dimension</span>
+<span class="n">predictions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">predictions</span><span class="p">)</span>
+
+<span class="c1"># Run argmax to pick the symbols with the highest probability</span>
+<span class="n">predictions_indexes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">predictions</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use groupby to remove concurrent letters, as required by CTC greedy decoding</span>
+<span class="n">output_text_indexes</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">groupby</span><span class="p">(</span><span class="n">predictions_indexes</span><span class="p">))</span>
+
+<span class="c1"># Remove grouper objects</span>
+<span class="n">output_text_indexes</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">output_text_indexes</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+
+<span class="c1"># Remove blank symbols</span>
+<span class="n">output_text_indexes</span> <span class="o">=</span> <span class="n">output_text_indexes</span><span class="p">[</span><span class="n">output_text_indexes</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># Assign letters to indexes from output array</span>
+<span class="n">output_text</span> <span class="o">=</span> <span class="p">[</span><span class="n">letters</span><span class="p">[</span><span class="n">letter_index</span><span class="p">]</span> <span class="k">for</span> <span class="n">letter_index</span> <span class="ow">in</span> <span class="n">output_text_indexes</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="print-output">
+<h2>Print Output<a class="headerlink" href="#print-output" title="Permalink to this headline">¶</a></h2>
+<p>Now you have a list of letters predicted by the model. The only thing
+left to do is display the image with predicted text printed below.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">resized_image</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">255</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_text</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>人有悲欢离合，月有阴睛圆缺，此事古难全。
+</pre></div>
+</div>
+<img alt="../_images/209-handwritten-ocr-with-output_29_1.png" src="../_images/209-handwritten-ocr-with-output_29_1.png" />
+</div>
+</div>
+
+
+                </div>
+            
+            
+                <div class='prev-next-bottom'>
+                  
+    <a class='button bttn-sec button-size-l' id="prev-link" href="208-optical-character-recognition-with-output.html" title="previous page">Prev</a>
+    <a class='button bttn-sec button-size-l' id="next-link" href="210-ct-scan-live-inference-with-output.html" title="next page">Next</a>
+
+                </div>
+            
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+<footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2021, Intel®.<br>
+</p>
+    </div>
+    
+    <div class="footer-item">
+      <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

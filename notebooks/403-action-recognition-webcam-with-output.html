@@ -1,0 +1,1171 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Human Action Recognition with OpenVINO &#8212; OpenVINO™  documentation</title>
+    
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/blank.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/doxyrest-pygments.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <link href="../_static/css/media/favicon.ico" rel="shortcut icon">
+    <link rel="stylesheet" href="../_static/css/openvino_sphinx_theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/button.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/input.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/textfield.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/tabs.css" type="text/css" />
+    <script src="../_static/js/openvino_sphinx_theme.js"></script>
+    <link rel="stylesheet" href="../_static/css/viewer.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/0.5.7/chartjs-plugin-annotation.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-barchart-background@1.3.0/build/Plugin.Barchart.Background.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-deferred@1"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.1/papaparse.min.js"></script>
+    <script src="../_static/js/viewer.min.js"></script>
+    <script src="/assets/versions_raw.js"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/tabs.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/js/custom.js"></script>
+    <script src="../_static/js/graphs.js"></script>
+    <script src="../_static/js/graphs_ov_tf.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/target-highlight.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <link rel="canonical" href="https://docs.openvino.ai/latest/notebooks/403-action-recognition-webcam-with-output.html" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="PaddleOCR with OpenVINO" href="405-paddle-ocr-webcam-with-output.html" />
+    <link rel="prev" title="Live Human Pose Estimation with OpenVINO" href="402-pose-estimation-with-output.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+      <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+
+<a class="navbar-brand" href="../index.html">
+  <img src="../_static/logo.svg" class="logo" alt="logo">
+</a>
+
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../pages/get_started.html">
+  Get Started
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../pages/documentation.html">
+  Documentation
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../tutorials.html">
+  Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../model_zoo.html">
+  Model Zoo
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../pages/resources.html">
+  Resources
+ </a>
+</li>
+
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/openvinotoolkit/openvino" rel="noopener" target="_blank" title="GitHub">
+            <span><i class="sst-github"></i></span>
+            <label class="sr-only">GitHub</label>
+          </a>
+        </li>
+</ul>
+      </div>
+      
+      <div class="navbar-end-item">
+        
+<div class="dropdown sst-dropdown sst-dropdown-navbar">
+  <button class="btn sst-btn dropdown-toggle" type="button" id="version-selector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+  <div class="dropdown-menu" aria-labelledby="version-selector">
+  </div>
+</div>
+      </div>
+      
+      <div class="navbar-end-item">
+        
+
+<div class="dropdown sst-dropdown sst-dropdown-navbar">
+  <button class="btn sst-btn dropdown-toggle" type="button" id="language-selector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">English</button>
+  <div class="dropdown-menu" aria-labelledby="language-selector">
+    
+      
+        <a class="dropdown-item font-weight-bold" href="/latest/notebooks/403-action-recognition-webcam-with-output.html">English</a>
+      
+    
+      
+        <a  class="dropdown-item" href="/cn/latest/notebooks/403-action-recognition-webcam-with-output.html">Chinese</a>
+      
+    
+  </div>
+</div>
+
+      </div>
+      
+    </div>
+  </div>
+</div>
+        <div id="collapse-nav-wrapper" class="container-xl">
+          <button id="collapse-nav" class="button bttn-prm button-size-m" type="button" data-toggle="collapse" data-target="#nav-tree" aria-expanded="false" aria-controls="nav-tree">
+            Documentation navigation <i class="fas fa-chevron-down"></i>
+          </button>
+        </div>
+      </nav>
+      <div class="transition-banner container-fluid alert alert-info alert-dismissible fade show" role="alert">
+        <p>OpenVINO 2022.1 introduces a new version of OpenVINO API (API 2.0). For more information on the changes and transition steps, see the <a href="https://docs.openvino.ai/latest/openvino_2_0_transition_guide.html">transition guide</a></p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar" id="nav-tree"><form class="searchForm bd-search d-flex align-items-center" action="../search.html" method="get">
+    <i class="icon fas fa-search"></i>
+    <input type="search" class="form-control" name="query" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="001-hello-world-with-output.html">
+   Hello Image Classification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="002-openvino-api-with-output.html">
+   OpenVINO API Tutorial
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="003-hello-segmentation-with-output.html">
+   Hello Image Segmentation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="004-hello-detection-with-output.html">
+   Hello Object Detection
+  </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="101-tensorflow-to-openvino-with-output.html">
+   Convert a TensorFlow Model to OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="102-pytorch-onnx-to-openvino-with-output.html">
+   Convert a PyTorch Model to ONNX and OpenVINO IR
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="103-paddle-onnx-to-openvino-classification-with-output.html">
+   Convert a PaddlePaddle Model to ONNX and OpenVINO IR
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="104-model-tools-with-output.html">
+   Working with Open Model Zoo Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="105-language-quantize-bert-with-output.html">
+   Quantize NLP models with OpenVINO Post-Training Optimization Tool ​
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="106-auto-device-with-output.html">
+   Automatic Device Selection with OpenVINO™
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="110-ct-segmentation-quantize-with-output.html">
+   Quantize a Segmentation Model and Show Live Inference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="111-detection-quantization-with-output.html">
+   Object Detection Quantization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="112-pytorch-post-training-quantization-nncf-with-output.html">
+   Post-Training Quantization of PyTorch models with NNCF
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="113-image-classification-quantization-with-output.html">
+   Quantization of Image Classification Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="114-quantization-simplified-mode-with-output.html">
+   INT8 Quantization with Post-training Optimization Tool (POT) in Simplified Mode tutorial
+  </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="201-vision-monodepth-with-output.html">
+   Monodepth Estimation with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="202-vision-superresolution-image-with-output.html">
+   Single Image Super Resolution with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="202-vision-superresolution-video-with-output.html">
+   Video Super Resolution with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="205-vision-background-removal-with-output.html">
+   Image Background Removal with U^2-Net and OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="206-vision-paddlegan-anime-with-output.html">
+   Photos to Anime with PaddleGAN and OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="207-vision-paddlegan-superresolution-with-output.html">
+   Super Resolution with PaddleGAN and OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="208-optical-character-recognition-with-output.html">
+   Optical Character Recognition (OCR) with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="209-handwritten-ocr-with-output.html">
+   Handwritten Chinese and Japanese OCR
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="210-ct-scan-live-inference-with-output.html">
+   Live Inference and Benchmark CT-scan Data with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="211-speech-to-text-with-output.html">
+   Speech to Text with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="212-onnx-style-transfer-with-output.html">
+   Style Transfer on ONNX Models with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="213-question-answering-with-output.html">
+   Interactive question answering with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="214-vision-paddle-classification-with-output.html">
+   PaddlePaddle Image Classification with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="215-image-inpainting-with-output.html">
+   Image In-painting with OpenVINO™
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="217-vision-deblur-with-output.html">
+   Deblur Photos with DeblurGAN-v2 and OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="218-vehicle-detection-and-recognition-with-output.html">
+   Vehicle Detection And Recognition with OpenVINO
+  </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="301-tensorflow-training-openvino-with-output.html">
+   From Training to Deployment with TensorFlow and OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="301-tensorflow-training-openvino-pot-with-output.html">
+   Post-Training Quantization with TensorFlow Classification Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="302-pytorch-quantization-aware-training-with-output.html">
+   Quantization Aware Training with NNCF, using PyTorch framework
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="305-tensorflow-quantization-aware-training-with-output.html">
+   Quantization Aware Training with NNCF, using TensorFlow Framework
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="401-object-detection-with-output.html">
+   Live Object Detection with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="402-pose-estimation-with-output.html">
+   Live Human Pose Estimation with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Human Action Recognition with OpenVINO
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="405-paddle-ocr-webcam-with-output.html">
+   PaddleOCR with OpenVINO
+  </a>
+ </li>
+</ul>
+
+  </div>
+</nav>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+              
+              <div class="toc-item">
+                
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#imports">
+   Imports
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-models">
+   The models
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#download-the-models">
+     Download the models
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#load-your-labels">
+     Load your labels
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#load-the-models">
+     Load the models
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#model-initialization-function">
+       Model Initialization function
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#initialization-for-encoder-and-decoder">
+       Initialization for Encoder and Decoder
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#helper-functions">
+     Helper functions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#ai-functions">
+     AI Functions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#main-processing-function">
+     Main Processing Function
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#run-action-recognition-on-a-video-file">
+     Run Action Recognition on a Video File
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#run-action-recognition-using-your-webcam">
+     Run Action Recognition using your webcam
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+</nav>
+              </div>
+              
+              <div class="toc-item">
+                <div class="tocsection download-docs">
+  <div class="dropdown sst-dropdown">
+    <button class="button bttn-prm button-size-m" data-display="static" type="button" id="download-options"
+      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Download Docs
+    </button>
+    <div class="dropdown-menu" aria-labelledby="download-options">
+      <a class="dropdown-item" href="#" onclick="window.print()">.pdf</a>
+      <a id="download-zip-btn" class="dropdown-item" href="#">.zip</a>
+    </div>
+  </div>
+</div>
+              </div>
+              
+            
+          </div>
+          
+
+          
+          
+              
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+
+<div class="tocsection editthispage">
+    <a href="None">
+        <i class="fas fa-pencil-alt"></i> Edit this page
+    </a>
+</div>
+
+            
+                <div>
+                  
+  <div class="section" id="human-action-recognition-with-openvino">
+<h1>Human Action Recognition with OpenVINO<a class="headerlink" href="#human-action-recognition-with-openvino" title="Permalink to this headline">¶</a></h1>
+<p>This notebook demonstrates live human action recognition with OpenVINO.
+We use the <a class="reference external" href="https://docs.openvino.ai/2020.2/usergroup13.html">Action Recognition
+Models</a> from <a class="reference external" href="https://github.com/openvinotoolkit/open_model_zoo">Open
+Model Zoo</a>,
+specifically an
+<a class="reference external" href="https://docs.openvino.ai/2020.2/_models_intel_action_recognition_0001_encoder_description_action_recognition_0001_encoder.html">Encoder</a>
+and a
+<a class="reference external" href="https://docs.openvino.ai/2020.2/_models_intel_action_recognition_0001_decoder_description_action_recognition_0001_decoder.html">Decoder</a>.
+Both models create a sequence to sequence (<code class="docutils literal notranslate"><span class="pre">&quot;seq2seq&quot;</span></code>)<a class="reference external" href="#f1">1</a>system to identify the human activities for <a class="reference external" href="https://deepmind.com/research/open-source/kinetics">Kinetics-400
+dataset</a>. The
+models use the Video Transformer approach with ResNet34
+encoder<a class="reference external" href="#f2">2</a>. In the notebook we show how to create the
+following pipeline:</p>
+<p>At the end of this notebook, you will see live inference results from
+your webcam. You can also upload a video file.</p>
+<p>NOTE: <em>To use the webcam, you must run this Jupyter notebook on a
+computer with a webcam. If you run on a server, the webcam will not
+work. However, you can still do inference on a video in the final step.</em></p>
+<blockquote>
+<div><p>1 seq2seq: Deep learning models that take a sequence of items to the
+input and output. In this case, input: video frames, output: actions
+sequence. This <code class="docutils literal notranslate"><span class="pre">&quot;seq2seq&quot;</span></code> is composed of an encoder and a decoder.
+The encoder captures the <code class="docutils literal notranslate"><span class="pre">&quot;context&quot;</span></code> of the inputs to be analyzed
+by the decoder, and finally gets the human action and
+confidence.<cite>:math:</cite>hookleftarrow` &lt;#a1&gt;`__</p>
+</div></blockquote>
+<blockquote>
+<div><p>2 <a class="reference external" href="https://en.wikipedia.org/wiki/Transformer_(machine_learning_model)">Video
+Transformer</a>
+and <a class="reference external" href="https://www.kaggle.com/pytorch/resnet34">ResNet34</a>.
+<cite>:math:</cite>hookleftarrow` &lt;#a2&gt;`__</p>
+</div></blockquote>
+<div class="section" id="imports">
+<h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">collections</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">List</span>
+
+<span class="kn">import</span> <span class="nn">cv2</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">IPython</span> <span class="kn">import</span> <span class="n">display</span>
+<span class="kn">from</span> <span class="nn">openvino.runtime</span> <span class="kn">import</span> <span class="n">Core</span>
+<span class="kn">from</span> <span class="nn">openvino.runtime.ie_api</span> <span class="kn">import</span> <span class="n">CompiledModel</span>
+
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;../utils&quot;</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">notebook_utils</span> <span class="k">as</span> <span class="nn">utils</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="the-models">
+<h2>The models<a class="headerlink" href="#the-models" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="download-the-models">
+<h3>Download the models<a class="headerlink" href="#download-the-models" title="Permalink to this headline">¶</a></h3>
+<p>We use <code class="docutils literal notranslate"><span class="pre">omz_downloader</span></code>, which is a command-line tool from the
+<code class="docutils literal notranslate"><span class="pre">openvino-dev</span></code> package. <code class="docutils literal notranslate"><span class="pre">omz_downloader</span></code> automatically creates a
+directory structure and downloads the selected model.</p>
+<p>In this case you can use <code class="docutils literal notranslate"><span class="pre">&quot;action-recognition-0001&quot;</span></code> as a model name,
+and the system automatically downloads the two models
+<code class="docutils literal notranslate"><span class="pre">&quot;action-recognition-0001-encoder&quot;</span></code> and
+<code class="docutils literal notranslate"><span class="pre">&quot;action-recognition-0001-decoder&quot;</span></code></p>
+<blockquote>
+<div><p>Note: <em>If you want to download another model, such as
+``”driver-action-recognition-adas-0002”``
+(``”driver-action-recognition-adas-0002-encoder”`` +
+``”driver-action-recognition-adas-0002-decoder”``), please change the
+model name. Using a model outside the list can require different pre-
+and post-processing.</em></p>
+</div></blockquote>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Directory where model will be downloaded</span>
+<span class="n">base_model_dir</span> <span class="o">=</span> <span class="s2">&quot;model&quot;</span>
+<span class="c1"># Model name as named in Open Model Zoo</span>
+<span class="n">model_name</span> <span class="o">=</span> <span class="s2">&quot;action-recognition-0001&quot;</span>
+<span class="c1"># Selected precision (FP32, FP16, FP16-INT8)</span>
+<span class="n">precision</span> <span class="o">=</span> <span class="s2">&quot;FP16&quot;</span>
+<span class="n">model_path_decoder</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="sa">f</span><span class="s2">&quot;model/intel/</span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2">-decoder/</span><span class="si">{</span><span class="n">precision</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2">-decoder.xml&quot;</span>
+<span class="p">)</span>
+<span class="n">model_path_encoder</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="sa">f</span><span class="s2">&quot;model/intel/</span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2">-encoder/</span><span class="si">{</span><span class="n">precision</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2">-encoder.xml&quot;</span>
+<span class="p">)</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">model_path_decoder</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">model_path_encoder</span><span class="p">):</span>
+    <span class="n">download_command</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;omz_downloader &quot;</span> \
+                       <span class="sa">f</span><span class="s2">&quot;--name </span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2"> &quot;</span> \
+                       <span class="sa">f</span><span class="s2">&quot;--precision </span><span class="si">{</span><span class="n">precision</span><span class="si">}</span><span class="s2"> &quot;</span> \
+                       <span class="sa">f</span><span class="s2">&quot;--output_dir </span><span class="si">{</span><span class="n">base_model_dir</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="o">!</span> <span class="nv">$download_command</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">################|| Downloading action-recognition-0001-decoder ||################</span>
+
+<span class="o">==========</span> <span class="n">Downloading</span> <span class="n">model</span><span class="o">/</span><span class="n">intel</span><span class="o">/</span><span class="n">action</span><span class="o">-</span><span class="n">recognition</span><span class="o">-</span><span class="mi">0001</span><span class="o">/</span><span class="n">action</span><span class="o">-</span><span class="n">recognition</span><span class="o">-</span><span class="mi">0001</span><span class="o">-</span><span class="n">decoder</span><span class="o">/</span><span class="n">FP16</span><span class="o">/</span><span class="n">action</span><span class="o">-</span><span class="n">recognition</span><span class="o">-</span><span class="mi">0001</span><span class="o">-</span><span class="n">decoder</span><span class="o">.</span><span class="n">xml</span>
+
+
+<span class="o">==========</span> <span class="n">Downloading</span> <span class="n">model</span><span class="o">/</span><span class="n">intel</span><span class="o">/</span><span class="n">action</span><span class="o">-</span><span class="n">recognition</span><span class="o">-</span><span class="mi">0001</span><span class="o">/</span><span class="n">action</span><span class="o">-</span><span class="n">recognition</span><span class="o">-</span><span class="mi">0001</span><span class="o">-</span><span class="n">decoder</span><span class="o">/</span><span class="n">FP16</span><span class="o">/</span><span class="n">action</span><span class="o">-</span><span class="n">recognition</span><span class="o">-</span><span class="mi">0001</span><span class="o">-</span><span class="n">decoder</span><span class="o">.</span><span class="n">bin</span>
+
+
+<span class="c1">################|| Downloading action-recognition-0001-encoder ||################</span>
+
+<span class="o">==========</span> <span class="n">Downloading</span> <span class="n">model</span><span class="o">/</span><span class="n">intel</span><span class="o">/</span><span class="n">action</span><span class="o">-</span><span class="n">recognition</span><span class="o">-</span><span class="mi">0001</span><span class="o">/</span><span class="n">action</span><span class="o">-</span><span class="n">recognition</span><span class="o">-</span><span class="mi">0001</span><span class="o">-</span><span class="n">encoder</span><span class="o">/</span><span class="n">FP16</span><span class="o">/</span><span class="n">action</span><span class="o">-</span><span class="n">recognition</span><span class="o">-</span><span class="mi">0001</span><span class="o">-</span><span class="n">encoder</span><span class="o">.</span><span class="n">xml</span>
+
+
+<span class="o">==========</span> <span class="n">Downloading</span> <span class="n">model</span><span class="o">/</span><span class="n">intel</span><span class="o">/</span><span class="n">action</span><span class="o">-</span><span class="n">recognition</span><span class="o">-</span><span class="mi">0001</span><span class="o">/</span><span class="n">action</span><span class="o">-</span><span class="n">recognition</span><span class="o">-</span><span class="mi">0001</span><span class="o">-</span><span class="n">encoder</span><span class="o">/</span><span class="n">FP16</span><span class="o">/</span><span class="n">action</span><span class="o">-</span><span class="n">recognition</span><span class="o">-</span><span class="mi">0001</span><span class="o">-</span><span class="n">encoder</span><span class="o">.</span><span class="n">bin</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="load-your-labels">
+<h3>Load your labels<a class="headerlink" href="#load-your-labels" title="Permalink to this headline">¶</a></h3>
+<p>We are using <a class="reference external" href="https://deepmind.com/research/open-source/kinetics">Kinetics-400
+dataset</a>, and
+also we are providing you with the text file embedded into this
+notebook.</p>
+<blockquote>
+<div><p>Note: <em>If you want to run ``”driver-action-recognition-adas-0002”``
+model, change the txt file for ``”driver_actions.txt”``</em></p>
+</div></blockquote>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">labels</span> <span class="o">=</span> <span class="s2">&quot;data/kinetics.txt&quot;</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">labels</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">9</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">labels</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="s1">&#39;abseiling&#39;</span><span class="p">,</span> <span class="s1">&#39;air drumming&#39;</span><span class="p">,</span> <span class="s1">&#39;answering questions&#39;</span><span class="p">,</span> <span class="s1">&#39;applauding&#39;</span><span class="p">,</span> <span class="s1">&#39;applying cream&#39;</span><span class="p">,</span> <span class="s1">&#39;archery&#39;</span><span class="p">,</span> <span class="s1">&#39;arm wrestling&#39;</span><span class="p">,</span> <span class="s1">&#39;arranging flowers&#39;</span><span class="p">,</span> <span class="s1">&#39;assembling computer&#39;</span><span class="p">]</span> <span class="p">(</span><span class="mi">400</span><span class="p">,)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="load-the-models">
+<h3>Load the models<a class="headerlink" href="#load-the-models" title="Permalink to this headline">¶</a></h3>
+<p>We will load the two models for this particular architecture, Encoder
+and Decoder. Downloaded models are located in a fixed structure,
+indicating vendor, model name, and precision.</p>
+<ol class="arabic simple">
+<li><p>Initialize inference engine (IECore)</p></li>
+<li><p>Read the network from <em>.bin and</em>.xml files (weights and architecture)</p></li>
+<li><p>Compile the model for the “CPU.”</p></li>
+<li><p>Get input and output names of nodes.</p></li>
+</ol>
+<p>Only a few lines of code are required to run the model. Let’s see it.</p>
+<div class="section" id="model-initialization-function">
+<h4>Model Initialization function<a class="headerlink" href="#model-initialization-function" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initialize inference engine</span>
+<span class="n">ie_core</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">model_init</span><span class="p">(</span><span class="n">model_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Read the network and weights from file, load the</span>
+<span class="sd">    model on the CPU and get input and output names of nodes</span>
+
+<span class="sd">    :param: model: model architecture path *.xml</span>
+<span class="sd">    :retuns:</span>
+<span class="sd">            compiled_model: Compiled model</span>
+<span class="sd">            input_key: Input node for model</span>
+<span class="sd">            output_key: Output node for model</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Read the network and corresponding weights from file</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">ie_core</span><span class="o">.</span><span class="n">read_model</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model_path</span><span class="p">)</span>
+    <span class="c1"># compile the model for the CPU (you can use GPU or MYRIAD as well)</span>
+    <span class="n">compiled_model</span> <span class="o">=</span> <span class="n">ie_core</span><span class="o">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">device_name</span><span class="o">=</span><span class="s2">&quot;CPU&quot;</span><span class="p">)</span>
+    <span class="c1"># Get input and output names of nodes</span>
+    <span class="n">input_keys</span> <span class="o">=</span> <span class="n">compiled_model</span><span class="o">.</span><span class="n">input</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">output_keys</span> <span class="o">=</span> <span class="n">compiled_model</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">input_keys</span><span class="p">,</span> <span class="n">output_keys</span><span class="p">,</span> <span class="n">compiled_model</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="initialization-for-encoder-and-decoder">
+<h4>Initialization for Encoder and Decoder<a class="headerlink" href="#initialization-for-encoder-and-decoder" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Encoder initialization</span>
+<span class="n">input_key_en</span><span class="p">,</span> <span class="n">output_keys_en</span><span class="p">,</span> <span class="n">compiled_model_en</span> <span class="o">=</span> <span class="n">model_init</span><span class="p">(</span><span class="n">model_path_encoder</span><span class="p">)</span>
+<span class="c1"># Decoder initialization</span>
+<span class="n">input_key_de</span><span class="p">,</span> <span class="n">output_keys_de</span><span class="p">,</span> <span class="n">compiled_model_de</span> <span class="o">=</span> <span class="n">model_init</span><span class="p">(</span><span class="n">model_path_decoder</span><span class="p">)</span>
+
+<span class="c1"># Get input size - Encoder</span>
+<span class="n">height_en</span><span class="p">,</span> <span class="n">width_en</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">input_key_en</span><span class="o">.</span><span class="n">shape</span><span class="p">)[</span><span class="mi">2</span><span class="p">:]</span>
+<span class="c1"># Get input size - Decoder</span>
+<span class="n">frames2decode</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">input_key_de</span><span class="o">.</span><span class="n">shape</span><span class="p">)[</span><span class="mi">0</span><span class="p">:][</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="helper-functions">
+<h3>Helper functions<a class="headerlink" href="#helper-functions" title="Permalink to this headline">¶</a></h3>
+<p>We will use the following helper functions for preprocessing and
+postprocessing frames:</p>
+<ol class="arabic simple">
+<li><p>Preprocess the input image before running the Encoder model.
+(<code class="docutils literal notranslate"><span class="pre">center_crop</span></code> and <code class="docutils literal notranslate"><span class="pre">adaptative_resize</span></code>)</p></li>
+<li><p>Decode top-3 probabilities into label names. (<code class="docutils literal notranslate"><span class="pre">decode_output</span></code>)</p></li>
+<li><p>Draw the Region of Interest (ROI) over the video.
+(<code class="docutils literal notranslate"><span class="pre">rec_frame_display</span></code>)</p></li>
+<li><p>Prepare the frame for displaying label names over the video.
+(<code class="docutils literal notranslate"><span class="pre">display_text_fnc</span></code>)</p></li>
+</ol>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">center_crop</span><span class="p">(</span><span class="n">frame</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Center crop squared the original frame to standardize the input image to the encoder model</span>
+
+<span class="sd">    :param frame: input frame</span>
+<span class="sd">    :returns: center-crop-squared frame</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">img_h</span><span class="p">,</span> <span class="n">img_w</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">min_dim</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">img_h</span><span class="p">,</span> <span class="n">img_w</span><span class="p">)</span>
+    <span class="n">start_x</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">img_w</span> <span class="o">-</span> <span class="n">min_dim</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">)</span>
+    <span class="n">start_y</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">img_h</span> <span class="o">-</span> <span class="n">min_dim</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">)</span>
+    <span class="n">roi</span> <span class="o">=</span> <span class="p">[</span><span class="n">start_y</span><span class="p">,</span> <span class="p">(</span><span class="n">start_y</span> <span class="o">+</span> <span class="n">min_dim</span><span class="p">),</span> <span class="n">start_x</span><span class="p">,</span> <span class="p">(</span><span class="n">start_x</span> <span class="o">+</span> <span class="n">min_dim</span><span class="p">)]</span>
+    <span class="k">return</span> <span class="n">frame</span><span class="p">[</span><span class="n">start_y</span> <span class="p">:</span> <span class="p">(</span><span class="n">start_y</span> <span class="o">+</span> <span class="n">min_dim</span><span class="p">),</span> <span class="n">start_x</span> <span class="p">:</span> <span class="p">(</span><span class="n">start_x</span> <span class="o">+</span> <span class="n">min_dim</span><span class="p">),</span> <span class="o">...</span><span class="p">],</span> <span class="n">roi</span>
+
+
+<span class="k">def</span> <span class="nf">adaptive_resize</span><span class="p">(</span><span class="n">frame</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">     The frame going to be resized to have a height of size or a width of size</span>
+
+<span class="sd">    :param frame: input frame</span>
+<span class="sd">    :param size: input size to encoder model</span>
+<span class="sd">    :returns: resized frame, np.array type</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">h</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">scale</span> <span class="o">=</span> <span class="n">size</span> <span class="o">/</span> <span class="nb">min</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
+    <span class="n">w_scaled</span><span class="p">,</span> <span class="n">h_scaled</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">w</span> <span class="o">*</span> <span class="n">scale</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">h</span> <span class="o">*</span> <span class="n">scale</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">w_scaled</span> <span class="o">==</span> <span class="n">w</span> <span class="ow">and</span> <span class="n">h_scaled</span> <span class="o">==</span> <span class="n">h</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">frame</span>
+    <span class="k">return</span> <span class="n">cv2</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="p">(</span><span class="n">w_scaled</span><span class="p">,</span> <span class="n">h_scaled</span><span class="p">))</span>
+
+
+<span class="k">def</span> <span class="nf">decode_output</span><span class="p">(</span><span class="n">probs</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">labels</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">top_k</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Decodes top probabilities into corresponding label names</span>
+
+<span class="sd">    :param probs: confidence vector for 400 actions</span>
+<span class="sd">    :param labels: list of actions</span>
+<span class="sd">    :param top_k: The k most probable positions in the list of labels</span>
+<span class="sd">    :returns: decoded_labels: The k most probable actions from the labels list</span>
+<span class="sd">              decoded_top_probs: confidence for the k most probable actions</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">top_ind</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span> <span class="o">*</span> <span class="n">probs</span><span class="p">)[:</span><span class="n">top_k</span><span class="p">]</span>
+    <span class="n">out_label</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">labels</span><span class="p">)[</span><span class="n">top_ind</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)]</span>
+    <span class="n">decoded_labels</span> <span class="o">=</span> <span class="p">[</span><span class="n">out_label</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">out_label</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">out_label</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">]]</span>
+    <span class="n">top_probs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">probs</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="n">top_ind</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)]</span>
+    <span class="n">decoded_top_probs</span> <span class="o">=</span> <span class="p">[</span><span class="n">top_probs</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">top_probs</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">top_probs</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">]]</span>
+    <span class="k">return</span> <span class="n">decoded_labels</span><span class="p">,</span> <span class="n">decoded_top_probs</span>
+
+
+<span class="k">def</span> <span class="nf">rec_frame_display</span><span class="p">(</span><span class="n">frame</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">roi</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Draw a rec frame over actual frame</span>
+
+<span class="sd">    :param frame: input frame</span>
+<span class="sd">    :param roi: Region of interest, image section processed by the Encoder</span>
+<span class="sd">    :returns: frame with drawed shape</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">cv2</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="p">(</span><span class="n">roi</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="mi">3</span><span class="p">,</span> <span class="n">roi</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="n">roi</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="mi">3</span><span class="p">,</span> <span class="n">roi</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">100</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">cv2</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="p">(</span><span class="n">roi</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="mi">3</span><span class="p">,</span> <span class="n">roi</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="n">roi</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="mi">100</span><span class="p">,</span> <span class="n">roi</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">cv2</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="p">(</span><span class="n">roi</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">-</span> <span class="mi">3</span><span class="p">,</span> <span class="n">roi</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="n">roi</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">-</span> <span class="mi">3</span><span class="p">,</span> <span class="n">roi</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">100</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">cv2</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="p">(</span><span class="n">roi</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">-</span> <span class="mi">3</span><span class="p">,</span> <span class="n">roi</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="n">roi</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">-</span> <span class="mi">100</span><span class="p">,</span> <span class="n">roi</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">cv2</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="p">(</span><span class="n">roi</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">-</span> <span class="mi">3</span><span class="p">,</span> <span class="n">roi</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="n">roi</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">-</span> <span class="mi">3</span><span class="p">,</span> <span class="n">roi</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">100</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">cv2</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="p">(</span><span class="n">roi</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">-</span> <span class="mi">3</span><span class="p">,</span> <span class="n">roi</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="n">roi</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">-</span> <span class="mi">100</span><span class="p">,</span> <span class="n">roi</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">cv2</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="p">(</span><span class="n">roi</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="mi">3</span><span class="p">,</span> <span class="n">roi</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="n">roi</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="mi">3</span><span class="p">,</span> <span class="n">roi</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">100</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">cv2</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="p">(</span><span class="n">roi</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="mi">3</span><span class="p">,</span> <span class="n">roi</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="n">roi</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="mi">100</span><span class="p">,</span> <span class="n">roi</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="c1"># Write ROI over actual frame</span>
+    <span class="n">FONT_STYLE</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">FONT_HERSHEY_SIMPLEX</span>
+    <span class="n">org</span> <span class="o">=</span> <span class="p">(</span><span class="n">roi</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="mi">3</span><span class="p">,</span> <span class="n">roi</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="n">org2</span> <span class="o">=</span> <span class="p">(</span><span class="n">roi</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="n">roi</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">FONT_SIZE</span> <span class="o">=</span> <span class="mf">0.5</span>
+    <span class="n">FONT_COLOR</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">FONT_COLOR2</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">cv2</span><span class="o">.</span><span class="n">putText</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="s2">&quot;ROI&quot;</span><span class="p">,</span> <span class="n">org2</span><span class="p">,</span> <span class="n">FONT_STYLE</span><span class="p">,</span> <span class="n">FONT_SIZE</span><span class="p">,</span> <span class="n">FONT_COLOR2</span><span class="p">)</span>
+    <span class="n">cv2</span><span class="o">.</span><span class="n">putText</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="s2">&quot;ROI&quot;</span><span class="p">,</span> <span class="n">org</span><span class="p">,</span> <span class="n">FONT_STYLE</span><span class="p">,</span> <span class="n">FONT_SIZE</span><span class="p">,</span> <span class="n">FONT_COLOR</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">frame</span>
+
+
+<span class="k">def</span> <span class="nf">display_text_fnc</span><span class="p">(</span><span class="n">frame</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">display_text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Include text on the analized frame</span>
+
+<span class="sd">    :param frame: input frame</span>
+<span class="sd">    :param display_text: text to add on the frame</span>
+<span class="sd">    :param index: index line dor adding text</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Configuration for displaying images with text</span>
+    <span class="n">FONT_COLOR</span> <span class="o">=</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
+    <span class="n">FONT_COLOR2</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">FONT_STYLE</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">FONT_HERSHEY_DUPLEX</span>
+    <span class="n">FONT_SIZE</span> <span class="o">=</span> <span class="mf">0.7</span>
+    <span class="n">TEXT_VERTICAL_INTERVAL</span> <span class="o">=</span> <span class="mi">25</span>
+    <span class="n">TEXT_LEFT_MARGIN</span> <span class="o">=</span> <span class="mi">15</span>
+    <span class="c1"># ROI over actual frame</span>
+    <span class="p">(</span><span class="n">processed</span><span class="p">,</span> <span class="n">roi</span><span class="p">)</span> <span class="o">=</span> <span class="n">center_crop</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span>
+    <span class="c1"># Draw a ROI over actual frame</span>
+    <span class="n">frame</span> <span class="o">=</span> <span class="n">rec_frame_display</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">roi</span><span class="p">)</span>
+    <span class="c1"># Put text over actual frame</span>
+    <span class="n">text_loc</span> <span class="o">=</span> <span class="p">(</span><span class="n">TEXT_LEFT_MARGIN</span><span class="p">,</span> <span class="n">TEXT_VERTICAL_INTERVAL</span> <span class="o">*</span> <span class="p">(</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">text_loc2</span> <span class="o">=</span> <span class="p">(</span><span class="n">TEXT_LEFT_MARGIN</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">TEXT_VERTICAL_INTERVAL</span> <span class="o">*</span> <span class="p">(</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">cv2</span><span class="o">.</span><span class="n">putText</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">display_text</span><span class="p">,</span> <span class="n">text_loc2</span><span class="p">,</span> <span class="n">FONT_STYLE</span><span class="p">,</span> <span class="n">FONT_SIZE</span><span class="p">,</span> <span class="n">FONT_COLOR2</span><span class="p">)</span>
+    <span class="n">cv2</span><span class="o">.</span><span class="n">putText</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">display_text</span><span class="p">,</span> <span class="n">text_loc</span><span class="p">,</span> <span class="n">FONT_STYLE</span><span class="p">,</span> <span class="n">FONT_SIZE</span><span class="p">,</span> <span class="n">FONT_COLOR</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="ai-functions">
+<h3>AI Functions<a class="headerlink" href="#ai-functions" title="Permalink to this headline">¶</a></h3>
+<p>Following this pipeline,</p>
+<p>we will use the next functions to help us to:</p>
+<ol class="arabic simple">
+<li><p>Preprocess frame before running the Encoder. (<code class="docutils literal notranslate"><span class="pre">preprocessing</span></code>)</p></li>
+<li><p>Encoder Inference per frame. (<code class="docutils literal notranslate"><span class="pre">encoder</span></code>)</p></li>
+<li><p>Decoder inference per set of frames. (<code class="docutils literal notranslate"><span class="pre">decoder</span></code>)</p></li>
+<li><p>Normalize the Decoder output to get confidence values per action
+recognition label. (<code class="docutils literal notranslate"><span class="pre">softmax</span></code>)</p></li>
+</ol>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">preprocessing</span><span class="p">(</span><span class="n">frame</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Preparing frame before Encoder.</span>
+<span class="sd">    The image should be scaled to its shortest dimension at &quot;size&quot;</span>
+<span class="sd">    and cropped, centered, and squared so that both width and</span>
+<span class="sd">    height have lengths &quot;size&quot;. Frame must be transposed from</span>
+<span class="sd">    Height-Width-Channels (HWC) to Channels-Height-Width (CHW).</span>
+
+<span class="sd">    :param frame: input frame</span>
+<span class="sd">    :param size: input size to encoder model</span>
+<span class="sd">    :returns: resized and cropped frame</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Adaptative resize</span>
+    <span class="n">preprocessed</span> <span class="o">=</span> <span class="n">adaptive_resize</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
+    <span class="c1"># Center_crop</span>
+    <span class="p">(</span><span class="n">preprocessed</span><span class="p">,</span> <span class="n">roi</span><span class="p">)</span> <span class="o">=</span> <span class="n">center_crop</span><span class="p">(</span><span class="n">preprocessed</span><span class="p">)</span>
+    <span class="c1"># Transpose frame HWC -&gt; CHW</span>
+    <span class="n">preprocessed</span> <span class="o">=</span> <span class="n">preprocessed</span><span class="o">.</span><span class="n">transpose</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))[</span><span class="kc">None</span><span class="p">,]</span>  <span class="c1"># HWC -&gt; CHW</span>
+    <span class="k">return</span> <span class="n">preprocessed</span><span class="p">,</span> <span class="n">roi</span>
+
+
+<span class="k">def</span> <span class="nf">encoder</span><span class="p">(</span>
+    <span class="n">preprocessed</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+    <span class="n">compiled_model</span><span class="p">:</span> <span class="n">CompiledModel</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Encoder Inference per frame. This function calls the network previously</span>
+<span class="sd">    configured for the encoder model (compiled_model), extracts the data</span>
+<span class="sd">    from the output node, and appends it in an array to be used by the decoder.</span>
+
+<span class="sd">    :param: preprocessed: preprocessing frame</span>
+<span class="sd">    :param: compiled_model: Encoder model network</span>
+<span class="sd">    :returns: encoder_output: embedding layer that is appended with each arriving frame</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">output_key_en</span> <span class="o">=</span> <span class="n">compiled_model</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="c1"># Get results on action-recognition-0001-encoder model</span>
+    <span class="n">infer_result_encoder</span> <span class="o">=</span> <span class="n">compiled_model</span><span class="p">([</span><span class="n">preprocessed</span><span class="p">])[</span><span class="n">output_key_en</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">infer_result_encoder</span>
+
+
+<span class="k">def</span> <span class="nf">decoder</span><span class="p">(</span><span class="n">encoder_output</span><span class="p">:</span> <span class="n">List</span><span class="p">,</span> <span class="n">compiled_model_de</span><span class="p">:</span> <span class="n">CompiledModel</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Decoder inference per set of frames. This function concatenates the embedding layer</span>
+<span class="sd">    froms the encoder output, transpose the array to match with the decoder input size.</span>
+<span class="sd">    Calls the network previously configured for the decoder model (compiled_model_de), extracts</span>
+<span class="sd">    the logits and normalize those to get confidence values along specified axis.</span>
+<span class="sd">    Decodes top probabilities into corresponding label names</span>
+
+<span class="sd">    :param: encoder_output: embedding layer for 16 frames</span>
+<span class="sd">    :param: compiled_model_de: Decoder model network</span>
+<span class="sd">    :returns: decoded_labels: The k most probable actions from the labels list</span>
+<span class="sd">              decoded_top_probs: confidence for the k most probable actions</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Concatenate sample_duration frames in just one array</span>
+    <span class="n">decoder_input</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">encoder_output</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="c1"># Organize input shape vector to the Decoder (shape: [1x16x512]]</span>
+    <span class="n">decoder_input</span> <span class="o">=</span> <span class="n">decoder_input</span><span class="o">.</span><span class="n">transpose</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+    <span class="n">decoder_input</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">decoder_input</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">output_key_de</span> <span class="o">=</span> <span class="n">compiled_model_de</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="c1"># Get results on action-recognition-0001-decoder model</span>
+    <span class="n">result_de</span> <span class="o">=</span> <span class="n">compiled_model_de</span><span class="p">([</span><span class="n">decoder_input</span><span class="p">])[</span><span class="n">output_key_de</span><span class="p">]</span>
+    <span class="c1"># Normalize logits to get confidence values along specified axis</span>
+    <span class="n">probs</span> <span class="o">=</span> <span class="n">softmax</span><span class="p">(</span><span class="n">result_de</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">result_de</span><span class="p">))</span>
+    <span class="c1"># Decodes top probabilities into corresponding label names</span>
+    <span class="n">decoded_labels</span><span class="p">,</span> <span class="n">decoded_top_probs</span> <span class="o">=</span> <span class="n">decode_output</span><span class="p">(</span><span class="n">probs</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">top_k</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">decoded_labels</span><span class="p">,</span> <span class="n">decoded_top_probs</span>
+
+
+<span class="k">def</span> <span class="nf">softmax</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Normalizes logits to get confidence values along specified axis</span>
+<span class="sd">    x: np.array, axis=None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">exp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">exp</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">exp</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="main-processing-function">
+<h3>Main Processing Function<a class="headerlink" href="#main-processing-function" title="Permalink to this headline">¶</a></h3>
+<p>Run action recognition function will run in different operations, either
+a webcam or a video file. See the list of procedures below:</p>
+<ol class="arabic simple">
+<li><p>Create a video player to play with target fps
+(<code class="docutils literal notranslate"><span class="pre">utils.VideoPlayer</span></code>).</p></li>
+<li><p>Prepare a set of frames to be encoded-decoded.</p></li>
+<li><p>Run AI functions</p></li>
+<li><p>Visualize the results.</p></li>
+</ol>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">run_action_recognition</span><span class="p">(</span>
+    <span class="n">source</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
+    <span class="n">flip</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">use_popup</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">compiled_model_en</span><span class="p">:</span> <span class="n">CompiledModel</span> <span class="o">=</span> <span class="n">compiled_model_en</span><span class="p">,</span>
+    <span class="n">compiled_model_de</span><span class="p">:</span> <span class="n">CompiledModel</span> <span class="o">=</span> <span class="n">compiled_model_de</span><span class="p">,</span>
+    <span class="n">skip_first_frames</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Use the &quot;source&quot; webcam or video file to run the complete pipeline for action-recognition problem</span>
+<span class="sd">    1. Create a video player to play with target fps</span>
+<span class="sd">    2. Prepare a set of frames to be encoded-decoded</span>
+<span class="sd">    3. Preprocess frame before Encoder</span>
+<span class="sd">    4. Encoder Inference per frame</span>
+<span class="sd">    5. Decoder inference per set of frames</span>
+<span class="sd">    6. Visualize the results</span>
+
+<span class="sd">    :param: source: webcam &quot;0&quot; or video path</span>
+<span class="sd">    :param: flip: to be used by VideoPlayer function for flipping capture image</span>
+<span class="sd">    :param: use_popup: False for showing encoded frames over this notebook, True for creating a popup window.</span>
+<span class="sd">    :param: skip_first_frames: Number of frames to skip at the beginning of the video.</span>
+<span class="sd">    :returns: display video over the notebook or in a popup window</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">size</span> <span class="o">=</span> <span class="n">height_en</span>  <span class="c1"># Endoder input size - From Cell 5_9</span>
+    <span class="n">sample_duration</span> <span class="o">=</span> <span class="n">frames2decode</span>  <span class="c1"># Decoder input size - From Cell 5_7</span>
+    <span class="c1"># Select frames per second of your source</span>
+    <span class="n">fps</span> <span class="o">=</span> <span class="mi">30</span>
+    <span class="n">player</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Create a video player</span>
+        <span class="n">player</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">VideoPlayer</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">flip</span><span class="o">=</span><span class="n">flip</span><span class="p">,</span> <span class="n">fps</span><span class="o">=</span><span class="n">fps</span><span class="p">,</span> <span class="n">skip_first_frames</span><span class="o">=</span><span class="n">skip_first_frames</span><span class="p">)</span>
+        <span class="c1"># Start capturing</span>
+        <span class="n">player</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">use_popup</span><span class="p">:</span>
+            <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Press ESC to Exit&quot;</span>
+            <span class="n">cv2</span><span class="o">.</span><span class="n">namedWindow</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">WINDOW_GUI_NORMAL</span> <span class="o">|</span> <span class="n">cv2</span><span class="o">.</span><span class="n">WINDOW_AUTOSIZE</span><span class="p">)</span>
+
+        <span class="n">processing_times</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">deque</span><span class="p">()</span>
+        <span class="n">processing_time</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">encoder_output</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">decoded_labels</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="n">decoded_top_probs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="c1"># Create a text template to show inference results over video</span>
+        <span class="n">text_inference_template</span> <span class="o">=</span> <span class="s2">&quot;Infer Time:</span><span class="si">{Time:.1f}</span><span class="s2">ms,</span><span class="si">{fps:.1f}</span><span class="s2">FPS&quot;</span>
+        <span class="n">text_template</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{label}</span><span class="s2">,</span><span class="si">{conf:.2f}</span><span class="s2">%&quot;</span>
+
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">counter</span> <span class="o">=</span> <span class="n">counter</span> <span class="o">+</span> <span class="mi">1</span>
+
+            <span class="c1"># read a frame from the video stream</span>
+            <span class="n">frame</span> <span class="o">=</span> <span class="n">player</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">frame</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Source ended&quot;</span><span class="p">)</span>
+                <span class="k">break</span>
+
+            <span class="n">scale</span> <span class="o">=</span> <span class="mi">1280</span> <span class="o">/</span> <span class="nb">max</span><span class="p">(</span><span class="n">frame</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+            <span class="c1"># Adaptative resize for visualization</span>
+            <span class="k">if</span> <span class="n">scale</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">frame</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">fx</span><span class="o">=</span><span class="n">scale</span><span class="p">,</span> <span class="n">fy</span><span class="o">=</span><span class="n">scale</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="n">cv2</span><span class="o">.</span><span class="n">INTER_AREA</span><span class="p">)</span>
+
+            <span class="c1"># Select one frame every two for processing through the encoder.</span>
+            <span class="c1"># After 16 frames are processed, the decoder will find the action,</span>
+            <span class="c1"># and the label will be printed over the frames.</span>
+
+            <span class="k">if</span> <span class="n">counter</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="c1"># Preprocess frame before Encoder</span>
+                <span class="p">(</span><span class="n">preprocessed</span><span class="p">,</span> <span class="n">_</span><span class="p">)</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
+
+                <span class="c1"># Measure processing time</span>
+                <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+                <span class="c1"># Encoder Inference per frame</span>
+                <span class="n">encoder_output</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">encoder</span><span class="p">(</span><span class="n">preprocessed</span><span class="p">,</span> <span class="n">compiled_model_en</span><span class="p">))</span>
+
+                <span class="c1"># Decoder inference per set of frames</span>
+                <span class="c1"># Wait for sample duration to work with decoder model</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">encoder_output</span><span class="p">)</span> <span class="o">==</span> <span class="n">sample_duration</span><span class="p">:</span>
+                    <span class="n">decoded_labels</span><span class="p">,</span> <span class="n">decoded_top_probs</span> <span class="o">=</span> <span class="n">decoder</span><span class="p">(</span><span class="n">encoder_output</span><span class="p">,</span> <span class="n">compiled_model_de</span><span class="p">)</span>
+                    <span class="n">encoder_output</span> <span class="o">=</span> <span class="p">[]</span>
+
+                <span class="c1"># Inference has finished ... Let&#39;s to display results</span>
+                <span class="n">stop_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+                <span class="c1"># Calculate processing time</span>
+                <span class="n">processing_times</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">stop_time</span> <span class="o">-</span> <span class="n">start_time</span><span class="p">)</span>
+
+                <span class="c1"># Use processing times from last 200 frames</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">processing_times</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">200</span><span class="p">:</span>
+                    <span class="n">processing_times</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>
+
+                <span class="c1"># Mean processing time [ms]</span>
+                <span class="n">processing_time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">processing_times</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1000</span>
+                <span class="n">fps</span> <span class="o">=</span> <span class="mi">1000</span> <span class="o">/</span> <span class="n">processing_time</span>
+
+            <span class="c1"># Visualize the results</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">):</span>
+                <span class="n">display_text</span> <span class="o">=</span> <span class="n">text_template</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">label</span><span class="o">=</span><span class="n">decoded_labels</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+                    <span class="n">conf</span><span class="o">=</span><span class="n">decoded_top_probs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="n">display_text_fnc</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">display_text</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+
+            <span class="n">display_text</span> <span class="o">=</span> <span class="n">text_inference_template</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Time</span><span class="o">=</span><span class="n">processing_time</span><span class="p">,</span> <span class="n">fps</span><span class="o">=</span><span class="n">fps</span><span class="p">)</span>
+            <span class="n">display_text_fnc</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">display_text</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+
+            <span class="c1"># Use this workaround you experience flickering</span>
+            <span class="k">if</span> <span class="n">use_popup</span><span class="p">:</span>
+                <span class="n">cv2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">frame</span><span class="p">)</span>
+                <span class="n">key</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">waitKey</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+                <span class="c1"># escape = 27</span>
+                <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="mi">27</span><span class="p">:</span>
+                    <span class="k">break</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># Encode numpy array to jpg</span>
+                <span class="n">_</span><span class="p">,</span> <span class="n">encoded_img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imencode</span><span class="p">(</span><span class="s2">&quot;.jpg&quot;</span><span class="p">,</span> <span class="n">frame</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">[</span><span class="n">cv2</span><span class="o">.</span><span class="n">IMWRITE_JPEG_QUALITY</span><span class="p">,</span> <span class="mi">90</span><span class="p">])</span>
+                <span class="c1"># Create IPython image</span>
+                <span class="n">i</span> <span class="o">=</span> <span class="n">display</span><span class="o">.</span><span class="n">Image</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">encoded_img</span><span class="p">)</span>
+                <span class="c1"># Display the image in this notebook</span>
+                <span class="n">display</span><span class="o">.</span><span class="n">clear_output</span><span class="p">(</span><span class="n">wait</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="n">display</span><span class="o">.</span><span class="n">display</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+    <span class="c1"># ctrl-c</span>
+    <span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Interrupted&quot;</span><span class="p">)</span>
+    <span class="c1"># Any different error</span>
+    <span class="k">except</span> <span class="ne">RuntimeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">player</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># stop capturing</span>
+            <span class="n">player</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">use_popup</span><span class="p">:</span>
+            <span class="n">cv2</span><span class="o">.</span><span class="n">destroyAllWindows</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="run-action-recognition-on-a-video-file">
+<h3>Run Action Recognition on a Video File<a class="headerlink" href="#run-action-recognition-on-a-video-file" title="Permalink to this headline">¶</a></h3>
+<p>Now let’s see how the model works in a video file. <a class="reference external" href="https://docs.opencv.org/4.5.1/dd/d43/tutorial_py_video_display.html">Any format
+supported</a>
+by OpenCV will work. Anytime you can press the stop button while the
+video file is running, it will activate the webcam for the next step.</p>
+<blockquote>
+<div><p>Note: <em>Sometimes, the video could be cut off if there are corrupted
+frames. In that case you could convert. If you experience any
+problems with your video, please use
+the</em><a class="reference external" href="https://handbrake.fr/">HandBrake</a><em>and select the MPEG
+format.</em></p>
+</div></blockquote>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">video_file</span> <span class="o">=</span> <span class="s2">&quot;https://archive.org/serve/ISSVideoResourceLifeOnStation720p/ISS%20Video%20Resource_LifeOnStation_720p.mp4&quot;</span>
+<span class="n">run_action_recognition</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">video_file</span><span class="p">,</span> <span class="n">flip</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">use_popup</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">skip_first_frames</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../_images/403-action-recognition-webcam-with-output_19_0.png" src="../_images/403-action-recognition-webcam-with-output_19_0.png" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Source</span> <span class="n">ended</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="run-action-recognition-using-your-webcam">
+<h3>Run Action Recognition using your webcam<a class="headerlink" href="#run-action-recognition-using-your-webcam" title="Permalink to this headline">¶</a></h3>
+<p>Now let’s try to see ourselves in our webcam.</p>
+<blockquote>
+<div><p>NOTE: <em>To use the webcam, you must run this Jupyter notebook on a
+computer with a webcam. If you run on a server, the webcam will not
+work. However, you can still do inference on a video in the final
+step.</em></p>
+</div></blockquote>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">run_action_recognition</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">flip</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">use_popup</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">skip_first_frames</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Cannot</span> <span class="nb">open</span> <span class="n">camera</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+                </div>
+            
+            
+                <div class='prev-next-bottom'>
+                  
+    <a class='button bttn-sec button-size-l' id="prev-link" href="402-pose-estimation-with-output.html" title="previous page">Prev</a>
+    <a class='button bttn-sec button-size-l' id="next-link" href="405-paddle-ocr-webcam-with-output.html" title="next page">Next</a>
+
+                </div>
+            
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+<footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2021, Intel®.<br>
+</p>
+    </div>
+    
+    <div class="footer-item">
+      <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

@@ -1,0 +1,2207 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Building a Face Analytics Pipeline &#8212; OpenVINO™  documentation</title>
+    
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/blank.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/doxyrest-pygments.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <link href="../_static/css/media/favicon.ico" rel="shortcut icon">
+    <link rel="stylesheet" href="../_static/css/openvino_sphinx_theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/button.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/input.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/textfield.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/tabs.css" type="text/css" />
+    <script src="../_static/js/openvino_sphinx_theme.js"></script>
+    <link rel="stylesheet" href="../_static/css/viewer.min.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/0.5.7/chartjs-plugin-annotation.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-barchart-background@1.3.0/build/Plugin.Barchart.Background.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-deferred@1"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.1/papaparse.min.js"></script>
+    <script src="../_static/js/viewer.min.js"></script>
+    <script src="/assets/versions_raw.js"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/tabs.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/js/custom.js"></script>
+    <script src="../_static/js/graphs.js"></script>
+    <script src="../_static/js/graphs_ov_tf.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/target-highlight.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <link rel="canonical" href="https://docs.openvino.ai/latest/pages/openvino_docs_gapi_gapi_face_analytics_pipeline.html" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="OpenVINO™ Security Add-on" href="ovsa_get_started.html" />
+    <link rel="prev" title="Implementing a Face Beautification Algorithm" href="openvino_docs_gapi_face_beautification.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+      <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+
+<a class="navbar-brand" href="../index.html">
+  <img src="../_static/logo.svg" class="logo" alt="logo">
+</a>
+
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="get_started.html">
+  Get Started
+ </a>
+</li>
+
+<li class="toctree-l1 current active nav-item">
+ <a class="reference internal nav-link" href="documentation.html">
+  Documentation
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../tutorials.html">
+  Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../model_zoo.html">
+  Model Zoo
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="resources.html">
+  Resources
+ </a>
+</li>
+
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/openvinotoolkit/openvino" rel="noopener" target="_blank" title="GitHub">
+            <span><i class="sst-github"></i></span>
+            <label class="sr-only">GitHub</label>
+          </a>
+        </li>
+</ul>
+      </div>
+      
+      <div class="navbar-end-item">
+        
+<div class="dropdown sst-dropdown sst-dropdown-navbar">
+  <button class="btn sst-btn dropdown-toggle" type="button" id="version-selector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+  <div class="dropdown-menu" aria-labelledby="version-selector">
+  </div>
+</div>
+      </div>
+      
+      <div class="navbar-end-item">
+        
+
+<div class="dropdown sst-dropdown sst-dropdown-navbar">
+  <button class="btn sst-btn dropdown-toggle" type="button" id="language-selector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">English</button>
+  <div class="dropdown-menu" aria-labelledby="language-selector">
+    
+      
+        <a class="dropdown-item font-weight-bold" href="/latest/pages/openvino_docs_gapi_gapi_face_analytics_pipeline.html">English</a>
+      
+    
+      
+        <a  class="dropdown-item" href="/cn/latest/pages/openvino_docs_gapi_gapi_face_analytics_pipeline.html">Chinese</a>
+      
+    
+  </div>
+</div>
+
+      </div>
+      
+    </div>
+  </div>
+</div>
+        <div id="collapse-nav-wrapper" class="container-xl">
+          <button id="collapse-nav" class="button bttn-prm button-size-m" type="button" data-toggle="collapse" data-target="#nav-tree" aria-expanded="false" aria-controls="nav-tree">
+            Documentation navigation <i class="fas fa-chevron-down"></i>
+          </button>
+        </div>
+      </nav>
+      <div class="transition-banner container-fluid alert alert-info alert-dismissible fade show" role="alert">
+        <p>OpenVINO 2022.1 introduces a new version of OpenVINO API (API 2.0). For more information on the changes and transition steps, see the <a href="https://docs.openvino.ai/latest/openvino_2_0_transition_guide.html">transition guide</a></p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar" id="nav-tree"><form class="searchForm bd-search d-flex align-items-center" action="../search.html" method="get">
+    <i class="icon fas fa-search"></i>
+    <input type="search" class="form-control" name="query" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Converting and Preparing Models
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="openvino_docs_MO_DG_Deep_Learning_Model_Optimizer_DevGuide.html">
+   Convert model with Model Optimizer
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_Converting_Model.html">
+     Setting Input Shapes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_Cutting_Model.html">
+     Cutting Off Parts of a Model
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_MO_DG_Additional_Optimization_Use_Cases.html">
+     Embedding Preprocessing Computation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_MO_DG_FP16_Compression.html">
+     Compression of a Model to FP16
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_Convert_Model_From_TensorFlow.html">
+     Converting a TensorFlow Model
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_Convert_Model_From_ONNX.html">
+     Converting an ONNX Model
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_Convert_Model_From_PyTorch.html">
+     Converting a PyTorch* Model
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_Convert_Model_From_Paddle.html">
+     Converting a PaddlePaddle* Model
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_Convert_Model_From_MxNet.html">
+     Converting an MXNet* Model
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_Convert_Model_From_Caffe.html">
+     Converting a Caffe* Model
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_Convert_Model_From_Kaldi.html">
+     Converting a Kaldi* Model
+    </a>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_tutorials.html">
+     Model Conversion Tutorials
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+    <label for="toctree-checkbox-2">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_tf_specific_Convert_AttentionOCR_From_Tensorflow.html">
+       Convert TensorFlow Attention OCR Model
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_tf_specific_Convert_BERT_From_Tensorflow.html">
+       Convert TensorFlow BERT Model
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_tf_specific_Convert_CRNN_From_Tensorflow.html">
+       Convert TensorFlow CRNN Model
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_tf_specific_Convert_DeepSpeech_From_Tensorflow.html">
+       Convert TensorFlow DeepSpeech Model
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_tf_specific_Convert_EfficientDet_Models.html">
+       Convert TensorFlow EfficientDet Models
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_tf_specific_Convert_FaceNet_From_Tensorflow.html">
+       Convert TensorFlow FaceNet Models
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_tf_specific_Convert_GNMT_From_Tensorflow.html">
+       Convert TensorFlow GNMT Model
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_tf_specific_Convert_lm_1b_From_Tensorflow.html">
+       Convert TensorFlow Language Model on One Billion Word Benchmark
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_tf_specific_Convert_NCF_From_Tensorflow.html">
+       Convert TensorFlow Neural Collaborative Filtering Model
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_tf_specific_Convert_Object_Detection_API_Models.html">
+       Convert TensorFlow Object Detection API Models
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_tf_specific_Convert_RetinaNet_From_Tensorflow.html">
+       Converting TensorFlow RetinaNet Model
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_tf_specific_Convert_Slim_Library_Models.html">
+       Convert TensorFlow Slim Image Classification Model Library Models
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_tf_specific_Convert_WideAndDeep_Family_Models.html">
+       Convert TensorFlow Wide and Deep Family Models
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_tf_specific_Convert_XLNet_From_Tensorflow.html">
+       Convert TensorFlow XLNet Model
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_tf_specific_Convert_YOLO_From_Tensorflow.html">
+       Convert TensorFlow YOLO Models
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_onnx_specific_Convert_Faster_RCNN.html">
+       Convert ONNX* Faster R-CNN Model
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_onnx_specific_Convert_GPT2.html">
+       Convert ONNX* GPT-2 Model
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_onnx_specific_Convert_Mask_RCNN.html">
+       Convert ONNX* Mask R-CNN Model
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_pytorch_specific_Convert_Bert_ner.html">
+       Convert PyTorch* BERT-NER Model
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_pytorch_specific_Convert_Cascade_RCNN_res101.html">
+       Convert PyTorch Cascade RCNN R-101 Model
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_pytorch_specific_Convert_F3Net.html">
+       Convert PyTorch* F3Net Model
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_pytorch_specific_Convert_QuartzNet.html">
+       Convert PyTorch* QuartzNet Model
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_pytorch_specific_Convert_RCAN.html">
+       Convert PyTorch* RCAN Model
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_pytorch_specific_Convert_RNNT.html">
+       Convert PyTorch* RNN-T Model
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_pytorch_specific_Convert_YOLACT.html">
+       Convert PyTorch* YOLACT Model
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_mxnet_specific_Convert_GluonCV_Models.html">
+       Convert MXNet GluonCV* Models
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_mxnet_specific_Convert_Style_Transfer_From_MXNet.html">
+       Convert MXNet Style Transfer Model
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_kaldi_specific_Aspire_Tdnn_Model.html">
+       Convert Kaldi* ASpIRE Chain Time Delay Neural Network (TDNN) Model
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_Model_Optimizer_FAQ.html">
+     Model Optimizer Frequently Asked Questions
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Deploying Inference
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="openvino_docs_OV_UG_OV_Runtime_User_Guide.html">
+   Performing inference with OpenVINO Runtime
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="openvino_docs_OV_UG_Integrate_OV_with_your_application.html">
+     Integrate OpenVINO™ with Your Application
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+    <label for="toctree-checkbox-4">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_OV_UG_Model_Representation.html">
+       Model Representation in OpenVINO™ Runtime
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_OV_UG_Infer_request.html">
+       OpenVINO™ Inference Request
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_OV_UG_Python_API_exclusives.html">
+       OpenVINO™ Python API exclusives
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_OV_UG_ShapeInference.html">
+     Changing input shapes
+    </a>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="openvino_docs_OV_UG_Working_with_devices.html">
+     Working with devices
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+    <label for="toctree-checkbox-5">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_OV_UG_query_api.html">
+       Query device properties, configuration
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_OV_UG_supported_plugins_CPU.html">
+       CPU device
+      </a>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="openvino_docs_OV_UG_supported_plugins_GPU.html">
+       GPU device
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+      <label for="toctree-checkbox-6">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="openvino_docs_OV_UG_supported_plugins_GPU_RemoteTensor_API.html">
+         Remote Tensor API of GPU Plugin
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="openvino_docs_OV_UG_supported_plugins_VPU.html">
+       VPU devices
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+      <label for="toctree-checkbox-7">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="openvino_docs_OV_UG_supported_plugins_MYRIAD.html">
+         MYRIAD device
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="openvino_docs_OV_UG_supported_plugins_HDDL.html">
+         HDDL device
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_OV_UG_supported_plugins_GNA.html">
+       GNA device
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_OV_UG_supported_plugins_ARM_CPU.html">
+       Arm® CPU device
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="openvino_docs_OV_UG_Preprocessing_Overview.html">
+     Optimize Preprocessing
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+    <label for="toctree-checkbox-8">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_OV_UG_Preprocessing_Details.html">
+       Preprocessing API - details
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_OV_UG_Layout_Overview.html">
+       Layout API overview
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_OV_UG_Preprocess_Usecase_save.html">
+       Use Case - Integrate and Save Preprocessing Steps Into IR
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="openvino_docs_OV_UG_DynamicShapes.html">
+     Dynamic Shapes
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+    <label for="toctree-checkbox-9">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_OV_UG_NoDynamicShapes.html">
+       When Dynamic Shapes API is Not Applicable
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="openvino_docs_OV_UG_supported_plugins_AUTO.html">
+     Automatic device selection
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+    <label for="toctree-checkbox-10">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_OV_UG_supported_plugins_AUTO_debugging.html">
+       Debugging Auto-Device Plugin
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_OV_UG_Running_on_multiple_devices.html">
+     Running on multiple devices simultaneously
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_OV_UG_Hetero_execution.html">
+     Heterogeneous execution
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_OV_UG_Performance_Hints.html">
+     High-level Performance Hints
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_OV_UG_Automatic_Batching.html">
+     Automatic Batching
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_OV_UG_network_state_intro.html">
+     Stateful models
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="openvino_2_0_transition_guide.html">
+   Transition to OpenVINO™ API 2.0
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_2_0_deployment.html">
+     Installation &amp; Deployment
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_2_0_inference_pipeline.html">
+     Inference Pipeline
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_2_0_configure_devices.html">
+     Configuring Devices
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_2_0_preprocessing.html">
+     Preprocessing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_2_0_model_creation.html">
+     Model Creation in Runtime
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="openvino_deployment_guide.html">
+   Deploy with OpenVINO
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+  <label for="toctree-checkbox-12">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_install_guides_deployment_manager_tool.html">
+     Deployment Manager
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_deploy_local_distribution.html">
+     Local distribution
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="openvino_inference_engine_tools_compile_tool_README.html">
+   Compile Tool
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Tuning for Performance
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="openvino_docs_optimization_guide_dldt_optimization_guide.html">
+   Introduction to Performance Optimization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="openvino_docs_MO_DG_Getting_Performance_Numbers.html">
+   Getting Performance Numbers
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="openvino_docs_model_optimization_guide.html">
+   Model Optimization Guide
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
+  <label for="toctree-checkbox-13">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="pot_introduction.html">
+     Optimizing models post-training
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/>
+    <label for="toctree-checkbox-14">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="pot_default_quantization_usage.html">
+       Quantizing Model
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/>
+      <label for="toctree-checkbox-15">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="pot_compression_algorithms_quantization_default_README.html">
+         DefaultQuantization Method
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="pot_accuracyaware_usage.html">
+       Quantizing Model with Accuracy Control
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/>
+      <label for="toctree-checkbox-16">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="accuracy_aware_README.html">
+         AccuracyAwareQuantization Method
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="pot_docs_BestPractices.html">
+       Quantization Best Practices
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/>
+      <label for="toctree-checkbox-17">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="pot_saturation_issue.html">
+         Saturation Issue
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="pot_compression_api_README.html">
+       API Reference
+      </a>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="pot_compression_cli_README.html">
+       Command-line Interface
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" type="checkbox"/>
+      <label for="toctree-checkbox-18">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="pot_docs_simplified_mode.html">
+         Simplified Mode
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="pot_configs_README.html">
+         Configuration File Description
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="pot_examples_description.html">
+       Examples
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" type="checkbox"/>
+      <label for="toctree-checkbox-19">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4 has-children">
+        <a class="reference internal" href="pot_example_README.html">
+         API Examples
+        </a>
+        <input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" type="checkbox"/>
+        <label for="toctree-checkbox-20">
+         <i class="fas fa-chevron-down">
+         </i>
+        </label>
+        <ul>
+         <li class="toctree-l5">
+          <a class="reference internal" href="pot_example_classification_README.html">
+           Quantizatiing Image Classification Model
+          </a>
+         </li>
+         <li class="toctree-l5">
+          <a class="reference internal" href="pot_example_object_detection_README.html">
+           Quantizatiing Object Detection Model with Accuracy Control
+          </a>
+         </li>
+         <li class="toctree-l5">
+          <a class="reference internal" href="pot_example_face_detection_README.html">
+           Quantizatiing Cascaded Model
+          </a>
+         </li>
+         <li class="toctree-l5">
+          <a class="reference internal" href="pot_example_segmentation_README.html">
+           Quantizatiing Semantic Segmentation Model
+          </a>
+         </li>
+         <li class="toctree-l5">
+          <a class="reference internal" href="pot_example_3d_segmentation_README.html">
+           Quantizatiing 3D Segmentation Model
+          </a>
+         </li>
+         <li class="toctree-l5">
+          <a class="reference internal" href="pot_example_speech_README.html">
+           Quantizatiing for GNA Device
+          </a>
+         </li>
+        </ul>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="pot_configs_examples_README.html">
+         Command-line Example
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="pot_docs_FrequentlyAskedQuestions.html">
+       Post-training Optimization Tool Frequently Asked Questions
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="docs_nncf_introduction.html">
+     Neural Network Compression Framework
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="pot_ranger_README.html">
+     (Experimental) Protecting Model
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="openvino_docs_deployment_optimization_guide_dldt_optimization_guide.html">
+   Runtime Inference Optimizations
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" type="checkbox"/>
+  <label for="toctree-checkbox-21">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_deployment_optimization_guide_common.html">
+     General Optimizations
+    </a>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="openvino_docs_deployment_optimization_guide_latency.html">
+     Optimizing for the Latency
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" type="checkbox"/>
+    <label for="toctree-checkbox-22">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_OV_UG_Model_caching_overview.html">
+       Model Caching Overview
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_deployment_optimization_guide_tput.html">
+     Optimizing for Throughput
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_deployment_optimization_guide_tput_advanced.html">
+     Using Advanced Throughput Options: Streams and Batching
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_deployment_optimization_guide_internals.html">
+     Further Low-Level Implementation Details
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="openvino_docs_tuning_utilities.html">
+   Tuning Utilities
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-23" name="toctree-checkbox-23" type="checkbox"/>
+  <label for="toctree-checkbox-23">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_inference_engine_tools_cross_check_tool_README.html">
+     Cross Check Tool
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="openvino_docs_performance_benchmarks.html">
+   Performance Benchmarks
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" type="checkbox"/>
+  <label for="toctree-checkbox-24">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="openvino_docs_performance_benchmarks_openvino.html">
+     Intel® Distribution of OpenVINO™ toolkit Benchmark Results
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-25" name="toctree-checkbox-25" type="checkbox"/>
+    <label for="toctree-checkbox-25">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_performance_benchmarks_faq.html">
+       Performance Information Frequently Asked Questions
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference external" href="https://docs.openvino.ai/downloads/benchmark_files/OV-2022.1-Download-Excel.xlsx">
+       Download Performance Data Spreadsheet in MS Excel* Format
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_performance_int8_vs_fp32.html">
+       Model Accuracy for INT8 and FP32 Precision
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_performance_benchmarks_ovms.html">
+     OpenVINO™ Model Server Benchmark Results
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Graphical Web Interface for OpenVINO™ toolkit
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="workbench_docs_Workbench_DG_Introduction.html">
+   OpenVINO™ Deep Learning Workbench Overview
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="workbench_docs_Workbench_DG_Install.html">
+   Installation
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-26" name="toctree-checkbox-26" type="checkbox"/>
+  <label for="toctree-checkbox-26">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="workbench_docs_Workbench_DG_Prerequisites.html">
+     Prerequisites
+    </a>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="workbench_docs_Workbench_DG_Run_Locally.html">
+     Run the DL Workbench Locally
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-27" name="toctree-checkbox-27" type="checkbox"/>
+    <label for="toctree-checkbox-27">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="workbench_docs_Workbench_DG_Advanced_Configurations.html">
+       Advanced DL Workbench Configurations
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="workbench_docs_Workbench_DG_Docker_Container.html">
+       Work with Docker Container
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="workbench_docs_Workbench_DG_Start_DL_Workbench_in_DevCloud.html">
+     Run the DL Workbench in the Intel® DevCloud for the Edge
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="workbench_docs_Workbench_DG_Work_with_Models_and_Sample_Datasets.html">
+   Get Started
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-28" name="toctree-checkbox-28" type="checkbox"/>
+  <label for="toctree-checkbox-28">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="workbench_docs_Workbench_DG_Select_Model.html">
+     Import Model
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="workbench_docs_Workbench_Create_Project.html">
+     Create Project
+    </a>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="workbench_docs_Workbench_DG_Additional_Resources.html">
+     Educational Resources about DL Workbench
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-29" name="toctree-checkbox-29" type="checkbox"/>
+    <label for="toctree-checkbox-29">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="workbench_docs_Workbench_DG_Key_Concepts.html">
+       DL Workbench Key Concepts
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="workbench_docs_Workbench_DG_Tutorials.html">
+   Tutorials
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-30" name="toctree-checkbox-30" type="checkbox"/>
+  <label for="toctree-checkbox-30">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="workbench_docs_Workbench_DG_Tutorial_Import_YOLO.html">
+     Object Detection Model (YOLOv4)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="workbench_docs_Workbench_DG_Measure_Accuracy_Object_detection.html">
+     Object Detection Model (SSD_mobilenet)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="workbench_docs_Workbench_DG_Tutorial_Classification.html">
+     Classification Model (mobilenet)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="workbench_docs_Workbench_DG_Measure_Accuracy_Classification.html">
+     Classification Model (squeezenet)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="workbench_docs_Workbench_DG_Tutorial_Instance_Segmentation.html">
+     Instance Segmentation Model (mask R-cnn)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="workbench_docs_Workbench_DG_Tutorial_Semantic_Segmentation.html">
+     Semantic Segmentation Model (deeplab)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="workbench_docs_Workbench_DG_Tutorial_Style_Transfer.html">
+     Style Transfer Model (fast-nst-onnx)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="workbench_docs_Workbench_DG_Tutorial_NLP.html">
+     NLP Model (BERT)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="workbench_docs_Workbench_DG_User_Guide.html">
+   User Guide
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-31" name="toctree-checkbox-31" type="checkbox"/>
+  <label for="toctree-checkbox-31">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="workbench_docs_Workbench_DG_Select_Models.html">
+     Obtain Models
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-32" name="toctree-checkbox-32" type="checkbox"/>
+    <label for="toctree-checkbox-32">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="workbench_docs_Workbench_DG_OMZ_Models.html">
+       Import Open Model Zoo Models
+      </a>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="workbench_docs_Workbench_DG_Original_Model_Import.html">
+       Import Original Model
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-33" name="toctree-checkbox-33" type="checkbox"/>
+      <label for="toctree-checkbox-33">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="workbench_docs_Workbench_DG_Tutorial_Import_Original.html">
+         Import Original Model Recommendations
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="workbench_docs_Workbench_DG_Generate_Datasets.html">
+     Obtain Datasets
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-34" name="toctree-checkbox-34" type="checkbox"/>
+    <label for="toctree-checkbox-34">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="workbench_docs_Workbench_DG_Dataset_Types.html">
+       Dataset Types
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-35" name="toctree-checkbox-35" type="checkbox"/>
+      <label for="toctree-checkbox-35">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="workbench_docs_Workbench_DG_Download_and_Cut_Datasets.html">
+         Cut Datasets
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="workbench_docs_Workbench_DG_Select_Environment.html">
+     Select Environment
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-36" name="toctree-checkbox-36" type="checkbox"/>
+    <label for="toctree-checkbox-36">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="workbench_docs_Workbench_DG_Remote_Profiling.html">
+       Work with Remote Targets
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-37" name="toctree-checkbox-37" type="checkbox"/>
+      <label for="toctree-checkbox-37">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="workbench_docs_Workbench_DG_Profile_on_Remote_Machine.html">
+         Profile on Remote Machine
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="workbench_docs_Workbench_DG_Setup_Remote_Target.html">
+         Set Up Remote Target
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="workbench_docs_Workbench_DG_Add_Remote_Target.html">
+         Register Remote Target in DL Workbench
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="workbench_docs_Workbench_DG_Remote_Machines.html">
+         Manipulate Remote Machines
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="workbench_docs_Workbench_DG_Int_8_Quantization.html">
+     Optimize Model Performance
+    </a>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="workbench_docs_Workbench_DG_Run_Inference.html">
+     Explore Inference Configurations
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-38" name="toctree-checkbox-38" type="checkbox"/>
+    <label for="toctree-checkbox-38">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="workbench_docs_Workbench_DG_Run_Single_Inference.html">
+       Run Inference
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="workbench_docs_Workbench_DG_View_Inference_Results.html">
+       View Inference Results
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="workbench_docs_Workbench_DG_Compare_Performance_between_Two_Versions_of_Models.html">
+       Compare Performance between Two Versions of a Model
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="workbench_docs_Workbench_DG_Visualize_Model.html">
+       Visualize Model
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="workbench_docs_Workbench_DG_Visualize_Accuracy.html">
+     Visualize Model Output
+    </a>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="workbench_docs_Workbench_DG_Measure_Accuracy.html">
+     Create Accuracy Report
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-39" name="toctree-checkbox-39" type="checkbox"/>
+    <label for="toctree-checkbox-39">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="workbench_docs_Workbench_DG_Accuracy_Configuration.html">
+       Accuracy Configuration
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="workbench_docs_Workbench_DG_Configure_Accuracy_Settings.html">
+       Set Accuracy Configuration
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="workbench_docs_Workbench_DG_Accuracy_Report_Results.html">
+       Interpret Accuracy Report Results
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="workbench_docs_Workbench_DG_Deployment_Package.html">
+     Create Deployment Package
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-40" name="toctree-checkbox-40" type="checkbox"/>
+    <label for="toctree-checkbox-40">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="workbench_docs_Workbench_DG_Deploy_and_Integrate_Performance_Criteria_into_Application.html">
+       Deploy and Integrate Performance Criteria into Application
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="workbench_docs_Workbench_DG_Export_Project.html">
+     Export Project
+    </a>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="workbench_docs_Workbench_DG_Jupyter_Notebooks_CLI.html">
+     Learn OpenVINO in DL Workbench
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-41" name="toctree-checkbox-41" type="checkbox"/>
+    <label for="toctree-checkbox-41">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="workbench_docs_Workbench_DG_Jupyter_Notebooks.html">
+       Learn Model Inference with OpenVINO™ API in JupyterLab* Environment
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="workbench_docs_Workbench_DG_Persist_Database.html">
+     Restore DL Workbench State
+    </a>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="workbench_docs_security_Workbench.html">
+     Run DL Workbench Securely
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-42" name="toctree-checkbox-42" type="checkbox"/>
+    <label for="toctree-checkbox-42">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="workbench_docs_Workbench_DG_Authentication.html">
+       Enable Authentication in DL Workbench
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="workbench_docs_Workbench_DG_Configure_TLS.html">
+       Configure Transport Layer Security (TLS)
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="workbench_docs_Workbench_DG_Troubleshooting.html">
+   Troubleshooting
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-43" name="toctree-checkbox-43" type="checkbox"/>
+  <label for="toctree-checkbox-43">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="workbench_docs_Workbench_DG_DC_Troubleshooting.html">
+     Troubleshooting for DL Workbench in the Intel® DevCloud for the Edge
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Media Processing and Computer Vision Libraries
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="openvino_docs_dlstreamer.html">
+   Intel® Deep Learning Streamer
+  </a>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="openvino_docs_gapi_gapi_intro.html">
+   Introduction to OpenCV Graph API (G-API)
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-44" name="toctree-checkbox-44" type="checkbox"/>
+  <label for="toctree-checkbox-44">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_gapi_kernel_api.html">
+     Graph API Kernel API
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_gapi_face_beautification.html">
+     Implementing a Face Beautification Algorithm
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Building a Face Analytics Pipeline
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference external" href="https://docs.opencv.org/master/">
+   OpenCV* Developer Guide
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference external" href="https://software.intel.com/en-us/openclsdk-devguide">
+   OpenCL™ Developer Guide
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Add-Ons
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="ovsa_get_started.html">
+   OpenVINO™ Security Add-on
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  OpenVINO Extensibility
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="openvino_docs_Extensibility_UG_Intro.html">
+   OpenVINO Extensibility Mechanism
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-45" name="toctree-checkbox-45" type="checkbox"/>
+  <label for="toctree-checkbox-45">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_Extensibility_UG_add_openvino_ops.html">
+     Custom OpenVINO™ Operations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_Extensibility_UG_Frontend_Extensions.html">
+     Frontend Extensions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_Extensibility_UG_GPU.html">
+     How to Implement Custom GPU Operations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_IE_DG_Extensibility_DG_VPU_Kernel.html">
+     How to Implement Custom Layers for VPU (Intel® Neural Compute Stick 2)
+    </a>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_customize_model_optimizer_Customize_Model_Optimizer.html">
+     Model Optimizer Extensibility
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-46" name="toctree-checkbox-46" type="checkbox"/>
+    <label for="toctree-checkbox-46">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_customize_model_optimizer_Extending_Model_Optimizer_With_Caffe_Python_Layers.html">
+       Extending Model Optimizer with Caffe* Python Layers
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="openvino_docs_transformations.html">
+   Overview of Transformations API
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-47" name="toctree-checkbox-47" type="checkbox"/>
+  <label for="toctree-checkbox-47">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_Extensibility_UG_model_pass.html">
+     OpenVINO Model Pass
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_Extensibility_UG_matcher_pass.html">
+     OpenVINO Matcher Pass
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_Extensibility_UG_graph_rewrite_pass.html">
+     OpenVINO Graph Rewrite Pass
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="openvino_docs_ie_plugin_dg_overview.html">
+   OpenVINO Plugin Developer Guide
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-48" name="toctree-checkbox-48" type="checkbox"/>
+  <label for="toctree-checkbox-48">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ie_plugin_dg_plugin.html">
+     Implement Plugin Functionality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ie_plugin_dg_executable_network.html">
+     Implement Executable Network Functionality
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ie_plugin_dg_infer_request.html">
+     Implement Synchronous Inference Request
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ie_plugin_dg_async_infer_request.html">
+     Implement Asynchronous Inference Request
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ie_plugin_dg_plugin_build.html">
+     Build Plugin Using CMake*
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="openvino_docs_ie_plugin_dg_plugin_testing.html">
+     Plugin Testing
+    </a>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="openvino_docs_ie_plugin_detailed_guides.html">
+     Advanced Topics
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-49" name="toctree-checkbox-49" type="checkbox"/>
+    <label for="toctree-checkbox-49">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="openvino_docs_ie_plugin_dg_quantized_networks.html">
+       Quantized networks compute and restrictions
+      </a>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="openvino_docs_OV_UG_lpt.html">
+       OpenVINO™ Low Precision Transformations
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-50" name="toctree-checkbox-50" type="checkbox"/>
+      <label for="toctree-checkbox-50">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4 has-children">
+        <a class="reference internal" href="openvino_docs_OV_UG_lpt_attributes.html">
+         Attributes
+        </a>
+        <input class="toctree-checkbox" id="toctree-checkbox-51" name="toctree-checkbox-51" type="checkbox"/>
+        <label for="toctree-checkbox-51">
+         <i class="fas fa-chevron-down">
+         </i>
+        </label>
+        <ul>
+         <li class="toctree-l5">
+          <a class="reference internal" href="openvino_docs_OV_UG_lpt_AvgPoolPrecisionPreserved.html">
+           AvgPoolPrecisionPreserved
+          </a>
+         </li>
+         <li class="toctree-l5">
+          <a class="reference internal" href="openvino_docs_OV_UG_lpt_IntervalsAlignment.html">
+           IntervalsAlignment
+          </a>
+         </li>
+         <li class="toctree-l5">
+          <a class="reference internal" href="openvino_docs_OV_UG_lpt_PrecisionPreserved.html">
+           PrecisionPreserved
+          </a>
+         </li>
+         <li class="toctree-l5">
+          <a class="reference internal" href="openvino_docs_OV_UG_lpt_Precisions.html">
+           Precisions
+          </a>
+         </li>
+         <li class="toctree-l5">
+          <a class="reference internal" href="openvino_docs_OV_UG_lpt_QuantizationAlignment.html">
+           QuantizationAlignment
+          </a>
+         </li>
+         <li class="toctree-l5">
+          <a class="reference internal" href="openvino_docs_OV_UG_lpt_QuantizationGranularity.html">
+           QuantizationGranularity
+          </a>
+         </li>
+        </ul>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="openvino_docs_OV_UG_lpt_step1_prerequisites.html">
+         Step 1. Prerequisites transformations
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="openvino_docs_OV_UG_lpt_step2_markup.html">
+         Step 2. Markup transformations
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="openvino_docs_OV_UG_lpt_step3_main.html">
+         Step 3. Main transformations
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="openvino_docs_OV_UG_lpt_step4_cleanup.html">
+         Step 4. Cleanup transformations
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="openvino_docs_ie_plugin_api_references.html">
+     Plugin API Reference
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-52" name="toctree-checkbox-52" type="checkbox"/>
+    <label for="toctree-checkbox-52">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul class="simple">
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Use OpenVINO™ Toolkit Securely
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="openvino_docs_security_guide_introduction.html">
+   Introduction to OpenVINO™ Security
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="openvino_docs_security_guide_workbench.html">
+   Deep Learning Workbench Security
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="openvino_docs_OV_UG_protecting_model_guide.html">
+   Using Encrypted Models with OpenVINO™
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ovsa_get_started.html">
+   OpenVINO™ Security Add-on
+  </a>
+ </li>
+</ul>
+
+  </div>
+</nav>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+              
+              <div class="toc-item">
+                
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#overview">
+   Overview
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#prerequisites">
+   Prerequisites
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction-why-g-api">
+   Introduction: Why G-API
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pipeline-overview">
+   Pipeline Overview
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#construct-a-pipeline">
+   Construct a pipeline
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#declare-deep-learning-topologies">
+     Declare Deep Learning topologies
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#building-a-gcomputation">
+   Building a GComputation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#configure-the-pipeline">
+   Configure the Pipeline
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#running-the-pipeline">
+   Running the Pipeline
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#comparison-with-serial-mode">
+   Comparison with Serial Mode
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conclusion">
+   Conclusion
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#listing-post-processing-kernel">
+   Listing: Post-Processing Kernel
+  </a>
+ </li>
+</ul>
+
+</nav>
+              </div>
+              
+              <div class="toc-item">
+                <div class="tocsection download-docs">
+  <div class="dropdown sst-dropdown">
+    <button class="button bttn-prm button-size-m" data-display="static" type="button" id="download-options"
+      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Download Docs
+    </button>
+    <div class="dropdown-menu" aria-labelledby="download-options">
+      <a class="dropdown-item" href="#" onclick="window.print()">.pdf</a>
+      <a id="download-zip-btn" class="dropdown-item" href="#">.zip</a>
+    </div>
+  </div>
+</div>
+              </div>
+              
+            
+          </div>
+          
+
+          
+          
+              
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+
+<div class="tocsection editthispage">
+    <a href="None">
+        <i class="fas fa-pencil-alt"></i> Edit this page
+    </a>
+</div>
+
+            
+                <div>
+                  
+  <div class="section" id="building-a-face-analytics-pipeline">
+<span id="doxid-openvino-docs-gapi-gapi-face-analytics-pipeline"></span><span id="index-0"></span><h1>Building a Face Analytics Pipeline<a class="headerlink" href="#building-a-face-analytics-pipeline" title="Permalink to this headline">¶</a></h1>
+<p><span class="target" id="doxid-openvino-docs-gapi-gapi-face-analytics-pipeline-1md-openvino-docs-gapi-gapi-face-analytics-pipeline"></span></p>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>In this tutorial you will learn:</p>
+<ul class="simple">
+<li><p>How to integrate Deep Learning inference in a G-API graph.</p></li>
+<li><p>How to run a G-API graph on a video stream and obtain data from it.</p></li>
+</ul>
+</div>
+<div class="section" id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<p>This sample requires:</p>
+<ul class="simple">
+<li><p>PC with GNU/Linux* or Microsoft Windows* (Apple macOS* is supported but was not tested)</p></li>
+<li><p>OpenCV 4.2 or higher built with <a class="reference external" href="https://software.intel.com/content/www/us/en/develop/tools/openvino-toolkit.html">Intel® Distribution of OpenVINO™ Toolkit</a> (building with <a class="reference external" href="https://www.threadingbuildingblocks.org/intel-tbb-tutorial">Intel® TBB</a></p></li>
+<li><p>The following pre-trained models from the Open Model Zoo:</p>
+<ul>
+<li><p>face-detection-adas-0001</p></li>
+<li><p>age-gender-recognition-retail-0013</p></li>
+<li><p>emotions-recognition-retail-0003</p></li>
+</ul>
+</li>
+</ul>
+<p>To download the models from the Open Model Zoo, use the Model Downloader tool.</p>
+</div>
+<div class="section" id="introduction-why-g-api">
+<h2>Introduction: Why G-API<a class="headerlink" href="#introduction-why-g-api" title="Permalink to this headline">¶</a></h2>
+<p>Many computer vision algorithms run on a video stream rather than on individual images. Stream processing usually consists of multiple steps – like decode, preprocessing, detection, tracking, classification (on detected objects), and visualization – forming a <em>video processing pipeline</em>. Moreover, many these steps of such pipeline can run in parallel – modern platforms have different hardware blocks on the same chip like decoders and GPUs, and extra accelerators can be plugged in as extensions, like Intel® Movidius™ Neural Compute Stick for deep learning offload.</p>
+<p>Given all this manifold of options and a variety in video analytics algorithms, managing such pipelines effectively quickly becomes a problem. For sure it can be done manually, but this approach doesn’t scale: if a change is required in the algorithm (e.g. a new pipeline step is added), or if it is ported on a new platform with different capabilities, the whole pipeline needs to be re-optimized.</p>
+<p>Starting with version 4.2, OpenCV offers a solution to this problem. OpenCV G-API now can manage Deep Learning inference (a cornerstone of any modern analytics pipeline) with a traditional Computer Vision as well as video capturing/decoding, all in a single pipeline. G-API takes care of pipelining itself – so if the algorithm or platform changes, the execution model adapts to it automatically.</p>
+</div>
+<div class="section" id="pipeline-overview">
+<h2>Pipeline Overview<a class="headerlink" href="#pipeline-overview" title="Permalink to this headline">¶</a></h2>
+<p>Our sample application is based on Interactive Face Detection demo from Open Model Zoo. A simplified pipeline consists of the following steps:</p>
+<ol class="arabic simple">
+<li><p>Image acquisition and decode</p></li>
+<li><p>Detection with preprocessing</p></li>
+<li><p>Classification with preprocessing for every detected object with two networks</p></li>
+<li><p>Visualization</p></li>
+</ol>
+<img alt="Face Analytics Pipeline Overview" src="../_images/gapi_face_analytics_pipeline.png" />
+</div>
+<div class="section" id="construct-a-pipeline">
+<span id="doxid-openvino-docs-gapi-gapi-face-analytics-pipeline-1gapi-ifd-constructing"></span><h2>Construct a pipeline<a class="headerlink" href="#construct-a-pipeline" title="Permalink to this headline">¶</a></h2>
+<p>Constructing a G-API graph for a video streaming case does not differ much from a <a class="reference external" href="https://docs.opencv.org/4.5.0/d0/d1e/gapi.html#gapi_example">regular usage</a> of G-API it is still about defining graph <em>data</em> (with cv::GMat, <code class="docutils literal notranslate"><span class="pre">cv::GScalar</span></code>, and <code class="docutils literal notranslate"><span class="pre">cv::GArray</span></code>) and <em>operations</em> over it. Inference also becomes an operation in the graph, but is defined in a little bit different way.</p>
+<div class="section" id="declare-deep-learning-topologies">
+<span id="doxid-openvino-docs-gapi-gapi-face-analytics-pipeline-1gapi-ifd-declaring-nets"></span><h3>Declare Deep Learning topologies<a class="headerlink" href="#declare-deep-learning-topologies" title="Permalink to this headline">¶</a></h3>
+<p>In contrast with traditional CV functions (see <a class="reference external" href="https://docs.opencv.org/4.5.0/df/d1f/group__gapi__core.html">core</a> and <a class="reference external" href="https://docs.opencv.org/4.5.0/d2/d00/group__gapi__imgproc.html">imgproc</a>) where G-API declares distinct operations for every function, inference in G-API is a single generic operation <code class="docutils literal notranslate"><span class="pre">cv::gapi::infer&lt;&gt;</span></code>. As usual, it is just an interface and it can be implemented in a number of ways under the hood. In OpenCV 4.2, only OpenVINO™ Runtime-based backend is available, and OpenCV’s own DNN module-based backend is to come.</p>
+<p><code class="docutils literal notranslate"><span class="pre">cv::gapi::infer&lt;&gt;</span></code> is <em>parametrized</em> by the details of a topology we are going to execute. Like operations, topologies in G-API are strongly typed and are defined with a special macro <code class="docutils literal notranslate"><span class="pre">G_API_NET()</span></code> :</p>
+<div class="highlight"><div class="highlight"><pre><span></span><span class="c1">// Face detector: takes one Mat, returns another Mat</span>
+<span class="n">G_API_NET</span><span class="p">(</span><span class="n">Faces</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">(</span><span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span> <span class="s">&quot;face-detector&quot;</span><span class="p">);</span>
+<span class="c1">// Age/Gender recognition - takes one Mat, returns two:</span>
+<span class="c1">// one for Age and one for Gender. In G-API, multiple-return-value operations</span>
+<span class="c1">// are defined using std::tuple&lt;&gt;.</span>
+<span class="k">using</span> <span class="n">AGInfo</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">,</span> <span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="n">G_API_NET</span><span class="p">(</span><span class="n">AgeGender</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">AGInfo</span><span class="p">(</span><span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span>   <span class="s">&quot;age-gender-recoginition&quot;</span><span class="p">);</span>
+<span class="c1">// Emotion recognition - takes one Mat, returns another.</span>
+<span class="n">G_API_NET</span><span class="p">(</span><span class="n">Emotions</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">(</span><span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span> <span class="s">&quot;emotions-recognition&quot;</span><span class="p">);</span></pre></div></div><p>Similar to how operations are defined with <code class="docutils literal notranslate"><span class="pre">G_API_OP()</span></code>, network description requires three parameters:</p>
+<ol class="arabic simple">
+<li><p>A type name. Every defined topology is declared as a distinct C++ type which is used further in the program see below.</p></li>
+<li><p>A <code class="docutils literal notranslate"><span class="pre">std::function&lt;&gt;</span></code> -like API signature. G-API traits networks as regular “functions” which take and return data. Here network <code class="docutils literal notranslate"><span class="pre">Faces</span></code> (a detector) takes a <code class="docutils literal notranslate"><span class="pre">cv::GMat</span></code> and returns a <code class="docutils literal notranslate"><span class="pre">cv::GMat</span></code>, while network <code class="docutils literal notranslate"><span class="pre">AgeGender</span></code> is known to provide two outputs (age and gender blobs, respectively) so its has a <code class="docutils literal notranslate"><span class="pre">std::tuple&lt;&gt;</span></code> as a return type.</p></li>
+<li><p>A topology name can be any non-empty string, G-API is using these names to distinguish networks inside. Names should be unique in the scope of a single graph.</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="building-a-gcomputation">
+<span id="doxid-openvino-docs-gapi-gapi-face-analytics-pipeline-1gapi-ifd-gcomputation"></span><h2>Building a GComputation<a class="headerlink" href="#building-a-gcomputation" title="Permalink to this headline">¶</a></h2>
+<p>Now the above pipeline is expressed in G-API like this:</p>
+<div class="highlight"><div class="highlight"><pre><span></span><span class="n">cv</span><span class="o">::</span><span class="n">GComputation</span> <span class="n">pp</span><span class="p">([]()</span> <span class="p">{</span>
+    <span class="c1">// Declare an empty GMat - the beginning of the pipeline.</span>
+    <span class="n">cv</span><span class="o">::</span><span class="n">GMat</span> <span class="n">in</span><span class="p">;</span>
+    <span class="c1">// Run face detection on the input frame. Result is a single GMat,</span>
+    <span class="c1">// internally representing an 1x1x200x7 SSD output.</span>
+    <span class="c1">// This is a single-patch version of infer:</span>
+    <span class="c1">// - Inference is running on the whole input image;</span>
+    <span class="c1">// - Image is converted and resized to the network&#39;s expected format</span>
+    <span class="c1">//   automatically.</span>
+    <span class="n">cv</span><span class="o">::</span><span class="n">GMat</span> <span class="n">detections</span> <span class="o">=</span> <span class="n">cv</span><span class="o">::</span><span class="n">gapi</span><span class="o">::</span><span class="n">infer</span><span class="o">&lt;</span><span class="n">custom</span><span class="o">::</span><span class="n">Faces</span><span class="o">&gt;</span><span class="p">(</span><span class="n">in</span><span class="p">);</span>
+    <span class="c1">// Parse SSD output to a list of ROI (rectangles) using</span>
+    <span class="c1">// a custom kernel. Note: parsing SSD may become a &quot;standard&quot; kernel.</span>
+    <span class="n">cv</span><span class="o">::</span><span class="n">GArray</span><span class="o">&lt;</span><span class="n">cv</span><span class="o">::</span><span class="n">Rect</span><span class="o">&gt;</span> <span class="n">faces</span> <span class="o">=</span> <span class="n">custom</span><span class="o">::</span><span class="n">PostProc</span><span class="o">::</span><span class="n">on</span><span class="p">(</span><span class="n">detections</span><span class="p">,</span> <span class="n">in</span><span class="p">);</span>
+    <span class="c1">// Now run Age/Gender model on every detected face. This model has two</span>
+    <span class="c1">// outputs (for age and gender respectively).</span>
+    <span class="c1">// A special ROI-list-oriented form of infer&lt;&gt;() is used here:</span>
+    <span class="c1">// - First input argument is the list of rectangles to process,</span>
+    <span class="c1">// - Second one is the image where to take ROI from;</span>
+    <span class="c1">// - Crop/Resize/Layout conversion happens automatically for every image patch</span>
+    <span class="c1">//   from the list</span>
+    <span class="c1">// - Inference results are also returned in form of list (GArray&lt;&gt;)</span>
+    <span class="c1">// - Since there&#39;re two outputs, infer&lt;&gt; return two arrays (via std::tuple).</span>
+    <span class="n">cv</span><span class="o">::</span><span class="n">GArray</span><span class="o">&lt;</span><span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="o">&gt;</span> <span class="n">ages</span><span class="p">;</span>
+    <span class="n">cv</span><span class="o">::</span><span class="n">GArray</span><span class="o">&lt;</span><span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="o">&gt;</span> <span class="n">genders</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">tie</span><span class="p">(</span><span class="n">ages</span><span class="p">,</span> <span class="n">genders</span><span class="p">)</span> <span class="o">=</span> <span class="n">cv</span><span class="o">::</span><span class="n">gapi</span><span class="o">::</span><span class="n">infer</span><span class="o">&lt;</span><span class="n">custom</span><span class="o">::</span><span class="n">AgeGender</span><span class="o">&gt;</span><span class="p">(</span><span class="n">faces</span><span class="p">,</span> <span class="n">in</span><span class="p">);</span>
+    <span class="c1">// Recognize emotions on every face.</span>
+    <span class="c1">// ROI-list-oriented infer&lt;&gt;() is used here as well.</span>
+    <span class="c1">// Since custom::Emotions network produce a single output, only one</span>
+    <span class="c1">// GArray&lt;&gt; is returned here.</span>
+    <span class="n">cv</span><span class="o">::</span><span class="n">GArray</span><span class="o">&lt;</span><span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="o">&gt;</span> <span class="n">emotions</span> <span class="o">=</span> <span class="n">cv</span><span class="o">::</span><span class="n">gapi</span><span class="o">::</span><span class="n">infer</span><span class="o">&lt;</span><span class="n">custom</span><span class="o">::</span><span class="n">Emotions</span><span class="o">&gt;</span><span class="p">(</span><span class="n">faces</span><span class="p">,</span> <span class="n">in</span><span class="p">);</span>
+    <span class="c1">// Return the decoded frame as a result as well.</span>
+    <span class="c1">// Input matrix can&#39;t be specified as output one, so use copy() here</span>
+    <span class="c1">// (this copy will be optimized out in the future).</span>
+    <span class="n">cv</span><span class="o">::</span><span class="n">GMat</span> <span class="n">frame</span> <span class="o">=</span> cv::gapi::copy<span></span><span class="p">(</span><span class="n">in</span><span class="p">);</span>
+    <span class="c1">// Now specify the computation&#39;s boundaries - our pipeline consumes</span>
+    <span class="c1">// one images and produces five outputs.</span>
+    <span class="k">return</span> <span class="n">cv</span><span class="o">::</span><span class="n">GComputation</span><span class="p">(</span><span class="n">cv</span><span class="o">::</span><span class="n">GIn</span><span class="p">(</span><span class="n">in</span><span class="p">),</span>
+                            <span class="n">cv</span><span class="o">::</span><span class="n">GOut</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">faces</span><span class="p">,</span> <span class="n">ages</span><span class="p">,</span> <span class="n">genders</span><span class="p">,</span> <span class="n">emotions</span><span class="p">));</span>
+<span class="p">});</span></pre></div></div><p>Every pipeline starts with declaring empty data objects – which act as inputs to the pipeline. Then we call a generic <code class="docutils literal notranslate"><span class="pre">cv::gapi::infer&lt;&gt;</span></code> specialized to Faces detection network. <code class="docutils literal notranslate"><span class="pre">cv::gapi::infer&lt;&gt;</span></code> inherits its signature from its template parameter – and in this case it expects one input cv::GMat and produces one output cv::GMat.</p>
+<p>In this sample we use a pre-trained SSD-based network and its output needs to be parsed to an array of detections (object regions of interest, ROIs). It is done by a custom operation custom::PostProc, which returns an array of rectangles (of type <code class="docutils literal notranslate"><span class="pre">cv::GArray&lt;cv::Rect&gt;</span></code>) back to the pipeline. This operation also filters out results by a confidence threshold – and these details are hidden in the kernel itself. Still, at the moment of graph construction we operate with interfaces only and don’t need actual kernels to express the pipeline – so the implementation of this post-processing will be listed later.</p>
+<p>After detection result output is parsed to an array of objects, we can run classification on any of those. G-API doesn’t support syntax for in-graph loops like <code class="docutils literal notranslate"><span class="pre">for_each()</span></code> yet, but instead <code class="docutils literal notranslate"><span class="pre">cv::gapi::infer&lt;&gt;</span></code> comes with a special list-oriented overload.</p>
+<p>User can call <code class="docutils literal notranslate"><span class="pre">cv::gapi::infer&lt;&gt;</span></code> with a <code class="docutils literal notranslate"><span class="pre">cv::GArray</span></code> as the first argument, so then G-API assumes it needs to run the associated network on every rectangle from the given list of the given frame (second argument). Result of such operation is also a list – a cv::GArray of <code class="docutils literal notranslate"><span class="pre">cv::GMat</span></code>.</p>
+<p>Since AgeGender network itself produces two outputs, it’s output type for a list-based version of <code class="docutils literal notranslate"><span class="pre">cv::gapi::infer</span></code> is a tuple of arrays. We use <code class="docutils literal notranslate"><span class="pre">std::tie()</span></code> to decompose this input into two distinct objects.</p>
+<p>Emotions network produces a single output so its list-based inference’s return type is <code class="docutils literal notranslate"><span class="pre">cv::GArray&lt;cv::GMat&gt;</span></code>.</p>
+</div>
+<div class="section" id="configure-the-pipeline">
+<span id="doxid-openvino-docs-gapi-gapi-face-analytics-pipeline-1gapi-ifd-configuration"></span><h2>Configure the Pipeline<a class="headerlink" href="#configure-the-pipeline" title="Permalink to this headline">¶</a></h2>
+<p>G-API strictly separates construction from configuration with the idea to keep algorithm code itself platform-neutral. In the above listings we only declared our operations and expressed the overall data flow, but didn’t even mention that we use OpenVINO™. We only described <em>what</em> we do, but not <em>how</em> we do it. Keeping these two aspects clearly separated is the design goal for G-API.</p>
+<p>Platform-specific details arise when the pipeline is <em>compiled</em> i.e. is turned from a declarative to an executable form. The way <em>how</em> to run stuff is specified via compilation arguments, and new inference/streaming features are no exception from this rule.</p>
+<p>G-API is built on backends which implement interfaces (see <a class="reference external" href="https://docs.opencv.org/4.5.0/de/d4d/gapi_hld.html">Architecture</a> and <a class="reference internal" href="openvino_docs_gapi_kernel_api.html#doxid-openvino-docs-gapi-kernel-api"><span class="std std-ref">Kernels</span></a> for details) thus <code class="docutils literal notranslate"><span class="pre">cv::gapi::infer&lt;&gt;</span></code> is a function which can be implemented by different backends. In OpenCV 4.2, only OpenVINO™ Runtime backend for inference is available. Every inference backend in G-API has to provide a special parameterizable structure to express <em>backend-specific</em> neural network parameters and in this case, it is <code class="docutils literal notranslate"><span class="pre">cv::gapi::ie::Params</span></code> :</p>
+<div class="highlight"><div class="highlight"><pre><span></span><span class="k">auto</span> <span class="n">det_net</span> <span class="o">=</span> <span class="n">cv</span><span class="o">::</span><span class="n">gapi</span><span class="o">::</span><span class="n">ie</span><span class="o">::</span><span class="n">Params</span><span class="o">&lt;</span><span class="n">custom</span><span class="o">::</span><span class="n">Faces</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="n">cmd</span><span class="p">.</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;fdm&quot;</span><span class="p">),</span>   <span class="c1">// read cmd args: path to topology IR</span>
+    <span class="n">cmd</span><span class="p">.</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;fdw&quot;</span><span class="p">),</span>   <span class="c1">// read cmd args: path to weights</span>
+    <span class="n">cmd</span><span class="p">.</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;fdd&quot;</span><span class="p">),</span>   <span class="c1">// read cmd args: device specifier</span>
+<span class="p">};</span>
+<span class="k">auto</span> <span class="n">age_net</span> <span class="o">=</span> <span class="n">cv</span><span class="o">::</span><span class="n">gapi</span><span class="o">::</span><span class="n">ie</span><span class="o">::</span><span class="n">Params</span><span class="o">&lt;</span><span class="n">custom</span><span class="o">::</span><span class="n">AgeGender</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="n">cmd</span><span class="p">.</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;agem&quot;</span><span class="p">),</span>   <span class="c1">// read cmd args: path to topology IR</span>
+    <span class="n">cmd</span><span class="p">.</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;agew&quot;</span><span class="p">),</span>   <span class="c1">// read cmd args: path to weights</span>
+    <span class="n">cmd</span><span class="p">.</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;aged&quot;</span><span class="p">),</span>   <span class="c1">// read cmd args: device specifier</span>
+<span class="p">}.</span><span class="n">cfgOutputLayers</span><span class="p">({</span> <span class="s">&quot;age_conv3&quot;</span><span class="p">,</span> <span class="s">&quot;prob&quot;</span> <span class="p">});</span>
+<span class="k">auto</span> <span class="n">emo_net</span> <span class="o">=</span> <span class="n">cv</span><span class="o">::</span><span class="n">gapi</span><span class="o">::</span><span class="n">ie</span><span class="o">::</span><span class="n">Params</span><span class="o">&lt;</span><span class="n">custom</span><span class="o">::</span><span class="n">Emotions</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="n">cmd</span><span class="p">.</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;emom&quot;</span><span class="p">),</span>   <span class="c1">// read cmd args: path to topology IR</span>
+    <span class="n">cmd</span><span class="p">.</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;emow&quot;</span><span class="p">),</span>   <span class="c1">// read cmd args: path to weights</span>
+    <span class="n">cmd</span><span class="p">.</span><span class="n">get</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;emod&quot;</span><span class="p">),</span>   <span class="c1">// read cmd args: device specifier</span>
+<span class="p">};</span></pre></div></div><p>Here we define three parameter objects: <code class="docutils literal notranslate"><span class="pre">det_net</span></code>, <code class="docutils literal notranslate"><span class="pre">age_net</span></code>, and <code class="docutils literal notranslate"><span class="pre">emo_net</span></code>. Every object is a <code class="docutils literal notranslate"><span class="pre">cv::gapi::ie::Params</span></code> structure parametrization for each particular network we use. On a compilation stage, G-API automatically matches network parameters with their <code class="docutils literal notranslate"><span class="pre">cv::gapi::infer&lt;&gt;</span></code> calls in graph using this information.</p>
+<p>Regardless of the topology, every parameter structure is constructed with three string arguments – specific to the OpenVINO™ Runtime:</p>
+<ul class="simple">
+<li><p>Path to the topology’s intermediate representation (.xml file);</p></li>
+<li><p>Path to the topology’s model weights (.bin file);</p></li>
+<li><p>Device where to run – “CPU”, “GPU”, and others – based on your OpenVINO™ Toolkit installation. These arguments are taken from the command-line parser.</p></li>
+</ul>
+<p>Once networks are defined and custom kernels are implemented, the pipeline is compiled for streaming:</p>
+<div class="highlight"><div class="highlight"><pre><span></span><span class="c1">// Form a kernel package (with a single OpenCV-based implementation of our</span>
+<span class="c1">// post-processing) and a network package (holding our three networks).</span>
+<span class="k">auto</span> <span class="n">kernels</span> <span class="o">=</span> <span class="n">cv</span><span class="o">::</span><span class="n">gapi</span><span class="o">::</span><span class="n">kernels</span><span class="o">&lt;</span><span class="n">custom</span><span class="o">::</span><span class="n">OCVPostProc</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="k">auto</span> <span class="n">networks</span> <span class="o">=</span> <span class="n">cv</span><span class="o">::</span><span class="n">gapi</span><span class="o">::</span><span class="n">networks</span><span class="p">(</span><span class="n">det_net</span><span class="p">,</span> <span class="n">age_net</span><span class="p">,</span> <span class="n">emo_net</span><span class="p">);</span>
+<span class="c1">// Compile our pipeline and pass our kernels &amp; networks as</span>
+<span class="c1">// parameters.  This is the place where G-API learns which</span>
+<span class="c1">// networks &amp; kernels we&#39;re actually operating with (the graph</span>
+<span class="c1">// description itself known nothing about that).</span>
+<span class="k">auto</span> <span class="n">cc</span> <span class="o">=</span> <span class="n">pp</span><span class="p">.</span><span class="n">compileStreaming</span><span class="p">(</span><span class="n">cv</span><span class="o">::</span><span class="n">compile_args</span><span class="p">(</span><span class="n">kernels</span><span class="p">,</span> <span class="n">networks</span><span class="p">));</span></pre></div></div><p><code class="docutils literal notranslate"><span class="pre">cv::GComputation::compileStreaming()</span></code> triggers a special video-oriented form of graph compilation where G-API is trying to optimize throughput. Result of this compilation is an object of special type <code class="docutils literal notranslate"><span class="pre">cv::GStreamingCompiled</span></code> – in contrast to a traditional callable <code class="docutils literal notranslate"><span class="pre">cv::GCompiled</span></code>, these objects are closer to media players in their semantics.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>There is no need to pass metadata arguments describing the format of the input video stream in <code class="docutils literal notranslate"><span class="pre">cv::GComputation::compileStreaming()</span></code> – G-API figures automatically what are the formats of the input vector and adjusts the pipeline to these formats on-the-fly. User still can pass metadata there as with regular <code class="docutils literal notranslate"><span class="pre">cv::GComputation::compile()</span></code> in order to fix the pipeline to the specific input format.</p>
+</div>
+</div>
+<div class="section" id="running-the-pipeline">
+<span id="doxid-openvino-docs-gapi-gapi-face-analytics-pipeline-1gapi-ifd-running"></span><h2>Running the Pipeline<a class="headerlink" href="#running-the-pipeline" title="Permalink to this headline">¶</a></h2>
+<p>Pipelining optimization is based on processing multiple input video frames simultaneously, running different steps of the pipeline in parallel. This is why it works best when the framework takes full control over the video stream.</p>
+<p>The idea behind streaming API is that user specifies an <em>input source</em> to the pipeline and then G-API manages its execution automatically until the source ends or user interrupts the execution. G-API pulls new image data from the source and passes it to the pipeline for processing.</p>
+<p>Streaming sources are represented by the interface <code class="docutils literal notranslate"><span class="pre">cv::gapi::wip::IStreamSource</span></code>. Objects implementing this interface may be passed to <code class="docutils literal notranslate"><span class="pre">GStreamingCompiled</span></code> as regular inputs via <code class="docutils literal notranslate"><span class="pre">cv::gin()</span></code> helper function. In OpenCV 4.2, only one streaming source is allowed per pipeline this requirement will be relaxed in the future.</p>
+<p>OpenCV comes with a great class cv::VideoCapture and by default G-API ships with a stream source class based on it <code class="docutils literal notranslate"><span class="pre">cv::gapi::wip::GCaptureSource</span></code>. Users can implement their own streaming sources e.g. using <a class="reference external" href="https://01.org/vaapi">VAAPI</a> or other Media or Networking APIs.</p>
+<p>Sample application specifies the input source as follows:</p>
+<div class="highlight"><div class="highlight"><pre><span></span><span class="k">auto</span> <span class="n">in_src</span> <span class="o">=</span> <span class="n">cv</span><span class="o">::</span><span class="n">gapi</span><span class="o">::</span><span class="n">wip</span><span class="o">::</span><span class="n">make_src</span><span class="o">&lt;</span><span class="n">cv</span><span class="o">::</span><span class="n">gapi</span><span class="o">::</span><span class="n">wip</span><span class="o">::</span><span class="n">GCaptureSource</span><span class="o">&gt;</span><span class="p">(</span><span class="n">input</span><span class="p">);</span>
+<span class="n">cc</span><span class="p">.</span><span class="n">setSource</span><span class="p">(</span><span class="n">cv</span><span class="o">::</span><span class="n">gin</span><span class="p">(</span><span class="n">in_src</span><span class="p">));</span></pre></div></div><p>Please note that a GComputation may still have multiple inputs like <code class="docutils literal notranslate"><span class="pre">cv::GMat</span></code>, <code class="docutils literal notranslate"><span class="pre">cv::GScalar</span></code>, or <code class="docutils literal notranslate"><span class="pre">cv::GArray</span></code> objects. User can pass their respective host-side types (<code class="docutils literal notranslate"><span class="pre">cv::Mat</span></code>, <code class="docutils literal notranslate"><span class="pre">cv::Scalar</span></code>, <code class="docutils literal notranslate"><span class="pre">std::vector&lt;&gt;</span></code>) in the input vector as well, but in Streaming mode these objects will create “endless” constant streams. Mixing a real video source stream and a const data stream is allowed.</p>
+<p>Running a pipeline is easy – just call <code class="docutils literal notranslate"><span class="pre">cv::GStreamingCompiled::start()</span></code> and fetch your data with blocking <code class="docutils literal notranslate"><span class="pre">cv::GStreamingCompiled::pull()</span></code> or non-blocking <code class="docutils literal notranslate"><span class="pre">cv::GStreamingCompiled::try_pull()</span></code>; repeat until the stream ends:</p>
+<div class="highlight"><div class="highlight"><pre><span></span><span class="c1">// After data source is specified, start the execution</span>
+<span class="n">cc</span><span class="p">.</span><span class="n">start</span><span class="p">();</span>
+<span class="c1">// Declare data objects we will be receiving from the pipeline.</span>
+<span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">frame</span><span class="p">;</span>                      <span class="c1">// The captured frame itself</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">cv</span><span class="o">::</span><span class="n">Rect</span><span class="o">&gt;</span> <span class="n">faces</span><span class="p">;</span>        <span class="c1">// Array of detected faces</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">cv</span><span class="o">::</span><span class="n">Mat</span><span class="o">&gt;</span> <span class="n">out_ages</span><span class="p">;</span>      <span class="c1">// Array of inferred ages (one blob per face)</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">cv</span><span class="o">::</span><span class="n">Mat</span><span class="o">&gt;</span> <span class="n">out_genders</span><span class="p">;</span>   <span class="c1">// Array of inferred genders (one blob per face)</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">cv</span><span class="o">::</span><span class="n">Mat</span><span class="o">&gt;</span> <span class="n">out_emotions</span><span class="p">;</span>  <span class="c1">// Array of classified emotions (one blob per face)</span>
+<span class="c1">// Implement different execution policies depending on the display option</span>
+<span class="c1">// for the best performance.</span>
+<span class="k">while</span> <span class="p">(</span><span class="n">cc</span><span class="p">.</span><span class="n">running</span><span class="p">())</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">out_vector</span> <span class="o">=</span> <span class="n">cv</span><span class="o">::</span><span class="n">gout</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">faces</span><span class="p">,</span> <span class="n">out_ages</span><span class="p">,</span> <span class="n">out_genders</span><span class="p">,</span> <span class="n">out_emotions</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">no_show</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// This is purely a video processing. No need to balance</span>
+        <span class="c1">// with UI rendering.  Use a blocking pull() to obtain</span>
+        <span class="c1">// data. Break the loop if the stream is over.</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">cc</span><span class="p">.</span><span class="n">pull</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">out_vector</span><span class="p">)))</span>
+            <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">cc</span><span class="p">.</span><span class="n">try_pull</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">out_vector</span><span class="p">)))</span> <span class="p">{</span>
+        <span class="c1">// Use a non-blocking try_pull() to obtain data.</span>
+        <span class="c1">// If there&#39;s no data, let UI refresh (and handle keypress)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">cv</span><span class="o">::</span><span class="n">waitKey</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="k">break</span><span class="p">;</span>
+        <span class="k">else</span> <span class="k">continue</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="c1">// At this point we have data for sure (obtained in either</span>
+    <span class="c1">// blocking or non-blocking way).</span>
+    <span class="n">frames</span><span class="o">++</span><span class="p">;</span>
+    <span class="n">labels</span><span class="o">::</span><span class="n">DrawResults</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">faces</span><span class="p">,</span> <span class="n">out_ages</span><span class="p">,</span> <span class="n">out_genders</span><span class="p">,</span> <span class="n">out_emotions</span><span class="p">);</span>
+    <span class="n">labels</span><span class="o">::</span><span class="n">DrawFPS</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">frames</span><span class="p">,</span> <span class="n">avg</span><span class="p">.</span><span class="n">fps</span><span class="p">(</span><span class="n">frames</span><span class="p">));</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">no_show</span><span class="p">)</span> <span class="n">cv</span><span class="o">::</span><span class="n">imshow</span><span class="p">(</span><span class="s">&quot;Out&quot;</span><span class="p">,</span> <span class="n">frame</span><span class="p">);</span>
+<span class="p">}</span></pre></div></div><p>The above code may look complex but in fact it handles two modes – with and without graphical user interface (GUI):</p>
+<ul class="simple">
+<li><p>When a sample is running in a “headless” mode (<code class="docutils literal notranslate"><span class="pre">--pure</span></code> option is set), this code simply pulls data from the pipeline with the blocking <code class="docutils literal notranslate"><span class="pre">pull()</span></code> until it ends. This is the most performant mode of execution.</p></li>
+<li><p>When results are also displayed on the screen, the Window System needs to take some time to refresh the window contents and handle GUI events. In this case, the demo pulls data with a non-blocking <code class="docutils literal notranslate"><span class="pre">try_pull()</span></code> until there is no more data available (but it does not mark end of the stream – just means new data is not ready yet), and only then displays the latest obtained result and refreshes the screen. Reducing the time spent in GUI with this trick increases the overall performance a little bit.</p></li>
+</ul>
+</div>
+<div class="section" id="comparison-with-serial-mode">
+<h2>Comparison with Serial Mode<a class="headerlink" href="#comparison-with-serial-mode" title="Permalink to this headline">¶</a></h2>
+<p>The sample can also run in a serial mode for a reference and benchmarking purposes. In this case, a regular <code class="docutils literal notranslate"><span class="pre">cv::GComputation::compile()</span></code> is used and a regular single-frame <code class="docutils literal notranslate"><span class="pre">cv::GCompiled</span></code> object is produced; the pipelining optimization is not applied within G-API; it is the user responsibility to acquire image frames from <code class="docutils literal notranslate"><span class="pre">cv::VideoCapture</span></code> object and pass those to G-API.</p>
+<div class="highlight"><div class="highlight"><pre><span></span><span class="n">cv</span><span class="o">::</span><span class="n">VideoCapture</span> <span class="n">cap</span><span class="p">(</span><span class="n">input</span><span class="p">);</span>
+<span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">in_frame</span><span class="p">,</span> <span class="n">frame</span><span class="p">;</span>            <span class="c1">// The captured frame itself</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">cv</span><span class="o">::</span><span class="n">Rect</span><span class="o">&gt;</span> <span class="n">faces</span><span class="p">;</span>        <span class="c1">// Array of detected faces</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">cv</span><span class="o">::</span><span class="n">Mat</span><span class="o">&gt;</span> <span class="n">out_ages</span><span class="p">;</span>      <span class="c1">// Array of inferred ages (one blob per face)</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">cv</span><span class="o">::</span><span class="n">Mat</span><span class="o">&gt;</span> <span class="n">out_genders</span><span class="p">;</span>   <span class="c1">// Array of inferred genders (one blob per face)</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">cv</span><span class="o">::</span><span class="n">Mat</span><span class="o">&gt;</span> <span class="n">out_emotions</span><span class="p">;</span>  <span class="c1">// Array of classified emotions (one blob per face)</span>
+<span class="k">while</span> <span class="p">(</span><span class="n">cap</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="n">in_frame</span><span class="p">))</span> <span class="p">{</span>
+    <span class="n">pp</span><span class="p">.</span><span class="n">apply</span><span class="p">(</span><span class="n">cv</span><span class="o">::</span><span class="n">gin</span><span class="p">(</span><span class="n">in_frame</span><span class="p">),</span>
+             <span class="n">cv</span><span class="o">::</span><span class="n">gout</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">faces</span><span class="p">,</span> <span class="n">out_ages</span><span class="p">,</span> <span class="n">out_genders</span><span class="p">,</span> <span class="n">out_emotions</span><span class="p">),</span>
+             <span class="n">cv</span><span class="o">::</span><span class="n">compile_args</span><span class="p">(</span><span class="n">kernels</span><span class="p">,</span> <span class="n">networks</span><span class="p">));</span>
+    <span class="n">labels</span><span class="o">::</span><span class="n">DrawResults</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">faces</span><span class="p">,</span> <span class="n">out_ages</span><span class="p">,</span> <span class="n">out_genders</span><span class="p">,</span> <span class="n">out_emotions</span><span class="p">);</span>
+    <span class="n">frames</span><span class="o">++</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">frames</span> <span class="o">==</span> <span class="mi">1u</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// Start timer only after 1st frame processed -- compilation</span>
+        <span class="c1">// happens on-the-fly here</span>
+        <span class="n">avg</span><span class="p">.</span><span class="n">start</span><span class="p">();</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="c1">// Measurfe &amp; draw FPS for all other frames</span>
+        <span class="n">labels</span><span class="o">::</span><span class="n">DrawFPS</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">frames</span><span class="p">,</span> <span class="n">avg</span><span class="p">.</span><span class="n">fps</span><span class="p">(</span><span class="n">frames</span><span class="o">-</span><span class="mi">1</span><span class="p">));</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">no_show</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">cv</span><span class="o">::</span><span class="n">imshow</span><span class="p">(</span><span class="s">&quot;Out&quot;</span><span class="p">,</span> <span class="n">frame</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">cv</span><span class="o">::</span><span class="n">waitKey</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span></pre></div></div><p>On a test machine (Intel® Core™ i5-6600), with OpenCV built with <a class="reference external" href="https://www.threadingbuildingblocks.org/intel-tbb-tutorial">Intel® TBB</a> support, detector network assigned to CPU, and classifiers to iGPU, the pipelined sample outperformes the serial one by the factor of 1.36x (thus adding +36% in overall throughput).</p>
+</div>
+<div class="section" id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h2>
+<p>G-API introduces a technological way to build and optimize hybrid pipelines. Switching to a new execution model does not require changes in the algorithm code expressed with G-API – only the way how graph is triggered differs.</p>
+</div>
+<div class="section" id="listing-post-processing-kernel">
+<h2>Listing: Post-Processing Kernel<a class="headerlink" href="#listing-post-processing-kernel" title="Permalink to this headline">¶</a></h2>
+<p>G-API gives an easy way to plug custom code into the pipeline even if it is running in a streaming mode and processing tensor data. Inference results are represented by multi-dimensional <code class="docutils literal notranslate"><span class="pre">cv::Mat</span></code> objects so accessing those is as easy as with a regular DNN module.</p>
+<p>The OpenCV-based SSD post-processing kernel is defined and implemented in this sample as follows:</p>
+<div class="highlight"><div class="highlight"><pre><span></span><span class="c1">// SSD Post-processing function - this is not a network but a kernel.</span>
+<span class="c1">// The kernel body is declared separately, this is just an interface.</span>
+<span class="c1">// This operation takes two Mats (detections and the source image),</span>
+<span class="c1">// and returns a vector of ROI (filtered by a default threshold).</span>
+<span class="c1">// Threshold (or a class to select) may become a parameter, but since</span>
+<span class="c1">// this kernel is custom, it doesn&#39;t make a lot of sense.</span>
+<span class="n">G_API_OP</span><span class="p">(</span><span class="n">PostProc</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">cv</span><span class="o">::</span><span class="n">GArray</span><span class="o">&lt;</span><span class="n">cv</span><span class="o">::</span><span class="n">Rect</span><span class="o">&gt;</span><span class="p">(</span><span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">,</span> <span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span> <span class="s">&quot;custom.fd_postproc&quot;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">static</span> <span class="n">cv</span><span class="o">::</span><span class="n">GArrayDesc</span> <span class="n">outMeta</span><span class="p">(</span><span class="k">const</span> <span class="n">cv</span><span class="o">::</span><span class="n">GMatDesc</span> <span class="o">&amp;</span><span class="p">,</span> <span class="k">const</span> <span class="n">cv</span><span class="o">::</span><span class="n">GMatDesc</span> <span class="o">&amp;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// This function is required for G-API engine to figure out</span>
+        <span class="c1">// what the output format is, given the input parameters.</span>
+        <span class="c1">// Since the output is an array (with a specific type),</span>
+        <span class="c1">// there&#39;s nothing to describe.</span>
+        <span class="k">return</span> <span class="n">cv</span><span class="o">::</span><span class="n">empty_array_desc</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+<span class="c1">// OpenCV-based implementation of the above kernel.</span>
+<span class="n">GAPI_OCV_KERNEL</span><span class="p">(</span><span class="n">OCVPostProc</span><span class="p">,</span> <span class="n">PostProc</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">static</span> <span class="kt">void</span> <span class="n">run</span><span class="p">(</span><span class="k">const</span> <span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="o">&amp;</span><span class="n">in_ssd_result</span><span class="p">,</span>
+                    <span class="k">const</span> <span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="o">&amp;</span><span class="n">in_frame</span><span class="p">,</span>
+                    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">cv</span><span class="o">::</span><span class="n">Rect</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">out_faces</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">const</span> <span class="kt">int</span> <span class="n">MAX_PROPOSALS</span> <span class="o">=</span> <span class="mi">200</span><span class="p">;</span>
+        <span class="k">const</span> <span class="kt">int</span> <span class="n">OBJECT_SIZE</span>   <span class="o">=</span>   <span class="mi">7</span><span class="p">;</span>
+        <span class="k">const</span> cv::Size<span></span> <span class="n">upscale</span> <span class="o">=</span> <span class="n">in_frame</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+        <span class="k">const</span> <span class="n">cv</span><span class="o">::</span><span class="n">Rect</span> surface<span></span><span class="p">({</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">},</span> <span class="n">upscale</span><span class="p">);</span>
+        <span class="n">out_faces</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+        <span class="k">const</span> <span class="kt">float</span> <span class="err">\</span><span class="o">*</span><span class="n">data</span> <span class="o">=</span> <span class="n">in_ssd_result</span><span class="p">.</span><span class="n">ptr</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">();</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">MAX_PROPOSALS</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">const</span> <span class="kt">float</span> <span class="n">image_id</span>   <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span> <span class="err">\</span><span class="o">*</span> <span class="n">OBJECT_SIZE</span> <span class="o">+</span> <span class="mi">0</span><span class="p">];</span> <span class="c1">// batch id</span>
+            <span class="k">const</span> <span class="kt">float</span> <span class="n">confidence</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span> <span class="err">\</span><span class="o">*</span> <span class="n">OBJECT_SIZE</span> <span class="o">+</span> <span class="mi">2</span><span class="p">];</span>
+            <span class="k">const</span> <span class="kt">float</span> <span class="n">rc_left</span>    <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span> <span class="err">\</span><span class="o">*</span> <span class="n">OBJECT_SIZE</span> <span class="o">+</span> <span class="mi">3</span><span class="p">];</span>
+            <span class="k">const</span> <span class="kt">float</span> <span class="n">rc_top</span>     <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span> <span class="err">\</span><span class="o">*</span> <span class="n">OBJECT_SIZE</span> <span class="o">+</span> <span class="mi">4</span><span class="p">];</span>
+            <span class="k">const</span> <span class="kt">float</span> <span class="n">rc_right</span>   <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span> <span class="err">\</span><span class="o">*</span> <span class="n">OBJECT_SIZE</span> <span class="o">+</span> <span class="mi">5</span><span class="p">];</span>
+            <span class="k">const</span> <span class="kt">float</span> <span class="n">rc_bottom</span>  <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span> <span class="err">\</span><span class="o">*</span> <span class="n">OBJECT_SIZE</span> <span class="o">+</span> <span class="mi">6</span><span class="p">];</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">image_id</span> <span class="o">&lt;</span> <span class="mf">0.</span>f<span></span><span class="p">)</span> <span class="p">{</span>  <span class="c1">// indicates end of detections</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">confidence</span> <span class="o">&lt;</span> <span class="mf">0.5</span>f<span></span><span class="p">)</span> <span class="p">{</span> <span class="c1">// a hard-coded snapshot</span>
+                <span class="k">continue</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="c1">// Convert floating-point coordinates to the absolute image</span>
+            <span class="c1">// frame coordinates; clip by the source image boundaries.</span>
+            <span class="n">cv</span><span class="o">::</span><span class="n">Rect</span> <span class="n">rc</span><span class="p">;</span>
+            <span class="n">rc</span><span class="p">.</span><span class="n">x</span>      <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">rc_left</span>   <span class="err">\</span><span class="o">*</span> <span class="n">upscale</span><span class="p">.</span><span class="n">width</span><span class="p">);</span>
+            <span class="n">rc</span><span class="p">.</span><span class="n">y</span>      <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">rc_top</span>    <span class="err">\</span><span class="o">*</span> <span class="n">upscale</span><span class="p">.</span><span class="n">height</span><span class="p">);</span>
+            <span class="n">rc</span><span class="p">.</span><span class="n">width</span>  <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">rc_right</span>  <span class="err">\</span><span class="o">*</span> <span class="n">upscale</span><span class="p">.</span><span class="n">width</span><span class="p">)</span>  <span class="o">-</span> <span class="n">rc</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
+            <span class="n">rc</span><span class="p">.</span><span class="n">height</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">rc_bottom</span> <span class="err">\</span><span class="o">*</span> <span class="n">upscale</span><span class="p">.</span><span class="n">height</span><span class="p">)</span> <span class="o">-</span> <span class="n">rc</span><span class="p">.</span><span class="n">y</span><span class="p">;</span>
+            <span class="n">out_faces</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">rc</span> <span class="o">&amp;</span> surface<span></span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">};</span></pre></div></div></div>
+</div>
+
+
+                </div>
+            
+            
+                <div class='prev-next-bottom'>
+                  
+    <a class='button bttn-sec button-size-l' id="prev-link" href="openvino_docs_gapi_face_beautification.html" title="previous page">Prev</a>
+    <a class='button bttn-sec button-size-l' id="next-link" href="ovsa_get_started.html" title="next page">Next</a>
+
+                </div>
+            
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+<footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2021, Intel®.<br>
+</p>
+    </div>
+    
+    <div class="footer-item">
+      <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>
