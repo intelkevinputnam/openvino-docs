@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>noise-suppression-denseunet-ll-0001 &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../../../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -2077,9 +2084,9 @@
             
                 <div>
                   
-  <div class="section" id="noise-suppression-denseunet-ll-0001">
+  <section id="noise-suppression-denseunet-ll-0001">
 <h1>noise-suppression-denseunet-ll-0001<a class="headerlink" href="#noise-suppression-denseunet-ll-0001" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="use-case-and-high-level-description">
+<section id="use-case-and-high-level-description">
 <h2>Use Case and High-Level Description<a class="headerlink" href="#use-case-and-high-level-description" title="Permalink to this headline">¶</a></h2>
 <p>This is a model for noise suppression to make speech cleaner.
 The model architecture is similar to <a class="reference external" href="https://arxiv.org/abs/2008.04470">PoCoNet</a>, <a class="reference external" href="https://arxiv.org/abs/2001.11542">Channel-Attention Dense U-Net</a> but without multi head attensions (MHA) to decrease model complexity and increse processing speed.
@@ -2092,8 +2099,8 @@ In addition the network required 39 state tensors to make processing seamless.
 On the first iteration these state tensors have to be filled with 0.
 On the consequences iterations these tensors have to be taken from corresponding outputs of previous iteration.
 You can try <a class="reference internal" href="../../../demos/noise_suppression_demo/cpp/README.html"><span class="doc std std-doc">Noise Suppression CPP* Demo</span></a> to see how it works.</p>
-</div>
-<div class="section" id="specification">
+</section>
+<section id="specification">
 <h2>Specification<a class="headerlink" href="#specification" title="Permalink to this headline">¶</a></h2>
 <p>to process 128 samples that is 8ms for 16kHz</p>
 <table class="colwidths-auto table">
@@ -2114,8 +2121,8 @@ You can try <a class="reference internal" href="../../../demos/noise_suppression
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="accuracy">
+</section>
+<section id="accuracy">
 <h2>Accuracy<a class="headerlink" href="#accuracy" title="Permalink to this headline">¶</a></h2>
 <p>The <a class="reference external" href="https://arxiv.org/abs/1811.02508">SISDR</a> quality metric was calculated on the 100 <a class="reference external" href="https://github.com/microsoft/DNS-Challenge/tree/icassp2021-final">dev test synthetic speech clips from DNS-Challenge dataset</a>.</p>
 <table class="colwidths-auto table">
@@ -2136,8 +2143,8 @@ You can try <a class="reference internal" href="../../../demos/noise_suppression
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="input">
+</section>
+<section id="input">
 <h2>Input<a class="headerlink" href="#input" title="Permalink to this headline">¶</a></h2>
 <p>Sequence patch, name: <code class="docutils literal notranslate"><span class="pre">input</span></code>, shape: <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">128</span></code>, format: <code class="docutils literal notranslate"><span class="pre">B,</span> <span class="pre">T</span></code>, where:</p>
 <ul class="simple">
@@ -2145,8 +2152,8 @@ You can try <a class="reference internal" href="../../../demos/noise_suppression
 <li><p><code class="docutils literal notranslate"><span class="pre">T</span></code> - number of samples in patch</p></li>
 </ul>
 <p>input states, names: <code class="docutils literal notranslate"><span class="pre">inp_state_*</span></code>, should be filled by corresponding <code class="docutils literal notranslate"><span class="pre">out_state_*</span></code> from previous step. Total number of input states is 39</p>
-</div>
-<div class="section" id="output">
+</section>
+<section id="output">
 <h2>Output<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h2>
 <p>Sequence patch, name: <code class="docutils literal notranslate"><span class="pre">output</span></code>, shape: <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">128</span></code>, format: <code class="docutils literal notranslate"><span class="pre">B,</span> <span class="pre">T</span></code>, where:</p>
 <ul class="simple">
@@ -2168,20 +2175,20 @@ You can try <a class="reference internal" href="../../../demos/noise_suppression
 <li><p><code class="docutils literal notranslate"><span class="pre">C</span></code> - number of delays (always 1)
 This is provided for convenience and contains the output “shift” relative to the input. For this model it is 384 and can differ for other noise suppression models.</p></li>
 </ul>
-</div>
-<div class="section" id="demo-usage">
+</section>
+<section id="demo-usage">
 <h2>Demo usage<a class="headerlink" href="#demo-usage" title="Permalink to this headline">¶</a></h2>
 <p>The model can be used in the following demos provided by the Open Model Zoo to show its capabilities:</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="../../../demos/noise_suppression_demo/cpp/README.html"><span class="doc std std-doc">Noise Suppression C++* Demo</span></a></p></li>
 <li><p><a class="reference internal" href="../../../demos/noise_suppression_demo/python/README.html"><span class="doc std std-doc">Noise Suppression Python* Demo</span></a></p></li>
 </ul>
-</div>
-<div class="section" id="legal-information">
+</section>
+<section id="legal-information">
 <h2>Legal Information<a class="headerlink" href="#legal-information" title="Permalink to this headline">¶</a></h2>
 <p>[*] Other names and brands may be claimed as the property of others.</p>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -2212,7 +2219,7 @@ This is provided for convenience and contains the output “shift” relative to
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

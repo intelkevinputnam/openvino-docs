@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Image Background Removal with U^2-Net and OpenVINO &#8212; OpenVINO™  documentation</title>
     
     
@@ -128,6 +129,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -559,7 +566,7 @@
             
                 <div>
                   
-  <div class="section" id="image-background-removal-with-u-2-net-and-openvino">
+  <section id="image-background-removal-with-u-2-net-and-openvino">
 <h1>Image Background Removal with U^2-Net and OpenVINO<a class="headerlink" href="#image-background-removal-with-u-2-net-and-openvino" title="Permalink to this headline">¶</a></h1>
 <p>This notebook demostrates background removal in images using
 U<span class="math notranslate nohighlight">\(^2\)</span>-Net and OpenVINO.</p>
@@ -576,9 +583,9 @@ ONNX model in OpenVINO directly, without converting to IR format, check
 out the
 <a class="reference external" href="102-pytorch-onnx-to-openvino-with-output.html">PyTorch/ONNX</a>
 notebook.</p>
-<div class="section" id="prepare">
+<section id="prepare">
 <h2>Prepare<a class="headerlink" href="#prepare" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="import-the-pytorch-library-and-u-2-net">
+<section id="import-the-pytorch-library-and-u-2-net">
 <h3>Import the PyTorch Library and U<span class="math notranslate nohighlight">\(^2\)</span>-Net<a class="headerlink" href="#import-the-pytorch-library-and-u-2-net" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">time</span>
@@ -594,8 +601,8 @@ notebook.</p>
 <span class="kn">from</span> <span class="nn">openvino.runtime</span> <span class="kn">import</span> <span class="n">Core</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="settings">
+</section>
+<section id="settings">
 <h3>Settings<a class="headerlink" href="#settings" title="Permalink to this headline">¶</a></h3>
 <p>This tutorial supports using the original U<span class="math notranslate nohighlight">\(^2\)</span>-Net salient
 object detection model, as well as the smaller U2NETP version. Two sets
@@ -634,8 +641,8 @@ detection and human segmentation.</p>
 <span class="n">ir_path</span> <span class="o">=</span> <span class="n">model_path</span><span class="o">.</span><span class="n">with_suffix</span><span class="p">(</span><span class="s2">&quot;.xml&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="load-the-u-2-net-model">
+</section>
+<section id="load-the-u-2-net-model">
 <h3>Load the U<span class="math notranslate nohighlight">\(^2\)</span>-Net Model<a class="headerlink" href="#load-the-u-2-net-model" title="Permalink to this headline">¶</a></h3>
 <p>The U<span class="math notranslate nohighlight">\(^2\)</span>-Net human segmentation model weights are stored on
 Google Drive. They will be downloaded if they have not been downloaded
@@ -668,11 +675,11 @@ yet. The next cell loads the model and the pretrained weights.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Loading</span> <span class="n">model</span> <span class="n">weights</span> <span class="n">from</span><span class="p">:</span> <span class="s1">&#39;model/u2net_lite/u2net_lite.pth&#39;</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="convert-pytorch-u-2-net-model-to-onnx-and-ir">
+</section>
+</section>
+<section id="convert-pytorch-u-2-net-model-to-onnx-and-ir">
 <h2>Convert PyTorch U<span class="math notranslate nohighlight">\(^2\)</span>-Net model to ONNX and IR<a class="headerlink" href="#convert-pytorch-u-2-net-model-to-onnx-and-ir" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="convert-pytorch-model-to-onnx">
+<section id="convert-pytorch-model-to-onnx">
 <h3>Convert PyTorch model to ONNX<a class="headerlink" href="#convert-pytorch-model-to-onnx" title="Permalink to this headline">¶</a></h3>
 <p>The output for this cell will show some warnings. These are most likely
 harmless. Conversion succeeded if the last line of the output says
@@ -685,19 +692,19 @@ harmless. Conversion succeeded if the last line of the output says
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ONNX model </span><span class="si">{</span><span class="n">onnx_path</span><span class="si">}</span><span class="s2"> already exists.&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8</span><span class="o">.</span><span class="mi">12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">torch</span><span class="o">/</span><span class="n">nn</span><span class="o">/</span><span class="n">functional</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">2952</span><span class="p">:</span> <span class="ne">UserWarning</span><span class="p">:</span> <span class="n">nn</span><span class="o">.</span><span class="n">functional</span><span class="o">.</span><span class="n">upsample</span> <span class="ow">is</span> <span class="n">deprecated</span><span class="o">.</span> <span class="n">Use</span> <span class="n">nn</span><span class="o">.</span><span class="n">functional</span><span class="o">.</span><span class="n">interpolate</span> <span class="n">instead</span><span class="o">.</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">torch</span><span class="o">/</span><span class="n">nn</span><span class="o">/</span><span class="n">functional</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">2952</span><span class="p">:</span> <span class="ne">UserWarning</span><span class="p">:</span> <span class="n">nn</span><span class="o">.</span><span class="n">functional</span><span class="o">.</span><span class="n">upsample</span> <span class="ow">is</span> <span class="n">deprecated</span><span class="o">.</span> <span class="n">Use</span> <span class="n">nn</span><span class="o">.</span><span class="n">functional</span><span class="o">.</span><span class="n">interpolate</span> <span class="n">instead</span><span class="o">.</span>
   <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;nn.functional.upsample is deprecated. Use nn.functional.interpolate instead.&quot;</span><span class="p">)</span>
-<span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8</span><span class="o">.</span><span class="mi">12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">torch</span><span class="o">/</span><span class="n">nn</span><span class="o">/</span><span class="n">functional</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">3060</span><span class="p">:</span> <span class="ne">UserWarning</span><span class="p">:</span> <span class="n">Default</span> <span class="n">upsampling</span> <span class="n">behavior</span> <span class="n">when</span> <span class="n">mode</span><span class="o">=</span><span class="n">bilinear</span> <span class="ow">is</span> <span class="n">changed</span> <span class="n">to</span> <span class="n">align_corners</span><span class="o">=</span><span class="kc">False</span> <span class="n">since</span> <span class="mf">0.4</span><span class="o">.</span><span class="mf">0.</span> <span class="n">Please</span> <span class="n">specify</span> <span class="n">align_corners</span><span class="o">=</span><span class="kc">True</span> <span class="k">if</span> <span class="n">the</span> <span class="n">old</span> <span class="n">behavior</span> <span class="ow">is</span> <span class="n">desired</span><span class="o">.</span> <span class="n">See</span> <span class="n">the</span> <span class="n">documentation</span> <span class="n">of</span> <span class="n">nn</span><span class="o">.</span><span class="n">Upsample</span> <span class="k">for</span> <span class="n">details</span><span class="o">.</span>
+<span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">torch</span><span class="o">/</span><span class="n">nn</span><span class="o">/</span><span class="n">functional</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">3060</span><span class="p">:</span> <span class="ne">UserWarning</span><span class="p">:</span> <span class="n">Default</span> <span class="n">upsampling</span> <span class="n">behavior</span> <span class="n">when</span> <span class="n">mode</span><span class="o">=</span><span class="n">bilinear</span> <span class="ow">is</span> <span class="n">changed</span> <span class="n">to</span> <span class="n">align_corners</span><span class="o">=</span><span class="kc">False</span> <span class="n">since</span> <span class="mf">0.4.0</span><span class="o">.</span> <span class="n">Please</span> <span class="n">specify</span> <span class="n">align_corners</span><span class="o">=</span><span class="kc">True</span> <span class="k">if</span> <span class="n">the</span> <span class="n">old</span> <span class="n">behavior</span> <span class="ow">is</span> <span class="n">desired</span><span class="o">.</span> <span class="n">See</span> <span class="n">the</span> <span class="n">documentation</span> <span class="n">of</span> <span class="n">nn</span><span class="o">.</span><span class="n">Upsample</span> <span class="k">for</span> <span class="n">details</span><span class="o">.</span>
   <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Default upsampling behavior when mode=</span><span class="si">{}</span><span class="s2"> is changed &quot;</span>
-<span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8</span><span class="o">.</span><span class="mi">12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">torch</span><span class="o">/</span><span class="n">nn</span><span class="o">/</span><span class="n">functional</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">1639</span><span class="p">:</span> <span class="ne">UserWarning</span><span class="p">:</span> <span class="n">nn</span><span class="o">.</span><span class="n">functional</span><span class="o">.</span><span class="n">sigmoid</span> <span class="ow">is</span> <span class="n">deprecated</span><span class="o">.</span> <span class="n">Use</span> <span class="n">torch</span><span class="o">.</span><span class="n">sigmoid</span> <span class="n">instead</span><span class="o">.</span>
+<span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">torch</span><span class="o">/</span><span class="n">nn</span><span class="o">/</span><span class="n">functional</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">1639</span><span class="p">:</span> <span class="ne">UserWarning</span><span class="p">:</span> <span class="n">nn</span><span class="o">.</span><span class="n">functional</span><span class="o">.</span><span class="n">sigmoid</span> <span class="ow">is</span> <span class="n">deprecated</span><span class="o">.</span> <span class="n">Use</span> <span class="n">torch</span><span class="o">.</span><span class="n">sigmoid</span> <span class="n">instead</span><span class="o">.</span>
   <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;nn.functional.sigmoid is deprecated. Use torch.sigmoid instead.&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ONNX</span> <span class="n">model</span> <span class="n">exported</span> <span class="n">to</span> <span class="n">model</span><span class="o">/</span><span class="n">u2net_lite</span><span class="o">/</span><span class="n">u2net_lite</span><span class="o">.</span><span class="n">onnx</span><span class="o">.</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="convert-onnx-model-to-openvino-ir-format">
+</section>
+<section id="convert-onnx-model-to-openvino-ir-format">
 <h3>Convert ONNX model to OpenVINO IR Format<a class="headerlink" href="#convert-onnx-model-to-openvino-ir-format" title="Permalink to this headline">¶</a></h3>
 <p>Call the OpenVINO Model Optimizer tool to convert the ONNX model to
 OpenVINO IR format, with FP16 precision. The models are saved to the
@@ -772,22 +779,22 @@ Optimization was successful if the last lines of the output include
 <span class="n">Advanced</span> <span class="n">parameters</span><span class="p">:</span>
     <span class="o">-</span> <span class="n">Force</span> <span class="n">the</span> <span class="n">usage</span> <span class="n">of</span> <span class="n">legacy</span> <span class="n">Frontend</span> <span class="n">of</span> <span class="n">Model</span> <span class="n">Optimizer</span> <span class="k">for</span> <span class="n">model</span> <span class="n">conversion</span> <span class="n">into</span> <span class="n">IR</span><span class="p">:</span>   <span class="kc">False</span>
     <span class="o">-</span> <span class="n">Force</span> <span class="n">the</span> <span class="n">usage</span> <span class="n">of</span> <span class="n">new</span> <span class="n">Frontend</span> <span class="n">of</span> <span class="n">Model</span> <span class="n">Optimizer</span> <span class="k">for</span> <span class="n">model</span> <span class="n">conversion</span> <span class="n">into</span> <span class="n">IR</span><span class="p">:</span>  <span class="kc">False</span>
-<span class="n">OpenVINO</span> <span class="n">runtime</span> <span class="n">found</span> <span class="ow">in</span><span class="p">:</span>  <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8</span><span class="o">.</span><span class="mi">12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">openvino</span>
-<span class="n">OpenVINO</span> <span class="n">runtime</span> <span class="n">version</span><span class="p">:</span>   <span class="mf">2022.1</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="mi">7019</span><span class="o">-</span><span class="n">cdb9bec7210</span><span class="o">-</span><span class="n">releases</span><span class="o">/</span><span class="mi">2022</span><span class="o">/</span><span class="mi">1</span>
-<span class="n">Model</span> <span class="n">Optimizer</span> <span class="n">version</span><span class="p">:</span>    <span class="mf">2022.1</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="mi">7019</span><span class="o">-</span><span class="n">cdb9bec7210</span><span class="o">-</span><span class="n">releases</span><span class="o">/</span><span class="mi">2022</span><span class="o">/</span><span class="mi">1</span>
+<span class="n">OpenVINO</span> <span class="n">runtime</span> <span class="n">found</span> <span class="ow">in</span><span class="p">:</span>  <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">openvino</span>
+<span class="n">OpenVINO</span> <span class="n">runtime</span> <span class="n">version</span><span class="p">:</span>   <span class="mf">2022.1.0</span><span class="o">-</span><span class="mi">7019</span><span class="o">-</span><span class="n">cdb9bec7210</span><span class="o">-</span><span class="n">releases</span><span class="o">/</span><span class="mi">2022</span><span class="o">/</span><span class="mi">1</span>
+<span class="n">Model</span> <span class="n">Optimizer</span> <span class="n">version</span><span class="p">:</span>    <span class="mf">2022.1.0</span><span class="o">-</span><span class="mi">7019</span><span class="o">-</span><span class="n">cdb9bec7210</span><span class="o">-</span><span class="n">releases</span><span class="o">/</span><span class="mi">2022</span><span class="o">/</span><span class="mi">1</span>
 <span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">Generated</span> <span class="n">IR</span> <span class="n">version</span> <span class="mi">11</span> <span class="n">model</span><span class="o">.</span>
 <span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">XML</span> <span class="n">file</span><span class="p">:</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">work</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">notebooks</span><span class="o">/</span><span class="mi">205</span><span class="o">-</span><span class="n">vision</span><span class="o">-</span><span class="n">background</span><span class="o">-</span><span class="n">removal</span><span class="o">/</span><span class="n">model</span><span class="o">/</span><span class="n">u2net_lite</span><span class="o">/</span><span class="n">u2net_lite</span><span class="o">.</span><span class="n">xml</span>
 <span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">BIN</span> <span class="n">file</span><span class="p">:</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">work</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">notebooks</span><span class="o">/</span><span class="mi">205</span><span class="o">-</span><span class="n">vision</span><span class="o">-</span><span class="n">background</span><span class="o">-</span><span class="n">removal</span><span class="o">/</span><span class="n">model</span><span class="o">/</span><span class="n">u2net_lite</span><span class="o">/</span><span class="n">u2net_lite</span><span class="o">.</span><span class="n">bin</span>
 <span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">Total</span> <span class="n">execution</span> <span class="n">time</span><span class="p">:</span> <span class="mf">1.24</span> <span class="n">seconds</span><span class="o">.</span>
 <span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">Memory</span> <span class="n">consumed</span><span class="p">:</span> <span class="mi">117</span> <span class="n">MB</span><span class="o">.</span>
 <span class="n">It</span><span class="s1">&#39;s been a while, check for a new version of Intel(R) Distribution of OpenVINO(TM) toolkit here https://software.intel.com/content/www/us/en/develop/tools/openvino-toolkit/download.html?cid=other&amp;source=prod&amp;campid=ww_2022_bu_IOTG_OpenVINO-2022-1&amp;content=upg_all&amp;medium=organic or on the GitHub*</span>
-<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">The</span> <span class="n">model</span> <span class="n">was</span> <span class="n">converted</span> <span class="n">to</span> <span class="n">IR</span> <span class="n">v11</span><span class="p">,</span> <span class="n">the</span> <span class="n">latest</span> <span class="n">model</span> <span class="nb">format</span> <span class="n">that</span> <span class="n">corresponds</span> <span class="n">to</span> <span class="n">the</span> <span class="n">source</span> <span class="n">DL</span> <span class="n">framework</span> <span class="nb">input</span><span class="o">/</span><span class="n">output</span> <span class="nb">format</span><span class="o">.</span> <span class="n">While</span> <span class="n">IR</span> <span class="n">v11</span> <span class="ow">is</span> <span class="n">backwards</span> <span class="n">compatible</span> <span class="k">with</span> <span class="n">OpenVINO</span> <span class="n">Inference</span> <span class="n">Engine</span> <span class="n">API</span> <span class="n">v1</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span> <span class="n">please</span> <span class="n">use</span> <span class="n">API</span> <span class="n">v2</span><span class="o">.</span><span class="mi">0</span> <span class="p">(</span><span class="k">as</span> <span class="n">of</span> <span class="mf">2022.1</span><span class="p">)</span> <span class="n">to</span> <span class="n">take</span> <span class="n">advantage</span> <span class="n">of</span> <span class="n">the</span> <span class="n">latest</span> <span class="n">improvements</span> <span class="ow">in</span> <span class="n">IR</span> <span class="n">v11</span><span class="o">.</span>
-<span class="n">Find</span> <span class="n">more</span> <span class="n">information</span> <span class="n">about</span> <span class="n">API</span> <span class="n">v2</span><span class="o">.</span><span class="mi">0</span> <span class="ow">and</span> <span class="n">IR</span> <span class="n">v11</span> <span class="n">at</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">docs</span><span class="o">.</span><span class="n">openvino</span><span class="o">.</span><span class="n">ai</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">The</span> <span class="n">model</span> <span class="n">was</span> <span class="n">converted</span> <span class="n">to</span> <span class="n">IR</span> <span class="n">v11</span><span class="p">,</span> <span class="n">the</span> <span class="n">latest</span> <span class="n">model</span> <span class="nb">format</span> <span class="n">that</span> <span class="n">corresponds</span> <span class="n">to</span> <span class="n">the</span> <span class="n">source</span> <span class="n">DL</span> <span class="n">framework</span> <span class="nb">input</span><span class="o">/</span><span class="n">output</span> <span class="nb">format</span><span class="o">.</span> <span class="n">While</span> <span class="n">IR</span> <span class="n">v11</span> <span class="ow">is</span> <span class="n">backwards</span> <span class="n">compatible</span> <span class="k">with</span> <span class="n">OpenVINO</span> <span class="n">Inference</span> <span class="n">Engine</span> <span class="n">API</span> <span class="n">v1</span><span class="mf">.0</span><span class="p">,</span> <span class="n">please</span> <span class="n">use</span> <span class="n">API</span> <span class="n">v2</span><span class="mf">.0</span> <span class="p">(</span><span class="k">as</span> <span class="n">of</span> <span class="mf">2022.1</span><span class="p">)</span> <span class="n">to</span> <span class="n">take</span> <span class="n">advantage</span> <span class="n">of</span> <span class="n">the</span> <span class="n">latest</span> <span class="n">improvements</span> <span class="ow">in</span> <span class="n">IR</span> <span class="n">v11</span><span class="o">.</span>
+<span class="n">Find</span> <span class="n">more</span> <span class="n">information</span> <span class="n">about</span> <span class="n">API</span> <span class="n">v2</span><span class="mf">.0</span> <span class="ow">and</span> <span class="n">IR</span> <span class="n">v11</span> <span class="n">at</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">docs</span><span class="o">.</span><span class="n">openvino</span><span class="o">.</span><span class="n">ai</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="load-and-pre-process-input-image">
+</section>
+</section>
+<section id="load-and-pre-process-input-image">
 <h2>Load and Pre-Process Input Image<a class="headerlink" href="#load-and-pre-process-input-image" title="Permalink to this headline">¶</a></h2>
 <p>The IR model expects images in RGB format. OpenCV reads images in BGR.
 We convert the images to RGB, resize them to <code class="docutils literal notranslate"><span class="pre">512</span> <span class="pre">x</span> <span class="pre">512</span></code> and transpose
@@ -804,8 +811,8 @@ the dimensions to the format that is expected by the IR model.</p>
 <span class="n">input_image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">resized_image</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span> <span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="do-inference-on-ir-model">
+</section>
+<section id="do-inference-on-ir-model">
 <h2>Do Inference on IR Model<a class="headerlink" href="#do-inference-on-ir-model" title="Permalink to this headline">¶</a></h2>
 <p>Load the IR model to Inference Engine and do inference.</p>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load network to Inference Engine</span>
@@ -829,8 +836,8 @@ the dimensions to the format that is expected by the IR model.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Inference</span> <span class="n">finished</span><span class="o">.</span> <span class="n">Inference</span> <span class="n">time</span><span class="p">:</span> <span class="mf">0.556</span> <span class="n">seconds</span><span class="p">,</span> <span class="n">FPS</span><span class="p">:</span> <span class="mf">1.80</span><span class="o">.</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="visualize-results">
+</section>
+<section id="visualize-results">
 <h2>Visualize Results<a class="headerlink" href="#visualize-results" title="Permalink to this headline">¶</a></h2>
 <p>Show the original image, the segmentation result, and the original image
 with the background removed.</p>
@@ -854,7 +861,7 @@ with the background removed.</p>
 </pre></div>
 </div>
 <img alt="../_images/205-vision-background-removal-with-output_19_0.png" src="../_images/205-vision-background-removal-with-output_19_0.png" />
-<div class="section" id="add-a-background-image">
+<section id="add-a-background-image">
 <h3>Add a Background Image<a class="headerlink" href="#add-a-background-image" title="Permalink to this headline">¶</a></h3>
 <p>In the segmentation result, all foreground pixels have a value of 1, all
 background pixels a value of 0. Replace the background image as follows:</p>
@@ -907,9 +914,9 @@ the original image that only contains foreground pixels - to the
 </pre></div>
 </div>
 <img alt="../_images/205-vision-background-removal-with-output_21_0.png" src="../_images/205-vision-background-removal-with-output_21_0.png" />
-The generated image <code>coco_hollywood-wall.jpg</code> is saved in the directory <code>output</code>. You can also download the image by clicking on this link: output/coco_hollywood-wall.jpg<br></div>
-</div>
-<div class="section" id="references">
+The generated image <code>coco_hollywood-wall.jpg</code> is saved in the directory <code>output</code>. You can also download the image by clicking on this link: output/coco_hollywood-wall.jpg<br></section>
+</section>
+<section id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://github.com/openvinotoolkit/openvino/blob/releases/2021/3/docs/install_guides/pypi-openvino-dev.md">PIP install
@@ -923,8 +930,8 @@ Documentation</a></p></li>
 U-Structure for Salient Object
 Detection</a></p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -955,7 +962,7 @@ Detection</a></p></li>
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

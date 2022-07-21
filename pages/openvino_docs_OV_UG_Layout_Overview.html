@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Layout API overview &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -1867,10 +1874,10 @@
             
                 <div>
                   
-  <div class="section" id="layout-api-overview">
+  <section id="layout-api-overview">
 <span id="doxid-openvino-docs-o-v-u-g-layout-overview"></span><span id="index-0"></span><h1>Layout API overview<a class="headerlink" href="#layout-api-overview" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-openvino-docs-o-v-u-g-layout-overview-1md-openvino-docs-ov-runtime-ug-layout-overview"></span></p>
-<div class="section" id="introduction">
+<section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>In few words, with layout <code class="docutils literal notranslate"><span class="pre">NCHW</span></code> it is easier to understand what model’s shape <code class="docutils literal notranslate"><span class="pre">{8,</span> <span class="pre">3,</span> <span class="pre">224,</span> <span class="pre">224}</span></code> means. Without layout it is just a 4-dimensional tensor.</p>
 <p>Concept of layout helps you (and your application) to understand what does each particular dimension of input/output tensor mean. For example, if your input has shape <code class="docutils literal notranslate"><span class="pre">{1,</span> <span class="pre">3,</span> <span class="pre">720,</span> <span class="pre">1280}</span></code> and layout “NCHW” - it is clear that <code class="docutils literal notranslate"><span class="pre">N(batch)</span> <span class="pre">=</span> <span class="pre">1</span></code>, <code class="docutils literal notranslate"><span class="pre">C(channels)</span> <span class="pre">=</span> <span class="pre">3</span></code>, <code class="docutils literal notranslate"><span class="pre">H(height)</span> <span class="pre">=</span> <span class="pre">720</span></code> and <code class="docutils literal notranslate"><span class="pre">W(width)</span> <span class="pre">=</span> <span class="pre">1280</span></code>. Without layout information <code class="docutils literal notranslate"><span class="pre">{1,</span> <span class="pre">3,</span> <span class="pre">720,</span> <span class="pre">1280}</span></code> doesn’t give any idea to your application what these number mean and how to resize input image to fit model’s expectations.</p>
@@ -1885,53 +1892,53 @@
 <li><p>Same operations, used during model conversion phase, see <a class="reference internal" href="openvino_docs_MO_DG_Additional_Optimization_Use_Cases.html#doxid-openvino-docs-m-o-d-g-additional-optimization-use-cases"><span class="std std-ref">Model Optimizer Embedding Preprocessing Computation</span></a></p></li>
 <li><p>Improve readability of a model’s input and output</p></li>
 </ul>
-</div>
-<div class="section" id="layout-syntax">
+</section>
+<section id="layout-syntax">
 <h2>Layout syntax<a class="headerlink" href="#layout-syntax" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="short">
+<section id="short">
 <h3>Short<a class="headerlink" href="#short" title="Permalink to this headline">¶</a></h3>
 <p>The easiest way is to fully specify each dimension with one alphabetical letter</p>
-<div class='sphinxtabset'><div class="sphinxtab" data-sphinxtab-value="C++"><div class="highlight"><div class="highlight"><pre><span></span><span class="n">layout</span> <span class="o">=</span> ov::Layout<span></span><span class="p">(</span><span class="s">&quot;NHWC&quot;</span><span class="p">);</span></pre></div></div></div><div class="sphinxtab" data-sphinxtab-value="Python"><div class="highlight"><div class="highlight"><pre><span></span><span class="n">from</span> <span class="n">openvino</span><span class="p">.</span><span class="n">runtime</span> <span class="n">import</span> <span class="n">Layout</span>
-<span class="n">layout</span> <span class="o">=</span> Layout<span></span><span class="p">(</span><span class="sc">&#39;NCHW&#39;</span><span class="p">)</span></pre></div></div></div></div><p>This assigns ‘N’ to first dimension, ‘C’ to second, ‘H’ to 3rd and ‘W’ to 4th</p>
-</div>
-<div class="section" id="advanced">
+<div class='sphinxtabset'><div class="sphinxtab" data-sphinxtab-value="C++"><div class="highlight"><div class="highlight"><pre><span></span><span class="n">layout</span> <span class="o">=</span> <a class="reference internal" href="../api/groups/enumInferenceEngine_1_1Layout.html#doxid-namespace-inference-engine-1a246d143abc5ca07da8d2cadeeb88fdb8"><span class="std std-ref">ov::Layout</span></a><span></span><span class="p">(</span><span class="s">&quot;NHWC&quot;</span><span class="p">);</span></pre></div></div></div><div class="sphinxtab" data-sphinxtab-value="Python"><div class="highlight"><div class="highlight"><pre><span></span><span class="n">from</span> <span class="n">openvino</span><span class="p">.</span><span class="n">runtime</span> <span class="n">import</span> <span class="n">Layout</span>
+<span class="n">layout</span> <span class="o">=</span> <a class="reference internal" href="../api/groups/enumInferenceEngine_1_1Layout.html#doxid-namespace-inference-engine-1a246d143abc5ca07da8d2cadeeb88fdb8"><span class="std std-ref">Layout</span></a><span></span><span class="p">(</span><span class="sc">&#39;NCHW&#39;</span><span class="p">)</span></pre></div></div></div></div><p>This assigns ‘N’ to first dimension, ‘C’ to second, ‘H’ to 3rd and ‘W’ to 4th</p>
+</section>
+<section id="advanced">
 <h3>Advanced<a class="headerlink" href="#advanced" title="Permalink to this headline">¶</a></h3>
 <p>Advanced syntax allows assigning a word to a dimension. To do this, wrap layout with square brackets <code class="docutils literal notranslate"><span class="pre">[]</span></code> and specify each name separated by comma <code class="docutils literal notranslate"><span class="pre">,</span></code></p>
 <div class='sphinxtabset'><div class="sphinxtab" data-sphinxtab-value="C++"><div class="highlight"><div class="highlight"><pre><span></span><span class="c1">// Each dimension has name separated by comma, layout is wrapped with square brackets</span>
-<span class="n">layout</span> <span class="o">=</span> ov::Layout<span></span><span class="p">(</span><span class="s">&quot;[time,temperature,humidity]&quot;</span><span class="p">);</span></pre></div></div></div><div class="sphinxtab" data-sphinxtab-value="Python"><div class="highlight"><div class="highlight"><pre><span></span><span class="cp"># Each dimension has name separated by comma</span>
+<span class="n">layout</span> <span class="o">=</span> <a class="reference internal" href="../api/groups/enumInferenceEngine_1_1Layout.html#doxid-namespace-inference-engine-1a246d143abc5ca07da8d2cadeeb88fdb8"><span class="std std-ref">ov::Layout</span></a><span></span><span class="p">(</span><span class="s">&quot;[time,temperature,humidity]&quot;</span><span class="p">);</span></pre></div></div></div><div class="sphinxtab" data-sphinxtab-value="Python"><div class="highlight"><div class="highlight"><pre><span></span><span class="cp"># Each dimension has name separated by comma</span>
 <span class="cp"># Layout is wrapped with square brackets</span>
-<span class="n">layout</span> <span class="o">=</span> Layout<span></span><span class="p">(</span><span class="sc">&#39;[time,temperature,humidity]&#39;</span><span class="p">)</span></pre></div></div></div></div></div>
-<div class="section" id="partially-defined-layout">
+<span class="n">layout</span> <span class="o">=</span> <a class="reference internal" href="../api/groups/enumInferenceEngine_1_1Layout.html#doxid-namespace-inference-engine-1a246d143abc5ca07da8d2cadeeb88fdb8"><span class="std std-ref">Layout</span></a><span></span><span class="p">(</span><span class="sc">&#39;[time,temperature,humidity]&#39;</span><span class="p">)</span></pre></div></div></div></div></section>
+<section id="partially-defined-layout">
 <h3>Partially defined layout<a class="headerlink" href="#partially-defined-layout" title="Permalink to this headline">¶</a></h3>
 <p>If some dimension is not important, it’s name can be set to <code class="docutils literal notranslate"><span class="pre">?</span></code></p>
 <div class='sphinxtabset'><div class="sphinxtab" data-sphinxtab-value="C++"><div class="highlight"><div class="highlight"><pre><span></span><span class="c1">// First dimension is batch, 4th is &#39;channels&#39;. Others are not important for us</span>
-<span class="n">layout</span> <span class="o">=</span> ov::Layout<span></span><span class="p">(</span><span class="s">&quot;N??C&quot;</span><span class="p">);</span>
+<span class="n">layout</span> <span class="o">=</span> <a class="reference internal" href="../api/groups/enumInferenceEngine_1_1Layout.html#doxid-namespace-inference-engine-1a246d143abc5ca07da8d2cadeeb88fdb8"><span class="std std-ref">ov::Layout</span></a><span></span><span class="p">(</span><span class="s">&quot;N??C&quot;</span><span class="p">);</span>
 <span class="c1">// Or the same using advanced syntax</span>
-<span class="n">layout</span> <span class="o">=</span> ov::Layout<span></span><span class="p">(</span><span class="s">&quot;[n,?,?,c]&quot;</span><span class="p">);</span></pre></div></div></div><div class="sphinxtab" data-sphinxtab-value="Python"><div class="highlight"><div class="highlight"><pre><span></span><span class="cp"># First dimension is batch, 4th is &#39;channels&#39;.</span>
+<span class="n">layout</span> <span class="o">=</span> <a class="reference internal" href="../api/groups/enumInferenceEngine_1_1Layout.html#doxid-namespace-inference-engine-1a246d143abc5ca07da8d2cadeeb88fdb8"><span class="std std-ref">ov::Layout</span></a><span></span><span class="p">(</span><span class="s">&quot;[n,?,?,c]&quot;</span><span class="p">);</span></pre></div></div></div><div class="sphinxtab" data-sphinxtab-value="Python"><div class="highlight"><div class="highlight"><pre><span></span><span class="cp"># First dimension is batch, 4th is &#39;channels&#39;.</span>
 <span class="cp"># Others are not important for us</span>
-<span class="n">layout</span> <span class="o">=</span> Layout<span></span><span class="p">(</span><span class="sc">&#39;N??C&#39;</span><span class="p">)</span>
+<span class="n">layout</span> <span class="o">=</span> <a class="reference internal" href="../api/groups/enumInferenceEngine_1_1Layout.html#doxid-namespace-inference-engine-1a246d143abc5ca07da8d2cadeeb88fdb8"><span class="std std-ref">Layout</span></a><span></span><span class="p">(</span><span class="sc">&#39;N??C&#39;</span><span class="p">)</span>
 
 <span class="cp"># Or the same using advanced syntax</span>
-<span class="n">layout</span> <span class="o">=</span> Layout<span></span><span class="p">(</span><span class="sc">&#39;[n,?,?,c]&#39;</span><span class="p">)</span></pre></div></div></div></div></div>
-<div class="section" id="dynamic-layout">
+<span class="n">layout</span> <span class="o">=</span> <a class="reference internal" href="../api/groups/enumInferenceEngine_1_1Layout.html#doxid-namespace-inference-engine-1a246d143abc5ca07da8d2cadeeb88fdb8"><span class="std std-ref">Layout</span></a><span></span><span class="p">(</span><span class="sc">&#39;[n,?,?,c]&#39;</span><span class="p">)</span></pre></div></div></div></div></section>
+<section id="dynamic-layout">
 <h3>Dynamic layout<a class="headerlink" href="#dynamic-layout" title="Permalink to this headline">¶</a></h3>
 <p>If number of dimensions is not important, ellipsis <code class="docutils literal notranslate"><span class="pre">...</span></code> can be used to specify variadic number of dimensions.</p>
 <div class='sphinxtabset'><div class="sphinxtab" data-sphinxtab-value="C++"><div class="highlight"><div class="highlight"><pre><span></span><span class="c1">// First dimension is &#39;batch&#39; others are whatever</span>
-<span class="n">layout</span> <span class="o">=</span> ov::Layout<span></span><span class="p">(</span><span class="s">&quot;N...&quot;</span><span class="p">);</span>
+<span class="n">layout</span> <span class="o">=</span> <a class="reference internal" href="../api/groups/enumInferenceEngine_1_1Layout.html#doxid-namespace-inference-engine-1a246d143abc5ca07da8d2cadeeb88fdb8"><span class="std std-ref">ov::Layout</span></a><span></span><span class="p">(</span><span class="s">&quot;N...&quot;</span><span class="p">);</span>
 
 <span class="c1">// Second dimension is &#39;channels&#39; others are whatever</span>
-<span class="n">layout</span> <span class="o">=</span> ov::Layout<span></span><span class="p">(</span><span class="s">&quot;?C...&quot;</span><span class="p">);</span>
+<span class="n">layout</span> <span class="o">=</span> <a class="reference internal" href="../api/groups/enumInferenceEngine_1_1Layout.html#doxid-namespace-inference-engine-1a246d143abc5ca07da8d2cadeeb88fdb8"><span class="std std-ref">ov::Layout</span></a><span></span><span class="p">(</span><span class="s">&quot;?C...&quot;</span><span class="p">);</span>
 
 <span class="c1">// Last dimension is &#39;channels&#39; others are whatever</span>
-<span class="n">layout</span> <span class="o">=</span> ov::Layout<span></span><span class="p">(</span><span class="s">&quot;...C&quot;</span><span class="p">);</span></pre></div></div></div><div class="sphinxtab" data-sphinxtab-value="Python"><div class="highlight"><div class="highlight"><pre><span></span><span class="cp"># First dimension is &#39;batch&#39; others are whatever</span>
-<span class="n">layout</span> <span class="o">=</span> Layout<span></span><span class="p">(</span><span class="sc">&#39;N...&#39;</span><span class="p">)</span>
+<span class="n">layout</span> <span class="o">=</span> <a class="reference internal" href="../api/groups/enumInferenceEngine_1_1Layout.html#doxid-namespace-inference-engine-1a246d143abc5ca07da8d2cadeeb88fdb8"><span class="std std-ref">ov::Layout</span></a><span></span><span class="p">(</span><span class="s">&quot;...C&quot;</span><span class="p">);</span></pre></div></div></div><div class="sphinxtab" data-sphinxtab-value="Python"><div class="highlight"><div class="highlight"><pre><span></span><span class="cp"># First dimension is &#39;batch&#39; others are whatever</span>
+<span class="n">layout</span> <span class="o">=</span> <a class="reference internal" href="../api/groups/enumInferenceEngine_1_1Layout.html#doxid-namespace-inference-engine-1a246d143abc5ca07da8d2cadeeb88fdb8"><span class="std std-ref">Layout</span></a><span></span><span class="p">(</span><span class="sc">&#39;N...&#39;</span><span class="p">)</span>
 
 <span class="cp"># Second dimension is &#39;channels&#39; others are whatever</span>
-<span class="n">layout</span> <span class="o">=</span> Layout<span></span><span class="p">(</span><span class="sc">&#39;?C...&#39;</span><span class="p">)</span>
+<span class="n">layout</span> <span class="o">=</span> <a class="reference internal" href="../api/groups/enumInferenceEngine_1_1Layout.html#doxid-namespace-inference-engine-1a246d143abc5ca07da8d2cadeeb88fdb8"><span class="std std-ref">Layout</span></a><span></span><span class="p">(</span><span class="sc">&#39;?C...&#39;</span><span class="p">)</span>
 
 <span class="cp"># Last dimension is &#39;channels&#39; others are whatever</span>
-<span class="n">layout</span> <span class="o">=</span> Layout<span></span><span class="p">(</span><span class="sc">&#39;...C&#39;</span><span class="p">)</span></pre></div></div></div></div></div>
-<div class="section" id="predefined-names">
+<span class="n">layout</span> <span class="o">=</span> <a class="reference internal" href="../api/groups/enumInferenceEngine_1_1Layout.html#doxid-namespace-inference-engine-1a246d143abc5ca07da8d2cadeeb88fdb8"><span class="std std-ref">Layout</span></a><span></span><span class="p">(</span><span class="sc">&#39;...C&#39;</span><span class="p">)</span></pre></div></div></div></div></section>
+<section id="predefined-names">
 <h3>Predefined names<a class="headerlink" href="#predefined-names" title="Permalink to this headline">¶</a></h3>
 <p>Layout has pre-defined some widely used in computer vision dimension names:</p>
 <ul class="simple">
@@ -1943,51 +1950,51 @@
 </ul>
 <p>These names are used in <a class="reference internal" href="openvino_docs_OV_UG_Preprocessing_Overview.html#doxid-openvino-docs-o-v-u-g-preprocessing-overview"><span class="std std-ref">PreProcessing API</span></a> and there is a set of helper functions to get appropriate dimension index from layout</p>
 <div class='sphinxtabset'><div class="sphinxtab" data-sphinxtab-value="C++"><div class="highlight"><div class="highlight"><pre><span></span><span class="c1">// returns 0 for batch</span>
-ov::layout::batch_idx<span></span><span class="p">(</span><span class="s">&quot;NCDHW&quot;</span><span class="p">);</span>
+<a class="reference internal" href="../api/groups/groupov_layout_cpp_api.html#doxid-group-ov-layout-cpp-api-1gae57e9fcaa7d8eaa7ddbcdfece346bccb"><span class="std std-ref">ov::layout::batch_idx</span></a><span></span><span class="p">(</span><span class="s">&quot;NCDHW&quot;</span><span class="p">);</span>
 
 <span class="c1">// returns 1 for channels</span>
-ov::layout::channels_idx<span></span><span class="p">(</span><span class="s">&quot;NCDHW&quot;</span><span class="p">);</span>
+<a class="reference internal" href="../api/groups/groupov_layout_cpp_api.html#doxid-group-ov-layout-cpp-api-1ga4c4a2d4a226d5b264a0f74c6c7839f4f"><span class="std std-ref">ov::layout::channels_idx</span></a><span></span><span class="p">(</span><span class="s">&quot;NCDHW&quot;</span><span class="p">);</span>
 
 <span class="c1">// returns 2 for depth</span>
-ov::layout::depth_idx<span></span><span class="p">(</span><span class="s">&quot;NCDHW&quot;</span><span class="p">);</span>
+<a class="reference internal" href="../api/groups/groupov_layout_cpp_api.html#doxid-group-ov-layout-cpp-api-1ga69af957b8f6a69956f38dfa1afc7039a"><span class="std std-ref">ov::layout::depth_idx</span></a><span></span><span class="p">(</span><span class="s">&quot;NCDHW&quot;</span><span class="p">);</span>
 
 <span class="c1">// returns -2 for height</span>
-ov::layout::height_idx<span></span><span class="p">(</span><span class="s">&quot;...HW&quot;</span><span class="p">);</span>
+<a class="reference internal" href="../api/groups/groupov_layout_cpp_api.html#doxid-group-ov-layout-cpp-api-1ga83da0183fe7f811912436ddb4aa4bb28"><span class="std std-ref">ov::layout::height_idx</span></a><span></span><span class="p">(</span><span class="s">&quot;...HW&quot;</span><span class="p">);</span>
 
 <span class="c1">// returns -1 for width</span>
-ov::layout::width_idx<span></span><span class="p">(</span><span class="s">&quot;...HW&quot;</span><span class="p">);</span></pre></div></div></div><div class="sphinxtab" data-sphinxtab-value="Python"><div class="highlight"><div class="highlight"><pre><span></span><span class="n">from</span> <span class="n">openvino</span><span class="p">.</span><span class="n">runtime</span> <span class="n">import</span> <span class="n">layout_helpers</span>
+<a class="reference internal" href="../api/groups/groupov_layout_cpp_api.html#doxid-group-ov-layout-cpp-api-1ga8730a2b5c3fd24f752c550ee3d07b870"><span class="std std-ref">ov::layout::width_idx</span></a><span></span><span class="p">(</span><span class="s">&quot;...HW&quot;</span><span class="p">);</span></pre></div></div></div><div class="sphinxtab" data-sphinxtab-value="Python"><div class="highlight"><div class="highlight"><pre><span></span><span class="n">from</span> <span class="n">openvino</span><span class="p">.</span><span class="n">runtime</span> <span class="n">import</span> <span class="n">layout_helpers</span>
 <span class="cp"># returns 0 for batch</span>
-<span class="n">layout_helpers</span><span class="p">.</span><span class="n">batch_idx</span><span class="p">(</span>Layout<span></span><span class="p">(</span><span class="sc">&#39;NCDHW&#39;</span><span class="p">))</span>
+<span class="n">layout_helpers</span><span class="p">.</span><span class="n">batch_idx</span><span class="p">(</span><a class="reference internal" href="../api/groups/enumInferenceEngine_1_1Layout.html#doxid-namespace-inference-engine-1a246d143abc5ca07da8d2cadeeb88fdb8"><span class="std std-ref">Layout</span></a><span></span><span class="p">(</span><span class="sc">&#39;NCDHW&#39;</span><span class="p">))</span>
 
 <span class="cp"># returns 1 for channels</span>
-<span class="n">layout_helpers</span><span class="p">.</span><span class="n">channels_idx</span><span class="p">(</span>Layout<span></span><span class="p">(</span><span class="sc">&#39;NCDHW&#39;</span><span class="p">))</span>
+<span class="n">layout_helpers</span><span class="p">.</span><span class="n">channels_idx</span><span class="p">(</span><a class="reference internal" href="../api/groups/enumInferenceEngine_1_1Layout.html#doxid-namespace-inference-engine-1a246d143abc5ca07da8d2cadeeb88fdb8"><span class="std std-ref">Layout</span></a><span></span><span class="p">(</span><span class="sc">&#39;NCDHW&#39;</span><span class="p">))</span>
 
 <span class="cp"># returns 2 for depth</span>
-<span class="n">layout_helpers</span><span class="p">.</span><span class="n">depth_idx</span><span class="p">(</span>Layout<span></span><span class="p">(</span><span class="sc">&#39;NCDHW&#39;</span><span class="p">))</span>
+<span class="n">layout_helpers</span><span class="p">.</span><span class="n">depth_idx</span><span class="p">(</span><a class="reference internal" href="../api/groups/enumInferenceEngine_1_1Layout.html#doxid-namespace-inference-engine-1a246d143abc5ca07da8d2cadeeb88fdb8"><span class="std std-ref">Layout</span></a><span></span><span class="p">(</span><span class="sc">&#39;NCDHW&#39;</span><span class="p">))</span>
 
 <span class="cp"># returns -2 for height</span>
-<span class="n">layout_helpers</span><span class="p">.</span><span class="n">height_idx</span><span class="p">(</span>Layout<span></span><span class="p">(</span><span class="sc">&#39;...HW&#39;</span><span class="p">))</span>
+<span class="n">layout_helpers</span><span class="p">.</span><span class="n">height_idx</span><span class="p">(</span><a class="reference internal" href="../api/groups/enumInferenceEngine_1_1Layout.html#doxid-namespace-inference-engine-1a246d143abc5ca07da8d2cadeeb88fdb8"><span class="std std-ref">Layout</span></a><span></span><span class="p">(</span><span class="sc">&#39;...HW&#39;</span><span class="p">))</span>
 
 <span class="cp"># returns -1 for width</span>
-<span class="n">layout_helpers</span><span class="p">.</span><span class="n">width_idx</span><span class="p">(</span>Layout<span></span><span class="p">(</span><span class="sc">&#39;...HW&#39;</span><span class="p">))</span></pre></div></div></div></div></div>
-<div class="section" id="equality">
+<span class="n">layout_helpers</span><span class="p">.</span><span class="n">width_idx</span><span class="p">(</span><a class="reference internal" href="../api/groups/enumInferenceEngine_1_1Layout.html#doxid-namespace-inference-engine-1a246d143abc5ca07da8d2cadeeb88fdb8"><span class="std std-ref">Layout</span></a><span></span><span class="p">(</span><span class="sc">&#39;...HW&#39;</span><span class="p">))</span></pre></div></div></div></div></section>
+<section id="equality">
 <h3>Equality<a class="headerlink" href="#equality" title="Permalink to this headline">¶</a></h3>
 <p>Layout names are case-insensitive, which means that <code class="docutils literal notranslate"><span class="pre">Layout(&quot;NCHW&quot;)</span> <span class="pre">==</span> <span class="pre">Layout(&quot;nChW&quot;)</span> <span class="pre">==</span> <span class="pre">Layout(&quot;[N,c,H,w]&quot;)</span></code></p>
-</div>
-<div class="section" id="dump-layout">
+</section>
+<section id="dump-layout">
 <h3>Dump layout<a class="headerlink" href="#dump-layout" title="Permalink to this headline">¶</a></h3>
 <p>Layout can be converted to string in advanced syntax format. Can be useful for debugging and serialization purposes</p>
-<div class='sphinxtabset'><div class="sphinxtab" data-sphinxtab-value="C++"><div class="highlight"><div class="highlight"><pre><span></span><span class="n">layout</span> <span class="o">=</span> ov::Layout<span></span><span class="p">(</span><span class="s">&quot;NCHW&quot;</span><span class="p">);</span>
-<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">layout</span><span class="p">.</span><span class="n">to_string</span><span class="p">();</span> <span class="c1">// prints [N,C,H,W]</span></pre></div></div></div><div class="sphinxtab" data-sphinxtab-value="Python"><div class="highlight"><div class="highlight"><pre><span></span><span class="n">layout</span> <span class="o">=</span> Layout<span></span><span class="p">(</span><span class="sc">&#39;NCHW&#39;</span><span class="p">)</span>
-<span class="n">print</span><span class="p">(</span><span class="n">layout</span><span class="p">)</span>    <span class="err">#</span> <span class="n">prints</span> <span class="p">[</span><span class="n">N</span><span class="p">,</span><span class="n">C</span><span class="p">,</span><span class="n">H</span><span class="p">,</span><span class="n">W</span><span class="p">]</span></pre></div></div></div></div></div>
-</div>
-<div class="section" id="see-also">
+<div class='sphinxtabset'><div class="sphinxtab" data-sphinxtab-value="C++"><div class="highlight"><div class="highlight"><pre><span></span><span class="n">layout</span> <span class="o">=</span> <a class="reference internal" href="../api/groups/enumInferenceEngine_1_1Layout.html#doxid-namespace-inference-engine-1a246d143abc5ca07da8d2cadeeb88fdb8"><span class="std std-ref">ov::Layout</span></a><span></span><span class="p">(</span><span class="s">&quot;NCHW&quot;</span><span class="p">);</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">layout</span><span class="p">.</span><span class="n">to_string</span><span class="p">();</span> <span class="c1">// prints [N,C,H,W]</span></pre></div></div></div><div class="sphinxtab" data-sphinxtab-value="Python"><div class="highlight"><div class="highlight"><pre><span></span><span class="n">layout</span> <span class="o">=</span> <a class="reference internal" href="../api/groups/enumInferenceEngine_1_1Layout.html#doxid-namespace-inference-engine-1a246d143abc5ca07da8d2cadeeb88fdb8"><span class="std std-ref">Layout</span></a><span></span><span class="p">(</span><span class="sc">&#39;NCHW&#39;</span><span class="p">)</span>
+<span class="n">print</span><span class="p">(</span><span class="n">layout</span><span class="p">)</span>    <span class="err">#</span> <span class="n">prints</span> <span class="p">[</span><span class="n">N</span><span class="p">,</span><span class="n">C</span><span class="p">,</span><span class="n">H</span><span class="p">,</span><span class="n">W</span><span class="p">]</span></pre></div></div></div></div></section>
+</section>
+<section id="see-also">
 <h2>See also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">ov::Layout</span></code> C++ class documentation</p></li>
+<li><p><code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1Layout.html#doxid-classov-1-1-layout"><span class="std std-ref"><span class="pre">ov::Layout</span></span></a></code> C++ class documentation</p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -2018,7 +2025,7 @@ ov::layout::width_idx<span></span><span class="p">(</span><span class="s">&quot;
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

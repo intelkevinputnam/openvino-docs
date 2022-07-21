@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Python* Model API package &#8212; OpenVINO™  documentation</title>
     
     
@@ -125,6 +126,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../../../../../../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../../../../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -322,11 +329,11 @@
             
                 <div>
                   
-  <div class="section" id="python-model-api-package">
+  <section id="python-model-api-package">
 <h1>Python* Model API package<a class="headerlink" href="#python-model-api-package" title="Permalink to this headline">¶</a></h1>
 <p>Model API package is a set of wrapper classes for particular tasks and model architectures, simplifying data preprocess and postprocess as well as routine procedures (model loading, asynchronous execution, etc…)
 An application feeds model class with input data, then the model returns postprocessed output data in user-friendly format.</p>
-<div class="section" id="package-structure">
+<section id="package-structure">
 <h2>Package structure<a class="headerlink" href="#package-structure" title="Permalink to this headline">¶</a></h2>
 <p>The Model API consists of 3 libraries:</p>
 <ul class="simple">
@@ -334,7 +341,7 @@ An application feeds model class with input data, then the model returns postpro
 <li><p><em>models</em> implements wrappers for Open Model Zoo models. See <span class="xref myst">Model API Wrappers</span> section</p></li>
 <li><p><em>pipelines</em> implements pipelines for model inference and manage the synchronous/asynchronous execution. See <span class="xref myst">Model API Pipelines</span> section</p></li>
 </ul>
-<div class="section" id="prerequisites">
+<section id="prerequisites">
 <h3>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h3>
 <p>The package requires</p>
 <ul class="simple">
@@ -347,9 +354,9 @@ An application feeds model class with input data, then the model returns postpro
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip install openvino
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="installing-python-model-api-package">
+</section>
+</section>
+<section id="installing-python-model-api-package">
 <h2>Installing Python* Model API package<a class="headerlink" href="#installing-python-model-api-package" title="Permalink to this headline">¶</a></h2>
 <p>Use the following command to install Model API from source:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip install &lt;omz_dir&gt;/demos/common/python
@@ -374,8 +381,8 @@ Name example: <code class="docutils literal notranslate"><span class="pre">openm
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>python -c <span class="s2">&quot;from openvino.model_zoo import model_api&quot;</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="model-api-wrappers">
+</section>
+<section id="model-api-wrappers">
 <h2>Model API Wrappers<a class="headerlink" href="#model-api-wrappers" title="Permalink to this headline">¶</a></h2>
 <p>The Model API package provides model wrappers, which implement standardized preprocessing/postprocessing functions per “task type” and incapsulate model-specific logic for usage of different models in a unified manner inside the application.</p>
 <p>The following tasks can be solved with wrappers usage:</p>
@@ -421,17 +428,17 @@ Name example: <code class="docutils literal notranslate"><span class="pre">openm
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="model-api-adapters">
+</section>
+<section id="model-api-adapters">
 <h2>Model API Adapters<a class="headerlink" href="#model-api-adapters" title="Permalink to this headline">¶</a></h2>
 <p>Model API wrappers are executor-agnostic, meaning it does not implement the specific model inference or model loading, instead it can be used with different executors having the implementation of common interface methods in adapter class respectively.</p>
 <p>Currently, <code class="docutils literal notranslate"><span class="pre">OpenvinoAdapter</span></code> and <code class="docutils literal notranslate"><span class="pre">OVMSAdapter</span></code> are supported.</p>
-<div class="section" id="openvino-adapter">
+<section id="openvino-adapter">
 <h3>OpenVINO Adapter<a class="headerlink" href="#openvino-adapter" title="Permalink to this headline">¶</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">OpenvinoAdapter</span></code> hides the OpenVINO™ toolkit API, which allows Model API wrappers launching with models represented in Intermediate Representation (IR) format.
 It accepts a path to either <code class="docutils literal notranslate"><span class="pre">xml</span></code> model file or <code class="docutils literal notranslate"><span class="pre">onnx</span></code> model file.</p>
-</div>
-<div class="section" id="openvino-model-server-adapter">
+</section>
+<section id="openvino-model-server-adapter">
 <h3>OpenVINO Model Server Adapter<a class="headerlink" href="#openvino-model-server-adapter" title="Permalink to this headline">¶</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">OVMSAdapter</span></code> hides the OpenVINO Model Server python client API, which allows Model API wrappers launching with models served by OVMS.</p>
 <p>Refer to <strong>OVMSAdapter</strong> to learn about running demos with OVMS.</p>
@@ -439,15 +446,15 @@ It accepts a path to either <code class="docutils literal notranslate"><span cla
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip install &lt;omz_dir&gt;/demos/common/python<span class="o">[</span>ovms<span class="o">]</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="model-api-pipelines">
+</section>
+</section>
+<section id="model-api-pipelines">
 <h2>Model API Pipelines<a class="headerlink" href="#model-api-pipelines" title="Permalink to this headline">¶</a></h2>
 <p>Model API Pipelines represent the high-level wrappers upon the input data and accessing model results management.
 They perform the data submission for model inference, verification of inference status, whether the result is ready or not, and results accessing.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">AsyncPipeline</span></code> is available, which handles the asynchronous execution of a single model.</p>
-</div>
-<div class="section" id="ready-to-use-model-api-solutions">
+</section>
+<section id="ready-to-use-model-api-solutions">
 <h2>Ready-to-use Model API solutions<a class="headerlink" href="#ready-to-use-model-api-solutions" title="Permalink to this headline">¶</a></h2>
 <p>To apply Model API wrappers in custom applications, learn the provided example of common scenario of how to use Model API.</p>
 <p>In the example, the SSD architecture is used to predict bounding boxes on input image <code class="docutils literal notranslate"><span class="pre">&quot;sample.png&quot;</span></code>. The model execution is produced by <code class="docutils literal notranslate"><span class="pre">OpenvinoAdapter</span></code>, therefore we submit the path to the model’s <code class="docutils literal notranslate"><span class="pre">xml</span></code> file.</p>
@@ -477,8 +484,8 @@ They perform the data submission for model inference, verification of inference 
 </pre></div>
 </div>
 <p>To study the complex scenarios, refer to Open Model Zoo Python* demos, where the asynchronous inference is applied.</p>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -507,7 +514,7 @@ They perform the data submission for model inference, verification of inference 
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

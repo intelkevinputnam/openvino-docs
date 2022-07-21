@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Introduction to OpenCV Graph API (G-API) &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -1830,7 +1837,7 @@
             
                 <div>
                   
-  <div class="section" id="introduction-to-opencv-graph-api-g-api">
+  <section id="introduction-to-opencv-graph-api-g-api">
 <span id="doxid-openvino-docs-gapi-gapi-intro"></span><span id="index-0"></span><h1>Introduction to OpenCV Graph API (G-API)<a class="headerlink" href="#introduction-to-opencv-graph-api-g-api" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-openvino-docs-gapi-gapi-intro-1md-openvino-docs-gapi-gapi-intro"></span></p>
 <div class="toctree-wrapper compound">
@@ -1843,7 +1850,7 @@
 <p class="admonition-title">Note</p>
 <p>Graph API (G-API) was introduced in the most recent major OpenCV 4.0 release and now is being actively developed. The API is volatile at the moment and there may be minor but compatibility-breaking changes in the future.</p>
 </div>
-<div class="section" id="g-api-concepts">
+<section id="g-api-concepts">
 <h2>G-API Concepts<a class="headerlink" href="#g-api-concepts" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><em>Graphs</em> are built by applying operations to data objects.</p>
@@ -1861,8 +1868,8 @@
 </li>
 </ul>
 <p>The paragraphs below explain the G-API programming model and development workflow.</p>
-</div>
-<div class="section" id="programming-model">
+</section>
+<section id="programming-model">
 <h2>Programming Model<a class="headerlink" href="#programming-model" title="Permalink to this headline">¶</a></h2>
 <p>Building graphs is easy with G-API. In fact, there is no notion of graphs exposed in the API, so the user doesn’t need to operate in terms of “nodes” and “edges” — instead, graphs are constructed implicitly via expressions in a “functional” way. Expression-based graphs are built using two major concepts: <a class="reference internal" href="openvino_docs_gapi_kernel_api.html#doxid-openvino-docs-gapi-kernel-api"><span class="std std-ref">operations</span></a> and <a class="reference external" href="https://docs.opencv.org/4.2.0/db/df1/group__gapi__data__objects.html">data objects</a>.</p>
 <p>In G-API, every graph begins and ends with data objects; data objects are passed to operations which produce (“return”) their results — new data objects, which are then passed to other operations, and so on. You can declare their own operations, G-API does not distinguish user-defined operations from its own predefined ones in any way.</p>
@@ -1875,14 +1882,14 @@
 <p>The overall process for the regular case is summarized in the diagram below:</p>
 <img alt="G-API Programming Model" src="../_images/gapi_programming_model.png" />
 <p>The graph is built with operations so having operations defined (<strong>0</strong>) is a basic prerequisite; a constructed expression graph (<strong>1</strong>) forms a <code class="docutils literal notranslate"><span class="pre">cv::GComputation</span></code> object; kernels (<strong>2</strong>) which implement operations are the basic requirement to the graph compilation (<strong>3</strong>); the actual execution (<strong>4</strong>) is handled by a <code class="docutils literal notranslate"><span class="pre">cv::GCompiled</span></code> object with takes input and produces output data.</p>
-</div>
-<div class="section" id="development-workflow">
+</section>
+<section id="development-workflow">
 <h2>Development Workflow<a class="headerlink" href="#development-workflow" title="Permalink to this headline">¶</a></h2>
 <p>One of the ways to organize a G-API development workflow is presented in the diagram below:</p>
 <img alt="G-API development workflow" src="../_images/gapi_development_workflow.png" />
 <p>Basically, it is a derivative from the programming model illustrated in the previous chapter. You start with an algorithm or a data flow in mind (<strong>0</strong>), mapping it to a graph model (<strong>1</strong>), then identifying what operations you need (<strong>2</strong>) to construct this graph. These operations may already exist in G-API or be missing, in the latter case we implement the missing ones as kernels (<strong>3</strong>). Then decide which execution model fits our case better, pass kernels and DL networks as arguments to the compilation process (<strong>4</strong>), and finally switch to the execution (<strong>5</strong>). The process is iterative, so if you want to change anything based on the execution results, get back to steps (<strong>0</strong>) or (<strong>1</strong>) (a dashed line).</p>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -1913,7 +1920,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

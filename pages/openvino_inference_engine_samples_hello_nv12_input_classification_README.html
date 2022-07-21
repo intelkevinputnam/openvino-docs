@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Hello NV12 Input Classification C++ Sample &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -624,7 +631,7 @@
             
                 <div>
                   
-  <div class="section" id="hello-nv12-input-classification-c-sample">
+  <section id="hello-nv12-input-classification-c-sample">
 <span id="doxid-openvino-inference-engine-samples-hello-nv12-input-classification-r-e-a-d-m-e"></span><span id="index-0"></span><h1>Hello NV12 Input Classification C++ Sample<a class="headerlink" href="#hello-nv12-input-classification-c-sample" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-openvino-inference-engine-samples-hello-nv12-input-classification-r-e-a-d-m-e-1md-openvino-samples-cpp-hello-nv12-input-classification-readme"></span> This sample demonstrates how to execute an inference of image classification models with images in NV12 color format using Synchronous Inference Request API.</p>
 <p>The following C++ API is used in the application:</p>
@@ -646,7 +653,7 @@
 <td><p>Get a layer name</p></td>
 </tr>
 <tr class="row-odd"><td><p>Infer Request Operations</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">ov::InferRequest::set_tensor</span></code> , <code class="docutils literal notranslate"><span class="pre">ov::InferRequest::get_tensor</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1InferRequest.html#doxid-classov-1-1-infer-request-1af54f126e7fb3b3a0343841dda8bcc368"><span class="std std-ref"><span class="pre">ov::InferRequest::set_tensor</span></span></a></code> , <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1InferRequest.html#doxid-classov-1-1-infer-request-1a75b8da7c6b00686bede600dddceaffc4"><span class="std std-ref"><span class="pre">ov::InferRequest::get_tensor</span></span></a></code></p></td>
 <td><p>Operate with tensors</p></td>
 </tr>
 <tr class="row-even"><td><p>Preprocessing</p></td>
@@ -684,16 +691,16 @@
 </tr>
 </tbody>
 </table>
-<div class="section" id="how-it-works">
+<section id="how-it-works">
 <h2>How It Works<a class="headerlink" href="#how-it-works" title="Permalink to this headline">¶</a></h2>
 <p>At startup, the sample application reads command line parameters, loads the specified model and an image in the NV12 color format to an OpenVINO™ Runtime plugin. Then, the sample creates an synchronous inference request object. When inference is done, the application outputs data to the standard output stream. You can place labels in .labels file near the model to get pretty output.</p>
 <p>You can see the explicit description of each sample step at <a class="reference internal" href="openvino_docs_OV_UG_Integrate_OV_with_your_application.html#doxid-openvino-docs-o-v-u-g-integrate-o-v-with-your-application"><span class="std std-ref">Integration Steps</span></a> section of “Integrate OpenVINO™ Runtime with Your Application” guide.</p>
-</div>
-<div class="section" id="building">
+</section>
+<section id="building">
 <h2>Building<a class="headerlink" href="#building" title="Permalink to this headline">¶</a></h2>
 <p>To build the sample, please use instructions available at <a class="reference internal" href="openvino_docs_OV_UG_Samples_Overview.html#doxid-openvino-docs-o-v-u-g-samples-overview"><span class="std std-ref">Build the Sample Applications</span></a> section in OpenVINO™ Toolkit Samples guide.</p>
-</div>
-<div class="section" id="running">
+</section>
+<section id="running">
 <h2>Running<a class="headerlink" href="#running" title="Permalink to this headline">¶</a></h2>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">hello_nv12_input_classification</span> <span class="o">&lt;</span><span class="n">path_to_model</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">path_to_image</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">image_size</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">device_name</span><span class="o">&gt;</span></pre></div></div><p>To run the sample, you need specify a model and image:</p>
 <ul class="simple">
@@ -708,7 +715,7 @@
 <li><p>Before running the sample with a trained model, make sure the model is converted to the intermediate representation (IR) format (*.xml + *.bin) using the <a class="reference internal" href="openvino_docs_MO_DG_Deep_Learning_Model_Optimizer_DevGuide.html#doxid-openvino-docs-m-o-d-g-deep-learning-model-optimizer-dev-guide"><span class="std std-ref">Model Optimizer tool</span></a>.</p></li>
 <li><p>The sample accepts models in ONNX format (.onnx) that do not require preprocessing.</p></li>
 </ul>
-<div class="section" id="example">
+<section id="example">
 <h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic simple">
 <li><p>Install openvino-dev python package if you don’t have it to use Open Model Zoo Tools:</p></li>
@@ -721,9 +728,9 @@
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">omz_converter</span> <span class="o">--</span><span class="n">name</span> <span class="n">alexnet</span></pre></div></div><ol class="arabic simple">
 <li><p>Perform inference of NV12 image using <code class="docutils literal notranslate"><span class="pre">alexnet</span></code> model on a <code class="docutils literal notranslate"><span class="pre">CPU</span></code>, for example:</p></li>
 </ol>
-<div class="highlight"><div class="highlight"><pre><span></span><span class="n">hello_nv12_input_classification</span> <span class="n">alexnet</span><span class="p">.</span><span class="n">xml</span> <span class="n">car</span><span class="p">.</span><span class="n">yuv</span> <span class="mi">300</span><span class="n">x300</span> <span class="n">CPU</span></pre></div></div></div>
-</div>
-<div class="section" id="sample-output">
+<div class="highlight"><div class="highlight"><pre><span></span><span class="n">hello_nv12_input_classification</span> <span class="n">alexnet</span><span class="p">.</span><span class="n">xml</span> <span class="n">car</span><span class="p">.</span><span class="n">yuv</span> <span class="mi">300</span><span class="n">x300</span> <span class="n">CPU</span></pre></div></div></section>
+</section>
+<section id="sample-output">
 <h2>Sample Output<a class="headerlink" href="#sample-output" title="Permalink to this headline">¶</a></h2>
 <p>The application outputs top-10 inference results.</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">OpenVINO</span> <span class="n">Runtime</span> <span class="n">version</span> <span class="p">.........</span> <span class="o">&lt;</span><span class="n">version</span><span class="o">&gt;</span>
@@ -755,8 +762,8 @@
 <span class="mi">675</span>     <span class="mf">0.0110199</span>
 <span class="mi">511</span>     <span class="mf">0.0106134</span>
 <span class="mi">569</span>     <span class="mf">0.0083373</span>
-<span class="mi">717</span>     <span class="mf">0.0061734</span></pre></div></div></div>
-<div class="section" id="see-also">
+<span class="mi">717</span>     <span class="mf">0.0061734</span></pre></div></div></section>
+<section id="see-also">
 <h2>See Also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="openvino_docs_OV_UG_Integrate_OV_with_your_application.html#doxid-openvino-docs-o-v-u-g-integrate-o-v-with-your-application"><span class="std std-ref">Integrate the OpenVINO™ Runtime with Your Application</span></a></p></li>
@@ -764,8 +771,8 @@
 <li><p>Model Downloader</p></li>
 <li><p><a class="reference internal" href="openvino_docs_MO_DG_Deep_Learning_Model_Optimizer_DevGuide.html#doxid-openvino-docs-m-o-d-g-deep-learning-model-optimizer-dev-guide"><span class="std std-ref">Model Optimizer</span></a></p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -796,7 +803,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

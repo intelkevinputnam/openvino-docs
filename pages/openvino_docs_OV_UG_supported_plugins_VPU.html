@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>VPU devices &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -1874,7 +1881,7 @@
             
                 <div>
                   
-  <div class="section" id="vpu-devices">
+  <section id="vpu-devices">
 <span id="doxid-openvino-docs-o-v-u-g-supported-plugins-v-p-u"></span><span id="index-0"></span><h1>VPU devices<a class="headerlink" href="#vpu-devices" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-openvino-docs-o-v-u-g-supported-plugins-v-p-u-1md-openvino-docs-ov-runtime-ug-supported-plugins-vpu"></span></p>
 <div class="toctree-wrapper compound">
@@ -1888,7 +1895,7 @@
 <p class="admonition-title">Note</p>
 <p>With the OpenVINO™ 2020.4 release, Intel® Movidius™ Neural Compute Stick powered by the Intel® Movidius™ Myriad™ 2 is no longer supported.</p>
 </div>
-<div class="section" id="supported-networks">
+<section id="supported-networks">
 <h2>Supported Networks<a class="headerlink" href="#supported-networks" title="Permalink to this headline">¶</a></h2>
 <p>Caffe* :</p>
 <ul class="simple">
@@ -1932,13 +1939,13 @@
 <li><p>SSD-Inception-v3, SSD-MobileNet, SSD-ResNet-50, SSD-300</p></li>
 </ul>
 <p>*** Network is tested on Intel Neural Compute Stick 2 with BatchNormalization fusion optimization disabled during Model Optimizer import</p>
-</div>
-<div class="section" id="optimizations">
+</section>
+<section id="optimizations">
 <h2>Optimizations<a class="headerlink" href="#optimizations" title="Permalink to this headline">¶</a></h2>
 <p>VPU plugins support layer fusion and decomposition.</p>
-<div class="section" id="layer-fusion">
+<section id="layer-fusion">
 <h3>Layer Fusion<a class="headerlink" href="#layer-fusion" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="fusing-rules">
+<section id="fusing-rules">
 <h4>Fusing Rules<a class="headerlink" href="#fusing-rules" title="Permalink to this headline">¶</a></h4>
 <p>Certain layers can be merged into convolution, ReLU, and Eltwise layers according to the patterns below:</p>
 <ul class="simple">
@@ -1960,8 +1967,8 @@
 </ul>
 </li>
 </ul>
-</div>
-<div class="section" id="joining-rules">
+</section>
+<section id="joining-rules">
 <h4>Joining Rules<a class="headerlink" href="#joining-rules" title="Permalink to this headline">¶</a></h4>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -1972,9 +1979,9 @@
 <li><p>Layers are located on topologically independent branches.</p></li>
 <li><p>Layers can be executed simultaneously on the same hardware units.</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="decomposition-rules">
+</section>
+</section>
+<section id="decomposition-rules">
 <h3>Decomposition Rules<a class="headerlink" href="#decomposition-rules" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p>Convolution and Pooling layers are tiled resulting in the following pattern:</p>
@@ -1995,11 +2002,11 @@
 <p class="admonition-title">Note</p>
 <p>VPU plugins can add extra layers like Copy.</p>
 </div>
-</div>
-</div>
-<div class="section" id="vpu-common-configuration-parameters">
+</section>
+</section>
+<section id="vpu-common-configuration-parameters">
 <h2>VPU Common Configuration Parameters<a class="headerlink" href="#vpu-common-configuration-parameters" title="Permalink to this headline">¶</a></h2>
-<p>VPU plugins support the configuration parameters listed below. The parameters are passed as <code class="docutils literal notranslate"><span class="pre">std::map&lt;std::string,</span> <span class="pre">std::string&gt;</span></code> on <code class="docutils literal notranslate"><span class="pre">InferenceEngine::Core::LoadNetwork</span></code> or <code class="docutils literal notranslate"><span class="pre">InferenceEngine::Core::SetConfig</span></code>. When specifying key values as raw strings (that is, when using Python API), omit the <code class="docutils literal notranslate"><span class="pre">KEY_</span></code> prefix.</p>
+<p>VPU plugins support the configuration parameters listed below. The parameters are passed as <code class="docutils literal notranslate"><span class="pre">std::map&lt;std::string,</span> <span class="pre">std::string&gt;</span></code> on <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classInferenceEngine_1_1Core.html#doxid-class-inference-engine-1-1-core-1a7b0b5ab0009abc572762422105b5c666"><span class="std std-ref"><span class="pre">InferenceEngine::Core::LoadNetwork</span></span></a></code> or <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classInferenceEngine_1_1Core.html#doxid-class-inference-engine-1-1-core-1a34aa9ac6fb237b634d5bf08b288e88d4"><span class="std std-ref"><span class="pre">InferenceEngine::Core::SetConfig</span></span></a></code>. When specifying key values as raw strings (that is, when using Python API), omit the <code class="docutils literal notranslate"><span class="pre">KEY_</span></code> prefix.</p>
 <table class="table">
 <colgroup>
 <col style="width: 25%" />
@@ -2042,18 +2049,18 @@
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="data-transfer-pipelining">
+</section>
+<section id="data-transfer-pipelining">
 <span id="vpu-data-transfer-pipelining"></span><h2>Data Transfer Pipelining<a class="headerlink" href="#data-transfer-pipelining" title="Permalink to this headline">¶</a></h2>
 <p>MYRIAD plugin tries to pipeline data transfer to/from device with computations. While one infer request is executed, the data for next infer request can be uploaded to device in parallel. The same applies to result downloading.</p>
 <p><code class="docutils literal notranslate"><span class="pre">KEY_VPU_PRINT_RECEIVE_TENSOR_TIME</span></code> configuration parameter can be used to check the efficiency of current pipelining. The new record in performance counters will show the time that device spent waiting for input before starting the inference. In a perfect pipeline this time should be near zero, which means that the data was already transferred when new inference started.</p>
-</div>
-<div class="section" id="troubleshooting">
+</section>
+<section id="troubleshooting">
 <h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h2>
 <p><strong>Get the following message when running inference with the VPU plugin: “[VPU] Cannot convert layer &lt;layer_name&gt; due to unsupported layer type &lt;layer_type&gt;”</strong></p>
 <p>This means that your topology has a layer that is unsupported by your target VPU plugin. To resolve this issue, you can implement the custom layer for the target device using the <a class="reference internal" href="openvino_docs_Extensibility_UG_Intro.html#doxid-openvino-docs-extensibility-u-g-intro"><span class="std std-ref">OpenVINO™ Extensibility mechanism</span></a>. Or, to quickly get a working prototype, you can use the heterogeneous scenario with the default fallback policy (see the <a class="reference internal" href="openvino_docs_OV_UG_Hetero_execution.html#doxid-openvino-docs-o-v-u-g-hetero-execution"><span class="std std-ref">Heterogeneous execution</span></a> section). Use the HETERO mode with a fallback device that supports this layer, for example, CPU: <code class="docutils literal notranslate"><span class="pre">HETERO:MYRIAD,CPU</span></code>. For a list of VPU-supported layers, see the Supported Layers section of the <a class="reference internal" href="openvino_docs_OV_UG_supported_plugins_Supported_Devices.html#doxid-openvino-docs-o-v-u-g-supported-plugins-supported-devices"><span class="std std-ref">Supported Devices</span></a> page.</p>
-</div>
-<div class="section" id="known-layers-limitations">
+</section>
+<section id="known-layers-limitations">
 <h2>Known Layers Limitations<a class="headerlink" href="#known-layers-limitations" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">ScaleShift</span></code> layer is supported for zero value of <code class="docutils literal notranslate"><span class="pre">broadcast</span></code> attribute only.</p></li>
@@ -2063,15 +2070,15 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">Normalize</span></code> layer uses fixed value for <code class="docutils literal notranslate"><span class="pre">eps</span></code> parameters (1e-9) and is supported for zero value of <code class="docutils literal notranslate"><span class="pre">across_spatial</span></code> only.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Pad</span></code> layer works only with 4D tensors.</p></li>
 </ul>
-</div>
-<div class="section" id="see-also">
+</section>
+<section id="see-also">
 <h2>See Also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="openvino_docs_OV_UG_supported_plugins_Supported_Devices.html#doxid-openvino-docs-o-v-u-g-supported-plugins-supported-devices"><span class="std std-ref">Supported Devices</span></a></p></li>
 <li><p><a class="reference external" href="https://software.intel.com/en-us/neural-compute-stick/get-started">Intel® Neural Compute Stick 2 Get Started</a></p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -2102,7 +2109,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

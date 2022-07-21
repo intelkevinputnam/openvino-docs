@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Optimize Classification Model &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -1857,10 +1864,10 @@
             
                 <div>
                   
-  <div class="section" id="optimize-classification-model">
+  <section id="optimize-classification-model">
 <span id="doxid-workbench-docs-workbench-d-g-tutorial-classification"></span><span id="index-0"></span><h1>Optimize Classification Model<a class="headerlink" href="#optimize-classification-model" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-workbench-docs-workbench-d-g-tutorial-classification-1md-openvino-workbench-docs-workbench-dg-tutorial-classification"></span></p>
-<div class="section" id="summary">
+<section id="summary">
 <h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
 <p>INT8 Calibration is a universal method for accelerating deep learning models. Calibration is a process of converting a Deep Learning model weights to a lower 8-bit precision such that it needs less computation.</p>
 <p>In this tutorial, you will learn how to optimize your model using INT8 Calibration, examine how much quicker the model has become, and check the difference between original and optimized model accuracy.</p>
@@ -1890,8 +1897,8 @@
 </tbody>
 </table>
 <p>You can learn how to <a class="reference internal" href="workbench_docs_Workbench_DG_Select_Model.html#doxid-workbench-docs-workbench-d-g-select-model"><span class="std std-ref">import the model</span></a> and <a class="reference internal" href="workbench_docs_Workbench_Create_Project.html#doxid-workbench-docs-workbench-create-project"><span class="std std-ref">create a not annotated dataset</span></a> in the DL Workbench <a class="reference internal" href="workbench_docs_Workbench_DG_Work_with_Models_and_Sample_Datasets.html#doxid-workbench-docs-workbench-d-g-work-with-models-and-sample-datasets"><span class="std std-ref">Get Started Guide</span></a>.</p>
-</div>
-<div class="section" id="optimize-model-using-int8-calibration">
+</section>
+<section id="optimize-model-using-int8-calibration">
 <h2>Optimize Model Using INT8 Calibration<a class="headerlink" href="#optimize-model-using-int8-calibration" title="Permalink to this headline">¶</a></h2>
 <p>To convert the model to INT8, go to <strong>Perform</strong> tab on the Project page and open <strong>Optimize</strong> subtab. Check <strong>INT8</strong> and click <strong>Optimize</strong>.</p>
 <p>Once a model has been inferred in the DL Workbench, you can convert it from FP32 to INT8. Go to the <strong>Perform</strong> tab on the Project page and open the <strong>Optimize</strong> subtab. Check <strong>INT8</strong> and click <strong>Optimize</strong>.</p>
@@ -1901,25 +1908,25 @@
 <p>After optimization, you will be redirected to a new Project page for optimized <code class="docutils literal notranslate"><span class="pre">mobilenet-v2</span></code> model.</p>
 <img alt="../_images/optimized-classification.png" src="../_images/optimized-classification.png" />
 <p>To ensure that the optimized model performance is sufficiently accelerated and its predictions can be trusted, evaluate the key characteristics: performance and accuracy.</p>
-</div>
-<div class="section" id="compare-optimized-and-parent-model-performance">
+</section>
+<section id="compare-optimized-and-parent-model-performance">
 <h2>Compare Optimized and Parent Model Performance<a class="headerlink" href="#compare-optimized-and-parent-model-performance" title="Permalink to this headline">¶</a></h2>
 <p>Go to the model page and check the performance of the imported and optimized models. Compare the throughput numbers and click <strong>Compare Projects</strong>. Learn more about projects comparison on the <a class="reference internal" href="workbench_docs_Workbench_DG_Compare_Performance_between_Two_Versions_of_Models.html#doxid-workbench-docs-workbench-d-g-compare-performance-between-two-versions-of-models"><span class="std std-ref">Compare Performance</span></a> page.</p>
 <p><strong>NOTE:</strong> Throughput is the number of images processed in a given amount of time. It is measured in frames per second (FPS). Higher throughput value means better performance.</p>
 <img alt="../_images/compare-classification.png" src="../_images/compare-classification.png" />
 <p>You can observe that <code class="docutils literal notranslate"><span class="pre">mobilenet_v2</span></code> model has become 1.2x times faster on CPU device after optimization.</p>
 <p>Lowering the precision of the model using quantization leads to a loss in prediction capability. Therefore you need to assess the model prediction capability to ensure that you have not lost a significant amount of accuracy.</p>
-</div>
-<div class="section" id="compare-parent-and-optimized-model-predictions">
+</section>
+<section id="compare-parent-and-optimized-model-predictions">
 <h2>Compare Parent and Optimized Model Predictions<a class="headerlink" href="#compare-parent-and-optimized-model-predictions" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="create-accuracy-report">
+<section id="create-accuracy-report">
 <h3>Create Accuracy Report<a class="headerlink" href="#create-accuracy-report" title="Permalink to this headline">¶</a></h3>
 <p>Go to the <strong>Perform</strong> tab and select <strong>Create Accuracy Report</strong> :</p>
 <img alt="../_images/accuracy-classification.png" src="../_images/accuracy-classification.png" />
 <p>Comparison of Optimized and Parent Model Predictions Report allows you to find out on which validation dataset images the predictions of the model have become different after optimization. Let’s compare Optimized model predictions with Parent model predictions used as optimal references.</p>
 <img alt="../_images/classification-table.png" src="../_images/classification-table.png" />
-</div>
-<div class="section" id="interpret-report-results">
+</section>
+<section id="interpret-report-results">
 <h3>Interpret Report Results<a class="headerlink" href="#interpret-report-results" title="Permalink to this headline">¶</a></h3>
 <p>Each line of the table contains a specific class that the model predicted for the object in the image - <strong>Class Predicted by Optimized Model</strong>. You can compare this class with the <strong>Class Predicted by Parent Model</strong>.</p>
 <p>If the classes do not match, the Optimized model might be incorrect. To assess the difference between the classes, check the <strong>Rank of Class Defined in Parent Model Predictions</strong>. You can also compare optimized <strong>Model Confidence in Class Predicted by Optimized Model</strong> with <strong>Optimized Model Confidence in Class Predicted by Parent Model</strong>.</p>
@@ -1933,9 +1940,9 @@
 <p>Check <strong>Show only erroneous images</strong> option to display only images where the classes predicted by the model and specified in dataset annotations do not match.</p>
 <img alt="../_images/classification-error.png" src="../_images/classification-error.png" />
 <p>Another type of Accuracy Report available for not annotated datasets is Calculation of Tensor Distance to Parent Model Output. The report enables you to identify differences between Parent and Optimized model predictions for a wider set of use cases besides classification and object detection. Learn more in the <a class="reference internal" href="workbench_docs_Workbench_DG_Tutorial_Style_Transfer.html#doxid-workbench-docs-workbench-d-g-tutorial-style-transfer"><span class="std std-ref">Style Transfer model tutorial</span></a>.</p>
-</div>
-</div>
-<div class="section" id="next-step">
+</section>
+</section>
+<section id="next-step">
 <h2>Next Step<a class="headerlink" href="#next-step" title="Permalink to this headline">¶</a></h2>
 <p>After evaluating the accuracy, you can decide whether the difference between imported and optimized models predictions is critical or not:</p>
 <ul class="simple">
@@ -1943,15 +1950,15 @@
 <li><p>If the tradeoff is acceptable, <a class="reference internal" href="workbench_docs_Workbench_DG_Deploy_and_Integrate_Performance_Criteria_into_Application.html#doxid-workbench-docs-workbench-d-g-deploy-and-integrate-performance-criteria-into-application"><span class="std std-ref">explore inference configurations</span></a> to further enhance the performance. Then create a <a class="reference internal" href="workbench_docs_Workbench_DG_Deployment_Package.html#doxid-workbench-docs-workbench-d-g-deployment-package"><span class="std std-ref">deployment package</span></a> with your ready-to-deploy model.</p></li>
 </ul>
 <p><em>All images were taken from ImageNet, Pascal Visual Object Classes, and Common Objects in Context datasets for demonstration purposes only.</em></p>
-</div>
-<div class="section" id="see-also">
+</section>
+<section id="see-also">
 <h2>See Also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="workbench_docs_Workbench_DG_Measure_Accuracy.html#doxid-workbench-docs-workbench-d-g-measure-accuracy"><span class="std std-ref">Create Accuracy Report</span></a></p></li>
 <li><p><a class="reference internal" href="workbench_docs_Workbench_DG_Troubleshooting.html#doxid-workbench-docs-workbench-d-g-troubleshooting"><span class="std std-ref">Troubleshooting</span></a></p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -1982,7 +1989,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

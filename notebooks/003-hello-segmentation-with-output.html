@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Hello Image Segmentation &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -510,7 +517,7 @@
             
                 <div>
                   
-  <div class="section" id="hello-image-segmentation">
+  <section id="hello-image-segmentation">
 <h1>Hello Image Segmentation<a class="headerlink" href="#hello-image-segmentation" title="Permalink to this headline">¶</a></h1>
 <p>A very basic introduction to using segmentation models with OpenVINO.</p>
 <p>We use the pre-trained
@@ -519,7 +526,7 @@ model from the <a class="reference external" href="https://github.com/openvinoto
 Zoo</a>. ADAS stands
 for Advanced Driver Assistance Services. The model recognizes four
 classes: background, road, curb and mark.</p>
-<div class="section" id="imports">
+<section id="imports">
 <h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cv2</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -531,8 +538,8 @@ classes: background, road, curb and mark.</p>
 <span class="kn">from</span> <span class="nn">notebook_utils</span> <span class="kn">import</span> <span class="n">segmentation_map_to_image</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="load-the-model">
+</section>
+<section id="load-the-model">
 <h2>Load the Model<a class="headerlink" href="#load-the-model" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ie</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span>
 
@@ -543,8 +550,8 @@ classes: background, road, curb and mark.</p>
 <span class="n">output_layer_ir</span> <span class="o">=</span> <span class="n">compiled_model</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="load-an-image">
+</section>
+<section id="load-an-image">
 <h2>Load an Image<a class="headerlink" href="#load-an-image" title="Permalink to this headline">¶</a></h2>
 <p>A sample image from the <a class="reference external" href="https://www.mapillary.com/dataset/vistas">Mapillary
 Vistas</a> dataset is
@@ -572,8 +579,8 @@ provided.</p>
 </pre></div>
 </div>
 <img alt="../_images/003-hello-segmentation-with-output_6_1.png" src="../_images/003-hello-segmentation-with-output_6_1.png" />
-</div>
-<div class="section" id="do-inference">
+</section>
+<section id="do-inference">
 <h2>Do Inference<a class="headerlink" href="#do-inference" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run the inference</span>
 <span class="n">result</span> <span class="o">=</span> <span class="n">compiled_model</span><span class="p">([</span><span class="n">input_image</span><span class="p">])[</span><span class="n">output_layer_ir</span><span class="p">]</span>
@@ -587,8 +594,8 @@ provided.</p>
 </pre></div>
 </div>
 <img alt="../_images/003-hello-segmentation-with-output_8_1.png" src="../_images/003-hello-segmentation-with-output_8_1.png" />
-</div>
-<div class="section" id="prepare-data-for-visualization">
+</section>
+<section id="prepare-data-for-visualization">
 <h2>Prepare Data for Visualization<a class="headerlink" href="#prepare-data-for-visualization" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define colormap, each color represents a class</span>
 <span class="n">colormap</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">68</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">84</span><span class="p">],</span> <span class="p">[</span><span class="mi">48</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mi">141</span><span class="p">],</span> <span class="p">[</span><span class="mi">53</span><span class="p">,</span> <span class="mi">183</span><span class="p">,</span> <span class="mi">120</span><span class="p">],</span> <span class="p">[</span><span class="mi">199</span><span class="p">,</span> <span class="mi">216</span><span class="p">,</span> <span class="mi">52</span><span class="p">]])</span>
@@ -604,8 +611,8 @@ provided.</p>
 <span class="n">image_with_mask</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">addWeighted</span><span class="p">(</span><span class="n">resized_mask</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">rgb_image</span><span class="p">,</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">alpha</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="visualize-data">
+</section>
+<section id="visualize-data">
 <h2>Visualize data<a class="headerlink" href="#visualize-data" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define titles with images</span>
 <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Base Photo&quot;</span><span class="p">:</span> <span class="n">rgb_image</span><span class="p">,</span> <span class="s2">&quot;Segmentation&quot;</span><span class="p">:</span> <span class="n">mask</span><span class="p">,</span> <span class="s2">&quot;Masked Photo&quot;</span><span class="p">:</span> <span class="n">image_with_mask</span><span class="p">}</span>
@@ -624,8 +631,8 @@ provided.</p>
 </pre></div>
 </div>
 <img alt="../_images/003-hello-segmentation-with-output_12_0.png" src="../_images/003-hello-segmentation-with-output_12_0.png" />
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -656,7 +663,7 @@ provided.</p>
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

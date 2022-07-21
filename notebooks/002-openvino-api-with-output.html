@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>OpenVINO API Tutorial &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -546,7 +553,7 @@
             
                 <div>
                   
-  <div class="section" id="openvino-api-tutorial">
+  <section id="openvino-api-tutorial">
 <h1>OpenVINO API Tutorial<a class="headerlink" href="#openvino-api-tutorial" title="Permalink to this headline">¶</a></h1>
 <p>This notebook explains the basics of the OpenVINO Inference Engine API.
 It covers:</p>
@@ -580,7 +587,7 @@ standalone and does not depend on previous sections. A segmentation and
 classification IR model and a segmentation ONNX model are provided as
 examples. You can replace these model files with your own models. The
 exact outputs will be different, but the process is the same.</p>
-<div class="section" id="load-inference-engine-and-show-info">
+<section id="load-inference-engine-and-show-info">
 <h2>Load Inference Engine and Show Info<a class="headerlink" href="#load-inference-engine-and-show-info" title="Permalink to this headline">¶</a></h2>
 <p>Initialize Inference Engine with Core()</p>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">openvino.runtime</span> <span class="kn">import</span> <span class="n">Core</span>
@@ -607,13 +614,13 @@ faster.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CPU</span><span class="p">:</span> <span class="n">Intel</span><span class="p">(</span><span class="n">R</span><span class="p">)</span> <span class="n">Xeon</span><span class="p">(</span><span class="n">R</span><span class="p">)</span> <span class="n">Platinum</span> <span class="mi">8272</span><span class="n">CL</span> <span class="n">CPU</span> <span class="o">@</span> <span class="mf">2.60</span><span class="n">GHz</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="loading-a-model">
+</section>
+<section id="loading-a-model">
 <h2>Loading a Model<a class="headerlink" href="#loading-a-model" title="Permalink to this headline">¶</a></h2>
 <p>After initializing Inference Engine, first read the model file with
 <code class="docutils literal notranslate"><span class="pre">read_model()</span></code>, then compile it to the specified device with
 <code class="docutils literal notranslate"><span class="pre">compile_model()</span></code>.</p>
-<div class="section" id="ir-model">
+<section id="ir-model">
 <h3>IR Model<a class="headerlink" href="#ir-model" title="Permalink to this headline">¶</a></h3>
 <p>An IR (Intermediate Representation) model consists of an .xml file,
 containing information about network topology, and a .bin file,
@@ -641,8 +648,8 @@ Optimizer. For exporting ONNX models to IR with default settings, the
 <span class="n">compiled_model</span> <span class="o">=</span> <span class="n">ie</span><span class="o">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">device_name</span><span class="o">=</span><span class="s2">&quot;CPU&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="onnx-model">
+</section>
+<section id="onnx-model">
 <h3>ONNX Model<a class="headerlink" href="#onnx-model" title="Permalink to this headline">¶</a></h3>
 <p>An ONNX model is a single file. Reading and loading an ONNX model works
 the same way as reading and loading an IR model. The <code class="docutils literal notranslate"><span class="pre">model</span></code> argument
@@ -661,9 +668,9 @@ points to the ONNX filename.</p>
 <span class="n">serialize</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model_onnx</span><span class="p">,</span> <span class="n">model_path</span><span class="o">=</span><span class="s2">&quot;model/exported_onnx_model.xml&quot;</span><span class="p">,</span> <span class="n">weights_path</span><span class="o">=</span><span class="s2">&quot;model/exported_onnx_model.bin&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="getting-information-about-a-model">
+</section>
+</section>
+<section id="getting-information-about-a-model">
 <h2>Getting Information about a Model<a class="headerlink" href="#getting-information-about-a-model" title="Permalink to this headline">¶</a></h2>
 <p>The OpenVINO IENetwork instance stores information about the model.
 Information about the inputs and outputs of the model are in
@@ -671,7 +678,7 @@ Information about the inputs and outputs of the model are in
 ExecutableNetwork instance. Where we use <code class="docutils literal notranslate"><span class="pre">model.inputs</span></code> and
 <code class="docutils literal notranslate"><span class="pre">model.outputs</span></code> in the cells below, you can also use
 <code class="docutils literal notranslate"><span class="pre">compiled_model.inputs</span></code> and <code class="docutils literal notranslate"><span class="pre">compiled_model.outputs</span></code>.</p>
-<div class="section" id="model-inputs">
+<section id="model-inputs">
 <h3>Model Inputs<a class="headerlink" href="#model-inputs" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">openvino.runtime</span> <span class="kn">import</span> <span class="n">Core</span>
 
@@ -707,8 +714,8 @@ prints the input layout, precision and shape.</p>
 model expects input data with a batch size (N) of 1, 3 channels (C), and
 images of a height (H) and width (W) of 224. The input data is expected
 to be of FP32 (floating point) precision.</p>
-</div>
-<div class="section" id="model-outputs">
+</section>
+<section id="model-outputs">
 <h3>Model Outputs<a class="headerlink" href="#model-outputs" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">openvino.runtime</span> <span class="kn">import</span> <span class="n">Core</span>
 
@@ -748,9 +755,9 @@ precision and shape.</p>
 <p>This cell output shows that the model returns outputs with a shape of
 [1, 1001], where 1 is the batch size (N) and 1001 the number of classes
 (C). The output is returned as 32-bit floating point.</p>
-</div>
-</div>
-<div class="section" id="doing-inference-on-a-model">
+</section>
+</section>
+<section id="doing-inference-on-a-model">
 <h2>Doing Inference on a Model<a class="headerlink" href="#doing-inference-on-a-model" title="Permalink to this headline">¶</a></h2>
 <p>To do inference on a model, first you need to create inference request
 by calling <code class="docutils literal notranslate"><span class="pre">create_infer_request()</span></code> being method of
@@ -839,10 +846,10 @@ output. This output shape indicates that the network returns
 probabilities for 1001 classes. To transform this into meaningful
 information, check out the <a class="reference external" href="001-hello-world-with-output.html">hello world
 notebook</a>.</p>
-</div>
-<div class="section" id="reshaping-and-resizing">
+</section>
+<section id="reshaping-and-resizing">
 <h2>Reshaping and Resizing<a class="headerlink" href="#reshaping-and-resizing" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="change-image-size">
+<section id="change-image-size">
 <h3>Change Image Size<a class="headerlink" href="#change-image-size" title="Permalink to this headline">¶</a></h3>
 <p>Instead of reshaping the image to fit the model, you can also reshape
 the model to fit the image. Note that not all models support reshaping,
@@ -892,8 +899,8 @@ accept input images with a width and height of 544 with the
 returns arrays with the same width and height as the input width and
 height, so setting the input dimensions to 544x544 also modifies the
 output dimensions. After reshaping, compile the network once again.</p>
-</div>
-<div class="section" id="change-batch-size">
+</section>
+<section id="change-batch-size">
 <h3>Change Batch Size<a class="headerlink" href="#change-batch-size" title="Permalink to this headline">¶</a></h3>
 <p>We can also use <code class="docutils literal notranslate"><span class="pre">.reshape()</span></code> to set the batch size, by increasing the
 first element of <em>new_shape</em>. For example, to set a batch size of two,
@@ -943,9 +950,9 @@ happens if we propagate our input image through the network:</p>
 <span class="n">result</span> <span class="n">data</span> <span class="n">data</span> <span class="n">shape</span><span class="p">:</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">544</span><span class="p">,</span> <span class="mi">544</span><span class="p">}</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="caching-a-model">
+</section>
+</section>
+<section id="caching-a-model">
 <h2>Caching a Model<a class="headerlink" href="#caching-a-model" title="Permalink to this headline">¶</a></h2>
 <p>For some devices, like GPU, loading a model can take some time. Model
 Caching solves this issue by caching the model in a cache directory. If
@@ -1002,8 +1009,8 @@ the time it takes now.</p>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Loading the network to the </span><span class="si">{</span><span class="n">device_name</span><span class="si">}</span><span class="s2"> device took </span><span class="si">{</span><span class="n">end_time</span><span class="o">-</span><span class="n">start_time</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> seconds.&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -1034,7 +1041,7 @@ the time it takes now.</p>
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>OpenVINO™ Python API exclusives &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -1883,23 +1890,23 @@
             
                 <div>
                   
-  <div class="section" id="openvino-python-api-exclusives">
+  <section id="openvino-python-api-exclusives">
 <span id="doxid-openvino-docs-o-v-u-g-python-a-p-i-exclusives"></span><span id="index-0"></span><h1>OpenVINO™ Python API exclusives<a class="headerlink" href="#openvino-python-api-exclusives" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-openvino-docs-o-v-u-g-python-a-p-i-exclusives-1md-openvino-docs-ov-runtime-ug-python-api-exclusives"></span> OpenVINO™ Runtime Python API is exposing additional features and helpers to elevate user experience. Main goal of Python API is to provide user-friendly and simple, still powerful, tool for Python users.</p>
-<div class="section" id="easier-model-compilation">
+<section id="easier-model-compilation">
 <h2>Easier model compilation<a class="headerlink" href="#easier-model-compilation" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">CompiledModel</span></code> can be easily created with the helper method. It hides <code class="docutils literal notranslate"><span class="pre">Core</span></code> creation and applies <code class="docutils literal notranslate"><span class="pre">AUTO</span></code> device by default.</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">import</span> <span class="n">openvino</span><span class="p">.</span><span class="n">runtime</span> <span class="n">as</span> <span class="n">ov</span>
 
-<span class="n">compiled_model</span> <span class="o">=</span> <span class="n">ov</span><span class="p">.</span><span class="n">compile_model</span><span class="p">(</span><span class="s">&quot;model.xml&quot;</span><span class="p">)</span></pre></div></div></div>
-<div class="section" id="model-compiledmodel-inputs-and-outputs">
+<span class="n">compiled_model</span> <span class="o">=</span> <span class="n">ov</span><span class="p">.</span><span class="n">compile_model</span><span class="p">(</span><span class="s">&quot;model.xml&quot;</span><span class="p">)</span></pre></div></div></section>
+<section id="model-compiledmodel-inputs-and-outputs">
 <h2>Model/CompiledModel inputs and outputs<a class="headerlink" href="#model-compiledmodel-inputs-and-outputs" title="Permalink to this headline">¶</a></h2>
 <p>Besides functions aligned to C++ API, some of them have their Pythonic counterparts or extensions. For example, <code class="docutils literal notranslate"><span class="pre">Model</span></code> and <code class="docutils literal notranslate"><span class="pre">CompiledModel</span></code> inputs/outputs can be accessed via properties.</p>
-<div class="highlight"><div class="highlight"><pre><span></span><span class="n">core</span> <span class="o">=</span> ov.Core<span></span><span class="p">()</span>
+<div class="highlight"><div class="highlight"><pre><span></span><span class="n">core</span> <span class="o">=</span> <a class="reference internal" href="../api/groups/classov_1_1Core.html#doxid-classov-1-1-core"><span class="std std-ref">ov.Core</span></a><span></span><span class="p">()</span>
 
 <span class="n">input_a</span> <span class="o">=</span> <span class="n">ov</span><span class="p">.</span><span class="n">opset8</span><span class="p">.</span><span class="n">parameter</span><span class="p">([</span><span class="mi">8</span><span class="p">])</span>
 <span class="n">res</span> <span class="o">=</span> <span class="n">ov</span><span class="p">.</span><span class="n">opset8</span><span class="p">.</span><span class="n">absolute</span><span class="p">(</span><span class="n">input_a</span><span class="p">)</span>
-<span class="n">model</span> <span class="o">=</span> ov.Model<span></span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="p">[</span><span class="n">input_a</span><span class="p">])</span>
+<span class="n">model</span> <span class="o">=</span> <a class="reference internal" href="../api/groups/classov_1_1Model.html#doxid-classov-1-1-model"><span class="std std-ref">ov.Model</span></a><span></span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="p">[</span><span class="n">input_a</span><span class="p">])</span>
 <span class="n">compiled</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s">&quot;CPU&quot;</span><span class="p">)</span>
 
 <span class="n">print</span><span class="p">(</span><span class="n">model</span><span class="p">.</span><span class="n">inputs</span><span class="p">)</span>
@@ -1907,24 +1914,24 @@
 
 <span class="n">print</span><span class="p">(</span><span class="n">compiled</span><span class="p">.</span><span class="n">inputs</span><span class="p">)</span>
 <span class="n">print</span><span class="p">(</span><span class="n">compiled</span><span class="p">.</span><span class="n">outputs</span><span class="p">)</span></pre></div></div><p>Refer to Python API documentation on which helper functions or properties are available for different classes.</p>
-</div>
-<div class="section" id="working-with-tensor">
+</section>
+<section id="working-with-tensor">
 <h2>Working with Tensor<a class="headerlink" href="#working-with-tensor" title="Permalink to this headline">¶</a></h2>
 <p>Python API allows passing data as tensors. <code class="docutils literal notranslate"><span class="pre">Tensor</span></code> object holds a copy of the data from the given array. <code class="docutils literal notranslate"><span class="pre">dtype</span></code> of numpy arrays is converted to OpenVINO™ types automatically.</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">data_float64</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">ones</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
 
-<span class="n">tensor</span> <span class="o">=</span> ov.Tensor<span></span><span class="p">(</span><span class="n">data_float64</span><span class="p">)</span>
+<span class="n">tensor</span> <span class="o">=</span> <a class="reference internal" href="../api/groups/classov_1_1Tensor.html#doxid-classov-1-1-tensor"><span class="std std-ref">ov.Tensor</span></a><span></span><span class="p">(</span><span class="n">data_float64</span><span class="p">)</span>
 <span class="n">assert</span> <span class="n">tensor</span><span class="p">.</span><span class="n">element_type</span> <span class="o">==</span> <span class="n">ov</span><span class="p">.</span><span class="n">Type</span><span class="p">.</span><span class="n">f64</span>
 
 <span class="n">data_int32</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">ones</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">8</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="p">.</span><span class="n">int32</span><span class="p">)</span>
 
-<span class="n">tensor</span> <span class="o">=</span> ov.Tensor<span></span><span class="p">(</span><span class="n">data_int32</span><span class="p">)</span>
-<span class="n">assert</span> <span class="n">tensor</span><span class="p">.</span><span class="n">element_type</span> <span class="o">==</span> <span class="n">ov</span><span class="p">.</span><span class="n">Type</span><span class="p">.</span><span class="n">i32</span></pre></div></div><div class="section" id="shared-memory-mode">
+<span class="n">tensor</span> <span class="o">=</span> <a class="reference internal" href="../api/groups/classov_1_1Tensor.html#doxid-classov-1-1-tensor"><span class="std std-ref">ov.Tensor</span></a><span></span><span class="p">(</span><span class="n">data_int32</span><span class="p">)</span>
+<span class="n">assert</span> <span class="n">tensor</span><span class="p">.</span><span class="n">element_type</span> <span class="o">==</span> <span class="n">ov</span><span class="p">.</span><span class="n">Type</span><span class="p">.</span><span class="n">i32</span></pre></div></div><section id="shared-memory-mode">
 <h3>Shared memory mode<a class="headerlink" href="#shared-memory-mode" title="Permalink to this headline">¶</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">Tensor</span></code> objects can share the memory with numpy arrays. By specifing <code class="docutils literal notranslate"><span class="pre">shared_memory</span></code> argument, a <code class="docutils literal notranslate"><span class="pre">Tensor</span></code> object does not perform copy of data and has access to the memory of the numpy array.</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">data_to_share</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">ones</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
 
-<span class="n">shared_tensor</span> <span class="o">=</span> ov.Tensor<span></span><span class="p">(</span><span class="n">data_to_share</span><span class="p">,</span> <span class="n">shared_memory</span><span class="o">=</span><span class="n">True</span><span class="p">)</span>
+<span class="n">shared_tensor</span> <span class="o">=</span> <a class="reference internal" href="../api/groups/classov_1_1Tensor.html#doxid-classov-1-1-tensor"><span class="std std-ref">ov.Tensor</span></a><span></span><span class="p">(</span><span class="n">data_to_share</span><span class="p">,</span> <span class="n">shared_memory</span><span class="o">=</span><span class="n">True</span><span class="p">)</span>
 
 <span class="cp"># Editing of the numpy array affects Tensor&#39;s data</span>
 <span class="n">data_to_share</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mf">6.0</span>
@@ -1932,9 +1939,9 @@
 
 <span class="cp"># Editing of Tensor&#39;s data affects the numpy array</span>
 <span class="n">shared_tensor</span><span class="p">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.6</span>
-<span class="n">assert</span> <span class="n">data_to_share</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="mf">0.6</span></pre></div></div></div>
-</div>
-<div class="section" id="running-inference">
+<span class="n">assert</span> <span class="n">data_to_share</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="mf">0.6</span></pre></div></div></section>
+</section>
+<section id="running-inference">
 <h2>Running inference<a class="headerlink" href="#running-inference" title="Permalink to this headline">¶</a></h2>
 <p>Python API supports extra calling methods to synchronous and asynchronous modes for inference.</p>
 <p>All infer methods allow users to pass data as popular numpy arrays, gathered in either Python dicts or lists.</p>
@@ -1949,25 +1956,25 @@
 <span class="n">results</span> <span class="o">=</span> <span class="n">infer_request</span><span class="p">.</span><span class="n">get_tensor</span><span class="p">(</span><span class="n">compiled</span><span class="p">.</span><span class="n">outputs</span><span class="p">[</span><span class="mi">0</span><span class="p">]).</span><span class="n">data</span>
 
 <span class="cp"># Get all results with special helper property</span>
-<span class="n">results</span> <span class="o">=</span> <span class="n">list</span><span class="p">(</span><span class="n">infer_request</span><span class="p">.</span><span class="n">results</span><span class="p">.</span><span class="n">values</span><span class="p">())</span></pre></div></div><div class="section" id="synchronous-mode-extended">
+<span class="n">results</span> <span class="o">=</span> <span class="n">list</span><span class="p">(</span><span class="n">infer_request</span><span class="p">.</span><span class="n">results</span><span class="p">.</span><span class="n">values</span><span class="p">())</span></pre></div></div><section id="synchronous-mode-extended">
 <h3>Synchronous mode - extended<a class="headerlink" href="#synchronous-mode-extended" title="Permalink to this headline">¶</a></h3>
 <p>Python API provides different synchronous calls to infer model, which block the application execution. Additionally these calls return results of inference:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="cp"># Simple call to InferRequest</span>
 <span class="n">results</span> <span class="o">=</span> <span class="n">infer_request</span><span class="p">.</span><span class="n">infer</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="o">:</span> <span class="n">data</span><span class="p">})</span>
 <span class="cp"># Extra feature: calling CompiledModel directly</span>
-<span class="n">results</span> <span class="o">=</span> <span class="n">compiled_model</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="o">:</span> <span class="n">data</span><span class="p">})</span></pre></div></div></div>
-<div class="section" id="asyncinferqueue">
+<span class="n">results</span> <span class="o">=</span> <span class="n">compiled_model</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="o">:</span> <span class="n">data</span><span class="p">})</span></pre></div></div></section>
+<section id="asyncinferqueue">
 <h3>AsyncInferQueue<a class="headerlink" href="#asyncinferqueue" title="Permalink to this headline">¶</a></h3>
 <p>Asynchronous mode pipelines can be supported with wrapper class called <code class="docutils literal notranslate"><span class="pre">AsyncInferQueue</span></code>. This class automatically spawns pool of <code class="docutils literal notranslate"><span class="pre">InferRequest</span></code> objects (also called “jobs”) and provides synchronization mechanisms to control flow of the pipeline.</p>
 <p>Each job is distinguishable by unique <code class="docutils literal notranslate"><span class="pre">id</span></code>, which is in the range from 0 up to number of jobs specified in <code class="docutils literal notranslate"><span class="pre">AsyncInferQueue</span></code> constructor.</p>
 <p>Function call <code class="docutils literal notranslate"><span class="pre">start_async</span></code> is not required to be synchronized, it waits for any available job if queue is busy/overloaded. Every <code class="docutils literal notranslate"><span class="pre">AsyncInferQueue</span></code> code block should end with <code class="docutils literal notranslate"><span class="pre">wait_all</span></code> function. It provides “global” synchronization of all jobs in the pool and ensure that access to them is safe.</p>
-<div class="highlight"><div class="highlight"><pre><span></span><span class="n">core</span> <span class="o">=</span> ov.Core<span></span><span class="p">()</span>
+<div class="highlight"><div class="highlight"><pre><span></span><span class="n">core</span> <span class="o">=</span> <a class="reference internal" href="../api/groups/classov_1_1Core.html#doxid-classov-1-1-core"><span class="std std-ref">ov.Core</span></a><span></span><span class="p">()</span>
 
 <span class="cp"># Simple model that adds two inputs together</span>
 <span class="n">input_a</span> <span class="o">=</span> <span class="n">ov</span><span class="p">.</span><span class="n">opset8</span><span class="p">.</span><span class="n">parameter</span><span class="p">([</span><span class="mi">8</span><span class="p">])</span>
 <span class="n">input_b</span> <span class="o">=</span> <span class="n">ov</span><span class="p">.</span><span class="n">opset8</span><span class="p">.</span><span class="n">parameter</span><span class="p">([</span><span class="mi">8</span><span class="p">])</span>
 <span class="n">res</span> <span class="o">=</span> <span class="n">ov</span><span class="p">.</span><span class="n">opset8</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">input_a</span><span class="p">,</span> <span class="n">input_b</span><span class="p">)</span>
-<span class="n">model</span> <span class="o">=</span> ov.Model<span></span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="p">[</span><span class="n">input_a</span><span class="p">,</span> <span class="n">input_b</span><span class="p">])</span>
+<span class="n">model</span> <span class="o">=</span> <a class="reference internal" href="../api/groups/classov_1_1Model.html#doxid-classov-1-1-model"><span class="std std-ref">ov.Model</span></a><span></span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="p">[</span><span class="n">input_a</span><span class="p">,</span> <span class="n">input_b</span><span class="p">])</span>
 <span class="n">compiled</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s">&quot;CPU&quot;</span><span class="p">)</span>
 
 <span class="cp"># Number of InferRequests that AsyncInferQueue holds</span>
@@ -1980,17 +1987,17 @@
 <span class="cp"># Run all jobs</span>
 <span class="k">for</span> <span class="n">i</span> <span class="n">in</span> range<span></span><span class="p">(</span><span class="n">len</span><span class="p">(</span><span class="n">data</span><span class="p">))</span><span class="o">:</span>
     <span class="n">infer_queue</span><span class="p">.</span><span class="n">start_async</span><span class="p">({</span><span class="mi">0</span><span class="o">:</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="mi">1</span><span class="o">:</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]})</span>
-<span class="n">infer_queue</span><span class="p">.</span><span class="n">wait_all</span><span class="p">()</span></pre></div></div><div class="section" id="acquire-results-from-requests">
+<span class="n">infer_queue</span><span class="p">.</span><span class="n">wait_all</span><span class="p">()</span></pre></div></div><section id="acquire-results-from-requests">
 <h4>Acquire results from requests<a class="headerlink" href="#acquire-results-from-requests" title="Permalink to this headline">¶</a></h4>
 <p>After the call to <code class="docutils literal notranslate"><span class="pre">wait_all</span></code>, jobs and their data can be safely accessed. Acquring of a specific job with <code class="docutils literal notranslate"><span class="pre">[id]</span></code> returns <code class="docutils literal notranslate"><span class="pre">InferRequest</span></code> object, which results in seamless retrieval of the output data.</p>
-<div class="highlight"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">infer_queue</span><span class="p">[</span><span class="mi">3</span><span class="p">].</span><span class="n">get_output_tensor</span><span class="p">().</span><span class="n">data</span></pre></div></div></div>
-<div class="section" id="setting-callbacks">
+<div class="highlight"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">infer_queue</span><span class="p">[</span><span class="mi">3</span><span class="p">].</span><span class="n">get_output_tensor</span><span class="p">().</span><span class="n">data</span></pre></div></div></section>
+<section id="setting-callbacks">
 <h4>Setting callbacks<a class="headerlink" href="#setting-callbacks" title="Permalink to this headline">¶</a></h4>
 <p>Another feature of <code class="docutils literal notranslate"><span class="pre">AsyncInferQueue</span></code> is ability of setting callbacks. When callback is set, any job that ends inference, calls upon Python function. Callback function must have two arguments. First is the request that calls the callback, it provides <code class="docutils literal notranslate"><span class="pre">InferRequest</span></code> API. Second one being called “userdata”, provides possibility of passing runtime values, which can be of any Python type and later used inside callback function.</p>
 <p>The callback of <code class="docutils literal notranslate"><span class="pre">AsyncInferQueue</span></code> is uniform for every job. When executed, GIL is acquired to ensure safety of data manipulation inside the function.</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">data_done</span> <span class="o">=</span> <span class="p">[</span><span class="n">False</span> <span class="k">for</span> <span class="n">_</span> <span class="n">in</span> range<span></span><span class="p">(</span><span class="n">jobs</span><span class="p">)]</span>
 
-<span class="n">def</span> f<span></span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">userdata</span><span class="p">)</span><span class="o">:</span>
+<span class="n">def</span> <a class="reference internal" href="../api/groups/namespacengraph_1_1runtime_1_1reference.html#doxid-namespacengraph-1-1runtime-1-1reference-1a4582949bb0b6082a5159f90c43a71ca9"><span class="std std-ref">f</span></a><span></span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">userdata</span><span class="p">)</span><span class="o">:</span>
     <span class="n">print</span><span class="p">(</span><span class="n">f</span><span class="s">&quot;Done! Result: {request.get_output_tensor().data}&quot;</span><span class="p">)</span>
     <span class="n">data_done</span><span class="p">[</span><span class="n">userdata</span><span class="p">]</span> <span class="o">=</span> <span class="n">True</span>
 
@@ -2000,21 +2007,21 @@
     <span class="n">infer_queue</span><span class="p">.</span><span class="n">start_async</span><span class="p">({</span><span class="mi">0</span><span class="o">:</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="mi">1</span><span class="o">:</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]},</span> <span class="n">userdata</span><span class="o">=</span><span class="n">i</span><span class="p">)</span>
 <span class="n">infer_queue</span><span class="p">.</span><span class="n">wait_all</span><span class="p">()</span>
 
-<span class="n">assert</span> <span class="n">all</span><span class="p">(</span><span class="n">data_done</span><span class="p">)</span></pre></div></div></div>
-</div>
-<div class="section" id="working-with-u1-u4-and-i4-element-types">
+<span class="n">assert</span> <span class="n">all</span><span class="p">(</span><span class="n">data_done</span><span class="p">)</span></pre></div></div></section>
+</section>
+<section id="working-with-u1-u4-and-i4-element-types">
 <h3>Working with u1, u4 and i4 element types<a class="headerlink" href="#working-with-u1-u4-and-i4-element-types" title="Permalink to this headline">¶</a></h3>
 <p>Since openvino supports low precision element types there are few ways how to handle them in python. To create an input tensor with such element types you may need to pack your data in new numpy array which byte size matches original input size:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">from</span> <span class="n">openvino</span><span class="p">.</span><span class="n">helpers</span> <span class="n">import</span> <span class="n">pack_data</span>
 
 <span class="n">packed_buffer</span> <span class="o">=</span> <span class="n">pack_data</span><span class="p">(</span><span class="n">unt8_data</span><span class="p">,</span> <span class="n">ov</span><span class="p">.</span><span class="n">Type</span><span class="p">.</span><span class="n">u4</span><span class="p">)</span>
 <span class="cp"># Create tensor with shape in element types</span>
-<span class="n">t</span> <span class="o">=</span> ov.Tensor<span></span><span class="p">(</span><span class="n">packed_buffer</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">128</span><span class="p">],</span> <span class="n">ov</span><span class="p">.</span><span class="n">Type</span><span class="p">.</span><span class="n">u4</span><span class="p">)</span></pre></div></div><p>To extract low precision values from tensor into numpy array you can use next helper:</p>
+<span class="n">t</span> <span class="o">=</span> <a class="reference internal" href="../api/groups/classov_1_1Tensor.html#doxid-classov-1-1-tensor"><span class="std std-ref">ov.Tensor</span></a><span></span><span class="p">(</span><span class="n">packed_buffer</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">128</span><span class="p">],</span> <span class="n">ov</span><span class="p">.</span><span class="n">Type</span><span class="p">.</span><span class="n">u4</span><span class="p">)</span></pre></div></div><p>To extract low precision values from tensor into numpy array you can use next helper:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">from</span> <span class="n">openvino</span><span class="p">.</span><span class="n">helpers</span> <span class="n">import</span> <span class="n">unpack_data</span>
 
 <span class="n">unpacked_data</span> <span class="o">=</span> <span class="n">unpack_data</span><span class="p">(</span><span class="n">t</span><span class="p">.</span><span class="n">data</span><span class="p">,</span> <span class="n">t</span><span class="p">.</span><span class="n">element_type</span><span class="p">,</span> <span class="n">t</span><span class="p">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="n">assert</span> <span class="n">np</span><span class="p">.</span><span class="n">array_equal</span><span class="p">(</span><span class="n">unpacked_data</span> <span class="p">,</span> <span class="n">unt8_data</span><span class="p">)</span></pre></div></div></div>
-<div class="section" id="releasing-the-gil">
+<span class="n">assert</span> <span class="n">np</span><span class="p">.</span><span class="n">array_equal</span><span class="p">(</span><span class="n">unpacked_data</span> <span class="p">,</span> <span class="n">unt8_data</span><span class="p">)</span></pre></div></div></section>
+<section id="releasing-the-gil">
 <h3>Releasing the GIL<a class="headerlink" href="#releasing-the-gil" title="Permalink to this headline">¶</a></h3>
 <p>Some functions in Python API release the Global Lock Interpreter (GIL) while running work-intensive code. It can help you to achieve more parallelism in your application using Python threads. For more information about GIL please refer to the Python documentation.</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">import</span> <span class="n">openvino</span><span class="p">.</span><span class="n">runtime</span> <span class="n">as</span> <span class="n">ov</span>
@@ -2034,7 +2041,7 @@
     <span class="n">image</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
     <span class="n">input_data</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
 
-<span class="n">core</span> <span class="o">=</span> ov.Core<span></span><span class="p">()</span>
+<span class="n">core</span> <span class="o">=</span> <a class="reference internal" href="../api/groups/classov_1_1Core.html#doxid-classov-1-1-core"><span class="std std-ref">ov.Core</span></a><span></span><span class="p">()</span>
 <span class="n">model</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><span class="n">read_model</span><span class="p">(</span><span class="s">&quot;model.xml&quot;</span><span class="p">)</span>
 <span class="cp"># Create thread with prepare_data function as target and start it</span>
 <span class="kr">thread</span> <span class="o">=</span> <span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">prepare_data</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="n">model</span><span class="p">.</span><span class="n">input</span><span class="p">(),</span> <span class="s">&quot;path/to/image&quot;</span><span class="p">])</span>
@@ -2053,7 +2060,7 @@
 <p class="admonition-title">Note</p>
 <p>While GIL is released functions can still modify and/or operate on Python objects in C++, thus there is no reference counting. User is responsible for thread safety if sharing of these objects with other thread occurs. It can affects your code only if multiple threads are spawned in Python.:</p>
 </div>
-<div class="section" id="list-of-functions-that-release-the-gil">
+<section id="list-of-functions-that-release-the-gil">
 <h4>List of functions that release the GIL<a class="headerlink" href="#list-of-functions-that-release-the-gil" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
 <li><p>openvino.runtime.AsyncInferQueue.start_async</p></li>
@@ -2079,10 +2086,10 @@
 <li><p>openvino.runtime.Model.reshape</p></li>
 <li><p>openvino.preprocess.PrePostProcessor.build</p></li>
 </ul>
-</div>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
+</section>
 
 
                 </div>
@@ -2113,7 +2120,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

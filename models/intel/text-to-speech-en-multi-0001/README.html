@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>text-to-speech-en-multi-0001 (composite) &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../../../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -2113,16 +2120,16 @@
             
                 <div>
                   
-  <div class="section" id="text-to-speech-en-multi-0001-composite">
+  <section id="text-to-speech-en-multi-0001-composite">
 <h1>text-to-speech-en-multi-0001 (composite)<a class="headerlink" href="#text-to-speech-en-multi-0001-composite" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="use-case-and-high-level-description">
+<section id="use-case-and-high-level-description">
 <h2>Use Case and High-Level Description<a class="headerlink" href="#use-case-and-high-level-description" title="Permalink to this headline">¶</a></h2>
 <p>This is a speech synthesis composite model that simultaneously reconstructs
 mel-spectrogram and wave form from text. The model generates wave form from symbol sequences separated by space for
 forty speakers. The speaker voice characteristics are represented by vector of two numbers.
 The model is built on top of the modified ForwardTacotron and modified MelGAN frameworks.</p>
-</div>
-<div class="section" id="composite-model-specification">
+</section>
+<section id="composite-model-specification">
 <h2>Composite model specification<a class="headerlink" href="#composite-model-specification" title="Permalink to this headline">¶</a></h2>
 <table class="colwidths-auto table">
 <thead>
@@ -2136,8 +2143,8 @@ The model is built on top of the modified ForwardTacotron and modified MelGAN fr
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="duration-prediction-model-specification">
+</section>
+<section id="duration-prediction-model-specification">
 <h2>Duration prediction model specification<a class="headerlink" href="#duration-prediction-model-specification" title="Permalink to this headline">¶</a></h2>
 <p>The text-to-speech-en-multi-0001-duration-prediction model is a ForwardTacotron-based duration predictor for symbols.</p>
 <table class="colwidths-auto table">
@@ -2155,7 +2162,7 @@ The model is built on top of the modified ForwardTacotron and modified MelGAN fr
 </tr>
 </tbody>
 </table>
-<div class="section" id="inputs">
+<section id="inputs">
 <h3>Inputs<a class="headerlink" href="#inputs" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic simple">
 <li><p>Sequence, name: <code class="docutils literal notranslate"><span class="pre">input_seq</span></code>, shape: <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">512</span></code>, format: <code class="docutils literal notranslate"><span class="pre">B,C</span></code>, where:</p>
@@ -2185,8 +2192,8 @@ The model is built on top of the modified ForwardTacotron and modified MelGAN fr
 </ul>
 </li>
 </ol>
-</div>
-<div class="section" id="outputs">
+</section>
+<section id="outputs">
 <h3>Outputs<a class="headerlink" href="#outputs" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic simple">
 <li><p>Duration for input symbols, name: <code class="docutils literal notranslate"><span class="pre">duration</span></code>, shape: <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">512,</span> <span class="pre">1</span></code>, format <code class="docutils literal notranslate"><span class="pre">B,</span> <span class="pre">C,</span> <span class="pre">H</span></code>. Contains predicted duration for each of the symbol in sequence.</p>
@@ -2204,9 +2211,9 @@ The model is built on top of the modified ForwardTacotron and modified MelGAN fr
 </ul>
 </li>
 </ol>
-</div>
-</div>
-<div class="section" id="mel-spectrogram-regression-model-specification">
+</section>
+</section>
+<section id="mel-spectrogram-regression-model-specification">
 <h2>Mel-spectrogram regression model specification<a class="headerlink" href="#mel-spectrogram-regression-model-specification" title="Permalink to this headline">¶</a></h2>
 <p>The text-to-speech-en-multi-0001-regression model accepts aligned by duration processed embeddings (for example: if duration is [2, 3] and processed embeddings is [[1, 2], [3, 4]], aligned embeddings is [[1, 2], [1, 2], [1,2], [3, 4], [3, 4]]) and produces mel-spectrogram.</p>
 <table class="colwidths-auto table">
@@ -2224,7 +2231,7 @@ The model is built on top of the modified ForwardTacotron and modified MelGAN fr
 </tr>
 </tbody>
 </table>
-<div class="section" id="id1">
+<section id="id1">
 <h3>Inputs<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic simple">
 <li><p>Processed embeddigs aligned by durations, name: <code class="docutils literal notranslate"><span class="pre">data</span></code>, shape: <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">512,</span> <span class="pre">256</span></code>, format: <code class="docutils literal notranslate"><span class="pre">B,</span> <span class="pre">T,</span> <span class="pre">C</span></code>, where:</p>
@@ -2255,17 +2262,17 @@ The model is built on top of the modified ForwardTacotron and modified MelGAN fr
 </ul>
 </li>
 </ol>
-</div>
-<div class="section" id="output">
+</section>
+<section id="output">
 <h3>Output<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h3>
 <p>Mel-spectrogram, name: <code class="docutils literal notranslate"><span class="pre">mel</span></code>, shape: <code class="docutils literal notranslate"><span class="pre">80,</span> <span class="pre">512</span></code>, format: <code class="docutils literal notranslate"><span class="pre">C,</span> <span class="pre">T</span></code>, where:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">T</span></code> - time in mel-spectrogram</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">C</span></code> - number of rows in mel-spectrogram</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="audio-generation-model-specification">
+</section>
+</section>
+<section id="audio-generation-model-specification">
 <h2>Audio generation model specification<a class="headerlink" href="#audio-generation-model-specification" title="Permalink to this headline">¶</a></h2>
 <p>The text-to-speech-en-multi-0001-generation model is a MelGAN based audio generator.</p>
 <table class="colwidths-auto table">
@@ -2283,7 +2290,7 @@ The model is built on top of the modified ForwardTacotron and modified MelGAN fr
 </tr>
 </tbody>
 </table>
-<div class="section" id="id2">
+<section id="id2">
 <h3>Inputs<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <p>Mel-spectrogram, name: <code class="docutils literal notranslate"><span class="pre">mel</span></code>, shape: <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">80,</span> <span class="pre">128</span></code>, format: <code class="docutils literal notranslate"><span class="pre">B,</span> <span class="pre">C,</span> <span class="pre">T</span></code>, where:</p>
 <ul class="simple">
@@ -2291,27 +2298,27 @@ The model is built on top of the modified ForwardTacotron and modified MelGAN fr
 <li><p><code class="docutils literal notranslate"><span class="pre">C</span></code> - number of rows in mel-spectrogram</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">T</span></code> - time in mel-spectrogram</p></li>
 </ul>
-</div>
-<div class="section" id="id3">
+</section>
+<section id="id3">
 <h3>Outputs<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <p>Audio, name: <code class="docutils literal notranslate"><span class="pre">audio</span></code>, shape: <code class="docutils literal notranslate"><span class="pre">32768</span></code>, format: <code class="docutils literal notranslate"><span class="pre">T</span></code>, where:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">T</span></code> - time in audio with sampling rate 22050 (~1.5 sec).</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="demo-usage">
+</section>
+</section>
+<section id="demo-usage">
 <h2>Demo usage<a class="headerlink" href="#demo-usage" title="Permalink to this headline">¶</a></h2>
 <p>The model can be used in the following demos provided by the Open Model Zoo to show its capabilities:</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="../../../demos/text_to_speech_demo/python/README.html"><span class="doc std std-doc">Text-to-speech Python* Demo</span></a></p></li>
 </ul>
-</div>
-<div class="section" id="legal-information">
+</section>
+<section id="legal-information">
 <h2>Legal Information<a class="headerlink" href="#legal-information" title="Permalink to this headline">¶</a></h2>
 <p>[*] Other names and brands may be claimed as the property of others.</p>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -2342,7 +2349,7 @@ The model is built on top of the modified ForwardTacotron and modified MelGAN fr
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

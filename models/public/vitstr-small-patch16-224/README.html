@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>vitstr-small-patch16-224 &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../../../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -2106,14 +2113,14 @@
             
                 <div>
                   
-  <div class="section" id="vitstr-small-patch16-224">
+  <section id="vitstr-small-patch16-224">
 <h1>vitstr-small-patch16-224<a class="headerlink" href="#vitstr-small-patch16-224" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="use-case-and-high-level-description">
+<section id="use-case-and-high-level-description">
 <h2>Use-case and high-level description<a class="headerlink" href="#use-case-and-high-level-description" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">vitstr-small-patch16-224</span></code> model is <code class="docutils literal notranslate"><span class="pre">small</span></code> version of the ViTSTR models. ViTSTR is a simple single-stage model that uses a pre-trained Vision Transformer (ViT) to perform Scene Text Recognition (ViTSTR). Small version of model has an embedding size of 384 and number of heads of 6. Model is able to recognize alphanumeric case sensitive text and special characters.</p>
 <p>More details provided in the <a class="reference external" href="https://arxiv.org/abs/2105.08582">paper</a> and <a class="reference external" href="https://github.com/roatienza/deep-text-recognition-benchmark">repository</a>.</p>
-</div>
-<div class="section" id="specification">
+</section>
+<section id="specification">
 <h2>Specification<a class="headerlink" href="#specification" title="Permalink to this headline">¶</a></h2>
 <table class="colwidths-auto table">
 <thead>
@@ -2136,8 +2143,8 @@
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="accuracy">
+</section>
+<section id="accuracy">
 <h2>Accuracy<a class="headerlink" href="#accuracy" title="Permalink to this headline">¶</a></h2>
 <p>Alphanumeric subset of common scene text recognition benchmarks are used. For your convenience you can see dataset size. Note, that we use here ICDAR15 alphanumeric subset without irregular (arbitrary oriented, perspective or curved) texts. See details <a class="reference external" href="https://arxiv.org/abs/1709.02054">here</a>, section 4.1. All reported results are achieved without using any lexicon.</p>
 <table class="colwidths-auto table">
@@ -2171,10 +2178,10 @@
 </tbody>
 </table>
 <p>Use <code class="docutils literal notranslate"><span class="pre">accuracy_check</span> <span class="pre">[...]</span> <span class="pre">--model_attributes</span> <span class="pre">&lt;path_to_folder_with_downloaded_model&gt;</span></code> to specify the path to additional model attributes. <code class="docutils literal notranslate"><span class="pre">path_to_folder_with_downloaded_model</span></code> is a path to the folder, where the current model is downloaded by <span class="xref myst">Model Downloader</span> tool.</p>
-</div>
-<div class="section" id="input">
+</section>
+<section id="input">
 <h2>Input<a class="headerlink" href="#input" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="original-model">
+<section id="original-model">
 <h3>Original model<a class="headerlink" href="#original-model" title="Permalink to this headline">¶</a></h3>
 <p>Image, name: <code class="docutils literal notranslate"><span class="pre">image</span></code>, shape: <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">1,</span> <span class="pre">224,</span> <span class="pre">224</span></code> in the format <code class="docutils literal notranslate"><span class="pre">B,</span> <span class="pre">C,</span> <span class="pre">H,</span> <span class="pre">W</span></code>, where:</p>
 <ul class="simple">
@@ -2185,8 +2192,8 @@
 </ul>
 <p>Note that the source image should be tight aligned crop with detected text converted to grayscale.</p>
 <p>Scale values - [255].</p>
-</div>
-<div class="section" id="converted-model">
+</section>
+<section id="converted-model">
 <h3>Converted model<a class="headerlink" href="#converted-model" title="Permalink to this headline">¶</a></h3>
 <p>Image, name: <code class="docutils literal notranslate"><span class="pre">image</span></code>, shape: <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">1,</span> <span class="pre">224,</span> <span class="pre">224</span></code> in the format <code class="docutils literal notranslate"><span class="pre">B,</span> <span class="pre">C,</span> <span class="pre">H,</span> <span class="pre">W</span></code>, where:</p>
 <ul class="simple">
@@ -2196,11 +2203,11 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">W</span></code> - image width</p></li>
 </ul>
 <p>Note that the source image should be tight aligned crop with detected text converted to grayscale.</p>
-</div>
-</div>
-<div class="section" id="output">
+</section>
+</section>
+<section id="output">
 <h2>Output<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id1">
+<section id="id1">
 <h3>Original model<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <p>Output tensor, name: <code class="docutils literal notranslate"><span class="pre">logits</span></code>, shape: <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">25,</span> <span class="pre">96</span></code> in the format <code class="docutils literal notranslate"><span class="pre">B,</span> <span class="pre">W,</span> <span class="pre">L</span></code>, where:</p>
 <ul class="simple">
@@ -2209,8 +2216,8 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">L</span></code> - confidence distribution across [GO] - special start token for decoder, [s] - special end of sequence character for decoder and characters, listed in enclosed file <code class="docutils literal notranslate"><span class="pre">vocab.txt</span></code>.</p></li>
 </ul>
 <p>The network output decoding process is pretty easy: get the argmax on <code class="docutils literal notranslate"><span class="pre">L</span></code> dimension, transform indices to letters and slice the resulting phrase on the first entry of <code class="docutils literal notranslate"><span class="pre">end-of-sequence</span></code> symbol.</p>
-</div>
-<div class="section" id="id2">
+</section>
+<section id="id2">
 <h3>Converted model<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <p>Output tensor, name: <code class="docutils literal notranslate"><span class="pre">logits</span></code>, shape: <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">25,</span> <span class="pre">96</span></code> in the format <code class="docutils literal notranslate"><span class="pre">B,</span> <span class="pre">W,</span> <span class="pre">L</span></code>, where:</p>
 <ul class="simple">
@@ -2219,9 +2226,9 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">L</span></code> - confidence distribution across [GO] - special start token for decoder, [s] - special end of sequence character for decoder and characters, listed in enclosed file <code class="docutils literal notranslate"><span class="pre">vocab.txt</span></code>.</p></li>
 </ul>
 <p>The network output decoding process is pretty easy: get the argmax on <code class="docutils literal notranslate"><span class="pre">L</span></code> dimension, transform indices to letters and slice the resulting phrase on the first entry of <code class="docutils literal notranslate"><span class="pre">end-of-sequence</span></code> symbol.</p>
-</div>
-</div>
-<div class="section" id="download-a-model-and-convert-it-into-openvino-ir-format">
+</section>
+</section>
+<section id="download-a-model-and-convert-it-into-openvino-ir-format">
 <h2>Download a Model and Convert it into OpenVINO™ IR Format<a class="headerlink" href="#download-a-model-and-convert-it-into-openvino-ir-format" title="Permalink to this headline">¶</a></h2>
 <p>You can download models and if necessary convert them into OpenVINO™ IR format using the <span class="xref myst">Model Downloader and other automation tools</span> as shown in the examples below.</p>
 <p>An example of using the Model Downloader:</p>
@@ -2232,21 +2239,21 @@
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">omz_converter</span> <span class="o">--</span><span class="n">name</span> <span class="o">&lt;</span><span class="n">model_name</span><span class="o">&gt;</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="demo-usage">
+</section>
+<section id="demo-usage">
 <h2>Demo usage<a class="headerlink" href="#demo-usage" title="Permalink to this headline">¶</a></h2>
 <p>The model can be used in the following demos provided by the Open Model Zoo to show its capabilities:</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="../../../demos/text_detection_demo/cpp/README.html"><span class="doc std std-doc">Text Detection C++ Demo</span></a></p></li>
 </ul>
-</div>
-<div class="section" id="legal-information">
+</section>
+<section id="legal-information">
 <h2>Legal Information<a class="headerlink" href="#legal-information" title="Permalink to this headline">¶</a></h2>
 <p>The original model is distributed under the
 <a class="reference external" href="https://raw.githubusercontent.com/roatienza/deep-text-recognition-benchmark/master/LICENSE.md">Apache License, Version 2.0</a>.
 A copy of the license is provided in <code class="docutils literal notranslate"><span class="pre">&lt;omz_dir&gt;/models/public/licenses/APACHE-2.0.txt</span></code>.</p>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -2277,7 +2284,7 @@ A copy of the license is provided in <code class="docutils literal notranslate">
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

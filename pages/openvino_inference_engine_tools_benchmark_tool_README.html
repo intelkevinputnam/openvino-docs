@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Benchmark Python* Tool &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -624,21 +631,21 @@
             
                 <div>
                   
-  <div class="section" id="benchmark-python-tool">
+  <section id="benchmark-python-tool">
 <span id="doxid-openvino-inference-engine-tools-benchmark-tool-r-e-a-d-m-e"></span><span id="index-0"></span><h1>Benchmark Python* Tool<a class="headerlink" href="#benchmark-python-tool" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-openvino-inference-engine-tools-benchmark-tool-r-e-a-d-m-e-1md-openvino-tools-benchmark-tool-readme"></span> This topic demonstrates how to run the Benchmark Python* Tool, which performs inference using convolutional networks. Performance can be measured for two inference modes: latency- and throughput-oriented.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This topic describes usage of Python implementation of the Benchmark Tool. For the C++ implementation, refer to <a class="reference internal" href="openvino_inference_engine_samples_benchmark_app_README.html#doxid-openvino-inference-engine-samples-benchmark-app-r-e-a-d-m-e"><span class="std std-ref">Benchmark C++ Tool</span></a>.</p>
 </div>
-<div class="section" id="how-it-works">
+<section id="how-it-works">
 <h2>How It Works<a class="headerlink" href="#how-it-works" title="Permalink to this headline">¶</a></h2>
 <p>Upon start-up, the application reads command-line parameters and loads a network and inputs (images/binary files) to the specified device. Device-specific execution parameters (number of streams, threads, and so on) can be either explicitly specified through the command line or left default. In the latter case, the sample logic will select the values for the optimal throughput. While further experimenting with individual parameters (like number of streams and requests, batch size, etc) allows to find the performance sweet spot, usually, the resulting values are not very performance-portable, so the values from one machine or device are not necessarily optimal for another. From this perspective, the most portable way is experimenting only the performance hints. To learn more, refer to the section below.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>By default, OpenVINO samples, tools and demos expect input with BGR channels order. If you trained your model to work with RGB order, you need to manually rearrange the default channels order in the sample or demo application or reconvert your model using the Model Optimizer tool with <code class="docutils literal notranslate"><span class="pre">--reverse_input_channels</span></code> argument specified. For more information about the argument, refer to <strong>When to Reverse Input Channels</strong> section of <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_Converting_Model.html#doxid-openvino-docs-m-o-d-g-prepare-model-convert-model-converting-model"><span class="std std-ref">Converting a Model to Intermediate Representation (IR)</span></a>.</p>
 </div>
-<div class="section" id="latency-and-throughput-focused-inference-modes">
+<section id="latency-and-throughput-focused-inference-modes">
 <h3>Latency and Throughput-focused Inference Modes<a class="headerlink" href="#latency-and-throughput-focused-inference-modes" title="Permalink to this headline">¶</a></h3>
 <p>In many cases the primary performance metric is the time (in milliseconds) for an individual inference request. For conventional devices the best latency is usually achieved when the application operates single inference request. Similarly, while for some devices the synchronous API (<code class="docutils literal notranslate"><span class="pre">Infer</span></code> method) was slightly better for the latency. However, advanced devices like multi-socket CPUs, modern GPUs and so on, are capable to run multiple inference requests, while delivering the same latency (as with the single request). Also, the asynchronous API is more general/flexible (with respect to handling multiple inference requests). Overall, the legacy way of measuring latency (triggered by ‘-api sync’) with a single request and synchronous API is discouraged in favor of the dedicated ‘-hint latency’ that lets the <em>device</em> to apply the right settings to minimize the time to request.</p>
 <p>Throughput-oriented scenarios, in contrast, are focused on fully saturating the machine with enough data to crunch, as opposite to the time of the individual request. So, the primary performance metric is rather FPS (frames per second). Yet, just like with the latency case, the optimal execution parameters may differ between machines and devices. So, again, as explained in the previous section, the most portable way is to use the dedicated performance hint, rather than playing individual parameters. The hints allow the device to configure actual settings for the specified mode. The sample then queries/executes the optimal number of inference requests.</p>
@@ -647,8 +654,8 @@
 <li><p>Wall-clock time (latency) of each infer request and resulting latency</p></li>
 <li><p>Duration of all inference executions and resulting throughput By default, the reported latency value is always calculated as the median (i.e. 50th percentile) value of all collected latencies from individual requests. Notice that you can change the desired percentile with the command-line flag. The throughput value is derived from the overall inference execution time and number of completed requests (respecting the batch size).</p></li>
 </ul>
-</div>
-<div class="section" id="defining-the-number-of-inference-executions">
+</section>
+<section id="defining-the-number-of-inference-executions">
 <h3>Defining the Number of Inference Executions<a class="headerlink" href="#defining-the-number-of-inference-executions" title="Permalink to this headline">¶</a></h3>
 <p>A number of executions is defined by one of the two values:</p>
 <ul class="simple">
@@ -657,9 +664,9 @@
 <li><p>Both of them (execution will continue until both conditions are met)</p></li>
 <li><p>Predefined duration if neither <code class="docutils literal notranslate"><span class="pre">-niter</span></code> nor <code class="docutils literal notranslate"><span class="pre">-t</span></code> are not specified. Predefined duration value depends on the device.</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="run-the-tool">
+</section>
+</section>
+<section id="run-the-tool">
 <h2>Run the Tool<a class="headerlink" href="#run-the-tool" title="Permalink to this headline">¶</a></h2>
 <p>Before running the Benchmark tool, install <a class="reference internal" href="openvino_docs_install_guides_install_dev_tools.html#doxid-openvino-docs-install-guides-install-dev-tools"><span class="std std-ref">OpenVINO™ Development Tools</span></a>.</p>
 <p>Notice that the benchmark_app usually produces optimal performance for any device out of the box. <strong>So in most cases you don’t need to play the app options explicitly and the plain device name is enough</strong>, for example, for CPU:</p>
@@ -768,8 +775,8 @@
 <p class="admonition-title">Note</p>
 <p>Before running the tool with a trained model, make sure the model is converted to the OpenVINO format (*.xml + *.bin) using the <a class="reference internal" href="openvino_docs_MO_DG_Deep_Learning_Model_Optimizer_DevGuide.html#doxid-openvino-docs-m-o-d-g-deep-learning-model-optimizer-dev-guide"><span class="std std-ref">Model Optimizer tool</span></a>.</p>
 </div>
-</div>
-<div class="section" id="examples-of-running-the-tool">
+</section>
+<section id="examples-of-running-the-tool">
 <h2>Examples of Running the Tool<a class="headerlink" href="#examples-of-running-the-tool" title="Permalink to this headline">¶</a></h2>
 <p>This section provides step-by-step instructions on how to run the Benchmark Tool with the <code class="docutils literal notranslate"><span class="pre">googlenet-v1</span></code> public model on CPU or GPU devices. The <a class="reference external" href="https://storage.openvinotoolkit.org/data/test_data/images/224x224/dog.bmp">dog.bmp</a> file is used as an input.</p>
 <div class="admonition note">
@@ -836,16 +843,16 @@
    <span class="nl">MAX</span><span class="p">:</span>        <span class="mf">63.54</span> <span class="n">ms</span>
 <span class="nl">Throughput</span><span class="p">:</span> <span class="mf">226.49</span> <span class="n">FPS</span></pre></div></div></li>
 </ul>
-</div>
-<div class="section" id="see-also">
+</section>
+<section id="see-also">
 <h2>See Also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="openvino_docs_OV_UG_Samples_Overview.html#doxid-openvino-docs-o-v-u-g-samples-overview"><span class="std std-ref">Using OpenVINO Samples</span></a></p></li>
 <li><p><a class="reference internal" href="openvino_docs_MO_DG_Deep_Learning_Model_Optimizer_DevGuide.html#doxid-openvino-docs-m-o-d-g-deep-learning-model-optimizer-dev-guide"><span class="std std-ref">Model Optimizer</span></a></p></li>
 <li><p>Model Downloader</p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -876,7 +883,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

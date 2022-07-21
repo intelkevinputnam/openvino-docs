@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>OpenVINO Model Pass &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -1820,24 +1827,24 @@
             
                 <div>
                   
-  <div class="section" id="openvino-model-pass">
+  <section id="openvino-model-pass">
 <span id="doxid-openvino-docs-extensibility-u-g-model-pass"></span><span id="index-0"></span><h1>OpenVINO Model Pass<a class="headerlink" href="#openvino-model-pass" title="Permalink to this headline">¶</a></h1>
-<p><span class="target" id="doxid-openvino-docs-extensibility-u-g-model-pass-1md-openvino-docs-extensibility-ug-model-pass"></span> <code class="docutils literal notranslate"><span class="pre">ov::pass::ModelPass</span></code> is used for transformations that take entire <code class="docutils literal notranslate"><span class="pre">ov::Model</span></code> as an input and process it.</p>
+<p><span class="target" id="doxid-openvino-docs-extensibility-u-g-model-pass-1md-openvino-docs-extensibility-ug-model-pass"></span> <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1pass_1_1ModelPass.html#doxid-classov-1-1pass-1-1-model-pass"><span class="std std-ref"><span class="pre">ov::pass::ModelPass</span></span></a></code> is used for transformations that take entire <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1Model.html#doxid-classov-1-1-model"><span class="std std-ref"><span class="pre">ov::Model</span></span></a></code> as an input and process it.</p>
 <p>Template for ModelPass transformation class</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="c1">// template_model_transformation.hpp</span>
-<span class="k">class</span> <span class="n">ov</span><span class="o">::</span><span class="n">pass</span><span class="o">::</span><span class="nl">MyModelTransformation</span> <span class="p">:</span> <span class="k">public</span> ov::pass::ModelPass<span></span> <span class="p">{</span>
+<span class="k">class</span> <span class="n">ov</span><span class="o">::</span><span class="n">pass</span><span class="o">::</span><span class="nl">MyModelTransformation</span> <span class="p">:</span> <span class="k">public</span> <a class="reference internal" href="../api/groups/classov_1_1pass_1_1ModelPass.html#doxid-classov-1-1pass-1-1-model-pass"><span class="std std-ref">ov::pass::ModelPass</span></a><span></span> <span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
-    OPENVINO_RTTI<span></span><span class="p">(</span><span class="s">&quot;MyModelTransformation&quot;</span><span class="p">,</span> <span class="s">&quot;0&quot;</span><span class="p">);</span>
-    <span class="kt">bool</span> run_on_model<span></span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">ov</span><span class="o">::</span><span class="n">Model</span><span class="o">&gt;&amp;</span> f<span></span><span class="p">)</span> <span class="k">override</span><span class="p">;</span>
+    <a class="reference internal" href="../api/groups/classov_1_1pass_1_1ModelPass.html#doxid-classov-1-1pass-1-1-model-pass-1a718f43e809339887547f5c96b84ea00a"><span class="std std-ref">OPENVINO_RTTI</span></a><span></span><span class="p">(</span><span class="s">&quot;MyModelTransformation&quot;</span><span class="p">,</span> <span class="s">&quot;0&quot;</span><span class="p">);</span>
+    <span class="kt">bool</span> <a class="reference internal" href="../api/groups/classov_1_1pass_1_1ModelPass.html#doxid-classov-1-1pass-1-1-model-pass-1afdce6ef577b36b5127115dd574b6615e"><span class="std std-ref">run_on_model</span></a><span></span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">ov</span><span class="o">::</span><span class="n">Model</span><span class="o">&gt;&amp;</span> <a class="reference internal" href="../api/groups/namespacengraph_1_1runtime_1_1reference.html#doxid-namespacengraph-1-1runtime-1-1reference-1a4582949bb0b6082a5159f90c43a71ca9"><span class="std std-ref">f</span></a><span></span><span class="p">)</span> <span class="k">override</span><span class="p">;</span>
 <span class="p">};</span></pre></div></div><div class="highlight"><div class="highlight"><pre><span></span><span class="c1">// template_function_transformation.cpp</span>
 
-<span class="kt">bool</span> <span class="n">ov</span><span class="o">::</span><span class="n">pass</span><span class="o">::</span><span class="n">MyModelTransformation</span><span class="o">::</span><span class="n">run_on_model</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">ov</span><span class="o">::</span><span class="n">Model</span><span class="o">&gt;&amp;</span> f<span></span><span class="p">)</span> <span class="p">{</span>
+<span class="kt">bool</span> <span class="n">ov</span><span class="o">::</span><span class="n">pass</span><span class="o">::</span><span class="n">MyModelTransformation</span><span class="o">::</span><span class="n">run_on_model</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">ov</span><span class="o">::</span><span class="n">Model</span><span class="o">&gt;&amp;</span> <a class="reference internal" href="../api/groups/namespacengraph_1_1runtime_1_1reference.html#doxid-namespacengraph-1-1runtime-1-1reference-1a4582949bb0b6082a5159f90c43a71ca9"><span class="std std-ref">f</span></a><span></span><span class="p">)</span> <span class="p">{</span>
     RUN_ON_MODEL_SCOPE<span></span><span class="p">(</span><span class="n">MyModelTransformation</span><span class="p">);</span>
     <span class="c1">// Example transformation code</span>
-    NodeVector<span></span> <span class="n">nodes</span><span class="p">;</span>
+    <a class="reference internal" href="../api/groups/namespaceov.html#doxid-namespaceov-1a750141ccb27d75af03e91a5295645c7f"><span class="std std-ref">NodeVector</span></a><span></span> <span class="n">nodes</span><span class="p">;</span>
 
     <span class="c1">// Traverse nGraph Function in topological order</span>
-    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">node</span> <span class="p">:</span> f<span></span><span class="o">-&gt;</span><span class="n">get_ordered_ops</span><span class="p">())</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">node</span> <span class="p">:</span> <a class="reference internal" href="../api/groups/namespacengraph_1_1runtime_1_1reference.html#doxid-namespacengraph-1-1runtime-1-1reference-1a4582949bb0b6082a5159f90c43a71ca9"><span class="std std-ref">f</span></a><span></span><span class="o">-&gt;</span><span class="n">get_ordered_ops</span><span class="p">())</span> <span class="p">{</span>
         <span class="c1">// Check that number of input and output ports are equal to 1</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">inputs</span><span class="p">().</span><span class="n">size</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">node</span><span class="o">-&gt;</span><span class="n">outputs</span><span class="p">().</span><span class="n">size</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
             <span class="c1">// Check that input and output shape a fully defined (not dynamic) and number of consumers equal to 1</span>
@@ -1858,14 +1865,14 @@
 
     <span class="c1">// Return false because we didn&#39;t change nGraph Function</span>
     <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
-<span class="p">}</span></pre></div></div><p>Using <code class="docutils literal notranslate"><span class="pre">ov::pass::ModelPass</span></code>, you need to override the <code class="docutils literal notranslate"><span class="pre">run_on_model</span></code> method where you will write the transformation code. Return value is <code class="docutils literal notranslate"><span class="pre">true</span></code> if the original model has changed during transformation (new operation was added, or operations replacement was made, or node attributes were changed); otherwise, it is <code class="docutils literal notranslate"><span class="pre">false</span></code>. Also <code class="docutils literal notranslate"><span class="pre">ov::pass::ModelPass</span></code> based transformations can be executed via <code class="docutils literal notranslate"><span class="pre">ov::pass::Manager</span></code>.</p>
-<div class="section" id="see-also">
+<span class="p">}</span></pre></div></div><p>Using <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1pass_1_1ModelPass.html#doxid-classov-1-1pass-1-1-model-pass"><span class="std std-ref"><span class="pre">ov::pass::ModelPass</span></span></a></code>, you need to override the <code class="docutils literal notranslate"><span class="pre">run_on_model</span></code> method where you will write the transformation code. Return value is <code class="docutils literal notranslate"><span class="pre">true</span></code> if the original model has changed during transformation (new operation was added, or operations replacement was made, or node attributes were changed); otherwise, it is <code class="docutils literal notranslate"><span class="pre">false</span></code>. Also <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1pass_1_1ModelPass.html#doxid-classov-1-1pass-1-1-model-pass"><span class="std std-ref"><span class="pre">ov::pass::ModelPass</span></span></a></code> based transformations can be executed via <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1pass_1_1Manager.html#doxid-classov-1-1pass-1-1-manager"><span class="std std-ref"><span class="pre">ov::pass::Manager</span></span></a></code>.</p>
+<section id="see-also">
 <h2>See Also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="openvino_docs_transformations.html#doxid-openvino-docs-transformations"><span class="std std-ref">OpenVINO™ Transformations</span></a></p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -1896,7 +1903,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

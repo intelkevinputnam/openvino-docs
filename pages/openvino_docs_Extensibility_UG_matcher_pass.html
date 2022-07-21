@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>OpenVINO Matcher Pass &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -1840,18 +1847,18 @@
             
                 <div>
                   
-  <div class="section" id="openvino-matcher-pass">
+  <section id="openvino-matcher-pass">
 <span id="doxid-openvino-docs-extensibility-u-g-matcher-pass"></span><span id="index-0"></span><h1>OpenVINO Matcher Pass<a class="headerlink" href="#openvino-matcher-pass" title="Permalink to this headline">¶</a></h1>
-<p><span class="target" id="doxid-openvino-docs-extensibility-u-g-matcher-pass-1md-openvino-docs-extensibility-ug-matcher-pass"></span> <code class="docutils literal notranslate"><span class="pre">ov::pass::MatcherPass</span></code> is used for pattern-based transformations.</p>
+<p><span class="target" id="doxid-openvino-docs-extensibility-u-g-matcher-pass-1md-openvino-docs-extensibility-ug-matcher-pass"></span> <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1pass_1_1MatcherPass.html#doxid-classov-1-1pass-1-1-matcher-pass"><span class="std std-ref"><span class="pre">ov::pass::MatcherPass</span></span></a></code> is used for pattern-based transformations.</p>
 <p>Template for MatcherPass transformation class</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="c1">// transformations/template_pattern_transformation.hpp</span>
 <span class="o">/</span><span class="err">\</span><span class="o">*</span><span class="err">\</span><span class="o">*</span>
  <span class="err">\</span><span class="o">*</span> <span class="err">@</span><span class="n">ingroup</span> <span class="n">ie_transformation_common_api</span>
  <span class="err">\</span><span class="o">*</span> <span class="err">@</span><span class="n">brief</span> <span class="n">Add</span> <span class="n">transformation</span> <span class="n">description</span><span class="p">.</span>
  <span class="err">\*/</span>
-<span class="k">class</span> <span class="n">ov</span><span class="o">::</span><span class="n">pass</span><span class="o">::</span><span class="nl">DecomposeDivideMatcher</span> <span class="p">:</span> <span class="k">public</span> ov::pass::MatcherPass<span></span> <span class="p">{</span>
+<span class="k">class</span> <span class="n">ov</span><span class="o">::</span><span class="n">pass</span><span class="o">::</span><span class="nl">DecomposeDivideMatcher</span> <span class="p">:</span> <span class="k">public</span> <a class="reference internal" href="../api/groups/classov_1_1pass_1_1MatcherPass.html#doxid-classov-1-1pass-1-1-matcher-pass"><span class="std std-ref">ov::pass::MatcherPass</span></a><span></span> <span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
-    OPENVINO_RTTI<span></span><span class="p">(</span><span class="s">&quot;DecomposeDivideMatcher&quot;</span><span class="p">,</span> <span class="s">&quot;0&quot;</span><span class="p">);</span>
+    <a class="reference internal" href="../api/groups/classov_1_1pass_1_1MatcherPass.html#doxid-classov-1-1pass-1-1-matcher-pass-1a525c64de11717629f6599042761eb844"><span class="std std-ref">OPENVINO_RTTI</span></a><span></span><span class="p">(</span><span class="s">&quot;DecomposeDivideMatcher&quot;</span><span class="p">,</span> <span class="s">&quot;0&quot;</span><span class="p">);</span>
     <span class="n">DecomposeDivideMatcher</span><span class="p">();</span>
 <span class="p">};</span></pre></div></div><div class="highlight"><div class="highlight"><pre><span></span><span class="c1">// template_pattern_transformation.cpp</span>
 <span class="n">ov</span><span class="o">::</span><span class="n">pass</span><span class="o">::</span><span class="n">DecomposeDivideMatcher</span><span class="o">::</span><span class="n">DecomposeDivideMatcher</span><span class="p">()</span> <span class="p">{</span>
@@ -1861,7 +1868,7 @@
     <span class="k">auto</span> <span class="n">input1</span> <span class="o">=</span> pattern::any_input<span></span><span class="p">();</span>
     <span class="k">auto</span> <span class="n">div</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">ov</span><span class="o">::</span><span class="n">opset3</span><span class="o">::</span><span class="n">Divide</span><span class="o">&gt;</span><span class="p">(</span><span class="n">input0</span><span class="p">,</span> <span class="n">input1</span><span class="p">);</span>
 
-    ov::matcher_pass_callback<span></span> <span class="n">callback</span> <span class="o">=</span> <span class="p">[](</span><span class="n">pattern</span><span class="o">::</span><span class="n">Matcher</span><span class="o">&amp;</span> <span class="n">m</span><span class="p">)</span> <span class="p">{</span>
+    <a class="reference internal" href="../api/groups/namespaceov.html#doxid-namespaceov-1a0a124d479a37653bc99b1b118d47fc79"><span class="std std-ref">ov::matcher_pass_callback</span></a><span></span> <span class="n">callback</span> <span class="o">=</span> <span class="p">[](</span><span class="n">pattern</span><span class="o">::</span><span class="n">Matcher</span><span class="o">&amp;</span> <span class="n">m</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">auto</span> <span class="n">div</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">dynamic_pointer_cast</span><span class="o">&lt;</span><span class="n">ov</span><span class="o">::</span><span class="n">opset3</span><span class="o">::</span><span class="n">Divide</span><span class="o">&gt;</span><span class="p">(</span><span class="n">m</span><span class="p">.</span><span class="n">get_match_root</span><span class="p">());</span>
         <span class="c1">// We can not apply this transformation in case with integer input data type</span>
         <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">div</span> <span class="o">||</span> <span class="n">div</span><span class="o">-&gt;</span><span class="n">input</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="n">get_element_type</span><span class="p">().</span><span class="n">is_integral</span><span class="p">())</span> <span class="p">{</span>
@@ -1879,10 +1886,10 @@
         <span class="n">mul</span><span class="o">-&gt;</span><span class="n">set_friendly_name</span><span class="p">(</span><span class="n">div</span><span class="o">-&gt;</span><span class="n">get_friendly_name</span><span class="p">());</span>
 
         <span class="c1">// Copy runtime info attributes to newly created operation</span>
-        ov::copy_runtime_info<span></span><span class="p">(</span><span class="n">div</span><span class="p">,</span> <span class="p">{</span><span class="n">pow</span><span class="p">,</span> <span class="n">mul</span><span class="p">});</span>
+        <a class="reference internal" href="../api/groups/namespaceov.html#doxid-namespaceov-1a3bb5969a95703b4b4fd77f6f58837207"><span class="std std-ref">ov::copy_runtime_info</span></a><span></span><span class="p">(</span><span class="n">div</span><span class="p">,</span> <span class="p">{</span><span class="n">pow</span><span class="p">,</span> <span class="n">mul</span><span class="p">});</span>
 
         <span class="c1">// Replace Divide operation with Multiply</span>
-        ov::replace_node<span></span><span class="p">(</span><span class="n">div</span><span class="p">,</span> <span class="n">mul</span><span class="p">);</span>
+        <a class="reference internal" href="../api/groups/namespaceov.html#doxid-namespaceov-1a75d84ee654edb73fe4fb18936a5dca6d"><span class="std std-ref">ov::replace_node</span></a><span></span><span class="p">(</span><span class="n">div</span><span class="p">,</span> <span class="n">mul</span><span class="p">);</span>
 
         <span class="c1">// Return true as the root node was changed</span>
         <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
@@ -1892,7 +1899,7 @@
     <span class="k">auto</span> <span class="n">m</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">ov</span><span class="o">::</span><span class="n">pass</span><span class="o">::</span><span class="n">pattern</span><span class="o">::</span><span class="n">Matcher</span><span class="o">&gt;</span><span class="p">(</span><span class="n">div</span><span class="p">,</span> <span class="s">&quot;ConvertDivide&quot;</span><span class="p">);</span>
     <span class="c1">// Register Matcher</span>
     <span class="n">register_matcher</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">callback</span><span class="p">);</span>
-<span class="p">}</span></pre></div></div><p>To use <code class="docutils literal notranslate"><span class="pre">ov::pass::MatcherPass</span></code>, you need to complete these steps:</p>
+<span class="p">}</span></pre></div></div><p>To use <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1pass_1_1MatcherPass.html#doxid-classov-1-1pass-1-1-matcher-pass"><span class="std std-ref"><span class="pre">ov::pass::MatcherPass</span></span></a></code>, you need to complete these steps:</p>
 <ol class="arabic simple">
 <li><p>Create a pattern</p></li>
 <li><p>Implement a callback</p></li>
@@ -1900,30 +1907,30 @@
 <li><p>Execute MatcherPass</p></li>
 </ol>
 <p>So let’s go through each of these steps.</p>
-<div class="section" id="create-a-pattern">
+<section id="create-a-pattern">
 <h2>Create a pattern<a class="headerlink" href="#create-a-pattern" title="Permalink to this headline">¶</a></h2>
-<p>Pattern is a single root <code class="docutils literal notranslate"><span class="pre">ov::Model</span></code>. But the only difference is that you do not need to create a model object, you just need to create and connect opset or special pattern operations. Then you need to take the last created operation and put it as a root of the pattern. This root node will be used as a root node in pattern matching.</p>
+<p>Pattern is a single root <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1Model.html#doxid-classov-1-1-model"><span class="std std-ref"><span class="pre">ov::Model</span></span></a></code>. But the only difference is that you do not need to create a model object, you just need to create and connect opset or special pattern operations. Then you need to take the last created operation and put it as a root of the pattern. This root node will be used as a root node in pattern matching.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Any nodes in a pattern that have no consumers and are not registered as root will not be used in pattern matching.</p>
 </div>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="c1">// Pattern example</span>
-<span class="k">auto</span> <span class="n">input</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">ov</span><span class="o">::</span><span class="n">opset8</span><span class="o">::</span><span class="n">Parameter</span><span class="o">&gt;</span><span class="p">(</span>ov::element::i64<span></span><span class="p">,</span> ov::Shape<span></span><span class="p">{</span><span class="mi">1</span><span class="p">});</span>
+<span class="k">auto</span> <span class="n">input</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">ov</span><span class="o">::</span><span class="n">opset8</span><span class="o">::</span><span class="n">Parameter</span><span class="o">&gt;</span><span class="p">(</span><a class="reference internal" href="../api/groups/groupov_element_cpp_api.html#doxid-group-ov-element-cpp-api-1ga6c86a9a54d44fc205ad9cbf28ca556a6"><span class="std std-ref">ov::element::i64</span></a><span></span><span class="p">,</span> <a class="reference internal" href="../api/groups/classov_1_1Shape.html#doxid-classov-1-1-shape"><span class="std std-ref">ov::Shape</span></a><span></span><span class="p">{</span><span class="mi">1</span><span class="p">});</span>
 <span class="k">auto</span> <span class="n">shapeof</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">ov</span><span class="o">::</span><span class="n">opset8</span><span class="o">::</span><span class="n">ShapeOf</span><span class="o">&gt;</span><span class="p">(</span><span class="n">input</span><span class="p">);</span>
 
 <span class="c1">// Create Matcher with Parameter-&gt;ShapeOf pattern</span>
 <span class="k">auto</span> <span class="n">m</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">ov</span><span class="o">::</span><span class="n">pass</span><span class="o">::</span><span class="n">pattern</span><span class="o">::</span><span class="n">Matcher</span><span class="o">&gt;</span><span class="p">(</span><span class="n">shapeof</span><span class="p">,</span> <span class="s">&quot;MyPatternBasedTransformation&quot;</span><span class="p">);</span></pre></div></div><p>The <code class="docutils literal notranslate"><span class="pre">Parameter</span></code> operation in the example above has type and shape specified. These attributes are needed only to create Parameter operation class and will not be used in pattern matching.</p>
 <p>For more pattern examples, refer to the <a class="reference external" href="#pattern_matching">pattern matching</a> section.</p>
-</div>
-<div class="section" id="implement-callback">
+</section>
+<section id="implement-callback">
 <h2>Implement callback<a class="headerlink" href="#implement-callback" title="Permalink to this headline">¶</a></h2>
 <p>Callback is an action applied to every pattern entrance. In general, callback is the lambda function that takes Matcher object with detected subgraph.</p>
-<div class="highlight"><div class="highlight"><pre>ov::graph_rewrite_callback<span></span> <span class="n">callback</span> <span class="o">=</span> <span class="p">[](</span>ov::pass::pattern::Matcher<span></span><span class="o">&amp;</span> <span class="n">m</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><div class="highlight"><pre><a class="reference internal" href="../api/groups/namespaceov.html#doxid-namespaceov-1a5fe08faf69e9897c58d168a54359047e"><span class="std std-ref">ov::graph_rewrite_callback</span></a><span></span> <span class="n">callback</span> <span class="o">=</span> <span class="p">[](</span><a class="reference internal" href="../api/groups/classov_1_1pass_1_1pattern_1_1Matcher.html#doxid-classov-1-1pass-1-1pattern-1-1-matcher"><span class="std std-ref">ov::pass::pattern::Matcher</span></a><span></span><span class="o">&amp;</span> <span class="n">m</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// Get root node</span>
     <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">ov</span><span class="o">::</span><span class="n">Node</span><span class="o">&gt;</span> <span class="n">root_node</span> <span class="o">=</span> <span class="n">m</span><span class="p">.</span><span class="n">get_match_root</span><span class="p">();</span>
 
     <span class="c1">// Get all nodes matched by pattern</span>
-    ov::NodeVector<span></span> <span class="n">nodes</span> <span class="o">=</span> <span class="n">m</span><span class="p">.</span><span class="n">get_matched_nodes</span><span class="p">();</span>
+    <a class="reference internal" href="../api/groups/namespaceov.html#doxid-namespaceov-1a750141ccb27d75af03e91a5295645c7f"><span class="std std-ref">ov::NodeVector</span></a><span></span> <span class="n">nodes</span> <span class="o">=</span> <span class="n">m</span><span class="p">.</span><span class="n">get_matched_nodes</span><span class="p">();</span>
 
     <span class="c1">// Transformation code</span>
     <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
@@ -1932,14 +1939,14 @@
 <p class="admonition-title">Note</p>
 <p>It is not recommended to manipulate with nodes that are under root node. This may affect GraphRewrite execution as it is expected that all nodes that come after root node in topological order are valid and can be used in pattern matching.</p>
 </div>
-<p>MatcherPass also provides functionality that allows reporting of the newly created nodes that can be used in additional pattern matching. If MatcherPass was registered in <code class="docutils literal notranslate"><span class="pre">ov::pass::Manager</span></code> or <code class="docutils literal notranslate"><span class="pre">ov::pass::GraphRewrite</span></code>, these registered nodes will be added for additional pattern matching. That means that matcher passes registered in <code class="docutils literal notranslate"><span class="pre">ov::pass::GraphRewrite</span></code> will be applied to these nodes.</p>
+<p>MatcherPass also provides functionality that allows reporting of the newly created nodes that can be used in additional pattern matching. If MatcherPass was registered in <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1pass_1_1Manager.html#doxid-classov-1-1pass-1-1-manager"><span class="std std-ref"><span class="pre">ov::pass::Manager</span></span></a></code> or <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1pass_1_1GraphRewrite.html#doxid-classov-1-1pass-1-1-graph-rewrite"><span class="std std-ref"><span class="pre">ov::pass::GraphRewrite</span></span></a></code>, these registered nodes will be added for additional pattern matching. That means that matcher passes registered in <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1pass_1_1GraphRewrite.html#doxid-classov-1-1pass-1-1-graph-rewrite"><span class="std std-ref"><span class="pre">ov::pass::GraphRewrite</span></span></a></code> will be applied to these nodes.</p>
 <p>The example below shows how single MatcherPass can fuse sequence of operations using the <code class="docutils literal notranslate"><span class="pre">register_new_node</span></code> method.</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">ov</span><span class="o">::</span><span class="n">pass</span><span class="o">::</span><span class="n">ReluReluFusionMatcher</span><span class="o">::</span><span class="n">ReluReluFusionMatcher</span><span class="p">()</span> <span class="p">{</span>
     MATCHER_SCOPE<span></span><span class="p">(</span><span class="n">ReluReluFusionMatcher</span><span class="p">);</span>
     <span class="k">auto</span> <span class="n">m_relu1</span> <span class="o">=</span> <span class="n">ov</span><span class="o">::</span><span class="n">pass</span><span class="o">::</span><span class="n">pattern</span><span class="o">::</span><span class="n">wrap_type</span><span class="o">&lt;</span><span class="n">ov</span><span class="o">::</span><span class="n">opset3</span><span class="o">::</span><span class="n">Relu</span><span class="o">&gt;</span><span class="p">(</span>pattern::consumers_count<span></span><span class="p">(</span><span class="mi">1</span><span class="p">));</span>
     <span class="k">auto</span> <span class="n">m_relu2</span> <span class="o">=</span> <span class="n">ov</span><span class="o">::</span><span class="n">pass</span><span class="o">::</span><span class="n">pattern</span><span class="o">::</span><span class="n">wrap_type</span><span class="o">&lt;</span><span class="n">ov</span><span class="o">::</span><span class="n">opset3</span><span class="o">::</span><span class="n">Relu</span><span class="o">&gt;</span><span class="p">({</span><span class="n">m_relu1</span><span class="p">});</span>
 
-    ov::matcher_pass_callback<span></span> <span class="n">callback</span> <span class="o">=</span> <span class="p">[</span><span class="o">=</span><span class="p">](</span><span class="n">pattern</span><span class="o">::</span><span class="n">Matcher</span><span class="o">&amp;</span> <span class="n">m</span><span class="p">)</span> <span class="p">{</span>
+    <a class="reference internal" href="../api/groups/namespaceov.html#doxid-namespaceov-1a0a124d479a37653bc99b1b118d47fc79"><span class="std std-ref">ov::matcher_pass_callback</span></a><span></span> <span class="n">callback</span> <span class="o">=</span> <span class="p">[</span><span class="o">=</span><span class="p">](</span><span class="n">pattern</span><span class="o">::</span><span class="n">Matcher</span><span class="o">&amp;</span> <span class="n">m</span><span class="p">)</span> <span class="p">{</span>
         <span class="c1">// Map that helps to connect labels with matched outputs</span>
         <span class="k">auto</span><span class="o">&amp;</span> <span class="n">node_to_output</span> <span class="o">=</span> <span class="n">m</span><span class="p">.</span><span class="n">get_pattern_value_map</span><span class="p">();</span>
 
@@ -1948,13 +1955,13 @@
             <span class="n">register_new_node</span><span class="o">&lt;</span><span class="n">ov</span><span class="o">::</span><span class="n">opset3</span><span class="o">::</span><span class="n">Relu</span><span class="o">&gt;</span><span class="p">(</span><span class="n">node_to_output</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="n">m_relu1</span><span class="p">).</span><span class="n">get_node_shared_ptr</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">input_value</span><span class="p">(</span><span class="mi">0</span><span class="p">));</span>
 
         <span class="c1">// Copy runtime info attributes to newly created operation</span>
-        ov::copy_runtime_info<span></span><span class="p">(</span><span class="n">m</span><span class="p">.</span><span class="n">get_matched_nodes</span><span class="p">(),</span> <span class="n">new_relu</span><span class="p">);</span>
+        <a class="reference internal" href="../api/groups/namespaceov.html#doxid-namespaceov-1a3bb5969a95703b4b4fd77f6f58837207"><span class="std std-ref">ov::copy_runtime_info</span></a><span></span><span class="p">(</span><span class="n">m</span><span class="p">.</span><span class="n">get_matched_nodes</span><span class="p">(),</span> <span class="n">new_relu</span><span class="p">);</span>
 
         <span class="c1">// Save last Relu name to new Relu operation</span>
         <span class="n">new_relu</span><span class="o">-&gt;</span><span class="n">set_friendly_name</span><span class="p">(</span><span class="n">m</span><span class="p">.</span><span class="n">get_match_root</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">get_friendly_name</span><span class="p">());</span>
 
         <span class="c1">// Replace Relu-&gt;Relu with Relu</span>
-        ov::replace_node<span></span><span class="p">(</span><span class="n">m</span><span class="p">.</span><span class="n">get_match_root</span><span class="p">(),</span> <span class="n">new_relu</span><span class="p">);</span>
+        <a class="reference internal" href="../api/groups/namespaceov.html#doxid-namespaceov-1a75d84ee654edb73fe4fb18936a5dca6d"><span class="std std-ref">ov::replace_node</span></a><span></span><span class="p">(</span><span class="n">m</span><span class="p">.</span><span class="n">get_match_root</span><span class="p">(),</span> <span class="n">new_relu</span><span class="p">);</span>
 
         <span class="c1">// Return true as the root node was changed</span>
         <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
@@ -1968,8 +1975,8 @@
 <p class="admonition-title">Note</p>
 <p>If you register multiple nodes, please add them in topological order. We do not topologically sort these nodes as it is a time-consuming operation.</p>
 </div>
-</div>
-<div class="section" id="register-pattern-and-matcher">
+</section>
+<section id="register-pattern-and-matcher">
 <h2>Register pattern and Matcher<a class="headerlink" href="#register-pattern-and-matcher" title="Permalink to this headline">¶</a></h2>
 <p>The last step is to register Matcher and callback inside the MatcherPass pass. To do this, call the <code class="docutils literal notranslate"><span class="pre">register_matcher</span></code> method.</p>
 <div class="admonition note">
@@ -1977,8 +1984,8 @@
 <p>Only one matcher can be registered for a single MatcherPass class.</p>
 </div>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="c1">// Register matcher and callback</span>
-<span class="n">register_matcher</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">callback</span><span class="p">);</span></pre></div></div></div>
-<div class="section" id="execute-matcherpass">
+<span class="n">register_matcher</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">callback</span><span class="p">);</span></pre></div></div></section>
+<section id="execute-matcherpass">
 <h2>Execute MatcherPass<a class="headerlink" href="#execute-matcherpass" title="Permalink to this headline">¶</a></h2>
 <p>MatcherPass has multiple ways to be executed:</p>
 <ul>
@@ -1986,19 +1993,19 @@
 <div class="highlight"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="n">ov</span><span class="o">::</span><span class="n">pass</span><span class="o">::</span><span class="n">DecomposeDivideMatcher</span><span class="p">().</span><span class="n">apply</span><span class="p">(</span><span class="n">node</span><span class="p">))</span> <span class="p">{</span>
     <span class="c1">// successful execution (root node was replaced)</span>
 <span class="p">}</span></pre></div></div></li>
-<li><p>Run on <code class="docutils literal notranslate"><span class="pre">ov::Model</span></code> using GraphRewrite - this approach gives ability to run MatcherPass on whole <code class="docutils literal notranslate"><span class="pre">ov::Model</span></code>. Moreover, multiple MatcherPass transformation can be registered in a single GraphRewite to be executed in a single graph traversal.</p>
+<li><p>Run on <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1Model.html#doxid-classov-1-1-model"><span class="std std-ref"><span class="pre">ov::Model</span></span></a></code> using GraphRewrite - this approach gives ability to run MatcherPass on whole <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1Model.html#doxid-classov-1-1-model"><span class="std std-ref"><span class="pre">ov::Model</span></span></a></code>. Moreover, multiple MatcherPass transformation can be registered in a single GraphRewite to be executed in a single graph traversal.</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="c1">// Two matcher passes will run simultaneously in a single graph traversal</span>
-ov::pass::GraphRewrite<span></span> <span class="n">pass</span><span class="p">;</span>
+<a class="reference internal" href="../api/groups/classov_1_1pass_1_1GraphRewrite.html#doxid-classov-1-1pass-1-1-graph-rewrite"><span class="std std-ref">ov::pass::GraphRewrite</span></a><span></span> <span class="n">pass</span><span class="p">;</span>
 <span class="n">pass</span><span class="p">.</span>add_matcher<span></span><span class="o">&lt;</span><span class="n">ov</span><span class="o">::</span><span class="n">pass</span><span class="o">::</span><span class="n">DecomposeDivideMatcher</span><span class="o">&gt;</span><span class="p">();</span>
 <span class="n">pass</span><span class="p">.</span>add_matcher<span></span><span class="o">&lt;</span><span class="n">ov</span><span class="o">::</span><span class="n">pass</span><span class="o">::</span><span class="n">ReluReluFusionMatcher</span><span class="o">&gt;</span><span class="p">();</span>
-<span class="n">pass</span><span class="p">.</span>run_on_model<span></span><span class="p">(</span>f<span></span><span class="p">);</span></pre></div></div></li>
-<li><p id="pattern-matching">Run on <code class="docutils literal notranslate"><span class="pre">ov::Model</span></code> using <code class="docutils literal notranslate"><span class="pre">ov::pass::Manager</span></code> - this approach helps you to register MatcherPass for execution on <code class="docutils literal notranslate"><span class="pre">ov::Model</span></code> as another transformation types.</p>
+<span class="n">pass</span><span class="p">.</span><a class="reference internal" href="../api/groups/classov_1_1pass_1_1GraphRewrite.html#doxid-classov-1-1pass-1-1-graph-rewrite-1ad27ed8542330330ce9a524ff17564c21"><span class="std std-ref">run_on_model</span></a><span></span><span class="p">(</span><a class="reference internal" href="../api/groups/namespacengraph_1_1runtime_1_1reference.html#doxid-namespacengraph-1-1runtime-1-1reference-1a4582949bb0b6082a5159f90c43a71ca9"><span class="std std-ref">f</span></a><span></span><span class="p">);</span></pre></div></div></li>
+<li><p id="pattern-matching">Run on <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1Model.html#doxid-classov-1-1-model"><span class="std std-ref"><span class="pre">ov::Model</span></span></a></code> using <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1pass_1_1Manager.html#doxid-classov-1-1pass-1-1-manager"><span class="std std-ref"><span class="pre">ov::pass::Manager</span></span></a></code> - this approach helps you to register MatcherPass for execution on <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1Model.html#doxid-classov-1-1-model"><span class="std std-ref"><span class="pre">ov::Model</span></span></a></code> as another transformation types.</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="c1">// Two matchers will run independently (two independent graph traversals)</span>
 <span class="c1">// pass::Manager automatically creates GraphRewrite container for each MatcherPass</span>
-ov::pass::Manager<span></span> <span class="n">manager</span><span class="p">;</span>
+<a class="reference internal" href="../api/groups/classov_1_1pass_1_1Manager.html#doxid-classov-1-1pass-1-1-manager"><span class="std std-ref">ov::pass::Manager</span></a><span></span> <span class="n">manager</span><span class="p">;</span>
 <span class="n">manager</span><span class="p">.</span>register_pass<span></span><span class="o">&lt;</span><span class="n">ov</span><span class="o">::</span><span class="n">pass</span><span class="o">::</span><span class="n">DecomposeDivideMatcher</span><span class="o">&gt;</span><span class="p">();</span>
 <span class="n">manager</span><span class="p">.</span>register_pass<span></span><span class="o">&lt;</span><span class="n">ov</span><span class="o">::</span><span class="n">pass</span><span class="o">::</span><span class="n">ReluReluFusionMatcher</span><span class="o">&gt;</span><span class="p">();</span>
-<span class="n">manager</span><span class="p">.</span>run_passes<span></span><span class="p">(</span>f<span></span><span class="p">);</span></pre></div></div></li>
+<span class="n">manager</span><span class="p">.</span><a class="reference internal" href="../api/groups/classov_1_1pass_1_1Manager.html#doxid-classov-1-1pass-1-1-manager-1a8b155191130f2c15e294cfd259d4ca0d"><span class="std std-ref">run_passes</span></a><span></span><span class="p">(</span><a class="reference internal" href="../api/groups/namespacengraph_1_1runtime_1_1reference.html#doxid-namespacengraph-1-1runtime-1-1reference-1a4582949bb0b6082a5159f90c43a71ca9"><span class="std std-ref">f</span></a><span></span><span class="p">);</span></pre></div></div></li>
 </ul>
 <p>Sometimes patterns cannot be expressed via regular operations or it is too complicated. For example, if you want to detect <strong>Convolution-&gt;Add</strong> sub-graph without specifying particular input type for Convolution operation or you want to create a pattern where some of operations can have different types. And for these cases OpenVINO™ provides additional helpers to construct patterns for GraphRewrite transformations.</p>
 <p>There are two main helpers:</p>
@@ -2015,16 +2022,16 @@ ov::pass::Manager<span></span> <span class="n">manager</span><span class="p">;</
 <div class="highlight"><div class="highlight"><pre><span></span><span class="c1">// Detect Multiply with arbitrary first input and second as Constant</span>
 <span class="c1">// ov::pattern::op::Label - represent arbitrary input</span>
 <span class="k">auto</span> <span class="n">input</span> <span class="o">=</span> ov::pass::pattern::any_input<span></span><span class="p">();</span>
-<span class="k">auto</span> <span class="n">value</span> <span class="o">=</span> <span class="n">ov</span><span class="o">::</span><span class="n">opset8</span><span class="o">::</span><span class="n">Constant</span><span class="o">::</span><span class="n">create</span><span class="p">(</span>ov::element::f32<span></span><span class="p">,</span> ov::Shape<span></span><span class="p">{</span><span class="mi">1</span><span class="p">},</span> <span class="p">{</span><span class="mf">0.5</span><span class="p">});</span>
+<span class="k">auto</span> <span class="n">value</span> <span class="o">=</span> <span class="n">ov</span><span class="o">::</span><span class="n">opset8</span><span class="o">::</span><span class="n">Constant</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><a class="reference internal" href="../api/groups/groupov_element_cpp_api.html#doxid-group-ov-element-cpp-api-1gadc8a5dda3244028a5c0b024897215d43"><span class="std std-ref">ov::element::f32</span></a><span></span><span class="p">,</span> <a class="reference internal" href="../api/groups/classov_1_1Shape.html#doxid-classov-1-1-shape"><span class="std std-ref">ov::Shape</span></a><span></span><span class="p">{</span><span class="mi">1</span><span class="p">},</span> <span class="p">{</span><span class="mf">0.5</span><span class="p">});</span>
 <span class="k">auto</span> <span class="n">mul</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">ov</span><span class="o">::</span><span class="n">opset8</span><span class="o">::</span><span class="n">Multiply</span><span class="o">&gt;</span><span class="p">(</span><span class="n">input</span><span class="p">,</span> <span class="n">value</span><span class="p">);</span>
 <span class="k">auto</span> <span class="n">m</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">ov</span><span class="o">::</span><span class="n">pass</span><span class="o">::</span><span class="n">pattern</span><span class="o">::</span><span class="n">Matcher</span><span class="o">&gt;</span><span class="p">(</span><span class="n">mul</span><span class="p">,</span> <span class="s">&quot;MultiplyMatcher&quot;</span><span class="p">);</span></pre></div></div><p>This example shows how we can construct a pattern when operation has arbitrary number of inputs.</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="c1">// Detect Concat operation with arbitrary number of inputs</span>
-<span class="k">auto</span> concat<span></span> <span class="o">=</span> <span class="n">ov</span><span class="o">::</span><span class="n">pass</span><span class="o">::</span><span class="n">pattern</span><span class="o">::</span><span class="n">wrap_type</span><span class="o">&lt;</span><span class="n">ov</span><span class="o">::</span><span class="n">opset8</span><span class="o">::</span><span class="n">Concat</span><span class="o">&gt;</span><span class="p">();</span>
-<span class="k">auto</span> <span class="n">m</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">ov</span><span class="o">::</span><span class="n">pass</span><span class="o">::</span><span class="n">pattern</span><span class="o">::</span><span class="n">Matcher</span><span class="o">&gt;</span><span class="p">(</span>concat<span></span><span class="p">,</span> <span class="s">&quot;ConcatMatcher&quot;</span><span class="p">);</span></pre></div></div><p>This example shows how to use predicate to construct a pattern. Also it shows how to match pattern manually on given node.</p>
+<span class="k">auto</span> <a class="reference internal" href="../api/groups/namespacengraph_1_1runtime_1_1reference.html#doxid-namespacengraph-1-1runtime-1-1reference-1a697183f9ae579acade2cb21c5ebad1ca"><span class="std std-ref">concat</span></a><span></span> <span class="o">=</span> <span class="n">ov</span><span class="o">::</span><span class="n">pass</span><span class="o">::</span><span class="n">pattern</span><span class="o">::</span><span class="n">wrap_type</span><span class="o">&lt;</span><span class="n">ov</span><span class="o">::</span><span class="n">opset8</span><span class="o">::</span><span class="n">Concat</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="k">auto</span> <span class="n">m</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">ov</span><span class="o">::</span><span class="n">pass</span><span class="o">::</span><span class="n">pattern</span><span class="o">::</span><span class="n">Matcher</span><span class="o">&gt;</span><span class="p">(</span><a class="reference internal" href="../api/groups/namespacengraph_1_1runtime_1_1reference.html#doxid-namespacengraph-1-1runtime-1-1reference-1a697183f9ae579acade2cb21c5ebad1ca"><span class="std std-ref">concat</span></a><span></span><span class="p">,</span> <span class="s">&quot;ConcatMatcher&quot;</span><span class="p">);</span></pre></div></div><p>This example shows how to use predicate to construct a pattern. Also it shows how to match pattern manually on given node.</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="c1">// Detect Multiply-&gt;Add sequence where mul has exactly one consumer</span>
 <span class="k">auto</span> <span class="n">mul</span> <span class="o">=</span> <span class="n">ov</span><span class="o">::</span><span class="n">pass</span><span class="o">::</span><span class="n">pattern</span><span class="o">::</span><span class="n">wrap_type</span><span class="o">&lt;</span><span class="n">ov</span><span class="o">::</span><span class="n">opset8</span><span class="o">::</span><span class="n">Multiply</span><span class="o">&gt;</span><span class="p">(</span>ov::pass::pattern::consumers_count<span></span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="err">\</span><span class="o">*</span><span class="err">с</span><span class="n">heck</span> <span class="n">consumers</span> <span class="n">count</span><span class="err">\*/</span><span class="p">);</span>
-<span class="k">auto</span> add<span></span> <span class="o">=</span> <span class="n">ov</span><span class="o">::</span><span class="n">pass</span><span class="o">::</span><span class="n">pattern</span><span class="o">::</span><span class="n">wrap_type</span><span class="o">&lt;</span><span class="n">ov</span><span class="o">::</span><span class="n">opset8</span><span class="o">::</span><span class="n">Add</span><span class="o">&gt;</span><span class="p">({</span><span class="n">mul</span><span class="p">,</span> ov::pass::pattern::any_input<span></span><span class="p">()});</span>
-<span class="k">auto</span> <span class="n">m</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">ov</span><span class="o">::</span><span class="n">pass</span><span class="o">::</span><span class="n">pattern</span><span class="o">::</span><span class="n">Matcher</span><span class="o">&gt;</span><span class="p">(</span>add<span></span><span class="p">,</span> <span class="s">&quot;MultiplyAddMatcher&quot;</span><span class="p">);</span>
+<span class="k">auto</span> <a class="reference internal" href="../api/groups/namespacengraph_1_1runtime_1_1reference.html#doxid-namespacengraph-1-1runtime-1-1reference-1a12956a756feab4106f4f12a6a372db41"><span class="std std-ref">add</span></a><span></span> <span class="o">=</span> <span class="n">ov</span><span class="o">::</span><span class="n">pass</span><span class="o">::</span><span class="n">pattern</span><span class="o">::</span><span class="n">wrap_type</span><span class="o">&lt;</span><span class="n">ov</span><span class="o">::</span><span class="n">opset8</span><span class="o">::</span><span class="n">Add</span><span class="o">&gt;</span><span class="p">({</span><span class="n">mul</span><span class="p">,</span> ov::pass::pattern::any_input<span></span><span class="p">()});</span>
+<span class="k">auto</span> <span class="n">m</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">ov</span><span class="o">::</span><span class="n">pass</span><span class="o">::</span><span class="n">pattern</span><span class="o">::</span><span class="n">Matcher</span><span class="o">&gt;</span><span class="p">(</span><a class="reference internal" href="../api/groups/namespacengraph_1_1runtime_1_1reference.html#doxid-namespacengraph-1-1runtime-1-1reference-1a12956a756feab4106f4f12a6a372db41"><span class="std std-ref">add</span></a><span></span><span class="p">,</span> <span class="s">&quot;MultiplyAddMatcher&quot;</span><span class="p">);</span>
 <span class="c1">// Matcher can be used to match pattern manually on given node</span>
 <span class="k">if</span> <span class="p">(</span><span class="n">m</span><span class="o">-&gt;</span><span class="n">match</span><span class="p">(</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">output</span><span class="p">(</span><span class="mi">0</span><span class="p">)))</span> <span class="p">{</span>
     <span class="c1">// Successfully matched</span>
@@ -2032,14 +2039,14 @@ ov::pass::Manager<span></span> <span class="n">manager</span><span class="p">;</
 <p class="admonition-title">Note</p>
 <p>Be careful with manual matching because Matcher object holds matched nodes. To clear a match, use the m-&gt;clear_state() method.</p>
 </div>
-</div>
-<div class="section" id="see-also">
+</section>
+<section id="see-also">
 <h2>See Also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="openvino_docs_transformations.html#doxid-openvino-docs-transformations"><span class="std std-ref">OpenVINO™ Transformations</span></a></p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -2070,7 +2077,7 @@ ov::pass::Manager<span></span> <span class="n">manager</span><span class="p">;</
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

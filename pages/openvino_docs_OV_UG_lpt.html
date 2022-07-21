@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>OpenVINO™ Low Precision Transformations &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -1957,12 +1964,12 @@
             
                 <div>
                   
-  <div class="section" id="openvino-low-precision-transformations">
+  <section id="openvino-low-precision-transformations">
 <span id="doxid-openvino-docs-o-v-u-g-lpt"></span><span id="index-0"></span><h1>OpenVINO™ Low Precision Transformations<a class="headerlink" href="#openvino-low-precision-transformations" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-openvino-docs-o-v-u-g-lpt-1md-openvino-docs-ie-plugin-dg-plugin-transformation-pipeline-low-precision-transformations-lpt"></span></p>
 <div class="toctree-wrapper compound">
 </div>
-<div class="section" id="introduction">
+<section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>Low precision transformations (known as LPT) are a set of nGraph transformations, which are combined in one library. The library is mandatory part of OpenVINO to infer quantized model in low precision with the maximum performance on Intel CPU, GPU and ARM platforms. The library includes more than 45 transformations and supports more then 30 operations. Some transformations are mandatory, some of them are optional and developed for specific device.</p>
 <p>The goal of Low Precision Transformations (LPT) is to transform a quantized model from its original precision (FP16 or FP32) to a low precision (INT8: <code class="docutils literal notranslate"><span class="pre">signed</span> <span class="pre">int8</span></code> or <code class="docutils literal notranslate"><span class="pre">unsigned</span> <span class="pre">int8</span></code>), so that it is prepared for low precision inference in OpenVINO™ plugin. It is achieved by two main principles:</p>
@@ -1977,8 +1984,8 @@
 </ol>
 <p>As result, operation input tensor precisions will be changed from original to low precision and operations can be inferred by OpenVINO™ plugin in low precision.</p>
 <p>For a more detailed description on how to quantize a model, see the <a class="reference external" href="#low-precision-tools">Low precision tools</a> section below. For more information about model quantization, refer to <strong>Brief History of Lower Precision in Deep Learning</strong> section in <a class="reference external" href="https://software.intel.com/en-us/articles/lower-numerical-precision-deep-learning-inference-and-training">this whitepaper</a>.</p>
-</div>
-<div class="section" id="input-model-requirements">
+</section>
+<section id="input-model-requirements">
 <h2>Input model requirements<a class="headerlink" href="#input-model-requirements" title="Permalink to this headline">¶</a></h2>
 <p>LPT transformations propagate dequantization operations through the following operations:</p>
 <ul class="simple">
@@ -2016,12 +2023,12 @@
 <p>For example, if you would like to infer a model with <code class="docutils literal notranslate"><span class="pre">Convolution</span></code> operation in low precision then the model can look as on picture below:</p>
 <img alt="Quantized Convolution" src="../_images/model_fq_and_convolution.common.png" />
 <p>There are several supported quantization approaches on activations and on weights. All supported approaches are described in <a class="reference external" href="#quantization-approaches">Quantization approaches</a> section below. In demonstrated model <a class="reference external" href="#fakequantize-operation">FakeQuantize operation quantization</a> approach is used.</p>
-<div class="section" id="low-precision-tools">
+<section id="low-precision-tools">
 <h3>Low precision tools<a class="headerlink" href="#low-precision-tools" title="Permalink to this headline">¶</a></h3>
 <p>For more details on how to get a quantized model, refer to <a class="reference internal" href="openvino_docs_model_optimization_guide.html#doxid-openvino-docs-model-optimization-guide"><span class="std std-ref">Model Optimization</span></a> document.</p>
-</div>
-</div>
-<div class="section" id="quantization-approaches">
+</section>
+</section>
+<section id="quantization-approaches">
 <h2>Quantization approaches<a class="headerlink" href="#quantization-approaches" title="Permalink to this headline">¶</a></h2>
 <p>LPT transformations support two quantization approaches:</p>
 <ol class="arabic simple">
@@ -2029,12 +2036,12 @@
 <li><p>Quantize and dequantization operations</p></li>
 </ol>
 <p>Let’s explore both approaches in details on <code class="docutils literal notranslate"><span class="pre">Convolution</span></code> operation.</p>
-<div class="section" id="fakequantize-operation">
+<section id="fakequantize-operation">
 <h3>FakeQuantize operation<a class="headerlink" href="#fakequantize-operation" title="Permalink to this headline">¶</a></h3>
 <p>In this case <code class="docutils literal notranslate"><span class="pre">FakeQuantize</span></code> operation is used on activations and quantized constant on weights. Original input model:</p>
 <img alt="Original model with FakeQuantize" src="../_images/model_fq_and_convolution.common.png" />
-</div>
-<div class="section" id="quantize-and-dequantization-operations">
+</section>
+<section id="quantize-and-dequantization-operations">
 <h3>Quantize and dequantization operations<a class="headerlink" href="#quantize-and-dequantization-operations" title="Permalink to this headline">¶</a></h3>
 <p>In this case <code class="docutils literal notranslate"><span class="pre">FakeQuantize</span></code> operation and <code class="docutils literal notranslate"><span class="pre">Convert</span></code> are used as quantize operation and return quantized low precision tensor. After quantize operation on activations there are <code class="docutils literal notranslate"><span class="pre">Convert</span></code> and dequantization operations to compensate decomposition. Original input model:</p>
 <img alt="Original model with Q/DQ" src="../_images/model_qdq_and_convolution.common.png" />
@@ -2051,8 +2058,8 @@
 </ol>
 <p>LPT result model:</p>
 <img alt="Result model" src="../_images/model_fq_and_convolution.transformed.png" />
-</div>
-<div class="section" id="low-precision-transformations-pipeline">
+</section>
+<section id="low-precision-transformations-pipeline">
 <h3>Low precision transformations pipeline<a class="headerlink" href="#low-precision-transformations-pipeline" title="Permalink to this headline">¶</a></h3>
 <p>LPT transformation pipeline has several steps. For each transformation inside one step pattern matcher is unique per transformation, but each operation can be assigned to several transformations.</p>
 <img alt="Low precision transformations pipeline" src="../_images/low_precision_transformation_pipeline.png" />
@@ -2065,8 +2072,8 @@
 <li><p><a class="reference internal" href="openvino_docs_OV_UG_lpt_step3_main.html#doxid-openvino-docs-o-v-u-g-lpt-step3-main"><span class="std std-ref">Step #3: Main transformations</span></a></p></li>
 <li><p><a class="reference internal" href="openvino_docs_OV_UG_lpt_step4_cleanup.html#doxid-openvino-docs-o-v-u-g-lpt-step4-cleanup"><span class="std std-ref">Step #4: Cleanup transformations</span></a></p></li>
 </ul>
-</div>
-<div class="section" id="step-1-prerequisites">
+</section>
+<section id="step-1-prerequisites">
 <h3>Step 1. Prerequisites<a class="headerlink" href="#step-1-prerequisites" title="Permalink to this headline">¶</a></h3>
 <p>This step fuses and propagates some operations in the model to prepare for the next step. It is required for OpenVINO plugins. Transformations:</p>
 <ul class="simple">
@@ -2075,8 +2082,8 @@
 <li><p><a class="reference internal" href="openvino_docs_OV_UG_lpt_LinOpSequenceFusion.html#doxid-openvino-docs-o-v-u-g-lpt-lin-op-sequence-fusion"><span class="std std-ref">LinOpSequenceFusion</span></a></p></li>
 </ul>
 <p>The model on this step is changed. There are more details in developer guide <a class="reference internal" href="openvino_docs_OV_UG_lpt_step1_prerequisites.html#doxid-openvino-docs-o-v-u-g-lpt-step1-prerequisites"><span class="std std-ref">Prerequisites transformations</span></a>.</p>
-</div>
-<div class="section" id="step-2-markup">
+</section>
+<section id="step-2-markup">
 <h3>Step 2. Markup<a class="headerlink" href="#step-2-markup" title="Permalink to this headline">¶</a></h3>
 <p>This step creates runtime attributes for operations. These attributes will be used in next step. Transformations:</p>
 <ul class="simple">
@@ -2089,8 +2096,8 @@
 <li><p><a class="reference internal" href="openvino_docs_OV_UG_lpt_AlignQuantizationParameters.html#doxid-openvino-docs-o-v-u-g-lpt-align-quantization-parameters"><span class="std std-ref">AlignQuantizationParameters</span></a></p></li>
 </ul>
 <p>The model on this step is changed: only new attributes are added to some operations. There are more details in developer guide <a class="reference internal" href="openvino_docs_OV_UG_lpt_step2_markup.html#doxid-openvino-docs-o-v-u-g-lpt-step2-markup"><span class="std std-ref">Markup transformations</span></a>.</p>
-</div>
-<div class="section" id="step-3-main-transformations-fakequantize-decomposition-and-dequantization-operations-handling">
+</section>
+<section id="step-3-main-transformations-fakequantize-decomposition-and-dequantization-operations-handling">
 <h3>Step 3. Main transformations, FakeQuantize decomposition and dequantization operations handling<a class="headerlink" href="#step-3-main-transformations-fakequantize-decomposition-and-dequantization-operations-handling" title="Permalink to this headline">¶</a></h3>
 <p>This step has the most transformations. These transformations can be separated in two groups: decomposition transformation and dequantization operations handling. There are more details in developer guide <a class="reference internal" href="openvino_docs_OV_UG_lpt_step3_main.html#doxid-openvino-docs-o-v-u-g-lpt-step3-main"><span class="std std-ref">Main transformations</span></a>. Transformations:</p>
 <ul class="simple">
@@ -2125,24 +2132,24 @@
 <li><p><a class="reference internal" href="openvino_docs_OV_UG_lpt_UnsqueezeTransformation.html#doxid-openvino-docs-o-v-u-g-lpt-unsqueeze-transformation"><span class="std std-ref">UnsqueezeTransformation</span></a></p></li>
 <li><p><a class="reference internal" href="openvino_docs_OV_UG_lpt_VariadicSplitTransformation.html#doxid-openvino-docs-o-v-u-g-lpt-variadic-split-transformation"><span class="std std-ref">VariadicSplitTransformation</span></a></p></li>
 </ul>
-<div class="section" id="decomposition-transformations">
+<section id="decomposition-transformations">
 <h4>Decomposition transformations<a class="headerlink" href="#decomposition-transformations" title="Permalink to this headline">¶</a></h4>
 <p>Decomposition transformations decompose the <code class="docutils literal notranslate"><span class="pre">FakeQuantize</span></code> operation to: quantize (<code class="docutils literal notranslate"><span class="pre">FakeQuantize</span></code> with low precision output) and dequantization operations (opposite to quantize, with low precision input and the original precision output). For dequantization operations LPT uses three operations: <code class="docutils literal notranslate"><span class="pre">Convert</span></code>, <code class="docutils literal notranslate"><span class="pre">Subtract</span></code> and <code class="docutils literal notranslate"><span class="pre">Multiply</span></code>. Element-wise operations <code class="docutils literal notranslate"><span class="pre">Subtract</span></code> and <code class="docutils literal notranslate"><span class="pre">Multiply</span></code> have constants on the second branches. If dequantization operations are not handled at the end of LPT pipeline, then they will be fused back to the <code class="docutils literal notranslate"><span class="pre">FakeQuantize</span></code>.</p>
 <p>Original <code class="docutils literal notranslate"><span class="pre">FakeQuantize</span></code> :</p>
 <img alt="FakeQuantize operation before LPT" src="../_images/fq.common.png" />
 <p><code class="docutils literal notranslate"><span class="pre">FakeQuantize</span></code> after decomposition to quantization and dequantization operations:</p>
 <img alt="FakeQuantize operation after LPT" src="../_images/fq.transformed.png" />
-</div>
-<div class="section" id="dequantization-operations-handling-transformations">
+</section>
+<section id="dequantization-operations-handling-transformations">
 <h4>Dequantization operations handling transformations<a class="headerlink" href="#dequantization-operations-handling-transformations" title="Permalink to this headline">¶</a></h4>
 <p>In this step, LPT transformations fuse dequantization operations or move them through existing model operations as much as possible.</p>
 <p>Original <code class="docutils literal notranslate"><span class="pre">Convolution</span></code> operation in FP32 with dequantization operations before:</p>
 <img alt="Convolution operation before LPT" src="../_images/model_fq_and_convolution.common.png" />
 <p><code class="docutils literal notranslate"><span class="pre">Convolution</span></code> operation in INT8 after decomposition and dequantization operations handling:</p>
 <img alt="Convolution operation after LPT" src="../_images/model_fq_and_convolution.transformed.png" />
-</div>
-</div>
-<div class="section" id="step-4-cleanup-of-the-result-model">
+</section>
+</section>
+<section id="step-4-cleanup-of-the-result-model">
 <h3>Step 4: Cleanup of the result model<a class="headerlink" href="#step-4-cleanup-of-the-result-model" title="Permalink to this headline">¶</a></h3>
 <p>LPT cleanup transformations is final stage in LPT pipeline. In this step LPT transformations clean up the result model to avoid not handled dequantization operations: fuse dequantization operations if possible (fuse at least <code class="docutils literal notranslate"><span class="pre">Convert</span></code> operations if not) to other model operations to cleanup result model. Transformations:</p>
 <ul class="simple">
@@ -2158,67 +2165,67 @@
 <img alt="TODO: FakeQuantize operation with dequantization operations before LPT" src="../_images/fq.transformed.png" />
 <p><code class="docutils literal notranslate"><span class="pre">FakeQuantize</span></code> operation with fused dequantization operations:</p>
 <img alt="TODO: FakeQuantize operation with fused operations after LPT" src="../_images/fq.common.png" />
-</div>
-</div>
-<div class="section" id="low-precision-transformations-in-plugin-transformation-pipeline">
+</section>
+</section>
+<section id="low-precision-transformations-in-plugin-transformation-pipeline">
 <h2>Low precision transformations in plugin transformation pipeline<a class="headerlink" href="#low-precision-transformations-in-plugin-transformation-pipeline" title="Permalink to this headline">¶</a></h2>
 <p>Typical transformation pipeline described below.</p>
-<div class="section" id="step-1-common-optimizations">
+<section id="step-1-common-optimizations">
 <h3>Step 1. Common optimizations<a class="headerlink" href="#step-1-common-optimizations" title="Permalink to this headline">¶</a></h3>
 <p>This step is optional for LPT but typically is presented in OpenVINO™ plugins. The step doesn’t use any LPT transformation. Firstly, the step disables dequantization operations constant folding on constant subgraph on weights to prevent the lost of dequantization info on the next plugin transformations. After that, it optimizes nGraph function and convert operations to operation set 1. Typically, usage of this step is the simplest way to meet LPT requirements for the input quantized model. If plugin can guarantee that LPT input requirements are met, then this step can be skipped.</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="c1">// check if the function is quantized to ignore LPT transformations for not quantized function to speed up model loading</span>
-<span class="k">const</span> <span class="kt">bool</span> <span class="n">useLpt</span> <span class="o">=</span> ngraph::pass::low_precision::LowPrecision::isFunctionQuantized<span></span><span class="p">(</span><span class="n">nGraphFunc</span><span class="p">);</span>
+<span class="k">const</span> <span class="kt">bool</span> <span class="n">useLpt</span> <span class="o">=</span> <a class="reference internal" href="../api/groups/classngraph_1_1pass_1_1low_precision_1_1LowPrecision.html#doxid-classngraph-1-1pass-1-1low-precision-1-1-low-precision-1a067d6e01e3585f860bff01118399328c"><span class="std std-ref">ngraph::pass::low_precision::LowPrecision::isFunctionQuantized</span></a><span></span><span class="p">(</span><span class="n">nGraphFunc</span><span class="p">);</span>
 <span class="k">auto</span> <span class="n">defaultPrecisions</span> <span class="o">=</span>
-    <span class="n">useLpt</span> <span class="o">?</span> ngraph::pass::low_precision::precision_set::int8_support<span></span> <span class="o">:</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">ov</span><span class="o">::</span><span class="n">element</span><span class="o">::</span><span class="n">Type</span><span class="o">&gt;</span><span class="p">{};</span>
+    <span class="n">useLpt</span> <span class="o">?</span> <a class="reference internal" href="../api/groups/namespacengraph_1_1pass_1_1low_precision_1_1precision_set.html#doxid-namespacengraph-1-1pass-1-1low-precision-1-1precision-set-1aadf8375a12f123670991b043f50a94e5"><span class="std std-ref">ngraph::pass::low_precision::precision_set::int8_support</span></a><span></span> <span class="o">:</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">ov</span><span class="o">::</span><span class="n">element</span><span class="o">::</span><span class="n">Type</span><span class="o">&gt;</span><span class="p">{};</span>
 <span class="k">if</span> <span class="p">(</span><span class="n">useLpt</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// disable constant folding on constant subgraph to use the subgraph for LPT</span>
-    <span class="n">manager</span><span class="p">.</span>register_pass<span></span><span class="o">&lt;</span>ngraph::pass::DisableConvertConstantFoldingOnConstPath<span></span><span class="o">&gt;</span><span class="p">(</span><span class="n">defaultPrecisions</span><span class="p">);</span>
+    <span class="n">manager</span><span class="p">.</span>register_pass<span></span><span class="o">&lt;</span><a class="reference internal" href="../api/groups/classngraph_1_1pass_1_1DisableConvertConstantFoldingOnConstPath.html#doxid-classngraph-1-1pass-1-1-disable-convert-constant-folding-on-const-path"><span class="std std-ref">ngraph::pass::DisableConvertConstantFoldingOnConstPath</span></a><span></span><span class="o">&gt;</span><span class="p">(</span><span class="n">defaultPrecisions</span><span class="p">);</span>
 <span class="p">}</span>
 
 <span class="c1">// nGraph common transformations happen here</span>
 
 <span class="k">if</span> <span class="p">(</span><span class="n">useLpt</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// convert subtract constant to INT8 to prevent unnecessary FP16 to FP32 conversion</span>
-    <span class="n">manager</span><span class="p">.</span>register_pass<span></span><span class="o">&lt;</span>ngraph::pass::low_precision::ConvertSubtractConstant<span></span><span class="o">&gt;</span><span class="p">(</span><span class="n">defaultPrecisions</span><span class="p">);</span>
+    <span class="n">manager</span><span class="p">.</span>register_pass<span></span><span class="o">&lt;</span><a class="reference internal" href="../api/groups/classngraph_1_1pass_1_1low_precision_1_1ConvertSubtractConstant.html#doxid-classngraph-1-1pass-1-1low-precision-1-1-convert-subtract-constant"><span class="std std-ref">ngraph::pass::low_precision::ConvertSubtractConstant</span></a><span></span><span class="o">&gt;</span><span class="p">(</span><span class="n">defaultPrecisions</span><span class="p">);</span>
 <span class="p">}</span>
 
 <span class="c1">// nGraph common transformations happen here</span>
 
 <span class="k">if</span> <span class="p">(</span><span class="n">useLpt</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// convert not supported cases FakeQuantize -&gt; Convert -&gt; Convert -&gt; Subtract -&gt; Multiply to a single FakeQuantize</span>
-    <span class="n">pass_config</span><span class="o">-&gt;</span>set_callback<span></span><span class="o">&lt;</span>ngraph::pass::ConvertQuantizeDequantize<span></span><span class="o">&gt;</span><span class="p">([</span><span class="o">&amp;</span><span class="n">defaultPrecisions</span><span class="p">](</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">ngraph</span><span class="o">::</span><span class="n">Node</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">node</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">bool</span> <span class="p">{</span>
-        <span class="k">return</span> ngraph::pass::low_precision::NetworkHelper::areQuantizeAndDequantizeSupportedForMultiply<span></span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">defaultPrecisions</span><span class="p">);</span>
+    <span class="n">pass_config</span><span class="o">-&gt;</span><a class="reference internal" href="../api/groups/classov_1_1pass_1_1PassBase.html#doxid-classov-1-1pass-1-1-pass-base-1a6a56827a1cf76be99289bab703982869"><span class="std std-ref">set_callback</span></a><span></span><span class="o">&lt;</span><a class="reference internal" href="../api/groups/classngraph_1_1pass_1_1ConvertQuantizeDequantize.html#doxid-classngraph-1-1pass-1-1-convert-quantize-dequantize"><span class="std std-ref">ngraph::pass::ConvertQuantizeDequantize</span></a><span></span><span class="o">&gt;</span><span class="p">([</span><span class="o">&amp;</span><span class="n">defaultPrecisions</span><span class="p">](</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">ngraph</span><span class="o">::</span><span class="n">Node</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">node</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">bool</span> <span class="p">{</span>
+        <span class="k">return</span> <a class="reference internal" href="../api/groups/classngraph_1_1pass_1_1low_precision_1_1NetworkHelper.html#doxid-classngraph-1-1pass-1-1low-precision-1-1-network-helper-1ae0dfcb088b4a5659a946b56e171ae2d7"><span class="std std-ref">ngraph::pass::low_precision::NetworkHelper::areQuantizeAndDequantizeSupportedForMultiply</span></a><span></span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">defaultPrecisions</span><span class="p">);</span>
     <span class="p">});</span>
 
     <span class="c1">// convert not supported cases FakeQuantize -&gt; Convert -&gt; Convert -&gt; Subtract -&gt; Multiply to a single FakeQuantize</span>
-    <span class="n">pass_config</span><span class="o">-&gt;</span>set_callback<span></span><span class="o">&lt;</span>ngraph::pass::ConvertSubtract<span></span><span class="o">&gt;</span><span class="p">([</span><span class="o">&amp;</span><span class="n">defaultPrecisions</span><span class="p">](</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">ngraph</span><span class="o">::</span><span class="n">Node</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">node</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">bool</span> <span class="p">{</span>
-        <span class="k">return</span> ngraph::pass::low_precision::NetworkHelper::areQuantizeAndDequantizeSupportedForSubtract<span></span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">defaultPrecisions</span><span class="p">);</span>
+    <span class="n">pass_config</span><span class="o">-&gt;</span><a class="reference internal" href="../api/groups/classov_1_1pass_1_1PassBase.html#doxid-classov-1-1pass-1-1-pass-base-1a6a56827a1cf76be99289bab703982869"><span class="std std-ref">set_callback</span></a><span></span><span class="o">&lt;</span><a class="reference internal" href="../api/groups/classngraph_1_1pass_1_1ConvertSubtract.html#doxid-classngraph-1-1pass-1-1-convert-subtract"><span class="std std-ref">ngraph::pass::ConvertSubtract</span></a><span></span><span class="o">&gt;</span><span class="p">([</span><span class="o">&amp;</span><span class="n">defaultPrecisions</span><span class="p">](</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">ngraph</span><span class="o">::</span><span class="n">Node</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">node</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">bool</span> <span class="p">{</span>
+        <span class="k">return</span> <a class="reference internal" href="../api/groups/classngraph_1_1pass_1_1low_precision_1_1NetworkHelper.html#doxid-classngraph-1-1pass-1-1low-precision-1-1-network-helper-1acaa693323231737064c9d7d6e3a25b89"><span class="std std-ref">ngraph::pass::low_precision::NetworkHelper::areQuantizeAndDequantizeSupportedForSubtract</span></a><span></span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">defaultPrecisions</span><span class="p">);</span>
     <span class="p">});</span>
 <span class="p">}</span>
 
-<span class="n">manager</span><span class="p">.</span>run_passes<span></span><span class="p">(</span><span class="n">nGraphFunc</span><span class="p">);</span></pre></div></div></div>
-<div class="section" id="step-2-low-precision-transformations-execution">
+<span class="n">manager</span><span class="p">.</span><a class="reference internal" href="../api/groups/classov_1_1pass_1_1Manager.html#doxid-classov-1-1pass-1-1-manager-1a8b155191130f2c15e294cfd259d4ca0d"><span class="std std-ref">run_passes</span></a><span></span><span class="p">(</span><span class="n">nGraphFunc</span><span class="p">);</span></pre></div></div></section>
+<section id="step-2-low-precision-transformations-execution">
 <h3>Step 2. Low precision transformations execution<a class="headerlink" href="#step-2-low-precision-transformations-execution" title="Permalink to this headline">¶</a></h3>
 <p>This step is mandatory. It configures and runs LPT transformations.</p>
-<div class="highlight"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="k">namespace</span> ngraph::pass::low_precision<span></span><span class="p">;</span>
+<div class="highlight"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="k">namespace</span> <a class="reference internal" href="../api/groups/namespacengraph_1_1pass_1_1low_precision.html#doxid-namespacengraph-1-1pass-1-1low-precision"><span class="std std-ref">ngraph::pass::low_precision</span></a><span></span><span class="p">;</span>
 <span class="k">if</span> <span class="p">(</span><span class="n">useLpt</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// Low precision transformations plugin specific configuration: restrictions definition</span>
     <span class="k">auto</span> <span class="n">supportedPrecisions</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">PrecisionsRestriction</span><span class="o">&gt;</span><span class="p">({</span>
         <span class="n">PrecisionsRestriction</span><span class="o">::</span><span class="n">create</span><span class="o">&lt;</span><span class="n">ngraph</span><span class="o">::</span><span class="n">opset1</span><span class="o">::</span><span class="n">Convolution</span><span class="o">&gt;</span><span class="p">({</span>
-            <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="p">{</span>ngraph::element::u8<span></span><span class="p">}},</span>
-            <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="p">{</span>ngraph::element::i8<span></span><span class="p">}},</span>
+            <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="p">{</span><a class="reference internal" href="../api/groups/groupov_element_cpp_api.html#doxid-group-ov-element-cpp-api-1gaaf60c536d3e295285f6a899eb3d29e2f"><span class="std std-ref">ngraph::element::u8</span></a><span></span><span class="p">}},</span>
+            <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="p">{</span><a class="reference internal" href="../api/groups/groupov_element_cpp_api.html#doxid-group-ov-element-cpp-api-1gaae12d14b28baf46d3c6f76c55b05fb42"><span class="std std-ref">ngraph::element::i8</span></a><span></span><span class="p">}},</span>
         <span class="p">}),</span>
         <span class="n">PrecisionsRestriction</span><span class="o">::</span><span class="n">create</span><span class="o">&lt;</span><span class="n">ngraph</span><span class="o">::</span><span class="n">opset1</span><span class="o">::</span><span class="n">ConvolutionBackpropData</span><span class="o">&gt;</span><span class="p">({</span>
-            <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="p">{</span>ngraph::element::u8<span></span><span class="p">,</span> ngraph::element::i8<span></span><span class="p">}},</span>
-            <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="p">{</span>ngraph::element::i8<span></span><span class="p">}}</span>
+            <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="p">{</span><a class="reference internal" href="../api/groups/groupov_element_cpp_api.html#doxid-group-ov-element-cpp-api-1gaaf60c536d3e295285f6a899eb3d29e2f"><span class="std std-ref">ngraph::element::u8</span></a><span></span><span class="p">,</span> <a class="reference internal" href="../api/groups/groupov_element_cpp_api.html#doxid-group-ov-element-cpp-api-1gaae12d14b28baf46d3c6f76c55b05fb42"><span class="std std-ref">ngraph::element::i8</span></a><span></span><span class="p">}},</span>
+            <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="p">{</span><a class="reference internal" href="../api/groups/groupov_element_cpp_api.html#doxid-group-ov-element-cpp-api-1gaae12d14b28baf46d3c6f76c55b05fb42"><span class="std std-ref">ngraph::element::i8</span></a><span></span><span class="p">}}</span>
         <span class="p">}),</span>
         <span class="n">PrecisionsRestriction</span><span class="o">::</span><span class="n">create</span><span class="o">&lt;</span><span class="n">ngraph</span><span class="o">::</span><span class="n">opset1</span><span class="o">::</span><span class="n">GroupConvolution</span><span class="o">&gt;</span><span class="p">({</span>
-            <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="p">{</span>ngraph::element::u8<span></span><span class="p">}},</span>
-            <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="p">{</span>ngraph::element::i8<span></span><span class="p">}}</span>
+            <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="p">{</span><a class="reference internal" href="../api/groups/groupov_element_cpp_api.html#doxid-group-ov-element-cpp-api-1gaaf60c536d3e295285f6a899eb3d29e2f"><span class="std std-ref">ngraph::element::u8</span></a><span></span><span class="p">}},</span>
+            <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="p">{</span><a class="reference internal" href="../api/groups/groupov_element_cpp_api.html#doxid-group-ov-element-cpp-api-1gaae12d14b28baf46d3c6f76c55b05fb42"><span class="std std-ref">ngraph::element::i8</span></a><span></span><span class="p">}}</span>
         <span class="p">}),</span>
         <span class="n">PrecisionsRestriction</span><span class="o">::</span><span class="n">create</span><span class="o">&lt;</span><span class="n">ngraph</span><span class="o">::</span><span class="n">opset1</span><span class="o">::</span><span class="n">Multiply</span><span class="o">&gt;</span><span class="p">({</span>
-            <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="p">{</span>ngraph::element::u8<span></span><span class="p">}},</span>
-            <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="p">{</span>ngraph::element::i8<span></span><span class="p">}},</span>
+            <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="p">{</span><a class="reference internal" href="../api/groups/groupov_element_cpp_api.html#doxid-group-ov-element-cpp-api-1gaaf60c536d3e295285f6a899eb3d29e2f"><span class="std std-ref">ngraph::element::u8</span></a><span></span><span class="p">}},</span>
+            <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="p">{</span><a class="reference internal" href="../api/groups/groupov_element_cpp_api.html#doxid-group-ov-element-cpp-api-1gaae12d14b28baf46d3c6f76c55b05fb42"><span class="std std-ref">ngraph::element::i8</span></a><span></span><span class="p">}},</span>
         <span class="p">}),</span>
     <span class="p">});</span>
 
@@ -2229,43 +2236,43 @@
     <span class="p">});</span>
 
     <span class="c1">// Low precision transformations instantiation and registration in pass manager</span>
-    ngraph::pass::Manager<span></span> <span class="n">lptManager</span><span class="p">;</span>
-    <span class="n">lptManager</span><span class="p">.</span>register_pass<span></span><span class="o">&lt;</span>ngraph::pass::low_precision::LowPrecision<span></span><span class="o">&gt;</span><span class="p">(</span><span class="n">supportedPrecisions</span><span class="p">,</span> <span class="n">perTensorQuantization</span><span class="p">);</span>
+    <a class="reference internal" href="../api/groups/classov_1_1pass_1_1Manager.html#doxid-classov-1-1pass-1-1-manager"><span class="std std-ref">ngraph::pass::Manager</span></a><span></span> <span class="n">lptManager</span><span class="p">;</span>
+    <span class="n">lptManager</span><span class="p">.</span>register_pass<span></span><span class="o">&lt;</span><a class="reference internal" href="../api/groups/classngraph_1_1pass_1_1low_precision_1_1LowPrecision.html#doxid-classngraph-1-1pass-1-1low-precision-1-1-low-precision"><span class="std std-ref">ngraph::pass::low_precision::LowPrecision</span></a><span></span><span class="o">&gt;</span><span class="p">(</span><span class="n">supportedPrecisions</span><span class="p">,</span> <span class="n">perTensorQuantization</span><span class="p">);</span>
 
     <span class="c1">// Low precision transformations plugin specific configuration: transformation callbacks definition</span>
-    <span class="n">lptManager</span><span class="p">.</span>get_pass_config<span></span><span class="p">()</span><span class="o">-&gt;</span><span class="n">set_callback</span><span class="o">&lt;</span>MarkupPrecisions<span></span><span class="o">&gt;</span><span class="p">([](</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">ngraph</span><span class="o">::</span><span class="n">Node</span><span class="o">&gt;&amp;</span> <span class="n">node</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">bool</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span> multiply<span></span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">dynamic_pointer_cast</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">ngraph</span><span class="o">::</span><span class="n">opset1</span><span class="o">::</span><span class="n">Multiply</span><span class="o">&gt;</span><span class="p">(</span><span class="n">node</span><span class="p">))</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="o">!</span>MultiplyToGroupConvolutionTransformation::canBeTransformedToGroupConvolution<span></span><span class="p">(</span>multiply<span></span><span class="p">);</span>
+    <span class="n">lptManager</span><span class="p">.</span>get_pass_config<span></span><span class="p">()</span><span class="o">-&gt;</span><span class="n">set_callback</span><span class="o">&lt;</span><a class="reference internal" href="../api/groups/classngraph_1_1pass_1_1low_precision_1_1MarkupPrecisions.html#doxid-classngraph-1-1pass-1-1low-precision-1-1-markup-precisions"><span class="std std-ref">MarkupPrecisions</span></a><span></span><span class="o">&gt;</span><span class="p">([](</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">ngraph</span><span class="o">::</span><span class="n">Node</span><span class="o">&gt;&amp;</span> <span class="n">node</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">bool</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span> <a class="reference internal" href="../api/groups/namespacengraph_1_1runtime_1_1reference.html#doxid-namespacengraph-1-1runtime-1-1reference-1a00292cb933b4e80075ebb7c6fcd77719"><span class="std std-ref">multiply</span></a><span></span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">dynamic_pointer_cast</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">ngraph</span><span class="o">::</span><span class="n">opset1</span><span class="o">::</span><span class="n">Multiply</span><span class="o">&gt;</span><span class="p">(</span><span class="n">node</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="o">!</span><a class="reference internal" href="../api/groups/classngraph_1_1pass_1_1low_precision_1_1MultiplyToGroupConvolutionTransformation.html#doxid-classngraph-1-1pass-1-1low-precision-1-1-multiply-to-group-convolution-transformation-1a0a5b80d6d2721ab4dac0714fa31367ec"><span class="std std-ref">MultiplyToGroupConvolutionTransformation::canBeTransformedToGroupConvolution</span></a><span></span><span class="p">(</span><a class="reference internal" href="../api/groups/namespacengraph_1_1runtime_1_1reference.html#doxid-namespacengraph-1-1runtime-1-1reference-1a00292cb933b4e80075ebb7c6fcd77719"><span class="std std-ref">multiply</span></a><span></span><span class="p">);</span>
         <span class="p">}</span>
         <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
     <span class="p">});</span>
-    <span class="n">lptManager</span><span class="p">.</span>get_pass_config<span></span><span class="p">()</span><span class="o">-&gt;</span><span class="n">set_callback</span><span class="o">&lt;</span>ConvolutionBackpropDataTransformation<span></span><span class="o">&gt;</span><span class="p">([</span><span class="o">&amp;</span><span class="n">defaultPrecisions</span><span class="p">](</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">ngraph</span><span class="o">::</span><span class="n">Node</span><span class="o">&gt;&amp;</span> <span class="n">node</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">bool</span> <span class="p">{</span>
-        <span class="k">return</span> LayerTransformation::isAsymmetricQuantization<span></span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">defaultPrecisions</span><span class="p">)</span> <span class="o">||</span> WeightableLayerTransformation::isAsymmetricOnWeights<span></span><span class="p">(</span><span class="n">node</span><span class="p">);</span>
+    <span class="n">lptManager</span><span class="p">.</span>get_pass_config<span></span><span class="p">()</span><span class="o">-&gt;</span><span class="n">set_callback</span><span class="o">&lt;</span><a class="reference internal" href="../api/groups/classngraph_1_1pass_1_1low_precision_1_1ConvolutionBackpropDataTransformation.html#doxid-classngraph-1-1pass-1-1low-precision-1-1-convolution-backprop-data-transformation"><span class="std std-ref">ConvolutionBackpropDataTransformation</span></a><span></span><span class="o">&gt;</span><span class="p">([</span><span class="o">&amp;</span><span class="n">defaultPrecisions</span><span class="p">](</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">ngraph</span><span class="o">::</span><span class="n">Node</span><span class="o">&gt;&amp;</span> <span class="n">node</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">bool</span> <span class="p">{</span>
+        <span class="k">return</span> <a class="reference internal" href="../api/groups/classngraph_1_1pass_1_1low_precision_1_1LayerTransformation.html#doxid-classngraph-1-1pass-1-1low-precision-1-1-layer-transformation-1a23155a77026a48988edbd0abec14b0d7"><span class="std std-ref">LayerTransformation::isAsymmetricQuantization</span></a><span></span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">defaultPrecisions</span><span class="p">)</span> <span class="o">||</span> <a class="reference internal" href="../api/groups/classngraph_1_1pass_1_1low_precision_1_1WeightableLayerTransformation.html#doxid-classngraph-1-1pass-1-1low-precision-1-1-weightable-layer-transformation-1aa3cdd67fafb1c8e13678696707777912"><span class="std std-ref">WeightableLayerTransformation::isAsymmetricOnWeights</span></a><span></span><span class="p">(</span><span class="n">node</span><span class="p">);</span>
     <span class="p">});</span>
-    <span class="n">lptManager</span><span class="p">.</span>get_pass_config<span></span><span class="p">()</span><span class="o">-&gt;</span><span class="n">set_callback</span><span class="o">&lt;</span>MultiplyToGroupConvolutionTransformation<span></span><span class="o">&gt;</span><span class="p">([](</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">ngraph</span><span class="o">::</span><span class="n">Node</span><span class="o">&gt;&amp;</span> <span class="n">node</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">bool</span> <span class="p">{</span>
-        <span class="k">return</span> MultiplyToGroupConvolutionTransformation::isDynamicOrScalar<span></span><span class="p">(</span><span class="n">node</span><span class="p">);</span>
+    <span class="n">lptManager</span><span class="p">.</span>get_pass_config<span></span><span class="p">()</span><span class="o">-&gt;</span><span class="n">set_callback</span><span class="o">&lt;</span><a class="reference internal" href="../api/groups/classngraph_1_1pass_1_1low_precision_1_1MultiplyToGroupConvolutionTransformation.html#doxid-classngraph-1-1pass-1-1low-precision-1-1-multiply-to-group-convolution-transformation"><span class="std std-ref">MultiplyToGroupConvolutionTransformation</span></a><span></span><span class="o">&gt;</span><span class="p">([](</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">ngraph</span><span class="o">::</span><span class="n">Node</span><span class="o">&gt;&amp;</span> <span class="n">node</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">bool</span> <span class="p">{</span>
+        <span class="k">return</span> <a class="reference internal" href="../api/groups/classngraph_1_1pass_1_1low_precision_1_1MultiplyToGroupConvolutionTransformation.html#doxid-classngraph-1-1pass-1-1low-precision-1-1-multiply-to-group-convolution-transformation-1a1d72f3597ecdad823d4eba0570c479cd"><span class="std std-ref">MultiplyToGroupConvolutionTransformation::isDynamicOrScalar</span></a><span></span><span class="p">(</span><span class="n">node</span><span class="p">);</span>
     <span class="p">});</span>
 
     <span class="c1">// Low precision transformations execution</span>
     <span class="n">lptManager</span><span class="p">.</span><span class="n">run_passes</span><span class="p">(</span><span class="n">nGraphFunc</span><span class="p">);</span>
-<span class="p">}</span></pre></div></div></div>
-<div class="section" id="step-3-plugin-specific-transformations">
+<span class="p">}</span></pre></div></div></section>
+<section id="step-3-plugin-specific-transformations">
 <h3>Step 3. Plugin-specific transformations<a class="headerlink" href="#step-3-plugin-specific-transformations" title="Permalink to this headline">¶</a></h3>
 <p>This step is optional. It modifies the nGraph function to a device-specific operation set.</p>
-<div class="highlight"><div class="highlight"><pre>ngraph::pass::Manager<span></span> <span class="n">deviceSpecificManager</span><span class="p">;</span>
+<div class="highlight"><div class="highlight"><pre><a class="reference internal" href="../api/groups/classov_1_1pass_1_1Manager.html#doxid-classov-1-1pass-1-1-manager"><span class="std std-ref">ngraph::pass::Manager</span></a><span></span> <span class="n">deviceSpecificManager</span><span class="p">;</span>
 <span class="n">deviceSpecificManager</span><span class="p">.</span>register_pass<span></span><span class="o">&lt;</span><span class="n">ngraph</span><span class="o">::</span><span class="n">pass</span><span class="o">::</span><span class="n">device</span><span class="o">::</span><span class="n">ConvertOpSet1ToDeviceSpecific</span><span class="o">&gt;</span><span class="p">();</span>
-<span class="n">deviceSpecificManager</span><span class="p">.</span>run_passes<span></span><span class="p">(</span><span class="n">nGraphFunc</span><span class="p">);</span></pre></div></div></div>
-</div>
-<div class="section" id="result-model-overview">
+<span class="n">deviceSpecificManager</span><span class="p">.</span><a class="reference internal" href="../api/groups/classov_1_1pass_1_1Manager.html#doxid-classov-1-1pass-1-1-manager-1a8b155191130f2c15e294cfd259d4ca0d"><span class="std std-ref">run_passes</span></a><span></span><span class="p">(</span><span class="n">nGraphFunc</span><span class="p">);</span></pre></div></div></section>
+</section>
+<section id="result-model-overview">
 <h2>Result model overview<a class="headerlink" href="#result-model-overview" title="Permalink to this headline">¶</a></h2>
 <p>Let’s explore quantized <a class="reference external" href="https://github.com/openvinotoolkit/open_model_zoo/tree/master/models/public/resnet-50-tf">TensorFlow* implementation of ResNet-50</a> model. Use Model Downloader tool to download the <code class="docutils literal notranslate"><span class="pre">fp16</span></code> model from <a class="reference external" href="https://github.com/openvinotoolkit/open_model_zoo">OpenVINO™ Toolkit - Open Model Zoo repository</a> :</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">omz_downloader</span> <span class="o">--</span><span class="n">name</span> <span class="n">resnet</span><span class="o">-</span><span class="mi">50</span><span class="o">-</span><span class="n">tf</span> <span class="o">--</span><span class="n">precisions</span> <span class="n">FP16</span><span class="o">-</span><span class="n">INT8</span></pre></div></div><p>After that you should quantize model by the Model Quantizer tool.</p>
-<div class="highlight"><div class="highlight"><pre><span></span><span class="n">omz_quantizer</span> <span class="o">--</span><span class="n">model_dir</span> <span class="k">public</span><span class="o">/</span><span class="n">resnet</span><span class="o">-</span><span class="mi">50</span><span class="o">-</span><span class="n">tf</span> <span class="o">--</span><span class="n">dataset_dir</span> <span class="o">&lt;</span><span class="n">DATASET_DIR</span><span class="o">&gt;</span> <span class="o">--</span><span class="n">precisions</span><span class="o">=</span><span class="n">FP16</span><span class="o">-</span><span class="n">INT8</span></pre></div></div><div class="section" id="inference">
+<div class="highlight"><div class="highlight"><pre><span></span><span class="n">omz_quantizer</span> <span class="o">--</span><span class="n">model_dir</span> <span class="k">public</span><span class="o">/</span><span class="n">resnet</span><span class="o">-</span><span class="mi">50</span><span class="o">-</span><span class="n">tf</span> <span class="o">--</span><span class="n">dataset_dir</span> <span class="o">&lt;</span><span class="n">DATASET_DIR</span><span class="o">&gt;</span> <span class="o">--</span><span class="n">precisions</span><span class="o">=</span><span class="n">FP16</span><span class="o">-</span><span class="n">INT8</span></pre></div></div><section id="inference">
 <h3>Inference<a class="headerlink" href="#inference" title="Permalink to this headline">¶</a></h3>
 <p>The simplest way to infer the model and collect performance counters is <a class="reference internal" href="openvino_inference_engine_samples_benchmark_app_README.html#doxid-openvino-inference-engine-samples-benchmark-app-r-e-a-d-m-e"><span class="std std-ref">Benchmark Application</span></a>.</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="p">.</span><span class="o">/</span><span class="n">benchmark_app</span> <span class="o">-</span><span class="n">m</span> <span class="n">resnet</span><span class="o">-</span><span class="mi">50</span><span class="o">-</span><span class="n">tf</span><span class="p">.</span><span class="n">xml</span> <span class="o">-</span><span class="n">d</span> <span class="n">CPU</span> <span class="o">-</span><span class="n">niter</span> <span class="mi">1</span> <span class="o">-</span><span class="n">api</span> <span class="n">sync</span> <span class="o">-</span><span class="n">report_type</span> <span class="n">average_counters</span>  <span class="o">-</span><span class="n">report_folder</span> <span class="n">pc_report_dir</span></pre></div></div><p>If you infer the model with the OpenVINO™ CPU plugin and collect performance counters, all operations (except last not quantized SoftMax) are executed in INT8 precision.</p>
-</div>
-<div class="section" id="results-analysis">
+</section>
+<section id="results-analysis">
 <h3>Results analysis<a class="headerlink" href="#results-analysis" title="Permalink to this headline">¶</a></h3>
 <p>Result model depends on different factors:</p>
 <ul class="simple">
@@ -2361,13 +2368,13 @@
 <li><p>Suffix <code class="docutils literal notranslate"><span class="pre">FP32</span></code> for layers computed in 32-bit precision</p></li>
 </ul>
 <p>As result all operations (except not quantized <code class="docutils literal notranslate"><span class="pre">SoftMax</span></code> at the end of the model) in OpenVINO™ CPU plugin are inferred in low precision. Note, please, in the result model there are <code class="docutils literal notranslate"><span class="pre">FakeQuantize</span></code> operations in FP32 but the plugin responsibility is fuse these operations with previous operations. OpenVINO™ CPU plugin achieves maximum optimized inference for all operations by fusing INT8 <code class="docutils literal notranslate"><span class="pre">Convolution</span></code> with FP32 output with <code class="docutils literal notranslate"><span class="pre">FakeQuantize</span></code> operation with FP32 input and INT8 output. In this case OpenVINO™ CPU plugin uses INT8 and FP32 vectorized instructions but reports about one INT8 kernel usage for inference, which is the most optimized for this case.</p>
-</div>
-</div>
-<div class="section" id="mixed-precision">
+</section>
+</section>
+<section id="mixed-precision">
 <h2>Mixed precision<a class="headerlink" href="#mixed-precision" title="Permalink to this headline">¶</a></h2>
 <p>If LPT input model operation output has <code class="docutils literal notranslate"><span class="pre">fp16</span></code> precision then dequantization computations still occurs in <code class="docutils literal notranslate"><span class="pre">fp32</span></code> precision. This approach is used to avoid accuracy loss in <code class="docutils literal notranslate"><span class="pre">fp16</span></code> arithmetic computations. The ultimate output of the dequantization operation will have the <code class="docutils literal notranslate"><span class="pre">fp16</span></code> precision, as expected.</p>
-</div>
-<div class="section" id="customization">
+</section>
+<section id="customization">
 <h2>Customization<a class="headerlink" href="#customization" title="Permalink to this headline">¶</a></h2>
 <p>Low Precision Transformations can be customizable. Build-in customization options:</p>
 <ul class="simple">
@@ -2376,24 +2383,24 @@
 <li><p>update precisions,</p></li>
 <li><p>dequantization precision.</p></li>
 </ul>
-<div class="section" id="operation-precision-restrictions">
+<section id="operation-precision-restrictions">
 <h3>Operation precision restrictions<a class="headerlink" href="#operation-precision-restrictions" title="Permalink to this headline">¶</a></h3>
 <p>This option defines precisions which allowed for the operation input ports. The option value is passed as input argument for <code class="docutils literal notranslate"><span class="pre">LowPrecision</span></code> constructor. For example:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="k">auto</span> <span class="n">supportedPrecisions</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">PrecisionsRestriction</span><span class="o">&gt;</span><span class="p">({</span>
     <span class="n">PrecisionsRestriction</span><span class="o">::</span><span class="n">create</span><span class="o">&lt;</span><span class="n">ngraph</span><span class="o">::</span><span class="n">opset1</span><span class="o">::</span><span class="n">Convolution</span><span class="o">&gt;</span><span class="p">({</span>
-        <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="p">{</span>ngraph::element::u8<span></span><span class="p">}},</span>
-        <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="p">{</span>ngraph::element::i8<span></span><span class="p">}},</span>
+        <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="p">{</span><a class="reference internal" href="../api/groups/groupov_element_cpp_api.html#doxid-group-ov-element-cpp-api-1gaaf60c536d3e295285f6a899eb3d29e2f"><span class="std std-ref">ngraph::element::u8</span></a><span></span><span class="p">}},</span>
+        <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="p">{</span><a class="reference internal" href="../api/groups/groupov_element_cpp_api.html#doxid-group-ov-element-cpp-api-1gaae12d14b28baf46d3c6f76c55b05fb42"><span class="std std-ref">ngraph::element::i8</span></a><span></span><span class="p">}},</span>
     <span class="p">}),</span>
 <span class="p">});</span>
 
-ngraph::pass::Manager<span></span> <span class="n">lptManager</span><span class="p">;</span>
-<span class="n">lptManager</span><span class="p">.</span>register_pass<span></span><span class="o">&lt;</span>ngraph::pass::low_precision::LowPrecision<span></span><span class="o">&gt;</span><span class="p">(</span><span class="n">supportedPrecisions</span><span class="p">);</span>
+<a class="reference internal" href="../api/groups/classov_1_1pass_1_1Manager.html#doxid-classov-1-1pass-1-1-manager"><span class="std std-ref">ngraph::pass::Manager</span></a><span></span> <span class="n">lptManager</span><span class="p">;</span>
+<span class="n">lptManager</span><span class="p">.</span>register_pass<span></span><span class="o">&lt;</span><a class="reference internal" href="../api/groups/classngraph_1_1pass_1_1low_precision_1_1LowPrecision.html#doxid-classngraph-1-1pass-1-1low-precision-1-1-low-precision"><span class="std std-ref">ngraph::pass::low_precision::LowPrecision</span></a><span></span><span class="o">&gt;</span><span class="p">(</span><span class="n">supportedPrecisions</span><span class="p">);</span>
 <span class="n">lptManager</span><span class="p">.</span><span class="n">run_passes</span><span class="p">(</span><span class="n">nGraphFunc</span><span class="p">);</span></pre></div></div><p>In provided example in result model <code class="docutils literal notranslate"><span class="pre">Convolution</span></code> operation inputs must have specific precisions: <code class="docutils literal notranslate"><span class="pre">u8</span></code> (unsigned int8) precision on input 0 (on activations) and <code class="docutils literal notranslate"><span class="pre">i8</span></code> (signed int8) precision on input 1 (on weights).</p>
-</div>
-<div class="section" id="operation-per-tensor-quantization-restrictions">
+</section>
+<section id="operation-per-tensor-quantization-restrictions">
 <h3>Operation per tensor quantization restrictions<a class="headerlink" href="#operation-per-tensor-quantization-restrictions" title="Permalink to this headline">¶</a></h3>
 <p>This option defines if operation supports per-tensor quantization only. The option value is passed as input argument for <code class="docutils literal notranslate"><span class="pre">LowPrecision</span></code> constructor. For example:</p>
-<div class="highlight"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="k">namespace</span> ngraph::pass::low_precision<span></span><span class="p">;</span>
+<div class="highlight"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="k">namespace</span> <a class="reference internal" href="../api/groups/namespacengraph_1_1pass_1_1low_precision.html#doxid-namespacengraph-1-1pass-1-1low-precision"><span class="std std-ref">ngraph::pass::low_precision</span></a><span></span><span class="p">;</span>
 
 <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">PrecisionsRestriction</span><span class="o">&gt;</span> <span class="n">emptyRestrictions</span><span class="p">;</span>
 
@@ -2401,27 +2408,27 @@ ngraph::pass::Manager<span></span> <span class="n">lptManager</span><span class=
     <span class="n">QuantizationGranularityRestriction</span><span class="o">::</span><span class="n">create</span><span class="o">&lt;</span><span class="n">ngraph</span><span class="o">::</span><span class="n">opset1</span><span class="o">::</span><span class="n">Convolution</span><span class="o">&gt;</span><span class="p">({</span><span class="mi">0</span><span class="p">})</span>
 <span class="p">});</span>
 
-ngraph::pass::Manager<span></span> <span class="n">lptManager</span><span class="p">;</span>
-<span class="n">lptManager</span><span class="p">.</span>register_pass<span></span><span class="o">&lt;</span>ngraph::pass::low_precision::LowPrecision<span></span><span class="o">&gt;</span><span class="p">(</span><span class="n">emptyRestrictions</span><span class="p">,</span> <span class="n">perTensorQuantization</span><span class="p">);</span>
+<a class="reference internal" href="../api/groups/classov_1_1pass_1_1Manager.html#doxid-classov-1-1pass-1-1-manager"><span class="std std-ref">ngraph::pass::Manager</span></a><span></span> <span class="n">lptManager</span><span class="p">;</span>
+<span class="n">lptManager</span><span class="p">.</span>register_pass<span></span><span class="o">&lt;</span><a class="reference internal" href="../api/groups/classngraph_1_1pass_1_1low_precision_1_1LowPrecision.html#doxid-classngraph-1-1pass-1-1low-precision-1-1-low-precision"><span class="std std-ref">ngraph::pass::low_precision::LowPrecision</span></a><span></span><span class="o">&gt;</span><span class="p">(</span><span class="n">emptyRestrictions</span><span class="p">,</span> <span class="n">perTensorQuantization</span><span class="p">);</span>
 <span class="n">lptManager</span><span class="p">.</span><span class="n">run_passes</span><span class="p">(</span><span class="n">nGraphFunc</span><span class="p">);</span></pre></div></div><p>In provided example in result model <code class="docutils literal notranslate"><span class="pre">Convolution</span></code> operations must have per-tensor quantization on input 0 (on activations).</p>
-</div>
-<div class="section" id="update-precisions">
+</section>
+<section id="update-precisions">
 <h3>Update precisions<a class="headerlink" href="#update-precisions" title="Permalink to this headline">¶</a></h3>
 <p>This option defines if each LPT transformation updates precision or not. The option value is boolean and is passed as <code class="docutils literal notranslate"><span class="pre">updatePrecisions</span></code> member of <code class="docutils literal notranslate"><span class="pre">LayerTransformation::Params</span></code> which is input argument for <code class="docutils literal notranslate"><span class="pre">LowPrecision</span></code> constructor. All transformations are affected. If <code class="docutils literal notranslate"><span class="pre">true</span></code> then low precision transformations update precisions to low precision and doesn’t if <code class="docutils literal notranslate"><span class="pre">false</span></code>. Typically this option is used for plugin debugging.</p>
-</div>
-<div class="section" id="typical-customization-use-cases">
+</section>
+<section id="typical-customization-use-cases">
 <h3>Typical customization use cases<a class="headerlink" href="#typical-customization-use-cases" title="Permalink to this headline">¶</a></h3>
 <p>Plugin specific customization can be implemented via nGraph transformation callbacks. For example: asymmetric quantization support can be easily customizable via <code class="docutils literal notranslate"><span class="pre">LayerTransformation::isAsymmetricQuantization</span></code> and <code class="docutils literal notranslate"><span class="pre">WeightableLayerTransformation::isAsymmetricOnWeights</span></code> methods usage in callbacks. For example:</p>
-<div class="highlight"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="k">namespace</span> ngraph::pass::low_precision<span></span><span class="p">;</span>
-ngraph::pass::Manager<span></span> <span class="n">lptManager</span><span class="p">;</span>
+<div class="highlight"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="k">namespace</span> <a class="reference internal" href="../api/groups/namespacengraph_1_1pass_1_1low_precision.html#doxid-namespacengraph-1-1pass-1-1low-precision"><span class="std std-ref">ngraph::pass::low_precision</span></a><span></span><span class="p">;</span>
+<a class="reference internal" href="../api/groups/classov_1_1pass_1_1Manager.html#doxid-classov-1-1pass-1-1-manager"><span class="std std-ref">ngraph::pass::Manager</span></a><span></span> <span class="n">lptManager</span><span class="p">;</span>
 
-<span class="n">lptManager</span><span class="p">.</span>register_pass<span></span><span class="o">&lt;</span>ngraph::pass::low_precision::LowPrecision<span></span><span class="o">&gt;</span><span class="p">();</span>
-<span class="n">lptManager</span><span class="p">.</span>get_pass_config<span></span><span class="p">()</span><span class="o">-&gt;</span><span class="n">set_callback</span><span class="o">&lt;</span>ConvolutionBackpropDataTransformation<span></span><span class="o">&gt;</span><span class="p">([</span><span class="o">&amp;</span><span class="n">defaultPrecisions</span><span class="p">](</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">ngraph</span><span class="o">::</span><span class="n">Node</span><span class="o">&gt;&amp;</span> <span class="n">node</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">bool</span> <span class="p">{</span>
-    <span class="k">return</span> LayerTransformation::isAsymmetricQuantization<span></span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">defaultPrecisions</span><span class="p">)</span> <span class="o">||</span> WeightableLayerTransformation::isAsymmetricOnWeights<span></span><span class="p">(</span><span class="n">node</span><span class="p">);</span>
+<span class="n">lptManager</span><span class="p">.</span>register_pass<span></span><span class="o">&lt;</span><a class="reference internal" href="../api/groups/classngraph_1_1pass_1_1low_precision_1_1LowPrecision.html#doxid-classngraph-1-1pass-1-1low-precision-1-1-low-precision"><span class="std std-ref">ngraph::pass::low_precision::LowPrecision</span></a><span></span><span class="o">&gt;</span><span class="p">();</span>
+<span class="n">lptManager</span><span class="p">.</span>get_pass_config<span></span><span class="p">()</span><span class="o">-&gt;</span><span class="n">set_callback</span><span class="o">&lt;</span><a class="reference internal" href="../api/groups/classngraph_1_1pass_1_1low_precision_1_1ConvolutionBackpropDataTransformation.html#doxid-classngraph-1-1pass-1-1low-precision-1-1-convolution-backprop-data-transformation"><span class="std std-ref">ConvolutionBackpropDataTransformation</span></a><span></span><span class="o">&gt;</span><span class="p">([</span><span class="o">&amp;</span><span class="n">defaultPrecisions</span><span class="p">](</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">ngraph</span><span class="o">::</span><span class="n">Node</span><span class="o">&gt;&amp;</span> <span class="n">node</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">bool</span> <span class="p">{</span>
+    <span class="k">return</span> <a class="reference internal" href="../api/groups/classngraph_1_1pass_1_1low_precision_1_1LayerTransformation.html#doxid-classngraph-1-1pass-1-1low-precision-1-1-layer-transformation-1a23155a77026a48988edbd0abec14b0d7"><span class="std std-ref">LayerTransformation::isAsymmetricQuantization</span></a><span></span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">defaultPrecisions</span><span class="p">)</span> <span class="o">||</span> <a class="reference internal" href="../api/groups/classngraph_1_1pass_1_1low_precision_1_1WeightableLayerTransformation.html#doxid-classngraph-1-1pass-1-1low-precision-1-1-weightable-layer-transformation-1aa3cdd67fafb1c8e13678696707777912"><span class="std std-ref">WeightableLayerTransformation::isAsymmetricOnWeights</span></a><span></span><span class="p">(</span><span class="n">node</span><span class="p">);</span>
 <span class="p">});</span>
-<span class="n">lptManager</span><span class="p">.</span>run_passes<span></span><span class="p">(</span><span class="n">nGraphFunc</span><span class="p">);</span></pre></div></div></div>
-</div>
-</div>
+<span class="n">lptManager</span><span class="p">.</span><a class="reference internal" href="../api/groups/classov_1_1pass_1_1Manager.html#doxid-classov-1-1pass-1-1-manager-1a8b155191130f2c15e294cfd259d4ca0d"><span class="std std-ref">run_passes</span></a><span></span><span class="p">(</span><span class="n">nGraphFunc</span><span class="p">);</span></pre></div></div></section>
+</section>
+</section>
 
 
                 </div>
@@ -2452,7 +2459,7 @@ ngraph::pass::Manager<span></span> <span class="n">lptManager</span><span class=
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Image In-painting with OpenVINO™ &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -530,7 +537,7 @@
             
                 <div>
                   
-  <div class="section" id="image-in-painting-with-openvino">
+  <section id="image-in-painting-with-openvino">
 <h1>Image In-painting with OpenVINO™<a class="headerlink" href="#image-in-painting-with-openvino" title="Permalink to this headline">¶</a></h1>
 <p>This notebook demonstrates how to use an image in-painting model with
 OpenVINO. We use <a class="reference external" href="https://github.com/shepnerd/inpainting_gmcnn">GMCNN
@@ -551,7 +558,7 @@ tampered image. The Following pipeline will be used in this notebook.
 <span class="kn">import</span> <span class="nn">notebook_utils</span> <span class="k">as</span> <span class="nn">utils</span>
 </pre></div>
 </div>
-<div class="section" id="download-the-model">
+<section id="download-the-model">
 <h2>Download the Model<a class="headerlink" href="#download-the-model" title="Permalink to this headline">¶</a></h2>
 <p>Models can be downloaded with <code class="docutils literal notranslate"><span class="pre">omz_downloader</span></code>. <code class="docutils literal notranslate"><span class="pre">omz_downloader</span></code> is
 a command-line tool for downloading models from the Open Model Zoo.
@@ -586,8 +593,8 @@ if the model is already downloaded.</p>
 <span class="o">==========</span> <span class="n">Unpacking</span> <span class="n">model</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">gmcnn</span><span class="o">-</span><span class="n">places2</span><span class="o">-</span><span class="n">tf</span><span class="o">/</span><span class="n">gmcnn</span><span class="o">-</span><span class="n">places2</span><span class="o">-</span><span class="n">tf</span><span class="o">.</span><span class="n">zip</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="convert-tensorflow-model-to-openvino-ir-format">
+</section>
+<section id="convert-tensorflow-model-to-openvino-ir-format">
 <h2>Convert Tensorflow model to OpenVINO IR format<a class="headerlink" href="#convert-tensorflow-model-to-openvino-ir-format" title="Permalink to this headline">¶</a></h2>
 <p>The pre-trained model is in TensorFlow format. To use it with OpenVINO,
 we need to convert it to OpenVINO IR format. To do this, we use Model
@@ -611,7 +618,7 @@ also skipped if the model is already converted.</p>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Exporting</span> <span class="n">TensorFlow</span> <span class="n">model</span> <span class="n">to</span> <span class="n">IR</span><span class="o">...</span> <span class="n">This</span> <span class="n">may</span> <span class="n">take</span> <span class="n">a</span> <span class="n">few</span> <span class="n">minutes</span><span class="o">.</span>
 <span class="o">==========</span> <span class="n">Converting</span> <span class="n">gmcnn</span><span class="o">-</span><span class="n">places2</span><span class="o">-</span><span class="n">tf</span> <span class="n">to</span> <span class="n">IR</span> <span class="p">(</span><span class="n">FP32</span><span class="p">)</span>
-<span class="n">Conversion</span> <span class="n">command</span><span class="p">:</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8</span><span class="o">.</span><span class="mi">12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">python</span> <span class="o">--</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8</span><span class="o">.</span><span class="mi">12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">mo</span> <span class="o">--</span><span class="n">framework</span><span class="o">=</span><span class="n">tf</span> <span class="o">--</span><span class="n">data_type</span><span class="o">=</span><span class="n">FP32</span> <span class="o">--</span><span class="n">output_dir</span><span class="o">=</span><span class="n">model</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">gmcnn</span><span class="o">-</span><span class="n">places2</span><span class="o">-</span><span class="n">tf</span><span class="o">/</span><span class="n">FP32</span> <span class="o">--</span><span class="n">model_name</span><span class="o">=</span><span class="n">gmcnn</span><span class="o">-</span><span class="n">places2</span><span class="o">-</span><span class="n">tf</span> <span class="o">--</span><span class="nb">input</span><span class="o">=</span><span class="n">Placeholder</span><span class="p">,</span><span class="n">Placeholder_1</span> <span class="o">--</span><span class="n">input_model</span><span class="o">=</span><span class="n">model</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">gmcnn</span><span class="o">-</span><span class="n">places2</span><span class="o">-</span><span class="n">tf</span><span class="o">/</span><span class="n">gmcnn</span><span class="o">-</span><span class="n">places2</span><span class="o">-</span><span class="n">tf</span><span class="o">/</span><span class="n">frozen_model</span><span class="o">.</span><span class="n">pb</span> <span class="o">--</span><span class="n">output</span><span class="o">=</span><span class="n">Minimum</span> <span class="s1">&#39;--layout=Placeholder(NHWC),Placeholder_1(NHWC)&#39;</span> <span class="s1">&#39;--input_shape=[1, 512, 680, 3],[1, 512, 680, 1]&#39;</span>
+<span class="n">Conversion</span> <span class="n">command</span><span class="p">:</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">python</span> <span class="o">--</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">mo</span> <span class="o">--</span><span class="n">framework</span><span class="o">=</span><span class="n">tf</span> <span class="o">--</span><span class="n">data_type</span><span class="o">=</span><span class="n">FP32</span> <span class="o">--</span><span class="n">output_dir</span><span class="o">=</span><span class="n">model</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">gmcnn</span><span class="o">-</span><span class="n">places2</span><span class="o">-</span><span class="n">tf</span><span class="o">/</span><span class="n">FP32</span> <span class="o">--</span><span class="n">model_name</span><span class="o">=</span><span class="n">gmcnn</span><span class="o">-</span><span class="n">places2</span><span class="o">-</span><span class="n">tf</span> <span class="o">--</span><span class="nb">input</span><span class="o">=</span><span class="n">Placeholder</span><span class="p">,</span><span class="n">Placeholder_1</span> <span class="o">--</span><span class="n">input_model</span><span class="o">=</span><span class="n">model</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">gmcnn</span><span class="o">-</span><span class="n">places2</span><span class="o">-</span><span class="n">tf</span><span class="o">/</span><span class="n">gmcnn</span><span class="o">-</span><span class="n">places2</span><span class="o">-</span><span class="n">tf</span><span class="o">/</span><span class="n">frozen_model</span><span class="o">.</span><span class="n">pb</span> <span class="o">--</span><span class="n">output</span><span class="o">=</span><span class="n">Minimum</span> <span class="s1">&#39;--layout=Placeholder(NHWC),Placeholder_1(NHWC)&#39;</span> <span class="s1">&#39;--input_shape=[1, 512, 680, 3],[1, 512, 680, 1]&#39;</span>
 
 <span class="n">Model</span> <span class="n">Optimizer</span> <span class="n">arguments</span><span class="p">:</span>
 <span class="n">Common</span> <span class="n">parameters</span><span class="p">:</span>
@@ -645,21 +652,21 @@ also skipped if the model is already converted.</p>
     <span class="o">-</span> <span class="n">Update</span> <span class="n">the</span> <span class="n">configuration</span> <span class="n">file</span> <span class="k">with</span> <span class="nb">input</span><span class="o">/</span><span class="n">output</span> <span class="n">node</span> <span class="n">names</span><span class="p">:</span>   <span class="kc">None</span>
     <span class="o">-</span> <span class="n">Use</span> <span class="n">configuration</span> <span class="n">file</span> <span class="n">used</span> <span class="n">to</span> <span class="n">generate</span> <span class="n">the</span> <span class="n">model</span> <span class="k">with</span> <span class="n">Object</span> <span class="n">Detection</span> <span class="n">API</span><span class="p">:</span>  <span class="kc">None</span>
     <span class="o">-</span> <span class="n">Use</span> <span class="n">the</span> <span class="n">config</span> <span class="n">file</span><span class="p">:</span>  <span class="kc">None</span>
-<span class="n">OpenVINO</span> <span class="n">runtime</span> <span class="n">found</span> <span class="ow">in</span><span class="p">:</span>  <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8</span><span class="o">.</span><span class="mi">12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">openvino</span>
-<span class="n">OpenVINO</span> <span class="n">runtime</span> <span class="n">version</span><span class="p">:</span>   <span class="mf">2022.1</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="mi">7019</span><span class="o">-</span><span class="n">cdb9bec7210</span><span class="o">-</span><span class="n">releases</span><span class="o">/</span><span class="mi">2022</span><span class="o">/</span><span class="mi">1</span>
-<span class="n">Model</span> <span class="n">Optimizer</span> <span class="n">version</span><span class="p">:</span>    <span class="mf">2022.1</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="mi">7019</span><span class="o">-</span><span class="n">cdb9bec7210</span><span class="o">-</span><span class="n">releases</span><span class="o">/</span><span class="mi">2022</span><span class="o">/</span><span class="mi">1</span>
+<span class="n">OpenVINO</span> <span class="n">runtime</span> <span class="n">found</span> <span class="ow">in</span><span class="p">:</span>  <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">openvino</span>
+<span class="n">OpenVINO</span> <span class="n">runtime</span> <span class="n">version</span><span class="p">:</span>   <span class="mf">2022.1.0</span><span class="o">-</span><span class="mi">7019</span><span class="o">-</span><span class="n">cdb9bec7210</span><span class="o">-</span><span class="n">releases</span><span class="o">/</span><span class="mi">2022</span><span class="o">/</span><span class="mi">1</span>
+<span class="n">Model</span> <span class="n">Optimizer</span> <span class="n">version</span><span class="p">:</span>    <span class="mf">2022.1.0</span><span class="o">-</span><span class="mi">7019</span><span class="o">-</span><span class="n">cdb9bec7210</span><span class="o">-</span><span class="n">releases</span><span class="o">/</span><span class="mi">2022</span><span class="o">/</span><span class="mi">1</span>
 <span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">Generated</span> <span class="n">IR</span> <span class="n">version</span> <span class="mi">11</span> <span class="n">model</span><span class="o">.</span>
 <span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">XML</span> <span class="n">file</span><span class="p">:</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">work</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">notebooks</span><span class="o">/</span><span class="mi">215</span><span class="o">-</span><span class="n">image</span><span class="o">-</span><span class="n">inpainting</span><span class="o">/</span><span class="n">model</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">gmcnn</span><span class="o">-</span><span class="n">places2</span><span class="o">-</span><span class="n">tf</span><span class="o">/</span><span class="n">FP32</span><span class="o">/</span><span class="n">gmcnn</span><span class="o">-</span><span class="n">places2</span><span class="o">-</span><span class="n">tf</span><span class="o">.</span><span class="n">xml</span>
 <span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">BIN</span> <span class="n">file</span><span class="p">:</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">work</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">notebooks</span><span class="o">/</span><span class="mi">215</span><span class="o">-</span><span class="n">image</span><span class="o">-</span><span class="n">inpainting</span><span class="o">/</span><span class="n">model</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">gmcnn</span><span class="o">-</span><span class="n">places2</span><span class="o">-</span><span class="n">tf</span><span class="o">/</span><span class="n">FP32</span><span class="o">/</span><span class="n">gmcnn</span><span class="o">-</span><span class="n">places2</span><span class="o">-</span><span class="n">tf</span><span class="o">.</span><span class="n">bin</span>
 <span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">Total</span> <span class="n">execution</span> <span class="n">time</span><span class="p">:</span> <span class="mf">19.03</span> <span class="n">seconds</span><span class="o">.</span>
 <span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">Memory</span> <span class="n">consumed</span><span class="p">:</span> <span class="mi">547</span> <span class="n">MB</span><span class="o">.</span>
 <span class="n">It</span><span class="s1">&#39;s been a while, check for a new version of Intel(R) Distribution of OpenVINO(TM) toolkit here https://software.intel.com/content/www/us/en/develop/tools/openvino-toolkit/download.html?cid=other&amp;source=prod&amp;campid=ww_2022_bu_IOTG_OpenVINO-2022-1&amp;content=upg_all&amp;medium=organic or on the GitHub*</span>
-<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">The</span> <span class="n">model</span> <span class="n">was</span> <span class="n">converted</span> <span class="n">to</span> <span class="n">IR</span> <span class="n">v11</span><span class="p">,</span> <span class="n">the</span> <span class="n">latest</span> <span class="n">model</span> <span class="nb">format</span> <span class="n">that</span> <span class="n">corresponds</span> <span class="n">to</span> <span class="n">the</span> <span class="n">source</span> <span class="n">DL</span> <span class="n">framework</span> <span class="nb">input</span><span class="o">/</span><span class="n">output</span> <span class="nb">format</span><span class="o">.</span> <span class="n">While</span> <span class="n">IR</span> <span class="n">v11</span> <span class="ow">is</span> <span class="n">backwards</span> <span class="n">compatible</span> <span class="k">with</span> <span class="n">OpenVINO</span> <span class="n">Inference</span> <span class="n">Engine</span> <span class="n">API</span> <span class="n">v1</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span> <span class="n">please</span> <span class="n">use</span> <span class="n">API</span> <span class="n">v2</span><span class="o">.</span><span class="mi">0</span> <span class="p">(</span><span class="k">as</span> <span class="n">of</span> <span class="mf">2022.1</span><span class="p">)</span> <span class="n">to</span> <span class="n">take</span> <span class="n">advantage</span> <span class="n">of</span> <span class="n">the</span> <span class="n">latest</span> <span class="n">improvements</span> <span class="ow">in</span> <span class="n">IR</span> <span class="n">v11</span><span class="o">.</span>
-<span class="n">Find</span> <span class="n">more</span> <span class="n">information</span> <span class="n">about</span> <span class="n">API</span> <span class="n">v2</span><span class="o">.</span><span class="mi">0</span> <span class="ow">and</span> <span class="n">IR</span> <span class="n">v11</span> <span class="n">at</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">docs</span><span class="o">.</span><span class="n">openvino</span><span class="o">.</span><span class="n">ai</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">The</span> <span class="n">model</span> <span class="n">was</span> <span class="n">converted</span> <span class="n">to</span> <span class="n">IR</span> <span class="n">v11</span><span class="p">,</span> <span class="n">the</span> <span class="n">latest</span> <span class="n">model</span> <span class="nb">format</span> <span class="n">that</span> <span class="n">corresponds</span> <span class="n">to</span> <span class="n">the</span> <span class="n">source</span> <span class="n">DL</span> <span class="n">framework</span> <span class="nb">input</span><span class="o">/</span><span class="n">output</span> <span class="nb">format</span><span class="o">.</span> <span class="n">While</span> <span class="n">IR</span> <span class="n">v11</span> <span class="ow">is</span> <span class="n">backwards</span> <span class="n">compatible</span> <span class="k">with</span> <span class="n">OpenVINO</span> <span class="n">Inference</span> <span class="n">Engine</span> <span class="n">API</span> <span class="n">v1</span><span class="mf">.0</span><span class="p">,</span> <span class="n">please</span> <span class="n">use</span> <span class="n">API</span> <span class="n">v2</span><span class="mf">.0</span> <span class="p">(</span><span class="k">as</span> <span class="n">of</span> <span class="mf">2022.1</span><span class="p">)</span> <span class="n">to</span> <span class="n">take</span> <span class="n">advantage</span> <span class="n">of</span> <span class="n">the</span> <span class="n">latest</span> <span class="n">improvements</span> <span class="ow">in</span> <span class="n">IR</span> <span class="n">v11</span><span class="o">.</span>
+<span class="n">Find</span> <span class="n">more</span> <span class="n">information</span> <span class="n">about</span> <span class="n">API</span> <span class="n">v2</span><span class="mf">.0</span> <span class="ow">and</span> <span class="n">IR</span> <span class="n">v11</span> <span class="n">at</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">docs</span><span class="o">.</span><span class="n">openvino</span><span class="o">.</span><span class="n">ai</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="load-the-model">
+</section>
+<section id="load-the-model">
 <h2>Load the model<a class="headerlink" href="#load-the-model" title="Permalink to this headline">¶</a></h2>
 <p>Now we will load the IR model. Then:</p>
 <ol class="arabic simple">
@@ -680,16 +687,16 @@ also skipped if the model is already converted.</p>
 <span class="n">output_layer</span> <span class="o">=</span> <span class="n">compiled_model</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="determine-the-input-shapes-of-the-model">
+</section>
+<section id="determine-the-input-shapes-of-the-model">
 <h2>Determine the input shapes of the model<a class="headerlink" href="#determine-the-input-shapes-of-the-model" title="Permalink to this headline">¶</a></h2>
 <p>Note that both input shapes are the same however, the second input has a
 channel of 1 (monotone).</p>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">C</span> <span class="o">=</span> <span class="n">input_layer</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="create-a-square-mask">
+</section>
+<section id="create-a-square-mask">
 <h2>Create a square mask<a class="headerlink" href="#create-a-square-mask" title="Permalink to this headline">¶</a></h2>
 <p>Next, we will create a single channeled mask that will be laid on top of
 the original image.</p>
@@ -724,8 +731,8 @@ the original image.</p>
 </pre></div>
 </div>
 <img alt="../_images/215-image-inpainting-with-output_12_0.png" src="../_images/215-image-inpainting-with-output_12_0.png" />
-</div>
-<div class="section" id="load-and-resize-the-image">
+</section>
+<section id="load-and-resize-the-image">
 <h2>Load and Resize the Image<a class="headerlink" href="#load-and-resize-the-image" title="Permalink to this headline">¶</a></h2>
 <p>This image will be altered using the mask. You can process any image you
 like. Just put a URL here.</p>
@@ -745,8 +752,8 @@ like. Just put a URL here.</p>
 </pre></div>
 </div>
 <img alt="../_images/215-image-inpainting-with-output_14_0.png" src="../_images/215-image-inpainting-with-output_14_0.png" />
-</div>
-<div class="section" id="generating-the-masked-image">
+</section>
+<section id="generating-the-masked-image">
 <h2>Generating the Masked Image<a class="headerlink" href="#generating-the-masked-image" title="Permalink to this headline">¶</a></h2>
 <p>This multiplication of the image and the mask gives us the result of the
 masked image layered on top of the original image. The <code class="docutils literal notranslate"><span class="pre">masked_image</span></code>
@@ -758,8 +765,8 @@ will be the first input to the GMCNN model.</p>
 </pre></div>
 </div>
 <img alt="../_images/215-image-inpainting-with-output_16_0.png" src="../_images/215-image-inpainting-with-output_16_0.png" />
-</div>
-<div class="section" id="preprocessing">
+</section>
+<section id="preprocessing">
 <h2>Preprocessing<a class="headerlink" href="#preprocessing" title="Permalink to this headline">¶</a></h2>
 <p>The model expects the input dimensions to be NHWC.</p>
 <ul class="simple">
@@ -770,8 +777,8 @@ will be the first input to the GMCNN model.</p>
 <span class="n">mask</span> <span class="o">=</span> <span class="n">mask</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="inference">
+</section>
+<section id="inference">
 <h2>Inference<a class="headerlink" href="#inference" title="Permalink to this headline">¶</a></h2>
 <p>Run the inference with given masked image and mask. Then show the
 restored image.</p>
@@ -785,8 +792,8 @@ restored image.</p>
 </pre></div>
 </div>
 <img alt="../_images/215-image-inpainting-with-output_20_1.png" src="../_images/215-image-inpainting-with-output_20_1.png" />
-</div>
-<div class="section" id="save-restored-image">
+</section>
+<section id="save-restored-image">
 <h2>Save restored image<a class="headerlink" href="#save-restored-image" title="Permalink to this headline">¶</a></h2>
 <p>Save restored image to data directory to download it.</p>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cv2</span><span class="o">.</span><span class="n">imwrite</span><span class="p">(</span><span class="s2">&quot;data/laptop_restored.png&quot;</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
@@ -795,8 +802,8 @@ restored image.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kc">True</span>
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -827,7 +834,7 @@ restored image.</p>
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

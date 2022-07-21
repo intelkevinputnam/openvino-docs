@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>t2t-vit-14 &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../../../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -2106,14 +2113,14 @@
             
                 <div>
                   
-  <div class="section" id="t2t-vit-14">
+  <section id="t2t-vit-14">
 <h1>t2t-vit-14<a class="headerlink" href="#t2t-vit-14" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="use-case-and-high-level-description">
+<section id="use-case-and-high-level-description">
 <h2>Use Case and High-Level Description<a class="headerlink" href="#use-case-and-high-level-description" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">t2t-vit-14</span></code> model is a variant of the Tokens-To-Token Vision Transformer(T2T-ViT) pre-trained on ImageNet dataset for image classification task. T2T-ViT progressively tokenize the image to tokens and has an efficient backbone. T2T-ViT consists of two main components: 1) a layer-wise “Tokens-to-Token module” to model the local structure information of the image and reduce the length of tokens progressively; 2) an efficient “T2T-ViT backbone” to draw the global attention relation on tokens from the T2T module. The model has 14 transformer layers in T2T-ViT backbone with 384 hidden dimensions.</p>
 <p>More details provided in the <a class="reference external" href="https://arxiv.org/abs/2101.11986">paper</a> and <a class="reference external" href="https://github.com/yitu-opensource/T2T-ViT">repository</a>.</p>
-</div>
-<div class="section" id="specification">
+</section>
+<section id="specification">
 <h2>Specification<a class="headerlink" href="#specification" title="Permalink to this headline">¶</a></h2>
 <table class="colwidths-auto table">
 <thead>
@@ -2136,8 +2143,8 @@
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="accuracy">
+</section>
+<section id="accuracy">
 <h2>Accuracy<a class="headerlink" href="#accuracy" title="Permalink to this headline">¶</a></h2>
 <table class="colwidths-auto table">
 <thead>
@@ -2154,10 +2161,10 @@
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="input">
+</section>
+<section id="input">
 <h2>Input<a class="headerlink" href="#input" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="original-model">
+<section id="original-model">
 <h3>Original Model<a class="headerlink" href="#original-model" title="Permalink to this headline">¶</a></h3>
 <p>Image, name: <code class="docutils literal notranslate"><span class="pre">image</span></code>, shape: <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">3,</span> <span class="pre">224,</span> <span class="pre">224</span></code>, format: <code class="docutils literal notranslate"><span class="pre">B,</span> <span class="pre">C,</span> <span class="pre">H,</span> <span class="pre">W</span></code>, where:</p>
 <ul class="simple">
@@ -2168,8 +2175,8 @@
 </ul>
 <p>Expected color order: <code class="docutils literal notranslate"><span class="pre">RGB</span></code>.
 Mean values - [123.675, 116.28, 103.53], scale values - [58.395, 57.12, 57.375].</p>
-</div>
-<div class="section" id="converted-model">
+</section>
+<section id="converted-model">
 <h3>Converted Model<a class="headerlink" href="#converted-model" title="Permalink to this headline">¶</a></h3>
 <p>Image, name: <code class="docutils literal notranslate"><span class="pre">image</span></code>, shape: <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">3,</span> <span class="pre">224,</span> <span class="pre">224</span></code>, format: <code class="docutils literal notranslate"><span class="pre">B,</span> <span class="pre">C,</span> <span class="pre">H,</span> <span class="pre">W</span></code>, where:</p>
 <ul class="simple">
@@ -2179,28 +2186,28 @@ Mean values - [123.675, 116.28, 103.53], scale values - [58.395, 57.12, 57.375].
 <li><p><code class="docutils literal notranslate"><span class="pre">W</span></code> - image width</p></li>
 </ul>
 <p>Expected color order: <code class="docutils literal notranslate"><span class="pre">BGR</span></code>.</p>
-</div>
-</div>
-<div class="section" id="output">
+</section>
+</section>
+<section id="output">
 <h2>Output<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id1">
+<section id="id1">
 <h3>Original Model<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <p>Object classifier according to ImageNet classes, name: <code class="docutils literal notranslate"><span class="pre">probs</span></code>,  shape: <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">1000</span></code>, output data format is <code class="docutils literal notranslate"><span class="pre">B,</span> <span class="pre">C</span></code>, where:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">B</span></code> - batch size</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">C</span></code> - vector of probabilities for all dataset classes in logits format</p></li>
 </ul>
-</div>
-<div class="section" id="id2">
+</section>
+<section id="id2">
 <h3>Converted Model<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <p>Object classifier according to ImageNet classes, name: <code class="docutils literal notranslate"><span class="pre">probs</span></code>,  shape: <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">1000</span></code>, output data format is <code class="docutils literal notranslate"><span class="pre">B,</span> <span class="pre">C</span></code>, where:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">B</span></code> - batch size</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">C</span></code> - vector of probabilities for all dataset classes in logits format</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="download-a-model-and-convert-it-into-openvino-ir-format">
+</section>
+</section>
+<section id="download-a-model-and-convert-it-into-openvino-ir-format">
 <h2>Download a Model and Convert it into OpenVINO™ IR Format<a class="headerlink" href="#download-a-model-and-convert-it-into-openvino-ir-format" title="Permalink to this headline">¶</a></h2>
 <p>You can download models and if necessary convert them into OpenVINO™ IR format using the <span class="xref myst">Model Downloader and other automation tools</span> as shown in the examples below.</p>
 <p>An example of using the Model Downloader:</p>
@@ -2211,15 +2218,15 @@ Mean values - [123.675, 116.28, 103.53], scale values - [58.395, 57.12, 57.375].
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">omz_converter</span> <span class="o">--</span><span class="n">name</span> <span class="o">&lt;</span><span class="n">model_name</span><span class="o">&gt;</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="demo-usage">
+</section>
+<section id="demo-usage">
 <h2>Demo usage<a class="headerlink" href="#demo-usage" title="Permalink to this headline">¶</a></h2>
 <p>The model can be used in the following demos provided by the Open Model Zoo to show its capabilities:</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="../../../demos/classification_demo/python/README.html"><span class="doc std std-doc">Classification Python* Demo</span></a></p></li>
 </ul>
-</div>
-<div class="section" id="legal-information">
+</section>
+<section id="legal-information">
 <h2>Legal Information<a class="headerlink" href="#legal-information" title="Permalink to this headline">¶</a></h2>
 <p>The original model is distributed under the following
 <a class="reference external" href="https://raw.githubusercontent.com/yitu-opensource/T2T-ViT/main/LICENSE">license</a>:</p>
@@ -2237,8 +2244,8 @@ Mean values - [123.675, 116.28, 103.53], scale values - [58.395, 57.12, 57.375].
 <span class="n">NO</span> <span class="n">EXPRESS</span> <span class="n">OR</span> <span class="n">IMPLIED</span> <span class="n">LICENSES</span> <span class="n">TO</span> <span class="n">ANY</span> <span class="n">PARTY</span><span class="s1">&#39;S PATENT RIGHTS ARE GRANTED BY THIS LICENSE. THIS SOFTWARE IS PROVIDED BY SHANGHAI YITU TECHNOLOGY CO., LTD. AND CONTRIBUTORS &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL SHANGHAI YITU TECHNOLOGY CO., LTD. OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</span>
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -2269,7 +2276,7 @@ Mean values - [123.675, 116.28, 103.53], scale values - [58.395, 57.12, 57.375].
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

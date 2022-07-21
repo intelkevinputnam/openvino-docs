@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Convert TensorFlow DeepSpeech Model &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -1830,10 +1837,10 @@
             
                 <div>
                   
-  <div class="section" id="convert-tensorflow-deepspeech-model">
+  <section id="convert-tensorflow-deepspeech-model">
 <span id="doxid-openvino-docs-m-o-d-g-prepare-model-convert-model-tf-specific-convert-deep-speech-from-tensorflow"></span><span id="index-0"></span><h1>Convert TensorFlow DeepSpeech Model<a class="headerlink" href="#convert-tensorflow-deepspeech-model" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-openvino-docs-m-o-d-g-prepare-model-convert-model-tf-specific-convert-deep-speech-from-tensorflow-1md-openvino-docs-mo-dg-prepare-model-convert-model-tf-specific-convert-deepspeech-from-tensorflow"></span> <a class="reference external" href="https://github.com/mozilla/DeepSpeech">DeepSpeech project</a> provides an engine to train speech-to-text models.</p>
-<div class="section" id="download-the-pretrained-deepspeech-model">
+<section id="download-the-pretrained-deepspeech-model">
 <h2>Download the Pretrained DeepSpeech Model<a class="headerlink" href="#download-the-pretrained-deepspeech-model" title="Permalink to this headline">¶</a></h2>
 <p>Create a directory where model and metagraph with pretrained weights will be stored:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="n">deepspeech</span>
@@ -1850,8 +1857,8 @@
 </ol>
 </li>
 </ul>
-</div>
-<div class="section" id="freeze-the-model-into-a-pb-file">
+</section>
+<section id="freeze-the-model-into-a-pb-file">
 <h2>Freeze the Model into a *.pb File<a class="headerlink" href="#freeze-the-model-into-a-pb-file" title="Permalink to this headline">¶</a></h2>
 <p>After unpacking the archives above, you have to freeze the model. Note that this requires TensorFlow* version 1 which is not available under Python 3.8, so you need Python 3.7 or lower. Before freezing, deploy a virtual environment and install the required packages:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">virtualenv</span> <span class="o">--</span><span class="n">python</span><span class="o">=</span><span class="n">python3</span><span class="mf">.7</span> <span class="n">venv</span><span class="o">-</span><span class="n">deep</span><span class="o">-</span><span class="n">speech</span>
@@ -1864,8 +1871,8 @@
 <p>The second is that the frozen model still has two variables: <code class="docutils literal notranslate"><span class="pre">previous_state_c</span></code> and <code class="docutils literal notranslate"><span class="pre">previous_state_h</span></code>, figure with the frozen *.pb model is below. It means that the model keeps training these variables at each inference.</p>
 <img alt="DeepSpeech model view" src="../_images/DeepSpeech-0.8.2.png" />
 <p>At the first inference the variables are initialized with zero tensors. After executing, the results of the <code class="docutils literal notranslate"><span class="pre">BlockLSTM</span></code> are assigned to cell state and hidden state, which are these two variables.</p>
-</div>
-<div class="section" id="convert-the-main-part-of-deepspeech-model-into-ir">
+</section>
+<section id="convert-the-main-part-of-deepspeech-model-into-ir">
 <h2>Convert the Main Part of DeepSpeech Model into IR<a class="headerlink" href="#convert-the-main-part-of-deepspeech-model-into-ir" title="Permalink to this headline">¶</a></h2>
 <p>Model Optimizer assumes that the output model is for inference only. That is why you should cut <code class="docutils literal notranslate"><span class="pre">previous_state_c</span></code> and <code class="docutils literal notranslate"><span class="pre">previous_state_h</span></code> variables off and resolve keeping cell and hidden states on the application level.</p>
 <p>There are certain limitations for the model conversion:</p>
@@ -1883,8 +1890,8 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">input_node[1</span> <span class="pre">16</span> <span class="pre">19</span> <span class="pre">26],previous_state_h[1</span> <span class="pre">2048],previous_state_c[1</span> <span class="pre">2048]</span></code> replaces the variables with a placeholder.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">--output</span> <span class="pre">&quot;.../GatherNd_1,.../GatherNd,logits&quot;</span></code> output node names.</p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -1915,7 +1922,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Convert TensorFlow YOLO Models &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -1847,7 +1854,7 @@
             
                 <div>
                   
-  <div class="section" id="convert-tensorflow-yolo-models">
+  <section id="convert-tensorflow-yolo-models">
 <span id="doxid-openvino-docs-m-o-d-g-prepare-model-convert-model-tf-specific-convert-y-o-l-o-from-tensorflow"></span><span id="index-0"></span><h1>Convert TensorFlow YOLO Models<a class="headerlink" href="#convert-tensorflow-yolo-models" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-openvino-docs-m-o-d-g-prepare-model-convert-model-tf-specific-convert-y-o-l-o-from-tensorflow-1md-openvino-docs-mo-dg-prepare-model-convert-model-tf-specific-convert-yolo-from-tensorflow"></span> This document explains how to convert real-time object detection YOLOv1*, YOLOv2*, YOLOv3* and YOLOv4* public models to the Intermediate Representation (IR). All YOLO* models are originally implemented in the DarkNet* framework and consist of two files:</p>
 <ul class="simple">
@@ -1860,7 +1867,7 @@
 <li><p>YOLOv3 has several implementations. This tutorial uses a TensorFlow implementation of YOLOv3 model, which can be directly converted to an IR.</p></li>
 <li><p>YOLOv1 and YOLOv2 models must be first converted to TensorFlow* using DarkFlow*.</p></li>
 </ul>
-<div class="section" id="convert-yolov4-model-to-ir">
+<section id="convert-yolov4-model-to-ir">
 <span id="yolov4-to-ir"></span><h2>Convert YOLOv4 Model to IR<a class="headerlink" href="#convert-yolov4-model-to-ir" title="Permalink to this headline">¶</a></h2>
 <p>This section explains how to convert the YOLOv4 Keras* model from the <a class="reference external" href="https://github.com/david8862/keras-YOLOv3-model-set">https://github.com/david8862/keras-YOLOv3-model-set</a> repository to an IR. To convert the YOLOv4 model, follow the instructions below:</p>
 <ol class="arabic simple">
@@ -1888,16 +1895,16 @@
 <p class="admonition-title">Note</p>
 <p>Before you run the conversion, make sure you have installed all the Model Optimizer dependencies for TensorFlow 2.</p>
 </div>
-<div class="highlight"><div class="highlight"><pre><span></span><span class="n">mo</span> <span class="o">--</span><span class="n">saved_model_dir</span> <span class="n">yolov4</span> <span class="o">--</span><span class="n">output_dir</span> <span class="n">models</span><span class="o">/</span><span class="n">IRs</span> <span class="o">--</span><span class="n">input_shape</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">608</span><span class="p">,</span><span class="mi">608</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span> <span class="o">--</span><span class="n">model_name</span> <span class="n">yolov4</span></pre></div></div></div>
-<div class="section" id="convert-yolov3-model-to-ir">
+<div class="highlight"><div class="highlight"><pre><span></span><span class="n">mo</span> <span class="o">--</span><span class="n">saved_model_dir</span> <span class="n">yolov4</span> <span class="o">--</span><span class="n">output_dir</span> <span class="n">models</span><span class="o">/</span><span class="n">IRs</span> <span class="o">--</span><span class="n">input_shape</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">608</span><span class="p">,</span><span class="mi">608</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span> <span class="o">--</span><span class="n">model_name</span> <span class="n">yolov4</span></pre></div></div></section>
+<section id="convert-yolov3-model-to-ir">
 <span id="yolov3-to-ir"></span><h2>Convert YOLOv3 Model to IR<a class="headerlink" href="#convert-yolov3-model-to-ir" title="Permalink to this headline">¶</a></h2>
 <p>On GitHub*, you can find several public versions of TensorFlow YOLOv3 model implementation. This section explains how to convert YOLOv3 model from the <a class="reference external" href="https://github.com/mystic123/tensorflow-yolo-v3">https://github.com/mystic123/tensorflow-yolo-v3</a> repository (commit ed60b90) to an IR , but the process is similar for other versions of TensorFlow YOLOv3 model.</p>
-<div class="section" id="overview-of-yolov3-model-architecture">
+<section id="overview-of-yolov3-model-architecture">
 <span id="yolov3-overview"></span><h3>Overview of YOLOv3 Model Architecture<a class="headerlink" href="#overview-of-yolov3-model-architecture" title="Permalink to this headline">¶</a></h3>
 <p>Originally, YOLOv3 model includes feature extractor called <code class="docutils literal notranslate"><span class="pre">Darknet-53</span></code> with three branches at the end that make detections at three different scales. These branches must end with the YOLO <code class="docutils literal notranslate"><span class="pre">Region</span></code> layer.</p>
 <p><code class="docutils literal notranslate"><span class="pre">Region</span></code> layer was first introduced in the DarkNet framework. Other frameworks, including TensorFlow, do not have the <code class="docutils literal notranslate"><span class="pre">Region</span></code> implemented as a single layer, so every author of public YOLOv3 model creates it using simple layers. This badly affects performance. For this reason, the main idea of YOLOv3 model conversion to IR is to cut off these custom <code class="docutils literal notranslate"><span class="pre">Region</span></code> -like parts of the model and complete the model with the <code class="docutils literal notranslate"><span class="pre">Region</span></code> layers where required.</p>
-</div>
-<div class="section" id="dump-yolov3-tensorflow-model">
+</section>
+<section id="dump-yolov3-tensorflow-model">
 <h3>Dump YOLOv3 TensorFlow* Model<a class="headerlink" href="#dump-yolov3-tensorflow-model" title="Permalink to this headline">¶</a></h3>
 <p>To dump TensorFlow model out of <a class="reference external" href="https://github.com/mystic123/tensorflow-yolo-v3">https://github.com/mystic123/tensorflow-yolo-v3</a> GitHub repository (commit ed60b90), follow the instructions below:</p>
 <ol class="arabic">
@@ -1925,8 +1932,8 @@
 </ul>
 <p>At this step, you may receive a warning like <code class="docutils literal notranslate"><span class="pre">WARNING:tensorflow:Entity</span> <span class="pre">&lt;...&gt;</span> <span class="pre">could</span> <span class="pre">not</span> <span class="pre">be</span> <span class="pre">transformed</span> <span class="pre">and</span> <span class="pre">will</span> <span class="pre">be</span> <span class="pre">executed</span> <span class="pre">as-is.</span></code>. To work around this issue, switch to gast 0.2.2 with the following command:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">pip3</span> <span class="n">install</span> <span class="o">--</span><span class="n">user</span> <span class="n">gast</span><span class="o">==</span><span class="mf">0.2.2</span></pre></div></div><p>If you have YOLOv3 weights trained for an input image with the size different from 416 (320, 608 or your own), please provide the <code class="docutils literal notranslate"><span class="pre">--size</span></code> key with the size of your image specified while running the converter. For example, run the following command for an image with size 608:</p>
-<div class="highlight"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="n">convert_weights_pb</span><span class="p">.</span><span class="n">py</span> <span class="o">--</span><span class="n">class_names</span> <span class="n">coco</span><span class="p">.</span><span class="n">names</span> <span class="o">--</span><span class="n">data_format</span> <span class="n">NHWC</span> <span class="o">--</span><span class="n">weights_file</span> <span class="n">yolov3_608</span><span class="p">.</span><span class="n">weights</span> <span class="o">--</span><span class="n">size</span> <span class="mi">608</span></pre></div></div></div>
-<div class="section" id="convert-yolov3-tensorflow-model-to-ir">
+<div class="highlight"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="n">convert_weights_pb</span><span class="p">.</span><span class="n">py</span> <span class="o">--</span><span class="n">class_names</span> <span class="n">coco</span><span class="p">.</span><span class="n">names</span> <span class="o">--</span><span class="n">data_format</span> <span class="n">NHWC</span> <span class="o">--</span><span class="n">weights_file</span> <span class="n">yolov3_608</span><span class="p">.</span><span class="n">weights</span> <span class="o">--</span><span class="n">size</span> <span class="mi">608</span></pre></div></div></section>
+<section id="convert-yolov3-tensorflow-model-to-ir">
 <h3>Convert YOLOv3 TensorFlow Model to IR<a class="headerlink" href="#convert-yolov3-tensorflow-model-to-ir" title="Permalink to this headline">¶</a></h3>
 <p>To solve the problems explained in the <a class="reference external" href="#yolov3-overview">YOLOv3 architecture overview</a> section, use the <code class="docutils literal notranslate"><span class="pre">yolo_v3.json</span></code> or <code class="docutils literal notranslate"><span class="pre">yolo_v3_tiny.json</span></code> (depending on a model) configuration file with custom operations located in the <code class="docutils literal notranslate"><span class="pre">&lt;OPENVINO_INSTALL_DIR&gt;/tools/model_optimizer/extensions/front/tf</span></code> repository.</p>
 <p>It consists of several attributes:</p>
@@ -1974,9 +1981,9 @@
 <p>The color channel order (RGB or BGR) of an input data should match the channel order of the model training dataset. If they are different, perform the <code class="docutils literal notranslate"><span class="pre">RGB&lt;-&gt;BGR</span></code> conversion specifying the command-line parameter: <code class="docutils literal notranslate"><span class="pre">--reverse_input_channels</span></code>. Otherwise, inference results may be incorrect. For more information about the parameter, refer to <strong>When to Reverse Input Channels</strong> section of <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_Converting_Model.html#doxid-openvino-docs-m-o-d-g-prepare-model-convert-model-converting-model"><span class="std std-ref">Converting a Model to Intermediate Representation (IR)</span></a>.</p>
 </div>
 <p>OpenVINO toolkit provides a demo that uses YOLOv3 model. For more information, refer to Object Detection C++ Demo.</p>
-</div>
-</div>
-<div class="section" id="convert-yolov1-and-yolov2-models-to-the-ir">
+</section>
+</section>
+<section id="convert-yolov1-and-yolov2-models-to-the-ir">
 <h2>Convert YOLOv1 and YOLOv2 Models to the IR<a class="headerlink" href="#convert-yolov1-and-yolov2-models-to-the-ir" title="Permalink to this headline">¶</a></h2>
 <p>Before converting Choose a YOLOv1 or YOLOv2 model version that best suits your task. Download model configuration file and corresponding weight file:</p>
 <ul class="simple">
@@ -2027,8 +2034,8 @@
 <p class="admonition-title">Note</p>
 <p>The color channel order (RGB or BGR) of an input data should match the channel order of the model training dataset. If they are different, perform the <code class="docutils literal notranslate"><span class="pre">RGB&lt;-&gt;BGR</span></code> conversion specifying the command-line parameter: <code class="docutils literal notranslate"><span class="pre">--reverse_input_channels</span></code>. Otherwise, inference results may be incorrect. For more information about the parameter, refer to <strong>When to Reverse Input Channels</strong> section of <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_Converting_Model.html#doxid-openvino-docs-m-o-d-g-prepare-model-convert-model-converting-model"><span class="std std-ref">Converting a Model to Intermediate Representation (IR)</span></a>.</p>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -2059,7 +2066,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

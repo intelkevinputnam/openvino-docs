@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Convert model with Model Optimizer &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -1830,12 +1837,12 @@
             
                 <div>
                   
-  <div class="section" id="convert-model-with-model-optimizer">
+  <section id="convert-model-with-model-optimizer">
 <span id="doxid-openvino-docs-m-o-d-g-deep-learning-model-optimizer-dev-guide"></span><span id="index-0"></span><h1>Convert model with Model Optimizer<a class="headerlink" href="#convert-model-with-model-optimizer" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-openvino-docs-m-o-d-g-deep-learning-model-optimizer-dev-guide-1md-openvino-docs-mo-dg-deep-learning-model-optimizer-devguide"></span></p>
 <div class="toctree-wrapper compound" id="deep-learning-model-optimizer">
 </div>
-<div class="section" id="introduction">
+<section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>Model Optimizer is a cross-platform command-line tool that facilitates the transition between training and deployment environments, performs static model analysis, and adjusts deep learning models for optimal execution on end-point target devices.</p>
 <p>Using Model Optimizer tool assumes you already have a deep learning model trained using one of the supported frameworks: TensorFlow, PyTorch, PaddlePaddle, MXNet, Caffe, Kaldi, or represented in ONNX* format. Model Optimizer produces an Intermediate Representation (IR) of the model, which can be inferred with <a class="reference internal" href="openvino_docs_OV_UG_OV_Runtime_User_Guide.html#doxid-openvino-docs-o-v-u-g-o-v-runtime-user-guide"><span class="std std-ref">OpenVINO™ Runtime</span></a>.</p>
@@ -1857,8 +1864,8 @@
 <p class="admonition-title">Tip</p>
 <p>You also can work with the Model Optimizer inside the OpenVINO™ <a class="reference external" href="https://docs.openvino.ai/latest/workbench_docs_Workbench_DG_Introduction.html">Deep Learning Workbench</a> (DL Workbench). <a class="reference external" href="https://docs.openvino.ai/latest/workbench_docs_Workbench_DG_Introduction.html">DL Workbench</a> is a web-based graphical environment that enables you to optimize, fine-tune, analyze, visualize, and compare performance of deep learning models.</p>
 </div>
-</div>
-<div class="section" id="run-model-optimizer">
+</section>
+<section id="run-model-optimizer">
 <h2>Run Model Optimizer<a class="headerlink" href="#run-model-optimizer" title="Permalink to this headline">¶</a></h2>
 <p>To convert the model to IR, run Model Optimizer:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">mo</span> <span class="o">--</span><span class="n">input_model</span> <span class="n">INPUT_MODEL</span></pre></div></div><p>If out-of-the-box conversion (only the <code class="docutils literal notranslate"><span class="pre">--input_model</span></code> parameter is specified) is not succeed, try to use parameters for overriding input shapes and cutting the model, mentioned below.</p>
@@ -1867,8 +1874,8 @@
 <p>Also, you can insert additional input pre-processing sub-graphs into the converted model using the <code class="docutils literal notranslate"><span class="pre">--mean_values</span></code>, <code class="docutils literal notranslate"><span class="pre">scales_values</span></code>, <code class="docutils literal notranslate"><span class="pre">--layout</span></code>, and other parameters described in <a class="reference internal" href="openvino_docs_MO_DG_Additional_Optimization_Use_Cases.html#doxid-openvino-docs-m-o-d-g-additional-optimization-use-cases"><span class="std std-ref">Embedding Preprocessing Computation</span></a>.</p>
 <p>Model Optimizer’s compression parameter <code class="docutils literal notranslate"><span class="pre">--data_type</span></code> allows to generate IR of the <code class="docutils literal notranslate"><span class="pre">FP16</span></code> data type. For more details, please refer to <a class="reference internal" href="openvino_docs_MO_DG_FP16_Compression.html#doxid-openvino-docs-m-o-d-g-f-p16-compression"><span class="std std-ref">Compression of a Model to FP16</span></a>.</p>
 <p>To get the full list of conversion parameters available in Model Optimizer, run the following command:</p>
-<div class="highlight"><div class="highlight"><pre><span></span><span class="n">mo</span> <span class="o">--</span><span class="n">help</span></pre></div></div></div>
-<div class="section" id="examples-of-cli-commands">
+<div class="highlight"><div class="highlight"><pre><span></span><span class="n">mo</span> <span class="o">--</span><span class="n">help</span></pre></div></div></section>
+<section id="examples-of-cli-commands">
 <h2>Examples of CLI Commands<a class="headerlink" href="#examples-of-cli-commands" title="Permalink to this headline">¶</a></h2>
 <p>Below is a list of separate examples for different frameworks and Model Optimizer parameters.</p>
 <ol class="arabic">
@@ -1903,8 +1910,8 @@
 </ol>
 <p>For more information on Kaldi model conversion, refer to <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_Convert_Model_From_Kaldi.html#doxid-openvino-docs-m-o-d-g-prepare-model-convert-model-convert-model-from-kaldi"><span class="std std-ref">Converting a Kaldi Model</span></a>.</p>
 <p>To get conversion recipes for specific TensorFlow, ONNX, PyTorch, MXNet, and Kaldi models, refer to <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_tutorials.html#doxid-openvino-docs-m-o-d-g-prepare-model-convert-model-tutorials"><span class="std std-ref">Model Conversion Tutorials</span></a>.</p>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -1935,7 +1942,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

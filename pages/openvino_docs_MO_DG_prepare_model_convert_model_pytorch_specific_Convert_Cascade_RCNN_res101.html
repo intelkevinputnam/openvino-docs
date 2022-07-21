@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Convert PyTorch Cascade RCNN R-101 Model &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -1825,10 +1832,10 @@
             
                 <div>
                   
-  <div class="section" id="convert-pytorch-cascade-rcnn-r-101-model">
+  <section id="convert-pytorch-cascade-rcnn-r-101-model">
 <span id="doxid-openvino-docs-m-o-d-g-prepare-model-convert-model-pytorch-specific-convert-cascade-r-c-n-n-res101"></span><span id="index-0"></span><h1>Convert PyTorch Cascade RCNN R-101 Model<a class="headerlink" href="#convert-pytorch-cascade-rcnn-r-101-model" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-openvino-docs-m-o-d-g-prepare-model-convert-model-pytorch-specific-convert-cascade-r-c-n-n-res101-1md-openvino-docs-mo-dg-prepare-model-convert-model-pytorch-specific-convert-cascade-rcnn-res101"></span></p>
-<div class="section" id="download-and-convert-model-to-onnx">
+<section id="download-and-convert-model-to-onnx">
 <h2>Download and Convert Model to ONNX<a class="headerlink" href="#download-and-convert-model-to-onnx" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>Clone the <a class="reference external" href="https://github.com/open-mmlab/mmdetection">repository</a> :</p></li>
@@ -1843,11 +1850,11 @@
 <li><p>To convert the model to ONNX format, use this <a class="reference external" href="https://github.com/open-mmlab/mmdetection/blob/master/tools/deployment/pytorch2onnx.py">script</a>.</p></li>
 </ul>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="n">tools</span><span class="o">/</span><span class="n">deployment</span><span class="o">/</span><span class="n">pytorch2onnx</span><span class="p">.</span><span class="n">py</span> <span class="n">configs</span><span class="o">/</span><span class="n">cascade_rcnn</span><span class="o">/</span><span class="n">cascade_rcnn_r101_fpn_1x_coco</span><span class="p">.</span><span class="n">py</span> <span class="n">cascade_rcnn_r101_fpn_1x_coco_20200317</span><span class="o">-</span><span class="mi">0</span><span class="n">b6a2fbf</span><span class="p">.</span><span class="n">pth</span> <span class="o">--</span><span class="n">output</span><span class="o">-</span><span class="n">file</span> <span class="n">cascade_rcnn_r101_fpn_1x_coco</span><span class="p">.</span><span class="n">onnx</span></pre></div></div><p>The script generates ONNX model file <code class="docutils literal notranslate"><span class="pre">cascade_rcnn_r101_fpn_1x_coco.onnx</span></code> in the directory <code class="docutils literal notranslate"><span class="pre">tools/deployment/</span></code>. If required, you can specify the model name or output directory using <code class="docutils literal notranslate"><span class="pre">--output-file</span> <span class="pre">&lt;path-to-dir&gt;/&lt;model-name&gt;.onnx</span></code></p>
-</div>
-<div class="section" id="convert-onnx-cascade-rcnn-r-101-model-to-ir">
+</section>
+<section id="convert-onnx-cascade-rcnn-r-101-model-to-ir">
 <h2>Convert ONNX Cascade RCNN R-101 Model to IR<a class="headerlink" href="#convert-onnx-cascade-rcnn-r-101-model-to-ir" title="Permalink to this headline">¶</a></h2>
-<div class="highlight"><div class="highlight"><pre><span></span><span class="n">mo</span> <span class="o">--</span><span class="n">input_model</span> <span class="n">cascade_rcnn_r101_fpn_1x_coco</span><span class="p">.</span><span class="n">onnx</span> <span class="o">--</span><span class="n">mean_values</span> <span class="p">[</span><span class="mf">123.675</span><span class="p">,</span><span class="mf">116.28</span><span class="p">,</span><span class="mf">103.53</span><span class="p">]</span> <span class="o">--</span><span class="n">scale_values</span> <span class="p">[</span><span class="mf">58.395</span><span class="p">,</span><span class="mf">57.12</span><span class="p">,</span><span class="mf">57.375</span><span class="p">]</span></pre></div></div></div>
-</div>
+<div class="highlight"><div class="highlight"><pre><span></span><span class="n">mo</span> <span class="o">--</span><span class="n">input_model</span> <span class="n">cascade_rcnn_r101_fpn_1x_coco</span><span class="p">.</span><span class="n">onnx</span> <span class="o">--</span><span class="n">mean_values</span> <span class="p">[</span><span class="mf">123.675</span><span class="p">,</span><span class="mf">116.28</span><span class="p">,</span><span class="mf">103.53</span><span class="p">]</span> <span class="o">--</span><span class="n">scale_values</span> <span class="p">[</span><span class="mf">58.395</span><span class="p">,</span><span class="mf">57.12</span><span class="p">,</span><span class="mf">57.375</span><span class="p">]</span></pre></div></div></section>
+</section>
 
 
                 </div>
@@ -1878,7 +1885,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

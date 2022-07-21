@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Use Case - Integrate and Save Preprocessing Steps Into IR &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -1835,16 +1842,16 @@
             
                 <div>
                   
-  <div class="section" id="use-case-integrate-and-save-preprocessing-steps-into-ir">
+  <section id="use-case-integrate-and-save-preprocessing-steps-into-ir">
 <span id="doxid-openvino-docs-o-v-u-g-preprocess-usecase-save"></span><span id="index-0"></span><h1>Use Case - Integrate and Save Preprocessing Steps Into IR<a class="headerlink" href="#use-case-integrate-and-save-preprocessing-steps-into-ir" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-openvino-docs-o-v-u-g-preprocess-usecase-save-1md-openvino-docs-ov-runtime-ug-preprocessing-usecase-save"></span></p>
-<div class="section" id="introduction">
+<section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>In previous sections we’ve covered how to add <a class="reference internal" href="openvino_docs_OV_UG_Preprocessing_Details.html#doxid-openvino-docs-o-v-u-g-preprocessing-details"><span class="std std-ref">preprocessing steps</span></a> and got the overview of <a class="reference internal" href="openvino_docs_OV_UG_Layout_Overview.html#doxid-openvino-docs-o-v-u-g-layout-overview"><span class="std std-ref">Layout</span></a> API.</p>
 <p>For many applications it is also important to minimize model’s read/load time, so performing integration of preprocessing steps every time on application startup after <code class="docutils literal notranslate"><span class="pre">ov::runtime::Core::read_model</span></code> may look not convenient. In such cases, after adding of Pre- and Post-processing steps it can be useful to store new execution model to Intermediate Representation (IR, .xml format).</p>
 <p>Most part of existing preprocessing steps can also be performed via command line options using Model Optimizer tool. Refer to <a class="reference internal" href="openvino_docs_MO_DG_Additional_Optimization_Use_Cases.html#doxid-openvino-docs-m-o-d-g-additional-optimization-use-cases"><span class="std std-ref">Model Optimizer - Optimize Preprocessing Computation</span></a> for details os such command line options.</p>
-</div>
-<div class="section" id="code-example-saving-model-with-preprocessing-to-ir">
+</section>
+<section id="code-example-saving-model-with-preprocessing-to-ir">
 <h2>Code example - saving model with preprocessing to IR<a class="headerlink" href="#code-example-saving-model-with-preprocessing-to-ir" title="Permalink to this headline">¶</a></h2>
 <p>In case if you have some preprocessing steps which can’t be integrated into execution graph using Model Optimizer command line options (e.g. <code class="docutils literal notranslate"><span class="pre">YUV-&gt;RGB</span></code> color space conversion, Resize, etc.) it is possible to write simple code which:</p>
 <ul class="simple">
@@ -1864,16 +1871,16 @@
 <li><p>Preprocessing &amp; Saving to IR code</p></li>
 </ul>
 <div class='sphinxtabset'><div class="sphinxtab" data-sphinxtab-value="C++"><div class="highlight"><div class="highlight"><pre><span></span><span class="c1">// ========  Step 0: read original model =========</span>
-ov::Core<span></span> <span class="n">core</span><span class="p">;</span>
-<span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">ov</span><span class="o">::</span><span class="n">Model</span><span class="o">&gt;</span> model<span></span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span>read_model<span></span><span class="p">(</span><span class="s">&quot;/path/to/some_model.onnx&quot;</span><span class="p">);</span>
+<a class="reference internal" href="../api/groups/classov_1_1Core.html#doxid-classov-1-1-core"><span class="std std-ref">ov::Core</span></a><span></span> <span class="n">core</span><span class="p">;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">ov</span><span class="o">::</span><span class="n">Model</span><span class="o">&gt;</span> <a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga461856fdfb6d7533dc53355aec9e9fad"><span class="std std-ref">model</span></a><span></span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span>read_model<span></span><span class="p">(</span><span class="s">&quot;/path/to/some_model.onnx&quot;</span><span class="p">);</span>
 
 <span class="c1">// ======== Step 1: Preprocessing ================</span>
-ov::preprocess::PrePostProcessor<span></span> <span class="n">prep</span><span class="p">(</span>model<span></span><span class="p">);</span>
+<a class="reference internal" href="../api/groups/classov_1_1preprocess_1_1PrePostProcessor.html#doxid-classov-1-1preprocess-1-1-pre-post-processor"><span class="std std-ref">ov::preprocess::PrePostProcessor</span></a><span></span> <span class="n">prep</span><span class="p">(</span><a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga461856fdfb6d7533dc53355aec9e9fad"><span class="std std-ref">model</span></a><span></span><span class="p">);</span>
 <span class="c1">// Declare section of desired application&#39;s input format</span>
 <span class="n">prep</span><span class="p">.</span><span class="n">input</span><span class="p">().</span><span class="n">tensor</span><span class="p">()</span>
-       <span class="p">.</span><span class="n">set_element_type</span><span class="p">(</span>ov::element::u8<span></span><span class="p">)</span>
+       <span class="p">.</span><span class="n">set_element_type</span><span class="p">(</span><a class="reference internal" href="../api/groups/groupov_element_cpp_api.html#doxid-group-ov-element-cpp-api-1gaaf60c536d3e295285f6a899eb3d29e2f"><span class="std std-ref">ov::element::u8</span></a><span></span><span class="p">)</span>
        <span class="p">.</span><span class="n">set_layout</span><span class="p">(</span><span class="s">&quot;NHWC&quot;</span><span class="p">)</span>
-       <span class="p">.</span><span class="n">set_color_format</span><span class="p">(</span>ov::preprocess::ColorFormat::BGR<span></span><span class="p">)</span>
+       <span class="p">.</span><span class="n">set_color_format</span><span class="p">(</span><a class="reference internal" href="../api/groups/enumInferenceEngine_1_1ColorFormat.html#doxid-namespace-inference-engine-1a5ee5ca7708cc67a9a0becc2593d0558aa0fb221afef06def7c25b82d6fa9efc1b"><span class="std std-ref">ov::preprocess::ColorFormat::BGR</span></a><span></span><span class="p">)</span>
        <span class="p">.</span><span class="n">set_spatial_dynamic_shape</span><span class="p">();</span>
 <span class="c1">// Specify actual model layout</span>
 <span class="n">prep</span><span class="p">.</span><span class="n">input</span><span class="p">().</span><span class="n">model</span><span class="p">()</span>
@@ -1881,22 +1888,22 @@ ov::preprocess::PrePostProcessor<span></span> <span class="n">prep</span><span c
 <span class="c1">// Explicit preprocessing steps. Layout conversion will be done automatically as last step</span>
 <span class="n">prep</span><span class="p">.</span><span class="n">input</span><span class="p">().</span><span class="n">preprocess</span><span class="p">()</span>
        <span class="p">.</span><span class="n">convert_element_type</span><span class="p">()</span>
-       <span class="p">.</span><span class="n">convert_color</span><span class="p">(</span>ov::preprocess::ColorFormat::RGB<span></span><span class="p">)</span>
+       <span class="p">.</span><span class="n">convert_color</span><span class="p">(</span><a class="reference internal" href="../api/groups/enumInferenceEngine_1_1ColorFormat.html#doxid-namespace-inference-engine-1a5ee5ca7708cc67a9a0becc2593d0558aae2262afdcd9754598dbc87e4a4725246"><span class="std std-ref">ov::preprocess::ColorFormat::RGB</span></a><span></span><span class="p">)</span>
        <span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">ov</span><span class="o">::</span><span class="n">preprocess</span><span class="o">::</span><span class="n">ResizeAlgorithm</span><span class="o">::</span><span class="n">RESIZE_LINEAR</span><span class="p">)</span>
        <span class="p">.</span><span class="n">mean</span><span class="p">({</span><span class="mf">123.675</span><span class="p">,</span> <span class="mf">116.28</span><span class="p">,</span> <span class="mf">103.53</span><span class="p">})</span> <span class="c1">// Subtract mean after color conversion</span>
        <span class="p">.</span><span class="n">scale</span><span class="p">({</span><span class="mf">58.624</span><span class="p">,</span> <span class="mf">57.12</span><span class="p">,</span> <span class="mf">57.375</span><span class="p">});</span>
 <span class="c1">// Dump preprocessor</span>
 <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Preprocessor: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">prep</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-model<span></span> <span class="o">=</span> <span class="n">prep</span><span class="p">.</span><span class="n">build</span><span class="p">();</span>
+<a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga461856fdfb6d7533dc53355aec9e9fad"><span class="std std-ref">model</span></a><span></span> <span class="o">=</span> <span class="n">prep</span><span class="p">.</span><span class="n">build</span><span class="p">();</span>
 
 <span class="c1">// ======== Step 2: Change batch size ================</span>
 <span class="c1">// In this example we also want to change batch size to increase throughput</span>
-ov::set_batch<span></span><span class="p">(</span>model<span></span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+<a class="reference internal" href="../api/groups/namespaceov.html#doxid-namespaceov-1a3314e2ff91fcc9ffec05b1a77c37862b"><span class="std std-ref">ov::set_batch</span></a><span></span><span class="p">(</span><a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga461856fdfb6d7533dc53355aec9e9fad"><span class="std std-ref">model</span></a><span></span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
 
 <span class="c1">// ======== Step 3: Save the model ================</span>
 <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">xml</span> <span class="o">=</span> <span class="s">&quot;/path/to/some_model_saved.xml&quot;</span><span class="p">;</span>
 <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">bin</span> <span class="o">=</span> <span class="s">&quot;/path/to/some_model_saved.bin&quot;</span><span class="p">;</span>
-ov::serialize<span></span><span class="p">(</span>model<span></span><span class="p">,</span> <span class="n">xml</span><span class="p">,</span> <span class="n">bin</span><span class="p">);</span></pre></div></div></div><div class="sphinxtab" data-sphinxtab-value="Python"><div class="highlight"><div class="highlight"><pre><span></span><span class="cp"># ========  Step 0: read original model =========</span>
+<a class="reference internal" href="../api/groups/namespaceov.html#doxid-namespaceov-1a9eb5ed541b9130617bfee541a9679464"><span class="std std-ref">ov::serialize</span></a><span></span><span class="p">(</span><a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga461856fdfb6d7533dc53355aec9e9fad"><span class="std std-ref">model</span></a><span></span><span class="p">,</span> <span class="n">xml</span><span class="p">,</span> <span class="n">bin</span><span class="p">);</span></pre></div></div></div><div class="sphinxtab" data-sphinxtab-value="Python"><div class="highlight"><div class="highlight"><pre><span></span><span class="cp"># ========  Step 0: read original model =========</span>
 <span class="n">core</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span>
 <span class="n">model</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><span class="n">read_model</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="sc">&#39;/path/to/some_model.onnx&#39;</span><span class="p">)</span>
 
@@ -1906,11 +1913,11 @@ ov::serialize<span></span><span class="p">(</span>model<span></span><span class=
 <span class="n">ppp</span><span class="p">.</span><span class="n">input</span><span class="p">().</span><span class="n">tensor</span><span class="p">()</span> \
     <span class="p">.</span><span class="n">set_element_type</span><span class="p">(</span><span class="n">Type</span><span class="p">.</span><span class="n">u8</span><span class="p">)</span> \
     <span class="p">.</span><span class="n">set_spatial_dynamic_shape</span><span class="p">()</span> \
-    <span class="p">.</span>set_layout<span></span><span class="p">(</span>Layout<span></span><span class="p">(</span><span class="sc">&#39;NHWC&#39;</span><span class="p">))</span> \
+    <span class="p">.</span><a class="reference internal" href="../api/groups/groupov_layout_cpp_api.html#doxid-group-ov-layout-cpp-api-1ga18464fb8ed029acb5fdc2bb1737358d9"><span class="std std-ref">set_layout</span></a><span></span><span class="p">(</span><a class="reference internal" href="../api/groups/enumInferenceEngine_1_1Layout.html#doxid-namespace-inference-engine-1a246d143abc5ca07da8d2cadeeb88fdb8"><span class="std std-ref">Layout</span></a><span></span><span class="p">(</span><span class="sc">&#39;NHWC&#39;</span><span class="p">))</span> \
     <span class="p">.</span><span class="n">set_color_format</span><span class="p">(</span><span class="n">ColorFormat</span><span class="p">.</span><span class="n">BGR</span><span class="p">)</span>
 
 <span class="cp"># Specify actual model layout</span>
-<span class="n">ppp</span><span class="p">.</span><span class="n">input</span><span class="p">().</span>model<span></span><span class="p">().</span>set_layout<span></span><span class="p">(</span>Layout<span></span><span class="p">(</span><span class="sc">&#39;NCHW&#39;</span><span class="p">))</span>
+<span class="n">ppp</span><span class="p">.</span><span class="n">input</span><span class="p">().</span><a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga461856fdfb6d7533dc53355aec9e9fad"><span class="std std-ref">model</span></a><span></span><span class="p">().</span><a class="reference internal" href="../api/groups/groupov_layout_cpp_api.html#doxid-group-ov-layout-cpp-api-1ga18464fb8ed029acb5fdc2bb1737358d9"><span class="std std-ref">set_layout</span></a><span></span><span class="p">(</span><a class="reference internal" href="../api/groups/enumInferenceEngine_1_1Layout.html#doxid-namespace-inference-engine-1a246d143abc5ca07da8d2cadeeb88fdb8"><span class="std std-ref">Layout</span></a><span></span><span class="p">(</span><span class="sc">&#39;NCHW&#39;</span><span class="p">))</span>
 
 <span class="cp"># Explicit preprocessing steps. Layout conversion will be done automatically as last step</span>
 <span class="n">ppp</span><span class="p">.</span><span class="n">input</span><span class="p">().</span><span class="n">preprocess</span><span class="p">()</span> \
@@ -1926,37 +1933,37 @@ ov::serialize<span></span><span class="p">(</span>model<span></span><span class=
 
 <span class="cp"># ======== Step 2: Change batch size ================</span>
 <span class="cp"># In this example we also want to change batch size to increase throughput</span>
-set_batch<span></span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<a class="reference internal" href="../api/groups/namespaceov.html#doxid-namespaceov-1a3314e2ff91fcc9ffec05b1a77c37862b"><span class="std std-ref">set_batch</span></a><span></span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 
 <span class="cp"># ======== Step 3: Save the model ================</span>
-serialize<span></span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="sc">&#39;/path/to/some_model_saved.xml&#39;</span><span class="p">,</span> <span class="sc">&#39;/path/to/some_model_saved.bin&#39;</span><span class="p">)</span></pre></div></div></div></div></div>
-<div class="section" id="application-code-load-model-to-target-device">
+<a class="reference internal" href="../api/groups/namespaceov.html#doxid-namespaceov-1a9eb5ed541b9130617bfee541a9679464"><span class="std std-ref">serialize</span></a><span></span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="sc">&#39;/path/to/some_model_saved.xml&#39;</span><span class="p">,</span> <span class="sc">&#39;/path/to/some_model_saved.bin&#39;</span><span class="p">)</span></pre></div></div></div></div></section>
+<section id="application-code-load-model-to-target-device">
 <h2>Application code - load model to target device<a class="headerlink" href="#application-code-load-model-to-target-device" title="Permalink to this headline">¶</a></h2>
 <p>After this, your application’s code can load saved file and don’t perform preprocessing anymore. In this example we’ll also enable <a class="reference internal" href="openvino_docs_OV_UG_Model_caching_overview.html#doxid-openvino-docs-o-v-u-g-model-caching-overview"><span class="std std-ref">model caching</span></a> to minimize load time when cached model is available</p>
-<div class='sphinxtabset'><div class="sphinxtab" data-sphinxtab-value="C++"><div class="highlight"><div class="highlight"><pre>ov::Core<span></span> <span class="n">core</span><span class="p">;</span>
-<span class="n">core</span><span class="p">.</span>set_property<span></span><span class="p">(</span>ov::cache_dir<span></span><span class="p">(</span><span class="s">&quot;/path/to/cache/dir&quot;</span><span class="p">));</span>
+<div class='sphinxtabset'><div class="sphinxtab" data-sphinxtab-value="C++"><div class="highlight"><div class="highlight"><pre><a class="reference internal" href="../api/groups/classov_1_1Core.html#doxid-classov-1-1-core"><span class="std std-ref">ov::Core</span></a><span></span> <span class="n">core</span><span class="p">;</span>
+<span class="n">core</span><span class="p">.</span><a class="reference internal" href="../api/groups/classov_1_1Core.html#doxid-classov-1-1-core-1aa953cb0a1601dbc9a34ef6ba82b8476e"><span class="std std-ref">set_property</span></a><span></span><span class="p">(</span><a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga3276fc4ed7cc7d0bbdcf0ae12063728d"><span class="std std-ref">ov::cache_dir</span></a><span></span><span class="p">(</span><span class="s">&quot;/path/to/cache/dir&quot;</span><span class="p">));</span>
 
 <span class="c1">// In case that no preprocessing is needed anymore, we can load model on target device directly</span>
 <span class="c1">// With cached model available, it will also save some time on reading original model</span>
-ov::CompiledModel<span></span> <span class="n">compiled_model</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span>compile_model<span></span><span class="p">(</span><span class="s">&quot;/path/to/some_model_saved.xml&quot;</span><span class="p">,</span> <span class="s">&quot;CPU&quot;</span><span class="p">);</span></pre></div></div></div><div class="sphinxtab" data-sphinxtab-value="Python"><div class="highlight"><div class="highlight"><pre><span></span><span class="n">core</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span>
+<a class="reference internal" href="../api/groups/classov_1_1CompiledModel.html#doxid-classov-1-1-compiled-model"><span class="std std-ref">ov::CompiledModel</span></a><span></span> <span class="n">compiled_model</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><a class="reference internal" href="../api/groups/classov_1_1Core.html#doxid-classov-1-1-core-1a46555f0803e8c29524626be08e7f5c5a"><span class="std std-ref">compile_model</span></a><span></span><span class="p">(</span><span class="s">&quot;/path/to/some_model_saved.xml&quot;</span><span class="p">,</span> <span class="s">&quot;CPU&quot;</span><span class="p">);</span></pre></div></div></div><div class="sphinxtab" data-sphinxtab-value="Python"><div class="highlight"><div class="highlight"><pre><span></span><span class="n">core</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span>
 <span class="n">core</span><span class="p">.</span><span class="n">set_property</span><span class="p">({</span><span class="sc">&#39;CACHE_DIR&#39;</span><span class="o">:</span> <span class="sc">&#39;/path/to/cache/dir&#39;</span><span class="p">})</span>
 
 <span class="cp"># In case that no preprocessing is needed anymore, we can load model on target device directly</span>
 <span class="cp"># With cached model available, it will also save some time on reading original model</span>
-<span class="n">compiled_model</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><span class="n">compile_model</span><span class="p">(</span><span class="sc">&#39;/path/to/some_model_saved.xml&#39;</span><span class="p">,</span> <span class="sc">&#39;CPU&#39;</span><span class="p">)</span></pre></div></div></div></div></div>
-<div class="section" id="see-also">
+<span class="n">compiled_model</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><span class="n">compile_model</span><span class="p">(</span><span class="sc">&#39;/path/to/some_model_saved.xml&#39;</span><span class="p">,</span> <span class="sc">&#39;CPU&#39;</span><span class="p">)</span></pre></div></div></div></div></section>
+<section id="see-also">
 <h2>See Also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="openvino_docs_OV_UG_Preprocessing_Details.html#doxid-openvino-docs-o-v-u-g-preprocessing-details"><span class="std std-ref">Preprocessing Details</span></a></p></li>
 <li><p><a class="reference internal" href="openvino_docs_OV_UG_Layout_Overview.html#doxid-openvino-docs-o-v-u-g-layout-overview"><span class="std std-ref">Layout API overview</span></a></p></li>
 <li><p><a class="reference internal" href="openvino_docs_MO_DG_Additional_Optimization_Use_Cases.html#doxid-openvino-docs-m-o-d-g-additional-optimization-use-cases"><span class="std std-ref">Model Optimizer - Optimize Preprocessing Computation</span></a></p></li>
 <li><p><a class="reference internal" href="openvino_docs_OV_UG_Model_caching_overview.html#doxid-openvino-docs-o-v-u-g-model-caching-overview"><span class="std std-ref">Model Caching Overview</span></a></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">ov::preprocess::PrePostProcessor</span></code> C++ class documentation</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">ov::pass::Serialize</span></code> - pass to serialize model to XML/BIN</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">ov::set_batch</span></code> - update batch dimension for a given model</p></li>
+<li><p><code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1preprocess_1_1PrePostProcessor.html#doxid-classov-1-1preprocess-1-1-pre-post-processor"><span class="std std-ref"><span class="pre">ov::preprocess::PrePostProcessor</span></span></a></code> C++ class documentation</p></li>
+<li><p><code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1pass_1_1Serialize.html#doxid-classov-1-1pass-1-1-serialize"><span class="std std-ref"><span class="pre">ov::pass::Serialize</span></span></a></code> - pass to serialize model to XML/BIN</p></li>
+<li><p><code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/namespaceov.html#doxid-namespaceov-1a3314e2ff91fcc9ffec05b1a77c37862b"><span class="std std-ref"><span class="pre">ov::set_batch</span></span></a></code> - update batch dimension for a given model</p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -1987,7 +1994,7 @@ ov::CompiledModel<span></span> <span class="n">compiled_model</span> <span class
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

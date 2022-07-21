@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Synchronous Inference Request &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -1854,7 +1861,7 @@
             
                 <div>
                   
-  <div class="section" id="synchronous-inference-request">
+  <section id="synchronous-inference-request">
 <span id="doxid-openvino-docs-ie-plugin-dg-infer-request"></span><span id="index-0"></span><h1>Synchronous Inference Request<a class="headerlink" href="#synchronous-inference-request" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-openvino-docs-ie-plugin-dg-infer-request-1md-openvino-docs-ie-plugin-dg-inferrequest"></span> <code class="docutils literal notranslate"><span class="pre">InferRequest</span></code> class functionality:</p>
 <ul class="simple">
@@ -1862,22 +1869,22 @@
 <li><p>Define functions for inference process stages (for example, <code class="docutils literal notranslate"><span class="pre">preprocess</span></code>, <code class="docutils literal notranslate"><span class="pre">upload</span></code>, <code class="docutils literal notranslate"><span class="pre">infer</span></code>, <code class="docutils literal notranslate"><span class="pre">download</span></code>, <code class="docutils literal notranslate"><span class="pre">postprocess</span></code>). These functions can later be used to define an execution pipeline during <a class="reference internal" href="openvino_docs_ie_plugin_dg_async_infer_request.html#doxid-openvino-docs-ie-plugin-dg-async-infer-request"><span class="std std-ref">Asynchronous Inference Request</span></a> implementation.</p></li>
 <li><p>Call inference stages one by one synchronously.</p></li>
 </ul>
-<div class="section" id="class">
+<section id="class">
 <h2>Class<a class="headerlink" href="#class" title="Permalink to this headline">¶</a></h2>
-<p>Inference Engine Plugin API provides the helper <span class="xref std std-ref">InferenceEngine::IInferRequestInternal</span> class recommended to use as a base class for a synchronous inference request implementation. Based of that, a declaration of a synchronous request class can look as follows:</p>
-<div class="highlight"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nl">TemplateInferRequest</span> <span class="p">:</span> <span class="k">public</span> InferenceEngine::IInferRequestInternal<span></span> <span class="p">{</span>
+<p>Inference Engine Plugin API provides the helper <a class="reference internal" href="../api/groups/classInferenceEngine_1_1IInferRequestInternal.html#doxid-class-inference-engine-1-1-i-infer-request-internal"><span class="std std-ref">InferenceEngine::IInferRequestInternal</span></a> class recommended to use as a base class for a synchronous inference request implementation. Based of that, a declaration of a synchronous request class can look as follows:</p>
+<div class="highlight"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nl">TemplateInferRequest</span> <span class="p">:</span> <span class="k">public</span> <a class="reference internal" href="../api/groups/classInferenceEngine_1_1IInferRequestInternal.html#doxid-class-inference-engine-1-1-i-infer-request-internal"><span class="std std-ref">InferenceEngine::IInferRequestInternal</span></a><span></span> <span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
-    <span class="k">typedef</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">TemplateInferRequest</span><span class="o">&gt;</span> Ptr<span></span><span class="p">;</span>
+    <span class="k">typedef</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">TemplateInferRequest</span><span class="o">&gt;</span> <a class="reference internal" href="../api/groups/classInferenceEngine_1_1IInferRequestInternal.html#doxid-class-inference-engine-1-1-i-infer-request-internal-1a50c614e7a30e1e8ee58e984f210a1558"><span class="std std-ref">Ptr</span></a><span></span><span class="p">;</span>
 
-    <span class="n">TemplateInferRequest</span><span class="p">(</span><span class="k">const</span> InferenceEngine::InputsDataMap<span></span><span class="o">&amp;</span> <span class="n">networkInputs</span><span class="p">,</span>
-                         <span class="k">const</span> InferenceEngine::OutputsDataMap<span></span><span class="o">&amp;</span> <span class="n">networkOutputs</span><span class="p">,</span>
+    <span class="n">TemplateInferRequest</span><span class="p">(</span><span class="k">const</span> <a class="reference internal" href="../api/groups/namespaceInferenceEngine.html#doxid-namespace-inference-engine-1a08270747275eb79985154365aa782a2a"><span class="std std-ref">InferenceEngine::InputsDataMap</span></a><span></span><span class="o">&amp;</span> <span class="n">networkInputs</span><span class="p">,</span>
+                         <span class="k">const</span> <a class="reference internal" href="../api/groups/namespaceInferenceEngine.html#doxid-namespace-inference-engine-1a76ce999f68455cf962a473718deb500c"><span class="std std-ref">InferenceEngine::OutputsDataMap</span></a><span></span><span class="o">&amp;</span> <span class="n">networkOutputs</span><span class="p">,</span>
                          <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">ExecutableNetwork</span><span class="o">&gt;&amp;</span> <span class="n">executableNetwork</span><span class="p">);</span>
     <span class="n">TemplateInferRequest</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">ov</span><span class="o">::</span><span class="n">Node</span><span class="o">&gt;&gt;&amp;</span> <span class="n">inputs</span><span class="p">,</span>
                          <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">ov</span><span class="o">::</span><span class="n">Node</span><span class="o">&gt;&gt;&amp;</span> <span class="n">outputs</span><span class="p">,</span>
                          <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">ExecutableNetwork</span><span class="o">&gt;&amp;</span> <span class="n">executableNetwork</span><span class="p">);</span>
     <span class="o">~</span><span class="n">TemplateInferRequest</span><span class="p">();</span>
 
-    <span class="kt">void</span> InferImpl<span></span><span class="p">()</span> <span class="k">override</span><span class="p">;</span>
+    <span class="kt">void</span> <a class="reference internal" href="../api/groups/classInferenceEngine_1_1IInferRequestInternal.html#doxid-class-inference-engine-1-1-i-infer-request-internal-1a0ff052d969d599023769a8f5f3a75a56"><span class="std std-ref">InferImpl</span></a><span></span><span class="p">()</span> <span class="k">override</span><span class="p">;</span>
     <span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span> <span class="n">InferenceEngine</span><span class="o">::</span><span class="n">InferenceEngineProfileInfo</span><span class="o">&gt;</span> GetPerformanceCounts<span></span><span class="p">()</span> <span class="k">const</span> <span class="k">override</span><span class="p">;</span>
 
     <span class="c1">// pipeline methods-stages which are used in async infer request implementation and assigned to particular executor</span>
@@ -1886,10 +1893,10 @@
     <span class="kt">void</span> <span class="nf">waitPipeline</span><span class="p">();</span>
     <span class="kt">void</span> <span class="nf">inferPostprocess</span><span class="p">();</span>
 
-    InferenceEngine::Blob::Ptr<span></span> GetBlob<span></span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name</span><span class="p">)</span> <span class="k">override</span><span class="p">;</span>
-    <span class="kt">void</span> SetBlob<span></span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name</span><span class="p">,</span> <span class="k">const</span> InferenceEngine::Blob::Ptr<span></span><span class="o">&amp;</span> <span class="n">userBlob</span><span class="p">)</span> <span class="k">override</span><span class="p">;</span>
+    <a class="reference internal" href="../api/groups/classInferenceEngine_1_1Blob.html#doxid-class-inference-engine-1-1-blob-1abb6c4f89181e2dd6d8a29ada2dfb4060"><span class="std std-ref">InferenceEngine::Blob::Ptr</span></a><span></span> <a class="reference internal" href="../api/groups/classInferenceEngine_1_1IInferRequestInternal.html#doxid-class-inference-engine-1-1-i-infer-request-internal-1ad15f46c840f339ee2dd5e827ad003166"><span class="std std-ref">GetBlob</span></a><span></span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name</span><span class="p">)</span> <span class="k">override</span><span class="p">;</span>
+    <span class="kt">void</span> <a class="reference internal" href="../api/groups/classInferenceEngine_1_1IInferRequestInternal.html#doxid-class-inference-engine-1-1-i-infer-request-internal-1aaf6f8482fd4e8220edb8cb08558a4d6c"><span class="std std-ref">SetBlob</span></a><span></span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name</span><span class="p">,</span> <span class="k">const</span> <a class="reference internal" href="../api/groups/classInferenceEngine_1_1Blob.html#doxid-class-inference-engine-1-1-blob-1abb6c4f89181e2dd6d8a29ada2dfb4060"><span class="std std-ref">InferenceEngine::Blob::Ptr</span></a><span></span><span class="o">&amp;</span> <span class="n">userBlob</span><span class="p">)</span> <span class="k">override</span><span class="p">;</span>
 
-    <span class="kt">void</span> SetBlobsImpl<span></span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name</span><span class="p">,</span> <span class="k">const</span> InferenceEngine::BatchedBlob::Ptr<span></span><span class="o">&amp;</span> <span class="n">batchedBlob</span><span class="p">)</span> <span class="k">override</span><span class="p">;</span>
+    <span class="kt">void</span> <a class="reference internal" href="../api/groups/classInferenceEngine_1_1IInferRequestInternal.html#doxid-class-inference-engine-1-1-i-infer-request-internal-1a55ffc43c997b9e2034048523724a1a9a"><span class="std std-ref">SetBlobsImpl</span></a><span></span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name</span><span class="p">,</span> <span class="k">const</span> <a class="reference internal" href="../api/groups/classInferenceEngine_1_1BatchedBlob.html#doxid-class-inference-engine-1-1-batched-blob-1ac66bc6bfae9ffc4be2de9c1d2f9e4208"><span class="std std-ref">InferenceEngine::BatchedBlob::Ptr</span></a><span></span><span class="o">&amp;</span> <span class="n">batchedBlob</span><span class="p">)</span> <span class="k">override</span><span class="p">;</span>
 
 <span class="k">private</span><span class="o">:</span>
     <span class="kt">void</span> <span class="n">createInferRequest</span><span class="p">();</span>
@@ -1903,12 +1910,12 @@
     <span class="c1">// for performance counters</span>
     <span class="n">std</span><span class="o">::</span><span class="n">array</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">duration</span><span class="o">&lt;</span><span class="kt">float</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">micro</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">numOfStages</span><span class="o">&gt;</span> <span class="n">_durations</span><span class="p">;</span>
 
-    InferenceEngine::BlobMap<span></span> <span class="n">_networkOutputBlobs</span><span class="p">;</span>
+    <a class="reference internal" href="../api/groups/namespaceInferenceEngine.html#doxid-namespace-inference-engine-1ad1c63c694d34358a748f591ffa74a9d0"><span class="std std-ref">InferenceEngine::BlobMap</span></a><span></span> <span class="n">_networkOutputBlobs</span><span class="p">;</span>
 
     <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">ngraph</span><span class="o">::</span><span class="n">runtime</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&gt;&gt;</span> <span class="n">_inputTensors</span><span class="p">;</span>
     <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">ngraph</span><span class="o">::</span><span class="n">runtime</span><span class="o">::</span><span class="n">Tensor</span><span class="o">&gt;&gt;</span> <span class="n">_outputTensors</span><span class="p">;</span>
     <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">ngraph</span><span class="o">::</span><span class="n">runtime</span><span class="o">::</span><span class="n">Executable</span><span class="o">&gt;</span> <span class="n">_executable</span><span class="p">;</span>
-<span class="p">};</span></pre></div></div><div class="section" id="class-fields">
+<span class="p">};</span></pre></div></div><section id="class-fields">
 <h3>Class Fields<a class="headerlink" href="#class-fields" title="Permalink to this headline">¶</a></h3>
 <p>The example class has several fields:</p>
 <ul class="simple">
@@ -1917,8 +1924,8 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">_durations</span></code> - array of durations of each pipeline stage.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">_networkInputBlobs</span></code> - input blob map.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">_networkOutputBlobs</span></code> - output blob map.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">_parameters</span></code> - <code class="docutils literal notranslate"><span class="pre">ngraph::Function</span></code> parameter operations.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">_results</span></code> - <code class="docutils literal notranslate"><span class="pre">ngraph::Function</span></code> result operations.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">_parameters</span></code> - <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classngraph.html#doxid-classngraph-1a14d7fe7c605267b52c145579e12d2a5f"><span class="std std-ref"><span class="pre">ngraph::Function</span></span></a></code> parameter operations.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">_results</span></code> - <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classngraph.html#doxid-classngraph-1a14d7fe7c605267b52c145579e12d2a5f"><span class="std std-ref"><span class="pre">ngraph::Function</span></span></a></code> result operations.</p></li>
 <li><p>backend specific fields:</p>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">_inputTensors</span></code> - inputs tensors which wrap <code class="docutils literal notranslate"><span class="pre">_networkInputBlobs</span></code> blobs. They are used as inputs to backend <code class="docutils literal notranslate"><span class="pre">_executable</span></code> computational graph.</p></li>
@@ -1927,11 +1934,11 @@
 </ul>
 </li>
 </ul>
-<div class="section" id="constructor">
+<section id="constructor">
 <h4>Constructor<a class="headerlink" href="#constructor" title="Permalink to this headline">¶</a></h4>
 <p>The constructor initializes helper fields and calls methods which allocate blobs:</p>
-<div class="highlight"><div class="highlight"><pre><span></span><span class="n">TemplateInferRequest</span><span class="o">::</span><span class="n">TemplateInferRequest</span><span class="p">(</span><span class="k">const</span> InferenceEngine::InputsDataMap<span></span><span class="o">&amp;</span> <span class="n">networkInputs</span><span class="p">,</span>
-                                           <span class="k">const</span> InferenceEngine::OutputsDataMap<span></span><span class="o">&amp;</span> <span class="n">networkOutputs</span><span class="p">,</span>
+<div class="highlight"><div class="highlight"><pre><span></span><span class="n">TemplateInferRequest</span><span class="o">::</span><span class="n">TemplateInferRequest</span><span class="p">(</span><span class="k">const</span> <a class="reference internal" href="../api/groups/namespaceInferenceEngine.html#doxid-namespace-inference-engine-1a08270747275eb79985154365aa782a2a"><span class="std std-ref">InferenceEngine::InputsDataMap</span></a><span></span><span class="o">&amp;</span> <span class="n">networkInputs</span><span class="p">,</span>
+                                           <span class="k">const</span> <a class="reference internal" href="../api/groups/namespaceInferenceEngine.html#doxid-namespace-inference-engine-1a76ce999f68455cf962a473718deb500c"><span class="std std-ref">InferenceEngine::OutputsDataMap</span></a><span></span><span class="o">&amp;</span> <span class="n">networkOutputs</span><span class="p">,</span>
                                            <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">TemplatePlugin</span><span class="o">::</span><span class="n">ExecutableNetwork</span><span class="o">&gt;&amp;</span> <span class="n">executableNetwork</span><span class="p">)</span>
     <span class="o">:</span> <span class="n">IInferRequestInternal</span><span class="p">(</span><span class="n">networkInputs</span><span class="p">,</span> <span class="n">networkOutputs</span><span class="p">),</span>
       <span class="n">_executableNetwork</span><span class="p">(</span><span class="n">executableNetwork</span><span class="p">)</span> <span class="p">{</span>
@@ -1953,13 +1960,13 @@
 
     <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">name</span> <span class="o">=</span> <span class="n">_executableNetwork</span><span class="o">-&gt;</span><span class="n">_function</span><span class="o">-&gt;</span><span class="n">get_friendly_name</span><span class="p">()</span> <span class="o">+</span> <span class="s">&quot;_Req&quot;</span> <span class="o">+</span> <span class="n">requestID</span><span class="p">;</span>
     <span class="n">_profilingTask</span> <span class="o">=</span> <span class="p">{</span>
-        openvino::itt::handle<span></span><span class="p">(</span><span class="s">&quot;Template&quot;</span> <span class="o">+</span> <span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">_executableNetwork</span><span class="o">-&gt;</span><span class="n">_cfg</span><span class="p">.</span><span class="n">deviceId</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;_&quot;</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span>
+        <a class="reference internal" href="../api/groups/groupie_dev_profiling.html#doxid-group-ie-dev-profiling-1ga8579f29ef5313d519bcaee20dd543a1b"><span class="std std-ref">openvino::itt::handle</span></a><span></span><span class="p">(</span><span class="s">&quot;Template&quot;</span> <span class="o">+</span> <span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">_executableNetwork</span><span class="o">-&gt;</span><span class="n">_cfg</span><span class="p">.</span><span class="n">deviceId</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;_&quot;</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span>
                               <span class="s">&quot;_Preprocess&quot;</span><span class="p">),</span>
-        openvino::itt::handle<span></span><span class="p">(</span><span class="s">&quot;Template&quot;</span> <span class="o">+</span> <span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">_executableNetwork</span><span class="o">-&gt;</span><span class="n">_cfg</span><span class="p">.</span><span class="n">deviceId</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;_&quot;</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span>
+        <a class="reference internal" href="../api/groups/groupie_dev_profiling.html#doxid-group-ie-dev-profiling-1ga8579f29ef5313d519bcaee20dd543a1b"><span class="std std-ref">openvino::itt::handle</span></a><span></span><span class="p">(</span><span class="s">&quot;Template&quot;</span> <span class="o">+</span> <span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">_executableNetwork</span><span class="o">-&gt;</span><span class="n">_cfg</span><span class="p">.</span><span class="n">deviceId</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;_&quot;</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span>
                               <span class="s">&quot;_Postprocess&quot;</span><span class="p">),</span>
-        openvino::itt::handle<span></span><span class="p">(</span><span class="s">&quot;Template&quot;</span> <span class="o">+</span> <span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">_executableNetwork</span><span class="o">-&gt;</span><span class="n">_cfg</span><span class="p">.</span><span class="n">deviceId</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;_&quot;</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span>
+        <a class="reference internal" href="../api/groups/groupie_dev_profiling.html#doxid-group-ie-dev-profiling-1ga8579f29ef5313d519bcaee20dd543a1b"><span class="std std-ref">openvino::itt::handle</span></a><span></span><span class="p">(</span><span class="s">&quot;Template&quot;</span> <span class="o">+</span> <span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">_executableNetwork</span><span class="o">-&gt;</span><span class="n">_cfg</span><span class="p">.</span><span class="n">deviceId</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;_&quot;</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span>
                               <span class="s">&quot;_StartPipline&quot;</span><span class="p">),</span>
-        openvino::itt::handle<span></span><span class="p">(</span><span class="s">&quot;Template&quot;</span> <span class="o">+</span> <span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">_executableNetwork</span><span class="o">-&gt;</span><span class="n">_cfg</span><span class="p">.</span><span class="n">deviceId</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;_&quot;</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span>
+        <a class="reference internal" href="../api/groups/groupie_dev_profiling.html#doxid-group-ie-dev-profiling-1ga8579f29ef5313d519bcaee20dd543a1b"><span class="std std-ref">openvino::itt::handle</span></a><span></span><span class="p">(</span><span class="s">&quot;Template&quot;</span> <span class="o">+</span> <span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">_executableNetwork</span><span class="o">-&gt;</span><span class="n">_cfg</span><span class="p">.</span><span class="n">deviceId</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;_&quot;</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span>
                               <span class="s">&quot;_WaitPipline&quot;</span><span class="p">),</span>
     <span class="p">};</span>
 
@@ -1969,15 +1976,15 @@
     <span class="n">allocateBlobs</span><span class="p">();</span>
 <span class="p">}</span></pre></div></div><div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Call <span class="xref std std-ref">InferenceEngine::CNNNetwork::getInputsInfo</span> and <span class="xref std std-ref">InferenceEngine::CNNNetwork::getOutputsInfo</span> to specify both layout and precision of blobs, which you can set with <span class="xref std std-ref">InferenceEngine::InferRequest::SetBlob</span> and get with <span class="xref std std-ref">InferenceEngine::InferRequest::GetBlob</span>. A plugin uses these hints to determine its internal layouts and precisions for input and output blobs if needed.</p>
+<p>Call <a class="reference internal" href="../api/groups/classInferenceEngine_1_1CNNNetwork.html#doxid-class-inference-engine-1-1-c-n-n-network-1a76de2a6101fe8276f56b0dc0f99c7ff7"><span class="std std-ref">InferenceEngine::CNNNetwork::getInputsInfo</span></a> and <a class="reference internal" href="../api/groups/classInferenceEngine_1_1CNNNetwork.html#doxid-class-inference-engine-1-1-c-n-n-network-1af8a6200f549b15a895e2cfefd304a9c2"><span class="std std-ref">InferenceEngine::CNNNetwork::getOutputsInfo</span></a> to specify both layout and precision of blobs, which you can set with <a class="reference internal" href="../api/groups/classInferenceEngine_1_1InferRequest.html#doxid-class-inference-engine-1-1-infer-request-1a27fb179e3bae652d76076965fd2a5653"><span class="std std-ref">InferenceEngine::InferRequest::SetBlob</span></a> and get with <a class="reference internal" href="../api/groups/classInferenceEngine_1_1InferRequest.html#doxid-class-inference-engine-1-1-infer-request-1a9601a4cda3f309181af34feedf1b914c"><span class="std std-ref">InferenceEngine::InferRequest::GetBlob</span></a>. A plugin uses these hints to determine its internal layouts and precisions for input and output blobs if needed.</p>
 </div>
-</div>
-<div class="section" id="destructor">
+</section>
+<section id="destructor">
 <h4>Destructor<a class="headerlink" href="#destructor" title="Permalink to this headline">¶</a></h4>
 <p>Decrements a number of created inference requests:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">TemplateInferRequest</span><span class="o">::~</span><span class="n">TemplateInferRequest</span><span class="p">()</span> <span class="p">{</span>
     <span class="n">_executableNetwork</span><span class="o">-&gt;</span><span class="n">_requestId</span><span class="o">--</span><span class="p">;</span>
-<span class="p">}</span></pre></div></div><p><strong>Implementation details:</strong> Base IInferRequestInternal class implements the public <span class="xref std std-ref">InferenceEngine::IInferRequestInternal::Infer</span> method as following:</p>
+<span class="p">}</span></pre></div></div><p><strong>Implementation details:</strong> Base IInferRequestInternal class implements the public <a class="reference internal" href="../api/groups/classInferenceEngine_1_1IInferRequestInternal.html#doxid-class-inference-engine-1-1-i-infer-request-internal-1afb61e1de4ffb9927431085a91a40f352"><span class="std std-ref">InferenceEngine::IInferRequestInternal::Infer</span></a> method as following:</p>
 <ul class="simple">
 <li><p>Checks blobs set by users</p></li>
 <li><p>Calls the <code class="docutils literal notranslate"><span class="pre">InferImpl</span></code> method defined in a derived class to call actual pipeline stages synchronously</p></li>
@@ -1988,13 +1995,13 @@
     <span class="n">startPipeline</span><span class="p">();</span>
     <span class="n">waitPipeline</span><span class="p">();</span>  <span class="c1">// does nothing in current implementation</span>
     <span class="n">inferPostprocess</span><span class="p">();</span>
-<span class="p">}</span></pre></div></div></div>
-</div>
-<div class="section" id="id1">
+<span class="p">}</span></pre></div></div></section>
+</section>
+<section id="id1">
 <h3>1.<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <p>Below is the code of the <code class="docutils literal notranslate"><span class="pre">inferPreprocess</span></code> method to demonstrate Inference Engine common preprocessing step handling:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="n">TemplateInferRequest</span><span class="o">::</span><span class="n">inferPreprocess</span><span class="p">()</span> <span class="p">{</span>
-    OV_ITT_SCOPED_TASK<span></span><span class="p">(</span><span class="n">itt</span><span class="o">::</span><span class="n">domains</span><span class="o">::</span><span class="n">TemplatePlugin</span><span class="p">,</span> <span class="n">_profilingTask</span><span class="p">[</span><span class="n">Preprocess</span><span class="p">]);</span>
+    <a class="reference internal" href="../api/groups/groupie_dev_profiling.html#doxid-group-ie-dev-profiling-1gac1e4b5bdc6097e2afd26b75d05dfe1ef"><span class="std std-ref">OV_ITT_SCOPED_TASK</span></a><span></span><span class="p">(</span><span class="n">itt</span><span class="o">::</span><span class="n">domains</span><span class="o">::</span><span class="n">TemplatePlugin</span><span class="p">,</span> <span class="n">_profilingTask</span><span class="p">[</span><span class="n">Preprocess</span><span class="p">]);</span>
     <span class="k">auto</span> <span class="n">start</span> <span class="o">=</span> <span class="n">Time</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
     <span class="n">convertBatchedInputBlobs</span><span class="p">();</span>
     <span class="c1">// NOTE: After IInferRequestInternal::execDataPreprocessing call</span>
@@ -2013,7 +2020,7 @@
                 <span class="kt">size_t</span> <span class="n">rev_idx</span> <span class="o">=</span> <span class="n">desc</span><span class="p">.</span><span class="n">getBlockDims</span><span class="p">().</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
                 OPENVINO_ASSERT<span></span><span class="p">(</span><span class="n">desc</span><span class="p">.</span><span class="n">getOrder</span><span class="p">()[</span><span class="n">rev_idx</span><span class="p">]</span> <span class="o">==</span> <span class="n">rev_idx</span><span class="p">,</span>
                                 <span class="s">&quot;Template plugin: unsupported tensors with mixed axes order: &quot;</span><span class="p">,</span>
-                                ngraph::vector_to_string<span></span><span class="p">(</span><span class="n">desc</span><span class="p">.</span><span class="n">getOrder</span><span class="p">()));</span>
+                                <a class="reference internal" href="../api/groups/namespacengraph.html#doxid-namespacengraph-1a7539123fc4727343234fd272ffbe2d0c"><span class="std std-ref">ngraph::vector_to_string</span></a><span></span><span class="p">(</span><span class="n">desc</span><span class="p">.</span><span class="n">getOrder</span><span class="p">()));</span>
                 <span class="k">if</span> <span class="p">(</span><span class="n">desc</span><span class="p">.</span><span class="n">getStrides</span><span class="p">()[</span><span class="n">rev_idx</span><span class="p">]</span> <span class="o">!=</span> <span class="n">exp_stride</span> <span class="o">||</span> <span class="n">desc</span><span class="p">.</span><span class="n">getOffsetPaddingToData</span><span class="p">()[</span><span class="n">rev_idx</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
                     <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
                 <span class="p">}</span>
@@ -2041,7 +2048,7 @@
             OPENVINO_ASSERT<span></span><span class="p">(</span><span class="n">dst_tensor</span><span class="p">,</span> <span class="s">&quot;Template plugin error: Can&#39;t cast created tensor to HostTensor&quot;</span><span class="p">);</span>
             <span class="k">auto</span><span class="err">\</span><span class="o">*</span> <span class="n">dst_data</span> <span class="o">=</span> <span class="n">dst_tensor</span><span class="o">-&gt;</span><span class="n">get_data_ptr</span><span class="o">&lt;</span><span class="kt">uint8_t</span><span class="o">&gt;</span><span class="p">();</span>
             <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;</span> <span class="n">indexes</span><span class="p">(</span><span class="n">parameterShape</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
-            <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">dst_idx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">dst_idx</span> <span class="o">&lt;</span> ov::shape_size<span></span><span class="p">(</span><span class="n">parameterShape</span><span class="p">);</span> <span class="n">dst_idx</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">dst_idx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">dst_idx</span> <span class="o">&lt;</span> <a class="reference internal" href="../api/groups/groupov_model_cpp_api.html#doxid-group-ov-model-cpp-api-1gafe8cdd6477ae9810c2bf368602d35883"><span class="std std-ref">ov::shape_size</span></a><span></span><span class="p">(</span><span class="n">parameterShape</span><span class="p">);</span> <span class="n">dst_idx</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
                 <span class="kt">size_t</span> <span class="n">val</span> <span class="o">=</span> <span class="n">dst_idx</span><span class="p">;</span>
                 <span class="kt">size_t</span> <span class="n">src_idx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
                 <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j1</span> <span class="o">&lt;</span> <span class="n">indexes</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">j1</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
@@ -2063,13 +2070,13 @@
         <span class="k">if</span> <span class="p">(</span><span class="n">outputBlob</span><span class="o">-&gt;</span><span class="n">getTensorDesc</span><span class="p">().</span><span class="n">getPrecision</span><span class="p">()</span> <span class="o">==</span> <span class="n">networkOutput</span><span class="o">-&gt;</span><span class="n">getTensorDesc</span><span class="p">().</span><span class="n">getPrecision</span><span class="p">())</span> <span class="p">{</span>
             <span class="n">networkOutput</span> <span class="o">=</span> <span class="n">outputBlob</span><span class="p">;</span>
         <span class="p">}</span>
-        <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> result<span></span> <span class="o">=</span> <span class="n">_executableNetwork</span><span class="o">-&gt;</span><span class="n">_function</span><span class="o">-&gt;</span><span class="n">get_results</span><span class="p">()[</span><span class="n">index</span><span class="p">];</span>
-        <span class="k">if</span> <span class="p">(</span>result<span></span><span class="o">-&gt;</span><span class="n">get_output_partial_shape</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="n">is_dynamic</span><span class="p">())</span> <span class="p">{</span>
+        <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <a class="reference internal" href="../api/groups/namespacengraph_1_1runtime_1_1reference.html#doxid-namespacengraph-1-1runtime-1-1reference-1a9f63c4359f72e8f64b3d6ff4883447f0"><span class="std std-ref">result</span></a><span></span> <span class="o">=</span> <span class="n">_executableNetwork</span><span class="o">-&gt;</span><span class="n">_function</span><span class="o">-&gt;</span><span class="n">get_results</span><span class="p">()[</span><span class="n">index</span><span class="p">];</span>
+        <span class="k">if</span> <span class="p">(</span><a class="reference internal" href="../api/groups/namespacengraph_1_1runtime_1_1reference.html#doxid-namespacengraph-1-1runtime-1-1reference-1a9f63c4359f72e8f64b3d6ff4883447f0"><span class="std std-ref">result</span></a><span></span><span class="o">-&gt;</span><span class="n">get_output_partial_shape</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="n">is_dynamic</span><span class="p">())</span> <span class="p">{</span>
             <span class="n">_outputTensors</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">_executableNetwork</span><span class="o">-&gt;</span><span class="n">_plugin</span><span class="o">-&gt;</span><span class="n">_backend</span><span class="o">-&gt;</span><span class="n">create_tensor</span><span class="p">();</span>
             <span class="k">continue</span><span class="p">;</span>
         <span class="p">}</span>
-        <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">resultShape</span> <span class="o">=</span> result<span></span><span class="o">-&gt;</span><span class="n">get_shape</span><span class="p">();</span>
-        <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">resultType</span> <span class="o">=</span> result<span></span><span class="o">-&gt;</span><span class="n">get_element_type</span><span class="p">();</span>
+        <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">resultShape</span> <span class="o">=</span> <a class="reference internal" href="../api/groups/namespacengraph_1_1runtime_1_1reference.html#doxid-namespacengraph-1-1runtime-1-1reference-1a9f63c4359f72e8f64b3d6ff4883447f0"><span class="std std-ref">result</span></a><span></span><span class="o">-&gt;</span><span class="n">get_shape</span><span class="p">();</span>
+        <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">resultType</span> <span class="o">=</span> <a class="reference internal" href="../api/groups/namespacengraph_1_1runtime_1_1reference.html#doxid-namespacengraph-1-1runtime-1-1reference-1a9f63c4359f72e8f64b3d6ff4883447f0"><span class="std std-ref">result</span></a><span></span><span class="o">-&gt;</span><span class="n">get_element_type</span><span class="p">();</span>
         <span class="n">_outputTensors</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">_executableNetwork</span><span class="o">-&gt;</span><span class="n">_plugin</span><span class="o">-&gt;</span><span class="n">_backend</span><span class="o">-&gt;</span><span class="n">create_tensor</span><span class="p">(</span>
             <span class="n">resultType</span><span class="p">,</span>
             <span class="n">resultShape</span><span class="p">,</span>
@@ -2078,29 +2085,29 @@
     <span class="n">_durations</span><span class="p">[</span><span class="n">Preprocess</span><span class="p">]</span> <span class="o">=</span> <span class="n">Time</span><span class="o">::</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">;</span>
 <span class="p">}</span></pre></div></div><p><strong>Details:</strong></p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">InferImpl</span></code> must call the <span class="xref std std-ref">InferenceEngine::IInferRequestInternal::execDataPreprocessing</span> function, which executes common Inference Engine preprocessing step (for example, applies resize or color conversion operations) if it is set by the user. The output dimensions, layout and precision matches the input information set via <span class="xref std std-ref">InferenceEngine::CNNNetwork::getInputsInfo</span>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">InferImpl</span></code> must call the <span class="xref std std-ref">InferenceEngine::IInferRequestInternal::execDataPreprocessing</span> function, which executes common Inference Engine preprocessing step (for example, applies resize or color conversion operations) if it is set by the user. The output dimensions, layout and precision matches the input information set via <a class="reference internal" href="../api/groups/classInferenceEngine_1_1CNNNetwork.html#doxid-class-inference-engine-1-1-c-n-n-network-1a76de2a6101fe8276f56b0dc0f99c7ff7"><span class="std std-ref">InferenceEngine::CNNNetwork::getInputsInfo</span></a>.</p></li>
 <li><p>If <code class="docutils literal notranslate"><span class="pre">inputBlob</span></code> passed by user differs in terms of precisions from precision expected by plugin, <code class="docutils literal notranslate"><span class="pre">blobCopy</span></code> is performed which does actual precision conversion.</p></li>
 </ul>
-</div>
-<div class="section" id="id2">
+</section>
+<section id="id2">
 <h3>2.<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <p>Executes a pipeline synchronously using <code class="docutils literal notranslate"><span class="pre">_executable</span></code> object:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="n">TemplateInferRequest</span><span class="o">::</span><span class="n">startPipeline</span><span class="p">()</span> <span class="p">{</span>
-    OV_ITT_SCOPED_TASK<span></span><span class="p">(</span><span class="n">itt</span><span class="o">::</span><span class="n">domains</span><span class="o">::</span><span class="n">TemplatePlugin</span><span class="p">,</span> <span class="n">_profilingTask</span><span class="p">[</span><span class="n">StartPipeline</span><span class="p">])</span>
+    <a class="reference internal" href="../api/groups/groupie_dev_profiling.html#doxid-group-ie-dev-profiling-1gac1e4b5bdc6097e2afd26b75d05dfe1ef"><span class="std std-ref">OV_ITT_SCOPED_TASK</span></a><span></span><span class="p">(</span><span class="n">itt</span><span class="o">::</span><span class="n">domains</span><span class="o">::</span><span class="n">TemplatePlugin</span><span class="p">,</span> <span class="n">_profilingTask</span><span class="p">[</span><span class="n">StartPipeline</span><span class="p">])</span>
     <span class="k">auto</span> <span class="n">start</span> <span class="o">=</span> <span class="n">Time</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
     <span class="n">_executable</span><span class="o">-&gt;</span><span class="n">call</span><span class="p">(</span><span class="n">_outputTensors</span><span class="p">,</span> <span class="n">_inputTensors</span><span class="p">);</span>
     <span class="n">_durations</span><span class="p">[</span><span class="n">StartPipeline</span><span class="p">]</span> <span class="o">=</span> <span class="n">Time</span><span class="o">::</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">;</span>
-<span class="p">}</span></pre></div></div></div>
-<div class="section" id="id3">
+<span class="p">}</span></pre></div></div></section>
+<section id="id3">
 <h3>3.<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <p>Converts output blobs if precisions of backend output blobs and blobs passed by user are different:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="n">TemplateInferRequest</span><span class="o">::</span><span class="n">inferPostprocess</span><span class="p">()</span> <span class="p">{</span>
-    OV_ITT_SCOPED_TASK<span></span><span class="p">(</span><span class="n">itt</span><span class="o">::</span><span class="n">domains</span><span class="o">::</span><span class="n">TemplatePlugin</span><span class="p">,</span> <span class="n">_profilingTask</span><span class="p">[</span><span class="n">Postprocess</span><span class="p">]);</span>
+    <a class="reference internal" href="../api/groups/groupie_dev_profiling.html#doxid-group-ie-dev-profiling-1gac1e4b5bdc6097e2afd26b75d05dfe1ef"><span class="std std-ref">OV_ITT_SCOPED_TASK</span></a><span></span><span class="p">(</span><span class="n">itt</span><span class="o">::</span><span class="n">domains</span><span class="o">::</span><span class="n">TemplatePlugin</span><span class="p">,</span> <span class="n">_profilingTask</span><span class="p">[</span><span class="n">Postprocess</span><span class="p">]);</span>
     <span class="k">auto</span> <span class="n">start</span> <span class="o">=</span> <span class="n">Time</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
     <span class="k">for</span> <span class="p">(</span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="nl">output</span> <span class="p">:</span> <span class="n">_networkOutputs</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">auto</span> <span class="n">index</span> <span class="o">=</span> <span class="n">_executableNetwork</span><span class="o">-&gt;</span><span class="n">_outputIndex</span><span class="p">[</span><span class="n">output</span><span class="p">.</span><span class="n">first</span><span class="p">];</span>
-        <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> result<span></span> <span class="o">=</span> <span class="n">_executableNetwork</span><span class="o">-&gt;</span><span class="n">_function</span><span class="o">-&gt;</span><span class="n">get_results</span><span class="p">()[</span><span class="n">index</span><span class="p">];</span>
-        <span class="k">if</span> <span class="p">(</span>result<span></span><span class="o">-&gt;</span><span class="n">get_output_partial_shape</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="n">is_dynamic</span><span class="p">())</span> <span class="p">{</span>
+        <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <a class="reference internal" href="../api/groups/namespacengraph_1_1runtime_1_1reference.html#doxid-namespacengraph-1-1runtime-1-1reference-1a9f63c4359f72e8f64b3d6ff4883447f0"><span class="std std-ref">result</span></a><span></span> <span class="o">=</span> <span class="n">_executableNetwork</span><span class="o">-&gt;</span><span class="n">_function</span><span class="o">-&gt;</span><span class="n">get_results</span><span class="p">()[</span><span class="n">index</span><span class="p">];</span>
+        <span class="k">if</span> <span class="p">(</span><a class="reference internal" href="../api/groups/namespacengraph_1_1runtime_1_1reference.html#doxid-namespacengraph-1-1runtime-1-1reference-1a9f63c4359f72e8f64b3d6ff4883447f0"><span class="std std-ref">result</span></a><span></span><span class="o">-&gt;</span><span class="n">get_output_partial_shape</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="n">is_dynamic</span><span class="p">())</span> <span class="p">{</span>
             <span class="c1">// Touch blob to allocate it</span>
             <span class="n">GetBlob</span><span class="p">(</span><span class="n">output</span><span class="p">.</span><span class="n">first</span><span class="p">);</span>
         <span class="p">}</span>
@@ -2108,7 +2115,7 @@
         <span class="k">auto</span> <span class="n">networkOutput</span> <span class="o">=</span> <span class="n">_networkOutputBlobs</span><span class="p">[</span><span class="n">output</span><span class="p">.</span><span class="n">first</span><span class="p">];</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">outputBlob</span><span class="o">-&gt;</span><span class="n">getTensorDesc</span><span class="p">().</span><span class="n">getPrecision</span><span class="p">()</span> <span class="o">!=</span> <span class="n">networkOutput</span><span class="o">-&gt;</span><span class="n">getTensorDesc</span><span class="p">().</span><span class="n">getPrecision</span><span class="p">())</span> <span class="p">{</span>
             <span class="n">blobCopy</span><span class="p">(</span><span class="n">networkOutput</span><span class="p">,</span> <span class="n">outputBlob</span><span class="p">);</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span>result<span></span><span class="o">-&gt;</span><span class="n">get_output_partial_shape</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="n">is_dynamic</span><span class="p">())</span> <span class="p">{</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><a class="reference internal" href="../api/groups/namespacengraph_1_1runtime_1_1reference.html#doxid-namespacengraph-1-1runtime-1-1reference-1a9f63c4359f72e8f64b3d6ff4883447f0"><span class="std std-ref">result</span></a><span></span><span class="o">-&gt;</span><span class="n">get_output_partial_shape</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="n">is_dynamic</span><span class="p">())</span> <span class="p">{</span>
             <span class="k">auto</span> <span class="n">tensor</span> <span class="o">=</span> <span class="n">_outputTensors</span><span class="p">[</span><span class="n">_executableNetwork</span><span class="o">-&gt;</span><span class="n">_outputIndex</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="n">output</span><span class="p">.</span><span class="n">first</span><span class="p">)];</span>
             <span class="n">tensor</span><span class="o">-&gt;</span><span class="n">read</span><span class="p">(</span><span class="n">InferenceEngine</span><span class="o">::</span><span class="n">as</span><span class="o">&lt;</span><span class="n">InferenceEngine</span><span class="o">::</span><span class="n">MemoryBlob</span><span class="o">&gt;</span><span class="p">(</span><span class="n">outputBlob</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">wmap</span><span class="p">().</span><span class="n">as</span><span class="o">&lt;</span><span class="kt">char</span><span class="err">\</span><span class="o">*&gt;</span><span class="p">(),</span>
                          <span class="n">tensor</span><span class="o">-&gt;</span><span class="n">get_size_in_bytes</span><span class="p">());</span>
@@ -2134,9 +2141,9 @@
     <span class="n">perfMap</span><span class="p">[</span><span class="s">&quot;5. output postprocessing&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">info</span><span class="p">;</span>
     <span class="k">return</span> <span class="n">perfMap</span><span class="p">;</span>
 <span class="p">}</span></pre></div></div><p>The next step in the plugin library implementation is the <a class="reference internal" href="openvino_docs_ie_plugin_dg_async_infer_request.html#doxid-openvino-docs-ie-plugin-dg-async-infer-request"><span class="std std-ref">Asynchronous Inference Request</span></a> class.</p>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
                 </div>
@@ -2167,7 +2174,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>background-matting-mobilenetv2 &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../../../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -2106,9 +2113,9 @@
             
                 <div>
                   
-  <div class="section" id="background-matting-mobilenetv2">
+  <section id="background-matting-mobilenetv2">
 <h1>background-matting-mobilenetv2<a class="headerlink" href="#background-matting-mobilenetv2" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="use-case-and-high-level-description">
+<section id="use-case-and-high-level-description">
 <h2>Use Case and High-Level Description<a class="headerlink" href="#use-case-and-high-level-description" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">background-matting-mobilenetv2</span></code> model is a high-resolution background replacement technique based on
 background matting (with MobileNetV2 backbone), where an additional frame of the background is
@@ -2117,8 +2124,8 @@ pre-trained in PyTorch* framework and converted to ONNX* format. More details pr
 the <a class="reference external" href="https://arxiv.org/abs/2012.07810">paper</a>.
 For details see the <a class="reference external" href="https://github.com/PeterL1n/BackgroundMattingV2">repository</a>.
 For details regarding export to ONNX see <a class="reference external" href="https://github.com/DmitriySidnev/BackgroundMattingV2/blob/master/export_onnx.py">here</a>.</p>
-</div>
-<div class="section" id="specification">
+</section>
+<section id="specification">
 <h2>Specification<a class="headerlink" href="#specification" title="Permalink to this headline">¶</a></h2>
 <table class="colwidths-auto table">
 <thead>
@@ -2141,8 +2148,8 @@ For details regarding export to ONNX see <a class="reference external" href="htt
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="accuracy">
+</section>
+<section id="accuracy">
 <h2>Accuracy<a class="headerlink" href="#accuracy" title="Permalink to this headline">¶</a></h2>
 <p>Accuracy measured on a dataset composed with foregrounds from the HumanMatting dataset and backgrounds from the OpenImagesV5 one with input resolution 1280x720.</p>
 <table class="colwidths-auto table">
@@ -2177,10 +2184,10 @@ For details regarding export to ONNX see <a class="reference external" href="htt
 <li><p>Alpha GRAD - spatial-gradient metric for alpha.</p></li>
 <li><p>Foreground MSE - mean squared error for foreground.</p></li>
 </ul>
-</div>
-<div class="section" id="input">
+</section>
+<section id="input">
 <h2>Input<a class="headerlink" href="#input" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="original-model">
+<section id="original-model">
 <h3>Original Model<a class="headerlink" href="#original-model" title="Permalink to this headline">¶</a></h3>
 <p>Image, name: <code class="docutils literal notranslate"><span class="pre">src</span></code>, shape: <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">3,</span> <span class="pre">720,</span> <span class="pre">1280</span></code>, format: <code class="docutils literal notranslate"><span class="pre">B,</span> <span class="pre">C,</span> <span class="pre">H,</span> <span class="pre">W</span></code>, where:</p>
 <ul class="simple">
@@ -2200,8 +2207,8 @@ scale factor: 255</p>
 </ul>
 <p>Expected color order: <code class="docutils literal notranslate"><span class="pre">RGB</span></code>.
 scale factor: 255</p>
-</div>
-<div class="section" id="converted-model">
+</section>
+<section id="converted-model">
 <h3>Converted Model<a class="headerlink" href="#converted-model" title="Permalink to this headline">¶</a></h3>
 <p>Image, name: <code class="docutils literal notranslate"><span class="pre">src</span></code>, shape: <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">3,</span> <span class="pre">720,</span> <span class="pre">1280</span></code>, format: <code class="docutils literal notranslate"><span class="pre">B,</span> <span class="pre">C,</span> <span class="pre">H,</span> <span class="pre">W</span></code>, where:</p>
 <ul class="simple">
@@ -2219,11 +2226,11 @@ scale factor: 255</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">W</span></code> - image width</p></li>
 </ul>
 <p>Expected color order: <code class="docutils literal notranslate"><span class="pre">BGR</span></code>.</p>
-</div>
-</div>
-<div class="section" id="output">
+</section>
+</section>
+<section id="output">
 <h2>Output<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id1">
+<section id="id1">
 <h3>Original model<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <p>Alpha matte. Name: <code class="docutils literal notranslate"><span class="pre">pha</span></code> Shape: <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">1,</span> <span class="pre">720,</span> <span class="pre">1280</span></code>, format: <code class="docutils literal notranslate"><span class="pre">B,</span> <span class="pre">C,</span> <span class="pre">H,</span> <span class="pre">W</span></code>, where:</p>
 <ul class="simple">
@@ -2239,8 +2246,8 @@ scale factor: 255</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">H</span></code> - image height</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">W</span></code> - image width</p></li>
 </ul>
-</div>
-<div class="section" id="id2">
+</section>
+<section id="id2">
 <h3>Converted model<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <p>Alpha matte. Name: <code class="docutils literal notranslate"><span class="pre">pha</span></code> Shape: <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">1,</span> <span class="pre">720,</span> <span class="pre">1280</span></code>, format: <code class="docutils literal notranslate"><span class="pre">B,</span> <span class="pre">C,</span> <span class="pre">H,</span> <span class="pre">W</span></code>, where:</p>
 <ul class="simple">
@@ -2256,9 +2263,9 @@ scale factor: 255</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">H</span></code> - image height</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">W</span></code> - image width</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="download-a-model-and-convert-it-into-inference-engine-format">
+</section>
+</section>
+<section id="download-a-model-and-convert-it-into-inference-engine-format">
 <h2>Download a Model and Convert it into Inference Engine Format<a class="headerlink" href="#download-a-model-and-convert-it-into-inference-engine-format" title="Permalink to this headline">¶</a></h2>
 <p>You can download models and if necessary convert them into Inference Engine format using the <span class="xref myst">Model Downloader and other automation tools</span> as shown in the examples below.</p>
 <p>An example of using the Model Downloader:</p>
@@ -2269,20 +2276,20 @@ scale factor: 255</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">omz_converter</span> <span class="o">--</span><span class="n">name</span> <span class="o">&lt;</span><span class="n">model_name</span><span class="o">&gt;</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="demo-usage">
+</section>
+<section id="demo-usage">
 <h2>Demo usage<a class="headerlink" href="#demo-usage" title="Permalink to this headline">¶</a></h2>
 <p>The model can be used in the following demos provided by the Open Model Zoo to show its capabilities:</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="../../../demos/background_subtraction_demo/python/README.html"><span class="doc std std-doc">Background subtraction Python* Demo</span></a></p></li>
 </ul>
-</div>
-<div class="section" id="legal-information">
+</section>
+<section id="legal-information">
 <h2>Legal Information<a class="headerlink" href="#legal-information" title="Permalink to this headline">¶</a></h2>
 <p>The original model is distributed under the
 <a class="reference external" href="https://github.com/DmitriySidnev/BackgroundMattingV2/blob/master/LICENSE">MIT License</a>.</p>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -2313,7 +2320,7 @@ scale factor: 255</p>
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

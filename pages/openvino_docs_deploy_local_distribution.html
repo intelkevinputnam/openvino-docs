@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Local distribution &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -1869,7 +1876,7 @@
             
                 <div>
                   
-  <div class="section" id="local-distribution">
+  <section id="local-distribution">
 <span id="doxid-openvino-docs-deploy-local-distribution"></span><span id="index-0"></span><h1>Local distribution<a class="headerlink" href="#local-distribution" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-openvino-docs-deploy-local-distribution-1md-openvino-docs-ov-runtime-ug-deployment-local-distribution"></span> The local distribution implies that each C or C++ application / installer will have its own copies of OpenVINO Runtime binaries. However, OpenVINO has a scalable plugin-based architecture which implies that some components can be loaded in runtime only if they are really needed. So, it is important to understand which minimal set of libraries is really needed to deploy the application and this guide helps to achieve this goal.</p>
 <div class="admonition note">
@@ -1877,7 +1884,7 @@
 <p>The steps below are operation system independent and refer to a library file name without any prefixes (like <code class="docutils literal notranslate"><span class="pre">lib</span></code> on Unix systems) or suffixes (like <code class="docutils literal notranslate"><span class="pre">.dll</span></code> on Windows OS). Do not put <code class="docutils literal notranslate"><span class="pre">.lib</span></code> files on Windows OS to the distribution, because such files are needed only on a linker stage.</p>
 </div>
 <p>Local dsitribution is also appropriate for OpenVINO binaries built from sources using <a class="reference external" href="https://github.com/openvinotoolkit/openvino/wiki#how-to-build">Build instructions</a>, but the guide below supposes OpenVINO Runtime is built dynamically. For case of <a class="reference external" href="https://github.com/openvinotoolkit/openvino/wiki/StaticLibraries">Static OpenVINO Runtime</a> select the required OpenVINO capabilities on CMake configuration stage using <a class="reference external" href="https://github.com/openvinotoolkit/openvino/wiki/CMakeOptionsForCustomCompilation">CMake Options for Custom Compilation</a>, the build and link the OpenVINO components into the final application.</p>
-<div class="section" id="c-or-c-language">
+<section id="c-or-c-language">
 <h2>C++ or C language<a class="headerlink" href="#c-or-c-language" title="Permalink to this headline">¶</a></h2>
 <p>Independently on language used to write the application, <code class="docutils literal notranslate"><span class="pre">openvino</span></code> must always be put to the final distribution since is a core library which orshectrates with all the inference and frontend plugins. If your application is written with C language, then you need to put <code class="docutils literal notranslate"><span class="pre">openvino_c</span></code> additionally.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">plugins.xml</span></code> file with information about inference devices must also be taken as support file for <code class="docutils literal notranslate"><span class="pre">openvino</span></code>.</p>
@@ -1885,12 +1892,12 @@
 <p class="admonition-title">Note</p>
 <p>in Intel Distribution of OpenVINO, <code class="docutils literal notranslate"><span class="pre">openvino</span></code> depends on TBB libraries which are used by OpenVINO Runtime to optimally saturate the devices with computations, so it must be put to the distribution package</p>
 </div>
-</div>
-<div class="section" id="pluggable-components">
+</section>
+<section id="pluggable-components">
 <h2>Pluggable components<a class="headerlink" href="#pluggable-components" title="Permalink to this headline">¶</a></h2>
 <p>The picture below demonstrates dependnecies between the OpenVINO Runtime core and pluggable libraries:</p>
 <img alt="../_images/deployment_full.png" src="../_images/deployment_full.png" />
-<div class="section" id="compute-devices">
+<section id="compute-devices">
 <h3>Compute devices<a class="headerlink" href="#compute-devices" title="Permalink to this headline">¶</a></h3>
 <p>For each inference device, OpenVINO Runtime has its own plugin library:</p>
 <ul class="simple">
@@ -1987,23 +1994,23 @@
 </tr>
 </tbody>
 </table>
-</div></div>
-<div class="section" id="execution-capabilities">
+</div></section>
+<section id="execution-capabilities">
 <h3>Execution capabilities<a class="headerlink" href="#execution-capabilities" title="Permalink to this headline">¶</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">HETERO</span></code>, <code class="docutils literal notranslate"><span class="pre">MULTI</span></code>, <code class="docutils literal notranslate"><span class="pre">BATCH</span></code>, <code class="docutils literal notranslate"><span class="pre">AUTO</span></code> execution capabilities can also be used explicitly or implicitly by the application. Use the following recommendation scheme to decide whether to put the appropriate libraries to the distribution package:</p>
 <ul>
-<li><p>If <a class="reference internal" href="openvino_docs_OV_UG_supported_plugins_AUTO.html#doxid-openvino-docs-o-v-u-g-supported-plugins-a-u-t-o"><span class="std std-ref">AUTO</span></a> is used explicitly in the application or <code class="docutils literal notranslate"><span class="pre">ov::Core::compile_model</span></code> is used without specifying a device, put the <code class="docutils literal notranslate"><span class="pre">openvino_auto_plugin</span></code> to the distribution</p>
+<li><p>If <a class="reference internal" href="openvino_docs_OV_UG_supported_plugins_AUTO.html#doxid-openvino-docs-o-v-u-g-supported-plugins-a-u-t-o"><span class="std std-ref">AUTO</span></a> is used explicitly in the application or <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1Core.html#doxid-classov-1-1-core-1a46555f0803e8c29524626be08e7f5c5a"><span class="std std-ref"><span class="pre">ov::Core::compile_model</span></span></a></code> is used without specifying a device, put the <code class="docutils literal notranslate"><span class="pre">openvino_auto_plugin</span></code> to the distribution</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Auto device selection relies on <a class="reference internal" href="openvino_docs_OV_UG_Working_with_devices.html#doxid-openvino-docs-o-v-u-g-working-with-devices"><span class="std std-ref">inference device plugins</span></a>, so if are not sure what inference devices are available on target machine, put all inference plugin libraries to the distribution. If the <code class="docutils literal notranslate"><span class="pre">ov::device::priorities</span></code> is used for <code class="docutils literal notranslate"><span class="pre">AUTO</span></code> to specify a limited device list, grab the corresponding device plugins only.</p>
+<p>Auto device selection relies on <a class="reference internal" href="openvino_docs_OV_UG_Working_with_devices.html#doxid-openvino-docs-o-v-u-g-working-with-devices"><span class="std std-ref">inference device plugins</span></a>, so if are not sure what inference devices are available on target machine, put all inference plugin libraries to the distribution. If the <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1gae88af90a18871677f39739cb0ef0101e"><span class="std std-ref"><span class="pre">ov::device::priorities</span></span></a></code> is used for <code class="docutils literal notranslate"><span class="pre">AUTO</span></code> to specify a limited device list, grab the corresponding device plugins only.</p>
 </div>
 </li>
 <li><p>If <a class="reference internal" href="openvino_docs_OV_UG_Running_on_multiple_devices.html#doxid-openvino-docs-o-v-u-g-running-on-multiple-devices"><span class="std std-ref">MULTI</span></a> is used explicitly, put the <code class="docutils literal notranslate"><span class="pre">openvino_auto_plugin</span></code> to the distribution</p></li>
-<li><p>If <a class="reference internal" href="openvino_docs_OV_UG_Hetero_execution.html#doxid-openvino-docs-o-v-u-g-hetero-execution"><span class="std std-ref">HETERO</span></a> is either used explicitly or <code class="docutils literal notranslate"><span class="pre">ov::hint::performance_mode</span></code> is used with GPU, put the <code class="docutils literal notranslate"><span class="pre">openvino_hetero_plugin</span></code> to the distribution</p></li>
-<li><p>If <a class="reference internal" href="openvino_docs_OV_UG_Automatic_Batching.html#doxid-openvino-docs-o-v-u-g-automatic-batching"><span class="std std-ref">BATCH</span></a> is either used explicitly or <code class="docutils literal notranslate"><span class="pre">ov::hint::performance_mode</span></code> is used with GPU, put the <code class="docutils literal notranslate"><span class="pre">openvino_batch_plugin</span></code> to the distribution</p></li>
+<li><p>If <a class="reference internal" href="openvino_docs_OV_UG_Hetero_execution.html#doxid-openvino-docs-o-v-u-g-hetero-execution"><span class="std std-ref">HETERO</span></a> is either used explicitly or <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga2691fe27acc8aa1d1700ad40b6da3ba2"><span class="std std-ref"><span class="pre">ov::hint::performance_mode</span></span></a></code> is used with GPU, put the <code class="docutils literal notranslate"><span class="pre">openvino_hetero_plugin</span></code> to the distribution</p></li>
+<li><p>If <a class="reference internal" href="openvino_docs_OV_UG_Automatic_Batching.html#doxid-openvino-docs-o-v-u-g-automatic-batching"><span class="std std-ref">BATCH</span></a> is either used explicitly or <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga2691fe27acc8aa1d1700ad40b6da3ba2"><span class="std std-ref"><span class="pre">ov::hint::performance_mode</span></span></a></code> is used with GPU, put the <code class="docutils literal notranslate"><span class="pre">openvino_batch_plugin</span></code> to the distribution</p></li>
 </ul>
-</div>
-<div class="section" id="reading-models">
+</section>
+<section id="reading-models">
 <h3>Reading models<a class="headerlink" href="#reading-models" title="Permalink to this headline">¶</a></h3>
 <p>OpenVINO Runtime uses frontend libraries dynamically to read models in different formats:</p>
 <ul class="simple">
@@ -2016,19 +2023,19 @@
 <p class="admonition-title">Note</p>
 <p>The recommended way to optimize the size of final distribution package is to <a class="reference internal" href="openvino_docs_MO_DG_Deep_Learning_Model_Optimizer_DevGuide.html#doxid-openvino-docs-m-o-d-g-deep-learning-model-optimizer-dev-guide"><span class="std std-ref">convert models using Model Optimizer</span></a> to OpenVINO IR, in this case you don’t have to keep ONNX, Paddle and other frontend libraries in the distribution package.</p>
 </div>
-</div>
-<div class="section" id="legacy-preprocessing-via-g-api">
+</section>
+<section id="legacy-preprocessing-via-g-api">
 <h3>(Legacy) Preprocessing via G-API<a class="headerlink" href="#legacy-preprocessing-via-g-api" title="Permalink to this headline">¶</a></h3>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p><a class="reference internal" href="openvino_docs_gapi_gapi_intro.html#doxid-openvino-docs-gapi-gapi-intro"><span class="std std-ref">G-API</span></a> preprocessing is a legacy functionality, use <a class="reference internal" href="openvino_docs_OV_UG_Preprocessing_Overview.html#doxid-openvino-docs-o-v-u-g-preprocessing-overview"><span class="std std-ref">preprocessing capabilities from OpenVINO 2.0</span></a> which do not require any additional libraries.</p>
 </div>
-<p>If the application uses <code class="docutils literal notranslate"><span class="pre">InferenceEngine::PreProcessInfo::setColorFormat</span></code> or <code class="docutils literal notranslate"><span class="pre">InferenceEngine::PreProcessInfo::setResizeAlgorithm</span></code> methods, OpenVINO Runtime dynamically loads <code class="docutils literal notranslate"><span class="pre">openvino_gapi_preproc</span></code> plugin to perform preprocessing via G-API.</p>
-</div>
-</div>
-<div class="section" id="examples">
+<p>If the application uses <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classInferenceEngine_1_1PreProcessInfo.html#doxid-class-inference-engine-1-1-pre-process-info-1a3a10ba0d562a2268fe584d4d2db94cac"><span class="std std-ref"><span class="pre">InferenceEngine::PreProcessInfo::setColorFormat</span></span></a></code> or <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classInferenceEngine_1_1PreProcessInfo.html#doxid-class-inference-engine-1-1-pre-process-info-1a0c083c43d01c53c327f09095e3e3f004"><span class="std std-ref"><span class="pre">InferenceEngine::PreProcessInfo::setResizeAlgorithm</span></span></a></code> methods, OpenVINO Runtime dynamically loads <code class="docutils literal notranslate"><span class="pre">openvino_gapi_preproc</span></code> plugin to perform preprocessing via G-API.</p>
+</section>
+</section>
+<section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="cpu-ir-in-c-written-application">
+<section id="cpu-ir-in-c-written-application">
 <h3>CPU + IR in C-written application<a class="headerlink" href="#cpu-ir-in-c-written-application" title="Permalink to this headline">¶</a></h3>
 <p>C-written application performs inference on CPU and reads models stored as OpenVINO IR:</p>
 <ul class="simple">
@@ -2037,8 +2044,8 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">openvino_intel_cpu_plugin</span></code> is used for inference</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">openvino_ir_frontend</span></code> is used to read source model</p></li>
 </ul>
-</div>
-<div class="section" id="multi-execution-on-gpu-and-myriad-in-tput-mode">
+</section>
+<section id="multi-execution-on-gpu-and-myriad-in-tput-mode">
 <h3>MULTI execution on GPU and MYRIAD in tput mode<a class="headerlink" href="#multi-execution-on-gpu-and-myriad-in-tput-mode" title="Permalink to this headline">¶</a></h3>
 <p>C++ written application performs inference <a class="reference internal" href="openvino_docs_OV_UG_Running_on_multiple_devices.html#doxid-openvino-docs-o-v-u-g-running-on-multiple-devices"><span class="std std-ref">simultaneously on GPU and MYRIAD devices</span></a> with <code class="docutils literal notranslate"><span class="pre">ov::hint::PerformanceMode::THROUGHPUT</span></code> property, reads models stored in ONNX file format:</p>
 <ul class="simple">
@@ -2048,19 +2055,19 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">openvino_auto_batch_plugin</span></code> can be also put to the distribution to improve saturation of <a class="reference internal" href="openvino_docs_OV_UG_supported_plugins_GPU.html#doxid-openvino-docs-o-v-u-g-supported-plugins-g-p-u"><span class="std std-ref">Intel GPU</span></a> device. If there is no such plugin, <a class="reference internal" href="openvino_docs_OV_UG_Automatic_Batching.html#doxid-openvino-docs-o-v-u-g-automatic-batching"><span class="std std-ref">Automatic batching</span></a> is turned off.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">openvino_onnx_frontend</span></code> is used to read source model</p></li>
 </ul>
-</div>
-<div class="section" id="auto-device-selection-between-hddl-and-cpu">
+</section>
+<section id="auto-device-selection-between-hddl-and-cpu">
 <h3>Auto device selection between HDDL and CPU<a class="headerlink" href="#auto-device-selection-between-hddl-and-cpu" title="Permalink to this headline">¶</a></h3>
 <p>C++ written application performs inference with <a class="reference internal" href="openvino_docs_OV_UG_supported_plugins_AUTO.html#doxid-openvino-docs-o-v-u-g-supported-plugins-a-u-t-o"><span class="std std-ref">automatic device selection</span></a> with device list limited to HDDL and CPU, model is <a class="reference internal" href="openvino_docs_OV_UG_Model_Representation.html#doxid-openvino-docs-o-v-u-g-model-representation"><span class="std std-ref">created using C++ code</span></a> :</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">openvino</span></code> library is a main dependency of the application. It links against this library</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">openvino_auto_plugin</span></code> is used to enable automatic device selection feature</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">openvino_intel_hddl_plugin</span></code> and <code class="docutils literal notranslate"><span class="pre">openvino_intel_cpu_plugin</span></code> are used for inference, <code class="docutils literal notranslate"><span class="pre">AUTO</span></code> selects between CPU and HDDL devices according to their physical existance on deployed machine.</p></li>
-<li><p>No frontend library is needed because <code class="docutils literal notranslate"><span class="pre">ov::Model</span></code> is created in code.</p></li>
+<li><p>No frontend library is needed because <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1Model.html#doxid-classov-1-1-model"><span class="std std-ref"><span class="pre">ov::Model</span></span></a></code> is created in code.</p></li>
 </ul>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
                 </div>
@@ -2091,7 +2098,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

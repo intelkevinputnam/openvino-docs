@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Text-to-speech Python* Demo &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../../../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -2096,17 +2103,17 @@
             
                 <div>
                   
-  <div class="section" id="text-to-speech-python-demo">
+  <section id="text-to-speech-python-demo">
 <h1>Text-to-speech Python* Demo<a class="headerlink" href="#text-to-speech-python-demo" title="Permalink to this headline">¶</a></h1>
 <p>The text to speech demo shows how to run the ForwardTacotron and WaveRNN models or modified ForwardTacotron and MelGAN models to produce an audio file for a given input text file.
 The demo is based on https://github.com/seungwonpark/melgan, https://github.com/as-ideas/ForwardTacotron and https://github.com/fatchord/WaveRNN repositories.</p>
-<div class="section" id="how-it-works">
+<section id="how-it-works">
 <h2>How It Works<a class="headerlink" href="#how-it-works" title="Permalink to this headline">¶</a></h2>
 <p>On startup, the demo application reads command-line parameters and loads four or three models to OpenVINO™ Runtime plugin. The demo pipeline reads text file by lines and divides every line to parts by punctuation marks.
 The heuristic algorithm chooses punctuation near to the some threshold by sentence length.
 When inference is done, the application outputs the audio to the WAV file with 22050 Hz sample rate.</p>
-</div>
-<div class="section" id="preparing-to-run">
+</section>
+<section id="preparing-to-run">
 <h2>Preparing to Run<a class="headerlink" href="#preparing-to-run" title="Permalink to this headline">¶</a></h2>
 <p>The list of models supported by the demo is in <code class="docutils literal notranslate"><span class="pre">&lt;omz_dir&gt;/demos/text_to_speech_demo/python/models.lst</span></code> file.
 This file can be used as a parameter for <span class="xref myst">Model Downloader</span> and Converter to download and, if necessary, convert models to OpenVINO IR format (*.xml + *.bin).</p>
@@ -2118,7 +2125,7 @@ This file can be used as a parameter for <span class="xref myst">Model Downloade
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>omz_converter --list models.lst
 </pre></div>
 </div>
-<div class="section" id="supported-models">
+<section id="supported-models">
 <h3>Supported Models<a class="headerlink" href="#supported-models" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>forward-tacotron-duration-prediction</p></li>
@@ -2135,9 +2142,9 @@ This file can be used as a parameter for <span class="xref myst">Model Downloade
 <blockquote>
 <div><p><strong>NOTE</strong>: Refer to the tables <a class="reference internal" href="../../../models/intel/device_support.html"><span class="doc std std-doc">Intel’s Pre-Trained Models Device Support</span></a> and <a class="reference internal" href="../../../models/public/device_support.html"><span class="doc std std-doc">Public Pre-Trained Models Device Support</span></a> for the details on models inference support at different devices.</p>
 </div></blockquote>
-</div>
-</div>
-<div class="section" id="running">
+</section>
+</section>
+<section id="running">
 <h2>Running<a class="headerlink" href="#running" title="Permalink to this headline">¶</a></h2>
 <p>Running the application with the <code class="docutils literal notranslate"><span class="pre">-h</span></code> option yields the following usage message:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>usage: text_to_speech_demo.py [-h] -m_duration MODEL_DURATION -m_forward
@@ -2185,10 +2192,10 @@ Options:
 </pre></div>
 </div>
 <p>Running the application with the empty list of options yields the usage message and an error message.</p>
-</div>
-<div class="section" id="example-for-running-with-arguments">
+</section>
+<section id="example-for-running-with-arguments">
 <h2>Example for Running with Arguments<a class="headerlink" href="#example-for-running-with-arguments" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="speech-synthesis-with-forwardtacotron-and-wavernn-models">
+<section id="speech-synthesis-with-forwardtacotron-and-wavernn-models">
 <h3>Speech synthesis with ForwardTacotron and WaveRNN models<a class="headerlink" href="#speech-synthesis-with-forwardtacotron-and-wavernn-models" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>python3 text_to_speech_demo.py <span class="se">\</span>
     --input &lt;path_to_file&gt;/text.txt <span class="se">\</span>
@@ -2204,8 +2211,8 @@ Options:
 in the input mel-spectrogram for the <code class="docutils literal notranslate"><span class="pre">wavernn_upsampler</span></code> network. This option can help you improve the speed of
 the pipeline inference on the long sentences.</p>
 </div></blockquote>
-</div>
-<div class="section" id="speech-synthesis-with-text-to-speech-en-0001-models">
+</section>
+<section id="speech-synthesis-with-text-to-speech-en-0001-models">
 <h3>Speech synthesis with text-to-speech-en-0001 models<a class="headerlink" href="#speech-synthesis-with-text-to-speech-en-0001-models" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>python3 text_to_speech_demo.py <span class="se">\</span>
     -i &lt;path_to_file&gt;/text.txt <span class="se">\</span>
@@ -2215,8 +2222,8 @@ the pipeline inference on the long sentences.</p>
     -m_melgan &lt;path_to_model&gt;/text-to-speech-en-0001-generation.xml
 </pre></div>
 </div>
-</div>
-<div class="section" id="speech-synthesis-with-multi-speaker-text-to-speech-en-multi-0001-models">
+</section>
+<section id="speech-synthesis-with-multi-speaker-text-to-speech-en-multi-0001-models">
 <h3>Speech synthesis with multi-speaker text-to-speech-en-multi-0001 models<a class="headerlink" href="#speech-synthesis-with-multi-speaker-text-to-speech-en-multi-0001-models" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>python3 text_to_speech_demo.py <span class="se">\</span>
     -i &lt;path_to_file&gt;/text.txt <span class="se">\</span>
@@ -2233,25 +2240,25 @@ multi-speaker TTS model parameters selection window. This window provides an opp
 speaker, index number of the speaker or calculate PCA based speaker embedding. The <code class="docutils literal notranslate"><span class="pre">s_id</span></code> is available only for
 <code class="docutils literal notranslate"><span class="pre">text-to-speech-en-multi-0001</span></code> models.</p>
 </div></blockquote>
-</div>
-</div>
-<div class="section" id="demo-output">
+</section>
+</section>
+<section id="demo-output">
 <h2>Demo Output<a class="headerlink" href="#demo-output" title="Permalink to this headline">¶</a></h2>
 <p>The application outputs WAV file with generated audio.
 The demo reports</p>
 <ul class="simple">
 <li><p><strong>Latency</strong>: total processing time required to process input data (from reading the data to displaying the results).</p></li>
 </ul>
-</div>
-<div class="section" id="see-also">
+</section>
+<section id="see-also">
 <h2>See Also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="../../README.html"><span class="doc std std-doc">Open Model Zoo Demos</span></a></p></li>
 <li><p><a class="reference external" href="https://docs.openvino.ai/latest/openvino_docs_MO_DG_Deep_Learning_Model_Optimizer_DevGuide.html">Model Optimizer</a></p></li>
 <li><p><span class="xref myst">Model Downloader</span></p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -2282,7 +2289,7 @@ The demo reports</p>
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

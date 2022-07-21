@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Converting TensorFlow RetinaNet Model &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -1810,13 +1817,13 @@
             
                 <div>
                   
-  <div class="section" id="converting-tensorflow-retinanet-model">
+  <section id="converting-tensorflow-retinanet-model">
 <span id="doxid-openvino-docs-m-o-d-g-prepare-model-convert-model-tf-specific-convert-retina-net-from-tensorflow"></span><span id="index-0"></span><h1>Converting TensorFlow RetinaNet Model<a class="headerlink" href="#converting-tensorflow-retinanet-model" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-openvino-docs-m-o-d-g-prepare-model-convert-model-tf-specific-convert-retina-net-from-tensorflow-1md-openvino-docs-mo-dg-prepare-model-convert-model-tf-specific-convert-retinanet-from-tensorflow"></span> This tutorial explains how to convert RetinaNet model to the Intermediate Representation (IR).</p>
 <p><a class="reference external" href="https://github.com/fizyr/keras-retinanet">Public RetinaNet model</a> does not contain pretrained TensorFlow* weights. To convert this model to the TensorFlow* format, you can use Reproduce Keras* to TensorFlow* Conversion tutorial.</p>
 <p>After you convert the model to TensorFlow* format, run the Model Optimizer command below:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">mo</span> <span class="o">--</span><span class="n">input</span> <span class="s">&quot;input_1[1 1333 1333 3]&quot;</span> <span class="o">--</span><span class="n">input_model</span> <span class="n">retinanet_resnet50_coco_best_v2</span><span class="mf">.1.0</span><span class="p">.</span><span class="n">pb</span> <span class="o">--</span><span class="n">data_type</span> <span class="n">FP32</span> <span class="o">--</span><span class="n">transformations_config</span> <span class="n">front</span><span class="o">/</span><span class="n">tf</span><span class="o">/</span><span class="n">retinanet</span><span class="p">.</span><span class="n">json</span></pre></div></div><p>Where <code class="docutils literal notranslate"><span class="pre">transformations_config</span></code> command-line parameter specifies the configuration json file containing model conversion hints for the Model Optimizer. The json file contains some parameters that need to be changed if you train the model yourself. It also contains information on how to match endpoints to replace the subgraph nodes. After the model is converted to IR, the output nodes will be replaced with DetectionOutput layer.</p>
-</div>
+</section>
 
 
                 </div>
@@ -1847,7 +1854,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

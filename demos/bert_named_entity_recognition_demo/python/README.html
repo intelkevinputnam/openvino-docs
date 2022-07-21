@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>BERT Named Entity Recognition Python* Demo &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../../../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -2099,21 +2106,21 @@
             
                 <div>
                   
-  <div class="section" id="bert-named-entity-recognition-python-demo">
+  <section id="bert-named-entity-recognition-python-demo">
 <h1>BERT Named Entity Recognition Python* Demo<a class="headerlink" href="#bert-named-entity-recognition-python-demo" title="Permalink to this headline">¶</a></h1>
 <p>This README describes the Named Entity Recognition (NER) demo application that uses a CONLL2003-tuned BERT model for inference.</p>
-<div class="section" id="how-it-works">
+<section id="how-it-works">
 <h2>How It Works<a class="headerlink" href="#how-it-works" title="Permalink to this headline">¶</a></h2>
 <p>On startup the demo application reads command line parameters and loads a model to OpenVINO™ Runtime plugin.
 It also fetches data from the user-provided url to populate the “context” text.
 The text is then used to search named entities.</p>
-</div>
-<div class="section" id="model-api">
+</section>
+<section id="model-api">
 <h2>Model API<a class="headerlink" href="#model-api" title="Permalink to this headline">¶</a></h2>
 <p>The demo utilizes model wrappers, adapters and pipelines from <a class="reference internal" href="../../common/python/openvino/model_zoo/model_api/README.html"><span class="doc std std-doc">Python* Model API</span></a>.</p>
 <p>The generalized interface of wrappers with its unified results representation provides the support of multiple different named entity recognition model topologies in one demo.</p>
-</div>
-<div class="section" id="preparing-to-run">
+</section>
+<section id="preparing-to-run">
 <h2>Preparing to Run<a class="headerlink" href="#preparing-to-run" title="Permalink to this headline">¶</a></h2>
 <p>The list of models supported by the demo is in <code class="docutils literal notranslate"><span class="pre">&lt;omz_dir&gt;/demos/bert_named_entity_recognition_demo/python/models.lst</span></code> file.
 This file can be used as a parameter for <span class="xref myst">Model Downloader</span> and Converter to download and, if necessary, convert models to OpenVINO IR format (*.xml + *.bin).</p>
@@ -2125,7 +2132,7 @@ This file can be used as a parameter for <span class="xref myst">Model Downloade
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>omz_converter --list models.lst
 </pre></div>
 </div>
-<div class="section" id="supported-models">
+<section id="supported-models">
 <h3>Supported Models<a class="headerlink" href="#supported-models" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>bert-base-ner</p></li>
@@ -2133,9 +2140,9 @@ This file can be used as a parameter for <span class="xref myst">Model Downloade
 <blockquote>
 <div><p><strong>NOTE</strong>: Refer to the tables <a class="reference internal" href="../../../models/intel/device_support.html"><span class="doc std std-doc">Intel’s Pre-Trained Models Device Support</span></a> and <a class="reference internal" href="../../../models/public/device_support.html"><span class="doc std std-doc">Public Pre-Trained Models Device Support</span></a> for the details on models inference support at different devices.</p>
 </div></blockquote>
-</div>
-</div>
-<div class="section" id="running">
+</section>
+</section>
+<section id="running">
 <h2>Running<a class="headerlink" href="#running" title="Permalink to this headline">¶</a></h2>
 <p>Running the application with the <code class="docutils literal notranslate"><span class="pre">-h</span></code> option yields the following usage message:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">bert_named_entity_recognition_demo</span><span class="o">.</span><span class="n">py</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="o">-</span><span class="n">v</span> <span class="n">VOCAB</span> <span class="o">-</span><span class="n">m</span> <span class="n">MODEL</span> <span class="o">-</span><span class="n">i</span> <span class="n">INPUT</span>
@@ -2176,23 +2183,23 @@ This file can be used as a parameter for <span class="xref myst">Model Downloade
                         <span class="ow">not</span> <span class="n">provided</span><span class="p">,</span> <span class="nb">input</span> <span class="n">sequence</span> <span class="ow">is</span> <span class="n">padded</span> <span class="n">to</span> <span class="n">max_seq_len</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="demo-inputs">
+</section>
+<section id="demo-inputs">
 <h2>Demo Inputs<a class="headerlink" href="#demo-inputs" title="Permalink to this headline">¶</a></h2>
 <p>The application reads text from the HTML page at the given URL.
 The model and its parameters (inputs and outputs) are also important demo arguments.
 Notice that since order of inputs for the model does matter, the demo application checks that the inputs specified
 from the command-line match the actual network inputs.</p>
-</div>
-<div class="section" id="demo-outputs">
+</section>
+<section id="demo-outputs">
 <h2>Demo Outputs<a class="headerlink" href="#demo-outputs" title="Permalink to this headline">¶</a></h2>
 <p>The application outputs recognized named entities (<code class="docutils literal notranslate"><span class="pre">LOC</span></code> - location, <code class="docutils literal notranslate"><span class="pre">PER</span></code> - person, <code class="docutils literal notranslate"><span class="pre">ORG</span></code> - organization, <code class="docutils literal notranslate"><span class="pre">MISC</span></code> - miscellaneous) for each sentence in input text.
 The application reports</p>
 <ul class="simple">
 <li><p><strong>Latency</strong>: total processing time required to process input data (from loading the vocab and processing the context as tokens to displaying the results).</p></li>
 </ul>
-</div>
-<div class="section" id="example-demo-cmd-line">
+</section>
+<section id="example-demo-cmd-line">
 <h2>Example Demo Cmd-Line<a class="headerlink" href="#example-demo-cmd-line" title="Permalink to this headline">¶</a></h2>
 <p>You can use the following command to try the demo (assuming the model from the Open Model Zoo, downloaded and converted with the
 <span class="xref myst">Model Downloader</span> executed with “–name bert*”):</p>
@@ -2203,8 +2210,8 @@ The application reports</p>
             --input<span class="o">=</span><span class="s2">&quot;https://en.wikipedia.org/wiki/Bert_(Sesame_Street)&quot;</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="running-with-openvino-model-server">
+</section>
+<section id="running-with-openvino-model-server">
 <h2>Running with OpenVINO Model Server<a class="headerlink" href="#running-with-openvino-model-server" title="Permalink to this headline">¶</a></h2>
 <p>You can also run this demo with model served in <a class="reference external" href="https://github.com/openvinotoolkit/model_server">OpenVINO Model Server</a>. Refer to <a class="reference internal" href="../../common/python/openvino/model_zoo/model_api/adapters/ovms_adapter.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">OVMSAdapter</span></code></span></a> to learn about running demos with OVMS.</p>
 <p>Exemplary command:</p>
@@ -2216,13 +2223,13 @@ The application reports</p>
             --adapter ovms
 </pre></div>
 </div>
-</div>
-<div class="section" id="classifying-documents-with-long-texts">
+</section>
+<section id="classifying-documents-with-long-texts">
 <h2>Classifying Documents with Long Texts<a class="headerlink" href="#classifying-documents-with-long-texts" title="Permalink to this headline">¶</a></h2>
 <p>Notice that when the original “context” (text from the url) does not fit the model input
 (128 for the Bert-Base), the demo reshapes model to maximum sentence length in the “context” and pad all input sequences to maximum sentence length if model executed with static shape.</p>
-</div>
-<div class="section" id="see-also">
+</section>
+<section id="see-also">
 <h2>See Also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="../../README.html"><span class="doc std std-doc">Open Model Zoo Demos</span></a></p></li>
@@ -2230,8 +2237,8 @@ The application reports</p>
 <li><p><span class="xref myst">Model Downloader</span></p></li>
 <li><p><a class="reference external" href="https://docs.openvino.ai/latest/_inference_engine_samples_benchmark_app_README.html">Benchmark C++ Sample</a></p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -2262,7 +2269,7 @@ The application reports</p>
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

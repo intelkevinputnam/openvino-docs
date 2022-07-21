@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Deblur Photos with DeblurGAN-v2 and OpenVINO &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -554,7 +561,7 @@
             
                 <div>
                   
-  <div class="section" id="deblur-photos-with-deblurgan-v2-and-openvino">
+  <section id="deblur-photos-with-deblurgan-v2-and-openvino">
 <h1>Deblur Photos with DeblurGAN-v2 and OpenVINO<a class="headerlink" href="#deblur-photos-with-deblurgan-v2-and-openvino" title="Permalink to this headline">¶</a></h1>
 <p>This tutorial demonstrates Single Image Motion Deblurring with
 DeblurGAN-v2 in OpenVINO, by first converting the
@@ -562,7 +569,7 @@ DeblurGAN-v2 in OpenVINO, by first converting the
 model to OpenVINO’s Intermediate Representation (IR) format. Model
 information can be found
 <a class="reference external" href="https://docs.openvino.ai/latest/omz_models_model_deblurgan_v2.html">here</a>.</p>
-<div class="section" id="what-is-deblurring">
+<section id="what-is-deblurring">
 <h2>What is deblurring?<a class="headerlink" href="#what-is-deblurring" title="Permalink to this headline">¶</a></h2>
 <p>Deblurring is the task of removing motion blurs that usually occur in
 photos shot with hand-held cameras when there are moving objects in the
@@ -573,11 +580,11 @@ Deblurring (orders-of-magnitude) faster and
 better.</a>
 In Proceedings of the IEEE/CVF International Conference on Computer
 Vision (pp. 8878-8887).</p>
-<div class="section" id="preparations">
+<section id="preparations">
 <h3>Preparations<a class="headerlink" href="#preparations" title="Permalink to this headline">¶</a></h3>
-</div>
-</div>
-<div class="section" id="imports">
+</section>
+</section>
+<section id="imports">
 <h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">import</span> <span class="nn">shutil</span>
@@ -595,8 +602,8 @@ Vision (pp. 8878-8887).</p>
 <span class="kn">from</span> <span class="nn">notebook_utils</span> <span class="kn">import</span> <span class="n">load_image</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="settings">
+</section>
+<section id="settings">
 <h2>Settings<a class="headerlink" href="#settings" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Device to use for inference. For example, &quot;CPU&quot;, or &quot;GPU&quot;</span>
 <span class="n">DEVICE</span> <span class="o">=</span> <span class="s2">&quot;CPU&quot;</span>
@@ -618,8 +625,8 @@ Vision (pp. 8878-8887).</p>
 <span class="n">omz_cache_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;~/open_model_zoo_cache&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">expanduser</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="download-deblurgan-v2-model-from-open-model-zoo">
+</section>
+<section id="download-deblurgan-v2-model-from-open-model-zoo">
 <h2>Download DeblurGAN-v2 Model from Open Model Zoo<a class="headerlink" href="#download-deblurgan-v2-model-from-open-model-zoo" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">download_command</span> <span class="o">=</span> <span class="p">(</span>
     <span class="sa">f</span><span class="s2">&quot;omz_downloader --name </span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2"> --output_dir&quot;</span>
@@ -655,8 +662,8 @@ Vision (pp. 8878-8887).</p>
 <span class="o">==========</span> <span class="n">Replacing</span> <span class="n">text</span> <span class="ow">in</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">open_model_zoo_models</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">deblurgan</span><span class="o">-</span><span class="n">v2</span><span class="o">/</span><span class="n">models</span><span class="o">/</span><span class="n">fpn_mobilenet</span><span class="o">.</span><span class="n">py</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="convert-deblurgan-v2-model-to-openvino-ir-format">
+</section>
+<section id="convert-deblurgan-v2-model-to-openvino-ir-format">
 <h2>Convert DeblurGAN-v2 Model to OpenVINO IR format<a class="headerlink" href="#convert-deblurgan-v2-model-to-openvino-ir-format" title="Permalink to this headline">¶</a></h2>
 <p>Model Conversion may take a while. Conversion succeeded if the last
 lines of the output include
@@ -675,12 +682,12 @@ lines of the output include
 <code class="docutils literal notranslate"><span class="pre">omz_converter</span> <span class="pre">--name</span> <span class="pre">deblurgan-v2</span> <span class="pre">--precisions</span> <span class="pre">FP16</span> <span class="pre">--download_dir</span> <span class="pre">/home/runner/open_model_zoo_models</span> <span class="pre">--output_dir</span> <span class="pre">/home/runner/open_model_zoo_models</span></code></p>
 <p>Converting deblurgan-v2…</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">==========</span> <span class="n">Converting</span> <span class="n">deblurgan</span><span class="o">-</span><span class="n">v2</span> <span class="n">to</span> <span class="n">ONNX</span>
-<span class="n">Conversion</span> <span class="n">to</span> <span class="n">ONNX</span> <span class="n">command</span><span class="p">:</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8</span><span class="o">.</span><span class="mi">12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">python</span> <span class="o">--</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8</span><span class="o">.</span><span class="mi">12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">openvino</span><span class="o">/</span><span class="n">model_zoo</span><span class="o">/</span><span class="n">internal_scripts</span><span class="o">/</span><span class="n">pytorch_to_onnx</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">model</span><span class="o">-</span><span class="n">path</span><span class="o">=/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8</span><span class="o">.</span><span class="mi">12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">openvino</span><span class="o">/</span><span class="n">model_zoo</span><span class="o">/</span><span class="n">models</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">deblurgan</span><span class="o">-</span><span class="n">v2</span> <span class="o">--</span><span class="n">model</span><span class="o">-</span><span class="n">path</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">open_model_zoo_models</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">deblurgan</span><span class="o">-</span><span class="n">v2</span> <span class="o">--</span><span class="n">model</span><span class="o">-</span><span class="n">name</span><span class="o">=</span><span class="n">DeblurV2</span> <span class="o">--</span><span class="n">import</span><span class="o">-</span><span class="n">module</span><span class="o">=</span><span class="n">model</span> <span class="o">--</span><span class="nb">input</span><span class="o">-</span><span class="n">shape</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">736</span><span class="p">,</span><span class="mi">1312</span> <span class="o">--</span><span class="n">output</span><span class="o">-</span><span class="n">file</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">open_model_zoo_models</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">deblurgan</span><span class="o">-</span><span class="n">v2</span><span class="o">/</span><span class="n">deblurgan</span><span class="o">-</span><span class="n">v2</span><span class="o">.</span><span class="n">onnx</span> <span class="s1">&#39;--model-param=weights=r&quot;/home/runner/open_model_zoo_models/public/deblurgan-v2/ckpt/fpn_mobilenet.h5&quot;&#39;</span> <span class="s1">&#39;--model-param=model_name=&quot;fpn_mobilenet&quot;&#39;</span> <span class="o">--</span><span class="nb">input</span><span class="o">-</span><span class="n">names</span><span class="o">=</span><span class="n">blur_image</span> <span class="o">--</span><span class="n">output</span><span class="o">-</span><span class="n">names</span><span class="o">=</span><span class="n">deblur_image</span>
+<span class="n">Conversion</span> <span class="n">to</span> <span class="n">ONNX</span> <span class="n">command</span><span class="p">:</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">python</span> <span class="o">--</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">openvino</span><span class="o">/</span><span class="n">model_zoo</span><span class="o">/</span><span class="n">internal_scripts</span><span class="o">/</span><span class="n">pytorch_to_onnx</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">model</span><span class="o">-</span><span class="n">path</span><span class="o">=/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">openvino</span><span class="o">/</span><span class="n">model_zoo</span><span class="o">/</span><span class="n">models</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">deblurgan</span><span class="o">-</span><span class="n">v2</span> <span class="o">--</span><span class="n">model</span><span class="o">-</span><span class="n">path</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">open_model_zoo_models</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">deblurgan</span><span class="o">-</span><span class="n">v2</span> <span class="o">--</span><span class="n">model</span><span class="o">-</span><span class="n">name</span><span class="o">=</span><span class="n">DeblurV2</span> <span class="o">--</span><span class="n">import</span><span class="o">-</span><span class="n">module</span><span class="o">=</span><span class="n">model</span> <span class="o">--</span><span class="nb">input</span><span class="o">-</span><span class="n">shape</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">736</span><span class="p">,</span><span class="mi">1312</span> <span class="o">--</span><span class="n">output</span><span class="o">-</span><span class="n">file</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">open_model_zoo_models</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">deblurgan</span><span class="o">-</span><span class="n">v2</span><span class="o">/</span><span class="n">deblurgan</span><span class="o">-</span><span class="n">v2</span><span class="o">.</span><span class="n">onnx</span> <span class="s1">&#39;--model-param=weights=r&quot;/home/runner/open_model_zoo_models/public/deblurgan-v2/ckpt/fpn_mobilenet.h5&quot;&#39;</span> <span class="s1">&#39;--model-param=model_name=&quot;fpn_mobilenet&quot;&#39;</span> <span class="o">--</span><span class="nb">input</span><span class="o">-</span><span class="n">names</span><span class="o">=</span><span class="n">blur_image</span> <span class="o">--</span><span class="n">output</span><span class="o">-</span><span class="n">names</span><span class="o">=</span><span class="n">deblur_image</span>
 
 <span class="n">ONNX</span> <span class="n">check</span> <span class="n">passed</span> <span class="n">successfully</span><span class="o">.</span>
 
 <span class="o">==========</span> <span class="n">Converting</span> <span class="n">deblurgan</span><span class="o">-</span><span class="n">v2</span> <span class="n">to</span> <span class="n">IR</span> <span class="p">(</span><span class="n">FP16</span><span class="p">)</span>
-<span class="n">Conversion</span> <span class="n">command</span><span class="p">:</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8</span><span class="o">.</span><span class="mi">12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">python</span> <span class="o">--</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8</span><span class="o">.</span><span class="mi">12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">mo</span> <span class="o">--</span><span class="n">framework</span><span class="o">=</span><span class="n">onnx</span> <span class="o">--</span><span class="n">data_type</span><span class="o">=</span><span class="n">FP16</span> <span class="o">--</span><span class="n">output_dir</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">open_model_zoo_models</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">deblurgan</span><span class="o">-</span><span class="n">v2</span><span class="o">/</span><span class="n">FP16</span> <span class="o">--</span><span class="n">model_name</span><span class="o">=</span><span class="n">deblurgan</span><span class="o">-</span><span class="n">v2</span> <span class="o">--</span><span class="nb">input</span><span class="o">=</span><span class="n">blur_image</span> <span class="o">--</span><span class="n">model_name</span><span class="o">=</span><span class="n">deblurgan</span><span class="o">-</span><span class="n">v2</span> <span class="o">--</span><span class="n">reverse_input_channels</span> <span class="s1">&#39;--mean_values=blur_image[127.5]&#39;</span> <span class="s1">&#39;--scale_values=blur_image[127.5]&#39;</span> <span class="o">--</span><span class="n">output</span><span class="o">=</span><span class="n">deblur_image</span> <span class="o">--</span><span class="n">input_model</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">open_model_zoo_models</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">deblurgan</span><span class="o">-</span><span class="n">v2</span><span class="o">/</span><span class="n">deblurgan</span><span class="o">-</span><span class="n">v2</span><span class="o">.</span><span class="n">onnx</span> <span class="s1">&#39;--layout=blur_image(NCHW)&#39;</span> <span class="s1">&#39;--input_shape=[1, 3, 736, 1312]&#39;</span>
+<span class="n">Conversion</span> <span class="n">command</span><span class="p">:</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">python</span> <span class="o">--</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">mo</span> <span class="o">--</span><span class="n">framework</span><span class="o">=</span><span class="n">onnx</span> <span class="o">--</span><span class="n">data_type</span><span class="o">=</span><span class="n">FP16</span> <span class="o">--</span><span class="n">output_dir</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">open_model_zoo_models</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">deblurgan</span><span class="o">-</span><span class="n">v2</span><span class="o">/</span><span class="n">FP16</span> <span class="o">--</span><span class="n">model_name</span><span class="o">=</span><span class="n">deblurgan</span><span class="o">-</span><span class="n">v2</span> <span class="o">--</span><span class="nb">input</span><span class="o">=</span><span class="n">blur_image</span> <span class="o">--</span><span class="n">model_name</span><span class="o">=</span><span class="n">deblurgan</span><span class="o">-</span><span class="n">v2</span> <span class="o">--</span><span class="n">reverse_input_channels</span> <span class="s1">&#39;--mean_values=blur_image[127.5]&#39;</span> <span class="s1">&#39;--scale_values=blur_image[127.5]&#39;</span> <span class="o">--</span><span class="n">output</span><span class="o">=</span><span class="n">deblur_image</span> <span class="o">--</span><span class="n">input_model</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">open_model_zoo_models</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">deblurgan</span><span class="o">-</span><span class="n">v2</span><span class="o">/</span><span class="n">deblurgan</span><span class="o">-</span><span class="n">v2</span><span class="o">.</span><span class="n">onnx</span> <span class="s1">&#39;--layout=blur_image(NCHW)&#39;</span> <span class="s1">&#39;--input_shape=[1, 3, 736, 1312]&#39;</span>
 
 <span class="n">Model</span> <span class="n">Optimizer</span> <span class="n">arguments</span><span class="p">:</span>
 <span class="n">Common</span> <span class="n">parameters</span><span class="p">:</span>
@@ -707,21 +714,21 @@ lines of the output include
 <span class="n">Advanced</span> <span class="n">parameters</span><span class="p">:</span>
     <span class="o">-</span> <span class="n">Force</span> <span class="n">the</span> <span class="n">usage</span> <span class="n">of</span> <span class="n">legacy</span> <span class="n">Frontend</span> <span class="n">of</span> <span class="n">Model</span> <span class="n">Optimizer</span> <span class="k">for</span> <span class="n">model</span> <span class="n">conversion</span> <span class="n">into</span> <span class="n">IR</span><span class="p">:</span>   <span class="kc">False</span>
     <span class="o">-</span> <span class="n">Force</span> <span class="n">the</span> <span class="n">usage</span> <span class="n">of</span> <span class="n">new</span> <span class="n">Frontend</span> <span class="n">of</span> <span class="n">Model</span> <span class="n">Optimizer</span> <span class="k">for</span> <span class="n">model</span> <span class="n">conversion</span> <span class="n">into</span> <span class="n">IR</span><span class="p">:</span>  <span class="kc">False</span>
-<span class="n">OpenVINO</span> <span class="n">runtime</span> <span class="n">found</span> <span class="ow">in</span><span class="p">:</span>  <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8</span><span class="o">.</span><span class="mi">12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">openvino</span>
-<span class="n">OpenVINO</span> <span class="n">runtime</span> <span class="n">version</span><span class="p">:</span>   <span class="mf">2022.1</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="mi">7019</span><span class="o">-</span><span class="n">cdb9bec7210</span><span class="o">-</span><span class="n">releases</span><span class="o">/</span><span class="mi">2022</span><span class="o">/</span><span class="mi">1</span>
-<span class="n">Model</span> <span class="n">Optimizer</span> <span class="n">version</span><span class="p">:</span>    <span class="mf">2022.1</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="mi">7019</span><span class="o">-</span><span class="n">cdb9bec7210</span><span class="o">-</span><span class="n">releases</span><span class="o">/</span><span class="mi">2022</span><span class="o">/</span><span class="mi">1</span>
+<span class="n">OpenVINO</span> <span class="n">runtime</span> <span class="n">found</span> <span class="ow">in</span><span class="p">:</span>  <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">openvino</span>
+<span class="n">OpenVINO</span> <span class="n">runtime</span> <span class="n">version</span><span class="p">:</span>   <span class="mf">2022.1.0</span><span class="o">-</span><span class="mi">7019</span><span class="o">-</span><span class="n">cdb9bec7210</span><span class="o">-</span><span class="n">releases</span><span class="o">/</span><span class="mi">2022</span><span class="o">/</span><span class="mi">1</span>
+<span class="n">Model</span> <span class="n">Optimizer</span> <span class="n">version</span><span class="p">:</span>    <span class="mf">2022.1.0</span><span class="o">-</span><span class="mi">7019</span><span class="o">-</span><span class="n">cdb9bec7210</span><span class="o">-</span><span class="n">releases</span><span class="o">/</span><span class="mi">2022</span><span class="o">/</span><span class="mi">1</span>
 <span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">Generated</span> <span class="n">IR</span> <span class="n">version</span> <span class="mi">11</span> <span class="n">model</span><span class="o">.</span>
 <span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">XML</span> <span class="n">file</span><span class="p">:</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">open_model_zoo_models</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">deblurgan</span><span class="o">-</span><span class="n">v2</span><span class="o">/</span><span class="n">FP16</span><span class="o">/</span><span class="n">deblurgan</span><span class="o">-</span><span class="n">v2</span><span class="o">.</span><span class="n">xml</span>
 <span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">BIN</span> <span class="n">file</span><span class="p">:</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">open_model_zoo_models</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">deblurgan</span><span class="o">-</span><span class="n">v2</span><span class="o">/</span><span class="n">FP16</span><span class="o">/</span><span class="n">deblurgan</span><span class="o">-</span><span class="n">v2</span><span class="o">.</span><span class="n">bin</span>
 <span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">Total</span> <span class="n">execution</span> <span class="n">time</span><span class="p">:</span> <span class="mf">1.35</span> <span class="n">seconds</span><span class="o">.</span>
 <span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">Memory</span> <span class="n">consumed</span><span class="p">:</span> <span class="mi">129</span> <span class="n">MB</span><span class="o">.</span>
 <span class="n">It</span><span class="s1">&#39;s been a while, check for a new version of Intel(R) Distribution of OpenVINO(TM) toolkit here https://software.intel.com/content/www/us/en/develop/tools/openvino-toolkit/download.html?cid=other&amp;source=prod&amp;campid=ww_2022_bu_IOTG_OpenVINO-2022-1&amp;content=upg_all&amp;medium=organic or on the GitHub*</span>
-<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">The</span> <span class="n">model</span> <span class="n">was</span> <span class="n">converted</span> <span class="n">to</span> <span class="n">IR</span> <span class="n">v11</span><span class="p">,</span> <span class="n">the</span> <span class="n">latest</span> <span class="n">model</span> <span class="nb">format</span> <span class="n">that</span> <span class="n">corresponds</span> <span class="n">to</span> <span class="n">the</span> <span class="n">source</span> <span class="n">DL</span> <span class="n">framework</span> <span class="nb">input</span><span class="o">/</span><span class="n">output</span> <span class="nb">format</span><span class="o">.</span> <span class="n">While</span> <span class="n">IR</span> <span class="n">v11</span> <span class="ow">is</span> <span class="n">backwards</span> <span class="n">compatible</span> <span class="k">with</span> <span class="n">OpenVINO</span> <span class="n">Inference</span> <span class="n">Engine</span> <span class="n">API</span> <span class="n">v1</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span> <span class="n">please</span> <span class="n">use</span> <span class="n">API</span> <span class="n">v2</span><span class="o">.</span><span class="mi">0</span> <span class="p">(</span><span class="k">as</span> <span class="n">of</span> <span class="mf">2022.1</span><span class="p">)</span> <span class="n">to</span> <span class="n">take</span> <span class="n">advantage</span> <span class="n">of</span> <span class="n">the</span> <span class="n">latest</span> <span class="n">improvements</span> <span class="ow">in</span> <span class="n">IR</span> <span class="n">v11</span><span class="o">.</span>
-<span class="n">Find</span> <span class="n">more</span> <span class="n">information</span> <span class="n">about</span> <span class="n">API</span> <span class="n">v2</span><span class="o">.</span><span class="mi">0</span> <span class="ow">and</span> <span class="n">IR</span> <span class="n">v11</span> <span class="n">at</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">docs</span><span class="o">.</span><span class="n">openvino</span><span class="o">.</span><span class="n">ai</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">The</span> <span class="n">model</span> <span class="n">was</span> <span class="n">converted</span> <span class="n">to</span> <span class="n">IR</span> <span class="n">v11</span><span class="p">,</span> <span class="n">the</span> <span class="n">latest</span> <span class="n">model</span> <span class="nb">format</span> <span class="n">that</span> <span class="n">corresponds</span> <span class="n">to</span> <span class="n">the</span> <span class="n">source</span> <span class="n">DL</span> <span class="n">framework</span> <span class="nb">input</span><span class="o">/</span><span class="n">output</span> <span class="nb">format</span><span class="o">.</span> <span class="n">While</span> <span class="n">IR</span> <span class="n">v11</span> <span class="ow">is</span> <span class="n">backwards</span> <span class="n">compatible</span> <span class="k">with</span> <span class="n">OpenVINO</span> <span class="n">Inference</span> <span class="n">Engine</span> <span class="n">API</span> <span class="n">v1</span><span class="mf">.0</span><span class="p">,</span> <span class="n">please</span> <span class="n">use</span> <span class="n">API</span> <span class="n">v2</span><span class="mf">.0</span> <span class="p">(</span><span class="k">as</span> <span class="n">of</span> <span class="mf">2022.1</span><span class="p">)</span> <span class="n">to</span> <span class="n">take</span> <span class="n">advantage</span> <span class="n">of</span> <span class="n">the</span> <span class="n">latest</span> <span class="n">improvements</span> <span class="ow">in</span> <span class="n">IR</span> <span class="n">v11</span><span class="o">.</span>
+<span class="n">Find</span> <span class="n">more</span> <span class="n">information</span> <span class="n">about</span> <span class="n">API</span> <span class="n">v2</span><span class="mf">.0</span> <span class="ow">and</span> <span class="n">IR</span> <span class="n">v11</span> <span class="n">at</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">docs</span><span class="o">.</span><span class="n">openvino</span><span class="o">.</span><span class="n">ai</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="copy-model">
+</section>
+<section id="copy-model">
 <h2>Copy Model<a class="headerlink" href="#copy-model" title="Permalink to this headline">¶</a></h2>
 <p>Copy the DeblurGAN-v2 Model to the specified <code class="docutils literal notranslate"><span class="pre">model_dir</span></code> directory in
 the settings.</p>
@@ -742,7 +749,7 @@ the settings.</p>
         <span class="k">pass</span>
 </pre></div>
 </div>
-<div class="section" id="load-the-model">
+<section id="load-the-model">
 <h3>Load the Model<a class="headerlink" href="#load-the-model" title="Permalink to this headline">¶</a></h3>
 <p>Load and compile the DeblurGAN-v2 model in the Inference Engine with
 <code class="docutils literal notranslate"><span class="pre">ie.read_model</span></code> and compile it for the specified device with
@@ -769,12 +776,12 @@ shape for the model.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">ConstOutput</span><span class="p">:</span> <span class="n">names</span><span class="p">[</span><span class="n">deblur_image</span><span class="p">]</span> <span class="n">shape</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">736</span><span class="p">,</span><span class="mi">1312</span><span class="p">}</span> <span class="nb">type</span><span class="p">:</span> <span class="n">f32</span><span class="o">&gt;</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="deblur-image">
+</section>
+<section id="deblur-image">
 <h3>Deblur Image<a class="headerlink" href="#deblur-image" title="Permalink to this headline">¶</a></h3>
-</div>
-</div>
-<div class="section" id="load-resize-and-reshape-input-image">
+</section>
+</section>
+<section id="load-resize-and-reshape-input-image">
 <h2>Load, resize and reshape input image<a class="headerlink" href="#load-resize-and-reshape-input-image" title="Permalink to this headline">¶</a></h2>
 <p>The input image is read using the default <code class="docutils literal notranslate"><span class="pre">load_image</span></code> function from
 notebooks.utils, resized to meet the network’s expected input sizes, and
@@ -807,8 +814,8 @@ C=number of channels, H=height, and W=width.</p>
 </pre></div>
 </div>
 <img alt="../_images/217-vision-deblur-with-output_24_1.png" src="../_images/217-vision-deblur-with-output_24_1.png" />
-</div>
-<div class="section" id="do-inference-on-input-image">
+</section>
+<section id="do-inference-on-input-image">
 <h2>Do inference on input image<a class="headerlink" href="#do-inference-on-input-image" title="Permalink to this headline">¶</a></h2>
 <p>Do the inference, convert the result to an image shape and resize it to
 the original image size.</p>
@@ -829,16 +836,16 @@ the original image size.</p>
 </pre></div>
 </div>
 <img alt="../_images/217-vision-deblur-with-output_27_1.png" src="../_images/217-vision-deblur-with-output_27_1.png" />
-</div>
-<div class="section" id="load-groundtruth-image">
+</section>
+<section id="load-groundtruth-image">
 <h2>Load groundtruth image<a class="headerlink" href="#load-groundtruth-image" title="Permalink to this headline">¶</a></h2>
 <p>Load the groundtruth image for comparison.</p>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load grountruth image</span>
 <span class="n">groundtruth_image</span> <span class="o">=</span> <span class="n">load_image</span><span class="p">(</span><span class="s2">&quot;https://user-images.githubusercontent.com/41332813/166900611-83be8ae5-23ed-4426-b535-fad960795687.png&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="display-results">
+</section>
+<section id="display-results">
 <h2>Display results<a class="headerlink" href="#display-results" title="Permalink to this headline">¶</a></h2>
 <p>Images are in BGR format, so they will be converted to the RGB format in
 order to be properly displayed by matplotlib.</p>
@@ -861,8 +868,8 @@ order to be properly displayed by matplotlib.</p>
 </pre></div>
 </div>
 <img alt="../_images/217-vision-deblur-with-output_31_1.png" src="../_images/217-vision-deblur-with-output_31_1.png" />
-</div>
-<div class="section" id="save-the-deblurred-image">
+</section>
+<section id="save-the-deblurred-image">
 <h2>Save the deblurred image<a class="headerlink" href="#save-the-deblurred-image" title="Permalink to this headline">¶</a></h2>
 <p>Save the output image of the DeblurGAN-v2 model in the <code class="docutils literal notranslate"><span class="pre">output_dir</span></code>
 directory.</p>
@@ -873,8 +880,8 @@ directory.</p>
 <span class="p">)</span>
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -905,7 +912,7 @@ directory.</p>
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

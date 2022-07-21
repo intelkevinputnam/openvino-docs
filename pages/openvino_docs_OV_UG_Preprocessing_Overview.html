@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Optimize Preprocessing &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -1864,15 +1871,15 @@
             
                 <div>
                   
-  <div class="section" id="optimize-preprocessing">
+  <section id="optimize-preprocessing">
 <span id="doxid-openvino-docs-o-v-u-g-preprocessing-overview"></span><span id="index-0"></span><h1>Optimize Preprocessing<a class="headerlink" href="#optimize-preprocessing" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-openvino-docs-o-v-u-g-preprocessing-overview-1md-openvino-docs-ov-runtime-ug-preprocessing-overview"></span></p>
 <div class="toctree-wrapper compound">
 </div>
-<div class="section" id="introduction">
+<section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>When your input data don’t perfectly fit to Neural Network model input tensor - this means that additional operations/steps are needed to transform your data to format expected by model. These operations are known as “preprocessing”.</p>
-<div class="section" id="example">
+<section id="example">
 <h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
 <p>Consider the following standard example: deep learning model expects input with shape <code class="docutils literal notranslate"><span class="pre">{1,</span> <span class="pre">3,</span> <span class="pre">224,</span> <span class="pre">224}</span></code>, <code class="docutils literal notranslate"><span class="pre">FP32</span></code> precision, <code class="docutils literal notranslate"><span class="pre">RGB</span></code> color channels order, and requires data normalization (subtract mean and divide by scale factor). But you have just a <code class="docutils literal notranslate"><span class="pre">640x480</span></code> <code class="docutils literal notranslate"><span class="pre">BGR</span></code> image (data is <code class="docutils literal notranslate"><span class="pre">{480,</span> <span class="pre">640,</span> <span class="pre">3}</span></code>). This means that we need some operations which will:</p>
 <ul class="simple">
@@ -1888,9 +1895,9 @@
 <li><p>Preprocessing API is easy to use</p></li>
 <li><p>Preprocessing steps will be integrated into execution graph and will be performed on selected device (CPU/GPU/VPU/etc.) rather than always being executed on CPU. This will improve selected device utilization which is always good.</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="preprocessing-api">
+</section>
+</section>
+<section id="preprocessing-api">
 <h2>Preprocessing API<a class="headerlink" href="#preprocessing-api" title="Permalink to this headline">¶</a></h2>
 <p>Intuitively, Preprocessing API consists of the following parts:</p>
 <ol class="arabic simple">
@@ -1899,31 +1906,31 @@
 <li><p><strong>Model:</strong> Specify Model’s data format. Usually, precision and shape are already known for model, only additional information, like <a class="reference internal" href="openvino_docs_OV_UG_Layout_Overview.html#doxid-openvino-docs-o-v-u-g-layout-overview"><span class="std std-ref">layout</span></a> can be specified</p></li>
 </ol>
 <p><strong>Note:</strong> All model’s graph modification shall be performed after model is read from disk and <strong>before</strong> it is being loaded on actual device.</p>
-<div class="section" id="prepostprocessor-object">
+<section id="prepostprocessor-object">
 <h3>PrePostProcessor object<a class="headerlink" href="#prepostprocessor-object" title="Permalink to this headline">¶</a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">ov::preprocess::PrePostProcessor</span></code> class allows specifying preprocessing and postprocessing steps for model read from disk.</p>
-<div class='sphinxtabset'><div class="sphinxtab" data-sphinxtab-value="C++"><div class="highlight"><div class="highlight"><pre>ov::Core<span></span> <span class="n">core</span><span class="p">;</span>
-<span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">ov</span><span class="o">::</span><span class="n">Model</span><span class="o">&gt;</span> model<span></span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span>read_model<span></span><span class="p">(</span><span class="n">model_path</span><span class="p">);</span>
-ov::preprocess::PrePostProcessor<span></span> <span class="n">ppp</span><span class="p">(</span>model<span></span><span class="p">);</span></pre></div></div></div><div class="sphinxtab" data-sphinxtab-value="Python"><div class="highlight"><div class="highlight"><pre><span></span><span class="n">from</span> <span class="n">openvino</span><span class="p">.</span><span class="n">preprocess</span> <span class="n">import</span> <span class="n">PrePostProcessor</span>
+<p><code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1preprocess_1_1PrePostProcessor.html#doxid-classov-1-1preprocess-1-1-pre-post-processor"><span class="std std-ref"><span class="pre">ov::preprocess::PrePostProcessor</span></span></a></code> class allows specifying preprocessing and postprocessing steps for model read from disk.</p>
+<div class='sphinxtabset'><div class="sphinxtab" data-sphinxtab-value="C++"><div class="highlight"><div class="highlight"><pre><a class="reference internal" href="../api/groups/classov_1_1Core.html#doxid-classov-1-1-core"><span class="std std-ref">ov::Core</span></a><span></span> <span class="n">core</span><span class="p">;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">ov</span><span class="o">::</span><span class="n">Model</span><span class="o">&gt;</span> <a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga461856fdfb6d7533dc53355aec9e9fad"><span class="std std-ref">model</span></a><span></span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span>read_model<span></span><span class="p">(</span><span class="n">model_path</span><span class="p">);</span>
+<a class="reference internal" href="../api/groups/classov_1_1preprocess_1_1PrePostProcessor.html#doxid-classov-1-1preprocess-1-1-pre-post-processor"><span class="std std-ref">ov::preprocess::PrePostProcessor</span></a><span></span> <span class="n">ppp</span><span class="p">(</span><a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga461856fdfb6d7533dc53355aec9e9fad"><span class="std std-ref">model</span></a><span></span><span class="p">);</span></pre></div></div></div><div class="sphinxtab" data-sphinxtab-value="Python"><div class="highlight"><div class="highlight"><pre><span></span><span class="n">from</span> <span class="n">openvino</span><span class="p">.</span><span class="n">preprocess</span> <span class="n">import</span> <span class="n">PrePostProcessor</span>
 <span class="n">from</span> <span class="n">openvino</span><span class="p">.</span><span class="n">runtime</span> <span class="n">import</span> <span class="n">Core</span>
 
 <span class="n">core</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span>
 <span class="n">model</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><span class="n">read_model</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">xml_path</span><span class="p">)</span>
-<span class="n">ppp</span> <span class="o">=</span> <span class="n">PrePostProcessor</span><span class="p">(</span><span class="n">model</span><span class="p">)</span></pre></div></div></div></div></div>
-<div class="section" id="declare-user-s-data-format">
+<span class="n">ppp</span> <span class="o">=</span> <span class="n">PrePostProcessor</span><span class="p">(</span><span class="n">model</span><span class="p">)</span></pre></div></div></div></div></section>
+<section id="declare-user-s-data-format">
 <h3>Declare user’s data format<a class="headerlink" href="#declare-user-s-data-format" title="Permalink to this headline">¶</a></h3>
 <p>To address particular input of model/preprocessor, use <code class="docutils literal notranslate"><span class="pre">ov::preprocess::PrePostProcessor::input(input_name)</span></code> method</p>
-<div class='sphinxtabset'><div class="sphinxtab" data-sphinxtab-value="C++"><div class="highlight"><div class="highlight"><pre>ov::preprocess::InputInfo<span></span><span class="o">&amp;</span> <span class="n">input</span> <span class="o">=</span> <span class="n">ppp</span><span class="p">.</span><span class="n">input</span><span class="p">(</span><span class="n">input_name</span><span class="p">);</span>
+<div class='sphinxtabset'><div class="sphinxtab" data-sphinxtab-value="C++"><div class="highlight"><div class="highlight"><pre><a class="reference internal" href="../api/groups/classov_1_1preprocess_1_1InputInfo.html#doxid-classov-1-1preprocess-1-1-input-info"><span class="std std-ref">ov::preprocess::InputInfo</span></a><span></span><span class="o">&amp;</span> <span class="n">input</span> <span class="o">=</span> <span class="n">ppp</span><span class="p">.</span><span class="n">input</span><span class="p">(</span><span class="n">input_name</span><span class="p">);</span>
 <span class="n">input</span><span class="p">.</span>tensor<span></span><span class="p">()</span>
-  <span class="p">.</span>set_element_type<span></span><span class="p">(</span>ov::element::u8<span></span><span class="p">)</span>
+  <span class="p">.</span>set_element_type<span></span><span class="p">(</span><a class="reference internal" href="../api/groups/groupov_element_cpp_api.html#doxid-group-ov-element-cpp-api-1gaaf60c536d3e295285f6a899eb3d29e2f"><span class="std std-ref">ov::element::u8</span></a><span></span><span class="p">)</span>
   <span class="p">.</span>set_shape<span></span><span class="p">({</span><span class="mi">1</span><span class="p">,</span> <span class="mi">480</span><span class="p">,</span> <span class="mi">640</span><span class="p">,</span> <span class="mi">3</span><span class="p">})</span>
-  <span class="p">.</span>set_layout<span></span><span class="p">(</span><span class="s">&quot;NHWC&quot;</span><span class="p">)</span>
-  <span class="p">.</span><span class="n">set_color_format</span><span class="p">(</span>ov::preprocess::ColorFormat::BGR<span></span><span class="p">);</span></pre></div></div></div><div class="sphinxtab" data-sphinxtab-value="Python"><div class="highlight"><div class="highlight"><pre><span></span><span class="n">from</span> <span class="n">openvino</span><span class="p">.</span><span class="n">preprocess</span> <span class="n">import</span> <span class="n">ColorFormat</span>
+  <span class="p">.</span><a class="reference internal" href="../api/groups/groupov_layout_cpp_api.html#doxid-group-ov-layout-cpp-api-1ga18464fb8ed029acb5fdc2bb1737358d9"><span class="std std-ref">set_layout</span></a><span></span><span class="p">(</span><span class="s">&quot;NHWC&quot;</span><span class="p">)</span>
+  <span class="p">.</span><span class="n">set_color_format</span><span class="p">(</span><a class="reference internal" href="../api/groups/enumInferenceEngine_1_1ColorFormat.html#doxid-namespace-inference-engine-1a5ee5ca7708cc67a9a0becc2593d0558aa0fb221afef06def7c25b82d6fa9efc1b"><span class="std std-ref">ov::preprocess::ColorFormat::BGR</span></a><span></span><span class="p">);</span></pre></div></div></div><div class="sphinxtab" data-sphinxtab-value="Python"><div class="highlight"><div class="highlight"><pre><span></span><span class="n">from</span> <span class="n">openvino</span><span class="p">.</span><span class="n">preprocess</span> <span class="n">import</span> <span class="n">ColorFormat</span>
 <span class="n">from</span> <span class="n">openvino</span><span class="p">.</span><span class="n">runtime</span> <span class="n">import</span> <span class="n">Layout</span><span class="p">,</span> <span class="n">Type</span>
 <span class="n">ppp</span><span class="p">.</span><span class="n">input</span><span class="p">(</span><span class="n">input_name</span><span class="p">).</span><span class="n">tensor</span><span class="p">()</span> \
         <span class="p">.</span><span class="n">set_element_type</span><span class="p">(</span><span class="n">Type</span><span class="p">.</span><span class="n">u8</span><span class="p">)</span> \
         <span class="p">.</span><span class="n">set_shape</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">480</span><span class="p">,</span> <span class="mi">640</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span> \
-        <span class="p">.</span>set_layout<span></span><span class="p">(</span>Layout<span></span><span class="p">(</span><span class="sc">&#39;NHWC&#39;</span><span class="p">))</span> \
+        <span class="p">.</span><a class="reference internal" href="../api/groups/groupov_layout_cpp_api.html#doxid-group-ov-layout-cpp-api-1ga18464fb8ed029acb5fdc2bb1737358d9"><span class="std std-ref">set_layout</span></a><span></span><span class="p">(</span><a class="reference internal" href="../api/groups/enumInferenceEngine_1_1Layout.html#doxid-namespace-inference-engine-1a246d143abc5ca07da8d2cadeeb88fdb8"><span class="std std-ref">Layout</span></a><span></span><span class="p">(</span><span class="sc">&#39;NHWC&#39;</span><span class="p">))</span> \
         <span class="p">.</span><span class="n">set_color_format</span><span class="p">(</span><span class="n">ColorFormat</span><span class="p">.</span><span class="n">BGR</span><span class="p">)</span></pre></div></div></div></div><p>Here we’ve specified all information about user’s input:</p>
 <ul class="simple">
 <li><p>Precision is U8 (unsigned 8-bit integer)</p></li>
@@ -1932,20 +1939,20 @@ ov::preprocess::PrePostProcessor<span></span> <span class="n">ppp</span><span cl
 <li><p>Color format is <code class="docutils literal notranslate"><span class="pre">BGR</span></code></p></li>
 </ul>
 <p><span class="target" id="doxid-openvino-docs-o-v-u-g-preprocessing-overview-1declare-model-s-layout"></span></p>
-</div>
-<div class="section" id="declare-model-s-layout">
+</section>
+<section id="declare-model-s-layout">
 <h3>Declare model’s layout<a class="headerlink" href="#declare-model-s-layout" title="Permalink to this headline">¶</a></h3>
 <p>Model’s input already has information about precision and shape. Preprocessing API is not intended to modify this. The only thing that may be specified is input’s data <a class="reference internal" href="openvino_docs_OV_UG_Layout_Overview.html#doxid-openvino-docs-o-v-u-g-layout-overview"><span class="std std-ref">layout</span></a></p>
 <div class='sphinxtabset'><div class="sphinxtab" data-sphinxtab-value="C++"><div class="highlight"><div class="highlight"><pre><span></span><span class="c1">// `model&#39;s input` already `knows` it&#39;s shape and data type, no need to specify them here</span>
 <span class="n">input</span><span class="p">.</span>model<span></span><span class="p">().</span>set_layout<span></span><span class="p">(</span><span class="s">&quot;NCHW&quot;</span><span class="p">);</span></pre></div></div></div><div class="sphinxtab" data-sphinxtab-value="Python"><div class="highlight"><div class="highlight"><pre><span></span><span class="cp"># `model&#39;s input` already `knows` it&#39;s shape and data type, no need to specify them here</span>
-<span class="n">ppp</span><span class="p">.</span><span class="n">input</span><span class="p">(</span><span class="n">input_name</span><span class="p">).</span>model<span></span><span class="p">().</span>set_layout<span></span><span class="p">(</span>Layout<span></span><span class="p">(</span><span class="sc">&#39;NCHW&#39;</span><span class="p">))</span></pre></div></div></div></div><p>Now, if model’s input has <code class="docutils literal notranslate"><span class="pre">{1,3,224,224}</span></code> shape, preprocessing will be able to identify that model’s <code class="docutils literal notranslate"><span class="pre">height=224</span></code>, <code class="docutils literal notranslate"><span class="pre">width=224</span></code>, <code class="docutils literal notranslate"><span class="pre">channels=3</span></code>. Height/width information is necessary for ‘resize’, and <code class="docutils literal notranslate"><span class="pre">channels</span></code> is needed for mean/scale normalization</p>
-</div>
-<div class="section" id="preprocessing-steps">
+<span class="n">ppp</span><span class="p">.</span><span class="n">input</span><span class="p">(</span><span class="n">input_name</span><span class="p">).</span><a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga461856fdfb6d7533dc53355aec9e9fad"><span class="std std-ref">model</span></a><span></span><span class="p">().</span><a class="reference internal" href="../api/groups/groupov_layout_cpp_api.html#doxid-group-ov-layout-cpp-api-1ga18464fb8ed029acb5fdc2bb1737358d9"><span class="std std-ref">set_layout</span></a><span></span><span class="p">(</span><a class="reference internal" href="../api/groups/enumInferenceEngine_1_1Layout.html#doxid-namespace-inference-engine-1a246d143abc5ca07da8d2cadeeb88fdb8"><span class="std std-ref">Layout</span></a><span></span><span class="p">(</span><span class="sc">&#39;NCHW&#39;</span><span class="p">))</span></pre></div></div></div></div><p>Now, if model’s input has <code class="docutils literal notranslate"><span class="pre">{1,3,224,224}</span></code> shape, preprocessing will be able to identify that model’s <code class="docutils literal notranslate"><span class="pre">height=224</span></code>, <code class="docutils literal notranslate"><span class="pre">width=224</span></code>, <code class="docutils literal notranslate"><span class="pre">channels=3</span></code>. Height/width information is necessary for ‘resize’, and <code class="docutils literal notranslate"><span class="pre">channels</span></code> is needed for mean/scale normalization</p>
+</section>
+<section id="preprocessing-steps">
 <h3>Preprocessing steps<a class="headerlink" href="#preprocessing-steps" title="Permalink to this headline">¶</a></h3>
 <p>Now we can define sequence of preprocessing steps:</p>
 <div class='sphinxtabset'><div class="sphinxtab" data-sphinxtab-value="C++"><div class="highlight"><div class="highlight"><pre><span></span><span class="n">input</span><span class="p">.</span>preprocess<span></span><span class="p">()</span>
-  <span class="p">.</span>convert_element_type<span></span><span class="p">(</span>ov::element::f32<span></span><span class="p">)</span>
-  <span class="p">.</span>convert_color<span></span><span class="p">(</span>ov::preprocess::ColorFormat::RGB<span></span><span class="p">)</span>
+  <span class="p">.</span>convert_element_type<span></span><span class="p">(</span><a class="reference internal" href="../api/groups/groupov_element_cpp_api.html#doxid-group-ov-element-cpp-api-1gadc8a5dda3244028a5c0b024897215d43"><span class="std std-ref">ov::element::f32</span></a><span></span><span class="p">)</span>
+  <span class="p">.</span>convert_color<span></span><span class="p">(</span><a class="reference internal" href="../api/groups/enumInferenceEngine_1_1ColorFormat.html#doxid-namespace-inference-engine-1a5ee5ca7708cc67a9a0becc2593d0558aae2262afdcd9754598dbc87e4a4725246"><span class="std std-ref">ov::preprocess::ColorFormat::RGB</span></a><span></span><span class="p">)</span>
   <span class="p">.</span>resize<span></span><span class="p">(</span><span class="n">ov</span><span class="o">::</span><span class="n">preprocess</span><span class="o">::</span><span class="n">ResizeAlgorithm</span><span class="o">::</span><span class="n">RESIZE_LINEAR</span><span class="p">)</span>
   <span class="p">.</span>mean<span></span><span class="p">({</span><span class="mf">100.5</span><span class="p">,</span> <span class="mi">101</span><span class="p">,</span> <span class="mf">101.5</span><span class="p">})</span>
   <span class="p">.</span><span class="n">scale</span><span class="p">({</span><span class="mf">50.</span><span class="p">,</span> <span class="mf">51.</span><span class="p">,</span> <span class="mf">52.</span><span class="p">});</span>
@@ -1966,24 +1973,24 @@ ov::preprocess::PrePostProcessor<span></span> <span class="n">ppp</span><span cl
 <li><p>Divide each pixel data to appropriate scale value. In this example each <code class="docutils literal notranslate"><span class="pre">Red</span></code> component will be divided by 50, <code class="docutils literal notranslate"><span class="pre">Green</span></code> by 51, <code class="docutils literal notranslate"><span class="pre">Blue</span></code> by 52 respectively</p></li>
 <li><p><strong>Note:</strong> last <code class="docutils literal notranslate"><span class="pre">convert_layout</span></code> step is commented out as it is not necessary to specify last layout conversion. PrePostProcessor will do such conversion automatically</p></li>
 </ul>
-</div>
-<div class="section" id="integrate-steps-into-model">
+</section>
+<section id="integrate-steps-into-model">
 <h3>Integrate steps into model<a class="headerlink" href="#integrate-steps-into-model" title="Permalink to this headline">¶</a></h3>
 <p>We’ve finished with preprocessing steps declaration, now it is time to build it. For debugging purposes it is possible to print <code class="docutils literal notranslate"><span class="pre">PrePostProcessor</span></code> configuration on screen:</p>
 <div class='sphinxtabset'><div class="sphinxtab" data-sphinxtab-value="C++"><div class="highlight"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Dump preprocessor: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">ppp</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-model<span></span> <span class="o">=</span> <span class="n">ppp</span><span class="p">.</span><span class="n">build</span><span class="p">();</span></pre></div></div></div><div class="sphinxtab" data-sphinxtab-value="Python"><div class="highlight"><div class="highlight"><pre><span></span><span class="n">print</span><span class="p">(</span><span class="n">f</span><span class="sc">&#39;Dump preprocessor: {ppp}&#39;</span><span class="p">)</span>
+<a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga461856fdfb6d7533dc53355aec9e9fad"><span class="std std-ref">model</span></a><span></span> <span class="o">=</span> <span class="n">ppp</span><span class="p">.</span><span class="n">build</span><span class="p">();</span></pre></div></div></div><div class="sphinxtab" data-sphinxtab-value="Python"><div class="highlight"><div class="highlight"><pre><span></span><span class="n">print</span><span class="p">(</span><span class="n">f</span><span class="sc">&#39;Dump preprocessor: {ppp}&#39;</span><span class="p">)</span>
 <span class="n">model</span> <span class="o">=</span> <span class="n">ppp</span><span class="p">.</span><span class="n">build</span><span class="p">()</span></pre></div></div></div></div><p>After this, <code class="docutils literal notranslate"><span class="pre">model</span></code> will accept U8 input with <code class="docutils literal notranslate"><span class="pre">{1,</span> <span class="pre">480,</span> <span class="pre">640,</span> <span class="pre">3}</span></code> shape, with <code class="docutils literal notranslate"><span class="pre">BGR</span></code> channels order. All conversion steps will be integrated into execution graph. Now you can load model on device and pass your image to model as is, without any data manipulation on application’s side</p>
-</div>
-</div>
-<div class="section" id="see-also">
+</section>
+</section>
+<section id="see-also">
 <h2>See Also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="openvino_docs_OV_UG_Preprocessing_Details.html#doxid-openvino-docs-o-v-u-g-preprocessing-details"><span class="std std-ref">Preprocessing Details</span></a></p></li>
 <li><p><a class="reference internal" href="openvino_docs_OV_UG_Layout_Overview.html#doxid-openvino-docs-o-v-u-g-layout-overview"><span class="std std-ref">Layout API overview</span></a></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">ov::preprocess::PrePostProcessor</span></code> C++ class documentation</p></li>
+<li><p><code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1preprocess_1_1PrePostProcessor.html#doxid-classov-1-1preprocess-1-1-pre-post-processor"><span class="std std-ref"><span class="pre">ov::preprocess::PrePostProcessor</span></span></a></code> C++ class documentation</p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -2014,7 +2021,7 @@ model<span></span> <span class="o">=</span> <span class="n">ppp</span><span clas
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

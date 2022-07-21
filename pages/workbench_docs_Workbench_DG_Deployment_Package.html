@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Build Your Application with Deployment Package &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -1857,7 +1864,7 @@
             
                 <div>
                   
-  <div class="section" id="build-your-application-with-deployment-package">
+  <section id="build-your-application-with-deployment-package">
 <span id="doxid-workbench-docs-workbench-d-g-deployment-package"></span><span id="index-0"></span><h1>Build Your Application with Deployment Package<a class="headerlink" href="#build-your-application-with-deployment-package" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-workbench-docs-workbench-d-g-deployment-package-1md-openvino-workbench-docs-workbench-dg-deployment-package"></span></p>
 <div class="toctree-wrapper compound">
@@ -1872,7 +1879,7 @@
 <p class="admonition-title">Note</p>
 <p><em>Developer machine</em> is the machine where you use the DL Workbench to download the package and where you prepare your own application. <em>Target machine</em> is the machine where you deploy the application.</p>
 </div>
-<div class="section" id="download-deployment-package">
+<section id="download-deployment-package">
 <h2>Download Deployment Package<a class="headerlink" href="#download-deployment-package" title="Permalink to this headline">¶</a></h2>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -1895,25 +1902,25 @@
 <li><p>The archive contains C++* libraries, so your application can be written in C++ only. A Python* application cannot use these libraries directly and Python bindings are not included in the deployment package. This document does not contain instructions on how to prepare a Python application for deployment.</p></li>
 </ul>
 <p>Your application should be compiled into a binary file. If you do not have an application, see <a class="reference external" href="#sample">Create Binary Sample</a>. The next step is <a class="reference external" href="#deploy">moving a binary to the target device and deploying it there</a>.</p>
-</div>
-<div class="section" id="create-binary-sample">
+</section>
+<section id="create-binary-sample">
 <span id="sample"></span><h2>Create Binary Sample<a class="headerlink" href="#create-binary-sample" title="Permalink to this headline">¶</a></h2>
 <p>You can learn how to use batches and streams in your application with DL Workbench <a class="reference internal" href="workbench_docs_Workbench_DG_Deploy_and_Integrate_Performance_Criteria_into_Application.html#doxid-workbench-docs-workbench-d-g-deploy-and-integrate-performance-criteria-into-application"><span class="std std-ref">C++ Sample Application</span></a>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Perform these steps on your developer machine.</p>
 </div>
-<div class="section" id="prerequisite">
+<section id="prerequisite">
 <h3>Prerequisite<a class="headerlink" href="#prerequisite" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference internal" href="openvino_docs_install_guides_installing_openvino_linux.html#doxid-openvino-docs-install-guides-installing-openvino-linux"><span class="std std-ref">Install the Intel® Distribution of OpenVINO™ toolkit for Linux*</span></a> on your developer machine. OpenVINO™ toolkit and DL Workbench should be of the same release version.</p>
-</div>
-<div class="section" id="step-1-create-main-cpp">
+</section>
+<section id="step-1-create-main-cpp">
 <h3>Step 1. Create main.cpp<a class="headerlink" href="#step-1-create-main-cpp" title="Permalink to this headline">¶</a></h3>
 <p>Create a file named <code class="docutils literal notranslate"><span class="pre">main.cpp</span></code> with the source code of your application:</p>
 <div class="collapsible-section"><div class="highlight"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;inference_engine.hpp&gt;</span><span class="cp"></span>
 <span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp"></span>
 
-<span class="k">using</span> <span class="k">namespace</span> InferenceEngine<span></span><span class="p">;</span>
+<span class="k">using</span> <span class="k">namespace</span> <a class="reference internal" href="../api/groups/namespaceInferenceEngine.html#doxid-namespace-inference-engine"><span class="std std-ref">InferenceEngine</span></a><span></span><span class="p">;</span>
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="err">\</span><span class="o">*</span><span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
@@ -1938,13 +1945,13 @@
 
     <span class="n">std</span><span class="o">::</span><span class="n">transform</span><span class="p">(</span><span class="n">device</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">device</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">device</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="o">::</span><span class="n">toupper</span><span class="p">);</span>
 
-    Core<span></span> ie<span></span><span class="p">;</span>
+    <a class="reference internal" href="../api/groups/classInferenceEngine_1_1Core.html#doxid-class-inference-engine-1-1-core"><span class="std std-ref">Core</span></a><span></span> <a class="reference internal" href="../api/groups/namespaceInferenceEngine.html#doxid-namespace-inference-engine"><span class="std std-ref">ie</span></a><span></span><span class="p">;</span>
 
     <span class="c1">// Start setting number of streams</span>
     <span class="kt">int</span> <span class="n">numStreams</span> <span class="o">=</span> <span class="n">numInferReq</span><span class="p">;</span>
 
     <span class="k">if</span> <span class="p">(</span><span class="n">device</span> <span class="o">==</span> <span class="s">&quot;CPU&quot;</span><span class="p">)</span> <span class="p">{</span>
-        ie<span></span><span class="p">.</span><span class="n">SetConfig</span><span class="p">({{</span>CONFIG_KEY<span></span><span class="p">(</span><span class="n">CPU_THROUGHPUT_STREAMS</span><span class="p">),</span> <span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">numStreams</span><span class="p">)}},</span> <span class="n">device</span><span class="p">);</span>
+        <a class="reference internal" href="../api/groups/namespaceInferenceEngine.html#doxid-namespace-inference-engine"><span class="std std-ref">ie</span></a><span></span><span class="p">.</span><span class="n">SetConfig</span><span class="p">({{</span>CONFIG_KEY<span></span><span class="p">(</span><span class="n">CPU_THROUGHPUT_STREAMS</span><span class="p">),</span> <span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">numStreams</span><span class="p">)}},</span> <span class="n">device</span><span class="p">);</span>
     <span class="p">}</span>
 
     <span class="k">if</span> <span class="p">(</span><span class="n">device</span> <span class="o">==</span> <span class="s">&quot;GPU&quot;</span><span class="p">)</span> <span class="p">{</span>
@@ -1952,16 +1959,16 @@
         <span class="k">if</span> <span class="p">(</span><span class="n">numStreams</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
             <span class="n">numStreams</span><span class="o">++</span><span class="p">;</span>
         <span class="p">}</span>
-        ie<span></span><span class="p">.</span><span class="n">SetConfig</span><span class="p">({{</span>CONFIG_KEY<span></span><span class="p">(</span><span class="n">GPU_THROUGHPUT_STREAMS</span><span class="p">),</span> <span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">numStreams</span><span class="p">)}},</span> <span class="n">device</span><span class="p">);</span>
+        <a class="reference internal" href="../api/groups/namespaceInferenceEngine.html#doxid-namespace-inference-engine"><span class="std std-ref">ie</span></a><span></span><span class="p">.</span><span class="n">SetConfig</span><span class="p">({{</span>CONFIG_KEY<span></span><span class="p">(</span><span class="n">GPU_THROUGHPUT_STREAMS</span><span class="p">),</span> <span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">numStreams</span><span class="p">)}},</span> <span class="n">device</span><span class="p">);</span>
     <span class="p">}</span>
     <span class="c1">// Finish setting number of streams</span>
 
-    CNNNetwork<span></span> <span class="n">network</span> <span class="o">=</span> ie<span></span><span class="p">.</span><span class="n">ReadNetwork</span><span class="p">(</span><span class="n">modelXml</span><span class="p">);</span>
+    <a class="reference internal" href="../api/groups/classInferenceEngine_1_1CNNNetwork.html#doxid-class-inference-engine-1-1-c-n-n-network"><span class="std std-ref">CNNNetwork</span></a><span></span> <span class="n">network</span> <span class="o">=</span> <a class="reference internal" href="../api/groups/namespaceInferenceEngine.html#doxid-namespace-inference-engine"><span class="std std-ref">ie</span></a><span></span><span class="p">.</span><span class="n">ReadNetwork</span><span class="p">(</span><span class="n">modelXml</span><span class="p">);</span>
 
     <span class="c1">// Set batch</span>
-    <span class="n">network</span><span class="p">.</span>setBatchSize<span></span><span class="p">(</span><span class="n">batchSize</span><span class="p">);</span>
+    <span class="n">network</span><span class="p">.</span><a class="reference internal" href="../api/groups/classInferenceEngine_1_1CNNNetwork.html#doxid-class-inference-engine-1-1-c-n-n-network-1a8e9d19270a48aab50cb5b1c43eecb8e9"><span class="std std-ref">setBatchSize</span></a><span></span><span class="p">(</span><span class="n">batchSize</span><span class="p">);</span>
 
-    ExecutableNetwork<span></span> <span class="n">executableNetwork</span> <span class="o">=</span> ie<span></span><span class="p">.</span><span class="n">LoadNetwork</span><span class="p">(</span><span class="n">network</span><span class="p">,</span> <span class="n">device</span><span class="p">);</span>
+    <a class="reference internal" href="../api/groups/classInferenceEngine_1_1ExecutableNetwork.html#doxid-class-inference-engine-1-1-executable-network"><span class="std std-ref">ExecutableNetwork</span></a><span></span> <span class="n">executableNetwork</span> <span class="o">=</span> <a class="reference internal" href="../api/groups/namespaceInferenceEngine.html#doxid-namespace-inference-engine"><span class="std std-ref">ie</span></a><span></span><span class="p">.</span><span class="n">LoadNetwork</span><span class="p">(</span><span class="n">network</span><span class="p">,</span> <span class="n">device</span><span class="p">);</span>
 
     <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">InferRequest</span><span class="o">&gt;</span> <span class="n">requests</span><span class="p">(</span><span class="n">numInferReq</span><span class="p">);</span>
 
@@ -1973,15 +1980,15 @@
     <span class="p">}</span>
 
     <span class="k">for</span> <span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">numInferReq</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
-        StatusCode<span></span> <span class="n">status</span> <span class="o">=</span> <span class="n">requests</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">Wait</span><span class="p">(</span><span class="n">IInferRequest</span><span class="o">::</span><span class="n">WaitMode</span><span class="o">::</span><span class="n">RESULT_READY</span><span class="p">);</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">status</span> <span class="o">!=</span> StatusCode::OK<span></span><span class="p">){</span>
+        <a class="reference internal" href="../api/groups/enumInferenceEngine_1_1StatusCode.html#doxid-namespace-inference-engine-1a2ce897aa6a353c071958fe379f5d6421"><span class="std std-ref">StatusCode</span></a><span></span> <span class="n">status</span> <span class="o">=</span> <span class="n">requests</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">Wait</span><span class="p">(</span><span class="n">IInferRequest</span><span class="o">::</span><span class="n">WaitMode</span><span class="o">::</span><span class="n">RESULT_READY</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">status</span> <span class="o">!=</span> <a class="reference internal" href="../api/groups/enumInferenceEngine_1_1StatusCode.html#doxid-namespace-inference-engine-1a2ce897aa6a353c071958fe379f5d6421a084fcaf510851d3281e7bd45db802c6a"><span class="std std-ref">StatusCode::OK</span></a><span></span><span class="p">){</span>
             <span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="o">&lt;&lt;</span> <span class="s">&quot;inferRequest &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">i</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;failed&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
         <span class="p">}</span>
     <span class="p">}</span>
     <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Inference completed successfully&quot;</span><span class="o">&lt;&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span></pre></div></div></div></div>
-<div class="section" id="step-2-create-cmakelists-txt">
+<span class="p">}</span></pre></div></div></div></section>
+<section id="step-2-create-cmakelists-txt">
 <h3>Step 2. Create CMakeLists.txt<a class="headerlink" href="#step-2-create-cmakelists-txt" title="Permalink to this headline">¶</a></h3>
 <p>In the same folder as <code class="docutils literal notranslate"><span class="pre">main.cpp</span></code>, create a file named <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> with the following commands to compile <code class="docutils literal notranslate"><span class="pre">main.cpp</span></code> into an executable file:</p>
 <div class="collapsible-section"><div class="highlight"><div class="highlight"><pre><span></span><span class="n">cmake_minimum_required</span><span class="p">(</span><span class="n">VERSION</span> <span class="mf">3.10</span><span class="p">)</span>
@@ -1996,8 +2003,8 @@
 
 <span class="n">add_executable</span><span class="p">(</span><span class="err">$</span><span class="p">{</span><span class="n">IE_SAMPLE_NAME</span><span class="p">}</span> <span class="n">main</span><span class="p">.</span><span class="n">cpp</span> <span class="err">$</span><span class="p">{</span><span class="n">IE_SAMPLE_SOURCES</span><span class="p">}</span> <span class="err">$</span><span class="p">{</span><span class="n">IE_SAMPLES_HEADERS</span><span class="p">})</span>
 
-<span class="n">target_link_libraries</span><span class="p">(</span><span class="err">$</span><span class="p">{</span><span class="n">IE_SAMPLE_NAME</span><span class="p">}</span> <span class="n">PUBLIC</span> <span class="err">$</span><span class="p">{</span><span class="n">InferenceEngine_LIBRARIES</span><span class="p">})</span></pre></div></div></div></div>
-<div class="section" id="step-3-compile-application">
+<span class="n">target_link_libraries</span><span class="p">(</span><span class="err">$</span><span class="p">{</span><span class="n">IE_SAMPLE_NAME</span><span class="p">}</span> <span class="n">PUBLIC</span> <span class="err">$</span><span class="p">{</span><span class="n">InferenceEngine_LIBRARIES</span><span class="p">})</span></pre></div></div></div></section>
+<section id="step-3-compile-application">
 <h3>Step 3. Compile Application<a class="headerlink" href="#step-3-compile-application" title="Permalink to this headline">¶</a></h3>
 <p>Open a terminal in the directory with <code class="docutils literal notranslate"><span class="pre">main.cpp</span></code> and <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code>, and run the following commands to build the sample:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">source</span> <span class="o">&lt;</span><span class="n">INSTALL_OPENVINO_DIR</span><span class="o">&gt;/</span><span class="n">setupvars</span><span class="p">.</span><span class="n">sh</span>
@@ -2009,9 +2016,9 @@
 <p>Replace <code class="docutils literal notranslate"><span class="pre">&lt;INSTALL_OPENVINO_DIR&gt;</span></code> with the directory where you installed the OpenVINO™ package. By default, the package is installed in <code class="docutils literal notranslate"><span class="pre">/opt/intel/openvino</span></code> or <code class="docutils literal notranslate"><span class="pre">~/intel/openvino</span></code>.</p>
 </div>
 <p>Once the commands are executed, find the <code class="docutils literal notranslate"><span class="pre">ie_sample</span></code> binary in the <code class="docutils literal notranslate"><span class="pre">build</span></code> folder in the directory with the source files.</p>
-</div>
-</div>
-<div class="section" id="deploy-your-application-on-target-machine">
+</section>
+</section>
+<section id="deploy-your-application-on-target-machine">
 <span id="deploy"></span><h2>Deploy Your Application on Target Machine<a class="headerlink" href="#deploy-your-application-on-target-machine" title="Permalink to this headline">¶</a></h2>
 <p><strong>Step 1.</strong> Make sure you have the following components on your developer machine:</p>
 <ul class="simple">
@@ -2043,8 +2050,8 @@
 <li><p>In the command above, the application is run on a CPU device. See the <strong>Supported Inference Devices</strong> section of <a class="reference internal" href="workbench_docs_Workbench_DG_Install.html#doxid-workbench-docs-workbench-d-g-install"><span class="std std-ref">Install DL Workbench</span></a> for code names of other devices.</p></li>
 </ul>
 <p><strong>Step 8.</strong> If you run the application created in the <a class="reference external" href="#sample">Create Binary Sample</a>, you get the following output:</p>
-<div class="highlight"><div class="highlight"><pre><span></span><span class="n">Inference</span> <span class="n">completed</span> <span class="n">successfully</span></pre></div></div></div>
-<div class="section" id="see-also">
+<div class="highlight"><div class="highlight"><pre><span></span><span class="n">Inference</span> <span class="n">completed</span> <span class="n">successfully</span></pre></div></div></section>
+<section id="see-also">
 <h2>See Also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="workbench_docs_Workbench_DG_Deploy_and_Integrate_Performance_Criteria_into_Application.html#doxid-workbench-docs-workbench-d-g-deploy-and-integrate-performance-criteria-into-application"><span class="std std-ref">Deploy and Integrate Performance Criteria into Application</span></a></p></li>
@@ -2052,8 +2059,8 @@
 <li><p><a class="reference internal" href="openvino_docs_OV_UG_Integrate_OV_with_your_application.html#doxid-openvino-docs-o-v-u-g-integrate-o-v-with-your-application"><span class="std std-ref">Integrate the OpenVINO™ Runtime with Your Application</span></a></p></li>
 <li><p><a class="reference internal" href="workbench_docs_Workbench_DG_Troubleshooting.html#doxid-workbench-docs-workbench-d-g-troubleshooting"><span class="std std-ref">Troubleshooting</span></a></p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -2084,7 +2091,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

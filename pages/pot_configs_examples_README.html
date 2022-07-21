@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>End-to-end Command-line Interface Example &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -1845,7 +1852,7 @@
             
                 <div>
                   
-  <div class="section" id="end-to-end-command-line-interface-example">
+  <section id="end-to-end-command-line-interface-example">
 <span id="doxid-pot-configs-examples-r-e-a-d-m-e"></span><span id="index-0"></span><h1>End-to-end Command-line Interface Example<a class="headerlink" href="#end-to-end-command-line-interface-example" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-pot-configs-examples-r-e-a-d-m-e-1md-openvino-tools-pot-docs-e2eexample"></span> This tutorial describes an example of running post-training quantization for <strong>MobileNet v2 model from PyTorch</strong> framework, particularly by the DefaultQuantization algorithm. The example covers the following steps:</p>
 <ul class="simple">
@@ -1860,7 +1867,7 @@
 <p>All the steps are based on the tools and samples of configuration files distributed with the Intel Distribution of OpenVINO toolkit.</p>
 <p>The example has been verified in Ubuntu 18.04 Operating System with Python 3.6 installed.</p>
 <p>In case of issues while running the example, refer to <a class="reference internal" href="pot_docs_FrequentlyAskedQuestions.html#doxid-pot-docs-frequently-asked-questions"><span class="std std-ref">POT Frequently Asked Questions</span></a> for help.</p>
-<div class="section" id="model-preparation">
+<section id="model-preparation">
 <h2>Model Preparation<a class="headerlink" href="#model-preparation" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic">
 <li><p>Navigate to <code class="docutils literal notranslate"><span class="pre">&lt;EXAMPLE_DIR&gt;</span></code>.</p></li>
@@ -1872,14 +1879,14 @@
 </li>
 </ol>
 <p>For more information about the Model Optimizer, refer to its <a class="reference internal" href="openvino_docs_MO_DG_Deep_Learning_Model_Optimizer_DevGuide.html#doxid-openvino-docs-m-o-d-g-deep-learning-model-optimizer-dev-guide"><span class="std std-ref">documentation</span></a>.</p>
-</div>
-<div class="section" id="performance-benchmarking-of-full-precision-models">
+</section>
+<section id="performance-benchmarking-of-full-precision-models">
 <h2>Performance Benchmarking of Full-Precision Models<a class="headerlink" href="#performance-benchmarking-of-full-precision-models" title="Permalink to this headline">¶</a></h2>
 <p>Check the performance of the full-precision model in the IR format using <a class="reference internal" href="openvino_inference_engine_tools_benchmark_tool_README.html#doxid-openvino-inference-engine-tools-benchmark-tool-r-e-a-d-m-e"><span class="std std-ref">Deep Learning Benchmark</span></a> tool:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">benchmark_app</span> <span class="o">-</span><span class="n">m</span> <span class="o">&lt;</span><span class="n">EXAMPLE_DIR</span><span class="o">&gt;/</span><span class="k">public</span><span class="o">/</span><span class="n">mobilenet</span><span class="o">-</span><span class="n">v2</span><span class="o">-</span><span class="n">pytorch</span><span class="o">/</span><span class="n">FP32</span><span class="o">/</span><span class="n">mobilenet</span><span class="o">-</span><span class="n">v2</span><span class="o">-</span><span class="n">pytorch</span><span class="p">.</span><span class="n">xml</span></pre></div></div><p>Note that the results might be different dependently on characteristics of your machine. On a machine with Intel Core i9-10920X CPU &#64; 3.50GHz it is like:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="nl">Latency</span><span class="p">:</span>    <span class="mf">4.14</span> <span class="n">ms</span>
-<span class="nl">Throughput</span><span class="p">:</span> <span class="mf">1436.55</span> <span class="n">FPS</span></pre></div></div></div>
-<div class="section" id="dataset-preparation">
+<span class="nl">Throughput</span><span class="p">:</span> <span class="mf">1436.55</span> <span class="n">FPS</span></pre></div></div></section>
+<section id="dataset-preparation">
 <h2>Dataset Preparation<a class="headerlink" href="#dataset-preparation" title="Permalink to this headline">¶</a></h2>
 <p>To perform the accuracy validation as well as quantization of a model, the dataset should be prepared. This example uses a real dataset called ImageNet.</p>
 <p>To download images:</p>
@@ -1900,8 +1907,8 @@
 <li><p>Unpack <code class="docutils literal notranslate"><span class="pre">val.txt</span></code> from the archive into <code class="docutils literal notranslate"><span class="pre">&lt;EXAMPLE_DIR&gt;/ImageNet/</span></code>.</p></li>
 </ol>
 <p>After that the <code class="docutils literal notranslate"><span class="pre">&lt;EXAMPLE_DIR&gt;/ImageNet/</span></code> dataset folder should have a lot of image files like <code class="docutils literal notranslate"><span class="pre">ILSVRC2012_val_00000001.JPEG</span></code> and the <code class="docutils literal notranslate"><span class="pre">val.txt</span></code> annotation file.</p>
-</div>
-<div class="section" id="accuracy-validation-of-full-precision-model-in-ir-format">
+</section>
+<section id="accuracy-validation-of-full-precision-model-in-ir-format">
 <h2>Accuracy Validation of Full-Precision Model in IR Format<a class="headerlink" href="#accuracy-validation-of-full-precision-model-in-ir-format" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic">
 <li><p>Create a new file in <code class="docutils literal notranslate"><span class="pre">&lt;EXAMPLE_DIR&gt;</span></code> and name it <code class="docutils literal notranslate"><span class="pre">mobilenet_v2_pytorch.yaml</span></code>. This is the Accuracy Checker configuration file.</p></li>
@@ -1948,8 +1955,8 @@
 <p>Note that the results might be different on CPUs with different instruction sets.</p>
 </li>
 </ol>
-</div>
-<div class="section" id="model-quantization">
+</section>
+<section id="model-quantization">
 <h2>Model Quantization<a class="headerlink" href="#model-quantization" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic">
 <li><p>Create a new file in <code class="docutils literal notranslate"><span class="pre">&lt;EXAMPLE_DIR&gt;</span></code> and name it <code class="docutils literal notranslate"><span class="pre">mobilenet_v2_pytorch_int8.json</span></code>. This is the POT configuration file.</p></li>
@@ -1983,15 +1990,15 @@
 <p>Note that the results might be different on CPUs with different instruction sets.</p>
 </li>
 </ol>
-</div>
-<div class="section" id="performance-benchmarking-of-quantized-model">
+</section>
+<section id="performance-benchmarking-of-quantized-model">
 <h2>Performance Benchmarking of Quantized Model<a class="headerlink" href="#performance-benchmarking-of-quantized-model" title="Permalink to this headline">¶</a></h2>
 <p>Check the performance of the quantized model using <a class="reference internal" href="openvino_inference_engine_tools_benchmark_tool_README.html#doxid-openvino-inference-engine-tools-benchmark-tool-r-e-a-d-m-e"><span class="std std-ref">Deep Learning Benchmark</span></a> tool:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">benchmark_app</span> <span class="o">-</span><span class="n">m</span> <span class="o">&lt;</span><span class="n">INT8_MODEL</span><span class="o">&gt;</span></pre></div></div><p>where <code class="docutils literal notranslate"><span class="pre">&lt;INT8_MODEL&gt;</span></code> is the path to the quantized model.</p>
 <p>Note that the results might be different dependently on characteristics of your machine. On a machine with Intel Core i9-10920X CPU &#64; 3.50GHz it is like:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="nl">Latency</span><span class="p">:</span>    <span class="mf">1.54</span> <span class="n">ms</span>
-<span class="nl">Throughput</span><span class="p">:</span> <span class="mf">3814.18</span> <span class="n">FPS</span></pre></div></div></div>
-</div>
+<span class="nl">Throughput</span><span class="p">:</span> <span class="mf">3814.18</span> <span class="n">FPS</span></pre></div></div></section>
+</section>
 
 
                 </div>
@@ -2022,7 +2029,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

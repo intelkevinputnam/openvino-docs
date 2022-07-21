@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Convert PyTorch* QuartzNet Model &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -1825,10 +1832,10 @@
             
                 <div>
                   
-  <div class="section" id="convert-pytorch-quartznet-model">
+  <section id="convert-pytorch-quartznet-model">
 <span id="doxid-openvino-docs-m-o-d-g-prepare-model-convert-model-pytorch-specific-convert-quartz-net"></span><span id="index-0"></span><h1>Convert PyTorch* QuartzNet Model<a class="headerlink" href="#convert-pytorch-quartznet-model" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-openvino-docs-m-o-d-g-prepare-model-convert-model-pytorch-specific-convert-quartz-net-1md-openvino-docs-mo-dg-prepare-model-convert-model-pytorch-specific-convert-quartznet"></span> <a class="reference external" href="https://github.com/NVIDIA/NeMo">NeMo project</a> provides the QuartzNet model.</p>
-<div class="section" id="download-the-pre-trained-quartznet-model">
+<section id="download-the-pre-trained-quartznet-model">
 <h2>Download the Pre-Trained QuartzNet Model<a class="headerlink" href="#download-the-pre-trained-quartznet-model" title="Permalink to this headline">¶</a></h2>
 <p>To download the pre-trained model, refer to the <a class="reference external" href="https://ngc.nvidia.com/catalog/models/nvidia:nemospeechmodels">NeMo Speech Models Catalog</a>. Here are the instructions on how to obtain QuartzNet in ONNX* format.</p>
 <ol class="arabic simple">
@@ -1843,15 +1850,15 @@
 <span class="n">quartznet</span><span class="p">.</span><span class="n">decoder</span><span class="p">.</span><span class="k">export</span><span class="p">(</span><span class="sc">&#39;decoder_qn.onnx&#39;</span><span class="p">)</span>
 <span class="n">quartznet</span><span class="p">.</span><span class="n">encoder</span><span class="p">.</span><span class="k">export</span><span class="p">(</span><span class="sc">&#39;encoder_qn.onnx&#39;</span><span class="p">)</span>
 <span class="n">quartznet</span><span class="p">.</span><span class="k">export</span><span class="p">(</span><span class="sc">&#39;qn.onnx&#39;</span><span class="p">)</span></pre></div></div><p>This code produces 3 ONNX* model files: <code class="docutils literal notranslate"><span class="pre">encoder_qn.onnx</span></code>, <code class="docutils literal notranslate"><span class="pre">decoder_qn.onnx</span></code>, <code class="docutils literal notranslate"><span class="pre">qn.onnx</span></code>. They are <code class="docutils literal notranslate"><span class="pre">decoder</span></code>, <code class="docutils literal notranslate"><span class="pre">encoder</span></code> and a combined <code class="docutils literal notranslate"><span class="pre">decoder(encoder(x))</span></code> models, respectively.</p>
-</div>
-<div class="section" id="convert-onnx-quartznet-model-to-ir">
+</section>
+<section id="convert-onnx-quartznet-model-to-ir">
 <h2>Convert ONNX* QuartzNet model to IR<a class="headerlink" href="#convert-onnx-quartznet-model-to-ir" title="Permalink to this headline">¶</a></h2>
 <p>If using a combined model:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">mo</span> <span class="o">--</span><span class="n">input_model</span> <span class="o">&lt;</span><span class="n">MODEL_DIR</span><span class="o">&gt;/</span><span class="n">qt</span><span class="p">.</span><span class="n">onnx</span> <span class="o">--</span><span class="n">input_shape</span> <span class="p">[</span><span class="n">B</span><span class="p">,</span><span class="mi">64</span><span class="p">,</span><span class="n">X</span><span class="p">]</span></pre></div></div><p>If using separate models:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">mo</span> <span class="o">--</span><span class="n">input_model</span> <span class="o">&lt;</span><span class="n">MODEL_DIR</span><span class="o">&gt;/</span><span class="n">encoder_qt</span><span class="p">.</span><span class="n">onnx</span> <span class="o">--</span><span class="n">input_shape</span> <span class="p">[</span><span class="n">B</span><span class="p">,</span><span class="mi">64</span><span class="p">,</span><span class="n">X</span><span class="p">]</span>
 <span class="n">mo</span> <span class="o">--</span><span class="n">input_model</span> <span class="o">&lt;</span><span class="n">MODEL_DIR</span><span class="o">&gt;/</span><span class="n">decoder_qt</span><span class="p">.</span><span class="n">onnx</span> <span class="o">--</span><span class="n">input_shape</span> <span class="p">[</span><span class="n">B</span><span class="p">,</span><span class="mi">1024</span><span class="p">,</span><span class="n">Y</span><span class="p">]</span></pre></div></div><p>Where shape is determined by the audio file Mel-Spectrogram length: B - batch dimension, X - dimension based on the input length, Y - determined by encoder output, usually <code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">/</span> <span class="pre">2</span></code>.</p>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -1882,7 +1889,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

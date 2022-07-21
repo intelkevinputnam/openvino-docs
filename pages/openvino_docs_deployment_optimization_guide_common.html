@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>General Optimizations &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -1837,10 +1844,10 @@
             
                 <div>
                   
-  <div class="section" id="general-optimizations">
+  <section id="general-optimizations">
 <span id="doxid-openvino-docs-deployment-optimization-guide-common"></span><span id="index-0"></span><h1>General Optimizations<a class="headerlink" href="#general-optimizations" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-openvino-docs-deployment-optimization-guide-common-1md-openvino-docs-optimization-guide-dldt-deployment-optimization-common"></span> This chapter covers application-level optimization techniques such as asynchronous execution to improve data pipelining, pre-processing acceleration and so on. While the techniques (e.g. pre-processing) can be specific to end-user applications, the associated performance improvements are general and shall improve any target scenario (both latency and throughput).</p>
-<div class="section" id="inputs-pre-processing-with-openvino">
+<section id="inputs-pre-processing-with-openvino">
 <h2>Inputs Pre-Processing with OpenVINO<a class="headerlink" href="#inputs-pre-processing-with-openvino" title="Permalink to this headline">¶</a></h2>
 <p>In many cases, a network expects a pre-processed image, so make sure you do not perform unnecessary steps in your code:</p>
 <ul class="simple">
@@ -1848,11 +1855,11 @@
 <li><p>Let the OpenVINO accelerate other means of <a class="reference internal" href="openvino_docs_OV_UG_Preprocessing_Overview.html#doxid-openvino-docs-o-v-u-g-preprocessing-overview"><span class="std std-ref">Image Pre-processing and Conversion</span></a>.</p></li>
 <li><p>You can directly input a data that is already in the <em>on-device</em> memory, by using the <a class="reference internal" href="openvino_docs_OV_UG_supported_plugins_GPU_RemoteTensor_API.html#doxid-openvino-docs-o-v-u-g-supported-plugins-g-p-u-remote-tensor-a-p-i"><span class="std std-ref">remote tensors API of the GPU Plugin</span></a>.</p></li>
 </ul>
-</div>
-<div class="section" id="prefer-openvino-async-api">
+</section>
+<section id="prefer-openvino-async-api">
 <h2>Prefer OpenVINO Async API<a class="headerlink" href="#prefer-openvino-async-api" title="Permalink to this headline">¶</a></h2>
-<p>The API of the inference requests offers Sync and Async execution. While the <code class="docutils literal notranslate"><span class="pre">ov::InferRequest::infer()</span></code> is inherently synchronous and executes immediately (effectively serializing the execution flow in the current application thread), the Async “splits” the <code class="docutils literal notranslate"><span class="pre">infer()</span></code> into <code class="docutils literal notranslate"><span class="pre">ov::InferRequest::start_async()</span></code> and <code class="docutils literal notranslate"><span class="pre">ov::InferRequest::wait()</span></code>. Please consider the <a class="reference internal" href="openvino_docs_OV_UG_Infer_request.html#doxid-openvino-docs-o-v-u-g-infer-request"><span class="std std-ref">API examples</span></a>.</p>
-<p>A typical use-case for the <code class="docutils literal notranslate"><span class="pre">ov::InferRequest::infer()</span></code> is running a dedicated application thread per source of inputs (e.g. a camera), so that every step (frame capture, processing, results parsing and associated logic) is kept serial within the thread. In contrast, the <code class="docutils literal notranslate"><span class="pre">ov::InferRequest::start_async()</span></code> and <code class="docutils literal notranslate"><span class="pre">ov::InferRequest::wait()</span></code> allow the application to continue its activities and poll or wait for the inference completion when really needed. So one reason for using asynchronous code is <em>efficiency</em>.</p>
+<p>The API of the inference requests offers Sync and Async execution. While the <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1InferRequest.html#doxid-classov-1-1-infer-request-1abcb7facc9f7c4b9226a1fd343e56958d"><span class="std std-ref"><span class="pre">ov::InferRequest::infer()</span></span></a></code> is inherently synchronous and executes immediately (effectively serializing the execution flow in the current application thread), the Async “splits” the <code class="docutils literal notranslate"><span class="pre">infer()</span></code> into <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1InferRequest.html#doxid-classov-1-1-infer-request-1a5a05ae4352f804c865e11f5d68b983d5"><span class="std std-ref"><span class="pre">ov::InferRequest::start_async()</span></span></a></code> and <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1InferRequest.html#doxid-classov-1-1-infer-request-1ab0e0739da45789d816f8b5584a0b5691"><span class="std std-ref"><span class="pre">ov::InferRequest::wait()</span></span></a></code>. Please consider the <a class="reference internal" href="openvino_docs_OV_UG_Infer_request.html#doxid-openvino-docs-o-v-u-g-infer-request"><span class="std std-ref">API examples</span></a>.</p>
+<p>A typical use-case for the <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1InferRequest.html#doxid-classov-1-1-infer-request-1abcb7facc9f7c4b9226a1fd343e56958d"><span class="std std-ref"><span class="pre">ov::InferRequest::infer()</span></span></a></code> is running a dedicated application thread per source of inputs (e.g. a camera), so that every step (frame capture, processing, results parsing and associated logic) is kept serial within the thread. In contrast, the <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1InferRequest.html#doxid-classov-1-1-infer-request-1a5a05ae4352f804c865e11f5d68b983d5"><span class="std std-ref"><span class="pre">ov::InferRequest::start_async()</span></span></a></code> and <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1InferRequest.html#doxid-classov-1-1-infer-request-1ab0e0739da45789d816f8b5584a0b5691"><span class="std std-ref"><span class="pre">ov::InferRequest::wait()</span></span></a></code> allow the application to continue its activities and poll or wait for the inference completion when really needed. So one reason for using asynchronous code is <em>efficiency</em>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Although the Synchronous API can be somewhat easier to start with, in the production code always prefer to use the Asynchronous (callbacks-based, below) API, as it is the most general and scalable way to implement the flow control for any possible number of requests (and hence both latency and throughput scenarios).</p>
@@ -1886,19 +1893,19 @@
 <p class="admonition-title">Note</p>
 <p>Using the Asynchronous API is a must for <a class="reference internal" href="openvino_docs_deployment_optimization_guide_tput.html#doxid-openvino-docs-deployment-optimization-guide-tput"><span class="std std-ref">throughput-oriented scenarios</span></a>.</p>
 </div>
-<div class="section" id="notes-on-callbacks">
+<section id="notes-on-callbacks">
 <h3>Notes on Callbacks<a class="headerlink" href="#notes-on-callbacks" title="Permalink to this headline">¶</a></h3>
-<p>Notice that the Async’s <code class="docutils literal notranslate"><span class="pre">ov::InferRequest::wait()</span></code> waits for the specific request only. However, running multiple inference requests in parallel provides no guarantees on the completion order. This may complicate a possible logic based on the <code class="docutils literal notranslate"><span class="pre">ov::InferRequest::wait</span></code>. The most scalable approach is using callbacks (set via the <code class="docutils literal notranslate"><span class="pre">ov::InferRequest::set_callback</span></code>) that are executed upon completion of the request. The callback functions will be used by the OpenVINO runtime to notify on the results (or errors. This is more event-driven approach.</p>
+<p>Notice that the Async’s <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1InferRequest.html#doxid-classov-1-1-infer-request-1ab0e0739da45789d816f8b5584a0b5691"><span class="std std-ref"><span class="pre">ov::InferRequest::wait()</span></span></a></code> waits for the specific request only. However, running multiple inference requests in parallel provides no guarantees on the completion order. This may complicate a possible logic based on the <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1InferRequest.html#doxid-classov-1-1-infer-request-1ab0e0739da45789d816f8b5584a0b5691"><span class="std std-ref"><span class="pre">ov::InferRequest::wait</span></span></a></code>. The most scalable approach is using callbacks (set via the <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1InferRequest.html#doxid-classov-1-1-infer-request-1afba2a10162ab356728ec8901973e8f02"><span class="std std-ref"><span class="pre">ov::InferRequest::set_callback</span></span></a></code>) that are executed upon completion of the request. The callback functions will be used by the OpenVINO runtime to notify on the results (or errors. This is more event-driven approach.</p>
 <p>Few important points on the callbacks:</p>
 <ul class="simple">
 <li><p>It is the application responsibility to ensure that any callback function is thread-safe</p></li>
 <li><p>Although executed asynchronously by a dedicated threads the callbacks should NOT include heavy operations (e.g. I/O) and/or blocking calls. Keep the work done by any callback to a minimum.</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="get-tensor-idiom">
+</section>
+</section>
+<section id="get-tensor-idiom">
 <h2>“get_tensor” Idiom<a class="headerlink" href="#get-tensor-idiom" title="Permalink to this headline">¶</a></h2>
-<p>Within the OpenVINO, each device may have different internal requirements on the memory padding, alignment, etc for intermediate tensors. The <strong>input/output tensors</strong> are also accessible by the application code. As every <code class="docutils literal notranslate"><span class="pre">ov::InferRequest</span></code> is created by the particular instance of the <code class="docutils literal notranslate"><span class="pre">ov::CompiledModel</span></code> (that is already device-specific) the requirements are respected and the requests’ input/output tensors are still device-friendly. Thus:</p>
+<p>Within the OpenVINO, each device may have different internal requirements on the memory padding, alignment, etc for intermediate tensors. The <strong>input/output tensors</strong> are also accessible by the application code. As every <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1InferRequest.html#doxid-classov-1-1-infer-request"><span class="std std-ref"><span class="pre">ov::InferRequest</span></span></a></code> is created by the particular instance of the <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1CompiledModel.html#doxid-classov-1-1-compiled-model"><span class="std std-ref"><span class="pre">ov::CompiledModel</span></span></a></code> (that is already device-specific) the requirements are respected and the requests’ input/output tensors are still device-friendly. Thus:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">get_tensor</span></code> (that offers the <code class="docutils literal notranslate"><span class="pre">data()</span></code> method to get a system-memory pointer to the tensor’s content), is a recommended way to populate the inference inputs (and read back the outputs) <strong>from/to the host memory</strong></p>
 <ul>
@@ -1912,8 +1919,8 @@
 </li>
 </ul>
 <p>Please consider the <a class="reference internal" href="openvino_docs_OV_UG_Infer_request.html#doxid-openvino-docs-o-v-u-g-infer-request"><span class="std std-ref">API examples</span></a> for <code class="docutils literal notranslate"><span class="pre">get_tensor</span></code> and <code class="docutils literal notranslate"><span class="pre">set_tensor</span></code>.</p>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -1944,7 +1951,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

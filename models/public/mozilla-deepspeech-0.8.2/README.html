@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>mozilla-deepspeech-0.8.2 &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../../../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -2106,17 +2113,17 @@
             
                 <div>
                   
-  <div class="section" id="mozilla-deepspeech-0-8-2">
+  <section id="mozilla-deepspeech-0-8-2">
 <h1>mozilla-deepspeech-0.8.2<a class="headerlink" href="#mozilla-deepspeech-0-8-2" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="use-case-and-high-level-description">
+<section id="use-case-and-high-level-description">
 <h2>Use Case and High-Level Description<a class="headerlink" href="#use-case-and-high-level-description" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">mozilla-deepspeech-0.8.2</span></code> model is a speech recognition neural network pre-trained by Mozilla
 based on DeepSpeech architecture (CTC decoder with beam search and n-gram language model)
 with changed neural network topology.</p>
 <p>For details on the original DeepSpeech, see <a class="reference external" href="https://arxiv.org/abs/1412.5567">paper</a>.</p>
 <p>For details on this model, see <a class="reference external" href="https://github.com/mozilla/DeepSpeech/releases/tag/v0.8.2">repository</a>.</p>
-</div>
-<div class="section" id="specification">
+</section>
+<section id="specification">
 <h2>Specification<a class="headerlink" href="#specification" title="Permalink to this headline">¶</a></h2>
 <table class="colwidths-auto table">
 <thead>
@@ -2142,8 +2149,8 @@ with changed neural network topology.</p>
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="accuracy">
+</section>
+<section id="accuracy">
 <h2>Accuracy<a class="headerlink" href="#accuracy" title="Permalink to this headline">¶</a></h2>
 <table class="colwidths-auto table">
 <thead>
@@ -2170,10 +2177,10 @@ with changed neural network topology.</p>
 <p><em>NB</em>: beam_width=32 is a low value for a CTC decoder, and was used to achieve reasonable evaluation time with Python CTC decoder in Accuracy Checker.
 Increasing beam_width improves WER metric and slows down decoding. Speech Recognition DeepSpeech Demo has a faster C++ CTC decoder module.</p>
 <p>Use <code class="docutils literal notranslate"><span class="pre">accuracy_check</span> <span class="pre">[...]</span> <span class="pre">--model_attributes</span> <span class="pre">&lt;path_to_folder_with_downloaded_model&gt;</span></code> to specify the path to additional model attributes. <code class="docutils literal notranslate"><span class="pre">path_to_folder_with_downloaded_model</span></code> is a path to the folder, where the current model is downloaded by <span class="xref myst">Model Downloader</span> tool.</p>
-</div>
-<div class="section" id="input">
+</section>
+<section id="input">
 <h2>Input<a class="headerlink" href="#input" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="original-model">
+<section id="original-model">
 <h3>Original Model<a class="headerlink" href="#original-model" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic">
 <li><p>Audio MFCC coefficients, name: <code class="docutils literal notranslate"><span class="pre">input_node</span></code>, shape: <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">16,</span> <span class="pre">19,</span> <span class="pre">26</span></code>, format: <code class="docutils literal notranslate"><span class="pre">B,</span> <span class="pre">N,</span> <span class="pre">T,</span> <span class="pre">C</span></code>, where:</p>
@@ -2191,8 +2198,8 @@ Increasing beam_width improves WER metric and slows down decoding. Speech Recogn
 </ol>
 <p>When splitting a long audio into chunks, these two last inputs must be fed with the corresponding outputs from the previous chunk.
 Chunk processing order must be from early to late audio positions.</p>
-</div>
-<div class="section" id="converted-model">
+</section>
+<section id="converted-model">
 <h3>Converted Model<a class="headerlink" href="#converted-model" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic">
 <li><p>Audio MFCC coefficients, name: <code class="docutils literal notranslate"><span class="pre">input_node</span></code>, shape: <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">16,</span> <span class="pre">19,</span> <span class="pre">26</span></code>, format: <code class="docutils literal notranslate"><span class="pre">B,</span> <span class="pre">N,</span> <span class="pre">T,</span> <span class="pre">C</span></code>, where:</p>
@@ -2209,11 +2216,11 @@ Chunk processing order must be from early to late audio positions.</p>
 </ol>
 <p>When splitting a long audio into chunks, these two last inputs must be fed with the corresponding outputs from the previous chunk.
 Chunk processing order must be from early to late audio positions.</p>
-</div>
-</div>
-<div class="section" id="output">
+</section>
+</section>
+<section id="output">
 <h2>Output<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id1">
+<section id="id1">
 <h3>Original Model<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic">
 <li><p>Per-frame probabilities (after softmax) for every symbol in the alphabet, name: <code class="docutils literal notranslate"><span class="pre">logits</span></code>, shape: <code class="docutils literal notranslate"><span class="pre">16,</span> <span class="pre">1,</span> <span class="pre">29</span></code>, format: <code class="docutils literal notranslate"><span class="pre">N,</span> <span class="pre">B,</span> <span class="pre">C</span></code>, where:</p>
@@ -2229,8 +2236,8 @@ The alphabet is: 0 = space, 1…26 = “a” to “z”, 27 = apostrophe, 28 = C
 <li><p>LSTM out-state vector, name: <code class="docutils literal notranslate"><span class="pre">new_state_c</span></code>, shape: <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">2048</span></code>, format: <code class="docutils literal notranslate"><span class="pre">B,</span> <span class="pre">C</span></code>. See Inputs.</p></li>
 <li><p>LSTM output vector, name: <code class="docutils literal notranslate"><span class="pre">new_state_h</span></code>, shape: <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">2048</span></code>, format: <code class="docutils literal notranslate"><span class="pre">B,</span> <span class="pre">C</span></code>. See Inputs.</p></li>
 </ol>
-</div>
-<div class="section" id="id2">
+</section>
+<section id="id2">
 <h3>Converted Model<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic">
 <li><p>Per-frame probabilities (after softmax) for every symbol in the alphabet, name: <code class="docutils literal notranslate"><span class="pre">logits</span></code>, shape: <code class="docutils literal notranslate"><span class="pre">16,</span> <span class="pre">1,</span> <span class="pre">29</span></code>, format: <code class="docutils literal notranslate"><span class="pre">N,</span> <span class="pre">B,</span> <span class="pre">C</span></code>, where:</p>
@@ -2246,9 +2253,9 @@ The alphabet is: 0 = space, 1…26 = “a” to “z”, 27 = apostrophe, 28 = C
 <li><p>LSTM out-state vector, name: <code class="docutils literal notranslate"><span class="pre">cudnn_lstm/rnn/multi_rnn_cell/cell_0/cudnn_compatible_lstm_cell/BlockLSTM/TensorIterator.2</span></code> (for <code class="docutils literal notranslate"><span class="pre">new_state_c</span></code>), shape: <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">2048</span></code>, format: <code class="docutils literal notranslate"><span class="pre">B,</span> <span class="pre">C</span></code>. See Inputs.</p></li>
 <li><p>LSTM output vector, name: <code class="docutils literal notranslate"><span class="pre">cudnn_lstm/rnn/multi_rnn_cell/cell_0/cudnn_compatible_lstm_cell/BlockLSTM/TensorIterator.1</span></code> (for <code class="docutils literal notranslate"><span class="pre">new_state_h</span></code>), shape: <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">2048</span></code>, format: <code class="docutils literal notranslate"><span class="pre">B,</span> <span class="pre">C</span></code>. See Inputs.</p></li>
 </ol>
-</div>
-</div>
-<div class="section" id="download-a-model-and-convert-it-into-openvino-ir-format">
+</section>
+</section>
+<section id="download-a-model-and-convert-it-into-openvino-ir-format">
 <h2>Download a Model and Convert it into OpenVINO™ IR Format<a class="headerlink" href="#download-a-model-and-convert-it-into-openvino-ir-format" title="Permalink to this headline">¶</a></h2>
 <p>You can download models and if necessary convert them into OpenVINO™ IR format using the <span class="xref myst">Model Downloader and other automation tools</span> as shown in the examples below.</p>
 <p>An example of using the Model Downloader:</p>
@@ -2259,21 +2266,21 @@ The alphabet is: 0 = space, 1…26 = “a” to “z”, 27 = apostrophe, 28 = C
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">omz_converter</span> <span class="o">--</span><span class="n">name</span> <span class="o">&lt;</span><span class="n">model_name</span><span class="o">&gt;</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="demo-usage">
+</section>
+<section id="demo-usage">
 <h2>Demo usage<a class="headerlink" href="#demo-usage" title="Permalink to this headline">¶</a></h2>
 <p>The model can be used in the following demos provided by the Open Model Zoo to show its capabilities:</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="../../../demos/speech_recognition_deepspeech_demo/python/README.html"><span class="doc std std-doc">Speech Recognition DeepSpeech Python* Demo</span></a></p></li>
 </ul>
-</div>
-<div class="section" id="legal-information">
+</section>
+<section id="legal-information">
 <h2>Legal Information<a class="headerlink" href="#legal-information" title="Permalink to this headline">¶</a></h2>
 <p>The original model is distributed under the
 <a class="reference external" href="https://raw.githubusercontent.com/mozilla/DeepSpeech/master/LICENSE">Mozilla Public License, Version 2.0</a>.
 A copy of the license is provided in <code class="docutils literal notranslate"><span class="pre">&lt;omz_dir&gt;/models/public/licenses/MPL-2.0-Mozilla-Deepspeech.txt</span></code>.</p>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -2304,7 +2311,7 @@ A copy of the license is provided in <code class="docutils literal notranslate">
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

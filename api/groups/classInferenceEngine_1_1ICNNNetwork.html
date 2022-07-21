@@ -1,0 +1,689 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>interface InferenceEngine::ICNNNetwork &#8212; OpenVINO™  documentation</title>
+    
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/blank.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/doxyrest-pygments.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <link href="../../_static/css/media/favicon.ico" rel="shortcut icon">
+    <link rel="stylesheet" href="../../_static/css/openvino_sphinx_theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/css/button.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/css/input.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/css/textfield.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/css/tabs.css" type="text/css" />
+    <script src="../../_static/js/openvino_sphinx_theme.js"></script>
+    <link rel="stylesheet" href="../../_static/css/viewer.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/0.5.7/chartjs-plugin-annotation.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-barchart-background@1.3.0/build/Plugin.Barchart.Background.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-deferred@1"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.1/papaparse.min.js"></script>
+    <script src="../../_static/js/viewer.min.js"></script>
+    <script src="/assets/versions_raw.js"></script>
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/tabs.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/js/custom.js"></script>
+    <script src="../../_static/js/graphs.js"></script>
+    <script src="../../_static/js/graphs_ov_tf.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/target-highlight.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <link rel="canonical" href="https://docs.openvino.ai/latest/api/groups/classInferenceEngine_1_1ICNNNetwork.html" />
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+      <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+
+<a class="navbar-brand" href="../../index.html">
+  <img src="../../_static/logo.svg" class="logo" alt="logo">
+</a>
+
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../pages/get_started.html">
+  Get Started
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../pages/documentation.html">
+  Documentation
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../tutorials.html">
+  Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api_reference.html">
+  API Reference
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../model_zoo.html">
+  Model Zoo
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../pages/resources.html">
+  Resources
+ </a>
+</li>
+
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/openvinotoolkit/openvino" rel="noopener" target="_blank" title="GitHub">
+            <span><i class="sst-github"></i></span>
+            <label class="sr-only">GitHub</label>
+          </a>
+        </li>
+</ul>
+      </div>
+      
+      <div class="navbar-end-item">
+        
+<div class="dropdown sst-dropdown sst-dropdown-navbar">
+  <button class="btn sst-btn dropdown-toggle" type="button" id="version-selector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+  <div class="dropdown-menu" aria-labelledby="version-selector">
+  </div>
+</div>
+      </div>
+      
+      <div class="navbar-end-item">
+        
+
+<div class="dropdown sst-dropdown sst-dropdown-navbar">
+  <button class="btn sst-btn dropdown-toggle" type="button" id="language-selector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">English</button>
+  <div class="dropdown-menu" aria-labelledby="language-selector">
+    
+      
+        <a class="dropdown-item font-weight-bold" href="/latest/api/groups/classInferenceEngine_1_1ICNNNetwork.html">English</a>
+      
+    
+      
+        <a  class="dropdown-item" href="/cn/latest/api/groups/classInferenceEngine_1_1ICNNNetwork.html">Chinese</a>
+      
+    
+  </div>
+</div>
+
+      </div>
+      
+    </div>
+  </div>
+</div>
+        <div id="collapse-nav-wrapper" class="container-xl">
+          <button id="collapse-nav" class="button bttn-prm button-size-m" type="button" data-toggle="collapse" data-target="#nav-tree" aria-expanded="false" aria-controls="nav-tree">
+            Documentation navigation <i class="fas fa-chevron-down"></i>
+          </button>
+        </div>
+      </nav>
+      <div class="transition-banner container-fluid alert alert-info alert-dismissible fade show" role="alert">
+        <p>OpenVINO 2022.1 introduces a new version of OpenVINO API (API 2.0). For more information on the changes and transition steps, see the <a href="https://docs.openvino.ai/latest/openvino_2_0_transition_guide.html">transition guide</a></p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar" id="nav-tree"><form class="searchForm bd-search d-flex align-items-center" action="../../search.html" method="get">
+    <i class="icon fas fa-search"></i>
+    <input type="search" class="form-control" name="query" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    
+  </div>
+</nav>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+              
+              <div class="toc-item">
+                
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#overview">
+   Overview
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#detailed-documentation">
+   Detailed Documentation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#typedefs">
+     Typedefs
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#methods">
+     Methods
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+</nav>
+              </div>
+              
+              <div class="toc-item">
+                <div class="tocsection download-docs">
+  <div class="dropdown sst-dropdown">
+    <button class="button bttn-prm button-size-m" data-display="static" type="button" id="download-options"
+      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Download Docs
+    </button>
+    <div class="dropdown-menu" aria-labelledby="download-options">
+      <a class="dropdown-item" href="#" onclick="window.print()">.pdf</a>
+      <a id="download-zip-btn" class="dropdown-item" href="#">.zip</a>
+    </div>
+  </div>
+</div>
+              </div>
+              
+            
+          </div>
+          
+
+          
+          
+              
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+
+<div class="tocsection editthispage">
+    <a href="None">
+        <i class="fas fa-pencil-alt"></i> Edit this page
+    </a>
+</div>
+
+            
+                <div>
+                  
+  <section id="interface-inferenceengine-icnnnetwork">
+<span id="doxid-class-inference-engine-1-1-i-c-n-n-network"></span><span id="index-0"></span><h1>interface InferenceEngine::ICNNNetwork<a class="headerlink" href="#interface-inferenceengine-icnnnetwork" title="Permalink to this headline">¶</a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>This is the main interface to describe the NN topology. <a class="reference internal" href="#details-class-inference-engine-1-1-i-c-n-n-network"><span class="std std-ref">More…</span></a></p>
+<div class="highlight doxyrest-overview-code-block"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;ie_icnn_network.hpp&gt;</span><span class="cp"></span>
+
+<span class="k">template</span> <span class="nl">ICNNNetwork</span><span class="p">:</span> <span class="k">public</span> <span class="n">std</span><span class="o">::</span><span class="n">enable_shared_from_this</span><span class="o">&lt;</span> <span class="n">ICNNNetwork</span> <span class="o">&gt;</span>
+<span class="p">{</span>
+    <span class="c1">// typedefs</span>
+
+    <span class="k">typedef</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">ICNNNetwork</span><span class="o">&gt;</span> <a class="reference internal" href="#doxid-class-inference-engine-1-1-i-c-n-n-network-1a05b6f650d23e571e03da46a3a89db633"><span class="std std-ref">Ptr</span></a><span></span><span class="p">;</span>
+    <span class="k">typedef</span> <span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span> <a class="reference internal" href="namespaceInferenceEngine.html#doxid-namespace-inference-engine-1a9400de686d3d0f48c30cd73d40e48576"><span class="std std-ref">SizeVector</span></a><span></span><span class="o">&gt;</span> <a class="reference internal" href="#doxid-class-inference-engine-1-1-i-c-n-n-network-1a8bcef7f638f6588a672a32080047ff1d"><span class="std std-ref">InputShapes</span></a><span></span><span class="p">;</span>
+
+    <span class="c1">// methods</span>
+
+    <span class="k">virtual</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><a class="reference internal" href="classngraph.html#doxid-classngraph-1a14d7fe7c605267b52c145579e12d2a5f"><span class="std std-ref">ngraph::Function</span></a><span></span><span class="o">&gt;</span> <a class="reference internal" href="#doxid-class-inference-engine-1-1-i-c-n-n-network-1a51f1716b731ff52310b9529df58b83df"><span class="std std-ref">getFunction</span></a><span></span><span class="p">()</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">virtual</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="k">const</span> <a class="reference internal" href="classngraph.html#doxid-classngraph-1a14d7fe7c605267b52c145579e12d2a5f"><span class="std std-ref">ngraph::Function</span></a><span></span><span class="o">&gt;</span> <a class="reference internal" href="#doxid-class-inference-engine-1-1-i-c-n-n-network-1a53f0671dbbe554466178186e96348818"><span class="std std-ref">getFunction</span></a><span></span><span class="p">()</span> <span class="k">const</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">virtual</span> <span class="kt">void</span> <a class="reference internal" href="#doxid-class-inference-engine-1-1-i-c-n-n-network-1a67b659f1a8fd1574bb1939ea3f672fad"><span class="std std-ref">getOutputsInfo</span></a><span></span><span class="p">(</span><a class="reference internal" href="namespaceInferenceEngine.html#doxid-namespace-inference-engine-1a76ce999f68455cf962a473718deb500c"><span class="std std-ref">OutputsDataMap</span></a><span></span><span class="o">&amp;</span> <span class="n">out</span><span class="p">)</span> <span class="k">const</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">virtual</span> <span class="kt">void</span> <a class="reference internal" href="#doxid-class-inference-engine-1-1-i-c-n-n-network-1ac0d904dcfd039972e04923f1e0befbdd"><span class="std std-ref">getInputsInfo</span></a><span></span><span class="p">(</span><a class="reference internal" href="namespaceInferenceEngine.html#doxid-namespace-inference-engine-1a08270747275eb79985154365aa782a2a"><span class="std std-ref">InputsDataMap</span></a><span></span><span class="o">&amp;</span> <span class="n">inputs</span><span class="p">)</span> <span class="k">const</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">virtual</span> <a class="reference internal" href="classInferenceEngine_1_1InputInfo.html#doxid-class-inference-engine-1-1-input-info-1a607e9d454a48136c3cae731cc5a140d2"><span class="std std-ref">InputInfo::Ptr</span></a><span></span> <a class="reference internal" href="#doxid-class-inference-engine-1-1-i-c-n-n-network-1ae952db225b323f5c809ded22c30da4ed"><span class="std std-ref">getInput</span></a><span></span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">inputName</span><span class="p">)</span> <span class="k">const</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">virtual</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <a class="reference internal" href="#doxid-class-inference-engine-1-1-i-c-n-n-network-1aafe6e2148a983b5e7f2b032ef9d610b3"><span class="std std-ref">getName</span></a><span></span><span class="p">()</span> <span class="k">const</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">virtual</span> <span class="kt">size_t</span> <a class="reference internal" href="#doxid-class-inference-engine-1-1-i-c-n-n-network-1ae6205636e448fe10f860012910f50ffd"><span class="std std-ref">layerCount</span></a><span></span><span class="p">()</span> <span class="k">const</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="k">virtual</span> <a class="reference internal" href="enumInferenceEngine_1_1StatusCode.html#doxid-namespace-inference-engine-1a2ce897aa6a353c071958fe379f5d6421"><span class="std std-ref">StatusCode</span></a><span></span> <a class="reference internal" href="#doxid-class-inference-engine-1-1-i-c-n-n-network-1a07f2f7ada6d7208710ae3dc144347df8"><span class="std std-ref">addOutput</span></a><span></span><span class="p">(</span>
+        <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">layerName</span><span class="p">,</span>
+        <span class="kt">size_t</span> <span class="n">outputIndex</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <a class="reference internal" href="structInferenceEngine_1_1ResponseDesc.html#doxid-struct-inference-engine-1-1-response-desc"><span class="std std-ref">ResponseDesc</span></a><span></span> <span class="err">\</span><span class="o">*</span> <span class="n">resp</span> <span class="o">=</span> <span class="k">nullptr</span>
+        <span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="k">virtual</span> <a class="reference internal" href="enumInferenceEngine_1_1StatusCode.html#doxid-namespace-inference-engine-1a2ce897aa6a353c071958fe379f5d6421"><span class="std std-ref">StatusCode</span></a><span></span> <a class="reference internal" href="#doxid-class-inference-engine-1-1-i-c-n-n-network-1ac29fc798d8a318f380624bd350b28501"><span class="std std-ref">setBatchSize</span></a><span></span><span class="p">(</span><span class="kt">size_t</span> <span class="n">size</span><span class="p">,</span> <a class="reference internal" href="structInferenceEngine_1_1ResponseDesc.html#doxid-struct-inference-engine-1-1-response-desc"><span class="std std-ref">ResponseDesc</span></a><span></span> <span class="err">\</span><span class="o">*</span> <span class="n">responseDesc</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">virtual</span> <span class="kt">size_t</span> <a class="reference internal" href="#doxid-class-inference-engine-1-1-i-c-n-n-network-1a42a783cf372dca11b615c6f28d5456cb"><span class="std std-ref">getBatchSize</span></a><span></span><span class="p">()</span> <span class="k">const</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">virtual</span> <a class="reference internal" href="enumInferenceEngine_1_1StatusCode.html#doxid-namespace-inference-engine-1a2ce897aa6a353c071958fe379f5d6421"><span class="std std-ref">StatusCode</span></a><span></span> <a class="reference internal" href="#doxid-class-inference-engine-1-1-i-c-n-n-network-1abcfd19bd3e69cbf69ed77285f748b1cf"><span class="std std-ref">reshape</span></a><span></span><span class="p">(</span><span class="k">const</span> <a class="reference internal" href="#doxid-class-inference-engine-1-1-i-c-n-n-network-1a8bcef7f638f6588a672a32080047ff1d"><span class="std std-ref">InputShapes</span></a><span></span><span class="o">&amp;</span> <span class="n">inputShapes</span><span class="p">,</span> <a class="reference internal" href="structInferenceEngine_1_1ResponseDesc.html#doxid-struct-inference-engine-1-1-response-desc"><span class="std std-ref">ResponseDesc</span></a><span></span> <span class="err">\</span><span class="o">*</span> <span class="n">resp</span><span class="p">);</span>
+
+    <span class="k">virtual</span> <a class="reference internal" href="enumInferenceEngine_1_1StatusCode.html#doxid-namespace-inference-engine-1a2ce897aa6a353c071958fe379f5d6421"><span class="std std-ref">StatusCode</span></a><span></span> <a class="reference internal" href="#doxid-class-inference-engine-1-1-i-c-n-n-network-1a91791651378668551ea48040b30b7459"><span class="std std-ref">reshape</span></a><span></span><span class="p">(</span>
+        <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span> <a class="reference internal" href="classov_1_1PartialShape.html#doxid-classov-1-1-partial-shape"><span class="std std-ref">ngraph::PartialShape</span></a><span></span><span class="o">&gt;&amp;</span> <span class="n">partialShapes</span><span class="p">,</span>
+        <a class="reference internal" href="structInferenceEngine_1_1ResponseDesc.html#doxid-struct-inference-engine-1-1-response-desc"><span class="std std-ref">ResponseDesc</span></a><span></span> <span class="err">\</span><span class="o">*</span> <span class="n">resp</span>
+        <span class="p">);</span>
+
+    <span class="k">virtual</span> <a class="reference internal" href="enumInferenceEngine_1_1StatusCode.html#doxid-namespace-inference-engine-1a2ce897aa6a353c071958fe379f5d6421"><span class="std std-ref">StatusCode</span></a><span></span> <a class="reference internal" href="#doxid-class-inference-engine-1-1-i-c-n-n-network-1acd12b5e9b9c6881ce33230a77b3031cf"><span class="std std-ref">serialize</span></a><span></span><span class="p">(</span>
+        <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">xmlPath</span><span class="p">,</span>
+        <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">binPath</span><span class="p">,</span>
+        <a class="reference internal" href="structInferenceEngine_1_1ResponseDesc.html#doxid-struct-inference-engine-1-1-response-desc"><span class="std std-ref">ResponseDesc</span></a><span></span> <span class="err">\</span><span class="o">*</span> <span class="n">resp</span>
+        <span class="p">)</span> <span class="k">const</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="k">virtual</span> <a class="reference internal" href="enumInferenceEngine_1_1StatusCode.html#doxid-namespace-inference-engine-1a2ce897aa6a353c071958fe379f5d6421"><span class="std std-ref">StatusCode</span></a><span></span> <a class="reference internal" href="#doxid-class-inference-engine-1-1-i-c-n-n-network-1a07dfb4ea0bcd5a3008fdc82535969d97"><span class="std std-ref">serialize</span></a><span></span><span class="p">(</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="n">xmlStream</span><span class="p">,</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="n">binStream</span><span class="p">,</span>
+        <a class="reference internal" href="structInferenceEngine_1_1ResponseDesc.html#doxid-struct-inference-engine-1-1-response-desc"><span class="std std-ref">ResponseDesc</span></a><span></span> <span class="err">\</span><span class="o">*</span> <span class="n">resp</span>
+        <span class="p">)</span> <span class="k">const</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="k">virtual</span> <a class="reference internal" href="enumInferenceEngine_1_1StatusCode.html#doxid-namespace-inference-engine-1a2ce897aa6a353c071958fe379f5d6421"><span class="std std-ref">StatusCode</span></a><span></span> <a class="reference internal" href="#doxid-class-inference-engine-1-1-i-c-n-n-network-1a1e678ce338cdfd9b0a056a55acb402ba"><span class="std std-ref">serialize</span></a><span></span><span class="p">(</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="n">xmlStream</span><span class="p">,</span>
+        <a class="reference internal" href="classInferenceEngine_1_1Blob.html#doxid-class-inference-engine-1-1-blob-1abb6c4f89181e2dd6d8a29ada2dfb4060"><span class="std std-ref">Blob::Ptr</span></a><span></span><span class="o">&amp;</span> <span class="n">binData</span><span class="p">,</span>
+        <a class="reference internal" href="structInferenceEngine_1_1ResponseDesc.html#doxid-struct-inference-engine-1-1-response-desc"><span class="std std-ref">ResponseDesc</span></a><span></span> <span class="err">\</span><span class="o">*</span> <span class="n">resp</span>
+        <span class="p">)</span> <span class="k">const</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="k">virtual</span> <a class="reference internal" href="enumInferenceEngine_1_1StatusCode.html#doxid-namespace-inference-engine-1a2ce897aa6a353c071958fe379f5d6421"><span class="std std-ref">StatusCode</span></a><span></span> <a class="reference internal" href="#doxid-class-inference-engine-1-1-i-c-n-n-network-1a9909922d0ba2139f1e6315d8d19f33e0"><span class="std std-ref">getOVNameForTensor</span></a><span></span><span class="p">(</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">ov_name</span><span class="p">,</span>
+        <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">orig_name</span><span class="p">,</span>
+        <a class="reference internal" href="structInferenceEngine_1_1ResponseDesc.html#doxid-struct-inference-engine-1-1-response-desc"><span class="std std-ref">ResponseDesc</span></a><span></span> <span class="err">\</span><span class="o">*</span> <span class="n">resp</span>
+        <span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+
+<span class="k">protected</span><span class="o">:</span>
+<span class="p">};</span></pre></div></div></section>
+<section id="detailed-documentation">
+<span id="details-class-inference-engine-1-1-i-c-n-n-network"></span><h2>Detailed Documentation<a class="headerlink" href="#detailed-documentation" title="Permalink to this headline">¶</a></h2>
+<p>This is the main interface to describe the NN topology.</p>
+<p>Deprecated Use <a class="reference internal" href="classInferenceEngine_1_1CNNNetwork.html#doxid-class-inference-engine-1-1-c-n-n-network"><span class="std std-ref">InferenceEngine::CNNNetwork</span></a> wrapper instead</p>
+<section id="typedefs">
+<h3>Typedefs<a class="headerlink" href="#typedefs" title="Permalink to this headline">¶</a></h3>
+<span class="target" id="doxid-class-inference-engine-1-1-i-c-n-n-network-1a05b6f650d23e571e03da46a3a89db633"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><span></span><span class="k">typedef</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">ICNNNetwork</span><span class="o">&gt;</span> <span class="n">Ptr</span></pre></div></div><p>A shared pointer to a <a class="reference internal" href="#doxid-class-inference-engine-1-1-i-c-n-n-network"><span class="std std-ref">ICNNNetwork</span></a> interface.</p>
+<p>Deprecated Use <a class="reference internal" href="classInferenceEngine_1_1CNNNetwork.html#doxid-class-inference-engine-1-1-c-n-n-network"><span class="std std-ref">InferenceEngine::CNNNetwork</span></a> wrapper instead</p>
+<span class="target" id="doxid-class-inference-engine-1-1-i-c-n-n-network-1a8bcef7f638f6588a672a32080047ff1d"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><span></span><span class="k">typedef</span> <span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span> <a class="reference internal" href="namespaceInferenceEngine.html#doxid-namespace-inference-engine-1a9400de686d3d0f48c30cd73d40e48576"><span class="std std-ref">SizeVector</span></a><span></span><span class="o">&gt;</span> <span class="n">InputShapes</span></pre></div></div><p>Map of pairs: name of corresponding data and its dimension.</p>
+<p>Deprecated Use <a class="reference internal" href="classInferenceEngine_1_1CNNNetwork.html#doxid-class-inference-engine-1-1-c-n-n-network"><span class="std std-ref">InferenceEngine::CNNNetwork</span></a> wrapper instead</p>
+</section>
+<section id="methods">
+<h3>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h3>
+<span class="target" id="doxid-class-inference-engine-1-1-i-c-n-n-network-1a51f1716b731ff52310b9529df58b83df"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><span></span><span class="k">virtual</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><a class="reference internal" href="classngraph.html#doxid-classngraph-1a14d7fe7c605267b52c145579e12d2a5f"><span class="std std-ref">ngraph::Function</span></a><span></span><span class="o">&gt;</span> <span class="n">getFunction</span><span class="p">()</span> <span class="o">=</span> <span class="mi">0</span></pre></div></div><p>Returns nGraph function.</p>
+<p>Deprecated Use <a class="reference internal" href="classInferenceEngine_1_1CNNNetwork.html#doxid-class-inference-engine-1-1-c-n-n-network"><span class="std std-ref">InferenceEngine::CNNNetwork</span></a> wrapper instead</p>
+<p class="rubric">Returns:</p>
+<p>nGraph function</p>
+<span class="target" id="doxid-class-inference-engine-1-1-i-c-n-n-network-1a53f0671dbbe554466178186e96348818"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><span></span><span class="k">virtual</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="k">const</span> <a class="reference internal" href="classngraph.html#doxid-classngraph-1a14d7fe7c605267b52c145579e12d2a5f"><span class="std std-ref">ngraph::Function</span></a><span></span><span class="o">&gt;</span> <span class="n">getFunction</span><span class="p">()</span> <span class="k">const</span> <span class="o">=</span> <span class="mi">0</span></pre></div></div><p>Returns constant nGraph function.</p>
+<p>Deprecated Use <a class="reference internal" href="classInferenceEngine_1_1CNNNetwork.html#doxid-class-inference-engine-1-1-c-n-n-network"><span class="std std-ref">InferenceEngine::CNNNetwork</span></a> wrapper instead</p>
+<p class="rubric">Returns:</p>
+<p>constant nGraph function</p>
+<span class="target" id="doxid-class-inference-engine-1-1-i-c-n-n-network-1a67b659f1a8fd1574bb1939ea3f672fad"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><span></span><span class="k">virtual</span> <span class="kt">void</span> <span class="n">getOutputsInfo</span><span class="p">(</span><a class="reference internal" href="namespaceInferenceEngine.html#doxid-namespace-inference-engine-1a76ce999f68455cf962a473718deb500c"><span class="std std-ref">OutputsDataMap</span></a><span></span><span class="o">&amp;</span> <span class="n">out</span><span class="p">)</span> <span class="k">const</span> <span class="o">=</span> <span class="mi">0</span></pre></div></div><p>Gets the network output <a class="reference internal" href="classInferenceEngine_1_1Data.html#doxid-class-inference-engine-1-1-data"><span class="std std-ref">Data</span></a> node information. The received info is stored in the given <a class="reference internal" href="classInferenceEngine_1_1Data.html#doxid-class-inference-engine-1-1-data"><span class="std std-ref">Data</span></a> node.</p>
+<p>Deprecated Use <a class="reference internal" href="classInferenceEngine_1_1CNNNetwork.html#doxid-class-inference-engine-1-1-c-n-n-network"><span class="std std-ref">InferenceEngine::CNNNetwork</span></a> wrapper instead</p>
+<p>For single and multiple outputs networks.</p>
+<p>This method need to be called to find out OpenVINO output names for using them later when calling <a class="reference internal" href="classInferenceEngine_1_1InferRequest.html#doxid-class-inference-engine-1-1-infer-request-1a9601a4cda3f309181af34feedf1b914c"><span class="std std-ref">InferenceEngine::InferRequest::GetBlob</span></a> or <a class="reference internal" href="classInferenceEngine_1_1InferRequest.html#doxid-class-inference-engine-1-1-infer-request-1a27fb179e3bae652d76076965fd2a5653"><span class="std std-ref">InferenceEngine::InferRequest::SetBlob</span></a></p>
+<p>If you want to use framework names, you can use <a class="reference internal" href="#doxid-class-inference-engine-1-1-i-c-n-n-network-1a9909922d0ba2139f1e6315d8d19f33e0"><span class="std std-ref">InferenceEngine::ICNNNetwork::getOVNameForTensor</span></a> method to map framework names to OpenVINO names</p>
+<p class="rubric">Parameters:</p>
+<table class="colwidths-given table">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>out</p></td>
+<td><p>Reference to the OutputsDataMap object</p></td>
+</tr>
+</tbody>
+</table>
+<span class="target" id="doxid-class-inference-engine-1-1-i-c-n-n-network-1ac0d904dcfd039972e04923f1e0befbdd"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><span></span><span class="k">virtual</span> <span class="kt">void</span> <span class="n">getInputsInfo</span><span class="p">(</span><a class="reference internal" href="namespaceInferenceEngine.html#doxid-namespace-inference-engine-1a08270747275eb79985154365aa782a2a"><span class="std std-ref">InputsDataMap</span></a><span></span><span class="o">&amp;</span> <span class="n">inputs</span><span class="p">)</span> <span class="k">const</span> <span class="o">=</span> <span class="mi">0</span></pre></div></div><p>Gets the network input <a class="reference internal" href="classInferenceEngine_1_1Data.html#doxid-class-inference-engine-1-1-data"><span class="std std-ref">Data</span></a> node information. The received info is stored in the given InputsDataMap object.</p>
+<p>Deprecated Use <a class="reference internal" href="classInferenceEngine_1_1CNNNetwork.html#doxid-class-inference-engine-1-1-c-n-n-network"><span class="std std-ref">InferenceEngine::CNNNetwork</span></a> wrapper instead</p>
+<p>For single and multiple inputs networks. This method need to be called to find out OpenVINO input names for using them later when calling <a class="reference internal" href="classInferenceEngine_1_1InferRequest.html#doxid-class-inference-engine-1-1-infer-request-1a27fb179e3bae652d76076965fd2a5653"><span class="std std-ref">InferenceEngine::InferRequest::SetBlob</span></a></p>
+<p>If you want to use framework names, you can use <a class="reference internal" href="#doxid-class-inference-engine-1-1-i-c-n-n-network-1a9909922d0ba2139f1e6315d8d19f33e0"><span class="std std-ref">InferenceEngine::ICNNNetwork::getOVNameForTensor</span></a> method to map framework names to OpenVINO names</p>
+<p class="rubric">Parameters:</p>
+<table class="colwidths-given table">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>inputs</p></td>
+<td><p>Reference to InputsDataMap object.</p></td>
+</tr>
+</tbody>
+</table>
+<span class="target" id="doxid-class-inference-engine-1-1-i-c-n-n-network-1ae952db225b323f5c809ded22c30da4ed"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><span></span><span class="k">virtual</span> <a class="reference internal" href="classInferenceEngine_1_1InputInfo.html#doxid-class-inference-engine-1-1-input-info-1a607e9d454a48136c3cae731cc5a140d2"><span class="std std-ref">InputInfo::Ptr</span></a><span></span> <span class="n">getInput</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">inputName</span><span class="p">)</span> <span class="k">const</span> <span class="o">=</span> <span class="mi">0</span></pre></div></div><p>Returns information on certain input pointed by inputName.</p>
+<p>Deprecated Use <a class="reference internal" href="classInferenceEngine_1_1CNNNetwork.html#doxid-class-inference-engine-1-1-c-n-n-network"><span class="std std-ref">InferenceEngine::CNNNetwork</span></a> wrapper instead</p>
+<p class="rubric">Parameters:</p>
+<table class="colwidths-given table">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>inputName</p></td>
+<td><p>Name of input layer to get info on</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Returns:</p>
+<p>A smart pointer to the input information</p>
+<span class="target" id="doxid-class-inference-engine-1-1-i-c-n-n-network-1aafe6e2148a983b5e7f2b032ef9d610b3"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><span></span><span class="k">virtual</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">getName</span><span class="p">()</span> <span class="k">const</span> <span class="o">=</span> <span class="mi">0</span></pre></div></div><p>Returns the network name.</p>
+<p>Deprecated Use <a class="reference internal" href="classInferenceEngine_1_1CNNNetwork.html#doxid-class-inference-engine-1-1-c-n-n-network"><span class="std std-ref">InferenceEngine::CNNNetwork</span></a> wrapper instead</p>
+<p class="rubric">Returns:</p>
+<p>Network name</p>
+<span class="target" id="doxid-class-inference-engine-1-1-i-c-n-n-network-1ae6205636e448fe10f860012910f50ffd"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><span></span><span class="k">virtual</span> <span class="kt">size_t</span> <span class="n">layerCount</span><span class="p">()</span> <span class="k">const</span> <span class="o">=</span> <span class="mi">0</span></pre></div></div><p>Returns the number of layers in the network as an integer value.</p>
+<p>Deprecated Use <a class="reference internal" href="classInferenceEngine_1_1CNNNetwork.html#doxid-class-inference-engine-1-1-c-n-n-network"><span class="std std-ref">InferenceEngine::CNNNetwork</span></a> wrapper instead</p>
+<p class="rubric">Returns:</p>
+<p>The number of layers as an integer value</p>
+<span class="target" id="doxid-class-inference-engine-1-1-i-c-n-n-network-1a07f2f7ada6d7208710ae3dc144347df8"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><span></span><span class="k">virtual</span> <a class="reference internal" href="enumInferenceEngine_1_1StatusCode.html#doxid-namespace-inference-engine-1a2ce897aa6a353c071958fe379f5d6421"><span class="std std-ref">StatusCode</span></a><span></span> <span class="n">addOutput</span><span class="p">(</span>
+    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">layerName</span><span class="p">,</span>
+    <span class="kt">size_t</span> <span class="n">outputIndex</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <a class="reference internal" href="structInferenceEngine_1_1ResponseDesc.html#doxid-struct-inference-engine-1-1-response-desc"><span class="std std-ref">ResponseDesc</span></a><span></span> <span class="err">\</span><span class="o">*</span> <span class="n">resp</span> <span class="o">=</span> <span class="k">nullptr</span>
+    <span class="p">)</span> <span class="o">=</span> <span class="mi">0</span></pre></div></div><p>Adds output to the layer.</p>
+<p>Deprecated Use <a class="reference internal" href="classInferenceEngine_1_1CNNNetwork.html#doxid-class-inference-engine-1-1-c-n-n-network"><span class="std std-ref">InferenceEngine::CNNNetwork</span></a> wrapper instead</p>
+<p class="rubric">Parameters:</p>
+<table class="colwidths-given table">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>layerName</p></td>
+<td><p>Name of the layer</p></td>
+</tr>
+<tr class="row-even"><td><p>outputIndex</p></td>
+<td><p>Index of the output</p></td>
+</tr>
+<tr class="row-odd"><td><p>resp</p></td>
+<td><p>Response message</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Returns:</p>
+<p>Status code of the operation</p>
+<span class="target" id="doxid-class-inference-engine-1-1-i-c-n-n-network-1ac29fc798d8a318f380624bd350b28501"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><span></span><span class="k">virtual</span> <a class="reference internal" href="enumInferenceEngine_1_1StatusCode.html#doxid-namespace-inference-engine-1a2ce897aa6a353c071958fe379f5d6421"><span class="std std-ref">StatusCode</span></a><span></span> <span class="n">setBatchSize</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">size</span><span class="p">,</span> <a class="reference internal" href="structInferenceEngine_1_1ResponseDesc.html#doxid-struct-inference-engine-1-1-response-desc"><span class="std std-ref">ResponseDesc</span></a><span></span> <span class="err">\</span><span class="o">*</span> <span class="n">responseDesc</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span></pre></div></div><p>Changes the inference batch size.</p>
+<p>Deprecated Use <a class="reference internal" href="classInferenceEngine_1_1CNNNetwork.html#doxid-class-inference-engine-1-1-c-n-n-network"><span class="std std-ref">InferenceEngine::CNNNetwork</span></a> wrapper instead</p>
+<p>There are several limitations and it’s not recommended to use it. Set batch to the input shape and call <a class="reference internal" href="#doxid-class-inference-engine-1-1-i-c-n-n-network-1abcfd19bd3e69cbf69ed77285f748b1cf"><span class="std std-ref">ICNNNetwork::reshape</span></a>.</p>
+<p>Current implementation of the function sets batch size to the first dimension of all layers in the networks. Before calling it make sure that all your layers have batch in the first dimension, otherwise the method works incorrectly. This limitation is resolved via shape inference feature by using <a class="reference internal" href="#doxid-class-inference-engine-1-1-i-c-n-n-network-1abcfd19bd3e69cbf69ed77285f748b1cf"><span class="std std-ref">InferenceEngine::ICNNNetwork::reshape</span></a> method. To read more refer to the Shape Inference section in documentation</p>
+<p>Current implementation of the function sets batch size to the first dimension of all layers in the networks. Before calling it make sure that all your layers have batch in the first dimension, otherwise the method works incorrectly. This limitation is resolved via shape inference feature by using <a class="reference internal" href="#doxid-class-inference-engine-1-1-i-c-n-n-network-1abcfd19bd3e69cbf69ed77285f748b1cf"><span class="std std-ref">InferenceEngine::ICNNNetwork::reshape</span></a> method. To read more refer to the Shape Inference section in documentation</p>
+<p class="rubric">Parameters:</p>
+<table class="colwidths-given table">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>size</p></td>
+<td><p>Size of batch to set</p></td>
+</tr>
+<tr class="row-even"><td><p>responseDesc</p></td>
+<td><p>Pointer to the response message that holds a description of an error if any occurred</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Returns:</p>
+<p>Status code of the operation</p>
+<span class="target" id="doxid-class-inference-engine-1-1-i-c-n-n-network-1a42a783cf372dca11b615c6f28d5456cb"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><span></span><span class="k">virtual</span> <span class="kt">size_t</span> <span class="n">getBatchSize</span><span class="p">()</span> <span class="k">const</span> <span class="o">=</span> <span class="mi">0</span></pre></div></div><p>Gets the inference batch size.</p>
+<p>Deprecated Use <a class="reference internal" href="classInferenceEngine_1_1CNNNetwork.html#doxid-class-inference-engine-1-1-c-n-n-network"><span class="std std-ref">InferenceEngine::CNNNetwork</span></a> wrapper instead</p>
+<p class="rubric">Returns:</p>
+<p>The size of batch as a size_t value</p>
+<span class="target" id="doxid-class-inference-engine-1-1-i-c-n-n-network-1abcfd19bd3e69cbf69ed77285f748b1cf"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><span></span><span class="k">virtual</span> <a class="reference internal" href="enumInferenceEngine_1_1StatusCode.html#doxid-namespace-inference-engine-1a2ce897aa6a353c071958fe379f5d6421"><span class="std std-ref">StatusCode</span></a><span></span> <span class="n">reshape</span><span class="p">(</span><span class="k">const</span> <a class="reference internal" href="#doxid-class-inference-engine-1-1-i-c-n-n-network-1a8bcef7f638f6588a672a32080047ff1d"><span class="std std-ref">InputShapes</span></a><span></span><span class="o">&amp;</span> <span class="n">inputShapes</span><span class="p">,</span> <a class="reference internal" href="structInferenceEngine_1_1ResponseDesc.html#doxid-struct-inference-engine-1-1-response-desc"><span class="std std-ref">ResponseDesc</span></a><span></span> <span class="err">\</span><span class="o">*</span> <span class="n">resp</span><span class="p">)</span></pre></div></div><p>Run shape inference with new input shapes for the network.</p>
+<p>Deprecated Use <a class="reference internal" href="classInferenceEngine_1_1CNNNetwork.html#doxid-class-inference-engine-1-1-c-n-n-network"><span class="std std-ref">InferenceEngine::CNNNetwork</span></a> wrapper instead</p>
+<p class="rubric">Parameters:</p>
+<table class="colwidths-given table">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>inputShapes</p></td>
+<td><ul class="simple">
+<li><p>map of pairs: name of corresponding data and its dimension.</p></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><p>resp</p></td>
+<td><p>Pointer to the response message that holds a description of an error if any occurred</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Returns:</p>
+<p>Status code of the operation</p>
+<span class="target" id="doxid-class-inference-engine-1-1-i-c-n-n-network-1a91791651378668551ea48040b30b7459"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><span></span><span class="k">virtual</span> <a class="reference internal" href="enumInferenceEngine_1_1StatusCode.html#doxid-namespace-inference-engine-1a2ce897aa6a353c071958fe379f5d6421"><span class="std std-ref">StatusCode</span></a><span></span> <span class="n">reshape</span><span class="p">(</span>
+    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span> <a class="reference internal" href="classov_1_1PartialShape.html#doxid-classov-1-1-partial-shape"><span class="std std-ref">ngraph::PartialShape</span></a><span></span><span class="o">&gt;&amp;</span> <span class="n">partialShapes</span><span class="p">,</span>
+    <a class="reference internal" href="structInferenceEngine_1_1ResponseDesc.html#doxid-struct-inference-engine-1-1-response-desc"><span class="std std-ref">ResponseDesc</span></a><span></span> <span class="err">\</span><span class="o">*</span> <span class="n">resp</span>
+    <span class="p">)</span></pre></div></div><p>Run shape inference with new input shapes for the network.</p>
+<p>Deprecated Use <a class="reference internal" href="classInferenceEngine_1_1CNNNetwork.html#doxid-class-inference-engine-1-1-c-n-n-network"><span class="std std-ref">InferenceEngine::CNNNetwork</span></a> wrapper instead</p>
+<p class="rubric">Parameters:</p>
+<table class="colwidths-given table">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>partialShapes</p></td>
+<td><ul class="simple">
+<li><p>map of pairs: name of corresponding data and its dimension.</p></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><p>resp</p></td>
+<td><p>Pointer to the response message that holds a description of an error if any occurred</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Returns:</p>
+<p>Status code of the operation</p>
+<span class="target" id="doxid-class-inference-engine-1-1-i-c-n-n-network-1acd12b5e9b9c6881ce33230a77b3031cf"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><span></span><span class="k">virtual</span> <a class="reference internal" href="enumInferenceEngine_1_1StatusCode.html#doxid-namespace-inference-engine-1a2ce897aa6a353c071958fe379f5d6421"><span class="std std-ref">StatusCode</span></a><span></span> <span class="n">serialize</span><span class="p">(</span>
+    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">xmlPath</span><span class="p">,</span>
+    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">binPath</span><span class="p">,</span>
+    <a class="reference internal" href="structInferenceEngine_1_1ResponseDesc.html#doxid-struct-inference-engine-1-1-response-desc"><span class="std std-ref">ResponseDesc</span></a><span></span> <span class="err">\</span><span class="o">*</span> <span class="n">resp</span>
+    <span class="p">)</span> <span class="k">const</span> <span class="o">=</span> <span class="mi">0</span></pre></div></div><p>Serialize network to IR and weights files.</p>
+<p>Deprecated Use <a class="reference internal" href="classInferenceEngine_1_1CNNNetwork.html#doxid-class-inference-engine-1-1-c-n-n-network"><span class="std std-ref">InferenceEngine::CNNNetwork</span></a> wrapper instead</p>
+<p class="rubric">Parameters:</p>
+<table class="colwidths-given table">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>xmlPath</p></td>
+<td><p>Path to output IR file.</p></td>
+</tr>
+<tr class="row-even"><td><p>binPath</p></td>
+<td><p>Path to output weights file.</p></td>
+</tr>
+<tr class="row-odd"><td><p>resp</p></td>
+<td><p>Pointer to the response message that holds a description of an error if any occurred</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Returns:</p>
+<p>Status code of the operation</p>
+<span class="target" id="doxid-class-inference-engine-1-1-i-c-n-n-network-1a07dfb4ea0bcd5a3008fdc82535969d97"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><span></span><span class="k">virtual</span> <a class="reference internal" href="enumInferenceEngine_1_1StatusCode.html#doxid-namespace-inference-engine-1a2ce897aa6a353c071958fe379f5d6421"><span class="std std-ref">StatusCode</span></a><span></span> <span class="n">serialize</span><span class="p">(</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="n">xmlStream</span><span class="p">,</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="n">binStream</span><span class="p">,</span>
+    <a class="reference internal" href="structInferenceEngine_1_1ResponseDesc.html#doxid-struct-inference-engine-1-1-response-desc"><span class="std std-ref">ResponseDesc</span></a><span></span> <span class="err">\</span><span class="o">*</span> <span class="n">resp</span>
+    <span class="p">)</span> <span class="k">const</span> <span class="o">=</span> <span class="mi">0</span></pre></div></div><p>Serialize network to IR and weights files.</p>
+<p>Deprecated Use <a class="reference internal" href="classInferenceEngine_1_1CNNNetwork.html#doxid-class-inference-engine-1-1-c-n-n-network"><span class="std std-ref">InferenceEngine::CNNNetwork</span></a> wrapper instead</p>
+<p class="rubric">Parameters:</p>
+<table class="colwidths-given table">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>xmlStream</p></td>
+<td><p>A stream for xml content (.xml file)</p></td>
+</tr>
+<tr class="row-even"><td><p>binStream</p></td>
+<td><p>A stream for weights content (.bin file)</p></td>
+</tr>
+<tr class="row-odd"><td><p>resp</p></td>
+<td><p>Pointer to the response message that holds a description of an error if any occurred</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Returns:</p>
+<p>Status code of the operation</p>
+<span class="target" id="doxid-class-inference-engine-1-1-i-c-n-n-network-1a1e678ce338cdfd9b0a056a55acb402ba"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><span></span><span class="k">virtual</span> <a class="reference internal" href="enumInferenceEngine_1_1StatusCode.html#doxid-namespace-inference-engine-1a2ce897aa6a353c071958fe379f5d6421"><span class="std std-ref">StatusCode</span></a><span></span> <span class="n">serialize</span><span class="p">(</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="n">xmlStream</span><span class="p">,</span>
+    <a class="reference internal" href="classInferenceEngine_1_1Blob.html#doxid-class-inference-engine-1-1-blob-1abb6c4f89181e2dd6d8a29ada2dfb4060"><span class="std std-ref">Blob::Ptr</span></a><span></span><span class="o">&amp;</span> <span class="n">binData</span><span class="p">,</span>
+    <a class="reference internal" href="structInferenceEngine_1_1ResponseDesc.html#doxid-struct-inference-engine-1-1-response-desc"><span class="std std-ref">ResponseDesc</span></a><span></span> <span class="err">\</span><span class="o">*</span> <span class="n">resp</span>
+    <span class="p">)</span> <span class="k">const</span> <span class="o">=</span> <span class="mi">0</span></pre></div></div><p>Serialize network to IR and weights files.</p>
+<p>Deprecated Use <a class="reference internal" href="classInferenceEngine_1_1CNNNetwork.html#doxid-class-inference-engine-1-1-c-n-n-network"><span class="std std-ref">InferenceEngine::CNNNetwork</span></a> wrapper instead</p>
+<p class="rubric">Parameters:</p>
+<table class="colwidths-given table">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>xmlStream</p></td>
+<td><p>A stream for xml content (.xml file)</p></td>
+</tr>
+<tr class="row-even"><td><p>binData</p></td>
+<td><p>A blob for weights content (.bin file)</p></td>
+</tr>
+<tr class="row-odd"><td><p>resp</p></td>
+<td><p>Pointer to the response message that holds a description of an error if any occurred</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Returns:</p>
+<p>Status code of the operation</p>
+<span class="target" id="doxid-class-inference-engine-1-1-i-c-n-n-network-1a9909922d0ba2139f1e6315d8d19f33e0"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><span></span><span class="k">virtual</span> <a class="reference internal" href="enumInferenceEngine_1_1StatusCode.html#doxid-namespace-inference-engine-1a2ce897aa6a353c071958fe379f5d6421"><span class="std std-ref">StatusCode</span></a><span></span> <span class="n">getOVNameForTensor</span><span class="p">(</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">ov_name</span><span class="p">,</span>
+    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">orig_name</span><span class="p">,</span>
+    <a class="reference internal" href="structInferenceEngine_1_1ResponseDesc.html#doxid-struct-inference-engine-1-1-response-desc"><span class="std std-ref">ResponseDesc</span></a><span></span> <span class="err">\</span><span class="o">*</span> <span class="n">resp</span>
+    <span class="p">)</span> <span class="k">const</span></pre></div></div><p>Methods maps framework tensor name to OpenVINO name.</p>
+<p>Deprecated Use <a class="reference internal" href="classInferenceEngine_1_1CNNNetwork.html#doxid-class-inference-engine-1-1-c-n-n-network"><span class="std std-ref">InferenceEngine::CNNNetwork</span></a> wrapper instead</p>
+<p class="rubric">Parameters:</p>
+<table class="colwidths-given table">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>ov_name</p></td>
+<td><p>OpenVINO name</p></td>
+</tr>
+<tr class="row-even"><td><p>orig_name</p></td>
+<td><p>Framework tensor name</p></td>
+</tr>
+<tr class="row-odd"><td><p>resp</p></td>
+<td><p>Pointer to the response message that holds a description of an error if any occurred</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Returns:</p>
+<p>Status code of the operation</p>
+</section>
+</section>
+</section>
+
+
+                </div>
+            
+            
+                <div class='prev-next-bottom'>
+                  
+
+                </div>
+            
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+<footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2021, Intel®.<br>
+</p>
+    </div>
+    
+    <div class="footer-item">
+      <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

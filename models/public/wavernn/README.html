@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>wavernn (composite) &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../../../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -2120,19 +2127,19 @@
             
                 <div>
                   
-  <div class="section" id="wavernn-composite">
+  <section id="wavernn-composite">
 <h1>wavernn (composite)<a class="headerlink" href="#wavernn-composite" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="use-case-and-high-level-description">
+<section id="use-case-and-high-level-description">
 <h2>Use Case and High-Level Description<a class="headerlink" href="#use-case-and-high-level-description" title="Permalink to this headline">¶</a></h2>
 <p>WaveRNN is a model for the text-to-speech task originally trained in PyTorch*
 then converted to ONNX* format. The model was trained on LJSpeech dataset.
 WaveRNN performs waveform regression from mel-spectrogram.
 For details see <a class="reference external" href="https://arxiv.org/abs/1703.10135">paper</a>, <a class="reference external" href="https://github.com/as-ideas/ForwardTacotron">repository</a>.</p>
-</div>
-<div class="section" id="onnx-models">
+</section>
+<section id="onnx-models">
 <h2>ONNX Models<a class="headerlink" href="#onnx-models" title="Permalink to this headline">¶</a></h2>
 <p>We provide pre-trained models in ONNX format for user convenience.</p>
-<div class="section" id="steps-to-reproduce-pytorch-to-onnx-conversion">
+<section id="steps-to-reproduce-pytorch-to-onnx-conversion">
 <h3>Steps to Reproduce PyTorch to ONNX Conversion<a class="headerlink" href="#steps-to-reproduce-pytorch-to-onnx-conversion" title="Permalink to this headline">¶</a></h3>
 <p>Model is provided in ONNX format, which was obtained by the following steps.</p>
 <ol class="arabic simple">
@@ -2165,9 +2172,9 @@ unzip ljspeech.wavernn.mol.800k.zip -d pretrained <span class="o">&amp;&amp;</sp
 </pre></div>
 </div>
 <p>Note: by the reason of autoregressive nature of the network, the model is divided into two parts: <code class="docutils literal notranslate"><span class="pre">wavernn_upsampler.onnx,</span> <span class="pre">wavernn_rnn.onnx</span></code>. The first part expands feature map by the time dimension, and the second one iteratively processes every column in expanded feature map.</p>
-</div>
-</div>
-<div class="section" id="composite-model-specification">
+</section>
+</section>
+<section id="composite-model-specification">
 <h2>Composite model specification<a class="headerlink" href="#composite-model-specification" title="Permalink to this headline">¶</a></h2>
 <table class="colwidths-auto table">
 <thead>
@@ -2181,12 +2188,12 @@ unzip ljspeech.wavernn.mol.800k.zip -d pretrained <span class="o">&amp;&amp;</sp
 </tr>
 </tbody>
 </table>
-<div class="section" id="accuracy">
+<section id="accuracy">
 <h3>Accuracy<a class="headerlink" href="#accuracy" title="Permalink to this headline">¶</a></h3>
 <p>Subjective</p>
-</div>
-</div>
-<div class="section" id="wavernn-upsampler-model-specification">
+</section>
+</section>
+<section id="wavernn-upsampler-model-specification">
 <h2>wavernn-upsampler model specification<a class="headerlink" href="#wavernn-upsampler-model-specification" title="Permalink to this headline">¶</a></h2>
 <p>The wavernn-upsampler model accepts mel-spectrogram and produces two feature map: the first one expands mel-spectrogram in one step using Upsample layer and sequence of convolutions, and the second one expands mel-spectrogram in three steps using sequence of Upsample layers and of convolutions.</p>
 <table class="colwidths-auto table">
@@ -2204,7 +2211,7 @@ unzip ljspeech.wavernn.mol.800k.zip -d pretrained <span class="o">&amp;&amp;</sp
 </tr>
 </tbody>
 </table>
-<div class="section" id="input">
+<section id="input">
 <h3>Input<a class="headerlink" href="#input" title="Permalink to this headline">¶</a></h3>
 <p>Mel-spectrogram, name: <code class="docutils literal notranslate"><span class="pre">mels</span></code>, shape: <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">200,</span> <span class="pre">80</span></code>, format: <code class="docutils literal notranslate"><span class="pre">B,</span> <span class="pre">T,</span> <span class="pre">C</span></code>, where:</p>
 <ul class="simple">
@@ -2212,8 +2219,8 @@ unzip ljspeech.wavernn.mol.800k.zip -d pretrained <span class="o">&amp;&amp;</sp
 <li><p><code class="docutils literal notranslate"><span class="pre">T</span></code> - time in mel-spectrogram</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">C</span></code> - number of mels in mel-spectrogram</p></li>
 </ul>
-</div>
-<div class="section" id="output">
+</section>
+<section id="output">
 <h3>Output<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic simple">
 <li><p>Processed mel-spectrogram, name: <code class="docutils literal notranslate"><span class="pre">aux</span></code>, shape: <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">53888,</span> <span class="pre">128</span></code>, format: <code class="docutils literal notranslate"><span class="pre">B,</span> <span class="pre">T,</span> <span class="pre">C</span></code>, where:</p>
@@ -2231,9 +2238,9 @@ unzip ljspeech.wavernn.mol.800k.zip -d pretrained <span class="o">&amp;&amp;</sp
 </ul>
 </li>
 </ol>
-</div>
-</div>
-<div class="section" id="wavernn-rnn-model-specification">
+</section>
+</section>
+<section id="wavernn-rnn-model-specification">
 <h2>wavernn-rnn model specification<a class="headerlink" href="#wavernn-rnn-model-specification" title="Permalink to this headline">¶</a></h2>
 <p>The wavernn-rnn model accepts two feature maps from wavernn-upsampler and produces parameters for mixture of logistics distribution that is used for audio regression by B samples per forward step, where B is batch size.</p>
 <table class="colwidths-auto table">
@@ -2251,7 +2258,7 @@ unzip ljspeech.wavernn.mol.800k.zip -d pretrained <span class="o">&amp;&amp;</sp
 </tr>
 </tbody>
 </table>
-<div class="section" id="id1">
+<section id="id1">
 <h3>Input<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic simple">
 <li><p>Time slice in <code class="docutils literal notranslate"><span class="pre">upsampled_mels</span></code>, name: <code class="docutils literal notranslate"><span class="pre">m_t</span></code>, shape: <code class="docutils literal notranslate"><span class="pre">B,</span> <span class="pre">80</span></code></p></li>
@@ -2264,8 +2271,8 @@ unzip ljspeech.wavernn.mol.800k.zip -d pretrained <span class="o">&amp;&amp;</sp
 <li><p>Previous prediction for autoregression (initially equal to zero), name: <code class="docutils literal notranslate"><span class="pre">x</span></code>, shape: <code class="docutils literal notranslate"><span class="pre">B,</span> <span class="pre">1</span></code></p></li>
 </ol>
 <p>Note: <code class="docutils literal notranslate"><span class="pre">B</span></code> - batch size.</p>
-</div>
-<div class="section" id="id2">
+</section>
+<section id="id2">
 <h3>Output<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic simple">
 <li><p>Hidden state for GRU layers in autoregression, name: <code class="docutils literal notranslate"><span class="pre">h1</span></code>, shape: <code class="docutils literal notranslate"><span class="pre">B,</span> <span class="pre">512</span></code></p></li>
@@ -2273,9 +2280,9 @@ unzip ljspeech.wavernn.mol.800k.zip -d pretrained <span class="o">&amp;&amp;</sp
 <li><p>Parameters for mixture of logistics distribution, name: <code class="docutils literal notranslate"><span class="pre">logits</span></code>, shape: <code class="docutils literal notranslate"><span class="pre">B,</span> <span class="pre">30</span></code>. Can be divided to parameters of mixture of logistic distributions: probabilities = logits[:, :10], means = logits[:, 10:20], scales = logits[:, 20:30]</p></li>
 </ol>
 <p>Note: <code class="docutils literal notranslate"><span class="pre">B</span></code> - batch size.</p>
-</div>
-</div>
-<div class="section" id="download-a-model-and-convert-it-into-openvino-ir-format">
+</section>
+</section>
+<section id="download-a-model-and-convert-it-into-openvino-ir-format">
 <h2>Download a Model and Convert it into OpenVINO™ IR Format<a class="headerlink" href="#download-a-model-and-convert-it-into-openvino-ir-format" title="Permalink to this headline">¶</a></h2>
 <p>You can download models and if necessary convert them into OpenVINO™ IR format using the <span class="xref myst">Model Downloader and other automation tools</span> as shown in the examples below.</p>
 <p>An example of using the Model Downloader:</p>
@@ -2286,15 +2293,15 @@ unzip ljspeech.wavernn.mol.800k.zip -d pretrained <span class="o">&amp;&amp;</sp
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">omz_converter</span> <span class="o">--</span><span class="n">name</span> <span class="o">&lt;</span><span class="n">model_name</span><span class="o">&gt;</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="demo-usage">
+</section>
+<section id="demo-usage">
 <h2>Demo usage<a class="headerlink" href="#demo-usage" title="Permalink to this headline">¶</a></h2>
 <p>The model can be used in the following demos provided by the Open Model Zoo to show its capabilities:</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="../../../demos/text_to_speech_demo/python/README.html"><span class="doc std std-doc">Text-to-speech Python* Demo</span></a></p></li>
 </ul>
-</div>
-<div class="section" id="legal-information">
+</section>
+<section id="legal-information">
 <h2>Legal Information<a class="headerlink" href="#legal-information" title="Permalink to this headline">¶</a></h2>
 <p>The original model is distributed under the following
 <a class="reference external" href="https://github.com/fatchord/WaveRNN/blob/master/LICENSE.txt">license</a></p>
@@ -2321,8 +2328,8 @@ unzip ljspeech.wavernn.mol.800k.zip -d pretrained <span class="o">&amp;&amp;</sp
 <span class="n">SOFTWARE</span><span class="o">.</span>
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -2353,7 +2360,7 @@ unzip ljspeech.wavernn.mol.800k.zip -d pretrained <span class="o">&amp;&amp;</sp
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

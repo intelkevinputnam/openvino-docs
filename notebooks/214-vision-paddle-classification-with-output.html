@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>PaddlePaddle Image Classification with OpenVINO &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -520,13 +527,13 @@
             
                 <div>
                   
-  <div class="section" id="paddlepaddle-image-classification-with-openvino">
+  <section id="paddlepaddle-image-classification-with-openvino">
 <h1>PaddlePaddle Image Classification with OpenVINO<a class="headerlink" href="#paddlepaddle-image-classification-with-openvino" title="Permalink to this headline">¶</a></h1>
 <p>This demo shows how to run a MobileNetV3 Large PaddePaddle model using
 OpenVINO Runtime. Instead of exporting the PaddlePaddle model to ONNX
 and converting to Intermediate Representation (IR) format using Model
 Optimizer, we can now read the Paddle model directly without conversion.</p>
-<div class="section" id="import">
+<section id="import">
 <h2>Import<a class="headerlink" href="#import" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># model download</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -549,8 +556,8 @@ Optimizer, we can now read the Paddle model directly without conversion.</p>
 <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="download-the-mobilenetv3-large-x1-0-model">
+</section>
+<section id="download-the-mobilenetv3-large-x1-0-model">
 <h2>Download the MobileNetV3_large_x1_0 Model<a class="headerlink" href="#download-the-mobilenetv3-large-x1-0-model" title="Permalink to this headline">¶</a></h2>
 <p>Download the pre-trained model directly from the server. More details
 about the pre-trained model can be found in the PaddleClas documentation
@@ -583,8 +590,8 @@ below.</p>
 <span class="n">Model</span> <span class="n">Extracted</span> <span class="n">to</span> <span class="n">model</span><span class="o">/</span><span class="n">MobileNetV3_large_x1_0_infer</span><span class="o">/</span><span class="n">inference</span><span class="o">.</span><span class="n">pdmodel</span><span class="o">.</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="define-the-callback-function-for-postprocessing">
+</section>
+<section id="define-the-callback-function-for-postprocessing">
 <h2>Define the callback function for postprocessing<a class="headerlink" href="#define-the-callback-function-for-postprocessing" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">callback</span><span class="p">(</span><span class="n">infer_request</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -609,8 +616,8 @@ below.</p>
             <span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="read-the-model">
+</section>
+<section id="read-the-model">
 <h2>Read the model<a class="headerlink" href="#read-the-model" title="Permalink to this headline">¶</a></h2>
 <p>OpenVINO Runtime reads the <code class="docutils literal notranslate"><span class="pre">PaddlePaddle</span></code> model directly.</p>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Intialize Inference Engine with Core()</span>
@@ -622,8 +629,8 @@ below.</p>
 <span class="n">output_layer</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="integrate-preprocessing-steps-into-the-execution-graph-with-preprocessing-api">
+</section>
+<section id="integrate-preprocessing-steps-into-the-execution-graph-with-preprocessing-api">
 <h2>Integrate preprocessing steps into the execution graph with Preprocessing API<a class="headerlink" href="#integrate-preprocessing-steps-into-the-execution-graph-with-preprocessing-api" title="Permalink to this headline">¶</a></h2>
 <p>If your input data does not fit perfectly in the model input tensor
 additional operations/steps are needed to transform the data to a format
@@ -667,8 +674,8 @@ device(s).</p>
 <span class="n">model</span> <span class="o">=</span> <span class="n">ppp</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="run-inference">
+</section>
+<section id="run-inference">
 <h2>Run Inference<a class="headerlink" href="#run-inference" title="Permalink to this headline">¶</a></h2>
 <p>Use <code class="docutils literal notranslate"><span class="pre">AUTO</span></code> as the device name to delegate device selection to
 OpenVINO. The Auto device plugin internally recognizes and selects
@@ -706,8 +713,8 @@ to first inference.</p>
 </pre></div>
 </div>
 <img alt="../_images/214-vision-paddle-classification-with-output_12_1.jpg" src="../_images/214-vision-paddle-classification-with-output_12_1.jpg" />
-</div>
-<div class="section" id="performance-hints-latency-and-throughput">
+</section>
+<section id="performance-hints-latency-and-throughput">
 <h2>Performance Hints: Latency and Throughput<a class="headerlink" href="#performance-hints-latency-and-throughput" title="Permalink to this headline">¶</a></h2>
 <p>Throughput and latency are some of the most widely used metrics that
 measure the overall performance of an application.</p>
@@ -781,8 +788,8 @@ performance.</p>
 <span class="n">throughput</span><span class="p">:</span> <span class="mf">117.52</span> <span class="n">fps</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="benchmark-app">
+</section>
+<section id="benchmark-app">
 <h2>benchmark_app<a class="headerlink" href="#benchmark-app" title="Permalink to this headline">¶</a></h2>
 <p>To generate more accurate performance measurements, use the OpenVINO
 <a class="reference external" href="https://docs.openvino.ai/latest/openvino_inference_engine_tools_benchmark_tool_README.html">Benchmark
@@ -898,8 +905,8 @@ Latency:
 Throughput: 236.07 FPS
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -930,7 +937,7 @@ Throughput: 236.07 FPS
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

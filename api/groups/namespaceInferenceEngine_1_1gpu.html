@@ -1,0 +1,878 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>namespace InferenceEngine::gpu &#8212; OpenVINO™  documentation</title>
+    
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/blank.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/doxyrest-pygments.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <link href="../../_static/css/media/favicon.ico" rel="shortcut icon">
+    <link rel="stylesheet" href="../../_static/css/openvino_sphinx_theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/css/button.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/css/input.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/css/textfield.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/css/tabs.css" type="text/css" />
+    <script src="../../_static/js/openvino_sphinx_theme.js"></script>
+    <link rel="stylesheet" href="../../_static/css/viewer.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/0.5.7/chartjs-plugin-annotation.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-barchart-background@1.3.0/build/Plugin.Barchart.Background.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-deferred@1"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.1/papaparse.min.js"></script>
+    <script src="../../_static/js/viewer.min.js"></script>
+    <script src="/assets/versions_raw.js"></script>
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/tabs.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/js/custom.js"></script>
+    <script src="../../_static/js/graphs.js"></script>
+    <script src="../../_static/js/graphs_ov_tf.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/target-highlight.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <link rel="canonical" href="https://docs.openvino.ai/latest/api/groups/namespaceInferenceEngine_1_1gpu.html" />
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+      <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+
+<a class="navbar-brand" href="../../index.html">
+  <img src="../../_static/logo.svg" class="logo" alt="logo">
+</a>
+
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../pages/get_started.html">
+  Get Started
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../pages/documentation.html">
+  Documentation
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../tutorials.html">
+  Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api_reference.html">
+  API Reference
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../model_zoo.html">
+  Model Zoo
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../pages/resources.html">
+  Resources
+ </a>
+</li>
+
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/openvinotoolkit/openvino" rel="noopener" target="_blank" title="GitHub">
+            <span><i class="sst-github"></i></span>
+            <label class="sr-only">GitHub</label>
+          </a>
+        </li>
+</ul>
+      </div>
+      
+      <div class="navbar-end-item">
+        
+<div class="dropdown sst-dropdown sst-dropdown-navbar">
+  <button class="btn sst-btn dropdown-toggle" type="button" id="version-selector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+  <div class="dropdown-menu" aria-labelledby="version-selector">
+  </div>
+</div>
+      </div>
+      
+      <div class="navbar-end-item">
+        
+
+<div class="dropdown sst-dropdown sst-dropdown-navbar">
+  <button class="btn sst-btn dropdown-toggle" type="button" id="language-selector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">English</button>
+  <div class="dropdown-menu" aria-labelledby="language-selector">
+    
+      
+        <a class="dropdown-item font-weight-bold" href="/latest/api/groups/namespaceInferenceEngine_1_1gpu.html">English</a>
+      
+    
+      
+        <a  class="dropdown-item" href="/cn/latest/api/groups/namespaceInferenceEngine_1_1gpu.html">Chinese</a>
+      
+    
+  </div>
+</div>
+
+      </div>
+      
+    </div>
+  </div>
+</div>
+        <div id="collapse-nav-wrapper" class="container-xl">
+          <button id="collapse-nav" class="button bttn-prm button-size-m" type="button" data-toggle="collapse" data-target="#nav-tree" aria-expanded="false" aria-controls="nav-tree">
+            Documentation navigation <i class="fas fa-chevron-down"></i>
+          </button>
+        </div>
+      </nav>
+      <div class="transition-banner container-fluid alert alert-info alert-dismissible fade show" role="alert">
+        <p>OpenVINO 2022.1 introduces a new version of OpenVINO API (API 2.0). For more information on the changes and transition steps, see the <a href="https://docs.openvino.ai/latest/openvino_2_0_transition_guide.html">transition guide</a></p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar" id="nav-tree"><form class="searchForm bd-search d-flex align-items-center" action="../../search.html" method="get">
+    <i class="icon fas fa-search"></i>
+    <input type="search" class="form-control" name="query" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="classInferenceEngine_1_1gpu_1_1ClBlob.html">
+   ClBlob
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classInferenceEngine_1_1gpu_1_1ClBufferBlob.html">
+   ClBufferBlob
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classInferenceEngine_1_1gpu_1_1ClContext.html">
+   ClContext
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classInferenceEngine_1_1gpu_1_1ClImage2DBlob.html">
+   ClImage2DBlob
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classInferenceEngine_1_1gpu_1_1D3DBufferBlob.html">
+   D3DBufferBlob
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classInferenceEngine_1_1gpu_1_1D3DContext.html">
+   D3DContext
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classInferenceEngine_1_1gpu_1_1D3DSurface2DBlob.html">
+   D3DSurface2DBlob
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classInferenceEngine_1_1gpu_1_1USMBlob.html">
+   USMBlob
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classInferenceEngine_1_1gpu_1_1VAContext.html">
+   VAContext
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classInferenceEngine_1_1gpu_1_1VASurfaceBlob.html">
+   VASurfaceBlob
+  </a>
+ </li>
+</ul>
+
+  </div>
+</nav>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+              
+              <div class="toc-item">
+                
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#overview">
+   Overview
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#detailed-documentation">
+   Detailed Documentation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#global-functions">
+     Global Functions
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+</nav>
+              </div>
+              
+              <div class="toc-item">
+                <div class="tocsection download-docs">
+  <div class="dropdown sst-dropdown">
+    <button class="button bttn-prm button-size-m" data-display="static" type="button" id="download-options"
+      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Download Docs
+    </button>
+    <div class="dropdown-menu" aria-labelledby="download-options">
+      <a class="dropdown-item" href="#" onclick="window.print()">.pdf</a>
+      <a id="download-zip-btn" class="dropdown-item" href="#">.zip</a>
+    </div>
+  </div>
+</div>
+              </div>
+              
+            
+          </div>
+          
+
+          
+          
+              
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+
+<div class="tocsection editthispage">
+    <a href="None">
+        <i class="fas fa-pencil-alt"></i> Edit this page
+    </a>
+</div>
+
+            
+                <div>
+                  
+  <section id="namespace-inferenceengine-gpu">
+<span id="doxid-namespace-inference-engine-1-1gpu"></span><span id="index-0"></span><h1>namespace InferenceEngine::gpu<a class="headerlink" href="#namespace-inferenceengine-gpu" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<div class="highlight doxyrest-overview-code-block"><div class="highlight"><pre><span></span><span class="k">namespace</span> <span class="n">gpu</span> <span class="p">{</span>
+
+<span class="c1">// classes</span>
+
+<span class="k">class</span> <a class="reference internal" href="classInferenceEngine_1_1gpu_1_1ClBlob.html#doxid-class-inference-engine-1-1gpu-1-1-cl-blob"><span class="std std-ref">ClBlob</span></a><span></span><span class="p">;</span>
+<span class="k">class</span> <a class="reference internal" href="classInferenceEngine_1_1gpu_1_1ClBufferBlob.html#doxid-class-inference-engine-1-1gpu-1-1-cl-buffer-blob"><span class="std std-ref">ClBufferBlob</span></a><span></span><span class="p">;</span>
+<span class="k">class</span> <a class="reference internal" href="classInferenceEngine_1_1gpu_1_1ClContext.html#doxid-class-inference-engine-1-1gpu-1-1-cl-context"><span class="std std-ref">ClContext</span></a><span></span><span class="p">;</span>
+<span class="k">class</span> <a class="reference internal" href="classInferenceEngine_1_1gpu_1_1ClImage2DBlob.html#doxid-class-inference-engine-1-1gpu-1-1-cl-image2-d-blob"><span class="std std-ref">ClImage2DBlob</span></a><span></span><span class="p">;</span>
+<span class="k">class</span> <a class="reference internal" href="classInferenceEngine_1_1gpu_1_1D3DBufferBlob.html#doxid-class-inference-engine-1-1gpu-1-1-d3-d-buffer-blob"><span class="std std-ref">D3DBufferBlob</span></a><span></span><span class="p">;</span>
+<span class="k">class</span> <a class="reference internal" href="classInferenceEngine_1_1gpu_1_1D3DContext.html#doxid-class-inference-engine-1-1gpu-1-1-d3-d-context"><span class="std std-ref">D3DContext</span></a><span></span><span class="p">;</span>
+<span class="k">class</span> <a class="reference internal" href="classInferenceEngine_1_1gpu_1_1D3DSurface2DBlob.html#doxid-class-inference-engine-1-1gpu-1-1-d3-d-surface2-d-blob"><span class="std std-ref">D3DSurface2DBlob</span></a><span></span><span class="p">;</span>
+<span class="k">class</span> <a class="reference internal" href="classInferenceEngine_1_1gpu_1_1USMBlob.html#doxid-class-inference-engine-1-1gpu-1-1-u-s-m-blob"><span class="std std-ref">USMBlob</span></a><span></span><span class="p">;</span>
+<span class="k">class</span> <a class="reference internal" href="classInferenceEngine_1_1gpu_1_1VAContext.html#doxid-class-inference-engine-1-1gpu-1-1-v-a-context"><span class="std std-ref">VAContext</span></a><span></span><span class="p">;</span>
+<span class="k">class</span> <a class="reference internal" href="classInferenceEngine_1_1gpu_1_1VASurfaceBlob.html#doxid-class-inference-engine-1-1gpu-1-1-v-a-surface-blob"><span class="std std-ref">VASurfaceBlob</span></a><span></span><span class="p">;</span>
+
+<span class="c1">// global functions</span>
+
+<span class="k">static</span> <a class="reference internal" href="classInferenceEngine_1_1Blob.html#doxid-class-inference-engine-1-1-blob-1abb6c4f89181e2dd6d8a29ada2dfb4060"><span class="std std-ref">Blob::Ptr</span></a><span></span> <a class="reference internal" href="#doxid-namespace-inference-engine-1-1gpu-1ac72ef58817d0933f40f735ba3e19dda0"><span class="std std-ref">make_shared_blob_nv12</span></a><span></span><span class="p">(</span>
+    <span class="kt">size_t</span> <span class="n">height</span><span class="p">,</span>
+    <span class="kt">size_t</span> <span class="n">width</span><span class="p">,</span>
+    <a class="reference internal" href="classInferenceEngine_1_1RemoteContext.html#doxid-class-inference-engine-1-1-remote-context-1adc79805c11b6939c51a794b90b8bfa93"><span class="std std-ref">RemoteContext::Ptr</span></a><span></span> <span class="n">ctx</span><span class="p">,</span>
+    <span class="n">ID3D11Texture2D</span> <span class="err">\</span><span class="o">*</span> <span class="n">nv12_surf</span>
+    <span class="p">);</span>
+
+<span class="k">static</span> <a class="reference internal" href="classInferenceEngine_1_1gpu_1_1D3DContext.html#doxid-class-inference-engine-1-1gpu-1-1-d3-d-context-1a1ece9eae5ddc8fa89bfe29f8e693b83e"><span class="std std-ref">D3DContext::Ptr</span></a><span></span> <a class="reference internal" href="#doxid-namespace-inference-engine-1-1gpu-1a5a979f098ea0dc89cd46c71b805302a0"><span class="std std-ref">make_shared_context</span></a><span></span><span class="p">(</span>
+    <a class="reference internal" href="classInferenceEngine_1_1Core.html#doxid-class-inference-engine-1-1-core"><span class="std std-ref">Core</span></a><span></span><span class="o">&amp;</span> <span class="n">core</span><span class="p">,</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">deviceName</span><span class="p">,</span>
+    <span class="n">ID3D11Device</span> <span class="err">\</span><span class="o">*</span> <span class="n">device</span><span class="p">,</span>
+    <span class="kt">int</span> <span class="n">target_tile_id</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="p">);</span>
+
+<span class="k">static</span> <a class="reference internal" href="classInferenceEngine_1_1Blob.html#doxid-class-inference-engine-1-1-blob-1abb6c4f89181e2dd6d8a29ada2dfb4060"><span class="std std-ref">Blob::Ptr</span></a><span></span> <a class="reference internal" href="#doxid-namespace-inference-engine-1-1gpu-1acbf3f7789d4a3c2daa4c63891d8e8577"><span class="std std-ref">make_shared_blob</span></a><span></span><span class="p">(</span>
+    <span class="k">const</span> <a class="reference internal" href="classInferenceEngine_1_1TensorDesc.html#doxid-class-inference-engine-1-1-tensor-desc"><span class="std std-ref">TensorDesc</span></a><span></span><span class="o">&amp;</span> <span class="n">desc</span><span class="p">,</span>
+    <a class="reference internal" href="classInferenceEngine_1_1RemoteContext.html#doxid-class-inference-engine-1-1-remote-context-1adc79805c11b6939c51a794b90b8bfa93"><span class="std std-ref">RemoteContext::Ptr</span></a><span></span> <span class="n">ctx</span><span class="p">,</span>
+    <span class="n">ID3D11Buffer</span> <span class="err">\</span><span class="o">*</span> <span class="n">buffer</span>
+    <span class="p">);</span>
+
+<span class="k">static</span> <a class="reference internal" href="classInferenceEngine_1_1Blob.html#doxid-class-inference-engine-1-1-blob-1abb6c4f89181e2dd6d8a29ada2dfb4060"><span class="std std-ref">Blob::Ptr</span></a><span></span> <a class="reference internal" href="#doxid-namespace-inference-engine-1-1gpu-1a53c4517258c8b6e439f561bfedca845f"><span class="std std-ref">make_shared_blob</span></a><span></span><span class="p">(</span>
+    <span class="k">const</span> <a class="reference internal" href="classInferenceEngine_1_1TensorDesc.html#doxid-class-inference-engine-1-1-tensor-desc"><span class="std std-ref">TensorDesc</span></a><span></span><span class="o">&amp;</span> <span class="n">desc</span><span class="p">,</span>
+    <a class="reference internal" href="classInferenceEngine_1_1RemoteContext.html#doxid-class-inference-engine-1-1-remote-context-1adc79805c11b6939c51a794b90b8bfa93"><span class="std std-ref">RemoteContext::Ptr</span></a><span></span> <span class="n">ctx</span><span class="p">,</span>
+    <span class="n">ID3D11Texture2D</span> <span class="err">\</span><span class="o">*</span> <span class="n">surface</span><span class="p">,</span>
+    <span class="kt">uint32_t</span> <span class="n">plane</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="p">);</span>
+
+<span class="k">static</span> <a class="reference internal" href="classInferenceEngine_1_1Blob.html#doxid-class-inference-engine-1-1-blob-1abb6c4f89181e2dd6d8a29ada2dfb4060"><span class="std std-ref">Blob::Ptr</span></a><span></span> <a class="reference internal" href="#doxid-namespace-inference-engine-1-1gpu-1a9b13e6964400f1d6724baad7c4c86876"><span class="std std-ref">make_shared_blob_nv12</span></a><span></span><span class="p">(</span>
+    <a class="reference internal" href="classInferenceEngine_1_1RemoteContext.html#doxid-class-inference-engine-1-1-remote-context-1adc79805c11b6939c51a794b90b8bfa93"><span class="std std-ref">RemoteContext::Ptr</span></a><span></span> <span class="n">ctx</span><span class="p">,</span>
+    <span class="n">cl</span><span class="o">::</span><span class="n">Image2D</span><span class="o">&amp;</span> <span class="n">nv12_image_plane_y</span><span class="p">,</span>
+    <span class="n">cl</span><span class="o">::</span><span class="n">Image2D</span><span class="o">&amp;</span> <span class="n">nv12_image_plane_uv</span>
+    <span class="p">);</span>
+
+<span class="k">static</span> <a class="reference internal" href="classInferenceEngine_1_1RemoteContext.html#doxid-class-inference-engine-1-1-remote-context-1adc79805c11b6939c51a794b90b8bfa93"><span class="std std-ref">RemoteContext::Ptr</span></a><span></span> <a class="reference internal" href="#doxid-namespace-inference-engine-1-1gpu-1ad6313247a73161759773e2b3fd054fb0"><span class="std std-ref">make_shared_context</span></a><span></span><span class="p">(</span>
+    <a class="reference internal" href="classInferenceEngine_1_1Core.html#doxid-class-inference-engine-1-1-core"><span class="std std-ref">Core</span></a><span></span><span class="o">&amp;</span> <span class="n">core</span><span class="p">,</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">deviceName</span><span class="p">,</span>
+    <span class="n">cl_context</span> <span class="n">ctx</span><span class="p">,</span>
+    <span class="kt">int</span> <span class="n">target_tile_id</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="p">);</span>
+
+<span class="k">static</span> <a class="reference internal" href="classInferenceEngine_1_1RemoteContext.html#doxid-class-inference-engine-1-1-remote-context-1adc79805c11b6939c51a794b90b8bfa93"><span class="std std-ref">RemoteContext::Ptr</span></a><span></span> <a class="reference internal" href="#doxid-namespace-inference-engine-1-1gpu-1abe7febe6387e312731fafe76efa3fa2c"><span class="std std-ref">make_shared_context</span></a><span></span><span class="p">(</span>
+    <a class="reference internal" href="classInferenceEngine_1_1Core.html#doxid-class-inference-engine-1-1-core"><span class="std std-ref">Core</span></a><span></span><span class="o">&amp;</span> <span class="n">core</span><span class="p">,</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">deviceName</span><span class="p">,</span>
+    <span class="n">cl_command_queue</span> <span class="n">queue</span>
+    <span class="p">);</span>
+
+<span class="k">static</span> <a class="reference internal" href="classInferenceEngine_1_1Blob.html#doxid-class-inference-engine-1-1-blob-1abb6c4f89181e2dd6d8a29ada2dfb4060"><span class="std std-ref">Blob::Ptr</span></a><span></span> <a class="reference internal" href="#doxid-namespace-inference-engine-1-1gpu-1a60b59713ecdd4d400b17ff47cefe0da0"><span class="std std-ref">make_shared_blob</span></a><span></span><span class="p">(</span><span class="k">const</span> <a class="reference internal" href="classInferenceEngine_1_1TensorDesc.html#doxid-class-inference-engine-1-1-tensor-desc"><span class="std std-ref">TensorDesc</span></a><span></span><span class="o">&amp;</span> <span class="n">desc</span><span class="p">,</span> <a class="reference internal" href="classInferenceEngine_1_1gpu_1_1ClContext.html#doxid-class-inference-engine-1-1gpu-1-1-cl-context-1a7c6b73b0d487f9a35644e696d89eca3a"><span class="std std-ref">ClContext::Ptr</span></a><span></span> <span class="n">ctx</span><span class="p">);</span>
+
+<span class="k">static</span> <a class="reference internal" href="classInferenceEngine_1_1Blob.html#doxid-class-inference-engine-1-1-blob-1abb6c4f89181e2dd6d8a29ada2dfb4060"><span class="std std-ref">Blob::Ptr</span></a><span></span> <a class="reference internal" href="#doxid-namespace-inference-engine-1-1gpu-1aff39e19df2cf6916a5599dd195bcd0c3"><span class="std std-ref">make_shared_blob</span></a><span></span><span class="p">(</span>
+    <span class="k">const</span> <a class="reference internal" href="classInferenceEngine_1_1TensorDesc.html#doxid-class-inference-engine-1-1-tensor-desc"><span class="std std-ref">TensorDesc</span></a><span></span><span class="o">&amp;</span> <span class="n">desc</span><span class="p">,</span>
+    <a class="reference internal" href="classInferenceEngine_1_1RemoteContext.html#doxid-class-inference-engine-1-1-remote-context-1adc79805c11b6939c51a794b90b8bfa93"><span class="std std-ref">RemoteContext::Ptr</span></a><span></span> <span class="n">ctx</span><span class="p">,</span>
+    <span class="n">cl</span><span class="o">::</span><span class="n">Buffer</span><span class="o">&amp;</span> <span class="n">buffer</span>
+    <span class="p">);</span>
+
+<span class="k">static</span> <a class="reference internal" href="classInferenceEngine_1_1Blob.html#doxid-class-inference-engine-1-1-blob-1abb6c4f89181e2dd6d8a29ada2dfb4060"><span class="std std-ref">Blob::Ptr</span></a><span></span> <a class="reference internal" href="#doxid-namespace-inference-engine-1-1gpu-1a33d130489a10ed2d10c2a9dbc842b62a"><span class="std std-ref">make_shared_blob</span></a><span></span><span class="p">(</span>
+    <span class="k">const</span> <a class="reference internal" href="classInferenceEngine_1_1TensorDesc.html#doxid-class-inference-engine-1-1-tensor-desc"><span class="std std-ref">TensorDesc</span></a><span></span><span class="o">&amp;</span> <span class="n">desc</span><span class="p">,</span>
+    <a class="reference internal" href="classInferenceEngine_1_1RemoteContext.html#doxid-class-inference-engine-1-1-remote-context-1adc79805c11b6939c51a794b90b8bfa93"><span class="std std-ref">RemoteContext::Ptr</span></a><span></span> <span class="n">ctx</span><span class="p">,</span>
+    <span class="n">cl_mem</span> <span class="n">buffer</span>
+    <span class="p">);</span>
+
+<span class="k">static</span> <a class="reference internal" href="classInferenceEngine_1_1Blob.html#doxid-class-inference-engine-1-1-blob-1abb6c4f89181e2dd6d8a29ada2dfb4060"><span class="std std-ref">Blob::Ptr</span></a><span></span> <a class="reference internal" href="#doxid-namespace-inference-engine-1-1gpu-1ae96aec1659ebd3283c478c09f6e8cfae"><span class="std std-ref">make_shared_blob</span></a><span></span><span class="p">(</span>
+    <span class="k">const</span> <a class="reference internal" href="classInferenceEngine_1_1TensorDesc.html#doxid-class-inference-engine-1-1-tensor-desc"><span class="std std-ref">TensorDesc</span></a><span></span><span class="o">&amp;</span> <span class="n">desc</span><span class="p">,</span>
+    <a class="reference internal" href="classInferenceEngine_1_1RemoteContext.html#doxid-class-inference-engine-1-1-remote-context-1adc79805c11b6939c51a794b90b8bfa93"><span class="std std-ref">RemoteContext::Ptr</span></a><span></span> <span class="n">ctx</span><span class="p">,</span>
+    <span class="n">cl</span><span class="o">::</span><span class="n">Image2D</span><span class="o">&amp;</span> <span class="n">image</span>
+    <span class="p">);</span>
+
+<span class="k">static</span> <a class="reference internal" href="classInferenceEngine_1_1Blob.html#doxid-class-inference-engine-1-1-blob-1abb6c4f89181e2dd6d8a29ada2dfb4060"><span class="std std-ref">Blob::Ptr</span></a><span></span> <a class="reference internal" href="#doxid-namespace-inference-engine-1-1gpu-1acaa3dc7389d6fdfaa5452e08ba925489"><span class="std std-ref">make_shared_blob_nv12</span></a><span></span><span class="p">(</span>
+    <span class="kt">size_t</span> <span class="n">height</span><span class="p">,</span>
+    <span class="kt">size_t</span> <span class="n">width</span><span class="p">,</span>
+    <a class="reference internal" href="classInferenceEngine_1_1RemoteContext.html#doxid-class-inference-engine-1-1-remote-context-1adc79805c11b6939c51a794b90b8bfa93"><span class="std std-ref">RemoteContext::Ptr</span></a><span></span> <span class="n">ctx</span><span class="p">,</span>
+    <span class="n">VASurfaceID</span> <span class="n">nv12_surf</span>
+    <span class="p">);</span>
+
+<span class="k">static</span> <a class="reference internal" href="classInferenceEngine_1_1gpu_1_1VAContext.html#doxid-class-inference-engine-1-1gpu-1-1-v-a-context-1a618acae0ec67eddf09180c6af6ca343e"><span class="std std-ref">VAContext::Ptr</span></a><span></span> <a class="reference internal" href="#doxid-namespace-inference-engine-1-1gpu-1a251bc7130aab41116ebdccc9955a2bae"><span class="std std-ref">make_shared_context</span></a><span></span><span class="p">(</span>
+    <a class="reference internal" href="classInferenceEngine_1_1Core.html#doxid-class-inference-engine-1-1-core"><span class="std std-ref">Core</span></a><span></span><span class="o">&amp;</span> <span class="n">core</span><span class="p">,</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">deviceName</span><span class="p">,</span>
+    <span class="n">VADisplay</span> <span class="n">device</span><span class="p">,</span>
+    <span class="kt">int</span> <span class="n">target_tile_id</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="p">);</span>
+
+<span class="k">static</span> <a class="reference internal" href="classInferenceEngine_1_1gpu_1_1VASurfaceBlob.html#doxid-class-inference-engine-1-1gpu-1-1-v-a-surface-blob-1a79c56780d0dd02794c837ccabbad4b3b"><span class="std std-ref">VASurfaceBlob::Ptr</span></a><span></span> <a class="reference internal" href="#doxid-namespace-inference-engine-1-1gpu-1a34c6c5f89430f39651644f76b52a0901"><span class="std std-ref">make_shared_blob</span></a><span></span><span class="p">(</span>
+    <span class="k">const</span> <a class="reference internal" href="classInferenceEngine_1_1TensorDesc.html#doxid-class-inference-engine-1-1-tensor-desc"><span class="std std-ref">TensorDesc</span></a><span></span><span class="o">&amp;</span> <span class="n">desc</span><span class="p">,</span>
+    <a class="reference internal" href="classInferenceEngine_1_1RemoteContext.html#doxid-class-inference-engine-1-1-remote-context-1adc79805c11b6939c51a794b90b8bfa93"><span class="std std-ref">RemoteContext::Ptr</span></a><span></span> <span class="n">ctx</span><span class="p">,</span>
+    <span class="n">VASurfaceID</span> <span class="n">surface</span><span class="p">,</span>
+    <span class="kt">uint32_t</span> <span class="n">plane</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="p">);</span>
+
+<span class="p">}</span> <span class="c1">// namespace gpu</span></pre></div></div></section>
+<section id="detailed-documentation">
+<span id="details-namespace-inference-engine-1-1gpu"></span><h2>Detailed Documentation<a class="headerlink" href="#detailed-documentation" title="Permalink to this headline">¶</a></h2>
+<section id="global-functions">
+<h3>Global Functions<a class="headerlink" href="#global-functions" title="Permalink to this headline">¶</a></h3>
+<span class="target" id="doxid-namespace-inference-engine-1-1gpu-1ac72ef58817d0933f40f735ba3e19dda0"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><span></span><span class="k">static</span> <a class="reference internal" href="classInferenceEngine_1_1Blob.html#doxid-class-inference-engine-1-1-blob-1abb6c4f89181e2dd6d8a29ada2dfb4060"><span class="std std-ref">Blob::Ptr</span></a><span></span> <span class="n">make_shared_blob_nv12</span><span class="p">(</span>
+    <span class="kt">size_t</span> <span class="n">height</span><span class="p">,</span>
+    <span class="kt">size_t</span> <span class="n">width</span><span class="p">,</span>
+    <a class="reference internal" href="classInferenceEngine_1_1RemoteContext.html#doxid-class-inference-engine-1-1-remote-context-1adc79805c11b6939c51a794b90b8bfa93"><span class="std std-ref">RemoteContext::Ptr</span></a><span></span> <span class="n">ctx</span><span class="p">,</span>
+    <span class="n">ID3D11Texture2D</span> <span class="err">\</span><span class="o">*</span> <span class="n">nv12_surf</span>
+    <span class="p">)</span></pre></div></div><p>This function is used to obtain a NV12 compound blob object from NV12 DXGI video decoder output. The resulting compound contains two remote blobs for Y and UV planes of the surface.</p>
+<p class="rubric">Parameters:</p>
+<table class="colwidths-given table">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>height</p></td>
+<td><p>Height of Y plane</p></td>
+</tr>
+<tr class="row-even"><td><p>width</p></td>
+<td><p>Widht of Y plane</p></td>
+</tr>
+<tr class="row-odd"><td><p>ctx</p></td>
+<td><p>A pointer to remote context</p></td>
+</tr>
+<tr class="row-even"><td><p>nv12_surf</p></td>
+<td><p>A ID3D11Texture2D instance to create NV12 blob from</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Returns:</p>
+<p>NV12 remote blob</p>
+<span class="target" id="doxid-namespace-inference-engine-1-1gpu-1a5a979f098ea0dc89cd46c71b805302a0"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><span></span><span class="k">static</span> <a class="reference internal" href="classInferenceEngine_1_1gpu_1_1D3DContext.html#doxid-class-inference-engine-1-1gpu-1-1-d3-d-context-1a1ece9eae5ddc8fa89bfe29f8e693b83e"><span class="std std-ref">D3DContext::Ptr</span></a><span></span> <span class="n">make_shared_context</span><span class="p">(</span>
+    <a class="reference internal" href="classInferenceEngine_1_1Core.html#doxid-class-inference-engine-1-1-core"><span class="std std-ref">Core</span></a><span></span><span class="o">&amp;</span> <span class="n">core</span><span class="p">,</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">deviceName</span><span class="p">,</span>
+    <span class="n">ID3D11Device</span> <span class="err">\</span><span class="o">*</span> <span class="n">device</span><span class="p">,</span>
+    <span class="kt">int</span> <span class="n">target_tile_id</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="p">)</span></pre></div></div><p>This function is used to obtain remote context object from ID3D11Device.</p>
+<p class="rubric">Parameters:</p>
+<table class="colwidths-given table">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>core</p></td>
+<td><p>Inference Engine <a class="reference internal" href="classInferenceEngine_1_1Core.html#doxid-class-inference-engine-1-1-core"><span class="std std-ref">Core</span></a> object instance</p></td>
+</tr>
+<tr class="row-even"><td><p>deviceName</p></td>
+<td><p>A name of to create a remote context for</p></td>
+</tr>
+<tr class="row-odd"><td><p>device</p></td>
+<td><p>A pointer to ID3D11Device to be used to create a remote context</p></td>
+</tr>
+<tr class="row-even"><td><p>target_tile_id</p></td>
+<td><p>Desired tile id within given context for multi-tile system. Default value (-1) means that root device should be used</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Returns:</p>
+<p>A shared remote context instance</p>
+<span class="target" id="doxid-namespace-inference-engine-1-1gpu-1acbf3f7789d4a3c2daa4c63891d8e8577"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><span></span><span class="k">static</span> <a class="reference internal" href="classInferenceEngine_1_1Blob.html#doxid-class-inference-engine-1-1-blob-1abb6c4f89181e2dd6d8a29ada2dfb4060"><span class="std std-ref">Blob::Ptr</span></a><span></span> <span class="n">make_shared_blob</span><span class="p">(</span>
+    <span class="k">const</span> <a class="reference internal" href="classInferenceEngine_1_1TensorDesc.html#doxid-class-inference-engine-1-1-tensor-desc"><span class="std std-ref">TensorDesc</span></a><span></span><span class="o">&amp;</span> <span class="n">desc</span><span class="p">,</span>
+    <a class="reference internal" href="classInferenceEngine_1_1RemoteContext.html#doxid-class-inference-engine-1-1-remote-context-1adc79805c11b6939c51a794b90b8bfa93"><span class="std std-ref">RemoteContext::Ptr</span></a><span></span> <span class="n">ctx</span><span class="p">,</span>
+    <span class="n">ID3D11Buffer</span> <span class="err">\</span><span class="o">*</span> <span class="n">buffer</span>
+    <span class="p">)</span></pre></div></div><p>This function is used to obtain remote blob object from ID3D11Buffer.</p>
+<p class="rubric">Parameters:</p>
+<table class="colwidths-given table">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>desc</p></td>
+<td><p>A tensor description which describes blob configuration</p></td>
+</tr>
+<tr class="row-even"><td><p>ctx</p></td>
+<td><p>A shared pointer to a remote context</p></td>
+</tr>
+<tr class="row-odd"><td><p>buffer</p></td>
+<td><p>A pointer to ID3D11Buffer instance to create remote blob based on</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Returns:</p>
+<p>A remote blob instance</p>
+<span class="target" id="doxid-namespace-inference-engine-1-1gpu-1a53c4517258c8b6e439f561bfedca845f"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><span></span><span class="k">static</span> <a class="reference internal" href="classInferenceEngine_1_1Blob.html#doxid-class-inference-engine-1-1-blob-1abb6c4f89181e2dd6d8a29ada2dfb4060"><span class="std std-ref">Blob::Ptr</span></a><span></span> <span class="n">make_shared_blob</span><span class="p">(</span>
+    <span class="k">const</span> <a class="reference internal" href="classInferenceEngine_1_1TensorDesc.html#doxid-class-inference-engine-1-1-tensor-desc"><span class="std std-ref">TensorDesc</span></a><span></span><span class="o">&amp;</span> <span class="n">desc</span><span class="p">,</span>
+    <a class="reference internal" href="classInferenceEngine_1_1RemoteContext.html#doxid-class-inference-engine-1-1-remote-context-1adc79805c11b6939c51a794b90b8bfa93"><span class="std std-ref">RemoteContext::Ptr</span></a><span></span> <span class="n">ctx</span><span class="p">,</span>
+    <span class="n">ID3D11Texture2D</span> <span class="err">\</span><span class="o">*</span> <span class="n">surface</span><span class="p">,</span>
+    <span class="kt">uint32_t</span> <span class="n">plane</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="p">)</span></pre></div></div><p>This function is used to obtain remote blob object from ID3D11Texture2D.</p>
+<p>The underlying ID3D11Texture2D can also be a plane of output surface of DXGI video decoder</p>
+<p class="rubric">Parameters:</p>
+<table class="colwidths-given table">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>desc</p></td>
+<td><p>Tensor description</p></td>
+</tr>
+<tr class="row-even"><td><p>ctx</p></td>
+<td><p>the <a class="reference internal" href="classInferenceEngine_1_1RemoteContext.html#doxid-class-inference-engine-1-1-remote-context"><span class="std std-ref">RemoteContext</span></a> object whuch owns context for the blob to be created</p></td>
+</tr>
+<tr class="row-odd"><td><p>surface</p></td>
+<td><p>Pointer to ID3D11Texture2D interface of the objects that owns NV12 texture</p></td>
+</tr>
+<tr class="row-even"><td><p>plane</p></td>
+<td><p>ID of the plane to be shared (0 or 1)</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Returns:</p>
+<p>Smart pointer to created <a class="reference internal" href="classInferenceEngine_1_1RemoteBlob.html#doxid-class-inference-engine-1-1-remote-blob"><span class="std std-ref">RemoteBlob</span></a> object cast to base class</p>
+<span class="target" id="doxid-namespace-inference-engine-1-1gpu-1a9b13e6964400f1d6724baad7c4c86876"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><span></span><span class="k">static</span> <a class="reference internal" href="classInferenceEngine_1_1Blob.html#doxid-class-inference-engine-1-1-blob-1abb6c4f89181e2dd6d8a29ada2dfb4060"><span class="std std-ref">Blob::Ptr</span></a><span></span> <span class="n">make_shared_blob_nv12</span><span class="p">(</span>
+    <a class="reference internal" href="classInferenceEngine_1_1RemoteContext.html#doxid-class-inference-engine-1-1-remote-context-1adc79805c11b6939c51a794b90b8bfa93"><span class="std std-ref">RemoteContext::Ptr</span></a><span></span> <span class="n">ctx</span><span class="p">,</span>
+    <span class="n">cl</span><span class="o">::</span><span class="n">Image2D</span><span class="o">&amp;</span> <span class="n">nv12_image_plane_y</span><span class="p">,</span>
+    <span class="n">cl</span><span class="o">::</span><span class="n">Image2D</span><span class="o">&amp;</span> <span class="n">nv12_image_plane_uv</span>
+    <span class="p">)</span></pre></div></div><p>This function is used to construct a NV12 compound blob object from two cl::Image2D wrapper objects. The resulting compound contains two remote blobs for Y and UV planes of the surface.</p>
+<p class="rubric">Parameters:</p>
+<table class="colwidths-given table">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>ctx</p></td>
+<td><p><a class="reference internal" href="classInferenceEngine_1_1RemoteContext.html#doxid-class-inference-engine-1-1-remote-context"><span class="std std-ref">RemoteContext</span></a> plugin object derived from <a class="reference internal" href="classInferenceEngine_1_1gpu_1_1ClContext.html#doxid-class-inference-engine-1-1gpu-1-1-cl-context"><span class="std std-ref">ClContext</span></a> class.</p></td>
+</tr>
+<tr class="row-even"><td><p>nv12_image_plane_y</p></td>
+<td><p>cl::Image2D object containing Y plane data.</p></td>
+</tr>
+<tr class="row-odd"><td><p>nv12_image_plane_uv</p></td>
+<td><p>cl::Image2D object containing UV plane data.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Returns:</p>
+<p>A shared remote blob instance</p>
+<span class="target" id="doxid-namespace-inference-engine-1-1gpu-1ad6313247a73161759773e2b3fd054fb0"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><span></span><span class="k">static</span> <a class="reference internal" href="classInferenceEngine_1_1RemoteContext.html#doxid-class-inference-engine-1-1-remote-context-1adc79805c11b6939c51a794b90b8bfa93"><span class="std std-ref">RemoteContext::Ptr</span></a><span></span> <span class="n">make_shared_context</span><span class="p">(</span>
+    <a class="reference internal" href="classInferenceEngine_1_1Core.html#doxid-class-inference-engine-1-1-core"><span class="std std-ref">Core</span></a><span></span><span class="o">&amp;</span> <span class="n">core</span><span class="p">,</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">deviceName</span><span class="p">,</span>
+    <span class="n">cl_context</span> <span class="n">ctx</span><span class="p">,</span>
+    <span class="kt">int</span> <span class="n">target_tile_id</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="p">)</span></pre></div></div><p>This function is used to obtain remote context object from user-supplied OpenCL context handle.</p>
+<p class="rubric">Parameters:</p>
+<table class="colwidths-given table">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>core</p></td>
+<td><p>A reference to Inference Engine <a class="reference internal" href="classInferenceEngine_1_1Core.html#doxid-class-inference-engine-1-1-core"><span class="std std-ref">Core</span></a> object</p></td>
+</tr>
+<tr class="row-even"><td><p>deviceName</p></td>
+<td><p>A name of device to create a remote context for</p></td>
+</tr>
+<tr class="row-odd"><td><p>ctx</p></td>
+<td><p>A OpenCL context to be used to create shared remote context</p></td>
+</tr>
+<tr class="row-even"><td><p>target_tile_id</p></td>
+<td><p>Desired tile id within given context for multi-tile system. Default value (-1) means that root device should be used</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Returns:</p>
+<p>A shared remote context instance</p>
+<span class="target" id="doxid-namespace-inference-engine-1-1gpu-1abe7febe6387e312731fafe76efa3fa2c"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><span></span><span class="k">static</span> <a class="reference internal" href="classInferenceEngine_1_1RemoteContext.html#doxid-class-inference-engine-1-1-remote-context-1adc79805c11b6939c51a794b90b8bfa93"><span class="std std-ref">RemoteContext::Ptr</span></a><span></span> <span class="n">make_shared_context</span><span class="p">(</span>
+    <a class="reference internal" href="classInferenceEngine_1_1Core.html#doxid-class-inference-engine-1-1-core"><span class="std std-ref">Core</span></a><span></span><span class="o">&amp;</span> <span class="n">core</span><span class="p">,</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">deviceName</span><span class="p">,</span>
+    <span class="n">cl_command_queue</span> <span class="n">queue</span>
+    <span class="p">)</span></pre></div></div><p>This function is used to obtain remote context object from user-supplied OpenCL context handle.</p>
+<p>Only latency mode is supported for such context sharing case.</p>
+<p class="rubric">Parameters:</p>
+<table class="colwidths-given table">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>core</p></td>
+<td><p>A reference to Inference Engine <a class="reference internal" href="classInferenceEngine_1_1Core.html#doxid-class-inference-engine-1-1-core"><span class="std std-ref">Core</span></a> object</p></td>
+</tr>
+<tr class="row-even"><td><p>deviceName</p></td>
+<td><p>A name of device to create a remote context for</p></td>
+</tr>
+<tr class="row-odd"><td><p>queue</p></td>
+<td><p>An OpenCL queue to be used to create shared remote context. Queue will be reused inside the plugin.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Returns:</p>
+<p>A shared remote context instance</p>
+<span class="target" id="doxid-namespace-inference-engine-1-1gpu-1a60b59713ecdd4d400b17ff47cefe0da0"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><span></span><span class="k">static</span> <a class="reference internal" href="classInferenceEngine_1_1Blob.html#doxid-class-inference-engine-1-1-blob-1abb6c4f89181e2dd6d8a29ada2dfb4060"><span class="std std-ref">Blob::Ptr</span></a><span></span> <span class="n">make_shared_blob</span><span class="p">(</span><span class="k">const</span> <a class="reference internal" href="classInferenceEngine_1_1TensorDesc.html#doxid-class-inference-engine-1-1-tensor-desc"><span class="std std-ref">TensorDesc</span></a><span></span><span class="o">&amp;</span> <span class="n">desc</span><span class="p">,</span> <a class="reference internal" href="classInferenceEngine_1_1gpu_1_1ClContext.html#doxid-class-inference-engine-1-1gpu-1-1-cl-context-1a7c6b73b0d487f9a35644e696d89eca3a"><span class="std std-ref">ClContext::Ptr</span></a><span></span> <span class="n">ctx</span><span class="p">)</span></pre></div></div><p>This function is used to create remote blob object within default GPU plugin OpenCL context.</p>
+<p class="rubric">Parameters:</p>
+<table class="colwidths-given table">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>desc</p></td>
+<td><p>A tensor descriptor object representing remote blob configuration</p></td>
+</tr>
+<tr class="row-even"><td><p>ctx</p></td>
+<td><p>A remote context used to create remote blob</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Returns:</p>
+<p>A remote blob instance</p>
+<span class="target" id="doxid-namespace-inference-engine-1-1gpu-1aff39e19df2cf6916a5599dd195bcd0c3"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><span></span><span class="k">static</span> <a class="reference internal" href="classInferenceEngine_1_1Blob.html#doxid-class-inference-engine-1-1-blob-1abb6c4f89181e2dd6d8a29ada2dfb4060"><span class="std std-ref">Blob::Ptr</span></a><span></span> <span class="n">make_shared_blob</span><span class="p">(</span>
+    <span class="k">const</span> <a class="reference internal" href="classInferenceEngine_1_1TensorDesc.html#doxid-class-inference-engine-1-1-tensor-desc"><span class="std std-ref">TensorDesc</span></a><span></span><span class="o">&amp;</span> <span class="n">desc</span><span class="p">,</span>
+    <a class="reference internal" href="classInferenceEngine_1_1RemoteContext.html#doxid-class-inference-engine-1-1-remote-context-1adc79805c11b6939c51a794b90b8bfa93"><span class="std std-ref">RemoteContext::Ptr</span></a><span></span> <span class="n">ctx</span><span class="p">,</span>
+    <span class="n">cl</span><span class="o">::</span><span class="n">Buffer</span><span class="o">&amp;</span> <span class="n">buffer</span>
+    <span class="p">)</span></pre></div></div><p>This function is used to obtain remote blob object from user-supplied cl::Buffer wrapper object.</p>
+<p class="rubric">Parameters:</p>
+<table class="colwidths-given table">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>desc</p></td>
+<td><p>A tensor descriptor object representing remote blob configuration</p></td>
+</tr>
+<tr class="row-even"><td><p>ctx</p></td>
+<td><p>A remote context used to create remote blob</p></td>
+</tr>
+<tr class="row-odd"><td><p>buffer</p></td>
+<td><p>A cl::Buffer object wrapped by a remote blob</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Returns:</p>
+<p>A remote blob instance</p>
+<span class="target" id="doxid-namespace-inference-engine-1-1gpu-1a33d130489a10ed2d10c2a9dbc842b62a"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><span></span><span class="k">static</span> <a class="reference internal" href="classInferenceEngine_1_1Blob.html#doxid-class-inference-engine-1-1-blob-1abb6c4f89181e2dd6d8a29ada2dfb4060"><span class="std std-ref">Blob::Ptr</span></a><span></span> <span class="n">make_shared_blob</span><span class="p">(</span>
+    <span class="k">const</span> <a class="reference internal" href="classInferenceEngine_1_1TensorDesc.html#doxid-class-inference-engine-1-1-tensor-desc"><span class="std std-ref">TensorDesc</span></a><span></span><span class="o">&amp;</span> <span class="n">desc</span><span class="p">,</span>
+    <a class="reference internal" href="classInferenceEngine_1_1RemoteContext.html#doxid-class-inference-engine-1-1-remote-context-1adc79805c11b6939c51a794b90b8bfa93"><span class="std std-ref">RemoteContext::Ptr</span></a><span></span> <span class="n">ctx</span><span class="p">,</span>
+    <span class="n">cl_mem</span> <span class="n">buffer</span>
+    <span class="p">)</span></pre></div></div><p>This function is used to obtain remote blob object from user-supplied OpenCL buffer handle.</p>
+<p class="rubric">Parameters:</p>
+<table class="colwidths-given table">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>desc</p></td>
+<td><p>A tensor descriptor object representing remote blob configuration</p></td>
+</tr>
+<tr class="row-even"><td><p>ctx</p></td>
+<td><p>A remote context used to create remote blob</p></td>
+</tr>
+<tr class="row-odd"><td><p>buffer</p></td>
+<td><p>A cl_mem object wrapped by a remote blob</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Returns:</p>
+<p>A remote blob instance</p>
+<span class="target" id="doxid-namespace-inference-engine-1-1gpu-1ae96aec1659ebd3283c478c09f6e8cfae"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><span></span><span class="k">static</span> <a class="reference internal" href="classInferenceEngine_1_1Blob.html#doxid-class-inference-engine-1-1-blob-1abb6c4f89181e2dd6d8a29ada2dfb4060"><span class="std std-ref">Blob::Ptr</span></a><span></span> <span class="n">make_shared_blob</span><span class="p">(</span>
+    <span class="k">const</span> <a class="reference internal" href="classInferenceEngine_1_1TensorDesc.html#doxid-class-inference-engine-1-1-tensor-desc"><span class="std std-ref">TensorDesc</span></a><span></span><span class="o">&amp;</span> <span class="n">desc</span><span class="p">,</span>
+    <a class="reference internal" href="classInferenceEngine_1_1RemoteContext.html#doxid-class-inference-engine-1-1-remote-context-1adc79805c11b6939c51a794b90b8bfa93"><span class="std std-ref">RemoteContext::Ptr</span></a><span></span> <span class="n">ctx</span><span class="p">,</span>
+    <span class="n">cl</span><span class="o">::</span><span class="n">Image2D</span><span class="o">&amp;</span> <span class="n">image</span>
+    <span class="p">)</span></pre></div></div><p>This function is used to obtain remote blob object from user-supplied cl::Image2D wrapper object.</p>
+<p class="rubric">Parameters:</p>
+<table class="colwidths-given table">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>desc</p></td>
+<td><p>A tensor descriptor object representing remote blob configuration</p></td>
+</tr>
+<tr class="row-even"><td><p>ctx</p></td>
+<td><p>A remote context used to create remote blob</p></td>
+</tr>
+<tr class="row-odd"><td><p>image</p></td>
+<td><p>A cl::Image2D object wrapped by a remote blob</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Returns:</p>
+<p>A remote blob instance</p>
+<span class="target" id="doxid-namespace-inference-engine-1-1gpu-1acaa3dc7389d6fdfaa5452e08ba925489"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><span></span><span class="k">static</span> <a class="reference internal" href="classInferenceEngine_1_1Blob.html#doxid-class-inference-engine-1-1-blob-1abb6c4f89181e2dd6d8a29ada2dfb4060"><span class="std std-ref">Blob::Ptr</span></a><span></span> <span class="n">make_shared_blob_nv12</span><span class="p">(</span>
+    <span class="kt">size_t</span> <span class="n">height</span><span class="p">,</span>
+    <span class="kt">size_t</span> <span class="n">width</span><span class="p">,</span>
+    <a class="reference internal" href="classInferenceEngine_1_1RemoteContext.html#doxid-class-inference-engine-1-1-remote-context-1adc79805c11b6939c51a794b90b8bfa93"><span class="std std-ref">RemoteContext::Ptr</span></a><span></span> <span class="n">ctx</span><span class="p">,</span>
+    <span class="n">VASurfaceID</span> <span class="n">nv12_surf</span>
+    <span class="p">)</span></pre></div></div><p>This function is used to obtain a NV12 compound blob object from NV12 VA decoder output. The resulting compound contains two remote blobs for Y and UV planes of the surface.</p>
+<p class="rubric">Parameters:</p>
+<table class="colwidths-given table">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>height</p></td>
+<td><p>A height of Y plane</p></td>
+</tr>
+<tr class="row-even"><td><p>width</p></td>
+<td><p>A width of Y plane</p></td>
+</tr>
+<tr class="row-odd"><td><p>ctx</p></td>
+<td><p>A remote context instance</p></td>
+</tr>
+<tr class="row-even"><td><p>nv12_surf</p></td>
+<td><p>NV12 <code class="docutils literal notranslate"><span class="pre">VASurfaceID</span></code> to create NV12 from</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Returns:</p>
+<p>A remote NV12 blob wrapping <code class="docutils literal notranslate"><span class="pre">VASurfaceID</span></code></p>
+<span class="target" id="doxid-namespace-inference-engine-1-1gpu-1a251bc7130aab41116ebdccc9955a2bae"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><span></span><span class="k">static</span> <a class="reference internal" href="classInferenceEngine_1_1gpu_1_1VAContext.html#doxid-class-inference-engine-1-1gpu-1-1-v-a-context-1a618acae0ec67eddf09180c6af6ca343e"><span class="std std-ref">VAContext::Ptr</span></a><span></span> <span class="n">make_shared_context</span><span class="p">(</span>
+    <a class="reference internal" href="classInferenceEngine_1_1Core.html#doxid-class-inference-engine-1-1-core"><span class="std std-ref">Core</span></a><span></span><span class="o">&amp;</span> <span class="n">core</span><span class="p">,</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">deviceName</span><span class="p">,</span>
+    <span class="n">VADisplay</span> <span class="n">device</span><span class="p">,</span>
+    <span class="kt">int</span> <span class="n">target_tile_id</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="p">)</span></pre></div></div><p>This function is used to obtain remote context object from VA display handle.</p>
+<p class="rubric">Parameters:</p>
+<table class="colwidths-given table">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>core</p></td>
+<td><p>Inference Engine <a class="reference internal" href="classInferenceEngine_1_1Core.html#doxid-class-inference-engine-1-1-core"><span class="std std-ref">Core</span></a> object</p></td>
+</tr>
+<tr class="row-even"><td><p>deviceName</p></td>
+<td><p>A device name to create a remote context for</p></td>
+</tr>
+<tr class="row-odd"><td><p>device</p></td>
+<td><p>A <code class="docutils literal notranslate"><span class="pre">VADisplay</span></code> to create remote context from</p></td>
+</tr>
+<tr class="row-even"><td><p>target_tile_id</p></td>
+<td><p>Desired tile id within given context for multi-tile system. Default value (-1) means that root device should be used</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Returns:</p>
+<p>A remote context wrapping <code class="docutils literal notranslate"><span class="pre">VADisplay</span></code></p>
+<span class="target" id="doxid-namespace-inference-engine-1-1gpu-1a34c6c5f89430f39651644f76b52a0901"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><span></span><span class="k">static</span> <a class="reference internal" href="classInferenceEngine_1_1gpu_1_1VASurfaceBlob.html#doxid-class-inference-engine-1-1gpu-1-1-v-a-surface-blob-1a79c56780d0dd02794c837ccabbad4b3b"><span class="std std-ref">VASurfaceBlob::Ptr</span></a><span></span> <span class="n">make_shared_blob</span><span class="p">(</span>
+    <span class="k">const</span> <a class="reference internal" href="classInferenceEngine_1_1TensorDesc.html#doxid-class-inference-engine-1-1-tensor-desc"><span class="std std-ref">TensorDesc</span></a><span></span><span class="o">&amp;</span> <span class="n">desc</span><span class="p">,</span>
+    <a class="reference internal" href="classInferenceEngine_1_1RemoteContext.html#doxid-class-inference-engine-1-1-remote-context-1adc79805c11b6939c51a794b90b8bfa93"><span class="std std-ref">RemoteContext::Ptr</span></a><span></span> <span class="n">ctx</span><span class="p">,</span>
+    <span class="n">VASurfaceID</span> <span class="n">surface</span><span class="p">,</span>
+    <span class="kt">uint32_t</span> <span class="n">plane</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="p">)</span></pre></div></div><p>This function is used to obtain remote blob object from VA surface handle.</p>
+<p class="rubric">Parameters:</p>
+<table class="colwidths-given table">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>desc</p></td>
+<td><p>Tensor descriptor</p></td>
+</tr>
+<tr class="row-even"><td><p>ctx</p></td>
+<td><p>A remote context instance</p></td>
+</tr>
+<tr class="row-odd"><td><p>surface</p></td>
+<td><p>A <code class="docutils literal notranslate"><span class="pre">VASurfaceID</span></code> to create remote blob from</p></td>
+</tr>
+<tr class="row-even"><td><p>plane</p></td>
+<td><p>An index of a plane inside <code class="docutils literal notranslate"><span class="pre">VASurfaceID</span></code> to create blob from</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Returns:</p>
+<p>A remote blob wrapping <code class="docutils literal notranslate"><span class="pre">VASurfaceID</span></code></p>
+</section>
+</section>
+</section>
+
+
+                </div>
+            
+            
+                <div class='prev-next-bottom'>
+                  
+
+                </div>
+            
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+<footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2021, Intel®.<br>
+</p>
+    </div>
+    
+    <div class="footer-item">
+      <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

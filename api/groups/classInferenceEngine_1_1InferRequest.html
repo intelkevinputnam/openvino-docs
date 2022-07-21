@@ -1,0 +1,676 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>class InferenceEngine::InferRequest &#8212; OpenVINO™  documentation</title>
+    
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/blank.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/doxyrest-pygments.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <link href="../../_static/css/media/favicon.ico" rel="shortcut icon">
+    <link rel="stylesheet" href="../../_static/css/openvino_sphinx_theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/css/button.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/css/input.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/css/textfield.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/css/tabs.css" type="text/css" />
+    <script src="../../_static/js/openvino_sphinx_theme.js"></script>
+    <link rel="stylesheet" href="../../_static/css/viewer.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/0.5.7/chartjs-plugin-annotation.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-barchart-background@1.3.0/build/Plugin.Barchart.Background.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-deferred@1"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.1/papaparse.min.js"></script>
+    <script src="../../_static/js/viewer.min.js"></script>
+    <script src="/assets/versions_raw.js"></script>
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/tabs.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/js/custom.js"></script>
+    <script src="../../_static/js/graphs.js"></script>
+    <script src="../../_static/js/graphs_ov_tf.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/target-highlight.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <link rel="canonical" href="https://docs.openvino.ai/latest/api/groups/classInferenceEngine_1_1InferRequest.html" />
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+      <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+
+<a class="navbar-brand" href="../../index.html">
+  <img src="../../_static/logo.svg" class="logo" alt="logo">
+</a>
+
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../pages/get_started.html">
+  Get Started
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../pages/documentation.html">
+  Documentation
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../tutorials.html">
+  Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api_reference.html">
+  API Reference
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../model_zoo.html">
+  Model Zoo
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../pages/resources.html">
+  Resources
+ </a>
+</li>
+
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/openvinotoolkit/openvino" rel="noopener" target="_blank" title="GitHub">
+            <span><i class="sst-github"></i></span>
+            <label class="sr-only">GitHub</label>
+          </a>
+        </li>
+</ul>
+      </div>
+      
+      <div class="navbar-end-item">
+        
+<div class="dropdown sst-dropdown sst-dropdown-navbar">
+  <button class="btn sst-btn dropdown-toggle" type="button" id="version-selector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+  <div class="dropdown-menu" aria-labelledby="version-selector">
+  </div>
+</div>
+      </div>
+      
+      <div class="navbar-end-item">
+        
+
+<div class="dropdown sst-dropdown sst-dropdown-navbar">
+  <button class="btn sst-btn dropdown-toggle" type="button" id="language-selector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">English</button>
+  <div class="dropdown-menu" aria-labelledby="language-selector">
+    
+      
+        <a class="dropdown-item font-weight-bold" href="/latest/api/groups/classInferenceEngine_1_1InferRequest.html">English</a>
+      
+    
+      
+        <a  class="dropdown-item" href="/cn/latest/api/groups/classInferenceEngine_1_1InferRequest.html">Chinese</a>
+      
+    
+  </div>
+</div>
+
+      </div>
+      
+    </div>
+  </div>
+</div>
+        <div id="collapse-nav-wrapper" class="container-xl">
+          <button id="collapse-nav" class="button bttn-prm button-size-m" type="button" data-toggle="collapse" data-target="#nav-tree" aria-expanded="false" aria-controls="nav-tree">
+            Documentation navigation <i class="fas fa-chevron-down"></i>
+          </button>
+        </div>
+      </nav>
+      <div class="transition-banner container-fluid alert alert-info alert-dismissible fade show" role="alert">
+        <p>OpenVINO 2022.1 introduces a new version of OpenVINO API (API 2.0). For more information on the changes and transition steps, see the <a href="https://docs.openvino.ai/latest/openvino_2_0_transition_guide.html">transition guide</a></p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar" id="nav-tree"><form class="searchForm bd-search d-flex align-items-center" action="../../search.html" method="get">
+    <i class="icon fas fa-search"></i>
+    <input type="search" class="form-control" name="query" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="enumInferenceEngine_1_1InferRequest_1_1WaitMode.html">
+   WaitMode
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="structInferenceEngine_1_1InferRequest_1_1SetCallback.html">
+   SetCallback
+  </a>
+ </li>
+</ul>
+
+  </div>
+</nav>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+              
+              <div class="toc-item">
+                
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#overview">
+   Overview
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#detailed-documentation">
+   Detailed Documentation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#typedefs">
+     Typedefs
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#construction">
+     Construction
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#methods">
+     Methods
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+</nav>
+              </div>
+              
+              <div class="toc-item">
+                <div class="tocsection download-docs">
+  <div class="dropdown sst-dropdown">
+    <button class="button bttn-prm button-size-m" data-display="static" type="button" id="download-options"
+      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Download Docs
+    </button>
+    <div class="dropdown-menu" aria-labelledby="download-options">
+      <a class="dropdown-item" href="#" onclick="window.print()">.pdf</a>
+      <a id="download-zip-btn" class="dropdown-item" href="#">.zip</a>
+    </div>
+  </div>
+</div>
+              </div>
+              
+            
+          </div>
+          
+
+          
+          
+              
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+
+<div class="tocsection editthispage">
+    <a href="None">
+        <i class="fas fa-pencil-alt"></i> Edit this page
+    </a>
+</div>
+
+            
+                <div>
+                  
+  <section id="class-inferenceengine-inferrequest">
+<span id="doxid-class-inference-engine-1-1-infer-request"></span><span id="index-0"></span><h1>class InferenceEngine::InferRequest<a class="headerlink" href="#class-inferenceengine-inferrequest" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>This is an interface of asynchronous infer request. <a class="reference internal" href="#details-class-inference-engine-1-1-infer-request"><span class="std std-ref">More…</span></a></p>
+<div class="highlight doxyrest-overview-code-block"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;ie_infer_request.hpp&gt;</span><span class="cp"></span>
+
+<span class="k">class</span> <span class="n">InferRequest</span>
+<span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="c1">// typedefs</span>
+
+    <span class="k">typedef</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">InferRequest</span><span class="o">&gt;</span> <a class="reference internal" href="#doxid-class-inference-engine-1-1-infer-request-1aa725364c5565a1cbe4d0e9245a4cb055"><span class="std std-ref">Ptr</span></a><span></span><span class="p">;</span>
+
+    <span class="c1">// enums</span>
+
+    <span class="k">enum</span> <a class="reference internal" href="enumInferenceEngine_1_1InferRequest_1_1WaitMode.html#doxid-class-inference-engine-1-1-infer-request-1ac52c77df62b93f2f40b47ea232fde45a"><span class="std std-ref">WaitMode</span></a><span></span><span class="p">;</span>
+
+    <span class="c1">// structs</span>
+
+    <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+    <span class="k">struct</span> <a class="reference internal" href="structInferenceEngine_1_1InferRequest_1_1SetCallback.html#doxid-struct-inference-engine-1-1-infer-request-1-1-set-callback"><span class="std std-ref">SetCallback</span></a><span></span><span class="p">;</span>
+    <span class="k">template</span> <span class="o">&lt;&gt;</span>
+    <span class="k">struct</span> <a class="reference internal" href="structInferenceEngine_1_1InferRequest_1_1SetCallback.html#doxid-struct-inference-engine-1-1-infer-request-1-1-set-callback-3-01-i-infer-request-1-1-completion-callback-01-4"><span class="std std-ref">SetCallback&lt;IInferRequest::CompletionCallback&gt;</span></a><span></span><span class="p">;</span>
+    <span class="k">template</span> <span class="o">&lt;&gt;</span>
+    <span class="k">struct</span> <a class="reference internal" href="structInferenceEngine_1_1InferRequest_1_1SetCallback.html#doxid-struct-inference-engine-1-1-infer-request-1-1-set-callback-3-01std-1-1function-3-01void-07-inferd36a10d7c08edcd1bda12bce9578bb66"><span class="std std-ref">SetCallback&lt;std::function&lt;void(InferRequest, StatusCode)&gt;&gt;</span></a><span></span><span class="p">;</span>
+
+    <span class="c1">// construction</span>
+
+    <a class="reference internal" href="#doxid-class-inference-engine-1-1-infer-request-1a47c1d4d15e66d7923e59551d70f8ca74"><span class="std std-ref">InferRequest</span></a><span></span><span class="p">();</span>
+    <a class="reference internal" href="#doxid-class-inference-engine-1-1-infer-request-1a927f91204d9477f67433b60230464026"><span class="std std-ref">InferRequest</span></a><span></span><span class="p">(</span><span class="k">const</span> <span class="n">InferRequest</span><span class="o">&amp;</span> <span class="n">other</span><span class="p">);</span>
+    <a class="reference internal" href="#doxid-class-inference-engine-1-1-infer-request-1a212108576a6bf2952aff41244cc50f95"><span class="std std-ref">InferRequest</span></a><span></span><span class="p">(</span><span class="n">InferRequest</span><span class="o">&amp;&amp;</span> <span class="n">other</span><span class="p">);</span>
+
+    <span class="c1">// methods</span>
+
+    <span class="n">InferRequest</span><span class="o">&amp;</span> <a class="reference internal" href="#doxid-class-inference-engine-1-1-infer-request-1a15bb1dc80080766661cae70f98fe6b02"><span class="std std-ref">operator =</span></a><span></span> <span class="p">(</span><span class="k">const</span> <span class="n">InferRequest</span><span class="o">&amp;</span> <span class="n">other</span><span class="p">);</span>
+    <span class="n">InferRequest</span><span class="o">&amp;</span> <a class="reference internal" href="#doxid-class-inference-engine-1-1-infer-request-1aafacc88c04986cd659397ffb1c6f792a"><span class="std std-ref">operator =</span></a><span></span> <span class="p">(</span><span class="n">InferRequest</span><span class="o">&amp;&amp;</span> <span class="n">other</span><span class="p">);</span>
+    <span class="kt">void</span> <a class="reference internal" href="#doxid-class-inference-engine-1-1-infer-request-1a27fb179e3bae652d76076965fd2a5653"><span class="std std-ref">SetBlob</span></a><span></span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name</span><span class="p">,</span> <span class="k">const</span> <a class="reference internal" href="classInferenceEngine_1_1Blob.html#doxid-class-inference-engine-1-1-blob-1abb6c4f89181e2dd6d8a29ada2dfb4060"><span class="std std-ref">Blob::Ptr</span></a><span></span><span class="o">&amp;</span> <span class="n">data</span><span class="p">);</span>
+    <a class="reference internal" href="classInferenceEngine_1_1Blob.html#doxid-class-inference-engine-1-1-blob-1abb6c4f89181e2dd6d8a29ada2dfb4060"><span class="std std-ref">Blob::Ptr</span></a><span></span> <a class="reference internal" href="#doxid-class-inference-engine-1-1-infer-request-1a9601a4cda3f309181af34feedf1b914c"><span class="std std-ref">GetBlob</span></a><span></span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name</span><span class="p">);</span>
+
+    <span class="kt">void</span> <a class="reference internal" href="#doxid-class-inference-engine-1-1-infer-request-1a21472d80ed86e65230d6d97f334c9da6"><span class="std std-ref">SetBlob</span></a><span></span><span class="p">(</span>
+        <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name</span><span class="p">,</span>
+        <span class="k">const</span> <a class="reference internal" href="classInferenceEngine_1_1Blob.html#doxid-class-inference-engine-1-1-blob-1abb6c4f89181e2dd6d8a29ada2dfb4060"><span class="std std-ref">Blob::Ptr</span></a><span></span><span class="o">&amp;</span> <span class="n">data</span><span class="p">,</span>
+        <span class="k">const</span> <a class="reference internal" href="classInferenceEngine_1_1PreProcessInfo.html#doxid-class-inference-engine-1-1-pre-process-info"><span class="std std-ref">PreProcessInfo</span></a><span></span><span class="o">&amp;</span> <span class="n">info</span>
+        <span class="p">);</span>
+
+    <span class="k">const</span> <a class="reference internal" href="classInferenceEngine_1_1PreProcessInfo.html#doxid-class-inference-engine-1-1-pre-process-info"><span class="std std-ref">PreProcessInfo</span></a><span></span><span class="o">&amp;</span> <a class="reference internal" href="#doxid-class-inference-engine-1-1-infer-request-1a04c843980fa57b22b6375346b3665aec"><span class="std std-ref">GetPreProcess</span></a><span></span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+    <span class="kt">void</span> <a class="reference internal" href="#doxid-class-inference-engine-1-1-infer-request-1a3391ce30894abde730523e9ca9371ce8"><span class="std std-ref">Infer</span></a><span></span><span class="p">();</span>
+    <span class="kt">void</span> <a class="reference internal" href="#doxid-class-inference-engine-1-1-infer-request-1ad4b36d13349db2c9985e4174d7e10ce9"><span class="std std-ref">Cancel</span></a><span></span><span class="p">();</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span> <a class="reference internal" href="structInferenceEngine_1_1InferenceEngineProfileInfo.html#doxid-struct-inference-engine-1-1-inference-engine-profile-info"><span class="std std-ref">InferenceEngineProfileInfo</span></a><span></span><span class="o">&gt;</span> <a class="reference internal" href="#doxid-class-inference-engine-1-1-infer-request-1a3122b59c0115bf413fc6379b93808855"><span class="std std-ref">GetPerformanceCounts</span></a><span></span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+    <span class="kt">void</span> <a class="reference internal" href="#doxid-class-inference-engine-1-1-infer-request-1a1d84744a6b08a2ace4041ff81519c946"><span class="std std-ref">SetInput</span></a><span></span><span class="p">(</span><span class="k">const</span> <a class="reference internal" href="namespaceInferenceEngine.html#doxid-namespace-inference-engine-1ad1c63c694d34358a748f591ffa74a9d0"><span class="std std-ref">BlobMap</span></a><span></span><span class="o">&amp;</span> <span class="n">inputs</span><span class="p">);</span>
+    <span class="kt">void</span> <a class="reference internal" href="#doxid-class-inference-engine-1-1-infer-request-1a8a0ea625862861f5fc71f4b6ab9ca587"><span class="std std-ref">SetOutput</span></a><span></span><span class="p">(</span><span class="k">const</span> <a class="reference internal" href="namespaceInferenceEngine.html#doxid-namespace-inference-engine-1ad1c63c694d34358a748f591ffa74a9d0"><span class="std std-ref">BlobMap</span></a><span></span><span class="o">&amp;</span> <span class="n">results</span><span class="p">);</span>
+    <span class="kt">void</span> <a class="reference internal" href="#doxid-class-inference-engine-1-1-infer-request-1a2f2e7ae0a8ae7dda6e7b4099eed9d183"><span class="std std-ref">SetBatch</span></a><span></span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span> <span class="n">batch</span><span class="p">);</span>
+    <span class="kt">void</span> <a class="reference internal" href="#doxid-class-inference-engine-1-1-infer-request-1a405293e8423d82a5b45f642a3bef0d24"><span class="std std-ref">StartAsync</span></a><span></span><span class="p">();</span>
+    <a class="reference internal" href="enumInferenceEngine_1_1StatusCode.html#doxid-namespace-inference-engine-1a2ce897aa6a353c071958fe379f5d6421"><span class="std std-ref">StatusCode</span></a><span></span> <a class="reference internal" href="#doxid-class-inference-engine-1-1-infer-request-1a7e54bb6699e0df0b88445be9eeb71948"><span class="std std-ref">Wait</span></a><span></span><span class="p">(</span><span class="kt">int64_t</span> <span class="n">millis_timeout</span> <span class="o">=</span> <a class="reference internal" href="enumInferenceEngine_1_1InferRequest_1_1WaitMode.html#doxid-class-inference-engine-1-1-infer-request-1ac52c77df62b93f2f40b47ea232fde45aaa71f7b3aaba799f92c75c52ac56897d8"><span class="std std-ref">RESULT_READY</span></a><span></span><span class="p">);</span>
+
+    <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">F</span><span class="o">&gt;</span>
+    <span class="kt">void</span> <a class="reference internal" href="#doxid-class-inference-engine-1-1-infer-request-1a3d37c50e3762862f29af78d1b0e5a435"><span class="std std-ref">SetCompletionCallback</span></a><span></span><span class="p">(</span><span class="n">F</span> <span class="n">callbackToSet</span><span class="p">);</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><a class="reference internal" href="classInferenceEngine_1_1VariableState.html#doxid-class-inference-engine-1-1-variable-state"><span class="std std-ref">VariableState</span></a><span></span><span class="o">&gt;</span> <a class="reference internal" href="#doxid-class-inference-engine-1-1-infer-request-1a34577cbdb2fabc5facb53d65d6724d4c"><span class="std std-ref">QueryState</span></a><span></span><span class="p">();</span>
+    <a class="reference internal" href="#doxid-class-inference-engine-1-1-infer-request-1a78b8f13d6b648e4826a9cf4c4fb32f1f"><span class="std std-ref">operator std::shared_ptr&lt; IInferRequest &gt;</span></a><span></span> <span class="p">();</span>
+    <span class="kt">bool</span> <a class="reference internal" href="#doxid-class-inference-engine-1-1-infer-request-1a64d1c42b9e12a1af040ecf2b255f4222"><span class="std std-ref">operator !</span></a><span></span> <span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+    <a class="reference internal" href="#doxid-class-inference-engine-1-1-infer-request-1ae09af4862c4db17651dad2a98afd557e"><span class="std std-ref">operator bool</span></a><span></span> <span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+    <span class="kt">bool</span> <a class="reference internal" href="#doxid-class-inference-engine-1-1-infer-request-1a2159a92894f4aa89501d08dd6d30dce6"><span class="std std-ref">operator !=</span></a><span></span> <span class="p">(</span><span class="k">const</span> <span class="n">InferRequest</span><span class="o">&amp;</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+    <span class="kt">bool</span> <a class="reference internal" href="#doxid-class-inference-engine-1-1-infer-request-1a9dda456c316adffee2f6213acb43b80d"><span class="std std-ref">operator ==</span></a><span></span> <span class="p">(</span><span class="k">const</span> <span class="n">InferRequest</span><span class="o">&amp;</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+<span class="p">};</span></pre></div></div></section>
+<section id="detailed-documentation">
+<span id="details-class-inference-engine-1-1-infer-request"></span><h2>Detailed Documentation<a class="headerlink" href="#detailed-documentation" title="Permalink to this headline">¶</a></h2>
+<p>This is an interface of asynchronous infer request.</p>
+<p>Wraps <a class="reference internal" href="classInferenceEngine_1_1IInferRequest.html#doxid-class-inference-engine-1-1-i-infer-request"><span class="std std-ref">IInferRequest</span></a> It can throw exceptions safely for the application, where it is properly handled.</p>
+<section id="typedefs">
+<h3>Typedefs<a class="headerlink" href="#typedefs" title="Permalink to this headline">¶</a></h3>
+<span class="target" id="doxid-class-inference-engine-1-1-infer-request-1aa725364c5565a1cbe4d0e9245a4cb055"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><span></span><span class="k">typedef</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">InferRequest</span><span class="o">&gt;</span> <span class="n">Ptr</span></pre></div></div><p>A smart pointer to the <a class="reference internal" href="#doxid-class-inference-engine-1-1-infer-request"><span class="std std-ref">InferRequest</span></a> object.</p>
+</section>
+<section id="construction">
+<h3>Construction<a class="headerlink" href="#construction" title="Permalink to this headline">¶</a></h3>
+<span class="target" id="doxid-class-inference-engine-1-1-infer-request-1a47c1d4d15e66d7923e59551d70f8ca74"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><span></span><span class="n">InferRequest</span><span class="p">()</span></pre></div></div><p>Default constructor.</p>
+<span class="target" id="doxid-class-inference-engine-1-1-infer-request-1a927f91204d9477f67433b60230464026"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><span></span><span class="n">InferRequest</span><span class="p">(</span><span class="k">const</span> <span class="n">InferRequest</span><span class="o">&amp;</span> <span class="n">other</span><span class="p">)</span></pre></div></div><p>Default copy constructor.</p>
+<p class="rubric">Parameters:</p>
+<table class="colwidths-given table">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>other</p></td>
+<td><p>other <a class="reference internal" href="#doxid-class-inference-engine-1-1-infer-request"><span class="std std-ref">InferRequest</span></a> object</p></td>
+</tr>
+</tbody>
+</table>
+<span class="target" id="doxid-class-inference-engine-1-1-infer-request-1a212108576a6bf2952aff41244cc50f95"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><span></span><span class="n">InferRequest</span><span class="p">(</span><span class="n">InferRequest</span><span class="o">&amp;&amp;</span> <span class="n">other</span><span class="p">)</span></pre></div></div><p>Default move constructor.</p>
+<p class="rubric">Parameters:</p>
+<table class="colwidths-given table">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>other</p></td>
+<td><p>other <a class="reference internal" href="#doxid-class-inference-engine-1-1-infer-request"><span class="std std-ref">InferRequest</span></a> object</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="methods">
+<h3>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h3>
+<span class="target" id="doxid-class-inference-engine-1-1-infer-request-1a15bb1dc80080766661cae70f98fe6b02"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><span></span><span class="n">InferRequest</span><span class="o">&amp;</span> <span class="k">operator</span> <span class="o">=</span> <span class="p">(</span><span class="k">const</span> <span class="n">InferRequest</span><span class="o">&amp;</span> <span class="n">other</span><span class="p">)</span></pre></div></div><p>Default copy assignment operator.</p>
+<p class="rubric">Parameters:</p>
+<table class="colwidths-given table">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>other</p></td>
+<td><p>other <a class="reference internal" href="#doxid-class-inference-engine-1-1-infer-request"><span class="std std-ref">InferRequest</span></a> object</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Returns:</p>
+<p>reference to the current object</p>
+<span class="target" id="doxid-class-inference-engine-1-1-infer-request-1aafacc88c04986cd659397ffb1c6f792a"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><span></span><span class="n">InferRequest</span><span class="o">&amp;</span> <span class="k">operator</span> <span class="o">=</span> <span class="p">(</span><span class="n">InferRequest</span><span class="o">&amp;&amp;</span> <span class="n">other</span><span class="p">)</span></pre></div></div><p>Default move assignment operator.</p>
+<p class="rubric">Parameters:</p>
+<table class="colwidths-given table">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>other</p></td>
+<td><p>other <a class="reference internal" href="#doxid-class-inference-engine-1-1-infer-request"><span class="std std-ref">InferRequest</span></a> object</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Returns:</p>
+<p>reference to the current object</p>
+<span class="target" id="doxid-class-inference-engine-1-1-infer-request-1a27fb179e3bae652d76076965fd2a5653"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="n">SetBlob</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name</span><span class="p">,</span> <span class="k">const</span> <a class="reference internal" href="classInferenceEngine_1_1Blob.html#doxid-class-inference-engine-1-1-blob-1abb6c4f89181e2dd6d8a29ada2dfb4060"><span class="std std-ref">Blob::Ptr</span></a><span></span><span class="o">&amp;</span> <span class="n">data</span><span class="p">)</span></pre></div></div><p>Sets input/output data to infer.</p>
+<p>Memory allocation does not happen</p>
+<p class="rubric">Parameters:</p>
+<table class="colwidths-given table">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>name</p></td>
+<td><p>Name of input or output blob.</p></td>
+</tr>
+<tr class="row-even"><td><p>data</p></td>
+<td><p>Reference to input or output blob. The type of a blob must match the network input precision and size.</p></td>
+</tr>
+</tbody>
+</table>
+<span class="target" id="doxid-class-inference-engine-1-1-infer-request-1a9601a4cda3f309181af34feedf1b914c"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><a class="reference internal" href="classInferenceEngine_1_1Blob.html#doxid-class-inference-engine-1-1-blob-1abb6c4f89181e2dd6d8a29ada2dfb4060"><span class="std std-ref">Blob::Ptr</span></a><span></span> <span class="n">GetBlob</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name</span><span class="p">)</span></pre></div></div><p>Gets input/output data for inference.</p>
+<p>Memory allocation does not happen</p>
+<p class="rubric">Parameters:</p>
+<table class="colwidths-given table">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>name</p></td>
+<td><p>A name of <a class="reference internal" href="classInferenceEngine_1_1Blob.html#doxid-class-inference-engine-1-1-blob"><span class="std std-ref">Blob</span></a> to get</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Returns:</p>
+<p>A shared pointer to a <a class="reference internal" href="classInferenceEngine_1_1Blob.html#doxid-class-inference-engine-1-1-blob"><span class="std std-ref">Blob</span></a> with a name <code class="docutils literal notranslate"><span class="pre">name</span></code>. If a blob is not found, an exception is thrown.</p>
+<span class="target" id="doxid-class-inference-engine-1-1-infer-request-1a21472d80ed86e65230d6d97f334c9da6"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="n">SetBlob</span><span class="p">(</span>
+    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name</span><span class="p">,</span>
+    <span class="k">const</span> <a class="reference internal" href="classInferenceEngine_1_1Blob.html#doxid-class-inference-engine-1-1-blob-1abb6c4f89181e2dd6d8a29ada2dfb4060"><span class="std std-ref">Blob::Ptr</span></a><span></span><span class="o">&amp;</span> <span class="n">data</span><span class="p">,</span>
+    <span class="k">const</span> <a class="reference internal" href="classInferenceEngine_1_1PreProcessInfo.html#doxid-class-inference-engine-1-1-pre-process-info"><span class="std std-ref">PreProcessInfo</span></a><span></span><span class="o">&amp;</span> <span class="n">info</span>
+    <span class="p">)</span></pre></div></div><p>Sets blob with a pre-process information.</p>
+<p>Returns an error in case if data blob is output</p>
+<p class="rubric">Parameters:</p>
+<table class="colwidths-given table">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>name</p></td>
+<td><p>Name of input blob.</p></td>
+</tr>
+<tr class="row-even"><td><p>data</p></td>
+<td><p>A reference to input. The type of <a class="reference internal" href="classInferenceEngine_1_1Blob.html#doxid-class-inference-engine-1-1-blob"><span class="std std-ref">Blob</span></a> must correspond to the network input precision and size.</p></td>
+</tr>
+<tr class="row-odd"><td><p>info</p></td>
+<td><p>Preprocess info for blob.</p></td>
+</tr>
+</tbody>
+</table>
+<span class="target" id="doxid-class-inference-engine-1-1-infer-request-1a04c843980fa57b22b6375346b3665aec"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><span></span><span class="k">const</span> <a class="reference internal" href="classInferenceEngine_1_1PreProcessInfo.html#doxid-class-inference-engine-1-1-pre-process-info"><span class="std std-ref">PreProcessInfo</span></a><span></span><span class="o">&amp;</span> <span class="n">GetPreProcess</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name</span><span class="p">)</span> <span class="k">const</span></pre></div></div><p>Gets pre-process for input data.</p>
+<p class="rubric">Parameters:</p>
+<table class="colwidths-given table">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>name</p></td>
+<td><p>Name of input blob.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Returns:</p>
+<p>pointer to pre-process info of blob with name</p>
+<span class="target" id="doxid-class-inference-engine-1-1-infer-request-1a3391ce30894abde730523e9ca9371ce8"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="n">Infer</span><span class="p">()</span></pre></div></div><p>Infers specified input(s) in synchronous mode.</p>
+<p>blocks all methods of <a class="reference internal" href="#doxid-class-inference-engine-1-1-infer-request"><span class="std std-ref">InferRequest</span></a> while request is ongoing (running or waiting in queue)</p>
+<span class="target" id="doxid-class-inference-engine-1-1-infer-request-1ad4b36d13349db2c9985e4174d7e10ce9"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="n">Cancel</span><span class="p">()</span></pre></div></div><p>Cancels inference request.</p>
+<span class="target" id="doxid-class-inference-engine-1-1-infer-request-1a3122b59c0115bf413fc6379b93808855"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span> <a class="reference internal" href="structInferenceEngine_1_1InferenceEngineProfileInfo.html#doxid-struct-inference-engine-1-1-inference-engine-profile-info"><span class="std std-ref">InferenceEngineProfileInfo</span></a><span></span><span class="o">&gt;</span> <span class="n">GetPerformanceCounts</span><span class="p">()</span> <span class="k">const</span></pre></div></div><p>Queries performance measures per layer to get feedback of what is the most time consuming layer.</p>
+<p>not all plugins provide meaningful data</p>
+<p class="rubric">Returns:</p>
+<p>Map of layer names to profiling information for that layer</p>
+<span class="target" id="doxid-class-inference-engine-1-1-infer-request-1a1d84744a6b08a2ace4041ff81519c946"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="n">SetInput</span><span class="p">(</span><span class="k">const</span> <a class="reference internal" href="namespaceInferenceEngine.html#doxid-namespace-inference-engine-1ad1c63c694d34358a748f591ffa74a9d0"><span class="std std-ref">BlobMap</span></a><span></span><span class="o">&amp;</span> <span class="n">inputs</span><span class="p">)</span></pre></div></div><p>Sets input data to infer.</p>
+<p>Memory allocation doesn’t happen</p>
+<p class="rubric">Parameters:</p>
+<table class="colwidths-given table">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>inputs</p></td>
+<td><p>A reference to a map of input blobs accessed by input names. The type of <a class="reference internal" href="classInferenceEngine_1_1Blob.html#doxid-class-inference-engine-1-1-blob"><span class="std std-ref">Blob</span></a> must correspond to the network input precision and size.</p></td>
+</tr>
+</tbody>
+</table>
+<span class="target" id="doxid-class-inference-engine-1-1-infer-request-1a8a0ea625862861f5fc71f4b6ab9ca587"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="n">SetOutput</span><span class="p">(</span><span class="k">const</span> <a class="reference internal" href="namespaceInferenceEngine.html#doxid-namespace-inference-engine-1ad1c63c694d34358a748f591ffa74a9d0"><span class="std std-ref">BlobMap</span></a><span></span><span class="o">&amp;</span> <span class="n">results</span><span class="p">)</span></pre></div></div><p>Sets data that will contain result of the inference.</p>
+<p>Memory allocation doesn’t happen</p>
+<p class="rubric">Parameters:</p>
+<table class="colwidths-given table">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>results</p></td>
+<td><ul class="simple">
+<li><p>a reference to a map of result blobs accessed by output names. The type of <a class="reference internal" href="classInferenceEngine_1_1Blob.html#doxid-class-inference-engine-1-1-blob"><span class="std std-ref">Blob</span></a> must correspond to the network output precision and size.</p></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<span class="target" id="doxid-class-inference-engine-1-1-infer-request-1a2f2e7ae0a8ae7dda6e7b4099eed9d183"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="n">SetBatch</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span> <span class="n">batch</span><span class="p">)</span></pre></div></div><p>Sets new batch size when dynamic batching is enabled in executable network that created this request.</p>
+<p class="rubric">Parameters:</p>
+<table class="colwidths-given table">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>batch</p></td>
+<td><p>new batch size to be used by all the following inference calls for this request.</p></td>
+</tr>
+</tbody>
+</table>
+<span class="target" id="doxid-class-inference-engine-1-1-infer-request-1a405293e8423d82a5b45f642a3bef0d24"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="n">StartAsync</span><span class="p">()</span></pre></div></div><p>Start inference of specified input(s) in asynchronous mode.</p>
+<p>It returns immediately. Inference starts also immediately.</p>
+<span class="target" id="doxid-class-inference-engine-1-1-infer-request-1a7e54bb6699e0df0b88445be9eeb71948"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><a class="reference internal" href="enumInferenceEngine_1_1StatusCode.html#doxid-namespace-inference-engine-1a2ce897aa6a353c071958fe379f5d6421"><span class="std std-ref">StatusCode</span></a><span></span> <span class="n">Wait</span><span class="p">(</span><span class="kt">int64_t</span> <span class="n">millis_timeout</span> <span class="o">=</span> <a class="reference internal" href="enumInferenceEngine_1_1InferRequest_1_1WaitMode.html#doxid-class-inference-engine-1-1-infer-request-1ac52c77df62b93f2f40b47ea232fde45aaa71f7b3aaba799f92c75c52ac56897d8"><span class="std std-ref">RESULT_READY</span></a><span></span><span class="p">)</span></pre></div></div><p>Waits for the result to become available. Blocks until specified millis_timeout has elapsed or the result becomes available, whichever comes first.</p>
+<p>There are special cases when millis_timeout is equal some value of the WaitMode enum:</p>
+<ul class="simple">
+<li><p>STATUS_ONLY - immediately returns inference status (IInferRequest::RequestStatus). It does not block or interrupt current thread</p></li>
+<li><p>RESULT_READY - waits until inference result becomes available</p></li>
+</ul>
+<p class="rubric">Parameters:</p>
+<table class="colwidths-given table">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>millis_timeout</p></td>
+<td><p>Maximum duration in milliseconds to block for</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Returns:</p>
+<p>A status code of operation</p>
+<span class="target" id="doxid-class-inference-engine-1-1-infer-request-1a3d37c50e3762862f29af78d1b0e5a435"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><span></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">F</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">SetCompletionCallback</span><span class="p">(</span><span class="n">F</span> <span class="n">callbackToSet</span><span class="p">)</span></pre></div></div><p>Sets a callback function that will be called on success or failure of asynchronous request.</p>
+<p class="rubric">Parameters:</p>
+<table class="colwidths-given table">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>callbackToSet</p></td>
+<td><p>callback object which will be called on when inference finish.</p></td>
+</tr>
+</tbody>
+</table>
+<span class="target" id="doxid-class-inference-engine-1-1-infer-request-1a34577cbdb2fabc5facb53d65d6724d4c"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><a class="reference internal" href="classInferenceEngine_1_1VariableState.html#doxid-class-inference-engine-1-1-variable-state"><span class="std std-ref">VariableState</span></a><span></span><span class="o">&gt;</span> <span class="n">QueryState</span><span class="p">()</span></pre></div></div><p>Gets state control interface for given infer request.</p>
+<p>State control essential for recurrent networks</p>
+<p class="rubric">Returns:</p>
+<p>A vector of Memory State objects</p>
+<span class="target" id="doxid-class-inference-engine-1-1-infer-request-1a78b8f13d6b648e4826a9cf4c4fb32f1f"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><span></span><span class="k">operator</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span> <span class="n">IInferRequest</span> <span class="o">&gt;</span> <span class="p">()</span></pre></div></div><p><a class="reference internal" href="classInferenceEngine_1_1IInferRequest.html#doxid-class-inference-engine-1-1-i-infer-request"><span class="std std-ref">IInferRequest</span></a> pointer to be used directly in CreateInferRequest functions.</p>
+<p class="rubric">Returns:</p>
+<p>A shared pointer to <a class="reference internal" href="classInferenceEngine_1_1IInferRequest.html#doxid-class-inference-engine-1-1-i-infer-request"><span class="std std-ref">IInferRequest</span></a> interface</p>
+<span class="target" id="doxid-class-inference-engine-1-1-infer-request-1a64d1c42b9e12a1af040ecf2b255f4222"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><span></span><span class="kt">bool</span> <span class="k">operator</span> <span class="o">!</span> <span class="p">()</span> <span class="k">const</span></pre></div></div><p>Checks if current <a class="reference internal" href="#doxid-class-inference-engine-1-1-infer-request"><span class="std std-ref">InferRequest</span></a> object is not initialized.</p>
+<p class="rubric">Returns:</p>
+<p>true if current <a class="reference internal" href="#doxid-class-inference-engine-1-1-infer-request"><span class="std std-ref">InferRequest</span></a> object is not initialized, false - otherwise</p>
+<span class="target" id="doxid-class-inference-engine-1-1-infer-request-1ae09af4862c4db17651dad2a98afd557e"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><span></span><span class="k">operator</span> <span class="kt">bool</span> <span class="p">()</span> <span class="k">const</span></pre></div></div><p>Checks if current <a class="reference internal" href="#doxid-class-inference-engine-1-1-infer-request"><span class="std std-ref">InferRequest</span></a> object is initialized.</p>
+<p class="rubric">Returns:</p>
+<p>true if current <a class="reference internal" href="#doxid-class-inference-engine-1-1-infer-request"><span class="std std-ref">InferRequest</span></a> object is initialized, false - otherwise</p>
+<span class="target" id="doxid-class-inference-engine-1-1-infer-request-1a2159a92894f4aa89501d08dd6d30dce6"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><span></span><span class="kt">bool</span> <span class="k">operator</span> <span class="o">!=</span> <span class="p">(</span><span class="k">const</span> <span class="n">InferRequest</span><span class="o">&amp;</span><span class="p">)</span> <span class="k">const</span></pre></div></div><p>Compares whether this request wraps the same impl underneath.</p>
+<p class="rubric">Returns:</p>
+<p>true if current <a class="reference internal" href="#doxid-class-inference-engine-1-1-infer-request"><span class="std std-ref">InferRequest</span></a> object doesn’t wrap the same impl as the operator’s arg</p>
+<span class="target" id="doxid-class-inference-engine-1-1-infer-request-1a9dda456c316adffee2f6213acb43b80d"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><span></span><span class="kt">bool</span> <span class="k">operator</span> <span class="o">==</span> <span class="p">(</span><span class="k">const</span> <span class="n">InferRequest</span><span class="o">&amp;</span><span class="p">)</span> <span class="k">const</span></pre></div></div><p>Compares whether this request wraps the same impl underneath.</p>
+<p class="rubric">Returns:</p>
+<p>true if current <a class="reference internal" href="#doxid-class-inference-engine-1-1-infer-request"><span class="std std-ref">InferRequest</span></a> object wraps the same impl as the operator’s arg</p>
+</section>
+</section>
+</section>
+
+
+                </div>
+            
+            
+                <div class='prev-next-bottom'>
+                  
+
+                </div>
+            
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+<footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2021, Intel®.<br>
+</p>
+    </div>
+    
+    <div class="footer-item">
+      <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

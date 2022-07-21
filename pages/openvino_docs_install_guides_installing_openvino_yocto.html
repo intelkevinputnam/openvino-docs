@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Create a Yocto Image with Intel® Distribution of OpenVINO™ toolkit &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -629,16 +636,16 @@
             
                 <div>
                   
-  <div class="section" id="create-a-yocto-image-with-intel-distribution-of-openvino-toolkit">
+  <section id="create-a-yocto-image-with-intel-distribution-of-openvino-toolkit">
 <span id="doxid-openvino-docs-install-guides-installing-openvino-yocto"></span><span id="index-0"></span><h1>Create a Yocto Image with Intel® Distribution of OpenVINO™ toolkit<a class="headerlink" href="#create-a-yocto-image-with-intel-distribution-of-openvino-toolkit" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-openvino-docs-install-guides-installing-openvino-yocto-1md-openvino-docs-install-guides-installing-openvino-yocto"></span> This document provides instructions for creating a Yocto image with Intel® Distribution of OpenVINO™ toolkit.</p>
-<div class="section" id="system-requirements">
+<section id="system-requirements">
 <h2>System Requirements<a class="headerlink" href="#system-requirements" title="Permalink to this headline">¶</a></h2>
 <p>Use the <a class="reference external" href="https://docs.yoctoproject.org/brief-yoctoprojectqs/index.html#compatible-linux-distribution">Yocto Project official documentation</a> to set up and configure your host machine to be compatible with BitBake.</p>
-</div>
-<div class="section" id="step-1-set-up-environment">
+</section>
+<section id="step-1-set-up-environment">
 <h2>Step 1: Set Up Environment<a class="headerlink" href="#step-1-set-up-environment" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="set-up-git-repositories">
+<section id="set-up-git-repositories">
 <h3>Set Up Git Repositories<a class="headerlink" href="#set-up-git-repositories" title="Permalink to this headline">¶</a></h3>
 <p>The following Git repositories are required to build a Yocto image:</p>
 <ul class="simple">
@@ -651,15 +658,15 @@
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="nl">https</span><span class="p">:</span><span class="c1">//git.yoctoproject.org/git/poky --branch kirkstone</span>
 <span class="n">git</span> <span class="n">clone</span> <span class="nl">https</span><span class="p">:</span><span class="c1">//git.yoctoproject.org/git/meta-intel --branch kirkstone</span>
 <span class="n">git</span> <span class="n">clone</span> <span class="nl">https</span><span class="p">:</span><span class="c1">//git.openembedded.org/meta-openembedded --branch kirkstone</span>
-<span class="n">git</span> <span class="n">clone</span> <span class="nl">https</span><span class="p">:</span><span class="c1">//github.com/kraj/meta-clang.git --branch kirkstone-clang12</span></pre></div></div></div>
-<div class="section" id="set-up-bitbake-layers">
+<span class="n">git</span> <span class="n">clone</span> <span class="nl">https</span><span class="p">:</span><span class="c1">//github.com/kraj/meta-clang.git --branch kirkstone-clang12</span></pre></div></div></section>
+<section id="set-up-bitbake-layers">
 <h3>Set up BitBake Layers<a class="headerlink" href="#set-up-bitbake-layers" title="Permalink to this headline">¶</a></h3>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">source</span> <span class="n">poky</span><span class="o">/</span><span class="n">oe</span><span class="o">-</span><span class="n">init</span><span class="o">-</span><span class="n">build</span><span class="o">-</span><span class="n">env</span>
 <span class="n">bitbake</span><span class="o">-</span><span class="n">layers</span> <span class="n">add</span><span class="o">-</span><span class="n">layer</span> <span class="p">..</span><span class="o">/</span><span class="n">meta</span><span class="o">-</span><span class="n">intel</span>
 <span class="n">bitbake</span><span class="o">-</span><span class="n">layers</span> <span class="n">add</span><span class="o">-</span><span class="n">layer</span> <span class="p">..</span><span class="o">/</span><span class="n">meta</span><span class="o">-</span><span class="n">openembedded</span><span class="o">/</span><span class="n">meta</span><span class="o">-</span><span class="n">oe</span>
 <span class="n">bitbake</span><span class="o">-</span><span class="n">layers</span> <span class="n">add</span><span class="o">-</span><span class="n">layer</span> <span class="p">..</span><span class="o">/</span><span class="n">meta</span><span class="o">-</span><span class="n">openembedded</span><span class="o">/</span><span class="n">meta</span><span class="o">-</span><span class="n">python</span>
-<span class="n">bitbake</span><span class="o">-</span><span class="n">layers</span> <span class="n">add</span><span class="o">-</span><span class="n">layer</span> <span class="p">..</span><span class="o">/</span><span class="n">meta</span><span class="o">-</span><span class="n">clang</span></pre></div></div></div>
-<div class="section" id="set-up-bitbake-configurations">
+<span class="n">bitbake</span><span class="o">-</span><span class="n">layers</span> <span class="n">add</span><span class="o">-</span><span class="n">layer</span> <span class="p">..</span><span class="o">/</span><span class="n">meta</span><span class="o">-</span><span class="n">clang</span></pre></div></div></section>
+<section id="set-up-bitbake-configurations">
 <h3>Set up BitBake Configurations<a class="headerlink" href="#set-up-bitbake-configurations" title="Permalink to this headline">¶</a></h3>
 <p>Include extra configuration in <code class="docutils literal notranslate"><span class="pre">conf/local.conf</span></code> in your build directory as required.</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="cp"># Build with SSE4.2, AVX2 etc. extensions</span>
@@ -687,13 +694,13 @@
 <span class="nl">CORE_IMAGE_EXTRA_INSTALL</span><span class="p">:</span><span class="n">append</span> <span class="o">=</span> <span class="s">&quot; openvino-inference-engine-vpu-firmware&quot;</span>
 
 <span class="cp"># Include Model Optimizer in the target image.</span>
-<span class="nl">CORE_IMAGE_EXTRA_INSTALL</span><span class="p">:</span><span class="n">append</span> <span class="o">=</span> <span class="s">&quot; openvino-model-optimizer&quot;</span></pre></div></div></div>
-</div>
-<div class="section" id="step-2-build-a-yocto-image-with-openvino-packages">
+<span class="nl">CORE_IMAGE_EXTRA_INSTALL</span><span class="p">:</span><span class="n">append</span> <span class="o">=</span> <span class="s">&quot; openvino-model-optimizer&quot;</span></pre></div></div></section>
+</section>
+<section id="step-2-build-a-yocto-image-with-openvino-packages">
 <h2>Step 2: Build a Yocto Image with OpenVINO Packages<a class="headerlink" href="#step-2-build-a-yocto-image-with-openvino-packages" title="Permalink to this headline">¶</a></h2>
 <p>Run BitBake to build your image with OpenVINO packages. To build the minimal image, for example, run:</p>
-<div class="highlight"><div class="highlight"><pre><span></span><span class="n">bitbake</span> <span class="n">core</span><span class="o">-</span><span class="n">image</span><span class="o">-</span><span class="n">minimal</span></pre></div></div></div>
-<div class="section" id="step-3-verify-the-yocto-image-with-openvino-packages">
+<div class="highlight"><div class="highlight"><pre><span></span><span class="n">bitbake</span> <span class="n">core</span><span class="o">-</span><span class="n">image</span><span class="o">-</span><span class="n">minimal</span></pre></div></div></section>
+<section id="step-3-verify-the-yocto-image-with-openvino-packages">
 <h2>Step 3: Verify the Yocto Image with OpenVINO Packages<a class="headerlink" href="#step-3-verify-the-yocto-image-with-openvino-packages" title="Permalink to this headline">¶</a></h2>
 <p>Verify that OpenVINO packages were built successfully. Run the following command:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">oe</span><span class="o">-</span><span class="n">pkgdata</span><span class="o">-</span><span class="n">util</span> <span class="n">list</span><span class="o">-</span><span class="n">pkgs</span> <span class="o">|</span> <span class="n">grep</span> <span class="n">openvino</span></pre></div></div><p>If the image was built successfully, it will return the list of packages as below:</p>
@@ -706,8 +713,8 @@
 <span class="n">openvino</span><span class="o">-</span><span class="n">inference</span><span class="o">-</span><span class="n">engine</span><span class="o">-</span><span class="n">vpu</span><span class="o">-</span><span class="n">firmware</span>
 <span class="n">openvino</span><span class="o">-</span><span class="n">model</span><span class="o">-</span><span class="n">optimizer</span>
 <span class="n">openvino</span><span class="o">-</span><span class="n">model</span><span class="o">-</span><span class="n">optimizer</span><span class="o">-</span><span class="n">dbg</span>
-<span class="n">openvino</span><span class="o">-</span><span class="n">model</span><span class="o">-</span><span class="n">optimizer</span><span class="o">-</span><span class="n">dev</span></pre></div></div></div>
-</div>
+<span class="n">openvino</span><span class="o">-</span><span class="n">model</span><span class="o">-</span><span class="n">optimizer</span><span class="o">-</span><span class="n">dev</span></pre></div></div></section>
+</section>
 
 
                 </div>
@@ -738,7 +745,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

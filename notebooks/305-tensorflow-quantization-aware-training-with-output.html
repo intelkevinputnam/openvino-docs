@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Quantization Aware Training with NNCF, using TensorFlow Framework &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -520,7 +527,7 @@
             
                 <div>
                   
-  <div class="section" id="quantization-aware-training-with-nncf-using-tensorflow-framework">
+  <section id="quantization-aware-training-with-nncf-using-tensorflow-framework">
 <h1>Quantization Aware Training with NNCF, using TensorFlow Framework<a class="headerlink" href="#quantization-aware-training-with-nncf-using-tensorflow-framework" title="Permalink to this headline">¶</a></h1>
 <p>The goal of this notebook to demonstrate how to use the Neural Network
 Compression Framework <a class="reference external" href="https://github.com/openvinotoolkit/nncf">NNCF</a>
@@ -535,7 +542,7 @@ models</p>
 <p>We selected the ResNet-18 model with Imagenette dataset. Imagenette is a
 subset of 10 easily classified classes from the Imagenet dataset. Using
 the smaller model and dataset will speed up training and download time.</p>
-<div class="section" id="imports-and-settings">
+<section id="imports-and-settings">
 <h2>Imports and Settings<a class="headerlink" href="#imports-and-settings" title="Permalink to this headline">¶</a></h2>
 <p>Import NNCF and all auxiliary packages from your Python code. Set a name
 for the model, input image size, used batch size, and the learning rate.
@@ -596,8 +603,8 @@ recommended to enable logging, by removing
  <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">work</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">notebooks</span><span class="o">/</span><span class="mi">305</span><span class="o">-</span><span class="n">tensorflow</span><span class="o">-</span><span class="n">quantization</span><span class="o">-</span><span class="n">aware</span><span class="o">-</span><span class="n">training</span><span class="o">/</span><span class="n">model</span><span class="o">/</span><span class="n">ResNet</span><span class="o">-</span><span class="mi">18</span><span class="n">_fp32</span><span class="o">.</span><span class="n">h5</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="dataset-preprocessing">
+</section>
+<section id="dataset-preprocessing">
 <h2>Dataset Preprocessing<a class="headerlink" href="#dataset-preprocessing" title="Permalink to this headline">¶</a></h2>
 <p>Download and prepare Imagenette 160px dataset. - Number of classes: 10 -
 Download size: 94.18 MiB | Split | Examples | |————–<a href="#id1"><span class="problematic" id="id2">|</span></a>———-| |
@@ -656,8 +663,8 @@ Download size: 94.18 MiB | Split | Examples | |————–<a href="#id1"><sp
                                         <span class="o">.</span><span class="n">prefetch</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">experimental</span><span class="o">.</span><span class="n">AUTOTUNE</span><span class="p">))</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="define-a-floating-point-model">
+</section>
+<section id="define-a-floating-point-model">
 <h2>Define a Floating-Point Model<a class="headerlink" href="#define-a-floating-point-model" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">residual_conv_block</span><span class="p">(</span><span class="n">filters</span><span class="p">,</span> <span class="n">stage</span><span class="p">,</span> <span class="n">block</span><span class="p">,</span> <span class="n">strides</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">cut</span><span class="o">=</span><span class="s1">&#39;pre&#39;</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">layer</span><span class="p">(</span><span class="n">input_tensor</span><span class="p">):</span>
@@ -729,8 +736,8 @@ Download size: 94.18 MiB | Split | Examples | |————–<a href="#id1"><sp
 <span class="n">model</span> <span class="o">=</span> <span class="n">ResNet18</span><span class="p">(</span><span class="n">input_shape</span><span class="o">=</span><span class="n">IMG_SHAPE</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="pre-train-floating-point-model">
+</section>
+<section id="pre-train-floating-point-model">
 <h2>Pre-train Floating-Point Model<a class="headerlink" href="#pre-train-floating-point-model" title="Permalink to this headline">¶</a></h2>
 <p>Using NNCF for model compression assumes that the user has a pre-trained
 model and a training pipeline.</p>
@@ -762,7 +769,7 @@ used for conversion to OpenVINO IR and further performance measurement.</p>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Absolute path where the model is saved:</span><span class="se">\n</span><span class="s1"> </span><span class="si">{</span><span class="n">fp32_sm_path</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8</span><span class="o">.</span><span class="mi">12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">tensorflow</span><span class="o">/</span><span class="n">python</span><span class="o">/</span><span class="n">keras</span><span class="o">/</span><span class="n">utils</span><span class="o">/</span><span class="n">generic_utils</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">494</span><span class="p">:</span> <span class="n">CustomMaskWarning</span><span class="p">:</span> <span class="n">Custom</span> <span class="n">mask</span> <span class="n">layers</span> <span class="n">require</span> <span class="n">a</span> <span class="n">config</span> <span class="ow">and</span> <span class="n">must</span> <span class="n">override</span> <span class="n">get_config</span><span class="o">.</span> <span class="n">When</span> <span class="n">loading</span><span class="p">,</span> <span class="n">the</span> <span class="n">custom</span> <span class="n">mask</span> <span class="n">layer</span> <span class="n">must</span> <span class="n">be</span> <span class="n">passed</span> <span class="n">to</span> <span class="n">the</span> <span class="n">custom_objects</span> <span class="n">argument</span><span class="o">.</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">tensorflow</span><span class="o">/</span><span class="n">python</span><span class="o">/</span><span class="n">keras</span><span class="o">/</span><span class="n">utils</span><span class="o">/</span><span class="n">generic_utils</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">494</span><span class="p">:</span> <span class="n">CustomMaskWarning</span><span class="p">:</span> <span class="n">Custom</span> <span class="n">mask</span> <span class="n">layers</span> <span class="n">require</span> <span class="n">a</span> <span class="n">config</span> <span class="ow">and</span> <span class="n">must</span> <span class="n">override</span> <span class="n">get_config</span><span class="o">.</span> <span class="n">When</span> <span class="n">loading</span><span class="p">,</span> <span class="n">the</span> <span class="n">custom</span> <span class="n">mask</span> <span class="n">layer</span> <span class="n">must</span> <span class="n">be</span> <span class="n">passed</span> <span class="n">to</span> <span class="n">the</span> <span class="n">custom_objects</span> <span class="n">argument</span><span class="o">.</span>
   <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;Custom mask layers require a config and must override &#39;</span>
 </pre></div>
 </div>
@@ -776,8 +783,8 @@ used for conversion to OpenVINO IR and further performance measurement.</p>
  <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">work</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">notebooks</span><span class="o">/</span><span class="mi">305</span><span class="o">-</span><span class="n">tensorflow</span><span class="o">-</span><span class="n">quantization</span><span class="o">-</span><span class="n">aware</span><span class="o">-</span><span class="n">training</span><span class="o">/</span><span class="n">output</span><span class="o">/</span><span class="n">ResNet</span><span class="o">-</span><span class="mi">18</span><span class="n">_fp32</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="create-and-initialize-quantization">
+</section>
+<section id="create-and-initialize-quantization">
 <h2>Create and Initialize Quantization<a class="headerlink" href="#create-and-initialize-quantization" title="Permalink to this headline">¶</a></h2>
 <p>NNCF enables compression-aware training by integrating into regular
 training pipelines. The framework is designed so that modifications to
@@ -835,8 +842,8 @@ demonstrating now.</p>
 <span class="n">Accuracy</span> <span class="n">of</span> <span class="n">INT8</span> <span class="n">model</span> <span class="n">after</span> <span class="n">initialization</span><span class="p">:</span> <span class="mf">0.816</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="fine-tune-the-compressed-model">
+</section>
+<section id="fine-tune-the-compressed-model">
 <h2>Fine-tune the Compressed Model<a class="headerlink" href="#fine-tune-the-compressed-model" title="Permalink to this headline">¶</a></h2>
 <p>At this step, a regular fine-tuning process is applied to further
 improve quantized model accuracy. Normally, several epochs of tuning are
@@ -876,8 +883,8 @@ to OpenVINO IR and further performance measurement.</p>
  <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">work</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">notebooks</span><span class="o">/</span><span class="mi">305</span><span class="o">-</span><span class="n">tensorflow</span><span class="o">-</span><span class="n">quantization</span><span class="o">-</span><span class="n">aware</span><span class="o">-</span><span class="n">training</span><span class="o">/</span><span class="n">output</span><span class="o">/</span><span class="n">ResNet</span><span class="o">-</span><span class="mi">18</span><span class="n">_int8</span><span class="o">.</span><span class="n">pb</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="export-frozen-graph-models-to-openvino-intermediate-representation-ir">
+</section>
+<section id="export-frozen-graph-models-to-openvino-intermediate-representation-ir">
 <h2>Export Frozen Graph Models to OpenVINO Intermediate Representation (IR)<a class="headerlink" href="#export-frozen-graph-models-to-openvino-intermediate-representation-ir" title="Permalink to this headline">¶</a></h2>
 <p>Call the OpenVINO Model Optimizer tool to convert the Saved Model and
 Frozen Graph models to OpenVINO IR. The models are saved to the current
@@ -924,17 +931,17 @@ the last lines of the output include:
     <span class="o">-</span> <span class="n">Update</span> <span class="n">the</span> <span class="n">configuration</span> <span class="n">file</span> <span class="k">with</span> <span class="nb">input</span><span class="o">/</span><span class="n">output</span> <span class="n">node</span> <span class="n">names</span><span class="p">:</span>   <span class="kc">None</span>
     <span class="o">-</span> <span class="n">Use</span> <span class="n">configuration</span> <span class="n">file</span> <span class="n">used</span> <span class="n">to</span> <span class="n">generate</span> <span class="n">the</span> <span class="n">model</span> <span class="k">with</span> <span class="n">Object</span> <span class="n">Detection</span> <span class="n">API</span><span class="p">:</span>  <span class="kc">None</span>
     <span class="o">-</span> <span class="n">Use</span> <span class="n">the</span> <span class="n">config</span> <span class="n">file</span><span class="p">:</span>  <span class="kc">None</span>
-<span class="n">OpenVINO</span> <span class="n">runtime</span> <span class="n">found</span> <span class="ow">in</span><span class="p">:</span>  <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8</span><span class="o">.</span><span class="mi">12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">openvino</span>
-<span class="n">OpenVINO</span> <span class="n">runtime</span> <span class="n">version</span><span class="p">:</span>   <span class="mf">2022.1</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="mi">7019</span><span class="o">-</span><span class="n">cdb9bec7210</span><span class="o">-</span><span class="n">releases</span><span class="o">/</span><span class="mi">2022</span><span class="o">/</span><span class="mi">1</span>
-<span class="n">Model</span> <span class="n">Optimizer</span> <span class="n">version</span><span class="p">:</span>    <span class="mf">2022.1</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="mi">7019</span><span class="o">-</span><span class="n">cdb9bec7210</span><span class="o">-</span><span class="n">releases</span><span class="o">/</span><span class="mi">2022</span><span class="o">/</span><span class="mi">1</span>
+<span class="n">OpenVINO</span> <span class="n">runtime</span> <span class="n">found</span> <span class="ow">in</span><span class="p">:</span>  <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">openvino</span>
+<span class="n">OpenVINO</span> <span class="n">runtime</span> <span class="n">version</span><span class="p">:</span>   <span class="mf">2022.1.0</span><span class="o">-</span><span class="mi">7019</span><span class="o">-</span><span class="n">cdb9bec7210</span><span class="o">-</span><span class="n">releases</span><span class="o">/</span><span class="mi">2022</span><span class="o">/</span><span class="mi">1</span>
+<span class="n">Model</span> <span class="n">Optimizer</span> <span class="n">version</span><span class="p">:</span>    <span class="mf">2022.1.0</span><span class="o">-</span><span class="mi">7019</span><span class="o">-</span><span class="n">cdb9bec7210</span><span class="o">-</span><span class="n">releases</span><span class="o">/</span><span class="mi">2022</span><span class="o">/</span><span class="mi">1</span>
 <span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">Generated</span> <span class="n">IR</span> <span class="n">version</span> <span class="mi">11</span> <span class="n">model</span><span class="o">.</span>
 <span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">XML</span> <span class="n">file</span><span class="p">:</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">work</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">notebooks</span><span class="o">/</span><span class="mi">305</span><span class="o">-</span><span class="n">tensorflow</span><span class="o">-</span><span class="n">quantization</span><span class="o">-</span><span class="n">aware</span><span class="o">-</span><span class="n">training</span><span class="o">/</span><span class="n">output</span><span class="o">/</span><span class="n">saved_model</span><span class="o">.</span><span class="n">xml</span>
 <span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">BIN</span> <span class="n">file</span><span class="p">:</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">work</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">notebooks</span><span class="o">/</span><span class="mi">305</span><span class="o">-</span><span class="n">tensorflow</span><span class="o">-</span><span class="n">quantization</span><span class="o">-</span><span class="n">aware</span><span class="o">-</span><span class="n">training</span><span class="o">/</span><span class="n">output</span><span class="o">/</span><span class="n">saved_model</span><span class="o">.</span><span class="n">bin</span>
 <span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">Total</span> <span class="n">execution</span> <span class="n">time</span><span class="p">:</span> <span class="mf">17.04</span> <span class="n">seconds</span><span class="o">.</span>
 <span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">Memory</span> <span class="n">consumed</span><span class="p">:</span> <span class="mi">892</span> <span class="n">MB</span><span class="o">.</span>
 <span class="n">It</span><span class="s1">&#39;s been a while, check for a new version of Intel(R) Distribution of OpenVINO(TM) toolkit here https://software.intel.com/content/www/us/en/develop/tools/openvino-toolkit/download.html?cid=other&amp;source=prod&amp;campid=ww_2022_bu_IOTG_OpenVINO-2022-1&amp;content=upg_all&amp;medium=organic or on the GitHub*</span>
-<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">The</span> <span class="n">model</span> <span class="n">was</span> <span class="n">converted</span> <span class="n">to</span> <span class="n">IR</span> <span class="n">v11</span><span class="p">,</span> <span class="n">the</span> <span class="n">latest</span> <span class="n">model</span> <span class="nb">format</span> <span class="n">that</span> <span class="n">corresponds</span> <span class="n">to</span> <span class="n">the</span> <span class="n">source</span> <span class="n">DL</span> <span class="n">framework</span> <span class="nb">input</span><span class="o">/</span><span class="n">output</span> <span class="nb">format</span><span class="o">.</span> <span class="n">While</span> <span class="n">IR</span> <span class="n">v11</span> <span class="ow">is</span> <span class="n">backwards</span> <span class="n">compatible</span> <span class="k">with</span> <span class="n">OpenVINO</span> <span class="n">Inference</span> <span class="n">Engine</span> <span class="n">API</span> <span class="n">v1</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span> <span class="n">please</span> <span class="n">use</span> <span class="n">API</span> <span class="n">v2</span><span class="o">.</span><span class="mi">0</span> <span class="p">(</span><span class="k">as</span> <span class="n">of</span> <span class="mf">2022.1</span><span class="p">)</span> <span class="n">to</span> <span class="n">take</span> <span class="n">advantage</span> <span class="n">of</span> <span class="n">the</span> <span class="n">latest</span> <span class="n">improvements</span> <span class="ow">in</span> <span class="n">IR</span> <span class="n">v11</span><span class="o">.</span>
-<span class="n">Find</span> <span class="n">more</span> <span class="n">information</span> <span class="n">about</span> <span class="n">API</span> <span class="n">v2</span><span class="o">.</span><span class="mi">0</span> <span class="ow">and</span> <span class="n">IR</span> <span class="n">v11</span> <span class="n">at</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">docs</span><span class="o">.</span><span class="n">openvino</span><span class="o">.</span><span class="n">ai</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">The</span> <span class="n">model</span> <span class="n">was</span> <span class="n">converted</span> <span class="n">to</span> <span class="n">IR</span> <span class="n">v11</span><span class="p">,</span> <span class="n">the</span> <span class="n">latest</span> <span class="n">model</span> <span class="nb">format</span> <span class="n">that</span> <span class="n">corresponds</span> <span class="n">to</span> <span class="n">the</span> <span class="n">source</span> <span class="n">DL</span> <span class="n">framework</span> <span class="nb">input</span><span class="o">/</span><span class="n">output</span> <span class="nb">format</span><span class="o">.</span> <span class="n">While</span> <span class="n">IR</span> <span class="n">v11</span> <span class="ow">is</span> <span class="n">backwards</span> <span class="n">compatible</span> <span class="k">with</span> <span class="n">OpenVINO</span> <span class="n">Inference</span> <span class="n">Engine</span> <span class="n">API</span> <span class="n">v1</span><span class="mf">.0</span><span class="p">,</span> <span class="n">please</span> <span class="n">use</span> <span class="n">API</span> <span class="n">v2</span><span class="mf">.0</span> <span class="p">(</span><span class="k">as</span> <span class="n">of</span> <span class="mf">2022.1</span><span class="p">)</span> <span class="n">to</span> <span class="n">take</span> <span class="n">advantage</span> <span class="n">of</span> <span class="n">the</span> <span class="n">latest</span> <span class="n">improvements</span> <span class="ow">in</span> <span class="n">IR</span> <span class="n">v11</span><span class="o">.</span>
+<span class="n">Find</span> <span class="n">more</span> <span class="n">information</span> <span class="n">about</span> <span class="n">API</span> <span class="n">v2</span><span class="mf">.0</span> <span class="ow">and</span> <span class="n">IR</span> <span class="n">v11</span> <span class="n">at</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">docs</span><span class="o">.</span><span class="n">openvino</span><span class="o">.</span><span class="n">ai</span>
 </pre></div>
 </div>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>mo --framework<span class="o">=</span>tf --input_shape<span class="o">=[</span><span class="m">1</span>,64,64,3<span class="o">]</span> --input<span class="o">=</span>Placeholder --input_model<span class="o">=</span><span class="nv">$int8_pb_path</span> --output_dir<span class="o">=</span><span class="nv">$OUTPUT_DIR</span>
@@ -978,8 +985,8 @@ Model Optimizer version:    2022.1.0-7019-cdb9bec7210-releases/2022/1
 [ ERROR ]  Exception occurred during running replacer &quot;REPLACEMENT_ID&quot; (&lt;class &#39;openvino.tools.mo.front.user_data_repack.UserDataRepack&#39;&gt;): No node with name Placeholder
 </pre></div>
 </div>
-</div>
-<div class="section" id="benchmark-model-performance-by-computing-inference-time">
+</section>
+<section id="benchmark-model-performance-by-computing-inference-time">
 <h2>Benchmark Model Performance by Computing Inference Time<a class="headerlink" href="#benchmark-model-performance-by-computing-inference-time" title="Permalink to this headline">¶</a></h2>
 <p>Finally, we will measure the inference performance of the FP32 and INT8
 models. To do this, we use <a class="reference external" href="https://docs.openvino.ai/latest/openvino_inference_engine_tools_benchmark_tool_README.html">Benchmark
@@ -1033,8 +1040,8 @@ RuntimeError: Model file /home/runner/work/openvino_notebooks/openvino_notebooks
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;Intel(R) Xeon(R) Platinum 8272CL CPU @ 2.60GHz&#39;</span>
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -1065,7 +1072,7 @@ RuntimeError: Model file /home/runner/work/openvino_notebooks/openvino_notebooks
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

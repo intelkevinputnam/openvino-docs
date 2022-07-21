@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Debugging Auto-Device Plugin &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -1832,46 +1839,23 @@
             
                 <div>
                   
-  <div class="section" id="debugging-auto-device-plugin">
+  <section id="debugging-auto-device-plugin">
 <span id="doxid-openvino-docs-o-v-u-g-supported-plugins-a-u-t-o-debugging"></span><span id="index-0"></span><h1>Debugging Auto-Device Plugin<a class="headerlink" href="#debugging-auto-device-plugin" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-openvino-docs-o-v-u-g-supported-plugins-a-u-t-o-debugging-1md-openvino-docs-ov-runtime-ug-supported-plugins-autoplugin-debugging"></span></p>
-<div class="section" id="using-debug-log">
+<section id="using-debug-log">
 <h2>Using Debug Log<a class="headerlink" href="#using-debug-log" title="Permalink to this headline">¶</a></h2>
-<p>In case of execution problems, just like all other plugins, Auto-Device provides the user with information on exceptions and error values. If the returned data is not enough for debugging purposes, more information may be acquired by means of <code class="docutils literal notranslate"><span class="pre">ov::log::Level</span></code>.</p>
+<p>In case of execution problems, just like all other plugins, Auto-Device provides the user with information on exceptions and error values. If the returned data is not enough for debugging purposes, more information may be acquired by means of <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/enumov_1_1log_1_1Level.html#doxid-group-ov-runtime-cpp-prop-api-1ga9868e1ed6b0286d17cdb0ab85b2cc66b"><span class="std std-ref"><span class="pre">ov::log::Level</span></span></a></code>.</p>
 <p>There are six levels of logs, which can be called explicitly or set via the <code class="docutils literal notranslate"><span class="pre">OPENVINO_LOG_LEVEL</span></code> environment variable (can be overwritten by <code class="docutils literal notranslate"><span class="pre">compile_model()</span></code> or <code class="docutils literal notranslate"><span class="pre">set_property()</span></code>):</p>
 <p>0 - ov::log::Level::NO</p>
 <p>1 - ov::log::Level::ERR</p>
 <p>2 - ov::log::Level::WARNING</p>
 <p>3 - ov::log::Level::INFO</p>
 <p>4 - ov::log::Level::DEBUG</p>
-<p>5 - <span class="xref std std-ref">ov::log::Level::TRACE</span></p>
+<p>5 - <a class="reference internal" href="../api/groups/enumov_1_1log_1_1Level.html#doxid-group-ov-runtime-cpp-prop-api-1gga9868e1ed6b0286d17cdb0ab85b2cc66bac2f3f489a00553e7a01d369c103c7251"><span class="std std-ref">ov::log::Level::TRACE</span></a></p>
 <div class="tab-set docutils">
 <input checked="True" class="tab-input" id="tab-set--0-input--1" name="tab-set--0" type="radio"><label class="tab-label" for="tab-set--0-input--1">C++</label><div class="tab-content docutils">
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">ov</span><span class="o">::</span><span class="n">Core</span> <span class="n">core</span><span class="p">;</span>
-
-<span class="c1">// read a network in IR, PaddlePaddle, or ONNX format</span>
-<span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">ov</span><span class="o">::</span><span class="n">Model</span><span class="o">&gt;</span> <span class="n">model</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><span class="n">read_model</span><span class="p">(</span><span class="s">&quot;sample.xml&quot;</span><span class="p">);</span>
-
-<span class="c1">// compile a model on AUTO and set log level to debug</span>
-<span class="n">ov</span><span class="o">::</span><span class="n">CompiledModel</span> <span class="n">compiled_model</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s">&quot;AUTO&quot;</span><span class="p">,</span> <span class="n">ov</span><span class="o">::</span><span class="n">log</span><span class="o">::</span><span class="n">level</span><span class="p">(</span><span class="n">ov</span><span class="o">::</span><span class="n">log</span><span class="o">::</span><span class="n">Level</span><span class="o">::</span><span class="n">DEBUG</span><span class="p">));</span>
-
-<span class="c1">// or set log level with set_property and compile model</span>
-<span class="n">core</span><span class="p">.</span><span class="n">set_property</span><span class="p">(</span><span class="s">&quot;AUTO&quot;</span><span class="p">,</span> <span class="n">ov</span><span class="o">::</span><span class="n">log</span><span class="o">::</span><span class="n">level</span><span class="p">(</span><span class="n">ov</span><span class="o">::</span><span class="n">log</span><span class="o">::</span><span class="n">Level</span><span class="o">::</span><span class="n">DEBUG</span><span class="p">));</span>
-<span class="n">ov</span><span class="o">::</span><span class="n">CompiledModel</span> <span class="n">compiled_model2</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s">&quot;AUTO&quot;</span><span class="p">);</span>
-</pre></div>
-</div>
 </div>
 <input class="tab-input" id="tab-set--0-input--2" name="tab-set--0" type="radio"><label class="tab-label" for="tab-set--0-input--2">Python</label><div class="tab-content docutils">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="n">core</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span>
-    <span class="c1"># read a network in IR, PaddlePaddle, or ONNX format</span>
-    <span class="n">model</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">read_model</span><span class="p">(</span><span class="n">model_path</span><span class="p">)</span>
-    <span class="c1"># compile a model on AUTO and set log level to debug</span>
-    <span class="n">compiled_model</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">device_name</span><span class="o">=</span><span class="s2">&quot;AUTO&quot;</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;LOG_LEVEL&quot;</span><span class="p">:</span><span class="s2">&quot;LOG_DEBUG&quot;</span><span class="p">});</span>
-    <span class="c1"># set log level with set_property and compile model</span>
-    <span class="n">core</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="n">device_name</span><span class="o">=</span><span class="s2">&quot;AUTO&quot;</span><span class="p">,</span> <span class="n">properties</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;LOG_LEVEL&quot;</span><span class="p">:</span><span class="s2">&quot;LOG_DEBUG&quot;</span><span class="p">});</span>
-    <span class="n">compiled_model</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">device_name</span><span class="o">=</span><span class="s2">&quot;AUTO&quot;</span><span class="p">);</span>
-</pre></div>
-</div>
 </div>
 <input class="tab-input" id="tab-set--0-input--3" name="tab-set--0" type="radio"><label class="tab-label" for="tab-set--0-input--3">OS environment variable</label><div class="tab-content docutils">
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>When defining it via the variable,
@@ -1896,8 +1880,8 @@ Windows
 <span class="o">[</span><span class="m">17</span>:09:36.6809<span class="o">]</span>ERROR<span class="o">[</span>executable_network.cpp:384<span class="o">]</span> <span class="o">[</span>AUTOPLUGIN<span class="o">]</span> load failed, MYRIAD:<span class="o">[</span> GENERAL_ERROR <span class="o">]</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="instrumentation-and-tracing-technology">
+</section>
+<section id="instrumentation-and-tracing-technology">
 <h2>Instrumentation and Tracing Technology<a class="headerlink" href="#instrumentation-and-tracing-technology" title="Permalink to this headline">¶</a></h2>
 <p>All major performance calls of both OpenVINO™ Runtime and the AUTO plugin are instrumented with Instrumentation and Tracing Technology (ITT) APIs. To enable ITT in OpenVINO™ Runtime, compile it with the following option:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>-DENABLE_PROFILING_ITT<span class="o">=</span>ON
@@ -1907,7 +1891,7 @@ Windows
 <ul class="simple">
 <li><p><a class="reference external" href="https://www.intel.com/content/www/us/en/develop/documentation/vtune-help/top/api-support/instrumentation-and-tracing-technology-apis.html">Intel® VTune™ Profiler User Guide</a></p></li>
 </ul>
-<div class="section" id="analyze-code-performance-on-linux">
+<section id="analyze-code-performance-on-linux">
 <h3>Analyze Code Performance on Linux<a class="headerlink" href="#analyze-code-performance-on-linux" title="Permalink to this headline">¶</a></h3>
 <p>You can analyze code performance using Intel® VTune™ Profiler. For more information and installation instructions refer to the <a class="reference external" href="https://software.intel.com/content/www/us/en/develop/download/intel-vtune-install-guide-linux-os.html">installation guide (PDF)</a> With Intel® VTune™ Profiler installed you can configure your analysis with the following steps:</p>
 <ol class="arabic">
@@ -1935,9 +1919,9 @@ vtune-gui
 <img alt="pages/_static/images/OV_UG_supported_plugins_AUTO_debugging-img05-vtunebottomup.png" class="align-center" src="pages/_static/images/OV_UG_supported_plugins_AUTO_debugging-img05-vtunebottomup.png" />
 </li>
 </ol>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
                 </div>
@@ -1968,7 +1952,7 @@ vtune-gui
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

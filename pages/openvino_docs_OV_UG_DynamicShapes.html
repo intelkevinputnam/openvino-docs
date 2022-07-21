@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Dynamic Shapes &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -1852,13 +1859,13 @@
             
                 <div>
                   
-  <div class="section" id="dynamic-shapes">
+  <section id="dynamic-shapes">
 <span id="doxid-openvino-docs-o-v-u-g-dynamic-shapes"></span><span id="index-0"></span><h1>Dynamic Shapes<a class="headerlink" href="#dynamic-shapes" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-openvino-docs-o-v-u-g-dynamic-shapes-1md-openvino-docs-ov-runtime-ug-ov-dynamic-shapes"></span></p>
 <div class="toctree-wrapper compound">
 </div>
 <p>As it was demonstrated in the <a class="reference internal" href="openvino_docs_OV_UG_ShapeInference.html#doxid-openvino-docs-o-v-u-g-shape-inference"><span class="std std-ref">Changing Input Shapes</span></a> article, there are models that support changing of input shapes before model compilation in <code class="docutils literal notranslate"><span class="pre">Core::compile_model</span></code>. Reshaping models provides an ability to customize the model input shape for exactly that size that is required in the end application. This article explains how the ability of model to reshape can further be leveraged in more dynamic scenarios.</p>
-<div class="section" id="when-to-apply-dynamic-shapes">
+<section id="when-to-apply-dynamic-shapes">
 <h2>When to Apply Dynamic Shapes<a class="headerlink" href="#when-to-apply-dynamic-shapes" title="Permalink to this headline">¶</a></h2>
 <p>Conventional “static” model reshaping works well when it can be done once per many model inference calls with the same shape. However, this approach doesn’t perform efficiently if the input tensor shape is changed on every inference call: calling <code class="docutils literal notranslate"><span class="pre">reshape()</span></code> and <code class="docutils literal notranslate"><span class="pre">compile_model()</span></code> each time when a new size comes is extremely time-consuming. A popular example would be an inference of natural language processing models (like BERT) with arbitrarily-sized input sequences that come from the user. In this case, the sequence length cannot be predicted and may change every time you need to call inference. Below, such dimensions that can be frequently changed are called <em>dynamic dimensions</em>. When real shape of input is not known at <code class="docutils literal notranslate"><span class="pre">compile_model</span></code> time, that’s the case when dynamic shapes should be considered.</p>
 <p>Here are several examples of dimensions that can be naturally dynamic:</p>
@@ -1870,8 +1877,8 @@
 </ul>
 <p>There are various tricks to address input dynamic dimensions through combining multiple pre-reshaped models and input data padding. The tricks are sensitive to model internals, do not always give optimal performance and cumbersome. Short overview of the methods you can find <a class="reference internal" href="openvino_docs_OV_UG_NoDynamicShapes.html#doxid-openvino-docs-o-v-u-g-no-dynamic-shapes"><span class="std std-ref">here</span></a>. Apply those methods only if native dynamic shape API described in the following sections doesn’t work for you or doesn’t give desired performance.</p>
 <p>The decision about using dynamic shapes should be based on proper benchmarking of real application with real data. That’s because unlike statically shaped models, inference of dynamically shaped ones takes different inference time depending on input data shape or input tensor content. Also using the dynamic shapes can bring more overheads in memory and running time per each inference call depending on hardware plugin and model used.</p>
-</div>
-<div class="section" id="dynamic-shapes-without-tricks">
+</section>
+<section id="dynamic-shapes-without-tricks">
 <h2>Dynamic Shapes without Tricks<a class="headerlink" href="#dynamic-shapes-without-tricks" title="Permalink to this headline">¶</a></h2>
 <p>This section describes how to handle dynamically shaped models natively with OpenVINO Runtime API version 2022.1 and higher. There are three main parts in the flow that differ from static shapes:</p>
 <ul class="simple">
@@ -1879,27 +1886,27 @@
 <li><p>prepare data for inference</p></li>
 <li><p>read resulting data after inference</p></li>
 </ul>
-<div class="section" id="configure-the-model">
+<section id="configure-the-model">
 <h3>Configure the Model<a class="headerlink" href="#configure-the-model" title="Permalink to this headline">¶</a></h3>
-<p>To avoid the tricks mentioned in the previous section there is a way to directly specify one or multiple dimensions in the model inputs to be dynamic. This is achieved with the same reshape method that is used for alternating static shape of inputs. Dynamic dimensions are specified as <code class="docutils literal notranslate"><span class="pre">-1</span></code> or <code class="docutils literal notranslate"><span class="pre">ov::Dimension()</span></code> instead of a positive number used for static dimensions:</p>
-<div class='sphinxtabset'><div class="sphinxtab" data-sphinxtab-value="C++"><div class="highlight"><div class="highlight"><pre>ov::Core<span></span> <span class="n">core</span><span class="p">;</span>
-<span class="k">auto</span> model<span></span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span>read_model<span></span><span class="p">(</span><span class="s">&quot;model.xml&quot;</span><span class="p">);</span>
+<p>To avoid the tricks mentioned in the previous section there is a way to directly specify one or multiple dimensions in the model inputs to be dynamic. This is achieved with the same reshape method that is used for alternating static shape of inputs. Dynamic dimensions are specified as <code class="docutils literal notranslate"><span class="pre">-1</span></code> or <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1Dimension.html#doxid-classov-1-1-dimension"><span class="std std-ref"><span class="pre">ov::Dimension()</span></span></a></code> instead of a positive number used for static dimensions:</p>
+<div class='sphinxtabset'><div class="sphinxtab" data-sphinxtab-value="C++"><div class="highlight"><div class="highlight"><pre><a class="reference internal" href="../api/groups/classov_1_1Core.html#doxid-classov-1-1-core"><span class="std std-ref">ov::Core</span></a><span></span> <span class="n">core</span><span class="p">;</span>
+<span class="k">auto</span> <a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga461856fdfb6d7533dc53355aec9e9fad"><span class="std std-ref">model</span></a><span></span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span>read_model<span></span><span class="p">(</span><span class="s">&quot;model.xml&quot;</span><span class="p">);</span>
 
 <span class="c1">// Set one static dimension (= 1) and another dynamic dimension (= Dimension())</span>
-model<span></span><span class="o">-&gt;</span><span class="n">reshape</span><span class="p">({{</span><span class="mi">1</span><span class="p">,</span> ov::Dimension<span></span><span class="p">()}});</span>  <span class="c1">// {1,?}</span>
+<a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga461856fdfb6d7533dc53355aec9e9fad"><span class="std std-ref">model</span></a><span></span><span class="o">-&gt;</span><span class="n">reshape</span><span class="p">({{</span><span class="mi">1</span><span class="p">,</span> <a class="reference internal" href="../api/groups/classov_1_1Dimension.html#doxid-classov-1-1-dimension"><span class="std std-ref">ov::Dimension</span></a><span></span><span class="p">()}});</span>  <span class="c1">// {1,?}</span>
 
 <span class="c1">// The same as above</span>
-model<span></span><span class="o">-&gt;</span><span class="n">reshape</span><span class="p">({{</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">}});</span> <span class="c1">// {1,?}</span>
+<a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga461856fdfb6d7533dc53355aec9e9fad"><span class="std std-ref">model</span></a><span></span><span class="o">-&gt;</span><span class="n">reshape</span><span class="p">({{</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">}});</span> <span class="c1">// {1,?}</span>
 
 <span class="c1">// Or set both dimensions as dynamic if both are going to be changed dynamically</span>
-model<span></span><span class="o">-&gt;</span><span class="n">reshape</span><span class="p">({{</span>ov::Dimension<span></span><span class="p">(),</span> ov::Dimension<span></span><span class="p">()}});</span>  <span class="c1">// {?,?}</span>
+<a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga461856fdfb6d7533dc53355aec9e9fad"><span class="std std-ref">model</span></a><span></span><span class="o">-&gt;</span><span class="n">reshape</span><span class="p">({{</span><a class="reference internal" href="../api/groups/classov_1_1Dimension.html#doxid-classov-1-1-dimension"><span class="std std-ref">ov::Dimension</span></a><span></span><span class="p">(),</span> <a class="reference internal" href="../api/groups/classov_1_1Dimension.html#doxid-classov-1-1-dimension"><span class="std std-ref">ov::Dimension</span></a><span></span><span class="p">()}});</span>  <span class="c1">// {?,?}</span>
 
 <span class="c1">// The same as above</span>
-model<span></span><span class="o">-&gt;</span><span class="n">reshape</span><span class="p">({{</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">}});</span>  <span class="c1">// {?,?}</span></pre></div></div></div><div class="sphinxtab" data-sphinxtab-value="Python"><div class="highlight"><div class="highlight"><pre><span></span><span class="n">core</span> <span class="o">=</span> ov.Core<span></span><span class="p">()</span>
+<a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga461856fdfb6d7533dc53355aec9e9fad"><span class="std std-ref">model</span></a><span></span><span class="o">-&gt;</span><span class="n">reshape</span><span class="p">({{</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">}});</span>  <span class="c1">// {?,?}</span></pre></div></div></div><div class="sphinxtab" data-sphinxtab-value="Python"><div class="highlight"><div class="highlight"><pre><span></span><span class="n">core</span> <span class="o">=</span> <a class="reference internal" href="../api/groups/classov_1_1Core.html#doxid-classov-1-1-core"><span class="std std-ref">ov.Core</span></a><span></span><span class="p">()</span>
 <span class="n">model</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><span class="n">read_model</span><span class="p">(</span><span class="s">&quot;model.xml&quot;</span><span class="p">)</span>
 
 <span class="cp"># Set one static dimension (= 1) and another dynamic dimension (= Dimension())</span>
-<span class="n">model</span><span class="p">.</span><span class="n">reshape</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> ov.Dimension<span></span><span class="p">()])</span>
+<span class="n">model</span><span class="p">.</span><span class="n">reshape</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <a class="reference internal" href="../api/groups/classov_1_1Dimension.html#doxid-classov-1-1-dimension"><span class="std std-ref">ov.Dimension</span></a><span></span><span class="p">()])</span>
 
 <span class="cp"># The same as above</span>
 <span class="n">model</span><span class="p">.</span><span class="n">reshape</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span>
@@ -1908,29 +1915,29 @@ model<span></span><span class="o">-&gt;</span><span class="n">reshape</span><spa
 <span class="n">model</span><span class="p">.</span><span class="n">reshape</span><span class="p">(</span><span class="s">&quot;1, ?&quot;</span><span class="p">)</span>
 
 <span class="cp"># Or set both dimensions as dynamic if both are going to be changed dynamically</span>
-<span class="n">model</span><span class="p">.</span><span class="n">reshape</span><span class="p">([</span>ov.Dimension<span></span><span class="p">(),</span> ov.Dimension<span></span><span class="p">()])</span>
+<span class="n">model</span><span class="p">.</span><span class="n">reshape</span><span class="p">([</span><a class="reference internal" href="../api/groups/classov_1_1Dimension.html#doxid-classov-1-1-dimension"><span class="std std-ref">ov.Dimension</span></a><span></span><span class="p">(),</span> <a class="reference internal" href="../api/groups/classov_1_1Dimension.html#doxid-classov-1-1-dimension"><span class="std std-ref">ov.Dimension</span></a><span></span><span class="p">()])</span>
 
 <span class="cp"># The same as above</span>
 <span class="n">model</span><span class="p">.</span><span class="n">reshape</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 
 <span class="cp"># The same as above</span>
 <span class="n">model</span><span class="p">.</span><span class="n">reshape</span><span class="p">(</span><span class="s">&quot;?, ?&quot;</span><span class="p">)</span></pre></div></div></div></div><p>To simplify the code, the examples assume that the model has a single input and single output. However, there are no limitations on the number of inputs and outputs to apply dynamic shapes.</p>
-</div>
-<div class="section" id="undefined-dimensions-out-of-the-box">
+</section>
+<section id="undefined-dimensions-out-of-the-box">
 <h3>Undefined Dimensions “Out Of the Box”<a class="headerlink" href="#undefined-dimensions-out-of-the-box" title="Permalink to this headline">¶</a></h3>
 <p>Dynamic dimensions may appear in the input model without calling reshape. Many DL frameworks support undefined dimensions. If such a model is converted with Model Optimizer or read directly by Core::read_model, undefined dimensions are preserved. Such dimensions automatically treated as dynamic ones. So you don’t need to call reshape if undefined dimensions are already configured in the original model or in the IR file.</p>
 <p>If the input model has undefined dimensions that you are not going to change during the inference, it is recommended to set them to static values, using the same <code class="docutils literal notranslate"><span class="pre">reshape</span></code> method of the model. From the API perspective any combination of dynamic and static dimensions can be configured.</p>
 <p>Model Optimizer provides identical capability to reshape the model during the conversion, including specifying dynamic dimensions. Use this capability to save time on calling <code class="docutils literal notranslate"><span class="pre">reshape</span></code> method in the end application. To get information about setting input shapes using Model Optimizer, refer to <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_Converting_Model.html#doxid-openvino-docs-m-o-d-g-prepare-model-convert-model-converting-model"><span class="std std-ref">Setting Input Shapes</span></a></p>
-</div>
-<div class="section" id="dimension-bounds">
+</section>
+<section id="dimension-bounds">
 <h3>Dimension Bounds<a class="headerlink" href="#dimension-bounds" title="Permalink to this headline">¶</a></h3>
-<p>Besides marking a dimension just dynamic, you can also specify lower and/or upper bounds that define a range of allowed values for the dimension. Bounds are coded as arguments for <code class="docutils literal notranslate"><span class="pre">ov::Dimension</span></code> :</p>
+<p>Besides marking a dimension just dynamic, you can also specify lower and/or upper bounds that define a range of allowed values for the dimension. Bounds are coded as arguments for <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1Dimension.html#doxid-classov-1-1-dimension"><span class="std std-ref"><span class="pre">ov::Dimension</span></span></a></code> :</p>
 <div class='sphinxtabset'><div class="sphinxtab" data-sphinxtab-value="C++"><div class="highlight"><div class="highlight"><pre><span></span><span class="c1">// Both dimensions are dynamic, first has a size within 1..10 and the second has a size within 8..512</span>
-model<span></span><span class="o">-&gt;</span><span class="n">reshape</span><span class="p">({{</span>ov::Dimension<span></span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> ov::Dimension<span></span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">512</span><span class="p">)}});</span>  <span class="c1">// {1..10,8..512}</span>
+<a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga461856fdfb6d7533dc53355aec9e9fad"><span class="std std-ref">model</span></a><span></span><span class="o">-&gt;</span><span class="n">reshape</span><span class="p">({{</span><a class="reference internal" href="../api/groups/classov_1_1Dimension.html#doxid-classov-1-1-dimension"><span class="std std-ref">ov::Dimension</span></a><span></span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <a class="reference internal" href="../api/groups/classov_1_1Dimension.html#doxid-classov-1-1-dimension"><span class="std std-ref">ov::Dimension</span></a><span></span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">512</span><span class="p">)}});</span>  <span class="c1">// {1..10,8..512}</span>
 
 <span class="c1">// Both dimensions are dynamic, first doesn&#39;t have bounds, the second is in the range of 8..512</span>
-model<span></span><span class="o">-&gt;</span><span class="n">reshape</span><span class="p">({{</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> ov::Dimension<span></span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">512</span><span class="p">)}});</span>   <span class="c1">// {?,8..512}</span></pre></div></div></div><div class="sphinxtab" data-sphinxtab-value="Python"><div class="highlight"><div class="highlight"><pre><span></span><span class="cp"># Both dimensions are dynamic, first has a size within 1..10 and the second has a size within 8..512</span>
-<span class="n">model</span><span class="p">.</span><span class="n">reshape</span><span class="p">([</span>ov.Dimension<span></span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> ov.Dimension<span></span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">512</span><span class="p">)])</span>
+<a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga461856fdfb6d7533dc53355aec9e9fad"><span class="std std-ref">model</span></a><span></span><span class="o">-&gt;</span><span class="n">reshape</span><span class="p">({{</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <a class="reference internal" href="../api/groups/classov_1_1Dimension.html#doxid-classov-1-1-dimension"><span class="std std-ref">ov::Dimension</span></a><span></span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">512</span><span class="p">)}});</span>   <span class="c1">// {?,8..512}</span></pre></div></div></div><div class="sphinxtab" data-sphinxtab-value="Python"><div class="highlight"><div class="highlight"><pre><span></span><span class="cp"># Both dimensions are dynamic, first has a size within 1..10 and the second has a size within 8..512</span>
+<span class="n">model</span><span class="p">.</span><span class="n">reshape</span><span class="p">([</span><a class="reference internal" href="../api/groups/classov_1_1Dimension.html#doxid-classov-1-1-dimension"><span class="std std-ref">ov.Dimension</span></a><span></span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <a class="reference internal" href="../api/groups/classov_1_1Dimension.html#doxid-classov-1-1-dimension"><span class="std std-ref">ov.Dimension</span></a><span></span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">512</span><span class="p">)])</span>
 
 <span class="cp"># The same as above</span>
 <span class="n">model</span><span class="p">.</span><span class="n">reshape</span><span class="p">([(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">512</span><span class="p">)])</span>
@@ -1942,30 +1949,30 @@ model<span></span><span class="o">-&gt;</span><span class="n">reshape</span><spa
 <span class="n">model</span><span class="p">.</span><span class="n">reshape</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">512</span><span class="p">)])</span></pre></div></div></div></div><p>Information about bounds gives opportunity for the inference plugin to apply additional optimizations. Using dynamic shapes assumes the plugins apply more loose optimization technique during model compilation It may require more time/memory for model compilation and inference. So providing any additional information like bounds can be beneficial. For the same reason it is not recommended to leave dimensions as undefined without the real need.</p>
 <p>When specifying bounds, the lower bound is not so important as upper bound, because knowing of upper bound allows inference devices to more precisely allocate memory for intermediate tensors for inference and use lesser number of tuned kernels for different sizes. Precisely speaking benefits of specifying lower or upper bound is device dependent. Depending on the plugin specifying upper bounds can be required. For information about dynamic shapes support on different devices, see the <a class="reference internal" href="openvino_docs_OV_UG_Working_with_devices.html#doxid-openvino-docs-o-v-u-g-working-with-devices-1features-support-matrix"><span class="std std-ref">Features Support Matrix</span></a>.</p>
 <p>If users known lower and upper bounds for dimension it is recommended to specify them even when plugin can execute model without the bounds.</p>
-</div>
-<div class="section" id="setting-input-tensors">
+</section>
+<section id="setting-input-tensors">
 <h3>Setting Input Tensors<a class="headerlink" href="#setting-input-tensors" title="Permalink to this headline">¶</a></h3>
 <p>Preparing model with the reshape method was the first step. The second step is passing a tensor with an appropriate shape to infer request. This is similar to <a class="reference internal" href="openvino_docs_OV_UG_Integrate_OV_with_your_application.html#doxid-openvino-docs-o-v-u-g-integrate-o-v-with-your-application"><span class="std std-ref">regular steps</span></a>, but now we can pass tensors with different shapes for the same executable model and even for the same inference request:</p>
 <div class='sphinxtabset'><div class="sphinxtab" data-sphinxtab-value="C++"><div class="highlight"><div class="highlight"><pre><span></span><span class="c1">// The first inference call</span>
 
 <span class="c1">// Create tensor compatible with the model input</span>
 <span class="c1">// Shape {1, 128} is compatible with any reshape statements made in previous examples</span>
-<span class="k">auto</span> <span class="n">input_tensor_1</span> <span class="o">=</span> ov::Tensor<span></span><span class="p">(</span>model<span></span><span class="o">-&gt;</span><span class="n">input</span><span class="p">().</span><span class="n">get_element_type</span><span class="p">(),</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">128</span><span class="p">});</span>
+<span class="k">auto</span> <span class="n">input_tensor_1</span> <span class="o">=</span> <a class="reference internal" href="../api/groups/classov_1_1Tensor.html#doxid-classov-1-1-tensor"><span class="std std-ref">ov::Tensor</span></a><span></span><span class="p">(</span><a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga461856fdfb6d7533dc53355aec9e9fad"><span class="std std-ref">model</span></a><span></span><span class="o">-&gt;</span><span class="n">input</span><span class="p">().</span><span class="n">get_element_type</span><span class="p">(),</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">128</span><span class="p">});</span>
 <span class="c1">// ... write values to input_tensor_1</span>
 
 <span class="c1">// Set the tensor as an input for the infer request</span>
-<span class="n">infer_request</span><span class="p">.</span>set_input_tensor<span></span><span class="p">(</span><span class="n">input_tensor_1</span><span class="p">);</span>
+<span class="n">infer_request</span><span class="p">.</span><a class="reference internal" href="../api/groups/classov_1_1InferRequest.html#doxid-classov-1-1-infer-request-1a5ddca7af7faffa2c90fd600a3f84aa6e"><span class="std std-ref">set_input_tensor</span></a><span></span><span class="p">(</span><span class="n">input_tensor_1</span><span class="p">);</span>
 
 <span class="c1">// Do the inference</span>
-<span class="n">infer_request</span><span class="p">.</span>infer<span></span><span class="p">();</span>
+<span class="n">infer_request</span><span class="p">.</span><a class="reference internal" href="../api/groups/classov_1_1InferRequest.html#doxid-classov-1-1-infer-request-1abcb7facc9f7c4b9226a1fd343e56958d"><span class="std std-ref">infer</span></a><span></span><span class="p">();</span>
 
 <span class="c1">// Retrieve a tensor representing the output data</span>
-ov::Tensor<span></span> <span class="n">output_tensor</span> <span class="o">=</span> <span class="n">infer_request</span><span class="p">.</span>get_output_tensor<span></span><span class="p">();</span>
+<a class="reference internal" href="../api/groups/classov_1_1Tensor.html#doxid-classov-1-1-tensor"><span class="std std-ref">ov::Tensor</span></a><span></span> <span class="n">output_tensor</span> <span class="o">=</span> <span class="n">infer_request</span><span class="p">.</span><a class="reference internal" href="../api/groups/classov_1_1InferRequest.html#doxid-classov-1-1-infer-request-1a350159a8d967022db46633eed50d073a"><span class="std std-ref">get_output_tensor</span></a><span></span><span class="p">();</span>
 
 <span class="c1">// For dynamic models output shape usually depends on input shape,</span>
 <span class="c1">// that means shape of output tensor is initialized after the first inference only</span>
 <span class="c1">// and has to be queried after every infer request</span>
-<span class="k">auto</span> <span class="n">output_shape_1</span> <span class="o">=</span> <span class="n">output_tensor</span><span class="p">.</span>get_shape<span></span><span class="p">();</span>
+<span class="k">auto</span> <span class="n">output_shape_1</span> <span class="o">=</span> <span class="n">output_tensor</span><span class="p">.</span><a class="reference internal" href="../api/groups/classov_1_1Tensor.html#doxid-classov-1-1-tensor-1a706163e01fb555eb9ccdfb5204cf7834"><span class="std std-ref">get_shape</span></a><span></span><span class="p">();</span>
 
 <span class="c1">// Take a pointer of an appropriate type to tensor data and read elements according to the shape</span>
 <span class="c1">// Assuming model output is f32 data type</span>
@@ -1976,12 +1983,12 @@ ov::Tensor<span></span> <span class="n">output_tensor</span> <span class="o">=</
 
 <span class="c1">// Create another tensor (if the previous one cannot be utilized)</span>
 <span class="c1">// Notice, the shape is different from input_tensor_1</span>
-<span class="k">auto</span> <span class="n">input_tensor_2</span> <span class="o">=</span> ov::Tensor<span></span><span class="p">(</span>model<span></span><span class="o">-&gt;</span><span class="n">input</span><span class="p">().</span><span class="n">get_element_type</span><span class="p">(),</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">200</span><span class="p">});</span>
+<span class="k">auto</span> <span class="n">input_tensor_2</span> <span class="o">=</span> <a class="reference internal" href="../api/groups/classov_1_1Tensor.html#doxid-classov-1-1-tensor"><span class="std std-ref">ov::Tensor</span></a><span></span><span class="p">(</span><a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga461856fdfb6d7533dc53355aec9e9fad"><span class="std std-ref">model</span></a><span></span><span class="o">-&gt;</span><span class="n">input</span><span class="p">().</span><span class="n">get_element_type</span><span class="p">(),</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">200</span><span class="p">});</span>
 <span class="c1">// ... write values to input_tensor_2</span>
 
-<span class="n">infer_request</span><span class="p">.</span>set_input_tensor<span></span><span class="p">(</span><span class="n">input_tensor_2</span><span class="p">);</span>
+<span class="n">infer_request</span><span class="p">.</span><a class="reference internal" href="../api/groups/classov_1_1InferRequest.html#doxid-classov-1-1-infer-request-1a5ddca7af7faffa2c90fd600a3f84aa6e"><span class="std std-ref">set_input_tensor</span></a><span></span><span class="p">(</span><span class="n">input_tensor_2</span><span class="p">);</span>
 
-<span class="n">infer_request</span><span class="p">.</span>infer<span></span><span class="p">();</span>
+<span class="n">infer_request</span><span class="p">.</span><a class="reference internal" href="../api/groups/classov_1_1InferRequest.html#doxid-classov-1-1-infer-request-1abcb7facc9f7c4b9226a1fd343e56958d"><span class="std std-ref">infer</span></a><span></span><span class="p">();</span>
 
 <span class="c1">// No need to call infer_request.get_output_tensor() again</span>
 <span class="c1">// output_tensor queried after the first inference call above is valid here.</span>
@@ -1989,13 +1996,13 @@ ov::Tensor<span></span> <span class="n">output_tensor</span> <span class="o">=</
 <span class="k">auto</span> <span class="n">data_2</span> <span class="o">=</span> <span class="n">output_tensor</span><span class="p">.</span>data<span></span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">();</span>
 
 <span class="c1">// and new shape as well</span>
-<span class="k">auto</span> <span class="n">output_shape_2</span> <span class="o">=</span> <span class="n">output_tensor</span><span class="p">.</span>get_shape<span></span><span class="p">();</span>
+<span class="k">auto</span> <span class="n">output_shape_2</span> <span class="o">=</span> <span class="n">output_tensor</span><span class="p">.</span><a class="reference internal" href="../api/groups/classov_1_1Tensor.html#doxid-classov-1-1-tensor-1a706163e01fb555eb9ccdfb5204cf7834"><span class="std std-ref">get_shape</span></a><span></span><span class="p">();</span>
 
 <span class="c1">// ... read values in data_2 according to the shape output_shape_2</span></pre></div></div></div><div class="sphinxtab" data-sphinxtab-value="Python"><div class="highlight"><div class="highlight"><pre><span></span><span class="cp"># The first inference call</span>
 
 <span class="cp"># Create tensor compatible to the model input</span>
 <span class="cp"># Shape {1, 128} is compatible with any reshape statements made in previous examples</span>
-<span class="n">input_tensor1</span> <span class="o">=</span> ov.Tensor<span></span><span class="p">(</span><span class="n">model</span><span class="p">.</span><span class="n">input</span><span class="p">().</span><span class="n">element_type</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">128</span><span class="p">])</span>
+<span class="n">input_tensor1</span> <span class="o">=</span> <a class="reference internal" href="../api/groups/classov_1_1Tensor.html#doxid-classov-1-1-tensor"><span class="std std-ref">ov.Tensor</span></a><span></span><span class="p">(</span><span class="n">model</span><span class="p">.</span><span class="n">input</span><span class="p">().</span><span class="n">element_type</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">128</span><span class="p">])</span>
 <span class="cp"># ... write values to input_tensor_1</span>
 
 <span class="cp"># Set the tensor as an input for the infer request</span>
@@ -2021,7 +2028,7 @@ ov::Tensor<span></span> <span class="n">output_tensor</span> <span class="o">=</
 
 <span class="cp"># Create another tensor (if the previous one cannot be utilized)</span>
 <span class="cp"># Notice, the shape is different from input_tensor_1</span>
-<span class="n">input_tensor2</span> <span class="o">=</span> ov.Tensor<span></span><span class="p">(</span><span class="n">model</span><span class="p">.</span><span class="n">input</span><span class="p">().</span><span class="n">element_type</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">200</span><span class="p">])</span>
+<span class="n">input_tensor2</span> <span class="o">=</span> <a class="reference internal" href="../api/groups/classov_1_1Tensor.html#doxid-classov-1-1-tensor"><span class="std std-ref">ov.Tensor</span></a><span></span><span class="p">(</span><span class="n">model</span><span class="p">.</span><span class="n">input</span><span class="p">().</span><span class="n">element_type</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">200</span><span class="p">])</span>
 <span class="cp"># ... write values to input_tensor_2</span>
 
 <span class="n">infer_request</span><span class="p">.</span><span class="n">infer</span><span class="p">([</span><span class="n">input_tensor2</span><span class="p">])</span>
@@ -2034,15 +2041,15 @@ ov::Tensor<span></span> <span class="n">output_tensor</span> <span class="o">=</
 <div class='sphinxtabset'><div class="sphinxtab" data-sphinxtab-value="C++"><div class="highlight"><div class="highlight"><pre><span></span><span class="c1">// The first inference call</span>
 
 <span class="c1">// Get the tensor; shape is not initialized</span>
-<span class="k">auto</span> <span class="n">input_tensor</span> <span class="o">=</span> <span class="n">infer_request</span><span class="p">.</span>get_input_tensor<span></span><span class="p">();</span>
+<span class="k">auto</span> <span class="n">input_tensor</span> <span class="o">=</span> <span class="n">infer_request</span><span class="p">.</span><a class="reference internal" href="../api/groups/classov_1_1InferRequest.html#doxid-classov-1-1-infer-request-1a5f0bc1ab40de6a7a12136b4a4e6a8b54"><span class="std std-ref">get_input_tensor</span></a><span></span><span class="p">();</span>
 
 <span class="c1">// Set shape is required</span>
-<span class="n">input_tensor</span><span class="p">.</span>set_shape<span></span><span class="p">({</span><span class="mi">1</span><span class="p">,</span> <span class="mi">128</span><span class="p">});</span>
+<span class="n">input_tensor</span><span class="p">.</span><a class="reference internal" href="../api/groups/classov_1_1Tensor.html#doxid-classov-1-1-tensor-1a7a513a53ac7221d1a52006c34bce6c18"><span class="std std-ref">set_shape</span></a><span></span><span class="p">({</span><span class="mi">1</span><span class="p">,</span> <span class="mi">128</span><span class="p">});</span>
 <span class="c1">// ... write values to input_tensor</span>
 
-<span class="n">infer_request</span><span class="p">.</span>infer<span></span><span class="p">();</span>
-ov::Tensor<span></span> <span class="n">output_tensor</span> <span class="o">=</span> <span class="n">infer_request</span><span class="p">.</span>get_output_tensor<span></span><span class="p">();</span>
-<span class="k">auto</span> <span class="n">output_shape_1</span> <span class="o">=</span> <span class="n">output_tensor</span><span class="p">.</span>get_shape<span></span><span class="p">();</span>
+<span class="n">infer_request</span><span class="p">.</span><a class="reference internal" href="../api/groups/classov_1_1InferRequest.html#doxid-classov-1-1-infer-request-1abcb7facc9f7c4b9226a1fd343e56958d"><span class="std std-ref">infer</span></a><span></span><span class="p">();</span>
+<a class="reference internal" href="../api/groups/classov_1_1Tensor.html#doxid-classov-1-1-tensor"><span class="std std-ref">ov::Tensor</span></a><span></span> <span class="n">output_tensor</span> <span class="o">=</span> <span class="n">infer_request</span><span class="p">.</span><a class="reference internal" href="../api/groups/classov_1_1InferRequest.html#doxid-classov-1-1-infer-request-1a350159a8d967022db46633eed50d073a"><span class="std std-ref">get_output_tensor</span></a><span></span><span class="p">();</span>
+<span class="k">auto</span> <span class="n">output_shape_1</span> <span class="o">=</span> <span class="n">output_tensor</span><span class="p">.</span><a class="reference internal" href="../api/groups/classov_1_1Tensor.html#doxid-classov-1-1-tensor-1a706163e01fb555eb9ccdfb5204cf7834"><span class="std std-ref">get_shape</span></a><span></span><span class="p">();</span>
 <span class="k">auto</span> <span class="n">data_1</span> <span class="o">=</span> <span class="n">output_tensor</span><span class="p">.</span>data<span></span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">();</span>
 <span class="c1">// ... read values</span>
 
@@ -2052,9 +2059,9 @@ ov::Tensor<span></span> <span class="n">output_tensor</span> <span class="o">=</
 <span class="n">input_tensor</span><span class="p">.</span><span class="n">set_shape</span><span class="p">({</span><span class="mi">1</span><span class="p">,</span> <span class="mi">200</span><span class="p">});</span>
 <span class="c1">// ... write values to input_tensor memory</span>
 
-<span class="n">infer_request</span><span class="p">.</span>infer<span></span><span class="p">();</span>
+<span class="n">infer_request</span><span class="p">.</span><a class="reference internal" href="../api/groups/classov_1_1InferRequest.html#doxid-classov-1-1-infer-request-1abcb7facc9f7c4b9226a1fd343e56958d"><span class="std std-ref">infer</span></a><span></span><span class="p">();</span>
 <span class="k">auto</span> <span class="n">data_2</span> <span class="o">=</span> <span class="n">output_tensor</span><span class="p">.</span>data<span></span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">();</span>
-<span class="k">auto</span> <span class="n">output_shape_2</span> <span class="o">=</span> <span class="n">output_tensor</span><span class="p">.</span>get_shape<span></span><span class="p">();</span>
+<span class="k">auto</span> <span class="n">output_shape_2</span> <span class="o">=</span> <span class="n">output_tensor</span><span class="p">.</span><a class="reference internal" href="../api/groups/classov_1_1Tensor.html#doxid-classov-1-1-tensor-1a706163e01fb555eb9ccdfb5204cf7834"><span class="std std-ref">get_shape</span></a><span></span><span class="p">();</span>
 <span class="c1">// ... read values in data_2 according to the shape output_shape_2</span></pre></div></div></div><div class="sphinxtab" data-sphinxtab-value="Python"><div class="highlight"><div class="highlight"><pre><span></span><span class="cp"># Get the tensor, shape is not initialized</span>
 <span class="n">input_tensor</span> <span class="o">=</span> <span class="n">infer_request</span><span class="p">.</span><span class="n">get_input_tensor</span><span class="p">()</span>
 
@@ -2073,32 +2080,32 @@ ov::Tensor<span></span> <span class="n">output_tensor</span> <span class="o">=</
 <span class="cp"># ... write values to input_tensor</span>
 
 <span class="n">infer_request</span><span class="p">.</span><span class="n">infer</span><span class="p">()</span>
-<span class="n">data2</span> <span class="o">=</span> <span class="n">output_tensor</span><span class="p">.</span><span class="n">data</span><span class="p">[</span><span class="o">:</span><span class="p">]</span></pre></div></div></div></div></div>
-<div class="section" id="dynamic-shapes-in-outputs">
+<span class="n">data2</span> <span class="o">=</span> <span class="n">output_tensor</span><span class="p">.</span><span class="n">data</span><span class="p">[</span><span class="o">:</span><span class="p">]</span></pre></div></div></div></div></section>
+<section id="dynamic-shapes-in-outputs">
 <h3>Dynamic Shapes in Outputs<a class="headerlink" href="#dynamic-shapes-in-outputs" title="Permalink to this headline">¶</a></h3>
 <p>Examples above handle correctly case when dynamic dimensions in output may be implied by propagating of dynamic dimension from the inputs. For example, batch dimension in input shape is usually propagated through the whole model and appears in the output shape. The same is true for other dimensions, like sequence length for NLP models or spatial dimensions for segmentation models, that are propagated through the entire network.</p>
 <p>Whether or not output has dynamic dimensions can be examined by querying output partial shape after model read or reshape. The same is applicable for inputs. For example:</p>
 <div class='sphinxtabset'><div class="sphinxtab" data-sphinxtab-value="C++"><div class="highlight"><div class="highlight"><pre><span></span><span class="c1">// Print output partial shape</span>
-<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> model<span></span><span class="o">-&gt;</span><span class="n">output</span><span class="p">().</span><span class="n">get_partial_shape</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga461856fdfb6d7533dc53355aec9e9fad"><span class="std std-ref">model</span></a><span></span><span class="o">-&gt;</span><span class="n">output</span><span class="p">().</span><span class="n">get_partial_shape</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
 
 <span class="c1">// Print input partial shape</span>
-<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> model<span></span><span class="o">-&gt;</span><span class="n">input</span><span class="p">().</span><span class="n">get_partial_shape</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span></pre></div></div></div><div class="sphinxtab" data-sphinxtab-value="Python"><div class="highlight"><div class="highlight"><pre><span></span><span class="cp"># Print output partial shape</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga461856fdfb6d7533dc53355aec9e9fad"><span class="std std-ref">model</span></a><span></span><span class="o">-&gt;</span><span class="n">input</span><span class="p">().</span><span class="n">get_partial_shape</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span></pre></div></div></div><div class="sphinxtab" data-sphinxtab-value="Python"><div class="highlight"><div class="highlight"><pre><span></span><span class="cp"># Print output partial shape</span>
 <span class="n">print</span><span class="p">(</span><span class="n">model</span><span class="p">.</span><span class="n">output</span><span class="p">().</span><span class="n">partial_shape</span><span class="p">)</span>
 
 <span class="cp"># Print input partial shape</span>
 <span class="n">print</span><span class="p">(</span><span class="n">model</span><span class="p">.</span><span class="n">input</span><span class="p">().</span><span class="n">partial_shape</span><span class="p">)</span></pre></div></div></div></div><p>Appearing <code class="docutils literal notranslate"><span class="pre">?</span></code> or ranges like <code class="docutils literal notranslate"><span class="pre">1..10</span></code> means there are dynamic dimensions in corresponding inputs or outputs.</p>
 <p>Or more programmatically:</p>
-<div class='sphinxtabset'><div class="sphinxtab" data-sphinxtab-value="C++"><div class="highlight"><div class="highlight"><pre><span></span><span class="k">auto</span> model<span></span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span>read_model<span></span><span class="p">(</span><span class="s">&quot;model.xml&quot;</span><span class="p">);</span>
+<div class='sphinxtabset'><div class="sphinxtab" data-sphinxtab-value="C++"><div class="highlight"><div class="highlight"><pre><span></span><span class="k">auto</span> <a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga461856fdfb6d7533dc53355aec9e9fad"><span class="std std-ref">model</span></a><span></span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span>read_model<span></span><span class="p">(</span><span class="s">&quot;model.xml&quot;</span><span class="p">);</span>
 
-<span class="k">if</span> <span class="p">(</span>model<span></span><span class="o">-&gt;</span><span class="n">input</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="n">get_partial_shape</span><span class="p">().</span><span class="n">is_dynamic</span><span class="p">())</span> <span class="p">{</span>
+<span class="k">if</span> <span class="p">(</span><a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga461856fdfb6d7533dc53355aec9e9fad"><span class="std std-ref">model</span></a><span></span><span class="o">-&gt;</span><span class="n">input</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="n">get_partial_shape</span><span class="p">().</span><span class="n">is_dynamic</span><span class="p">())</span> <span class="p">{</span>
     <span class="c1">// input is dynamic</span>
 <span class="p">}</span>
 
-<span class="k">if</span> <span class="p">(</span>model<span></span><span class="o">-&gt;</span><span class="n">output</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="n">get_partial_shape</span><span class="p">().</span><span class="n">is_dynamic</span><span class="p">())</span> <span class="p">{</span>
+<span class="k">if</span> <span class="p">(</span><a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga461856fdfb6d7533dc53355aec9e9fad"><span class="std std-ref">model</span></a><span></span><span class="o">-&gt;</span><span class="n">output</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="n">get_partial_shape</span><span class="p">().</span><span class="n">is_dynamic</span><span class="p">())</span> <span class="p">{</span>
     <span class="c1">// output is dynamic</span>
 <span class="p">}</span>
 
-<span class="k">if</span> <span class="p">(</span>model<span></span><span class="o">-&gt;</span><span class="n">output</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="n">get_partial_shape</span><span class="p">()[</span><span class="mi">1</span><span class="p">].</span><span class="n">is_dynamic</span><span class="p">())</span> <span class="p">{</span>
+<span class="k">if</span> <span class="p">(</span><a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga461856fdfb6d7533dc53355aec9e9fad"><span class="std std-ref">model</span></a><span></span><span class="o">-&gt;</span><span class="n">output</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="n">get_partial_shape</span><span class="p">()[</span><span class="mi">1</span><span class="p">].</span><span class="n">is_dynamic</span><span class="p">())</span> <span class="p">{</span>
     <span class="c1">// 1-st dimension of output is dynamic</span>
 <span class="p">}</span></pre></div></div></div><div class="sphinxtab" data-sphinxtab-value="Python"><div class="highlight"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><span class="n">read_model</span><span class="p">(</span><span class="s">&quot;model.xml&quot;</span><span class="p">)</span>
 
@@ -2113,9 +2120,9 @@ ov::Tensor<span></span> <span class="n">output_tensor</span> <span class="o">=</
 <span class="k">if</span> <span class="n">model</span><span class="p">.</span><span class="n">output</span><span class="p">(</span><span class="mi">0</span><span class="p">).</span><span class="n">partial_shape</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">is_dynamic</span><span class="p">()</span><span class="o">:</span>
     <span class="cp"># 1-st dimension of output is dynamic</span>
     <span class="n">pass</span></pre></div></div></div></div><p>If at least one dynamic dimension exists in output of the model, shape of the corresponding output tensor will be set as the result of inference call. Before the first inference, memory for such a tensor is not allocated and has shape <code class="docutils literal notranslate"><span class="pre">[0]</span></code>. If user call <code class="docutils literal notranslate"><span class="pre">set_output_tensor</span></code> with pre-allocated tensor, the inference will call <code class="docutils literal notranslate"><span class="pre">set_shape</span></code> internally, and the initial shape is replaced by the really calculated shape. So setting shape for output tensors in this case is useful only if you want to pre-allocate enough memory for output tensor, because <code class="docutils literal notranslate"><span class="pre">Tensor</span></code> ‘s <code class="docutils literal notranslate"><span class="pre">set_shape</span></code> method will re-allocate memory only if new shape requires more storage.</p>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
                 </div>
@@ -2146,7 +2153,7 @@ ov::Tensor<span></span> <span class="n">output_tensor</span> <span class="o">=</
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

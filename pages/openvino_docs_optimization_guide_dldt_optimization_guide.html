@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Introduction to Performance Optimization &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -1835,15 +1842,15 @@
             
                 <div>
                   
-  <div class="section" id="introduction-to-performance-optimization">
+  <section id="introduction-to-performance-optimization">
 <span id="doxid-openvino-docs-optimization-guide-dldt-optimization-guide"></span><span id="index-0"></span><h1>Introduction to Performance Optimization<a class="headerlink" href="#introduction-to-performance-optimization" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-openvino-docs-optimization-guide-dldt-optimization-guide-1md-openvino-docs-optimization-guide-dldt-optimization-guide"></span> Before exploring possible optimization techniques, let us first define what the inference performance is and how to measure that. Notice that reported inference performance often tends to focus on the speed of execution. In fact these are at least four connected factors of accuracy, throughput/latency and efficiency. The rest of the document discusses how to balance these key factors.</p>
-<div class="section" id="what-is-inference-performance">
+<section id="what-is-inference-performance">
 <h2>What Is Inference Performance<a class="headerlink" href="#what-is-inference-performance" title="Permalink to this headline">¶</a></h2>
 <p>Generally, performance means how fast the model processes the live data. Two key metrics are used to measure the performance: latency and throughput are fundamentally interconnected.</p>
 <img alt="pages/LATENCY_VS_THROUGHPUT.svg" src="pages/LATENCY_VS_THROUGHPUT.svg" /><p><strong>Latency</strong> measures inference time (ms) required to process a single input. When it comes to the executing multiple inputs simultaneously (e.g. via batching) then the overall throughput (inferences per second, or frames per second, FPS, in the specific case of visual processing) is usually of more concern. To calculate <strong>throughput</strong>, divide number of inputs that were processed by the processing time.</p>
-</div>
-<div class="section" id="end-to-end-application-performance">
+</section>
+<section id="end-to-end-application-performance">
 <h2>End-to-End Application Performance<a class="headerlink" href="#end-to-end-application-performance" title="Permalink to this headline">¶</a></h2>
 <p>It is important to separate the “pure” inference time of a neural network and the end-to-end application performance. For example data transfers between the host and a device may unintentionally affect the performance when a host input tensor is processed on the accelerator like dGPU.</p>
 <p>Similarly, the input-preprocessing contributes significantly to the to inference time. As detailed in the <a class="reference internal" href="openvino_docs_MO_DG_Getting_Performance_Numbers.html#doxid-openvino-docs-m-o-d-g-getting-performance-numbers"><span class="std std-ref">getting performance numbers</span></a> section, when drilling into <em>inference</em> performance, one option is to measure all such items separately. For the <strong>end-to-end scenario</strong> though, consider the image pre-processing thru the OpenVINO and the asynchronous execution as a way to amortize the communication costs like data transfers. You can find further details in the <a class="reference internal" href="openvino_docs_deployment_optimization_guide_common.html#doxid-openvino-docs-deployment-optimization-guide-common"><span class="std std-ref">general optimizations document</span></a>.</p>
@@ -1853,8 +1860,8 @@
 <p class="admonition-title">Note</p>
 <p>To get performance numbers for OpenVINO, as well as tips how to measure it and compare with native framework, check <a class="reference internal" href="openvino_docs_MO_DG_Getting_Performance_Numbers.html#doxid-openvino-docs-m-o-d-g-getting-performance-numbers"><span class="std std-ref">Getting performance numbers</span></a> page.</p>
 </div>
-</div>
-<div class="section" id="improving-the-performance-model-vs-runtime-optimizations">
+</section>
+<section id="improving-the-performance-model-vs-runtime-optimizations">
 <h2>Improving the Performance: Model vs Runtime Optimizations<a class="headerlink" href="#improving-the-performance-model-vs-runtime-optimizations" title="Permalink to this headline">¶</a></h2>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -1869,12 +1876,12 @@
 </li>
 <li><p><strong>Runtime (Deployment) optimizations</strong> includes tuning of model <em>execution</em> parameters. To read more visit the <a class="reference internal" href="openvino_docs_deployment_optimization_guide_dldt_optimization_guide.html#doxid-openvino-docs-deployment-optimization-guide-dldt-optimization-guide"><span class="std std-ref">Runtime Inference Optimizations</span></a>.</p></li>
 </ul>
-</div>
-<div class="section" id="performance-benchmarks">
+</section>
+<section id="performance-benchmarks">
 <h2>Performance benchmarks<a class="headerlink" href="#performance-benchmarks" title="Permalink to this headline">¶</a></h2>
 <p>To estimate the performance and compare performance numbers, measured on various supported devices, a wide range of public models are available at <a class="reference internal" href="openvino_docs_performance_benchmarks.html#doxid-openvino-docs-performance-benchmarks"><span class="std std-ref">Performance benchmarks</span></a> section.</p>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -1905,7 +1912,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

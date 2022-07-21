@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Further Low-Level Implementation Details &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -1825,26 +1832,26 @@
             
                 <div>
                   
-  <div class="section" id="further-low-level-implementation-details">
+  <section id="further-low-level-implementation-details">
 <span id="doxid-openvino-docs-deployment-optimization-guide-internals"></span><span id="index-0"></span><h1>Further Low-Level Implementation Details<a class="headerlink" href="#further-low-level-implementation-details" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-openvino-docs-deployment-optimization-guide-internals-1md-openvino-docs-optimization-guide-dldt-deployment-optimization-internals"></span></p>
-<div class="section" id="throughput-on-the-cpu-internals">
+<section id="throughput-on-the-cpu-internals">
 <h2>Throughput on the CPU: Internals<a class="headerlink" href="#throughput-on-the-cpu-internals" title="Permalink to this headline">¶</a></h2>
 <p>As explained in the <a class="reference internal" href="openvino_docs_deployment_optimization_guide_tput.html#doxid-openvino-docs-deployment-optimization-guide-tput"><span class="std std-ref">throughput-related section</span></a>, the OpenVINO streams is a mean of running multiple requests in parallel. In order to best serve multiple inference requests executed simultaneously, the inference threads are grouped/pinned to the particular CPU cores, constituting the “CPU” streams. This provides much better performance for the networks than batching especially for the many-core machines:</p>
 <img alt="../_images/cpu_streams_explained_1.png" src="../_images/cpu_streams_explained_1.png" />
 <p>Compared with the batching, the parallelism is somewhat transposed (i.e. performed over inputs, with much less synchronization within CNN ops):</p>
 <img alt="../_images/cpu_streams_explained.png" src="../_images/cpu_streams_explained.png" />
 <p>Note that <a class="reference internal" href="openvino_docs_OV_UG_Performance_Hints.html#doxid-openvino-docs-o-v-u-g-performance-hints"><span class="std std-ref">high-level performance hints</span></a> allows the implementation to select the optimal number of the streams, <em>depending on the model compute demands</em> and CPU capabilities (including <a class="reference internal" href="openvino_docs_model_optimization_guide.html#doxid-openvino-docs-model-optimization-guide"><span class="std std-ref">int8 inference</span></a> hardware acceleration, number of cores, etc).</p>
-</div>
-<div class="section" id="automatic-batching-internals">
+</section>
+<section id="automatic-batching-internals">
 <h2>Automatic Batching Internals<a class="headerlink" href="#automatic-batching-internals" title="Permalink to this headline">¶</a></h2>
 <p>As explained in the section on the <a class="reference internal" href="openvino_docs_OV_UG_Automatic_Batching.html#doxid-openvino-docs-o-v-u-g-automatic-batching"><span class="std std-ref">automatic batching</span></a>, the feature performs on-the-fly grouping of the inference requests to improve device utilization. The Automatic Batching relaxes the requirement for an application to saturate devices like GPU by <em>explicitly</em> using a large batch. It performs transparent inputs gathering from individual inference requests followed by the actual batched execution, with no programming effort from the user:</p>
 <img alt="pages/BATCH_device.PNG" src="pages/BATCH_device.PNG" />
 <p>Essentially, the Automatic Batching shifts the asynchronousity from the individual requests to the groups of requests that constitute the batches. Thus, for the execution to be efficient it is very important that the requests arrive timely, without causing a batching timeout. Normally, the timeout should never be hit. It is rather a graceful way to handle the application exit (when the inputs are not arriving anymore, so the full batch is not possible to collect).</p>
 <p>So if your workload experiences the timeouts (resulting in the performance drop, as the timeout value adds itself to the latency of every request), consider balancing the timeout value vs the batch size. For example in many cases having smaller timeout value and batch size may yield better performance than large batch size, but coupled with the timeout value that cannot guarantee accommodating the full number of the required requests.</p>
 <p>Finally, following the “get_tensor idiom” section from the <a class="reference internal" href="openvino_docs_deployment_optimization_guide_common.html#doxid-openvino-docs-deployment-optimization-guide-common"><span class="std std-ref">general optimizations</span></a> helps the Automatic Batching to save on inputs/outputs copies. Thus, in your application always prefer the “get” versions of the tensors’ data access APIs.</p>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -1875,7 +1882,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

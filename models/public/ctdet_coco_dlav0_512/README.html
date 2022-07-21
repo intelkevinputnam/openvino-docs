@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>ctdet_coco_dlav0_512 &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../../../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -2094,16 +2101,16 @@
             
                 <div>
                   
-  <div class="section" id="ctdet-coco-dlav0-512">
+  <section id="ctdet-coco-dlav0-512">
 <h1>ctdet_coco_dlav0_512<a class="headerlink" href="#ctdet-coco-dlav0-512" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="use-case-and-high-level-description">
+<section id="use-case-and-high-level-description">
 <h2>Use Case and High-Level Description<a class="headerlink" href="#use-case-and-high-level-description" title="Permalink to this headline">¶</a></h2>
 <p>CenterNet object detection model <code class="docutils literal notranslate"><span class="pre">ctdet_coco_dlav0_512</span></code> originally trained with PyTorch*.
 CenterNet models an object as a single point - the center point of its bounding box
 and uses keypoint estimation to find center points and regresses to object size.
 For details see <a class="reference external" href="https://arxiv.org/abs/1904.07850">paper</a>, <a class="reference external" href="https://github.com/xingyizhou/CenterNet/">repository</a>.</p>
-</div>
-<div class="section" id="specification">
+</section>
+<section id="specification">
 <h2>Specification<a class="headerlink" href="#specification" title="Permalink to this headline">¶</a></h2>
 <table class="colwidths-auto table">
 <thead>
@@ -2126,8 +2133,8 @@ For details see <a class="reference external" href="https://arxiv.org/abs/1904.0
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="accuracy">
+</section>
+<section id="accuracy">
 <h2>Accuracy<a class="headerlink" href="#accuracy" title="Permalink to this headline">¶</a></h2>
 <table class="colwidths-auto table">
 <thead>
@@ -2143,10 +2150,10 @@ For details see <a class="reference external" href="https://arxiv.org/abs/1904.0
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="input">
+</section>
+<section id="input">
 <h2>Input<a class="headerlink" href="#input" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="original-model">
+<section id="original-model">
 <h3>Original Model<a class="headerlink" href="#original-model" title="Permalink to this headline">¶</a></h3>
 <p>Image, name: <code class="docutils literal notranslate"><span class="pre">input.1</span></code>, shape: <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">3,</span> <span class="pre">512,</span> <span class="pre">512</span></code>, format: <code class="docutils literal notranslate"><span class="pre">B,</span> <span class="pre">C,</span> <span class="pre">H,</span> <span class="pre">W</span></code>, where:</p>
 <ul class="simple">
@@ -2157,8 +2164,8 @@ For details see <a class="reference external" href="https://arxiv.org/abs/1904.0
 </ul>
 <p>Expected color order: <code class="docutils literal notranslate"><span class="pre">BGR</span></code>.
 Mean values: [104.04, 113.985, 119.85], scale values: [73.695, 69.87, 70.89].</p>
-</div>
-<div class="section" id="converted-model">
+</section>
+<section id="converted-model">
 <h3>Converted Model<a class="headerlink" href="#converted-model" title="Permalink to this headline">¶</a></h3>
 <p>Image, name: <code class="docutils literal notranslate"><span class="pre">input.1</span></code>, shape: <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">3,</span> <span class="pre">512,</span> <span class="pre">512</span></code>, format: <code class="docutils literal notranslate"><span class="pre">B,</span> <span class="pre">C,</span> <span class="pre">H,</span> <span class="pre">W</span></code>, where:</p>
 <ul class="simple">
@@ -2168,17 +2175,17 @@ Mean values: [104.04, 113.985, 119.85], scale values: [73.695, 69.87, 70.89].</p
 <li><p><code class="docutils literal notranslate"><span class="pre">W</span></code> - image width</p></li>
 </ul>
 <p>Expected color order: <code class="docutils literal notranslate"><span class="pre">BGR</span></code>.</p>
-</div>
-</div>
-<div class="section" id="output">
+</section>
+</section>
+<section id="output">
 <h2>Output<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
 <li><p>Object center points heatmap, name: <code class="docutils literal notranslate"><span class="pre">center_heatmap</span></code>. Contains predicted objects center point, for each of the 80 categories, according to <a class="reference external" href="https://cocodataset.org/#home">Common Objects in Context (COCO)</a> dataset version with 80 categories of objects, without background label, mapping to class names provided in <code class="docutils literal notranslate"><span class="pre">&lt;omz_dir&gt;/data/dataset_classes/coco_80cl.txt</span></code> file.</p></li>
 <li><p>Object size output, name: <code class="docutils literal notranslate"><span class="pre">width_height</span></code>. Contains predicted width and height for each object.</p></li>
 <li><p>Regression output, name: <code class="docutils literal notranslate"><span class="pre">regression</span></code>. Contains offsets for each prediction.</p></li>
 </ol>
-</div>
-<div class="section" id="download-a-model-and-convert-it-into-openvino-ir-format">
+</section>
+<section id="download-a-model-and-convert-it-into-openvino-ir-format">
 <h2>Download a Model and Convert it into OpenVINO™ IR Format<a class="headerlink" href="#download-a-model-and-convert-it-into-openvino-ir-format" title="Permalink to this headline">¶</a></h2>
 <p>You can download models and if necessary convert them into OpenVINO™ IR format using the <span class="xref myst">Model Downloader and other automation tools</span> as shown in the examples below.</p>
 <p>An example of using the Model Downloader:</p>
@@ -2189,8 +2196,8 @@ Mean values: [104.04, 113.985, 119.85], scale values: [73.695, 69.87, 70.89].</p
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">omz_converter</span> <span class="o">--</span><span class="n">name</span> <span class="o">&lt;</span><span class="n">model_name</span><span class="o">&gt;</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="demo-usage">
+</section>
+<section id="demo-usage">
 <h2>Demo usage<a class="headerlink" href="#demo-usage" title="Permalink to this headline">¶</a></h2>
 <p>The model can be used in the following demos provided by the Open Model Zoo to show its capabilities:</p>
 <ul class="simple">
@@ -2198,8 +2205,8 @@ Mean values: [104.04, 113.985, 119.85], scale values: [73.695, 69.87, 70.89].</p
 <li><p><a class="reference internal" href="../../../demos/object_detection_demo/python/README.html"><span class="doc std std-doc">Object Detection Python* Demo</span></a></p></li>
 <li><p><a class="reference internal" href="../../../demos/pedestrian_tracker_demo/cpp/README.html"><span class="doc std std-doc">Pedestrian Tracker C++ Demo</span></a></p></li>
 </ul>
-</div>
-<div class="section" id="legal-information">
+</section>
+<section id="legal-information">
 <h2>Legal Information<a class="headerlink" href="#legal-information" title="Permalink to this headline">¶</a></h2>
 <p>The original model is distributed under the following
 <a class="reference external" href="https://raw.githubusercontent.com/xingyizhou/CenterNet/master/LICENSE">license</a></p>
@@ -2227,8 +2234,8 @@ Mean values: [104.04, 113.985, 119.85], scale values: [73.695, 69.87, 70.89].</p
 <span class="n">SOFTWARE</span><span class="o">.</span>
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -2259,7 +2266,7 @@ Mean values: [104.04, 113.985, 119.85], scale values: [73.695, 69.87, 70.89].</p
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

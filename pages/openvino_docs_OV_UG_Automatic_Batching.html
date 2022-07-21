@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Automatic Batching &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -1842,35 +1849,35 @@
             
                 <div>
                   
-  <div class="section" id="automatic-batching">
+  <section id="automatic-batching">
 <span id="doxid-openvino-docs-o-v-u-g-automatic-batching"></span><span id="index-0"></span><h1>Automatic Batching<a class="headerlink" href="#automatic-batching" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-openvino-docs-o-v-u-g-automatic-batching-1md-openvino-docs-ov-runtime-ug-automatic-batching"></span></p>
-<div class="section" id="automatic-batching-execution">
+<section id="automatic-batching-execution">
 <h2>(Automatic) Batching Execution<a class="headerlink" href="#automatic-batching-execution" title="Permalink to this headline">¶</a></h2>
 <p>The Automatic-Batching is a preview of the new functionality in the OpenVINO™ toolkit. It performs on-the-fly automatic batching (i.e. grouping inference requests together) to improve device utilization, with no programming effort from the user. Inputs gathering and outputs scattering from the individual inference requests required for the batch happen transparently, without affecting the application code.</p>
 <p>The feature primarily targets existing code written for inferencing many requests (each instance with the batch size 1). To obtain corresponding performance improvements, the application must be <em>running many inference requests simultaneously</em>. As explained below, the auto-batching functionality can be also used via a special <em>virtual</em> device.</p>
-<p>Batching is a straightforward way of leveraging the GPU compute power and saving on communication overheads. The automatic batching is <em>implicitly</em> triggered on the GPU when the <code class="docutils literal notranslate"><span class="pre">ov::hint::PerformanceMode::THROUGHPUT</span></code> is specified for the <code class="docutils literal notranslate"><span class="pre">ov::hint::performance_mode</span></code> property for the compile_model or set_property calls.</p>
-<div class='sphinxtabset'><div class="sphinxtab" data-sphinxtab-value="C++"><div class="highlight"><div class="highlight"><pre><span></span><span class="k">auto</span> <span class="n">compiled_model</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span>compile_model<span></span><span class="p">(</span>model<span></span><span class="p">,</span> <span class="s">&quot;GPU&quot;</span><span class="p">,</span>
-    ov::hint::performance_mode<span></span><span class="p">(</span>ov::hint::PerformanceMode::THROUGHPUT<span></span><span class="p">));</span></pre></div></div></div><div class="sphinxtab" data-sphinxtab-value="Python"><div class="highlight"><div class="highlight"><pre><span></span><span class="n">config</span> <span class="o">=</span> <span class="p">{</span><span class="s">&quot;PERFORMANCE_HINT&quot;</span><span class="o">:</span> <span class="s">&quot;THROUGHPUT&quot;</span><span class="p">}</span>
+<p>Batching is a straightforward way of leveraging the GPU compute power and saving on communication overheads. The automatic batching is <em>implicitly</em> triggered on the GPU when the <code class="docutils literal notranslate"><span class="pre">ov::hint::PerformanceMode::THROUGHPUT</span></code> is specified for the <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga2691fe27acc8aa1d1700ad40b6da3ba2"><span class="std std-ref"><span class="pre">ov::hint::performance_mode</span></span></a></code> property for the compile_model or set_property calls.</p>
+<div class='sphinxtabset'><div class="sphinxtab" data-sphinxtab-value="C++"><div class="highlight"><div class="highlight"><pre><span></span><span class="k">auto</span> <span class="n">compiled_model</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><a class="reference internal" href="../api/groups/classov_1_1Core.html#doxid-classov-1-1-core-1a46555f0803e8c29524626be08e7f5c5a"><span class="std std-ref">compile_model</span></a><span></span><span class="p">(</span><a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga461856fdfb6d7533dc53355aec9e9fad"><span class="std std-ref">model</span></a><span></span><span class="p">,</span> <span class="s">&quot;GPU&quot;</span><span class="p">,</span>
+    <a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga2691fe27acc8aa1d1700ad40b6da3ba2"><span class="std std-ref">ov::hint::performance_mode</span></a><span></span><span class="p">(</span><a class="reference internal" href="../api/groups/namespaceInferenceEngine_1_1PluginConfigParams.html#doxid-namespace-inference-engine-1-1-plugin-config-params-1a0902fd7a7ca168b6a188daf4b75db92f"><span class="std std-ref">ov::hint::PerformanceMode::THROUGHPUT</span></a><span></span><span class="p">));</span></pre></div></div></div><div class="sphinxtab" data-sphinxtab-value="Python"><div class="highlight"><div class="highlight"><pre><span></span><span class="n">config</span> <span class="o">=</span> <span class="p">{</span><span class="s">&quot;PERFORMANCE_HINT&quot;</span><span class="o">:</span> <span class="s">&quot;THROUGHPUT&quot;</span><span class="p">}</span>
 <span class="n">compiled_model</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s">&quot;GPU&quot;</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span></pre></div></div></div></div><div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>You can disable the Auto-Batching (for example, for the GPU device) from being triggered by the <code class="docutils literal notranslate"><span class="pre">ov::hint::PerformanceMode::THROUGHPUT</span></code>. To do that, pass the <code class="docutils literal notranslate"><span class="pre">ov::hint::allow_auto_batching</span></code> set to <strong>false</strong> in addition to the <code class="docutils literal notranslate"><span class="pre">ov::hint::performance_mode</span></code> :</p>
+<p>You can disable the Auto-Batching (for example, for the GPU device) from being triggered by the <code class="docutils literal notranslate"><span class="pre">ov::hint::PerformanceMode::THROUGHPUT</span></code>. To do that, pass the <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga445a111e7219955c585eb418d2f4f80d"><span class="std std-ref"><span class="pre">ov::hint::allow_auto_batching</span></span></a></code> set to <strong>false</strong> in addition to the <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga2691fe27acc8aa1d1700ad40b6da3ba2"><span class="std std-ref"><span class="pre">ov::hint::performance_mode</span></span></a></code> :</p>
 </div>
 <div class='sphinxtabset'><div class="sphinxtab" data-sphinxtab-value="C++"><div class="highlight"><div class="highlight"><pre><span></span><span class="c1">// disabling the automatic batching</span>
 <span class="c1">// leaving intact other configurations options that the device selects for the &#39;throughput&#39; hint</span>
-<span class="k">auto</span> <span class="n">compiled_model</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span>compile_model<span></span><span class="p">(</span>model<span></span><span class="p">,</span> <span class="s">&quot;GPU&quot;</span><span class="p">,</span>
-    ov::hint::performance_mode<span></span><span class="p">(</span>ov::hint::PerformanceMode::THROUGHPUT<span></span><span class="p">),</span>
-    ov::hint::allow_auto_batching<span></span><span class="p">(</span><span class="nb">false</span><span class="p">));</span></pre></div></div></div><div class="sphinxtab" data-sphinxtab-value="Python"><div class="highlight"><div class="highlight"><pre><span></span><span class="cp"># disabling the automatic batching</span>
+<span class="k">auto</span> <span class="n">compiled_model</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><a class="reference internal" href="../api/groups/classov_1_1Core.html#doxid-classov-1-1-core-1a46555f0803e8c29524626be08e7f5c5a"><span class="std std-ref">compile_model</span></a><span></span><span class="p">(</span><a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga461856fdfb6d7533dc53355aec9e9fad"><span class="std std-ref">model</span></a><span></span><span class="p">,</span> <span class="s">&quot;GPU&quot;</span><span class="p">,</span>
+    <a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga2691fe27acc8aa1d1700ad40b6da3ba2"><span class="std std-ref">ov::hint::performance_mode</span></a><span></span><span class="p">(</span><a class="reference internal" href="../api/groups/namespaceInferenceEngine_1_1PluginConfigParams.html#doxid-namespace-inference-engine-1-1-plugin-config-params-1a0902fd7a7ca168b6a188daf4b75db92f"><span class="std std-ref">ov::hint::PerformanceMode::THROUGHPUT</span></a><span></span><span class="p">),</span>
+    <a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga445a111e7219955c585eb418d2f4f80d"><span class="std std-ref">ov::hint::allow_auto_batching</span></a><span></span><span class="p">(</span><span class="nb">false</span><span class="p">));</span></pre></div></div></div><div class="sphinxtab" data-sphinxtab-value="Python"><div class="highlight"><div class="highlight"><pre><span></span><span class="cp"># disabling the automatic batching</span>
 <span class="cp"># leaving intact other configurations options that the device selects for the &#39;throughput&#39; hint</span>
 <span class="n">config</span> <span class="o">=</span> <span class="p">{</span><span class="s">&quot;PERFORMANCE_HINT&quot;</span><span class="o">:</span> <span class="s">&quot;THROUGHPUT&quot;</span><span class="p">,</span>
           <span class="s">&quot;ALLOW_AUTO_BATCHING&quot;</span><span class="o">:</span> <span class="n">False</span><span class="p">}</span>
-<span class="n">compiled_model</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s">&quot;GPU&quot;</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span></pre></div></div></div></div><p>Alternatively, to enable the Auto-Batching in the legacy apps not akin to the notion of the performance hints, you may need to use the <strong>explicit</strong> device notion, such as ‘BATCH:GPU’. In both cases (the <em>throughput</em> hint or explicit BATCH device), the optimal batch size selection happens automatically (the implementation queries the <code class="docutils literal notranslate"><span class="pre">ov::optimal_batch_size</span></code> property from the device, passing the model’s graph as the parameter). The actual value depends on the model and device specifics, for example, on-device memory for the dGPUs. Auto-Batching support is not limited to the GPUs, but if a device does not support the <code class="docutils literal notranslate"><span class="pre">ov::optimal_batch_size</span></code> yet, it can work with the auto-batching only when specifying an explicit batch size, for example, “BATCH:&lt;device&gt;(16)”.</p>
-<p>This <em>automatic batch size selection</em> assumes that the application queries the <code class="docutils literal notranslate"><span class="pre">ov::optimal_number_of_infer_requests</span></code> to create and run the returned number of requests simultaneously:</p>
+<span class="n">compiled_model</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s">&quot;GPU&quot;</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span></pre></div></div></div></div><p>Alternatively, to enable the Auto-Batching in the legacy apps not akin to the notion of the performance hints, you may need to use the <strong>explicit</strong> device notion, such as ‘BATCH:GPU’. In both cases (the <em>throughput</em> hint or explicit BATCH device), the optimal batch size selection happens automatically (the implementation queries the <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga129bad2da2fc2a40a7d746d86fc9c68d"><span class="std std-ref"><span class="pre">ov::optimal_batch_size</span></span></a></code> property from the device, passing the model’s graph as the parameter). The actual value depends on the model and device specifics, for example, on-device memory for the dGPUs. Auto-Batching support is not limited to the GPUs, but if a device does not support the <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga129bad2da2fc2a40a7d746d86fc9c68d"><span class="std std-ref"><span class="pre">ov::optimal_batch_size</span></span></a></code> yet, it can work with the auto-batching only when specifying an explicit batch size, for example, “BATCH:&lt;device&gt;(16)”.</p>
+<p>This <em>automatic batch size selection</em> assumes that the application queries the <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga087c6da667f7c3d8374aec5f6cbba027"><span class="std std-ref"><span class="pre">ov::optimal_number_of_infer_requests</span></span></a></code> to create and run the returned number of requests simultaneously:</p>
 <div class='sphinxtabset'><div class="sphinxtab" data-sphinxtab-value="C++"><div class="highlight"><div class="highlight"><pre><span></span><span class="c1">// when the batch size is automatically selected by the implementation</span>
 <span class="c1">// it is important to query/create and run the sufficient #requests</span>
-<span class="k">auto</span> <span class="n">compiled_model</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span>compile_model<span></span><span class="p">(</span>model<span></span><span class="p">,</span> <span class="s">&quot;GPU&quot;</span><span class="p">,</span>
-    ov::hint::performance_mode<span></span><span class="p">(</span>ov::hint::PerformanceMode::THROUGHPUT<span></span><span class="p">));</span>
-<span class="k">auto</span> <span class="n">num_requests</span> <span class="o">=</span> <span class="n">compiled_model</span><span class="p">.</span>get_property<span></span><span class="p">(</span>ov::optimal_number_of_infer_requests<span></span><span class="p">);</span></pre></div></div></div><div class="sphinxtab" data-sphinxtab-value="Python"><div class="highlight"><div class="highlight"><pre><span></span><span class="cp"># when the batch size is automatically selected by the implementation</span>
+<span class="k">auto</span> <span class="n">compiled_model</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><a class="reference internal" href="../api/groups/classov_1_1Core.html#doxid-classov-1-1-core-1a46555f0803e8c29524626be08e7f5c5a"><span class="std std-ref">compile_model</span></a><span></span><span class="p">(</span><a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga461856fdfb6d7533dc53355aec9e9fad"><span class="std std-ref">model</span></a><span></span><span class="p">,</span> <span class="s">&quot;GPU&quot;</span><span class="p">,</span>
+    <a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga2691fe27acc8aa1d1700ad40b6da3ba2"><span class="std std-ref">ov::hint::performance_mode</span></a><span></span><span class="p">(</span><a class="reference internal" href="../api/groups/namespaceInferenceEngine_1_1PluginConfigParams.html#doxid-namespace-inference-engine-1-1-plugin-config-params-1a0902fd7a7ca168b6a188daf4b75db92f"><span class="std std-ref">ov::hint::PerformanceMode::THROUGHPUT</span></a><span></span><span class="p">));</span>
+<span class="k">auto</span> <span class="n">num_requests</span> <span class="o">=</span> <span class="n">compiled_model</span><span class="p">.</span><a class="reference internal" href="../api/groups/classov_1_1CompiledModel.html#doxid-classov-1-1-compiled-model-1a109d701ffe8b5de096961c7c98ff0bed"><span class="std std-ref">get_property</span></a><span></span><span class="p">(</span><a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga087c6da667f7c3d8374aec5f6cbba027"><span class="std std-ref">ov::optimal_number_of_infer_requests</span></a><span></span><span class="p">);</span></pre></div></div></div><div class="sphinxtab" data-sphinxtab-value="Python"><div class="highlight"><div class="highlight"><pre><span></span><span class="cp"># when the batch size is automatically selected by the implementation</span>
 <span class="cp"># it is important to query/create and run the sufficient requests</span>
 <span class="n">config</span> <span class="o">=</span> <span class="p">{</span><span class="s">&quot;PERFORMANCE_HINT&quot;</span><span class="o">:</span> <span class="s">&quot;THROUGHPUT&quot;</span><span class="p">}</span>
 <span class="n">compiled_model</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s">&quot;GPU&quot;</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
@@ -1878,14 +1885,14 @@
 <p>For example, the application processes only 4 video streams, so there is no need to use a batch larger than 4. The most future-proof way to communicate the limitations on the parallelism is to equip the performance hint with the optional <code class="docutils literal notranslate"><span class="pre">ov::hint::num_requests</span></code> configuration key set to 4. For the GPU this will limit the batch size, for the CPU - the number of inference streams, so each device uses the <code class="docutils literal notranslate"><span class="pre">ov::hint::num_requests</span></code> while converting the hint to the actual device configuration options:</p>
 <div class='sphinxtabset'><div class="sphinxtab" data-sphinxtab-value="C++"><div class="highlight"><div class="highlight"><pre><span></span><span class="c1">// limiting the available parallel slack for the &#39;throughput&#39; hint via the ov::hint::num_requests</span>
 <span class="c1">// so that certain parameters (like selected batch size) are automatically accommodated accordingly</span>
-<span class="k">auto</span> <span class="n">compiled_model</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span>compile_model<span></span><span class="p">(</span>model<span></span><span class="p">,</span> <span class="s">&quot;GPU&quot;</span><span class="p">,</span>
-    ov::hint::performance_mode<span></span><span class="p">(</span>ov::hint::PerformanceMode::THROUGHPUT<span></span><span class="p">),</span>
+<span class="k">auto</span> <span class="n">compiled_model</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><a class="reference internal" href="../api/groups/classov_1_1Core.html#doxid-classov-1-1-core-1a46555f0803e8c29524626be08e7f5c5a"><span class="std std-ref">compile_model</span></a><span></span><span class="p">(</span><a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga461856fdfb6d7533dc53355aec9e9fad"><span class="std std-ref">model</span></a><span></span><span class="p">,</span> <span class="s">&quot;GPU&quot;</span><span class="p">,</span>
+    <a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga2691fe27acc8aa1d1700ad40b6da3ba2"><span class="std std-ref">ov::hint::performance_mode</span></a><span></span><span class="p">(</span><a class="reference internal" href="../api/groups/namespaceInferenceEngine_1_1PluginConfigParams.html#doxid-namespace-inference-engine-1-1-plugin-config-params-1a0902fd7a7ca168b6a188daf4b75db92f"><span class="std std-ref">ov::hint::PerformanceMode::THROUGHPUT</span></a><span></span><span class="p">),</span>
     <span class="n">ov</span><span class="o">::</span><span class="n">hint</span><span class="o">::</span><span class="n">num_requests</span><span class="p">(</span><span class="mi">4</span><span class="p">));</span></pre></div></div></div><div class="sphinxtab" data-sphinxtab-value="Python"><div class="highlight"><div class="highlight"><pre><span></span><span class="n">config</span> <span class="o">=</span> <span class="p">{</span><span class="s">&quot;PERFORMANCE_HINT&quot;</span><span class="o">:</span> <span class="s">&quot;THROUGHPUT&quot;</span><span class="p">,</span>
           <span class="s">&quot;PERFORMANCE_HINT_NUM_REQUESTS&quot;</span><span class="o">:</span> <span class="s">&quot;4&quot;</span><span class="p">}</span>
 <span class="cp"># limiting the available parallel slack for the &#39;throughput&#39;</span>
 <span class="cp"># so that certain parameters (like selected batch size) are automatically accommodated accordingly</span>
 <span class="n">compiled_model</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s">&quot;GPU&quot;</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span></pre></div></div></div></div><p>For the <em>explicit</em> usage, you can limit the batch size using “BATCH:GPU(4)”, where 4 is the number of requests running in parallel.</p>
-<div class="section" id="other-performance-considerations">
+<section id="other-performance-considerations">
 <h3>Other Performance Considerations<a class="headerlink" href="#other-performance-considerations" title="Permalink to this headline">¶</a></h3>
 <p>To achieve the best performance with the Automatic Batching, the application should:</p>
 <ul class="simple">
@@ -1893,7 +1900,7 @@
 <li><p>Use the requests, grouped by the batch size, together. For example, the first 4 requests are inferred, while the second group of the requests is being populated. Essentially, the Automatic Batching shifts the asynchronousity from the individual requests to the groups of requests that constitute the batches.</p>
 <ul>
 <li><p>Balance the ‘timeout’ value vs the batch size. For example, in many cases having a smaller timeout value/batch size may yield better performance than large batch size, but with the timeout value that is not large enough to accommodate the full number of the required requests.</p></li>
-<li><p>When the Automatic Batching is enabled, the ‘timeout’ property of the <code class="docutils literal notranslate"><span class="pre">ov::CompiledModel</span></code> can be changed any time, even after model loading/compilation. For example, setting the value to 0 effectively disables the auto-batching, as requests’ collection would be omitted.</p></li>
+<li><p>When the Automatic Batching is enabled, the ‘timeout’ property of the <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1CompiledModel.html#doxid-classov-1-1-compiled-model"><span class="std std-ref"><span class="pre">ov::CompiledModel</span></span></a></code> can be changed any time, even after model loading/compilation. For example, setting the value to 0 effectively disables the auto-batching, as requests’ collection would be omitted.</p></li>
 <li><p>Carefully apply the auto-batching to the pipelines. For example for the conventional video-sources-&gt;detection-&gt;classification flow, it is the most benefical to do auto-batching over the inputs to the detection stage. Whereas the resulting number of detections is usually fluent, which makes the auto-batching less applicable for the classification stage.</p></li>
 </ul>
 </li>
@@ -1909,8 +1916,8 @@
 </li>
 <li><p>Performance improvements happen at the cost of the memory footprint growth, yet the auto-batching queries the available memory (especially for the dGPUs) and limits the selected batch size accordingly.</p></li>
 </ul>
-</div>
-<div class="section" id="configuring-the-automatic-batching">
+</section>
+<section id="configuring-the-automatic-batching">
 <h3>Configuring the Automatic Batching<a class="headerlink" href="#configuring-the-automatic-batching" title="Permalink to this headline">¶</a></h3>
 <p>Following the OpenVINO convention for devices names, the <em>batching</em> device is named <em>BATCH</em>. The configuration options are as follows:</p>
 <table class="table">
@@ -1940,8 +1947,8 @@
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="testing-automatic-batching-performance-with-the-benchmark-app">
+</section>
+<section id="testing-automatic-batching-performance-with-the-benchmark-app">
 <h3>Testing Automatic Batching Performance with the Benchmark_App<a class="headerlink" href="#testing-automatic-batching-performance-with-the-benchmark-app" title="Permalink to this headline">¶</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">benchmark_app</span></code>, that exists in both <a class="reference internal" href="openvino_inference_engine_samples_benchmark_app_README.html#doxid-openvino-inference-engine-samples-benchmark-app-r-e-a-d-m-e"><span class="std std-ref">C++</span></a> and <a class="reference internal" href="openvino_inference_engine_tools_benchmark_tool_README.html#doxid-openvino-inference-engine-tools-benchmark-tool-r-e-a-d-m-e"><span class="std std-ref">Python</span></a> versions, is the best way to evaluate the performance of the Automatic Batching:</p>
 <ul class="simple">
@@ -1963,13 +1970,13 @@
 </li>
 </ul>
 <p>The last example is also applicable to the CPU or any other device that generally supports the batched execution.</p>
-</div>
-<div class="section" id="see-also">
+</section>
+<section id="see-also">
 <h3>See Also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference internal" href="openvino_docs_OV_UG_supported_plugins_Supported_Devices.html#doxid-openvino-docs-o-v-u-g-supported-plugins-supported-devices"><span class="std std-ref">Supported Devices</span></a></p>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
                 </div>
@@ -2000,7 +2007,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

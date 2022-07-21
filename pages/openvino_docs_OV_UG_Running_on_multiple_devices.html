@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Running on multiple devices simultaneously &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -1906,10 +1913,10 @@
             
                 <div>
                   
-  <div class="section" id="running-on-multiple-devices-simultaneously">
+  <section id="running-on-multiple-devices-simultaneously">
 <span id="doxid-openvino-docs-o-v-u-g-running-on-multiple-devices"></span><span id="index-0"></span><h1>Running on multiple devices simultaneously<a class="headerlink" href="#running-on-multiple-devices-simultaneously" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-openvino-docs-o-v-u-g-running-on-multiple-devices-1md-openvino-docs-ov-runtime-ug-multi-device"></span></p>
-<div class="section" id="introducing-the-multi-device-plugin-c">
+<section id="introducing-the-multi-device-plugin-c">
 <h2>Introducing the Multi-Device Plugin (C++)<a class="headerlink" href="#introducing-the-multi-device-plugin-c" title="Permalink to this headline">¶</a></h2>
 <div id="switcher-cpp" class="switcher-anchor">C++</div><p>The Multi-Device plugin automatically assigns inference requests to available computational devices to execute the requests in parallel. By contrast, the Heterogeneous plugin can run different layers on different devices but not in parallel. The potential gains with the Multi-Device plugin are:</p>
 <ul class="simple">
@@ -1924,7 +1931,7 @@
 <li><p>As with any other CompiledModel call (resulting from <code class="docutils literal notranslate"><span class="pre">compile_model</span></code>), you create as many requests as needed to saturate the devices.</p></li>
 </ol>
 <p>These steps are covered below in detail.</p>
-<div class="section" id="defining-and-configuring-the-multi-device-plugin">
+<section id="defining-and-configuring-the-multi-device-plugin">
 <h3>Defining and Configuring the Multi-Device Plugin<a class="headerlink" href="#defining-and-configuring-the-multi-device-plugin" title="Permalink to this headline">¶</a></h3>
 <p>Following the OpenVINO™ convention of labeling devices, the Multi-Device plugin uses the name “MULTI”. The only configuration option for the Multi-Device plugin is a prioritized list of devices to use:</p>
 <table class="table">
@@ -1942,7 +1949,7 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><span class="xref std std-ref">ov::device::priorities</span></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1gae88af90a18871677f39739cb0ef0101e"><span class="std std-ref">ov::device::priorities</span></a></p></td>
 <td><p>comma-separated device names with no spaces</p></td>
 <td><p>N/A</p></td>
 <td><p>Prioritized list of devices</p></td>
@@ -1953,47 +1960,16 @@
 <p>Basically, there are three ways to specify the devices to be use by the “MULTI”:</p>
 <div class="tab-set docutils">
 <input checked="True" class="tab-input" id="tab-set--0-input--1" name="tab-set--0" type="radio"><label class="tab-label" for="tab-set--0-input--1">C++</label><div class="tab-content docutils">
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">ov</span><span class="o">::</span><span class="n">Core</span> <span class="n">core</span><span class="p">;</span>
-<span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">ov</span><span class="o">::</span><span class="n">Model</span><span class="o">&gt;</span> <span class="n">model</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><span class="n">read_model</span><span class="p">(</span><span class="s">&quot;sample.xml&quot;</span><span class="p">);</span>
-<span class="c1">// the &quot;MULTI&quot; device is (globally) pre-configured with the explicit option</span>
-<span class="n">core</span><span class="p">.</span><span class="n">set_property</span><span class="p">(</span><span class="s">&quot;MULTI&quot;</span><span class="p">,</span> <span class="n">ov</span><span class="o">::</span><span class="n">device</span><span class="o">::</span><span class="n">priorities</span><span class="p">(</span><span class="s">&quot;HDDL,GPU&quot;</span><span class="p">));</span>
-<span class="n">ov</span><span class="o">::</span><span class="n">CompiledModel</span> <span class="n">compileModel0</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s">&quot;MULTI&quot;</span><span class="p">);</span>
-
-<span class="c1">// configuration of the &quot;MULTI&quot; is part of the compile configuration (and hence specific to the model):</span>
-<span class="n">ov</span><span class="o">::</span><span class="n">CompiledModel</span> <span class="n">compileModel1</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s">&quot;MULTI&quot;</span><span class="p">,</span> <span class="n">ov</span><span class="o">::</span><span class="n">device</span><span class="o">::</span><span class="n">priorities</span><span class="p">(</span><span class="s">&quot;HDDL,GPU&quot;</span><span class="p">));</span>
-
-<span class="c1">// same as previous, but configuration of the &quot;MULTI&quot; is part</span>
-<span class="c1">// of the name (so config is empty), also model-specific:</span>
-<span class="n">ov</span><span class="o">::</span><span class="n">CompiledModel</span> <span class="n">compileModel2</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s">&quot;MULTI:HDDL,GPU&quot;</span><span class="p">);</span>
-</pre></div>
-</div>
 </div>
 </div>
 <p>Notice that the priorities of the devices can be changed in real time for the compiled model:</p>
 <div class="tab-set docutils">
 <input checked="True" class="tab-input" id="tab-set--1-input--1" name="tab-set--1" type="radio"><label class="tab-label" for="tab-set--1-input--1">C++</label><div class="tab-content docutils">
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">ov</span><span class="o">::</span><span class="n">Core</span> <span class="n">core</span><span class="p">;</span>
-<span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">ov</span><span class="o">::</span><span class="n">Model</span><span class="o">&gt;</span> <span class="n">model</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><span class="n">read_model</span><span class="p">(</span><span class="s">&quot;sample.xml&quot;</span><span class="p">);</span>
-<span class="n">ov</span><span class="o">::</span><span class="n">CompiledModel</span> <span class="n">compileModel</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s">&quot;MULTI:HDDL,GPU&quot;</span><span class="p">);</span>
-<span class="c1">// reverse the order of priorities</span>
-<span class="n">compileModel</span><span class="p">.</span><span class="n">set_property</span><span class="p">(</span><span class="n">ov</span><span class="o">::</span><span class="n">device</span><span class="o">::</span><span class="n">priorities</span><span class="p">(</span><span class="s">&quot;GPU,HDDL&quot;</span><span class="p">));</span>
-<span class="c1">// you can even exclude some device (HDDL here)</span>
-<span class="n">compileModel</span><span class="p">.</span><span class="n">set_property</span><span class="p">(</span><span class="n">ov</span><span class="o">::</span><span class="n">device</span><span class="o">::</span><span class="n">priorities</span><span class="p">(</span><span class="s">&quot;GPU&quot;</span><span class="p">));</span>
-<span class="c1">// and then return it back</span>
-<span class="n">compileModel</span><span class="p">.</span><span class="n">set_property</span><span class="p">(</span><span class="n">ov</span><span class="o">::</span><span class="n">device</span><span class="o">::</span><span class="n">priorities</span><span class="p">(</span><span class="s">&quot;GPU,HDDL&quot;</span><span class="p">));</span>
-<span class="c1">// but you cannot add new devices on the fly, </span>
-<span class="c1">// the next line will trigger the following exception:</span>
-<span class="c1">// [ ERROR ] [NOT_FOUND] You can only change device</span>
-<span class="c1">// priorities but not add new devices with the model&#39;s</span>
-<span class="c1">// ov::device::priorities. CPU device was not in the original device list!</span>
-<span class="n">compileModel</span><span class="p">.</span><span class="n">set_property</span><span class="p">(</span><span class="n">ov</span><span class="o">::</span><span class="n">device</span><span class="o">::</span><span class="n">priorities</span><span class="p">(</span><span class="s">&quot;CPU,GPU,HDDL&quot;</span><span class="p">));</span>
-</pre></div>
-</div>
 </div>
 </div>
 <p>Finally, there is a way to specify number of requests that the Multi-Device will internally keep for each device. Suppose your original app was running 4 cameras with 4 inference requests. You would probably want to share these 4 requests between 2 devices used in MULTI. The easiest way is to specify a number of requests for each device using parentheses: “MULTI:CPU(2),GPU(2)” and use the same 4 requests in your app. However, such an explicit configuration is not performance-portable and hence not recommended. Instead, the better way is to configure the individual devices and query the resulting number of requests to be used at the application level (see <a class="reference external" href="#configuring-the-individual-devices-and-creating-the-multi-device-on-top">Configuring the Individual Devices and Creating the Multi-Device On Top</a>).</p>
-</div>
-<div class="section" id="enumerating-available-devices">
+</section>
+<section id="enumerating-available-devices">
 <h3>Enumerating Available Devices<a class="headerlink" href="#enumerating-available-devices" title="Permalink to this headline">¶</a></h3>
 <p>The OpenVINO Runtime API features a dedicated methods to enumerate devices and their capabilities. See the <a class="reference internal" href="openvino_inference_engine_samples_hello_query_device_README.html#doxid-openvino-inference-engine-samples-hello-query-device-r-e-a-d-m-e"><span class="std std-ref">Hello Query Device C++ Sample</span></a>. This is example output from the sample (truncated to device names only):</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="p">.</span><span class="o">/</span><span class="n">hello_query_device</span>
@@ -2007,18 +1983,6 @@
     <span class="nl">Device</span><span class="p">:</span> <span class="n">HDDL</span></pre></div></div><p>A simple programmatic way to enumerate the devices and use with the multi-device is as follows:</p>
 <div class="tab-set docutils">
 <input checked="True" class="tab-input" id="tab-set--2-input--1" name="tab-set--2" type="radio"><label class="tab-label" for="tab-set--2-input--1">C++</label><div class="tab-content docutils">
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">ov</span><span class="o">::</span><span class="n">Core</span> <span class="n">core</span><span class="p">;</span>
-<span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">ov</span><span class="o">::</span><span class="n">Model</span><span class="o">&gt;</span> <span class="n">model</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><span class="n">read_model</span><span class="p">(</span><span class="s">&quot;sample.xml&quot;</span><span class="p">);</span>
-<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">availableDevices</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><span class="n">get_available_devices</span><span class="p">();</span>
-<span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">all_devices</span><span class="p">;</span>
-<span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="o">&amp;&amp;</span> <span class="nl">device</span> <span class="p">:</span> <span class="n">availableDevices</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">all_devices</span> <span class="o">+=</span> <span class="n">device</span><span class="p">;</span>
-    <span class="n">all_devices</span> <span class="o">+=</span> <span class="p">((</span><span class="n">device</span> <span class="o">==</span> <span class="n">availableDevices</span><span class="p">[</span><span class="n">availableDevices</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">?</span> <span class="s">&quot;&quot;</span> <span class="o">:</span> <span class="s">&quot;,&quot;</span><span class="p">);</span>
-<span class="p">}</span>
-<span class="n">ov</span><span class="o">::</span><span class="n">CompiledModel</span> <span class="n">compileModel</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s">&quot;MULTI&quot;</span><span class="p">,</span>
-    <span class="n">ov</span><span class="o">::</span><span class="n">device</span><span class="o">::</span><span class="n">priorities</span><span class="p">(</span><span class="n">all_devices</span><span class="p">));</span>
-</pre></div>
-</div>
 </div>
 </div>
 <p>Beyond the trivial “CPU”, “GPU”, “HDDL” and so on, when multiple instances of a device are available the names are more qualified. For example, this is how two Intel® Movidius™ Myriad™ X sticks are listed with the hello_query_sample:</p>
@@ -2028,74 +1992,41 @@
     <span class="nl">Device</span><span class="p">:</span> <span class="n">MYRIAD</span><span class="mf">.1.4</span><span class="o">-</span><span class="n">ma2480</span></pre></div></div><p>So the explicit configuration to use both would be “MULTI:MYRIAD.1.2-ma2480,MYRIAD.1.4-ma2480”. Accordingly, the code that loops over all available devices of “MYRIAD” type only is below:</p>
 <div class="tab-set docutils">
 <input checked="True" class="tab-input" id="tab-set--3-input--1" name="tab-set--3" type="radio"><label class="tab-label" for="tab-set--3-input--1">C++</label><div class="tab-content docutils">
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">ov</span><span class="o">::</span><span class="n">Core</span> <span class="n">core</span><span class="p">;</span>
-<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">myriadDevices</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><span class="n">get_property</span><span class="p">(</span><span class="s">&quot;MYRIAD&quot;</span><span class="p">,</span> <span class="n">ov</span><span class="o">::</span><span class="n">available_devices</span><span class="p">);</span>
-<span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">all_devices</span><span class="p">;</span>
-<span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">myriadDevices</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">all_devices</span> <span class="o">+=</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="s">&quot;MYRIAD.&quot;</span><span class="p">)</span>
-                            <span class="o">+</span> <span class="n">myriadDevices</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-                            <span class="o">+</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="p">(</span><span class="n">myriadDevices</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">?</span> <span class="s">&quot;,&quot;</span> <span class="o">:</span> <span class="s">&quot;&quot;</span><span class="p">);</span>
-<span class="p">}</span>
-<span class="n">ov</span><span class="o">::</span><span class="n">CompiledModel</span> <span class="n">compileModel</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><span class="n">compile_model</span><span class="p">(</span><span class="s">&quot;sample.xml&quot;</span><span class="p">,</span> <span class="s">&quot;MULTI&quot;</span><span class="p">,</span>
-    <span class="n">ov</span><span class="o">::</span><span class="n">device</span><span class="o">::</span><span class="n">priorities</span><span class="p">(</span><span class="n">all_devices</span><span class="p">));</span>
-</pre></div>
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="configuring-the-individual-devices-and-creating-the-multi-device-on-top">
+</section>
+<section id="configuring-the-individual-devices-and-creating-the-multi-device-on-top">
 <h3>Configuring the Individual Devices and Creating the Multi-Device On Top<a class="headerlink" href="#configuring-the-individual-devices-and-creating-the-multi-device-on-top" title="Permalink to this headline">¶</a></h3>
 <p>As discussed in the first section, you shall configure each individual device as usual and then just create the “MULTI” device on top:</p>
 <div class="tab-set docutils">
 <input checked="True" class="tab-input" id="tab-set--4-input--1" name="tab-set--4" type="radio"><label class="tab-label" for="tab-set--4-input--1">C++</label><div class="tab-content docutils">
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// configure the HDDL device first</span>
-<span class="n">ov</span><span class="o">::</span><span class="n">Core</span> <span class="n">core</span><span class="p">;</span>
-<span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">ov</span><span class="o">::</span><span class="n">Model</span><span class="o">&gt;</span> <span class="n">model</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><span class="n">read_model</span><span class="p">(</span><span class="s">&quot;sample.xml&quot;</span><span class="p">);</span>
-<span class="c1">// compile the modle on the multi-device,</span>
-<span class="c1">// while specifying the configuration (devices along with priorities</span>
-<span class="c1">// and the configuration of devices):</span>
-<span class="n">ov</span><span class="o">::</span><span class="n">CompiledModel</span> <span class="n">compileModel</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s">&quot;MULTI&quot;</span><span class="p">,</span>
-    <span class="n">ov</span><span class="o">::</span><span class="n">device</span><span class="o">::</span><span class="n">priorities</span><span class="p">(</span><span class="s">&quot;HDDL&quot;</span><span class="p">,</span> <span class="s">&quot;GPU&quot;</span><span class="p">),</span>
-    <span class="n">ov</span><span class="o">::</span><span class="n">device</span><span class="o">::</span><span class="n">properties</span><span class="p">(</span><span class="s">&quot;HDDL&quot;</span><span class="p">,</span> <span class="n">hddl_config</span><span class="p">),</span>
-    <span class="n">ov</span><span class="o">::</span><span class="n">device</span><span class="o">::</span><span class="n">properties</span><span class="p">(</span><span class="s">&quot;GPU&quot;</span><span class="p">,</span> <span class="n">gpu_config</span><span class="p">));</span>
-
-<span class="c1">// query the optimal number of requests:</span>
-<span class="kt">uint32_t</span> <span class="n">nireq</span> <span class="o">=</span> <span class="n">compileModel</span><span class="p">.</span><span class="n">get_property</span><span class="p">(</span><span class="n">ov</span><span class="o">::</span><span class="n">optimal_number_of_infer_requests</span><span class="p">);</span>
-</pre></div>
-</div>
 </div>
 </div>
 <p>An alternative is to combine all the individual device settings into a single config file and load that, allowing the Multi-Device plugin to parse and apply settings to the right devices. See the code example in the next section.</p>
 <p>Note that while the performance of accelerators combines really well with Multi-Device, the CPU+GPU execution poses some performance caveats, as these devices share the power, bandwidth and other resources. For example it is recommended to enable the GPU throttling hint (which save another CPU thread for the CPU inference). See the <a class="reference external" href="#using-the-multi-device-with-openvino-samples-and-benchmarking-the-performance">Using the Multi-Device with OpenVINO samples and benchmarking the performance</a> section below.</p>
-</div>
-<div class="section" id="querying-the-optimal-number-of-inference-requests">
+</section>
+<section id="querying-the-optimal-number-of-inference-requests">
 <h3>Querying the Optimal Number of Inference Requests<a class="headerlink" href="#querying-the-optimal-number-of-inference-requests" title="Permalink to this headline">¶</a></h3>
 <p>You can use the <a class="reference internal" href="openvino_docs_OV_UG_query_api.html#doxid-openvino-docs-o-v-u-g-query-api"><span class="std std-ref">configure devices</span></a> to query the optimal number of requests. Similarly, when using the Multi-Device you don’t need to sum over included devices yourself, you can query property directly:</p>
 <div class="tab-set docutils">
 <input checked="True" class="tab-input" id="tab-set--5-input--1" name="tab-set--5" type="radio"><label class="tab-label" for="tab-set--5-input--1">C++</label><div class="tab-content docutils">
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">ov</span><span class="o">::</span><span class="n">Core</span> <span class="n">core</span><span class="p">;</span>
-<span class="n">ov</span><span class="o">::</span><span class="n">CompiledModel</span> <span class="n">compileModel</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><span class="n">compile_model</span><span class="p">(</span><span class="s">&quot;sample.xml&quot;</span><span class="p">,</span> <span class="s">&quot;MULTI:HDDL,GPU&quot;</span><span class="p">);</span>
-<span class="c1">// query the optimal number of requests</span>
-<span class="kt">uint32_t</span> <span class="n">nireq</span> <span class="o">=</span> <span class="n">compileModel</span><span class="p">.</span><span class="n">get_property</span><span class="p">(</span><span class="n">ov</span><span class="o">::</span><span class="n">optimal_number_of_infer_requests</span><span class="p">);</span>
-</pre></div>
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="using-the-multi-device-with-openvino-samples-and-benchmarking-the-performance">
+</section>
+<section id="using-the-multi-device-with-openvino-samples-and-benchmarking-the-performance">
 <h3>Using the Multi-Device with OpenVINO Samples and Benchmarking the Performance<a class="headerlink" href="#using-the-multi-device-with-openvino-samples-and-benchmarking-the-performance" title="Permalink to this headline">¶</a></h3>
 <p>Every OpenVINO sample that supports the <code class="docutils literal notranslate"><span class="pre">-d</span></code> (which stands for “device”) command-line option transparently accepts Multi-Device. The <a class="reference internal" href="openvino_inference_engine_samples_benchmark_app_README.html#doxid-openvino-inference-engine-samples-benchmark-app-r-e-a-d-m-e"><span class="std std-ref">Benchmark Application</span></a> is the best reference for the optimal usage of Multi-Device. As discussed earlier, you do not need to set up the number of requests, CPU streams or threads because the application provides optimal performance out of the box. Below is an example command to evaluate HDDL+GPU performance with that:</p>
-<div class="highlight"><div class="highlight"><pre><span></span><span class="p">.</span><span class="o">/</span><span class="n">benchmark_app</span> <span class="err">–</span><span class="n">d</span> <span class="nl">MULTI</span><span class="p">:</span><span class="n">HDDL</span><span class="p">,</span><span class="n">GPU</span> <span class="err">–</span><span class="n">m</span> <span class="o">&lt;</span><span class="n">model</span><span class="o">&gt;</span> <span class="o">-</span><span class="n">i</span> <span class="o">&lt;</span><span class="n">input</span><span class="o">&gt;</span> <span class="o">-</span><span class="n">niter</span> <span class="mi">1000</span></pre></div></div><p>The Multi-Device plugin supports FP16 IR files. The CPU plugin automatically upconverts it to FP32 and the other devices support it natively. Note that no demos are (yet) fully optimized for Multi-Device, by means of supporting the <span class="xref std std-ref">ov::optimal_number_of_infer_requests</span> property, using the GPU streams/throttling, and so on.</p>
-</div>
-<div class="section" id="video-multi-plugin">
+<div class="highlight"><div class="highlight"><pre><span></span><span class="p">.</span><span class="o">/</span><span class="n">benchmark_app</span> <span class="err">–</span><span class="n">d</span> <span class="nl">MULTI</span><span class="p">:</span><span class="n">HDDL</span><span class="p">,</span><span class="n">GPU</span> <span class="err">–</span><span class="n">m</span> <span class="o">&lt;</span><span class="n">model</span><span class="o">&gt;</span> <span class="o">-</span><span class="n">i</span> <span class="o">&lt;</span><span class="n">input</span><span class="o">&gt;</span> <span class="o">-</span><span class="n">niter</span> <span class="mi">1000</span></pre></div></div><p>The Multi-Device plugin supports FP16 IR files. The CPU plugin automatically upconverts it to FP32 and the other devices support it natively. Note that no demos are (yet) fully optimized for Multi-Device, by means of supporting the <a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga087c6da667f7c3d8374aec5f6cbba027"><span class="std std-ref">ov::optimal_number_of_infer_requests</span></a> property, using the GPU streams/throttling, and so on.</p>
+</section>
+<section id="video-multi-plugin">
 <h3>Video: MULTI Plugin<a class="headerlink" href="#video-multi-plugin" title="Permalink to this headline">¶</a></h3>
-<iframe allowfullscreen mozallowfullscreen msallowfullscreen oallowfullscreen webkitallowfullscreen width="560" height="315" src="https://www.youtube.com/embed/xbORYFEmrqU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-<div class="section" id="see-also">
+<iframe allowfullscreen mozallowfullscreen msallowfullscreen oallowfullscreen webkitallowfullscreen width="560" height="315" src="https://www.youtube.com/embed/xbORYFEmrqU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></section>
+<section id="see-also">
 <h3>See Also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference internal" href="openvino_docs_OV_UG_supported_plugins_Supported_Devices.html#doxid-openvino-docs-o-v-u-g-supported-plugins-supported-devices"><span class="std std-ref">Supported Devices</span></a></p>
-</div>
-</div>
-<div class="section" id="performance-considerations-for-the-multi-device-execution">
+</section>
+</section>
+<section id="performance-considerations-for-the-multi-device-execution">
 <h2>Performance Considerations for the Multi-Device Execution<a class="headerlink" href="#performance-considerations-for-the-multi-device-execution" title="Permalink to this headline">¶</a></h2>
 <p>This section covers few recommendations for the multi-device execution (applicable for both Python and C++):</p>
 <ul class="simple">
@@ -2104,8 +2035,8 @@
 <li><p>Notice that for example CPU+GPU execution performs better with certain knobs which you can find in the code of the same <a class="reference internal" href="openvino_inference_engine_samples_benchmark_app_README.html#doxid-openvino-inference-engine-samples-benchmark-app-r-e-a-d-m-e"><span class="std std-ref">Benchmark App</span></a> sample. One specific example is disabling GPU driver polling, which in turn requires multiple GPU streams to amortize slower communication of inference completion from the device to the host.</p></li>
 <li><p>Multi-device logic always attempts to save on the (e.g. inputs) data copies between device-agnostic, user-facing inference requests and device-specific ‘worker’ requests that are being actually scheduled behind the scene. To facilitate the copy savings, it is recommended to run the requests in the order that they were created.</p></li>
 </ul>
-</div>
-<div class="section" id="introducing-the-multi-device-plugin-python">
+</section>
+<section id="introducing-the-multi-device-plugin-python">
 <h2>Introducing the Multi-Device Plugin (Python)<a class="headerlink" href="#introducing-the-multi-device-plugin-python" title="Permalink to this headline">¶</a></h2>
 <div id="switcher-python" class="switcher-anchor">Python</div><p>The Multi-Device plugin automatically assigns inference requests to available computational devices to execute the requests in parallel. By contrast, the Heterogeneous plugin can run different layers on different devices but not in parallel. The potential gains with the Multi-Device plugin are:</p>
 <ul class="simple">
@@ -2120,7 +2051,7 @@
 <li><p>As with any other CompiledModel call (resulting from <code class="docutils literal notranslate"><span class="pre">compile_model</span></code>), you create as many requests as needed to saturate the devices.</p></li>
 </ol>
 <p>These steps are covered below in detail.</p>
-<div class="section" id="id1">
+<section id="id1">
 <h3>Defining and Configuring the Multi-Device Plugin<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <p>Following the OpenVINO™ convention of labeling devices, the Multi-Device plugin uses the name “MULTI”. The only configuration option for the Multi-Device plugin is a prioritized list of devices to use:</p>
 <table class="table">
@@ -2146,20 +2077,13 @@
 </tbody>
 </table>
 <p>You can set the configuration directly as a string, or use the metric key <code class="docutils literal notranslate"><span class="pre">MULTI_DEVICE_PRIORITIES</span></code> from the <code class="docutils literal notranslate"><span class="pre">multi/multi_device_config.hpp</span></code> file, which defines the same string.</p>
-<div class="section" id="the-three-ways-to-specify-devices-targets-for-the-multi-plugin">
+<section id="the-three-ways-to-specify-devices-targets-for-the-multi-plugin">
 <h4>The Three Ways to Specify Devices Targets for the MULTI plugin<a class="headerlink" href="#the-three-ways-to-specify-devices-targets-for-the-multi-plugin" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
 <li><p>Option 1 - Pass a Prioritized List as a Parameter in ie.load_network()</p></li>
 </ul>
 <div class="tab-set docutils">
 <input checked="True" class="tab-input" id="tab-set--6-input--1" name="tab-set--6" type="radio"><label class="tab-label" for="tab-set--6-input--1">Python</label><div class="tab-content docutils">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="n">core</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span>
-
-    <span class="c1"># Read a network in IR or ONNX format</span>
-    <span class="n">model</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">read_model</span><span class="p">(</span><span class="n">model_path</span><span class="p">)</span>
-    <span class="n">compiled_model</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">device_name</span><span class="o">=</span><span class="s2">&quot;MULTI:CPU,GPU&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
 </div>
 </div>
 <ul class="simple">
@@ -2167,26 +2091,14 @@
 </ul>
 <div class="tab-set docutils">
 <input checked="True" class="tab-input" id="tab-set--7-input--1" name="tab-set--7" type="radio"><label class="tab-label" for="tab-set--7-input--1">Python</label><div class="tab-content docutils">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="n">core</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span>
-
-    <span class="c1"># Read a network in IR or ONNX format</span>
-    <span class="n">model</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">read_model</span><span class="p">(</span><span class="n">model_path</span><span class="p">)</span>
-    <span class="n">core</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="n">device_name</span><span class="o">=</span><span class="s2">&quot;MULTI&quot;</span><span class="p">,</span> <span class="n">properties</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;MULTI_DEVICE_PRIORITIES&quot;</span><span class="p">:</span><span class="s2">&quot;HDDL,GPU&quot;</span><span class="p">})</span>
-    <span class="c1"># Change priorities</span>
-    <span class="n">core</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="n">device_name</span><span class="o">=</span><span class="s2">&quot;MULTI&quot;</span><span class="p">,</span> <span class="n">properties</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;MULTI_DEVICE_PRIORITIES&quot;</span><span class="p">:</span><span class="s2">&quot;GPU,HDDL&quot;</span><span class="p">})</span>
-    <span class="n">core</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="n">device_name</span><span class="o">=</span><span class="s2">&quot;MULTI&quot;</span><span class="p">,</span> <span class="n">properties</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;MULTI_DEVICE_PRIORITIES&quot;</span><span class="p">:</span><span class="s2">&quot;GPU&quot;</span><span class="p">})</span>
-    <span class="n">core</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="n">device_name</span><span class="o">=</span><span class="s2">&quot;MULTI&quot;</span><span class="p">,</span> <span class="n">properties</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;MULTI_DEVICE_PRIORITIES&quot;</span><span class="p">:</span><span class="s2">&quot;HDDL,GPU&quot;</span><span class="p">})</span>
-    <span class="n">core</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="n">device_name</span><span class="o">=</span><span class="s2">&quot;MULTI&quot;</span><span class="p">,</span> <span class="n">properties</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;MULTI_DEVICE_PRIORITIES&quot;</span><span class="p">:</span><span class="s2">&quot;CPU,HDDL,GPU&quot;</span><span class="p">})</span>
-</pre></div>
-</div>
 </div>
 </div>
 <ul class="simple">
 <li><p>Option 3 - Use Explicit Hints for Controlling Request Numbers Executed by Devices There is a way to specify the number of requests that Multi-Device will internally keep for each device. If the original app was running 4 cameras with 4 inference requests, it might be best to share these 4 requests between 2 devices used in the MULTI. The easiest way is to specify a number of requests for each device using parentheses: “MULTI:CPU(2),GPU(2)” and use the same 4 requests in the app. However, such an explicit configuration is not performance-portable and not recommended. The better way is to configure the individual devices and query the resulting number of requests to be used at the application level. See <a class="reference external" href="#configuring-the-individual-devices-and-creating-the-multi-device-on-top">Configuring the Individual Devices and Creating the Multi-Device On Top</a>.</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="id2">
+</section>
+</section>
+<section id="id2">
 <h3>Enumerating Available Devices<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <p>The OpenVINO Runtime API features a dedicated methods to enumerate devices and their capabilities. See the <a class="reference internal" href="openvino_inference_engine_ie_bridges_python_sample_hello_query_device_README.html#doxid-openvino-inference-engine-ie-bridges-python-sample-hello-query-device-r-e-a-d-m-e"><span class="std std-ref">Hello Query Device Python Sample</span></a>. This is example output from the sample (truncated to device names only):</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="p">.</span><span class="o">/</span><span class="n">hello_query_device</span>
@@ -2200,13 +2112,6 @@
     <span class="nl">Device</span><span class="p">:</span> <span class="n">HDDL</span></pre></div></div><p>A simple programmatic way to enumerate the devices and use with the multi-device is as follows:</p>
 <div class="tab-set docutils">
 <input checked="True" class="tab-input" id="tab-set--8-input--1" name="tab-set--8" type="radio"><label class="tab-label" for="tab-set--8-input--1">Python</label><div class="tab-content docutils">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="n">all_devices</span> <span class="o">=</span> <span class="s2">&quot;MULTI:&quot;</span>
-    <span class="n">core</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span>
-    <span class="n">model</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">read_model</span><span class="p">(</span><span class="n">model_path</span><span class="p">)</span>
-    <span class="n">all_devices</span> <span class="o">+=</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">available_devices</span><span class="p">)</span>
-    <span class="n">compiled_model</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">device_name</span><span class="o">=</span><span class="n">all_devices</span><span class="p">)</span>
-</pre></div>
-</div>
 </div>
 </div>
 <p>Beyond the trivial “CPU”, “GPU”, “HDDL” and so on, when multiple instances of a device are available the names are more qualified. For example, this is how two Intel® Movidius™ Myriad™ X sticks are listed with the hello_query_sample:</p>
@@ -2216,60 +2121,37 @@
     <span class="nl">Device</span><span class="p">:</span> <span class="n">MYRIAD</span><span class="mf">.1.4</span><span class="o">-</span><span class="n">ma2480</span></pre></div></div><p>So the explicit configuration to use both would be “MULTI:MYRIAD.1.2-ma2480,MYRIAD.1.4-ma2480”. Accordingly, the code that loops over all available devices of “MYRIAD” type only is below:</p>
 <div class="tab-set docutils">
 <input checked="True" class="tab-input" id="tab-set--9-input--1" name="tab-set--9" type="radio"><label class="tab-label" for="tab-set--9-input--1">Python</label><div class="tab-content docutils">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="n">match_list</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">all_devices</span> <span class="o">=</span> <span class="s2">&quot;MULTI:&quot;</span>
-    <span class="n">dev_match_str</span> <span class="o">=</span> <span class="s2">&quot;MYRIAD&quot;</span>
-    <span class="n">core</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span>
-    <span class="n">model</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">read_model</span><span class="p">(</span><span class="n">model_path</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">core</span><span class="o">.</span><span class="n">available_devices</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">dev_match_str</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span>
-            <span class="n">match_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
-    <span class="n">all_devices</span> <span class="o">+=</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">match_list</span><span class="p">)</span>
-    <span class="n">compiled_model</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">device_name</span><span class="o">=</span><span class="n">all_devices</span><span class="p">)</span>
-</pre></div>
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="id3">
+</section>
+<section id="id3">
 <h3>Configuring the Individual Devices and Creating the Multi-Device On Top<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <p>It is possible to configure each individual device as usual and then create the “MULTI” device on top:</p>
 <div class="tab-set docutils">
 <input checked="True" class="tab-input" id="tab-set--10-input--1" name="tab-set--10" type="radio"><label class="tab-label" for="tab-set--10-input--1">Python</label><div class="tab-content docutils">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="n">core</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span>
-    <span class="n">cpu_config</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="n">gpu_config</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="n">model</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">read_model</span><span class="p">(</span><span class="n">model_path</span><span class="p">)</span>
-    <span class="n">core</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="n">device_name</span><span class="o">=</span><span class="s2">&quot;CPU&quot;</span><span class="p">,</span> <span class="n">properties</span><span class="o">=</span><span class="n">cpu_config</span><span class="p">)</span>
-    <span class="n">core</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="n">device_name</span><span class="o">=</span><span class="s2">&quot;GPU&quot;</span><span class="p">,</span> <span class="n">properties</span><span class="o">=</span><span class="n">gpu_config</span><span class="p">)</span>
-    <span class="n">compiled_model</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">device_name</span><span class="o">=</span><span class="s2">&quot;MULTI:GPU,CPU&quot;</span><span class="p">)</span>
-    <span class="c1"># Query the optimal number of requests</span>
-    <span class="n">nireq</span> <span class="o">=</span> <span class="n">compiled_model</span><span class="o">.</span><span class="n">get_property</span><span class="p">(</span><span class="s2">&quot;OPTIMAL_NUMBER_OF_INFER_REQUESTS&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
 </div>
 </div>
 <p>An alternative is to combine all the individual device settings into a single config file and load that, allowing the Multi-Device plugin to parse and apply settings to the right devices. See the code example in the next section.</p>
 <p>Note that while the performance of accelerators works well with Multi-Device, the CPU+GPU execution poses some performance caveats, as these devices share power, bandwidth and other resources. For example it is recommended to enable the GPU throttling hint (which saves another CPU thread for CPU inferencing). See the section below titled Using the Multi-Device with OpenVINO Samples and Benchmarking the Performance.</p>
-</div>
-<div class="section" id="id4">
+</section>
+<section id="id4">
 <h3>Using the Multi-Device with OpenVINO Samples and Benchmarking the Performance<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
 <p>Every OpenVINO sample that supports the <code class="docutils literal notranslate"><span class="pre">-d</span></code> (which stands for “device”) command-line option transparently accepts Multi-Device. The <a class="reference internal" href="openvino_inference_engine_tools_benchmark_tool_README.html#doxid-openvino-inference-engine-tools-benchmark-tool-r-e-a-d-m-e"><span class="std std-ref">Benchmark application</span></a> is the best reference for the optimal usage of Multi-Device. As discussed earlier, you do not need to set up the number of requests, CPU streams or threads because the application provides optimal performance out of the box. Below is an example command to evaluate CPU+GPU performance with the Benchmark application:</p>
-<div class="highlight"><div class="highlight"><pre><span></span><span class="n">benchmark_app</span> <span class="err">–</span><span class="n">d</span> <span class="nl">MULTI</span><span class="p">:</span><span class="n">CPU</span><span class="p">,</span><span class="n">GPU</span> <span class="err">–</span><span class="n">m</span> <span class="o">&lt;</span><span class="n">model</span><span class="o">&gt;</span></pre></div></div><p>The Multi-Device plugin supports FP16 IR files. The CPU plugin automatically upconverts it to FP32 and the other devices support it natively. Note that no demos are (yet) fully optimized for Multi-Device, by means of supporting the <span class="xref std std-ref">ov::optimal_number_of_infer_requests</span> property, using the GPU streams/throttling, and so on.</p>
-</div>
-<div class="section" id="id5">
+<div class="highlight"><div class="highlight"><pre><span></span><span class="n">benchmark_app</span> <span class="err">–</span><span class="n">d</span> <span class="nl">MULTI</span><span class="p">:</span><span class="n">CPU</span><span class="p">,</span><span class="n">GPU</span> <span class="err">–</span><span class="n">m</span> <span class="o">&lt;</span><span class="n">model</span><span class="o">&gt;</span></pre></div></div><p>The Multi-Device plugin supports FP16 IR files. The CPU plugin automatically upconverts it to FP32 and the other devices support it natively. Note that no demos are (yet) fully optimized for Multi-Device, by means of supporting the <a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga087c6da667f7c3d8374aec5f6cbba027"><span class="std std-ref">ov::optimal_number_of_infer_requests</span></a> property, using the GPU streams/throttling, and so on.</p>
+</section>
+<section id="id5">
 <h3>Video: MULTI Plugin<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This video is currently available only for C++, but many of the same concepts apply to Python.</p>
 </div>
-<iframe allowfullscreen mozallowfullscreen msallowfullscreen oallowfullscreen webkitallowfullscreen width="560" height="315" src="https://www.youtube.com/embed/xbORYFEmrqU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-<div class="section" id="id6">
+<iframe allowfullscreen mozallowfullscreen msallowfullscreen oallowfullscreen webkitallowfullscreen width="560" height="315" src="https://www.youtube.com/embed/xbORYFEmrqU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></section>
+<section id="id6">
 <h3>See Also<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference internal" href="openvino_docs_OV_UG_supported_plugins_Supported_Devices.html#doxid-openvino-docs-o-v-u-g-supported-plugins-supported-devices"><span class="std std-ref">Supported Devices</span></a></p>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
                 </div>
@@ -2300,7 +2182,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

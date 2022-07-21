@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Quantized networks compute and restrictions &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -1827,10 +1834,10 @@
             
                 <div>
                   
-  <div class="section" id="quantized-networks-compute-and-restrictions">
+  <section id="quantized-networks-compute-and-restrictions">
 <span id="doxid-openvino-docs-ie-plugin-dg-quantized-networks"></span><span id="index-0"></span><h1>Quantized networks compute and restrictions<a class="headerlink" href="#quantized-networks-compute-and-restrictions" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-openvino-docs-ie-plugin-dg-quantized-networks-1md-openvino-docs-ie-plugin-dg-quantizednetworks"></span> One of the feature of Inference Engine is the support of quantized networks with different precisions: INT8, INT4, etc. However, it is up to the plugin to define what exact precisions are supported by the particular HW. All quantized networks which can be expressed in IR have a unified representation by means of <em>FakeQuantize</em> operation. For more details about low-precision model representation please refer to this <a class="reference internal" href="openvino_docs_ie_plugin_dg_lp_representation.html#doxid-openvino-docs-ie-plugin-dg-lp-representation"><span class="std std-ref">document</span></a>.</p>
-<div class="section" id="interpreting-fakequantize-at-runtime">
+<section id="interpreting-fakequantize-at-runtime">
 <h2>Interpreting FakeQuantize at runtime<a class="headerlink" href="#interpreting-fakequantize-at-runtime" title="Permalink to this headline">¶</a></h2>
 <p>During the model load each plugin can interpret quantization rules expressed in <em>FakeQuantize</em> operations:</p>
 <ul class="simple">
@@ -1854,7 +1861,7 @@
 <li><p><strong>Zero-point</strong> as <code class="docutils literal notranslate"><span class="pre">-output_low</span> <span class="pre">/</span> <span class="pre">(output_high</span> <span class="pre">-</span> <span class="pre">output_low)</span> <span class="pre">\*</span> <span class="pre">(levels-1)</span></code></p></li>
 </ul>
 <p><strong>Note</strong> : During the quantization process the values <code class="docutils literal notranslate"><span class="pre">input_low</span></code>, <code class="docutils literal notranslate"><span class="pre">input_high</span></code>, <code class="docutils literal notranslate"><span class="pre">output_low</span></code>, <code class="docutils literal notranslate"><span class="pre">output_high</span></code> are selected so that to map a floating-point zero exactly to an integer value (zero-point) and vice versa.</p>
-<div class="section" id="quantization-specifics-and-restrictions">
+<section id="quantization-specifics-and-restrictions">
 <h3>Quantization specifics and restrictions<a class="headerlink" href="#quantization-specifics-and-restrictions" title="Permalink to this headline">¶</a></h3>
 <p>In general, OpenVINO can represent and execute quantized models from different sources. However, the Post-training Optimization Tool (POT) is considered the default way to get optimized models. Since the POT supports HW-aware quantization it means that specific rules can be implemented in it for the particular HW. However, it is reasonable to have compatibility with general-purpose HW such as CPU and GPU and support their quantization schemes. Below we define these rules as follows:</p>
 <ul class="simple">
@@ -1865,9 +1872,9 @@
 <li><p>Non-unified quantization parameters for Eltwise and Concat operations.</p></li>
 <li><p>Non-quantized network output, i.e. there are no quantization parameters for it.</p></li>
 </ul>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
                 </div>
@@ -1898,7 +1905,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

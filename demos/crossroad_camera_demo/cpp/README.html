@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Crossroad Camera C++ Demo &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../../../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -2074,7 +2081,7 @@
             
                 <div>
                   
-  <div class="section" id="crossroad-camera-c-demo">
+  <section id="crossroad-camera-c-demo">
 <h1>Crossroad Camera C++ Demo<a class="headerlink" href="#crossroad-camera-c-demo" title="Permalink to this headline">¶</a></h1>
 <p><img alt="example" src="../../../_images/crossroad_camera.gif" /></p>
 <p>This demo provides an inference pipeline for person detection, recognition and reidentification. The demo uses a Person Detection network followed by the Person Attributes Recognition and Person Reidentification Retail networks applied on top of the detection results. You can use a set of the following pre-trained models with the demo:</p>
@@ -2093,7 +2100,7 @@ a vector of features for each detected person. This vector is used to conclude i
 the Person Detection results</p></li>
 <li><p>Visualization of Person Attributes and Person Reidentification (REID) information for each detected person</p></li>
 </ul>
-<div class="section" id="how-it-works">
+<section id="how-it-works">
 <h2>How It Works<a class="headerlink" href="#how-it-works" title="Permalink to this headline">¶</a></h2>
 <p>On startup, the application reads command line parameters and loads the specified networks. The Person Detection
 network is required, and the other two are optional.</p>
@@ -2107,8 +2114,8 @@ REID value is assigned. Otherwise, the vector is added to a global list, and new
 <blockquote>
 <div><p><strong>NOTE</strong>: By default, Open Model Zoo demos expect input with BGR channels order. If you trained your model to work with RGB order, you need to manually rearrange the default channels order in the demo application or reconvert your model using the Model Optimizer tool with the <code class="docutils literal notranslate"><span class="pre">--reverse_input_channels</span></code> argument specified. For more information about the argument, refer to <strong>When to Reverse Input Channels</strong> section of [Embedding Preprocessing Computation](&#64;ref openvino_docs_MO_DG_Additional_Optimization_Use_Cases).</p>
 </div></blockquote>
-</div>
-<div class="section" id="preparing-to-run">
+</section>
+<section id="preparing-to-run">
 <h2>Preparing to Run<a class="headerlink" href="#preparing-to-run" title="Permalink to this headline">¶</a></h2>
 <p>For demo input image or video files, refer to the section <strong>Media Files Available for Demos</strong> in the <a class="reference internal" href="../../README.html"><span class="doc std std-doc">Open Model Zoo Demos Overview</span></a>.
 The list of models supported by the demo is in <code class="docutils literal notranslate"><span class="pre">&lt;omz_dir&gt;/demos/crossroad_camera_demo/cpp/models.lst</span></code> file.
@@ -2121,7 +2128,7 @@ This file can be used as a parameter for <span class="xref myst">Model Downloade
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>omz_converter --list models.lst
 </pre></div>
 </div>
-<div class="section" id="supported-models">
+<section id="supported-models">
 <h3>Supported Models<a class="headerlink" href="#supported-models" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>person-attributes-recognition-crossroad-0230</p></li>
@@ -2137,9 +2144,9 @@ This file can be used as a parameter for <span class="xref myst">Model Downloade
 <blockquote>
 <div><p><strong>NOTE</strong>: Refer to the tables <a class="reference internal" href="../../../models/intel/device_support.html"><span class="doc std std-doc">Intel’s Pre-Trained Models Device Support</span></a> and <a class="reference internal" href="../../../models/public/device_support.html"><span class="doc std std-doc">Public Pre-Trained Models Device Support</span></a> for the details on models inference support at different devices.</p>
 </div></blockquote>
-</div>
-</div>
-<div class="section" id="running">
+</section>
+</section>
+<section id="running">
 <h2>Running<a class="headerlink" href="#running" title="Permalink to this headline">¶</a></h2>
 <p>Running the application with the <code class="docutils literal notranslate"><span class="pre">-h</span></code> option yields the following usage message:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">crossroad_camera_demo</span> <span class="p">[</span><span class="n">OPTION</span><span class="p">]</span>
@@ -2191,8 +2198,8 @@ To avoid disk space overrun in case of continuous input stream, like camera, you
 <blockquote>
 <div><p><strong>NOTE</strong>: Windows* systems may not have the Motion JPEG codec installed by default. If this is the case, you can download OpenCV FFMPEG back end using the PowerShell script provided with the OpenVINO ™ install package and located at <code class="docutils literal notranslate"><span class="pre">&lt;INSTALL_DIR&gt;/opencv/ffmpeg-download.ps1</span></code>. The script should be run with administrative privileges if OpenVINO ™ is installed in a system protected folder (this is a typical case). Alternatively, you can save results as images.</p>
 </div></blockquote>
-</div>
-<div class="section" id="demo-output">
+</section>
+<section id="demo-output">
 <h2>Demo Output<a class="headerlink" href="#demo-output" title="Permalink to this headline">¶</a></h2>
 <p>The demo uses OpenCV to display the resulting frame with detections rendered as bounding boxes and text.
 In the default mode, during the demo’s run it reports <strong>Person Detection time</strong> - inference time for the Person/Vehicle/Bike Detection network.</p>
@@ -2207,16 +2214,16 @@ In the default mode, during the demo’s run it reports <strong>Person Detection
 <li><p><strong>Latency</strong>: average time required to process one frame (from reading the frame to displaying the results).</p></li>
 </ul>
 <p>You can use these metrics to measure application-level performance.</p>
-</div>
-<div class="section" id="see-also">
+</section>
+<section id="see-also">
 <h2>See Also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="../../README.html"><span class="doc std std-doc">Open Model Zoo Demos</span></a></p></li>
 <li><p><a class="reference external" href="https://docs.openvino.ai/latest/openvino_docs_MO_DG_Deep_Learning_Model_Optimizer_DevGuide.html">Model Optimizer</a></p></li>
 <li><p><span class="xref myst">Model Downloader</span></p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -2247,7 +2254,7 @@ In the default mode, during the demo’s run it reports <strong>Person Detection
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

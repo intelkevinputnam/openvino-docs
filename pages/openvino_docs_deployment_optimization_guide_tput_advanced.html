@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Using Advanced Throughput Options: Streams and Batching &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -1847,10 +1854,10 @@
             
                 <div>
                   
-  <div class="section" id="using-advanced-throughput-options-streams-and-batching">
+  <section id="using-advanced-throughput-options-streams-and-batching">
 <span id="doxid-openvino-docs-deployment-optimization-guide-tput-advanced"></span><span id="index-0"></span><h1>Using Advanced Throughput Options: Streams and Batching<a class="headerlink" href="#using-advanced-throughput-options-streams-and-batching" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-openvino-docs-deployment-optimization-guide-tput-advanced-1md-openvino-docs-optimization-guide-dldt-deployment-optimization-tput-advanced"></span></p>
-<div class="section" id="openvino-streams">
+<section id="openvino-streams">
 <h2>OpenVINO Streams<a class="headerlink" href="#openvino-streams" title="Permalink to this headline">¶</a></h2>
 <p>As detailed in the <a class="reference internal" href="openvino_docs_deployment_optimization_guide_common.html#doxid-openvino-docs-deployment-optimization-guide-common"><span class="std std-ref">common-optimizations section</span></a> running multiple inference requests asynchronously is important for general application efficiency. Internally, every device implements a queue. The queue acts as a buffer, storing the inference requests until retrieved by the device at its own pace. The devices may actually process multiple inference requests in parallel in order to improve the device utilization and overall throughput. This configurable mean of this device-side parallelism is commonly referred as <strong>streams</strong>.</p>
 <div class="admonition note">
@@ -1877,8 +1884,8 @@
 <li><p>Notice that the streams also inflate the model load (compilation) time.</p></li>
 </ul>
 <p>For efficient asynchronous execution, the streams are actually handling the inference with a special pool of the threads (a thread per stream). Each time you start inference requests (potentially from different application threads), they are actually muxed into a inference queue of the particular <code class="docutils literal notranslate"><span class="pre">ov:Compiled_Model</span></code>. If there is a vacant stream, it pops the request from the queue and actually expedites that to the on-device execution. There are further device-specific details e.g. for the CPU, that you may find in the <a class="reference internal" href="openvino_docs_deployment_optimization_guide_internals.html#doxid-openvino-docs-deployment-optimization-guide-internals"><span class="std std-ref">internals</span></a> section.</p>
-</div>
-<div class="section" id="batching">
+</section>
+<section id="batching">
 <h2>Batching<a class="headerlink" href="#batching" title="Permalink to this headline">¶</a></h2>
 <p>Hardware accelerators like GPUs are optimized for massive compute parallelism, so the batching helps to saturate the device and leads to higher throughput. While the streams (described earlier) already help to hide the communication overheads and certain bubbles in the scheduling, running multiple OpenCL kernels simultaneously is less GPU-efficient, compared to calling a kernel on the multiple inputs at once.</p>
 <p>As explained in the next section, the batching is a must to leverage maximum throughput on the GPUs.</p>
@@ -1892,8 +1899,8 @@
 <li><p><em>Sending individual requests</em>, while configuring the OpenVINO to collect and perform inference on the requests in batch <a class="reference internal" href="openvino_docs_OV_UG_Automatic_Batching.html#doxid-openvino-docs-o-v-u-g-automatic-batching"><span class="std std-ref">automatically</span></a>. In both cases, optimal batch size is very device-specific. Also as explained below, the optimal batch size depends on the model, inference precision and other factors.</p></li>
 </ul>
 <p><span class="target" id="doxid-openvino-docs-deployment-optimization-guide-tput-advanced-1throughput-advanced"></span></p>
-</div>
-<div class="section" id="choosing-the-number-of-streams-and-or-batch-size">
+</section>
+<section id="choosing-the-number-of-streams-and-or-batch-size">
 <h2>Choosing the Number of Streams and/or Batch Size<a class="headerlink" href="#choosing-the-number-of-streams-and-or-batch-size" title="Permalink to this headline">¶</a></h2>
 <p>Predicting the inference performance is difficult and finding optimal execution parameters requires direct experiments with measurements. Run performance testing in the scope of development, and make sure to validate overall (end-to-end) application performance.</p>
 <p>Different devices behave differently with the batch sizes. The optimal batch size depends on the model, inference precision and other factors. Similarly, different devices require different number of execution streams to saturate. Finally, in some cases combination of streams and batching may be required to maximize the throughput.</p>
@@ -1906,21 +1913,21 @@
 <p class="admonition-title">Note</p>
 <p>Using the <a class="reference internal" href="openvino_docs_OV_UG_Performance_Hints.html#doxid-openvino-docs-o-v-u-g-performance-hints"><span class="std std-ref">High-Level Performance Hints</span></a> is the alternative, portable and future-proof option, allowing the OpenVINO to find best combination of streams and batching for a given scenario and model.</p>
 </div>
-<div class="section" id="number-of-streams-considerations">
+<section id="number-of-streams-considerations">
 <h3>Number of Streams Considerations<a class="headerlink" href="#number-of-streams-considerations" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>Select the number of streams is it is <strong>less or equal</strong> to the number of requests that your application would be able to runs simultaneously</p></li>
 <li><p>To avoid wasting resources, the number of streams should be enough to meet the <em>average</em> parallel slack rather than the peak load</p></li>
-<li><p>As a more portable option (that also respects the underlying hardware configuration) use the <code class="docutils literal notranslate"><span class="pre">ov::streams::AUTO</span></code></p></li>
+<li><p>As a more portable option (that also respects the underlying hardware configuration) use the <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1gaddb29425af71fbb6ad3379c59342ff0e"><span class="std std-ref"><span class="pre">ov::streams::AUTO</span></span></a></code></p></li>
 <li><p>It is very important to keep these streams busy, by running as many inference requests as possible (e.g. start the newly-arrived inputs immediately)</p>
 <ul>
-<li><p>Bare minimum of requests to saturate the device can be queried as <code class="docutils literal notranslate"><span class="pre">ov::optimal_number_of_infer_requests</span></code> of the <code class="docutils literal notranslate"><span class="pre">ov:Compiled_Model</span></code></p></li>
+<li><p>Bare minimum of requests to saturate the device can be queried as <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga087c6da667f7c3d8374aec5f6cbba027"><span class="std std-ref"><span class="pre">ov::optimal_number_of_infer_requests</span></span></a></code> of the <code class="docutils literal notranslate"><span class="pre">ov:Compiled_Model</span></code></p></li>
 </ul>
 </li>
-<li><p><em>Maximum number of streams</em> for the device (per model) can be queried as the <code class="docutils literal notranslate"><span class="pre">ov::range_for_streams</span></code></p></li>
+<li><p><em>Maximum number of streams</em> for the device (per model) can be queried as the <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga8a5d84196f6873729167aa512c34a94a"><span class="std std-ref"><span class="pre">ov::range_for_streams</span></span></a></code></p></li>
 </ul>
-</div>
-<div class="section" id="batch-size-considerations">
+</section>
+<section id="batch-size-considerations">
 <h3>Batch Size Considerations<a class="headerlink" href="#batch-size-considerations" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>Select the batch size that is <strong>equal</strong> to the number of requests that your application is able to runs simultaneously</p>
@@ -1928,10 +1935,10 @@
 <li><p>Otherwise (or if the number of “available” requests fluctuates), you may need to keep several instances of the network (reshaped to the different batch size) and select the properly sized instance in the runtime accordingly</p></li>
 </ul>
 </li>
-<li><p>For OpenVINO devices that internally implement a dedicated heuristic, the <code class="docutils literal notranslate"><span class="pre">ov::optimal_batch_size</span></code> is a <em>device</em> property (that accepts the actual model as a parameter) to query the recommended batch size for the model.</p></li>
+<li><p>For OpenVINO devices that internally implement a dedicated heuristic, the <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga129bad2da2fc2a40a7d746d86fc9c68d"><span class="std std-ref"><span class="pre">ov::optimal_batch_size</span></span></a></code> is a <em>device</em> property (that accepts the actual model as a parameter) to query the recommended batch size for the model.</p></li>
 </ul>
-</div>
-<div class="section" id="few-device-specific-details">
+</section>
+<section id="few-device-specific-details">
 <h3>Few Device Specific Details<a class="headerlink" href="#few-device-specific-details" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>For the <strong>GPU</strong> :</p>
@@ -1956,9 +1963,9 @@
 </ul>
 </li>
 </ul>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
                 </div>
@@ -1989,7 +1996,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

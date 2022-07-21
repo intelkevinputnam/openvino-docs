@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>cocosnet &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../../../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -2084,14 +2091,14 @@
             
                 <div>
                   
-  <div class="section" id="cocosnet">
+  <section id="cocosnet">
 <h1>cocosnet<a class="headerlink" href="#cocosnet" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="use-case-and-high-level-description">
+<section id="use-case-and-high-level-description">
 <h2>Use Case and High-Level Description<a class="headerlink" href="#use-case-and-high-level-description" title="Permalink to this headline">¶</a></h2>
 <p>Cross-domain correspondence network is an exemplar-based image translation model, consisting of correspondence and translation parts. Model was pre-trained on ADE20k dataset.
 For details see <a class="reference external" href="https://arxiv.org/abs/2004.05571">paper</a> and <a class="reference external" href="https://github.com/microsoft/CoCosNet">repository</a>.</p>
-</div>
-<div class="section" id="specification">
+</section>
+<section id="specification">
 <h2>Specification<a class="headerlink" href="#specification" title="Permalink to this headline">¶</a></h2>
 <table class="colwidths-auto table">
 <thead>
@@ -2114,8 +2121,8 @@ For details see <a class="reference external" href="https://arxiv.org/abs/2004.0
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="accuracy">
+</section>
+<section id="accuracy">
 <h2>Accuracy<a class="headerlink" href="#accuracy" title="Permalink to this headline">¶</a></h2>
 <p>Metrics were calculated between generated images by model and real validation images from ADE20k dataset.
 For some GAN metrics (IS and FID) you need to use classification model as verification network.
@@ -2147,7 +2154,7 @@ For details, please check Accuracy Checker config <code class="docutils literal 
 </tr>
 </tbody>
 </table>
-<div class="section" id="inputs">
+<section id="inputs">
 <h3>Inputs<a class="headerlink" href="#inputs" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic">
 <li><p>name: <code class="docutils literal notranslate"><span class="pre">input_seg_map</span></code>, shape: <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">151,</span> <span class="pre">256,</span> <span class="pre">256</span></code> - Input semantic segmentation mask (one-hot label map) in the format <code class="docutils literal notranslate"><span class="pre">B,</span> <span class="pre">C,</span> <span class="pre">H,</span> <span class="pre">W</span></code>, where:</p>
@@ -2176,8 +2183,8 @@ For details, please check Accuracy Checker config <code class="docutils literal 
 </ul>
 </li>
 </ol>
-</div>
-<div class="section" id="output">
+</section>
+<section id="output">
 <h3>Output<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h3>
 <p>Image, name: <code class="docutils literal notranslate"><span class="pre">exemplar_based_output</span></code>, shape: <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">3,</span> <span class="pre">256,</span> <span class="pre">256</span></code> - A result (generated) image based on exemplar in the format <code class="docutils literal notranslate"><span class="pre">B,</span> <span class="pre">C,</span> <span class="pre">H,</span> <span class="pre">W</span></code>, where:</p>
 <ul class="simple">
@@ -2187,9 +2194,9 @@ For details, please check Accuracy Checker config <code class="docutils literal 
 <li><p><code class="docutils literal notranslate"><span class="pre">W</span></code> - image width</p></li>
 </ul>
 <p>Output color order is <code class="docutils literal notranslate"><span class="pre">RGB</span></code>.</p>
-</div>
-</div>
-<div class="section" id="download-a-model-and-convert-it-into-openvino-ir-format">
+</section>
+</section>
+<section id="download-a-model-and-convert-it-into-openvino-ir-format">
 <h2>Download a Model and Convert it into OpenVINO™ IR Format<a class="headerlink" href="#download-a-model-and-convert-it-into-openvino-ir-format" title="Permalink to this headline">¶</a></h2>
 <p>You can download models and if necessary convert them into OpenVINO™ IR format using the <span class="xref myst">Model Downloader and other automation tools</span> as shown in the examples below.</p>
 <p>An example of using the Model Downloader:</p>
@@ -2200,15 +2207,15 @@ For details, please check Accuracy Checker config <code class="docutils literal 
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">omz_converter</span> <span class="o">--</span><span class="n">name</span> <span class="o">&lt;</span><span class="n">model_name</span><span class="o">&gt;</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="demo-usage">
+</section>
+<section id="demo-usage">
 <h2>Demo usage<a class="headerlink" href="#demo-usage" title="Permalink to this headline">¶</a></h2>
 <p>The model can be used in the following demos provided by the Open Model Zoo to show its capabilities:</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="../../../demos/image_translation_demo/python/README.html"><span class="doc std std-doc">Image Translation Demo</span></a></p></li>
 </ul>
-</div>
-<div class="section" id="legal-information">
+</section>
+<section id="legal-information">
 <h2>Legal Information<a class="headerlink" href="#legal-information" title="Permalink to this headline">¶</a></h2>
 <p>The original model is distributed under the following
 <a class="reference external" href="https://github.com/microsoft/CoCosNet/blob/master/LICENSE">license</a>:</p>
@@ -2256,8 +2263,8 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ‘’’</p>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -2288,7 +2295,7 @@ SOFTWARE.
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

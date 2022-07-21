@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>INT8 Calibration &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -1894,7 +1901,7 @@
             
                 <div>
                   
-  <div class="section" id="int8-calibration">
+  <section id="int8-calibration">
 <span id="doxid-workbench-docs-workbench-d-g-int-8-quantization"></span><span id="index-0"></span><h1>INT8 Calibration<a class="headerlink" href="#int8-calibration" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-workbench-docs-workbench-d-g-int-8-quantization-1md-openvino-workbench-docs-workbench-dg-int-8-quantization"></span> DL Workbench can lower the precision of a model from FP32 to INT8 with a process called calibration. Calibration accelerates the performance of certain models on hardware that supports INT8. A model in INT8 precision takes up less memory and has higher throughput capacity. Often this performance boost is achieved at the cost of a small accuracy reduction. With the DL Workbench, you can calibrate your model locally, on a <a class="reference external" href="#remote-calibration">remote target</a>, or in the <a class="reference external" href="#devcloud-calibration">Intel® DevCloud for the Edge</a>.</p>
 <p>To read more about INT8 inference, see <a class="reference internal" href="openvino_docs_model_optimization_guide.html#doxid-openvino-docs-model-optimization-guide"><span class="std std-ref">Using Low-Precision INT8 Integer Inference</span></a> and <a class="reference internal" href="pot_introduction.html#doxid-pot-introduction"><span class="std std-ref">Post-Training Optimization Toolkit</span></a>.</p>
@@ -1907,7 +1914,7 @@
 <li><p>You run the configuration on an Intel® Movidius™ Neural Compute Stick 2, or Intel® Vision Accelerator Design with Intel® Movidius™ VPUs plugin.</p></li>
 <li><p>AccuracyAware method is disabled if your configuration uses a not annotated dataset.</p></li>
 </ol>
-<div class="section" id="int8-calibration-methods">
+<section id="int8-calibration-methods">
 <h2>INT8 Calibration Methods<a class="headerlink" href="#int8-calibration-methods" title="Permalink to this headline">¶</a></h2>
 <p>DL Workbench supports two calibration methods: <a class="reference external" href="#default">Default method</a> and <a class="reference external" href="#accuracyaware">AccuracyAware</a>. Each method is further configured with a calibration scheme configuration: the <a class="reference external" href="#performance-preset">performance-oriented preset</a>, which is the default scheme, or the <a class="reference external" href="#mixed-preset">mixed preset</a>. Calibration schemes do not depend on a selected calibration method.</p>
 <div class="admonition tip">
@@ -1918,32 +1925,32 @@
 <p class="admonition-title">Note</p>
 <p>A model optimized by the Default method translates all layers that support INT8 execution into INT8 precision, while the AccuracyAware method translates only those layers that both can be executed in INT8 precision and almost do not increase accuracy drop.</p>
 </div>
-<div class="section" id="default-method">
+<section id="default-method">
 <span id="default"></span><h3>Default Method<a class="headerlink" href="#default-method" title="Permalink to this headline">¶</a></h3>
 <p>Default method optimizes your model to achieve best performance. The algorithm usually produces the fastest model and usually but not always results in accuracy drop within 1%. Also, this algorithm takes less time than the AccuracyAware optimization method.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This method supports both annotated and not annotated datasets. See <a class="reference internal" href="workbench_docs_Workbench_DG_Dataset_Types.html#doxid-workbench-docs-workbench-d-g-dataset-types"><span class="std std-ref">Dataset Types</span></a> for details.</p>
 </div>
-</div>
-<div class="section" id="accuracyaware-method">
+</section>
+<section id="accuracyaware-method">
 <span id="accuracyaware"></span><h3>AccuracyAware method<a class="headerlink" href="#accuracyaware-method" title="Permalink to this headline">¶</a></h3>
 <p>AccuracyAware calibration optimizes your model to achieve best performance possible with the specified maximum acceptable accuracy drop. The AccuracyAware method might result in lower performance compared to the Default method, while the accuracy drop is predictable. Accuracy drop is the difference between the parent model accuracy and the optimized model accuracy. Accuracy of the optimized model is guaranteed to be not smaller than the difference between the parent model accuracy and the accuracy drop.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This method supports only annotated datasets. See <a class="reference internal" href="workbench_docs_Workbench_DG_Dataset_Types.html#doxid-workbench-docs-workbench-d-g-dataset-types"><span class="std std-ref">Dataset Types</span></a> for details.</p>
 </div>
-</div>
-<div class="section" id="performance-preset">
+</section>
+<section id="performance-preset">
 <span id="id1"></span><h3>Performance Preset<a class="headerlink" href="#performance-preset" title="Permalink to this headline">¶</a></h3>
 <p>Performance preset guarantees uncompromising performance of a selected calibration method, as with this preset both weights and activations are calibrated in a symmetric mode. Performance preset is a default option because it provides maximum performance speedup and is independent from a target platform.</p>
-</div>
-<div class="section" id="mixed-preset">
+</section>
+<section id="mixed-preset">
 <span id="id2"></span><h3>Mixed Preset<a class="headerlink" href="#mixed-preset" title="Permalink to this headline">¶</a></h3>
 <p>Mixed preset is a tradeoff between accuracy and performance, and with this preset weights and activations are calibrated in symmetric and asymmetric modes correspondingly. Compared to the performance preset, the mixed preset may result in a more accurate model at the cost of performance drop. Depending on a target platform and a model, performance drop usually varies from 5 to 15%. For example, use this preset if a model has convolutional or fully-connected layers with both negative and positive activations, like a model with non-ReLU activations.</p>
-</div>
-</div>
-<div class="section" id="workflow">
+</section>
+</section>
+<section id="workflow">
 <h2>Workflow<a class="headerlink" href="#workflow" title="Permalink to this headline">¶</a></h2>
 <iframe  allowfullscreen mozallowfullscreen msallowfullscreen oallowfullscreen webkitallowfullscreen  width="560" height="315" src="https://www.youtube.com/embed/7XQAZBdA_wo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><p>Overall flow for converting a model from FP32 to INT8:</p>
 <ol class="arabic simple">
@@ -1957,8 +1964,8 @@
 <li><p><a class="reference internal" href="workbench_docs_Workbench_DG_Compare_Performance_between_Two_Versions_of_Models.html#doxid-workbench-docs-workbench-d-g-compare-performance-between-two-versions-of-models"><span class="std std-ref">Compare the calibrated model with the original FP32 model</span></a></p></li>
 </ol>
 <p>Use the links above to walk through the steps and workflow for creating a calibrated model. Topics specific <em>only</em> to the INT8 calibration process (steps 4-6) are described below.</p>
-</div>
-<div class="section" id="configure-int8-calibration-settings">
+</section>
+<section id="configure-int8-calibration-settings">
 <span id="bit-config"></span><h2>Configure INT8 Calibration Settings<a class="headerlink" href="#configure-int8-calibration-settings" title="Permalink to this headline">¶</a></h2>
 <p>Once a model has been profiled by the DL Workbench, you can convert it from FP32 to to INT8. For non-FP32 models, the INT8 option is grayed out. Go to the <strong>Perform</strong> tab on the <strong>Projects</strong> page and open the <strong>Optimize</strong> subtab.</p>
 <img alt="../_images/optimize_options.png" src="../_images/optimize_options.png" />
@@ -1970,7 +1977,7 @@
 <li><p><a class="reference external" href="#method">Select an optimization method</a>.</p></li>
 <li><p>Optionally, <a class="reference external" href="#preset">select an optimization scheme</a>.</p></li>
 </ol>
-<div class="section" id="select-calibration-dataset-optional">
+<section id="select-calibration-dataset-optional">
 <span id="dataset"></span><h3>Select Calibration Dataset (Optional)<a class="headerlink" href="#select-calibration-dataset-optional" title="Permalink to this headline">¶</a></h3>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -1982,8 +1989,8 @@
 <img alt="../_images/calibration_dataset_02.png" src="../_images/calibration_dataset_02.png" />
 <p>You are directed back to the <strong>Optimize INT8</strong> page. Specify the percentage of images you will use during the calibration procedure in the <strong>Subset Size</strong> box. The default value is 100%.</p>
 <img alt="../_images/subset_size.png" src="../_images/subset_size.png" />
-</div>
-<div class="section" id="select-optimization-method">
+</section>
+<section id="select-optimization-method">
 <span id="method"></span><h3>Select Optimization Method<a class="headerlink" href="#select-optimization-method" title="Permalink to this headline">¶</a></h3>
 <p>Select an optimization method: <a class="reference external" href="#default">Default Method</a> or <a class="reference external" href="#accuracyaware">AccuracyAware Method</a>.</p>
 <img alt="../_images/calibration_options.png" src="../_images/calibration_options.png" />
@@ -1993,38 +2000,38 @@
 <p>See <a class="reference internal" href="workbench_docs_Workbench_DG_Accuracy_Configuration.html#doxid-workbench-docs-workbench-d-g-accuracy-configuration"><span class="std std-ref">Configure Accuracy Settings</span></a> for details.</p>
 </div>
 <img alt="../_images/configure_calibration_01-b.png" src="../_images/configure_calibration_01-b.png" />
-</div>
-<div class="section" id="select-calibration-scheme-advanced">
+</section>
+<section id="select-calibration-scheme-advanced">
 <span id="preset"></span><h3>Select Calibration Scheme (Advanced)<a class="headerlink" href="#select-calibration-scheme-advanced" title="Permalink to this headline">¶</a></h3>
 <p>Calibration scheme is a collection of optimization algorithm parameters that improve a certain metric of an algorithm. See <a class="reference internal" href="pot_compression_algorithms_quantization_default_README.html#doxid-pot-compression-algorithms-quantization-default-r-e-a-d-m-e"><span class="std std-ref">optimization parameters</span></a> for details.</p>
 <img alt="../_images/calibration_scheme.png" src="../_images/calibration_scheme.png" />
-</div>
-</div>
-<div class="section" id="view-int8-calibration">
+</section>
+</section>
+<section id="view-int8-calibration">
 <span id="review-calibration-progress"></span><h2>View INT8 Calibration<a class="headerlink" href="#view-int8-calibration" title="Permalink to this headline">¶</a></h2>
 <p>Click <strong>Calibrate</strong>, and a new project for your model appears. You can work with other projects while the calibration is performed.</p>
 <img alt="../_images/calibration_process.png" src="../_images/calibration_process.png" />
-</div>
-<div class="section" id="view-int8-calibration-results">
+</section>
+<section id="view-int8-calibration-results">
 <span id="id3"></span><h2>View INT8 Calibration Results<a class="headerlink" href="#view-int8-calibration-results" title="Permalink to this headline">¶</a></h2>
 <p>Optimized model project is available at the Model Page:</p>
 <img alt="../_images/optimized_model_project.png" src="../_images/optimized_model_project.png" />
 <p>Once the job is done, you can compare an optimized model with the original model. For more details, go to <a class="reference internal" href="workbench_docs_Workbench_DG_Compare_Performance_between_Two_Versions_of_Models.html#doxid-workbench-docs-workbench-d-g-compare-performance-between-two-versions-of-models"><span class="std std-ref">Compare Performance between Two Versions of Models</span></a>.</p>
 <p>The value of the <strong>outputPrecisions</strong> parameter in the <strong>Layer Name</strong> table for layers of INT8 optimized models is U8 (INT8 unsigned integer value).</p>
-</div>
-<div class="section" id="remote-calibration">
+</section>
+<section id="remote-calibration">
 <span id="id4"></span><h2>Remote Calibration<a class="headerlink" href="#remote-calibration" title="Permalink to this headline">¶</a></h2>
 <p>Remote calibration is available only for configurations that use remote machines. To calibrate on a remote machine, follow the same workflow as for local calibration. However, remote calibration usually takes some more time due to data exchange between a host machine and a remote machine. Once inference on the remote machine is complete, the DL Workbench sends the calibrated model to the host machine and saves it there.</p>
 <p>When you calibrate on a remote system, the progress bar first shows the progress for asset preparation and upload, and then for calibration and inference:</p>
 <img alt="../_images/remote_calibration_02.png" src="../_images/remote_calibration_02.png" />
-</div>
-<div class="section" id="calibration-in-the-intel-devcloud-for-the-edge">
+</section>
+<section id="calibration-in-the-intel-devcloud-for-the-edge">
 <span id="devcloud-calibration"></span><h2>Calibration in the Intel® DevCloud for the Edge<a class="headerlink" href="#calibration-in-the-intel-devcloud-for-the-edge" title="Permalink to this headline">¶</a></h2>
 <p>To calibrate on a platform from the <a class="reference internal" href="workbench_docs_Workbench_DG_Start_DL_Workbench_in_DevCloud.html#doxid-workbench-docs-workbench-d-g-start-d-l-workbench-in-dev-cloud"><span class="std std-ref">Intel® DevCloud for the Edge</span></a>, follow the same workflow as for local calibration. However, calibration in the DevCloud usually takes some more time due to data exchange between a host machine and a remote machine.</p>
 <p>When you calibrate in the DevCloud, the progress bar first shows the progress for asset preparation and upload, and then for calibration and inference:</p>
 <img alt="../_images/remote_calibration_02.png" src="../_images/remote_calibration_02.png" />
-</div>
-<div class="section" id="see-also">
+</section>
+<section id="see-also">
 <h2>See Also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="workbench_docs_Workbench_DG_Compare_Performance_between_Two_Versions_of_Models.html#doxid-workbench-docs-workbench-d-g-compare-performance-between-two-versions-of-models"><span class="std std-ref">Compare Performance between Two Versions of a Model</span></a></p></li>
@@ -2032,8 +2039,8 @@
 <li><p><a class="reference internal" href="pot_introduction.html#doxid-pot-introduction"><span class="std std-ref">Post-Training Optimization Tool</span></a></p></li>
 <li><p><a class="reference internal" href="workbench_docs_Workbench_DG_Troubleshooting.html#doxid-workbench-docs-workbench-d-g-troubleshooting"><span class="std std-ref">Troubleshooting</span></a></p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -2064,7 +2071,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

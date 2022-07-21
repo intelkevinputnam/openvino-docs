@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Compile Tool &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -1832,7 +1839,7 @@
             
                 <div>
                   
-  <div class="section" id="compile-tool">
+  <section id="compile-tool">
 <span id="doxid-openvino-inference-engine-tools-compile-tool-r-e-a-d-m-e"></span><span id="index-0"></span><h1>Compile Tool<a class="headerlink" href="#compile-tool" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-openvino-inference-engine-tools-compile-tool-r-e-a-d-m-e-1md-openvino-tools-compile-tool-readme"></span> Compile tool is a C++ application that enables you to compile a model for inference on a specific device and export the compiled representation to a binary file. With the Compile Tool, you can compile a model using supported OpenVINO Runtime devices on a machine that doesn’t have the physical device connected and then transfer a generated file to any machine with the target inference device available. See the <a class="reference internal" href="openvino_docs_OV_UG_Working_with_devices.html#doxid-openvino-docs-o-v-u-g-working-with-devices"><span class="std std-ref">Features support matrix</span></a> to understand which device support import / export functionality.</p>
 <p>The tool compiles networks for the following target devices using corresponding OpenVINO Runtime plugins:</p>
@@ -1840,7 +1847,7 @@
 <li><p>Intel® Neural Compute Stick 2 (MYRIAD plugin)</p></li>
 </ul>
 <p>The tool is delivered as an executable file that can be run on both Linux* and Windows*. The tool is located in the <code class="docutils literal notranslate"><span class="pre">&lt;INSTALLROOT&gt;/tools/compile_tool</span></code> directory.</p>
-<div class="section" id="workflow-of-the-compile-tool">
+<section id="workflow-of-the-compile-tool">
 <h2>Workflow of the Compile tool<a class="headerlink" href="#workflow-of-the-compile-tool" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
 <li><p>First, the application reads command-line parameters and loads a model to the OpenVINO Runtime device.</p></li>
@@ -1852,8 +1859,8 @@
 <li><p>Compile blobs for OpenVINO Runtime API 2.0 by default or for Inference Engine API with explicit option <code class="docutils literal notranslate"><span class="pre">-ov_api_1_0</span></code></p></li>
 <li><p>Accepts device specific options for customizing the compilation process</p></li>
 </ul>
-</div>
-<div class="section" id="run-the-compile-tool">
+</section>
+<section id="run-the-compile-tool">
 <h2>Run the Compile Tool<a class="headerlink" href="#run-the-compile-tool" title="Permalink to this headline">¶</a></h2>
 <p>Running the application with the <code class="docutils literal notranslate"><span class="pre">-h</span></code> option yields the following usage message:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="p">.</span><span class="o">/</span><span class="n">compile_tool</span> <span class="o">-</span><span class="n">h</span>
@@ -1904,14 +1911,14 @@
                                              <span class="n">Value</span> <span class="n">should</span> <span class="n">be</span> <span class="n">equal</span> <span class="n">or</span> <span class="n">greater</span> <span class="n">than</span> <span class="o">-</span><span class="mf">1.</span>
                                              <span class="n">Overwrites</span> <span class="n">value</span> <span class="n">from</span> <span class="n">config</span><span class="p">.</span></pre></div></div><p>Running the application with the empty list of options yields an error message.</p>
 <p>For example, to compile a blob for inference on an Intel® Neural Compute Stick 2 from a trained network, run the command below:</p>
-<div class="highlight"><div class="highlight"><pre><span></span><span class="p">.</span><span class="o">/</span><span class="n">compile_tool</span> <span class="o">-</span><span class="n">m</span> <span class="o">&lt;</span><span class="n">path_to_model</span><span class="o">&gt;/</span><span class="n">model_name</span><span class="p">.</span><span class="n">xml</span> <span class="o">-</span><span class="n">d</span> <span class="n">MYRIAD</span></pre></div></div><div class="section" id="import-a-compiled-blob-file-to-your-application">
+<div class="highlight"><div class="highlight"><pre><span></span><span class="p">.</span><span class="o">/</span><span class="n">compile_tool</span> <span class="o">-</span><span class="n">m</span> <span class="o">&lt;</span><span class="n">path_to_model</span><span class="o">&gt;/</span><span class="n">model_name</span><span class="p">.</span><span class="n">xml</span> <span class="o">-</span><span class="n">d</span> <span class="n">MYRIAD</span></pre></div></div><section id="import-a-compiled-blob-file-to-your-application">
 <h3>Import a Compiled Blob File to Your Application<a class="headerlink" href="#import-a-compiled-blob-file-to-your-application" title="Permalink to this headline">¶</a></h3>
-<p>To import a blob with the network from a generated file into your application, use the <code class="docutils literal notranslate"><span class="pre">ov::Core::import_model</span></code> method:</p>
-<div class="highlight"><div class="highlight"><pre>ov::Core<span></span> ie<span></span><span class="p">;</span>
+<p>To import a blob with the network from a generated file into your application, use the <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1Core.html#doxid-classov-1-1-core-1a0d2853511bd7ba60cb591f4685b91884"><span class="std std-ref"><span class="pre">ov::Core::import_model</span></span></a></code> method:</p>
+<div class="highlight"><div class="highlight"><pre><a class="reference internal" href="../api/groups/classov_1_1Core.html#doxid-classov-1-1-core"><span class="std std-ref">ov::Core</span></a><span></span> <a class="reference internal" href="../api/groups/namespaceInferenceEngine.html#doxid-namespace-inference-engine"><span class="std std-ref">ie</span></a><span></span><span class="p">;</span>
 <span class="n">std</span><span class="o">::</span><span class="n">ifstream</span> <span class="n">file</span><span class="p">{</span><span class="s">&quot;model_name.blob&quot;</span><span class="p">};</span>
-ov::CompiledModel<span></span> <span class="n">compiled_model</span> <span class="o">=</span> ie<span></span><span class="p">.</span><span class="n">import_model</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="s">&quot;MYRIAD&quot;</span><span class="p">);</span></pre></div></div></div>
-</div>
-</div>
+<a class="reference internal" href="../api/groups/classov_1_1CompiledModel.html#doxid-classov-1-1-compiled-model"><span class="std std-ref">ov::CompiledModel</span></a><span></span> <span class="n">compiled_model</span> <span class="o">=</span> <a class="reference internal" href="../api/groups/namespaceInferenceEngine.html#doxid-namespace-inference-engine"><span class="std std-ref">ie</span></a><span></span><span class="p">.</span><span class="n">import_model</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="s">&quot;MYRIAD&quot;</span><span class="p">);</span></pre></div></div></section>
+</section>
+</section>
 
 
                 </div>
@@ -1942,7 +1949,7 @@ ov::CompiledModel<span></span> <span class="n">compiled_model</span> <span class
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

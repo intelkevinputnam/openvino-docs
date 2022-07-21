@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Formula Recognition Python* Demo &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../../../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -2100,14 +2107,14 @@
             
                 <div>
                   
-  <div class="section" id="formula-recognition-python-demo">
+  <section id="formula-recognition-python-demo">
 <h1>Formula Recognition Python* Demo<a class="headerlink" href="#formula-recognition-python-demo" title="Permalink to this headline">¶</a></h1>
 <p><img alt="example" src="../../../_images/formula_recognition.gif" /></p>
 <p>This demo shows how to run LaTeX formula recognition models. These models allow to get a LaTeX formula markup from the image.</p>
 <blockquote>
 <div><p><strong>NOTE</strong>: Only batch size of 1 is supported.</p>
 </div></blockquote>
-<div class="section" id="how-it-works">
+<section id="how-it-works">
 <h2>How It Works<a class="headerlink" href="#how-it-works" title="Permalink to this headline">¶</a></h2>
 <p>The demo application expects a formula recognition model that is split into two parts. Every model part must be in the Intermediate Representation (IR) format.</p>
 <p>The First model is Encoder which extracts features from an image and prepares first steps of the decoder.</p>
@@ -2147,7 +2154,7 @@ Second model is being executed until current decoded token is <code class="docut
 <div><p>This will trigger interactive mode, which would be explained in detail later.</p>
 </div></blockquote>
 <p>Vocabulary files are provided under corresponding model configuration directory.</p>
-<div class="section" id="non-interactive-mode">
+<section id="non-interactive-mode">
 <h3>Non-interactive mode<a class="headerlink" href="#non-interactive-mode" title="Permalink to this headline">¶</a></h3>
 <p>Non-interactive mode assumes that demo processes inputs sequentially.
 The demo workflow in non-interactive mode is the following:</p>
@@ -2157,11 +2164,11 @@ The demo workflow in non-interactive mode is the following:</p>
 <li><p>While length of the current formula is less then <code class="docutils literal notranslate"><span class="pre">--max_formula_len</span></code> or current token is not <code class="docutils literal notranslate"><span class="pre">END_TOKEN</span></code> Decode Step produces new tokens.</p></li>
 <li><p>The demo prints the decoded text to a file if <code class="docutils literal notranslate"><span class="pre">-o</span></code> parameter specified or into the console and (optionally) renders predicted formula into image.</p></li>
 </ol>
-<div class="section" id="rendering-of-the-latex-formula-into-image">
+<section id="rendering-of-the-latex-formula-into-image">
 <h4>Rendering of the LaTeX formula into image<a class="headerlink" href="#rendering-of-the-latex-formula-into-image" title="Permalink to this headline">¶</a></h4>
 <p>User has an option to render the LaTeX formula predicted by the demo application into an image.
 Regardless of what mode is selected (interactive or non-interactive) the process of the rendering of the formula is the same.</p>
-<div class="section" id="requirements-for-rendering">
+<section id="requirements-for-rendering">
 <h5>Requirements for rendering<a class="headerlink" href="#requirements-for-rendering" title="Permalink to this headline">¶</a></h5>
 <p>Sympy package needs LaTeX system installed in the operating system.
 For Windows you can use <a class="reference external" href="https://miktex.org/">MiKTeX*</a> (just download and install it), for Ubuntu/MacOS you can use TeX Live*:
@@ -2176,10 +2183,10 @@ You might also face the missing <code class="docutils literal notranslate"><span
 <blockquote>
 <div><p>Note: Other LaTeX systems should also work.</p>
 </div></blockquote>
-</div>
-</div>
-</div>
-<div class="section" id="interactive-mode">
+</section>
+</section>
+</section>
+<section id="interactive-mode">
 <h3>Interactive mode<a class="headerlink" href="#interactive-mode" title="Permalink to this headline">¶</a></h3>
 <p>The example of the interface:
 <img alt="interactive example" src="../../../_images/interactive_interface.png" />
@@ -2212,9 +2219,9 @@ This means model inference and rendering of the formula do not block main thread
 </div></blockquote>
 <p>The demo has two preprocessing types: Crop and Pad to target shape and Resize and pad to target shape. Two preprocessing types are used for two different datasets as model trained with concrete font size, so if one wants to run the model on inputs with bigger font size (e.g. if input is photographed in 12Mpx, while model trained to imitate scans in ~3Mpx) they should first resize the input to make font size like in train set. Example of the target font size:
 <img alt="font_size" src="../../../_images/sample.png" /></p>
-</div>
-</div>
-<div class="section" id="preparing-to-run">
+</section>
+</section>
+<section id="preparing-to-run">
 <h2>Preparing to Run<a class="headerlink" href="#preparing-to-run" title="Permalink to this headline">¶</a></h2>
 <p>The list of models supported by the demo is in <code class="docutils literal notranslate"><span class="pre">&lt;omz_dir&gt;/demos/formula_recognition_demo/python/models.lst</span></code> file. This file can be used as a parameter for <span class="xref myst">Model Downloader</span> and Converter to download and, if necessary, convert models to OpenVINO IR format (*.xml + *.bin).</p>
 <p>An example of using the Model Downloader:</p>
@@ -2225,7 +2232,7 @@ This means model inference and rendering of the formula do not block main thread
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>omz_converter --list models.lst
 </pre></div>
 </div>
-<div class="section" id="supported-models">
+<section id="supported-models">
 <h3>Supported Models<a class="headerlink" href="#supported-models" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>formula-recognition-medium-scan-0001-im2latex-decoder</p></li>
@@ -2236,9 +2243,9 @@ This means model inference and rendering of the formula do not block main thread
 <blockquote>
 <div><p><strong>NOTE</strong>: Refer to the tables <a class="reference internal" href="../../../models/intel/device_support.html"><span class="doc std std-doc">Intel’s Pre-Trained Models Device Support</span></a> and <a class="reference internal" href="../../../models/public/device_support.html"><span class="doc std std-doc">Public Pre-Trained Models Device Support</span></a> for the details on models inference support at different devices.</p>
 </div></blockquote>
-</div>
-</div>
-<div class="section" id="running">
+</section>
+</section>
+<section id="running">
 <h2>Running<a class="headerlink" href="#running" title="Permalink to this headline">¶</a></h2>
 <p>Run the application with the <code class="docutils literal notranslate"><span class="pre">-h</span></code> option to see the following usage message:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">formula_recognition_demo</span><span class="o">.</span><span class="n">py</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="o">-</span><span class="n">m_encoder</span> <span class="n">M_ENCODER</span> <span class="o">-</span><span class="n">m_decoder</span>
@@ -2356,20 +2363,20 @@ This means model inference and rendering of the formula do not block main thread
     --preprocessing crop
 </pre></div>
 </div>
-</div>
-<div class="section" id="demo-output">
+</section>
+<section id="demo-output">
 <h2>Demo Output<a class="headerlink" href="#demo-output" title="Permalink to this headline">¶</a></h2>
 <p>The application outputs recognized formula into the console or into the file.</p>
-</div>
-<div class="section" id="see-also">
+</section>
+<section id="see-also">
 <h2>See Also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="../../README.html"><span class="doc std std-doc">Open Model Zoo Demos</span></a></p></li>
 <li><p><a class="reference external" href="https://docs.openvino.ai/latest/openvino_docs_MO_DG_Deep_Learning_Model_Optimizer_DevGuide.html">Model Optimizer</a></p></li>
 <li><p><span class="xref myst">Model Downloader</span></p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -2400,7 +2407,7 @@ This means model inference and rendering of the formula do not block main thread
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

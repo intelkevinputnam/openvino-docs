@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>detr-resnet50 &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../../../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -2106,14 +2113,14 @@
             
                 <div>
                   
-  <div class="section" id="detr-resnet50">
+  <section id="detr-resnet50">
 <h1>detr-resnet50<a class="headerlink" href="#detr-resnet50" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="use-case-and-high-level-description">
+<section id="use-case-and-high-level-description">
 <h2>Use Case and High-Level Description<a class="headerlink" href="#use-case-and-high-level-description" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">detr-resnet50</span></code> model is one from DEtection TRansformer (DETR) models family, which consider object detection as a direct set prediction problem. The model has ResNet50 backbone and pretrained on <a class="reference external" href="https://cocodataset.org/#home">Common Objects in Context (COCO)</a> dataset for solving object detection task. DETR predicts all objects at once, and is trained end-to-end with a set loss function which performs bipartite matching between predicted and ground-truth objects. DETR simplifies the detection pipeline by dropping multiple hand-designed components that encode prior knowledge, like spatial anchors or non-maximal suppression.</p>
 <p>More details provided in the <a class="reference external" href="https://arxiv.org/abs/2005.12872">paper</a> and <a class="reference external" href="https://github.com/facebookresearch/detr">repository</a>.</p>
-</div>
-<div class="section" id="specification">
+</section>
+<section id="specification">
 <h2>Specification<a class="headerlink" href="#specification" title="Permalink to this headline">¶</a></h2>
 <table class="colwidths-auto table">
 <thead>
@@ -2136,8 +2143,8 @@
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="accuracy">
+</section>
+<section id="accuracy">
 <h2>Accuracy<a class="headerlink" href="#accuracy" title="Permalink to this headline">¶</a></h2>
 <p>Accuracy metrics obtained on <a class="reference external" href="https://cocodataset.org/#home">Common Objects in Context (COCO)</a> validation dataset for converted model. Background label + label map with 80 public available object categories are used (original indexing to 91 categories is preserved).</p>
 <table class="colwidths-auto table">
@@ -2155,10 +2162,10 @@
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="input">
+</section>
+<section id="input">
 <h2>Input<a class="headerlink" href="#input" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="original-model">
+<section id="original-model">
 <h3>Original model<a class="headerlink" href="#original-model" title="Permalink to this headline">¶</a></h3>
 <p>Image, name - <code class="docutils literal notranslate"><span class="pre">input</span></code>, shape - <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">3,</span> <span class="pre">800,</span> <span class="pre">1137</span></code>, format <code class="docutils literal notranslate"><span class="pre">B,</span> <span class="pre">C,</span> <span class="pre">H,</span> <span class="pre">W</span></code>, where:</p>
 <ul class="simple">
@@ -2170,8 +2177,8 @@
 <p>Expected color order is <code class="docutils literal notranslate"><span class="pre">RGB</span></code>.</p>
 <p>Mean values - [123.675, 116.28, 103.53].
 Scale values - [58.395, 57.12, 57.375].</p>
-</div>
-<div class="section" id="converted-model">
+</section>
+<section id="converted-model">
 <h3>Converted model<a class="headerlink" href="#converted-model" title="Permalink to this headline">¶</a></h3>
 <p>Image, name - <code class="docutils literal notranslate"><span class="pre">input</span></code>, shape - <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">3,</span> <span class="pre">800,</span> <span class="pre">1137</span></code>, format <code class="docutils literal notranslate"><span class="pre">B,</span> <span class="pre">C,</span> <span class="pre">H,</span> <span class="pre">W</span></code>, where:</p>
 <ul class="simple">
@@ -2181,11 +2188,11 @@ Scale values - [58.395, 57.12, 57.375].</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">W</span></code> - image width</p></li>
 </ul>
 <p>Expected color order is <code class="docutils literal notranslate"><span class="pre">BGR</span></code>.</p>
-</div>
-</div>
-<div class="section" id="output">
+</section>
+</section>
+<section id="output">
 <h2>Output<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id1">
+<section id="id1">
 <h3>Original model<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic">
 <li><p>Bounding boxes, name: <code class="docutils literal notranslate"><span class="pre">boxes</span></code>, shape - <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">100,</span> <span class="pre">4</span></code>. Presented in format <code class="docutils literal notranslate"><span class="pre">B,</span> <span class="pre">A,</span> <span class="pre">4</span></code>, where:</p>
@@ -2202,8 +2209,8 @@ Scale values - [58.395, 57.12, 57.375].</p>
 </li>
 <li><p>Scores, name: <code class="docutils literal notranslate"><span class="pre">scores</span></code>, shape - <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">100,</span> <span class="pre">92</span></code>. Contains scores for 91 <a class="reference external" href="https://cocodataset.org/#home">Common Objects in Context (COCO)</a> object classes. The last class is <code class="docutils literal notranslate"><span class="pre">no-object</span></code> class.</p></li>
 </ol>
-</div>
-<div class="section" id="id2">
+</section>
+<section id="id2">
 <h3>Converted model<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic">
 <li><p>Bounding boxes, name: <code class="docutils literal notranslate"><span class="pre">boxes</span></code>, shape - <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">100,</span> <span class="pre">4</span></code>. Presented in format <code class="docutils literal notranslate"><span class="pre">B,</span> <span class="pre">A,</span> <span class="pre">4</span></code>, where:</p>
@@ -2220,9 +2227,9 @@ Scale values - [58.395, 57.12, 57.375].</p>
 </li>
 <li><p>Scores, name: <code class="docutils literal notranslate"><span class="pre">scores</span></code>, shape - <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">100,</span> <span class="pre">92</span></code>. Contains scores for 91 <a class="reference external" href="https://cocodataset.org/#home">Common Objects in Context (COCO)</a> object classes. The last class is <code class="docutils literal notranslate"><span class="pre">no-object</span></code> class.</p></li>
 </ol>
-</div>
-</div>
-<div class="section" id="download-a-model-and-convert-it-into-openvino-ir-format">
+</section>
+</section>
+<section id="download-a-model-and-convert-it-into-openvino-ir-format">
 <h2>Download a Model and Convert it into OpenVINO™ IR Format<a class="headerlink" href="#download-a-model-and-convert-it-into-openvino-ir-format" title="Permalink to this headline">¶</a></h2>
 <p>You can download models and if necessary convert them into OpenVINO™ IR format using the <span class="xref myst">Model Downloader and other automation tools</span> as shown in the examples below.</p>
 <p>An example of using the Model Downloader:</p>
@@ -2233,21 +2240,21 @@ Scale values - [58.395, 57.12, 57.375].</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">omz_converter</span> <span class="o">--</span><span class="n">name</span> <span class="o">&lt;</span><span class="n">model_name</span><span class="o">&gt;</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="demo-usage">
+</section>
+<section id="demo-usage">
 <h2>Demo usage<a class="headerlink" href="#demo-usage" title="Permalink to this headline">¶</a></h2>
 <p>The model can be used in the following demos provided by the Open Model Zoo to show its capabilities:</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="../../../demos/object_detection_demo/python/README.html"><span class="doc std std-doc">Object Detection Python* Demo</span></a></p></li>
 </ul>
-</div>
-<div class="section" id="legal-information">
+</section>
+<section id="legal-information">
 <h2>Legal Information<a class="headerlink" href="#legal-information" title="Permalink to this headline">¶</a></h2>
 <p>The original model is distributed under the
 <a class="reference external" href="https://raw.githubusercontent.com/facebookresearch/detr/master/LICENSE">Apache License, Version 2.0</a>.
 A copy of the license is provided in <code class="docutils literal notranslate"><span class="pre">&lt;omz_dir&gt;/models/public/licenses/APACHE-2.0-FacebookResearch.txt</span></code>.</p>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -2278,7 +2285,7 @@ A copy of the license is provided in <code class="docutils literal notranslate">
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

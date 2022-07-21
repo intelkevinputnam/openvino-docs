@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Implementing a Face Beautification Algorithm &#8212; OpenVINO™  documentation</title>
     
     
@@ -128,6 +129,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -1919,10 +1926,10 @@
             
                 <div>
                   
-  <div class="section" id="implementing-a-face-beautification-algorithm">
+  <section id="implementing-a-face-beautification-algorithm">
 <span id="doxid-openvino-docs-gapi-face-beautification"></span><span id="index-0"></span><h1>Implementing a Face Beautification Algorithm<a class="headerlink" href="#implementing-a-face-beautification-algorithm" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-openvino-docs-gapi-face-beautification-1md-openvino-docs-gapi-face-beautification"></span></p>
-<div class="section" id="introduction">
+<section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>In this tutorial you will learn:</p>
 <ul class="simple">
@@ -1930,8 +1937,8 @@
 <li><p>How to infer different networks inside a pipeline with G-API;</p></li>
 <li><p>How to run a G-API pipeline on a video stream.</p></li>
 </ul>
-</div>
-<div class="section" id="prerequisites">
+</section>
+<section id="prerequisites">
 <h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
 <p>This sample requires:</p>
 <ul class="simple">
@@ -1945,8 +1952,8 @@
 </li>
 </ul>
 <p>To download the models from the Open Model Zoo, use the Model Downloader tool.</p>
-</div>
-<div class="section" id="face-beautification-algorithm">
+</section>
+<section id="face-beautification-algorithm">
 <h2>Face Beautification Algorithm<a class="headerlink" href="#face-beautification-algorithm" title="Permalink to this headline">¶</a></h2>
 <p>We will implement a simple face beautification algorithm using a combination of modern Deep Learning techniques and traditional Computer Vision. The general idea behind the algorithm is to make face skin smoother while preserving face features like eyes or a mouth contrast. The algorithm identifies parts of the face using a DNN inference, applies different filters to the parts found, and then combines it into the final result using basic image arithmetics:</p>
 <img alt="Face Beautification Algorithm" src="../_images/gapi_face_beautification_algorithm.png" />
@@ -1967,16 +1974,16 @@
 <li><p>The final result <span class="math notranslate nohighlight">\(O\)</span> is a composition of features above calculated as <span class="math notranslate nohighlight">\(O = b\*I + p\*U + s\*L\)</span>.</p></li>
 </ul>
 <p>Generating face element masks based on a limited set of features (just 35 per face, including all its parts) is not very trivial and is described in the sections below.</p>
-</div>
-<div class="section" id="constructing-a-g-api-pipeline">
+</section>
+<section id="constructing-a-g-api-pipeline">
 <h2>Constructing a G-API Pipeline<a class="headerlink" href="#constructing-a-g-api-pipeline" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="declare-deep-learning-topologies">
+<section id="declare-deep-learning-topologies">
 <h3>Declare Deep Learning Topologies<a class="headerlink" href="#declare-deep-learning-topologies" title="Permalink to this headline">¶</a></h3>
 <p>This sample is using two DNN detectors. Every network takes one input and produces one output. In G-API, networks are defined with macro G_API_NET():</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">G_API_NET</span><span class="p">(</span><span class="n">FaceDetector</span><span class="p">,</span>  <span class="o">&lt;</span><span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">(</span><span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span> <span class="s">&quot;face_detector&quot;</span><span class="p">);</span>
 <span class="n">G_API_NET</span><span class="p">(</span><span class="n">LandmDetector</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">(</span><span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span> <span class="s">&quot;landm_detector&quot;</span><span class="p">);</span></pre></div></div><p>To get more information, see Declaring Deep Learning topologies described in the “Face Analytics pipeline” tutorial.</p>
-</div>
-<div class="section" id="describe-the-processing-graph">
+</section>
+<section id="describe-the-processing-graph">
 <h3>Describe the Processing Graph<a class="headerlink" href="#describe-the-processing-graph" title="Permalink to this headline">¶</a></h3>
 <p>The code below generates a graph for the algorithm above:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">cv</span><span class="o">::</span><span class="n">GComputation</span> <span class="n">pipeline</span><span class="p">([</span><span class="o">=</span><span class="p">]()</span>
@@ -2015,7 +2022,7 @@
     <span class="n">cv</span><span class="o">::</span><span class="n">GMat</span> <span class="n">gimgInMasked</span>    <span class="o">=</span> <span class="n">custom</span><span class="o">::</span><span class="n">mask3C</span><span class="p">(</span><span class="n">gimgIn</span><span class="p">,</span>    <span class="n">mskNoFaces</span><span class="p">);</span>
     <span class="n">cv</span><span class="o">::</span><span class="n">GMat</span> <span class="n">gimgBeautif</span> <span class="o">=</span> <span class="n">gimgBilatMasked</span> <span class="o">+</span> <span class="n">gimgSharpMasked</span> <span class="o">+</span> <span class="n">gimgInMasked</span><span class="p">;</span>
     <span class="k">return</span> <span class="n">cv</span><span class="o">::</span><span class="n">GComputation</span><span class="p">(</span><span class="n">cv</span><span class="o">::</span><span class="n">GIn</span><span class="p">(</span><span class="n">gimgIn</span><span class="p">),</span> <span class="n">cv</span><span class="o">::</span><span class="n">GOut</span><span class="p">(</span><span class="n">gimgBeautif</span><span class="p">,</span>
-                                                      cv::gapi::copy<span></span><span class="p">(</span><span class="n">gimgIn</span><span class="p">),</span>
+                                                      <a class="reference internal" href="../api/groups/namespacengraph_1_1runtime_1_1reference.html#doxid-namespacengraph-1-1runtime-1-1reference-1ae9e111c1aee5932340d30ef5bcb9886c"><span class="std std-ref">cv::gapi::copy</span></a><span></span><span class="p">(</span><span class="n">gimgIn</span><span class="p">),</span>
                                                       <span class="n">garFaceConts</span><span class="p">,</span>
                                                       <span class="n">garElsConts</span><span class="p">,</span>
                                                       <span class="n">garRects</span><span class="p">));</span>
@@ -2024,8 +2031,8 @@
 <li><p>A frame-oriented one is used to detect faces on the input frame.</p></li>
 <li><p>An ROI-list oriented one is used to run landmarks inference on a list of faces – this version produces an array of landmarks per every face. More on this in “Face Analytics pipeline” (<a class="reference internal" href="openvino_docs_gapi_gapi_face_analytics_pipeline.html#doxid-openvino-docs-gapi-gapi-face-analytics-pipeline-1gapi-ifd-gcomputation"><span class="std std-ref">Building a GComputation</span></a> section).</p></li>
 </ul>
-</div>
-<div class="section" id="unsharp-mask-in-g-api">
+</section>
+<section id="unsharp-mask-in-g-api">
 <h3>Unsharp mask in G-API<a class="headerlink" href="#unsharp-mask-in-g-api" title="Permalink to this headline">¶</a></h3>
 <p>The unsharp mask <span class="math notranslate nohighlight">\(U\)</span> for image <span class="math notranslate nohighlight">\(I\)</span> is defined as:</p>
 <div class="math notranslate nohighlight">
@@ -2039,12 +2046,12 @@
     <span class="n">cv</span><span class="o">::</span><span class="n">GMat</span> <span class="n">laplacian</span> <span class="o">=</span> <span class="n">custom</span><span class="o">::</span><span class="n">GLaplacian</span><span class="o">::</span><span class="n">on</span><span class="p">(</span><span class="n">blurred</span><span class="p">,</span> <span class="n">CV_8U</span><span class="p">);</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">src</span> <span class="o">-</span> <span class="p">(</span><span class="n">laplacian</span> <span class="err">\</span><span class="o">*</span> <span class="n">strength</span><span class="p">));</span>
 <span class="p">}</span></pre></div></div><p>Note that the code snipped above is a regular C++ function defined with G-API types. Users can write functions like this to simplify graph construction; when called, this function just puts the relevant nodes to the pipeline it is used in.</p>
-</div>
-</div>
-<div class="section" id="custom-operations">
+</section>
+</section>
+<section id="custom-operations">
 <h2>Custom Operations<a class="headerlink" href="#custom-operations" title="Permalink to this headline">¶</a></h2>
 <p>The face beautification graph is using custom operations extensively. This chapter focuses on the most interesting kernels, refer to G-API Kernel API for general information on defining operations and implementing kernels in G-API.</p>
-<div class="section" id="face-detector-post-processing">
+<section id="face-detector-post-processing">
 <h3>Face detector post-processing<a class="headerlink" href="#face-detector-post-processing" title="Permalink to this headline">¶</a></h3>
 <p>A face detector output is converted to an array of faces with the following kernel:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">VectorROI</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">cv</span><span class="o">::</span><span class="n">Rect</span><span class="o">&gt;</span><span class="p">;</span>
@@ -2065,7 +2072,7 @@
         <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">numOfDetections</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
         <span class="p">{</span>
             <span class="k">const</span> <span class="kt">float</span> <span class="n">faceId</span>         <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span> <span class="err">\</span><span class="o">*</span> <span class="n">kObjectSize</span> <span class="o">+</span> <span class="mi">0</span><span class="p">];</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">faceId</span> <span class="o">&lt;</span> <span class="mf">0.</span>f<span></span><span class="p">)</span>  <span class="c1">// indicates the end of detections</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">faceId</span> <span class="o">&lt;</span> <span class="mf">0.</span><a class="reference internal" href="../api/groups/namespacengraph_1_1runtime_1_1reference.html#doxid-namespacengraph-1-1runtime-1-1reference-1a4582949bb0b6082a5159f90c43a71ca9"><span class="std std-ref">f</span></a><span></span><span class="p">)</span>  <span class="c1">// indicates the end of detections</span>
             <span class="p">{</span>
                 <span class="k">break</span><span class="p">;</span>
             <span class="p">}</span>
@@ -2089,8 +2096,8 @@
             <span class="p">}</span>
         <span class="p">}</span>
     <span class="p">}</span>
-<span class="p">};</span></pre></div></div></div>
-<div class="section" id="facial-landmarks-post-processing">
+<span class="p">};</span></pre></div></div></section>
+<section id="facial-landmarks-post-processing">
 <h3>Facial Landmarks Post-Processing<a class="headerlink" href="#facial-landmarks-post-processing" title="Permalink to this headline">¶</a></h3>
 <p>The algorithm infers locations of face elements (like the eyes, the mouth and the head contour itself) using a generic facial landmarks detector (details) from OpenVINO™ Open Model Zoo. However, the detected landmarks as-is are not enough to generate masks — this operation requires regions of interest on the face represented by closed contours, so some interpolation is applied to get them. This landmarks processing and interpolation is performed by the following kernel:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">GAPI_OCV_KERNEL</span><span class="p">(</span><span class="n">GCPUGetContours</span><span class="p">,</span> <span class="n">GGetContours</span><span class="p">)</span>
@@ -2142,14 +2149,14 @@
             <span class="n">cntFace</span> <span class="o">=</span> <span class="n">getForeheadEllipse</span><span class="p">(</span><span class="n">vctCntJaw</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">vctCntJaw</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">16</span><span class="p">],</span> <span class="n">vctCntJaw</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">8</span><span class="p">]);</span>
             <span class="c1">// The ellipse is drawn clock-wise, but jaw contour points goes vice versa, so it&#39;s necessary to push</span>
             <span class="c1">//  cntJaw from the end to the begin using a reverse iterator:</span>
-            std::copy<span></span><span class="p">(</span><span class="n">vctCntJaw</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">crbegin</span><span class="p">(),</span> <span class="n">vctCntJaw</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">crend</span><span class="p">(),</span> <span class="n">std</span><span class="o">::</span><span class="n">back_inserter</span><span class="p">(</span><span class="n">cntFace</span><span class="p">));</span>
+            <a class="reference internal" href="../api/groups/namespacengraph_1_1runtime_1_1reference.html#doxid-namespacengraph-1-1runtime-1-1reference-1ae9e111c1aee5932340d30ef5bcb9886c"><span class="std std-ref">std::copy</span></a><span></span><span class="p">(</span><span class="n">vctCntJaw</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">crbegin</span><span class="p">(),</span> <span class="n">vctCntJaw</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">crend</span><span class="p">(),</span> <span class="n">std</span><span class="o">::</span><span class="n">back_inserter</span><span class="p">(</span><span class="n">cntFace</span><span class="p">));</span>
             <span class="c1">// Storing the face contour in another vector:</span>
             <span class="n">vctFaceContours</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">cntFace</span><span class="p">);</span>
         <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">};</span></pre></div></div><p>The kernel takes two arrays of denormalized landmarks coordinates and returns an array of elements’ closed contours and an array of faces’ closed contours; in other words, outputs are, the first, an array of contours of image areas to be sharpened and, the second, another one to be smoothed.</p>
 <p>Here and below <code class="docutils literal notranslate"><span class="pre">Contour</span></code> is a vector of points.</p>
-<div class="section" id="get-an-eye-contour">
+<section id="get-an-eye-contour">
 <h4>Get an Eye Contour<a class="headerlink" href="#get-an-eye-contour" title="Permalink to this headline">¶</a></h4>
 <p>Eye contours are estimated with the following function:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="kr">inline</span> <span class="kt">int</span> <span class="n">custom</span><span class="o">::</span><span class="n">getLineInclinationAngleDegrees</span><span class="p">(</span><span class="k">const</span> <span class="n">cv</span><span class="o">::</span><span class="n">Point</span> <span class="o">&amp;</span><span class="n">ptLeft</span><span class="p">,</span> <span class="k">const</span> <span class="n">cv</span><span class="o">::</span><span class="n">Point</span> <span class="o">&amp;</span><span class="n">ptRight</span><span class="p">)</span>
@@ -2158,21 +2165,21 @@
     <span class="k">if</span> <span class="p">(</span><span class="n">residual</span><span class="p">.</span><span class="n">y</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">residual</span><span class="p">.</span><span class="n">x</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
         <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
     <span class="k">else</span>
-        <span class="k">return</span> <span class="n">toIntRounded</span><span class="p">(</span>atan2<span></span><span class="p">(</span><span class="n">toDouble</span><span class="p">(</span><span class="n">residual</span><span class="p">.</span><span class="n">y</span><span class="p">),</span> <span class="n">toDouble</span><span class="p">(</span><span class="n">residual</span><span class="p">.</span><span class="n">x</span><span class="p">))</span> <span class="err">\</span><span class="o">*</span> <span class="mf">180.0</span> <span class="o">/</span> <span class="n">CV_PI</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">toIntRounded</span><span class="p">(</span><a class="reference internal" href="../api/groups/namespacengraph_1_1runtime_1_1reference.html#doxid-namespacengraph-1-1runtime-1-1reference-1a0fe523fcc10ffde40ad189c4c0acfcbb"><span class="std std-ref">atan2</span></a><span></span><span class="p">(</span><span class="n">toDouble</span><span class="p">(</span><span class="n">residual</span><span class="p">.</span><span class="n">y</span><span class="p">),</span> <span class="n">toDouble</span><span class="p">(</span><span class="n">residual</span><span class="p">.</span><span class="n">x</span><span class="p">))</span> <span class="err">\</span><span class="o">*</span> <span class="mf">180.0</span> <span class="o">/</span> <span class="n">CV_PI</span><span class="p">);</span>
 <span class="p">}</span>
 <span class="kr">inline</span> <span class="n">Contour</span> <span class="n">custom</span><span class="o">::</span><span class="n">getEyeEllipse</span><span class="p">(</span><span class="k">const</span> <span class="n">cv</span><span class="o">::</span><span class="n">Point</span> <span class="o">&amp;</span><span class="n">ptLeft</span><span class="p">,</span> <span class="k">const</span> <span class="n">cv</span><span class="o">::</span><span class="n">Point</span> <span class="o">&amp;</span><span class="n">ptRight</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="n">Contour</span> <span class="n">cntEyeBottom</span><span class="p">;</span>
     <span class="k">const</span> <span class="n">cv</span><span class="o">::</span><span class="n">Point</span> <span class="n">ptEyeCenter</span><span class="p">((</span><span class="n">ptRight</span> <span class="o">+</span> <span class="n">ptLeft</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">);</span>
     <span class="k">const</span> <span class="kt">int</span> <span class="n">angle</span> <span class="o">=</span> <span class="n">getLineInclinationAngleDegrees</span><span class="p">(</span><span class="n">ptLeft</span><span class="p">,</span> <span class="n">ptRight</span><span class="p">);</span>
-    <span class="k">const</span> <span class="kt">int</span> <span class="n">axisX</span> <span class="o">=</span> <span class="n">toIntRounded</span><span class="p">(</span>cv::norm<span></span><span class="p">(</span><span class="n">ptRight</span> <span class="o">-</span> <span class="n">ptLeft</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">);</span>
+    <span class="k">const</span> <span class="kt">int</span> <span class="n">axisX</span> <span class="o">=</span> <span class="n">toIntRounded</span><span class="p">(</span><a class="reference internal" href="../api/groups/namespacengraph_1_1runtime_1_1reference.html#doxid-namespacengraph-1-1runtime-1-1reference-1a245cd52a8980cf5851b581a332965999"><span class="std std-ref">cv::norm</span></a><span></span><span class="p">(</span><span class="n">ptRight</span> <span class="o">-</span> <span class="n">ptLeft</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">);</span>
     <span class="c1">// According to research, in average a Y axis of an eye is approximately</span>
     <span class="c1">//  1/3 of an X one.</span>
     <span class="k">const</span> <span class="kt">int</span> <span class="n">axisY</span> <span class="o">=</span> <span class="n">axisX</span> <span class="o">/</span> <span class="mi">3</span><span class="p">;</span>
     <span class="c1">// We need the lower part of an ellipse:</span>
     <span class="k">static</span> <span class="k">constexpr</span> <span class="kt">int</span> <span class="n">kAngEyeStart</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
     <span class="k">static</span> <span class="k">constexpr</span> <span class="kt">int</span> <span class="n">kAngEyeEnd</span>   <span class="o">=</span> <span class="mi">180</span><span class="p">;</span>
-    <span class="n">cv</span><span class="o">::</span><span class="n">ellipse2Poly</span><span class="p">(</span><span class="n">ptEyeCenter</span><span class="p">,</span> cv::Size<span></span><span class="p">(</span><span class="n">axisX</span><span class="p">,</span> <span class="n">axisY</span><span class="p">),</span> <span class="n">angle</span><span class="p">,</span> <span class="n">kAngEyeStart</span><span class="p">,</span> <span class="n">kAngEyeEnd</span><span class="p">,</span> <span class="n">config</span><span class="o">::</span><span class="n">kAngDelta</span><span class="p">,</span>
+    <span class="n">cv</span><span class="o">::</span><span class="n">ellipse2Poly</span><span class="p">(</span><span class="n">ptEyeCenter</span><span class="p">,</span> <a class="reference internal" href="../api/groups/namespaceInferenceEngine_1_1gapi.html#doxid-namespace-inference-engine-1-1gapi-1abfae352fcf3162d0b3a795593049bd5b"><span class="std std-ref">cv::Size</span></a><span></span><span class="p">(</span><span class="n">axisX</span><span class="p">,</span> <span class="n">axisY</span><span class="p">),</span> <span class="n">angle</span><span class="p">,</span> <span class="n">kAngEyeStart</span><span class="p">,</span> <span class="n">kAngEyeEnd</span><span class="p">,</span> <span class="n">config</span><span class="o">::</span><span class="n">kAngDelta</span><span class="p">,</span>
                      <span class="n">cntEyeBottom</span><span class="p">);</span>
     <span class="k">return</span> <span class="n">cntEyeBottom</span><span class="p">;</span>
 <span class="p">}</span></pre></div></div><p>Briefly, this function restores the bottom side of an eye by a half-ellipse based on two points in left and right eye corners. In fact, <code class="docutils literal notranslate"><span class="pre">cv::ellipse2Poly()</span></code> is used to approximate the eye region, and the function only defines ellipse parameters based on just two points:</p>
@@ -2183,9 +2190,9 @@
 <li><p>The angle delta: how much points to produce in the contour.</p></li>
 <li><p>The inclination angle of the axes.</p></li>
 </ul>
-<p>The use of the <code class="docutils literal notranslate"><span class="pre">atan2()</span></code> instead of just <code class="docutils literal notranslate"><span class="pre">atan()</span></code> in function <code class="docutils literal notranslate"><span class="pre">custom::getLineInclinationAngleDegrees()</span></code> is essential as it allows to return a negative value depending on the <code class="docutils literal notranslate"><span class="pre">x</span></code> and the <code class="docutils literal notranslate"><span class="pre">y</span></code> signs so we can get the right angle even in case of upside-down face arrangement (if we put the points in the right order, of course).</p>
-</div>
-<div class="section" id="get-a-forehead-contour">
+<p>The use of the <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/namespacengraph_1_1runtime_1_1reference.html#doxid-namespacengraph-1-1runtime-1-1reference-1a0fe523fcc10ffde40ad189c4c0acfcbb"><span class="std std-ref"><span class="pre">atan2()</span></span></a></code> instead of just <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/namespacengraph_1_1runtime_1_1reference.html#doxid-namespacengraph-1-1runtime-1-1reference-1a26928b5ccc0b0e9418e7eaad39df5a39"><span class="std std-ref"><span class="pre">atan()</span></span></a></code> in function <code class="docutils literal notranslate"><span class="pre">custom::getLineInclinationAngleDegrees()</span></code> is essential as it allows to return a negative value depending on the <code class="docutils literal notranslate"><span class="pre">x</span></code> and the <code class="docutils literal notranslate"><span class="pre">y</span></code> signs so we can get the right angle even in case of upside-down face arrangement (if we put the points in the right order, of course).</p>
+</section>
+<section id="get-a-forehead-contour">
 <h4>Get a Forehead Contour<a class="headerlink" href="#get-a-forehead-contour" title="Permalink to this headline">¶</a></h4>
 <p>The function approximates the forehead contour:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="kr">inline</span> <span class="n">Contour</span> <span class="n">custom</span><span class="o">::</span><span class="n">getForeheadEllipse</span><span class="p">(</span><span class="k">const</span> <span class="n">cv</span><span class="o">::</span><span class="n">Point</span> <span class="o">&amp;</span><span class="n">ptJawLeft</span><span class="p">,</span>
@@ -2200,23 +2207,23 @@
     <span class="k">const</span> <span class="kt">int</span> <span class="n">angFace</span> <span class="o">=</span> <span class="n">getLineInclinationAngleDegrees</span><span class="p">(</span><span class="n">ptJawLeft</span><span class="p">,</span> <span class="n">ptJawRight</span><span class="p">);</span>
     <span class="c1">// This will be the inclination of the ellipse</span>
     <span class="c1">// Counting the half-axis of the ellipse:</span>
-    <span class="k">const</span> <span class="kt">double</span> <span class="n">jawWidth</span>  <span class="o">=</span> cv::norm<span></span><span class="p">(</span><span class="n">ptJawLeft</span> <span class="o">-</span> <span class="n">ptJawRight</span><span class="p">);</span>
+    <span class="k">const</span> <span class="kt">double</span> <span class="n">jawWidth</span>  <span class="o">=</span> <a class="reference internal" href="../api/groups/namespacengraph_1_1runtime_1_1reference.html#doxid-namespacengraph-1-1runtime-1-1reference-1a245cd52a8980cf5851b581a332965999"><span class="std std-ref">cv::norm</span></a><span></span><span class="p">(</span><span class="n">ptJawLeft</span> <span class="o">-</span> <span class="n">ptJawRight</span><span class="p">);</span>
     <span class="c1">// A forehead width equals the jaw width, and we need a half-axis:</span>
     <span class="k">const</span> <span class="kt">int</span> <span class="n">axisX</span>        <span class="o">=</span> <span class="n">toIntRounded</span><span class="p">(</span><span class="n">jawWidth</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">);</span>
-    <span class="k">const</span> <span class="kt">double</span> <span class="n">jawHeight</span> <span class="o">=</span> cv::norm<span></span><span class="p">(</span><span class="n">ptFaceCenter</span> <span class="o">-</span> <span class="n">ptJawLower</span><span class="p">);</span>
+    <span class="k">const</span> <span class="kt">double</span> <span class="n">jawHeight</span> <span class="o">=</span> <a class="reference internal" href="../api/groups/namespacengraph_1_1runtime_1_1reference.html#doxid-namespacengraph-1-1runtime-1-1reference-1a245cd52a8980cf5851b581a332965999"><span class="std std-ref">cv::norm</span></a><span></span><span class="p">(</span><span class="n">ptFaceCenter</span> <span class="o">-</span> <span class="n">ptJawLower</span><span class="p">);</span>
     <span class="c1">// According to research, in average a forehead is approximately 2/3 of</span>
     <span class="c1">//  a jaw:</span>
     <span class="k">const</span> <span class="kt">int</span> <span class="n">axisY</span>        <span class="o">=</span> <span class="n">toIntRounded</span><span class="p">(</span><span class="n">jawHeight</span> <span class="err">\</span><span class="o">*</span> <span class="mi">2</span> <span class="o">/</span> <span class="mf">3.0</span><span class="p">);</span>
     <span class="c1">// We need the upper part of an ellipse:</span>
     <span class="k">static</span> <span class="k">constexpr</span> <span class="kt">int</span> <span class="n">kAngForeheadStart</span> <span class="o">=</span> <span class="mi">180</span><span class="p">;</span>
     <span class="k">static</span> <span class="k">constexpr</span> <span class="kt">int</span> <span class="n">kAngForeheadEnd</span>   <span class="o">=</span> <span class="mi">360</span><span class="p">;</span>
-    <span class="n">cv</span><span class="o">::</span><span class="n">ellipse2Poly</span><span class="p">(</span><span class="n">ptFaceCenter</span><span class="p">,</span> cv::Size<span></span><span class="p">(</span><span class="n">axisX</span><span class="p">,</span> <span class="n">axisY</span><span class="p">),</span> <span class="n">angFace</span><span class="p">,</span> <span class="n">kAngForeheadStart</span><span class="p">,</span> <span class="n">kAngForeheadEnd</span><span class="p">,</span>
+    <span class="n">cv</span><span class="o">::</span><span class="n">ellipse2Poly</span><span class="p">(</span><span class="n">ptFaceCenter</span><span class="p">,</span> <a class="reference internal" href="../api/groups/namespaceInferenceEngine_1_1gapi.html#doxid-namespace-inference-engine-1-1gapi-1abfae352fcf3162d0b3a795593049bd5b"><span class="std std-ref">cv::Size</span></a><span></span><span class="p">(</span><span class="n">axisX</span><span class="p">,</span> <span class="n">axisY</span><span class="p">),</span> <span class="n">angFace</span><span class="p">,</span> <span class="n">kAngForeheadStart</span><span class="p">,</span> <span class="n">kAngForeheadEnd</span><span class="p">,</span>
                      <span class="n">config</span><span class="o">::</span><span class="n">kAngDelta</span><span class="p">,</span> <span class="n">cntForehead</span><span class="p">);</span>
     <span class="k">return</span> <span class="n">cntForehead</span><span class="p">;</span>
 <span class="p">}</span></pre></div></div><p>As we have only jaw points in our detected landmarks, we have to get a half-ellipse based on three points of a jaw: the leftmost, the rightmost and the lowest one. The jaw width is assumed to be equal to the forehead width and the latter is calculated using the left and the right points. Speaking of the <span class="math notranslate nohighlight">\(Y\)</span> axis, we have no points to get it directly, and instead assume that the forehead height is about <span class="math notranslate nohighlight">\(2/3\)</span> of the jaw height, which can be figured out from the face center (the middle between the left and right points) and the lowest jaw point.</p>
-</div>
-</div>
-<div class="section" id="draw-masks">
+</section>
+</section>
+<section id="draw-masks">
 <h3>Draw Masks<a class="headerlink" href="#draw-masks" title="Permalink to this headline">¶</a></h3>
 <p>When we have all the contours needed, you are able to draw masks:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">cv</span><span class="o">::</span><span class="n">GMat</span> <span class="n">mskSharp</span>        <span class="o">=</span> <span class="n">custom</span><span class="o">::</span><span class="n">GFillPolyGContours</span><span class="o">::</span><span class="n">on</span><span class="p">(</span><span class="n">gimgIn</span><span class="p">,</span> <span class="n">garElsConts</span><span class="p">);</span>             <span class="c1">// |</span>
@@ -2253,12 +2260,12 @@
 </ul>
 </li>
 </ul>
-</div>
-</div>
-<div class="section" id="configuring-and-running-the-pipeline">
+</section>
+</section>
+<section id="configuring-and-running-the-pipeline">
 <h2>Configuring and Running the Pipeline<a class="headerlink" href="#configuring-and-running-the-pipeline" title="Permalink to this headline">¶</a></h2>
 <p>Once the graph is fully expressed, we can finally compile it and run on real data. G-API graph compilation is the stage where the G-API framework actually understands which kernels and networks to use. This configuration happens via G-API compilation arguments.</p>
-<div class="section" id="dnn-parameters">
+<section id="dnn-parameters">
 <h3>DNN Parameters<a class="headerlink" href="#dnn-parameters" title="Permalink to this headline">¶</a></h3>
 <p>This sample is using OpenVINO™ Toolkit OpenVINO Runtime backend for DL inference, which is configured the following way:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="k">auto</span> <span class="n">faceParams</span>  <span class="o">=</span> <span class="n">cv</span><span class="o">::</span><span class="n">gapi</span><span class="o">::</span><span class="n">ie</span><span class="o">::</span><span class="n">Params</span><span class="o">&lt;</span><span class="n">custom</span><span class="o">::</span><span class="n">FaceDetector</span><span class="o">&gt;</span>
@@ -2275,8 +2282,8 @@
 <span class="p">};</span></pre></div></div><p>Every <code class="docutils literal notranslate"><span class="pre">cv::gapi::ie::Params&lt;&gt;</span></code> object is related to the network specified in its template argument. We should pass there the network type we have defined in <code class="docutils literal notranslate"><span class="pre">G_API_NET()</span></code> in the early beginning of the tutorial.</p>
 <p>Network parameters are then wrapped in <code class="docutils literal notranslate"><span class="pre">cv::gapi::NetworkPackage</span></code> :</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="k">auto</span> <span class="n">networks</span>      <span class="o">=</span> <span class="n">cv</span><span class="o">::</span><span class="n">gapi</span><span class="o">::</span><span class="n">networks</span><span class="p">(</span><span class="n">faceParams</span><span class="p">,</span> <span class="n">landmParams</span><span class="p">);</span></pre></div></div><p>More details in “Face Analytics Pipeline” (<a class="reference internal" href="openvino_docs_gapi_gapi_face_analytics_pipeline.html#doxid-openvino-docs-gapi-gapi-face-analytics-pipeline-1gapi-ifd-configuration"><span class="std std-ref">Configuring the Pipeline</span></a> section).</p>
-</div>
-<div class="section" id="kernel-packages">
+</section>
+<section id="kernel-packages">
 <h3>Kernel Packages<a class="headerlink" href="#kernel-packages" title="Permalink to this headline">¶</a></h3>
 <p>In this example we use a lot of custom kernels, in addition to that we use Fluid backend to optimize out memory for G-API’s standard kernels where applicable. The resulting kernel package is formed like this:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="k">auto</span> <span class="n">customKernels</span> <span class="o">=</span> <span class="n">cv</span><span class="o">::</span><span class="n">gapi</span><span class="o">::</span><span class="n">kernels</span><span class="o">&lt;</span><span class="n">custom</span><span class="o">::</span><span class="n">GCPUBilateralFilter</span><span class="p">,</span>
@@ -2288,13 +2295,13 @@
                                        <span class="n">custom</span><span class="o">::</span><span class="n">GCPULandmPostProc</span><span class="p">,</span>
                                        <span class="n">custom</span><span class="o">::</span><span class="n">GCPUGetContours</span><span class="o">&gt;</span><span class="p">();</span>
 <span class="k">auto</span> <span class="n">kernels</span>       <span class="o">=</span> <span class="n">cv</span><span class="o">::</span><span class="n">gapi</span><span class="o">::</span><span class="n">combine</span><span class="p">(</span><span class="n">cv</span><span class="o">::</span><span class="n">gapi</span><span class="o">::</span><span class="n">core</span><span class="o">::</span><span class="n">fluid</span><span class="o">::</span><span class="n">kernels</span><span class="p">(),</span>
-                                           <span class="n">customKernels</span><span class="p">);</span></pre></div></div></div>
-<div class="section" id="compiling-the-streaming-pipeline">
+                                           <span class="n">customKernels</span><span class="p">);</span></pre></div></div></section>
+<section id="compiling-the-streaming-pipeline">
 <h3>Compiling the Streaming Pipeline<a class="headerlink" href="#compiling-the-streaming-pipeline" title="Permalink to this headline">¶</a></h3>
 <p>G-API optimizes execution for video streams when compiled in the “Streaming” mode.</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">cv</span><span class="o">::</span><span class="n">GStreamingCompiled</span> <span class="n">stream</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">.</span><span class="n">compileStreaming</span><span class="p">(</span><span class="n">cv</span><span class="o">::</span><span class="n">compile_args</span><span class="p">(</span><span class="n">kernels</span><span class="p">,</span> <span class="n">networks</span><span class="p">));</span></pre></div></div><p>More on this in “Face Analytics Pipeline” (<a class="reference internal" href="openvino_docs_gapi_gapi_face_analytics_pipeline.html#doxid-openvino-docs-gapi-gapi-face-analytics-pipeline-1gapi-ifd-configuration"><span class="std std-ref">Configuring the pipeline</span></a> section).</p>
-</div>
-<div class="section" id="running-the-streaming-pipeline">
+</section>
+<section id="running-the-streaming-pipeline">
 <h3>Running the streaming pipeline<a class="headerlink" href="#running-the-streaming-pipeline" title="Permalink to this headline">¶</a></h3>
 <p>In order to run the G-API streaming pipeline, all we need is to specify the input video source, call <code class="docutils literal notranslate"><span class="pre">cv::GStreamingCompiled::start()</span></code>, and then fetch the pipeline processing results:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="n">parser</span><span class="p">.</span><span class="n">has</span><span class="p">(</span><span class="s">&quot;input&quot;</span><span class="p">))</span>
@@ -2330,16 +2337,16 @@
         <span class="n">cv</span><span class="o">::</span><span class="n">imshow</span><span class="p">(</span><span class="n">config</span><span class="o">::</span><span class="n">kWinFaceBeautification</span><span class="p">,</span> <span class="n">imgBeautif</span><span class="p">);</span>
     <span class="p">}</span></pre></div></div><p>Once results are ready and can be pulled from the pipeline we display it on the screen and handle GUI events.</p>
 <p>See <a class="reference internal" href="openvino_docs_gapi_gapi_face_analytics_pipeline.html#doxid-openvino-docs-gapi-gapi-face-analytics-pipeline-1gapi-ifd-running"><span class="std std-ref">Running the pipeline</span></a> section in the “Face Analytics Pipeline” tutorial for more details.</p>
-</div>
-</div>
-<div class="section" id="conclusion">
+</section>
+</section>
+<section id="conclusion">
 <h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h2>
 <p>The tutorial has two goals: to show the use of brand new features of G-API introduced in OpenCV 4.2, and give a basic understanding on a sample face beautification algorithm.</p>
 <p>The result of the algorithm application:</p>
 <img alt="Face Beautification example" src="pages/gapi_face_beautification_example.jpg" />
 <p>On the test machine (Intel® Core™ i7-8700) the G-API-optimized video pipeline outperforms its serial (non-pipelined) version by a factor of 2.7 – meaning that for such a non-trivial graph, the proper pipelining can bring almost 3x increase in performance.</p>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -2370,7 +2377,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

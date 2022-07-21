@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Object Detection Quantization &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -556,7 +563,7 @@
             
                 <div>
                   
-  <div class="section" id="object-detection-quantization">
+  <section id="object-detection-quantization">
 <h1>Object Detection Quantization<a class="headerlink" href="#object-detection-quantization" title="Permalink to this headline">¶</a></h1>
 <p>This tutorial shows how to quantize an object detection model, using
 OpenVINO’s <a class="reference external" href="https://docs.openvino.ai/2021.4/pot_compression_api_README.html">Post-Training Optimization Tool
@@ -567,9 +574,9 @@ original resolution of 1920x1080 to 960x540. For any real use cases, a
 representative dataset of about 300 images is recommended. The model
 used is:
 <a class="reference external" href="https://github.com/openvinotoolkit/open_model_zoo/tree/master/models/intel/person-detection-retail-0013">person-detection-retail-0013</a></p>
-<div class="section" id="preparation">
+<section id="preparation">
 <h2>Preparation<a class="headerlink" href="#preparation" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="imports">
+<section id="imports">
 <h3>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">import</span> <span class="nn">sys</span>
@@ -595,8 +602,8 @@ used is:
 <span class="kn">from</span> <span class="nn">notebook_utils</span> <span class="kn">import</span> <span class="n">benchmark_model</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="download-model">
+</section>
+<section id="download-model">
 <h3>Download Model<a class="headerlink" href="#download-model" title="Permalink to this headline">¶</a></h3>
 <p>Download the model from Open Model Zoo, if it does not yet exist.</p>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ir_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;intel/person-detection-retail-0013/FP32/person-detection-retail-0013.xml&quot;</span><span class="p">)</span>
@@ -613,8 +620,8 @@ used is:
 <span class="o">==========</span> <span class="n">Downloading</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">work</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">notebooks</span><span class="o">/</span><span class="mi">111</span><span class="o">-</span><span class="n">detection</span><span class="o">-</span><span class="n">quantization</span><span class="o">/</span><span class="n">intel</span><span class="o">/</span><span class="n">person</span><span class="o">-</span><span class="n">detection</span><span class="o">-</span><span class="n">retail</span><span class="o">-</span><span class="mi">0013</span><span class="o">/</span><span class="n">FP32</span><span class="o">/</span><span class="n">person</span><span class="o">-</span><span class="n">detection</span><span class="o">-</span><span class="n">retail</span><span class="o">-</span><span class="mf">0013.</span><span class="n">bin</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="load-model">
+</section>
+<section id="load-model">
 <h3>Load Model<a class="headerlink" href="#load-model" title="Permalink to this headline">¶</a></h3>
 <p>Load the IR model, and get information about network inputs and outputs.</p>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ie</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span>
@@ -626,9 +633,9 @@ used is:
 <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">input_height</span><span class="p">,</span> <span class="n">input_width</span> <span class="o">=</span> <span class="n">input_size</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="post-training-optimization-tool-pot-quantization">
+</section>
+</section>
+<section id="post-training-optimization-tool-pot-quantization">
 <h2>Post-Training Optimization Tool (POT) Quantization<a class="headerlink" href="#post-training-optimization-tool-pot-quantization" title="Permalink to this headline">¶</a></h2>
 <p>The Post-Training Optimization Tool (POT) <code class="docutils literal notranslate"><span class="pre">compression</span></code> API defines
 base classes for <code class="docutils literal notranslate"><span class="pre">Metric</span></code> and <code class="docutils literal notranslate"><span class="pre">DataLoader</span></code>. In this notebook, we use
@@ -648,9 +655,9 @@ specifies that the model returns an array of shape <code class="docutils literal
 where 200 is the number of detected boxes. Each detection has the format
 of <code class="docutils literal notranslate"><span class="pre">[image_id,</span> <span class="pre">label,</span> <span class="pre">conf,</span> <span class="pre">x_min,</span> <span class="pre">y_min,</span> <span class="pre">x_max,</span> <span class="pre">y_max]</span></code>. For this
 dataset the label of <code class="docutils literal notranslate"><span class="pre">1</span></code> indicates a person.</p>
-<div class="section" id="configuration">
+<section id="configuration">
 <h3>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="dataset">
+<section id="dataset">
 <h4>Dataset<a class="headerlink" href="#dataset" title="Permalink to this headline">¶</a></h4>
 <p>The <code class="docutils literal notranslate"><span class="pre">DetectionDataLoader</span></code> class follows POT’s
 <code class="docutils literal notranslate"><span class="pre">compression.api.DataLoader</span></code> interface, which should implement
@@ -747,8 +754,8 @@ should return data as <code class="docutils literal notranslate"><span class="pr
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">images</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="metric">
+</section>
+<section id="metric">
 <h4>Metric<a class="headerlink" href="#metric" title="Permalink to this headline">¶</a></h4>
 <p>Define a metric to determine the model’s performance. For the Default
 Quantization algorithm used in this notebook, defining a metric is
@@ -868,8 +875,8 @@ implement all the methods in this example.</p>
         <span class="k">return</span> <span class="p">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;direction&quot;</span><span class="p">:</span> <span class="s2">&quot;higher-better&quot;</span><span class="p">,</span> <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;mAP&quot;</span><span class="p">}}</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="quantization-config">
+</section>
+<section id="quantization-config">
 <h4>Quantization Config<a class="headerlink" href="#quantization-config" title="Permalink to this headline">¶</a></h4>
 <p>POT methods expect configuration dictionaries as arguments, which are
 defined in the cell below. The variable <code class="docutils literal notranslate"><span class="pre">ir_path</span></code> points to the IR
@@ -911,9 +918,9 @@ for more information about the settings and best practices.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">model_config</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;model_name&#39;</span><span class="p">:</span> <span class="s1">&#39;person-detection-retail-0013&#39;</span><span class="p">,</span> <span class="s1">&#39;model&#39;</span><span class="p">:</span> <span class="n">PosixPath</span><span class="p">(</span><span class="s1">&#39;intel/person-detection-retail-0013/FP32/person-detection-retail-0013.xml&#39;</span><span class="p">),</span> <span class="s1">&#39;weights&#39;</span><span class="p">:</span> <span class="n">PosixPath</span><span class="p">(</span><span class="s1">&#39;intel/person-detection-retail-0013/FP32/person-detection-retail-0013.bin&#39;</span><span class="p">)}</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="run-quantization-pipeline">
+</section>
+</section>
+<section id="run-quantization-pipeline">
 <h3>Run Quantization Pipeline<a class="headerlink" href="#run-quantization-pipeline" title="Permalink to this headline">¶</a></h3>
 <p>The POT pipeline uses the functions: <code class="docutils literal notranslate"><span class="pre">load_model()</span></code>, <code class="docutils literal notranslate"><span class="pre">IEEngine</span></code>, and
 <code class="docutils literal notranslate"><span class="pre">create_pipeline()</span></code>. <code class="docutils literal notranslate"><span class="pre">load_model()</span></code> loads an IR model specified in
@@ -982,9 +989,9 @@ Quantization finished in 60.62 seconds
 The quantized model is stored at optimized_model/person-detection-retail-0013_mixed_DefaultQuantization.xml
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="compare-metric-of-floating-point-and-quantized-model">
+</section>
+</section>
+<section id="compare-metric-of-floating-point-and-quantized-model">
 <h2>Compare Metric of Floating Point and Quantized Model<a class="headerlink" href="#compare-metric-of-floating-point-and-quantized-model" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute the mAP on the quantized model and compare with the mAP on the FP16 IR model.</span>
 <span class="n">ir_model</span> <span class="o">=</span> <span class="n">load_model</span><span class="p">(</span><span class="n">model_config</span><span class="o">=</span><span class="n">model_config</span><span class="p">)</span>
@@ -1009,8 +1016,8 @@ The quantized model is stored at optimized_model/person-detection-retail-0013_mi
 The map score of the quantized INT8 model is 0.66232
 </pre></div>
 </div>
-</div>
-<div class="section" id="visualize-results">
+</section>
+<section id="visualize-results">
 <h2>Visualize Results<a class="headerlink" href="#visualize-results" title="Permalink to this headline">¶</a></h2>
 <p>Compare the annotated boxes (green) with the results of the floating
 point (red) and quantized (green) models. First, define a helper
@@ -1129,8 +1136,8 @@ least 0.5 will be shown.</p>
 </pre></div>
 </div>
 <img alt="../_images/111-detection-quantization-with-output_19_0.png" src="../_images/111-detection-quantization-with-output_19_0.png" />
-</div>
-<div class="section" id="compare-the-size-of-the-original-and-quantized-models">
+</section>
+<section id="compare-the-size-of-the-original-and-quantized-models">
 <h2>Compare the Size of the Original and Quantized Models<a class="headerlink" href="#compare-the-size-of-the-original-and-quantized-models" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">original_model_size</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">ir_path</span><span class="p">)</span><span class="o">.</span><span class="n">with_suffix</span><span class="p">(</span><span class="s2">&quot;.bin&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">stat</span><span class="p">()</span><span class="o">.</span><span class="n">st_size</span> <span class="o">/</span> <span class="mi">1024</span>
 <span class="n">quantized_model_size</span> <span class="o">=</span> <span class="p">(</span>
@@ -1145,8 +1152,8 @@ least 0.5 will be shown.</p>
 <span class="n">INT8</span> <span class="n">model</span> <span class="n">size</span><span class="p">:</span> <span class="mf">806.62</span> <span class="n">KB</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="compare-performance-of-the-original-and-quantized-models">
+</section>
+<section id="compare-performance-of-the-original-and-quantized-models">
 <h2>Compare Performance of the Original and Quantized Models<a class="headerlink" href="#compare-performance-of-the-original-and-quantized-models" title="Permalink to this headline">¶</a></h2>
 <p>To measure inference performance of the FP16 and INT8 models, we use
 OpenVINO’s benchmarking solution, the <a class="reference external" href="https://docs.openvino.ai/latest/openvino_inference_engine_tools_benchmark_tool_README.html">Benchmark
@@ -1212,8 +1219,8 @@ with CPU for 15 seconds with async inference</strong></p>
     <span class="p">)</span>
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -1244,7 +1251,7 @@ with CPU for 15 seconds with async inference</strong></p>
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

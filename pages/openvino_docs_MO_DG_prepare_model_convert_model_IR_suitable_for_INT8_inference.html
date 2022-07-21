@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Intermediate Representation Suitable for INT8 Inference &#8212; OpenVINO™  documentation</title>
     
     
@@ -126,6 +127,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -1399,10 +1406,10 @@
             
                 <div>
                   
-  <div class="section" id="intermediate-representation-suitable-for-int8-inference">
+  <section id="intermediate-representation-suitable-for-int8-inference">
 <span id="doxid-openvino-docs-m-o-d-g-prepare-model-convert-model-i-r-suitable-for-i-n-t8-inference"></span><span id="index-0"></span><h1>Intermediate Representation Suitable for INT8 Inference<a class="headerlink" href="#intermediate-representation-suitable-for-int8-inference" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-openvino-docs-m-o-d-g-prepare-model-convert-model-i-r-suitable-for-i-n-t8-inference-1md-openvino-docs-mo-dg-prepare-model-convert-model-ir-suitable-for-int8-inference"></span></p>
-<div class="section" id="introduction">
+<section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>OpenVINO Runtime CPU and GPU devices can infer models in the low precision. For details, refer to <a class="reference internal" href="openvino_docs_model_optimization_guide.html#doxid-openvino-docs-model-optimization-guide"><span class="std std-ref">Model Optimization Guide</span></a>.</p>
 <p>Intermediate Representation (IR) should be specifically formed to be suitable for low precision inference. Such an IR is called a Low Precision IR and you can generate it in two ways:</p>
@@ -1415,15 +1422,15 @@
 <img alt="../_images/expanded_int8_Convolution_weights.png" src="../_images/expanded_int8_Convolution_weights.png" />
 <p>Low precision IR is also suitable for FP32 and FP16 inference if a chosen plugin supports all operations of the IR, because the only difference between a Low Precision IR and FP16 or FP32 IR is the existence of <code class="docutils literal notranslate"><span class="pre">FakeQuantize</span></code> in the Low Precision IR. Plugins with Low Precision Inference support recognize these sub-graphs and quantize them during the inference time. Plugins without Low Precision support execute all operations, including <code class="docutils literal notranslate"><span class="pre">FakeQuantize</span></code>, as is in the FP32 or FP16 precision.</p>
 <p>Accordingly, the presence of FakeQuantize operations in the IR is a recommendation for a plugin on how to quantize particular operations in the model. If capable, a plugin accepts the recommendation and performs Low Precision Inference, otherwise, the plugin ignores the recommendation and executes a model in the floating-point precision.</p>
-</div>
-<div class="section" id="compressed-low-precision-weights">
+</section>
+<section id="compressed-low-precision-weights">
 <h2>Compressed Low Precision Weights<a class="headerlink" href="#compressed-low-precision-weights" title="Permalink to this headline">¶</a></h2>
 <p>Weighted operations, like <code class="docutils literal notranslate"><span class="pre">Convolution</span></code>, <code class="docutils literal notranslate"><span class="pre">MatMul</span></code>, and others, store weights as floating-point <code class="docutils literal notranslate"><span class="pre">Constant</span></code> in the graph followed by the <code class="docutils literal notranslate"><span class="pre">FakeQuantize</span></code> operation. <code class="docutils literal notranslate"><span class="pre">Constant</span></code> followed by the <code class="docutils literal notranslate"><span class="pre">FakeQuantize</span></code> operation could be optimized memory-wise due to the <code class="docutils literal notranslate"><span class="pre">FakeQuantize</span></code> operation semantics. The resulting weights sub-graph stores weights in Low Precision <code class="docutils literal notranslate"><span class="pre">Constant</span></code>, which gets unpacked back to floating point with the <code class="docutils literal notranslate"><span class="pre">Convert</span></code> operation. Weights compression replaces <code class="docutils literal notranslate"><span class="pre">FakeQuantize</span></code> with optional <code class="docutils literal notranslate"><span class="pre">Subtract</span></code> and <code class="docutils literal notranslate"><span class="pre">Multiply</span></code> operation leaving output arithmetically the same and weights storing takes four times less memory.</p>
 <p>See the visualization of <code class="docutils literal notranslate"><span class="pre">Convolution</span></code> with the compressed weights:</p>
 <img alt="../_images/compressed_int8_Convolution_weights.png" src="../_images/compressed_int8_Convolution_weights.png" />
 <p>Both Model Optimizer and Post-Training Optimization tool generate a compressed IR by default.</p>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -1453,7 +1460,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>bert-small-uncased-whole-word-masking-squad-0002 &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../../../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -2077,9 +2084,9 @@
             
                 <div>
                   
-  <div class="section" id="bert-small-uncased-whole-word-masking-squad-0002">
+  <section id="bert-small-uncased-whole-word-masking-squad-0002">
 <h1>bert-small-uncased-whole-word-masking-squad-0002<a class="headerlink" href="#bert-small-uncased-whole-word-masking-squad-0002" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="use-case-and-high-level-description">
+<section id="use-case-and-high-level-description">
 <h2>Use Case and High-Level Description<a class="headerlink" href="#use-case-and-high-level-description" title="Permalink to this headline">¶</a></h2>
 <p>This is a small BERT-large like model distilled on SQuAD v1.1 training set from original
 bert-large-uncased-whole-word-masking-finetuned-squad provided by the <a class="reference external" href="https://github.com/huggingface/transformers">Transformers</a> library.
@@ -2090,8 +2097,8 @@ For details about the original model, check out
 <a class="reference external" href="https://arxiv.org/abs/1810.04805">BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding</a>,
 <a class="reference external" href="https://arxiv.org/abs/1910.03771">HuggingFace’s Transformers: State-of-the-art Natural Language Processing</a>.</p>
 <p>Tokenization occurs using the BERT tokenizer (see the demo code for implementation details) and the enclosed <code class="docutils literal notranslate"><span class="pre">vocab.txt</span></code> dictionary file. Input is to be lower-cased before tokenizing.</p>
-</div>
-<div class="section" id="specification">
+</section>
+<section id="specification">
 <h2>Specification<a class="headerlink" href="#specification" title="Permalink to this headline">¶</a></h2>
 <table class="colwidths-auto table">
 <thead>
@@ -2111,8 +2118,8 @@ For details about the original model, check out
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="accuracy">
+</section>
+<section id="accuracy">
 <h2>Accuracy<a class="headerlink" href="#accuracy" title="Permalink to this headline">¶</a></h2>
 <p>The quality metrics were calculated on the SQuAD v1.1 dataset (“dev” split). Maximum sequence length is 384, input is lower-cased.</p>
 <table class="colwidths-auto table">
@@ -2130,8 +2137,8 @@ For details about the original model, check out
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="input">
+</section>
+<section id="input">
 <h2>Input<a class="headerlink" href="#input" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
 <li><p>Token IDs, name: <code class="docutils literal notranslate"><span class="pre">input_ids</span></code>, shape: <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">384</span></code>.
@@ -2163,8 +2170,8 @@ Position indexes is sequence of integer values from 0 to 383 representing the po
 <li><p><code class="docutils literal notranslate"><span class="pre">[SEP]</span></code> is a special separator token inserted between the question and premise of the question.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">[PAD]</span></code> is a special token used to fill the rest of the input to get given input length (384).</p></li>
 </ul>
-</div>
-<div class="section" id="output">
+</section>
+<section id="output">
 <h2>Output<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h2>
 <p>The outputs of the net are two <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">384</span></code> floating point-valued logit scores vectors that after soft-max operation are probabilities for start and end positions of answer in the premise of the question.</p>
 <ol class="arabic simple">
@@ -2173,21 +2180,21 @@ Start position is floating point-valued logit scores for start position.</p></li
 <li><p>End position: name: <code class="docutils literal notranslate"><span class="pre">output_e</span></code>, shape: <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">384</span></code>.
 End position is floating point-valued logit scores for end position.</p></li>
 </ol>
-</div>
-<div class="section" id="demo-usage">
+</section>
+<section id="demo-usage">
 <h2>Demo usage<a class="headerlink" href="#demo-usage" title="Permalink to this headline">¶</a></h2>
 <p>The model can be used in the following demos provided by the Open Model Zoo to show its capabilities:</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="../../../demos/bert_question_answering_embedding_demo/python/README.html"><span class="doc std std-doc">BERT Question Answering Embedding Python* Demo</span></a></p></li>
 <li><p><a class="reference internal" href="../../../demos/bert_question_answering_demo/python/README.html"><span class="doc std std-doc">BERT Question Answering Python* Demo</span></a></p></li>
 </ul>
-</div>
-<div class="section" id="legal-information">
+</section>
+<section id="legal-information">
 <h2>Legal Information<a class="headerlink" href="#legal-information" title="Permalink to this headline">¶</a></h2>
 <p>[*] Other names and brands may be claimed as the property of others.</p>
 <p>The original <code class="docutils literal notranslate"><span class="pre">bert-large-uncased-whole-word-masking-finetuned-squad</span></code> model is taken from <a class="reference external" href="https://github.com/huggingface/transformers">Transformers</a> library, which is distributed under the <a class="reference external" href="https://raw.githubusercontent.com/huggingface/transformers/master/LICENSE">Apache License, Version 2.0</a>.</p>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -2218,7 +2225,7 @@ End position is floating point-valued logit scores for end position.</p></li>
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

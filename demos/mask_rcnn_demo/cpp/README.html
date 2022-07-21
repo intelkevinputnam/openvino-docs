@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>TensorFlow* Object Detection Mask R-CNNs Segmentation C++ Demo &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../../../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -2074,18 +2081,18 @@
             
                 <div>
                   
-  <div class="section" id="tensorflow-object-detection-mask-r-cnns-segmentation-c-demo">
+  <section id="tensorflow-object-detection-mask-r-cnns-segmentation-c-demo">
 <h1>TensorFlow* Object Detection Mask R-CNNs Segmentation C++ Demo<a class="headerlink" href="#tensorflow-object-detection-mask-r-cnns-segmentation-c-demo" title="Permalink to this headline">¶</a></h1>
 <p>This topic demonstrates how to run the Segmentation demo application, which does inference using image segmentation networks created with Object Detection API.</p>
 <p>The demo has a post-processing part that gathers mask arrays corresponding to bounding boxes with high probability taken from the Detection Output layer. Then the demo produces pictures with identified masks.</p>
-<div class="section" id="how-it-works">
+<section id="how-it-works">
 <h2>How It Works<a class="headerlink" href="#how-it-works" title="Permalink to this headline">¶</a></h2>
 <p>On startup, the demo application reads command line parameters and loads a model and an image to OpenVINO™ Runtime plugin. When inference is done, the application creates an output image.</p>
 <blockquote>
 <div><p><strong>NOTE</strong>: By default, Open Model Zoo demos expect input with BGR channels order. If you trained your model to work with RGB order, you need to manually rearrange the default channels order in the demo application or reconvert your model using the Model Optimizer tool with the <code class="docutils literal notranslate"><span class="pre">--reverse_input_channels</span></code> argument specified. For more information about the argument, refer to <strong>When to Reverse Input Channels</strong> section of [Embedding Preprocessing Computation](&#64;ref openvino_docs_MO_DG_Additional_Optimization_Use_Cases).</p>
 </div></blockquote>
-</div>
-<div class="section" id="preparing-to-run">
+</section>
+<section id="preparing-to-run">
 <h2>Preparing to Run<a class="headerlink" href="#preparing-to-run" title="Permalink to this headline">¶</a></h2>
 <p>For demo input image or video files, refer to the section <strong>Media Files Available for Demos</strong> in the <a class="reference internal" href="../../README.html"><span class="doc std std-doc">Open Model Zoo Demos Overview</span></a>.
 The list of models supported by the demo is in <code class="docutils literal notranslate"><span class="pre">&lt;omz_dir&gt;/demos/mask_rcnn_demo/cpp/models.lst</span></code> file.
@@ -2098,7 +2105,7 @@ This file can be used as a parameter for <span class="xref myst">Model Downloade
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>omz_converter --list models.lst
 </pre></div>
 </div>
-<div class="section" id="supported-models">
+<section id="supported-models">
 <h3>Supported Models<a class="headerlink" href="#supported-models" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>mask_rcnn_inception_resnet_v2_atrous_coco</p></li>
@@ -2107,9 +2114,9 @@ This file can be used as a parameter for <span class="xref myst">Model Downloade
 <blockquote>
 <div><p><strong>NOTE</strong>: Refer to the tables <a class="reference internal" href="../../../models/intel/device_support.html"><span class="doc std std-doc">Intel’s Pre-Trained Models Device Support</span></a> and <a class="reference internal" href="../../../models/public/device_support.html"><span class="doc std std-doc">Public Pre-Trained Models Device Support</span></a> for the details on models inference support at different devices.</p>
 </div></blockquote>
-</div>
-</div>
-<div class="section" id="running">
+</section>
+</section>
+<section id="running">
 <h2>Running<a class="headerlink" href="#running" title="Permalink to this headline">¶</a></h2>
 <p>Running the application with the <code class="docutils literal notranslate"><span class="pre">-h</span></code> option yields the following usage message:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mask_rcnn_demo</span> <span class="p">[</span><span class="n">OPTION</span><span class="p">]</span>
@@ -2128,24 +2135,24 @@ This file can be used as a parameter for <span class="xref myst">Model Downloade
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>./mask_rcnn_demo -i &lt;path_to_image&gt;/inputImage.bmp -m &lt;path_to_model&gt;/mask_rcnn_inception_resnet_v2_atrous_coco.xml
 </pre></div>
 </div>
-</div>
-<div class="section" id="demo-output">
+</section>
+<section id="demo-output">
 <h2>Demo Output<a class="headerlink" href="#demo-output" title="Permalink to this headline">¶</a></h2>
 <p>For each input image the application outputs a segmented image. For example, <code class="docutils literal notranslate"><span class="pre">out0.png</span></code> and <code class="docutils literal notranslate"><span class="pre">out1.png</span></code> are created for the network with batch size equal to 2. The demo reports:</p>
 <ul class="simple">
 <li><p><strong>Latency</strong>: average time required to process one frame (from reading the frame to displaying the results).</p></li>
 </ul>
 <p>You can use this metric to measure application-level performance.</p>
-</div>
-<div class="section" id="see-also">
+</section>
+<section id="see-also">
 <h2>See Also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="../../README.html"><span class="doc std std-doc">Open Model Zoo Demos</span></a></p></li>
 <li><p><a class="reference external" href="https://docs.openvino.ai/latest/openvino_docs_MO_DG_Deep_Learning_Model_Optimizer_DevGuide.html">Model Optimizer</a></p></li>
 <li><p><span class="xref myst">Model Downloader</span></p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -2176,7 +2183,7 @@ This file can be used as a parameter for <span class="xref myst">Model Downloade
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

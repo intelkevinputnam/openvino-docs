@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Vehicle Detection And Recognition with OpenVINO &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -546,7 +553,7 @@
             
                 <div>
                   
-  <div class="section" id="vehicle-detection-and-recognition-with-openvino">
+  <section id="vehicle-detection-and-recognition-with-openvino">
 <h1>Vehicle Detection And Recognition with OpenVINO<a class="headerlink" href="#vehicle-detection-and-recognition-with-openvino" title="Permalink to this headline">¶</a></h1>
 <p>This tutorial demonstrates how to use two pre-trained models from <a class="reference external" href="https://github.com/openvinotoolkit/open_model_zoo">Open
 Model Zoo</a>:
@@ -557,12 +564,14 @@ for image classification. Using these models, we will detect vehicles
 from raw images and recognize attributes of detected vehicles.
 <img alt="flowchart" src="https://user-images.githubusercontent.com/47499836/157867076-9e997781-f9ef-45f6-9a51-b515bbf41048.png" /></p>
 <p>Finally, we will get the result:</p>
-<div class="figure align-default" id="id1">
+<figure class="align-default" id="id1">
 <img alt="result" src="https://user-images.githubusercontent.com/47499836/157867020-99738b30-62ca-44e2-8d9e-caf13fb724ed.png" />
-<p class="caption"><span class="caption-text">result</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
-</div>
-</div>
-<div class="section" id="imports">
+<figcaption>
+<p><span class="caption-text">result</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="imports">
 <h1>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h1>
 <p>Import the required modules.</p>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
@@ -579,8 +588,8 @@ from raw images and recognize attributes of detected vehicles.
 <span class="kn">import</span> <span class="nn">notebook_utils</span> <span class="k">as</span> <span class="nn">utils</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="download-models">
+</section>
+<section id="download-models">
 <h1>Download Models<a class="headerlink" href="#download-models" title="Permalink to this headline">¶</a></h1>
 <p>We use <code class="docutils literal notranslate"><span class="pre">omz_downloader</span></code>, which is a command-line tool from the
 <code class="docutils literal notranslate"><span class="pre">openvino-dev</span></code> package. <code class="docutils literal notranslate"><span class="pre">omz_downloader</span></code> automatically creates a
@@ -647,8 +656,8 @@ and precision value.</p>
 <span class="o">==========</span> <span class="n">Downloading</span> <span class="n">model</span><span class="o">/</span><span class="n">intel</span><span class="o">/</span><span class="n">vehicle</span><span class="o">-</span><span class="n">attributes</span><span class="o">-</span><span class="n">recognition</span><span class="o">-</span><span class="n">barrier</span><span class="o">-</span><span class="mi">0039</span><span class="o">/</span><span class="n">FP32</span><span class="o">/</span><span class="n">vehicle</span><span class="o">-</span><span class="n">attributes</span><span class="o">-</span><span class="n">recognition</span><span class="o">-</span><span class="n">barrier</span><span class="o">-</span><span class="mf">0039.</span><span class="n">bin</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="load-models">
+</section>
+<section id="load-models">
 <h1>Load Models<a class="headerlink" href="#load-models" title="Permalink to this headline">¶</a></h1>
 <p>In this notebook, we will need a detection model and a recognition
 model. After downloading the models, we initialize inference engine
@@ -682,7 +691,7 @@ specified device with <code class="docutils literal notranslate"><span class="pr
     <span class="k">return</span> <span class="n">input_keys</span><span class="p">,</span> <span class="n">output_keys</span><span class="p">,</span> <span class="n">compiled_model</span>
 </pre></div>
 </div>
-<div class="section" id="get-attributes-from-model">
+<section id="get-attributes-from-model">
 <h2>Get attributes from model<a class="headerlink" href="#get-attributes-from-model" title="Permalink to this headline">¶</a></h2>
 <p>We use <code class="docutils literal notranslate"><span class="pre">input_keys.shape</span></code> to get data shapes</p>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># de -&gt; detection</span>
@@ -698,8 +707,8 @@ specified device with <code class="docutils literal notranslate"><span class="pr
 <span class="n">height_re</span><span class="p">,</span> <span class="n">width_re</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">input_key_re</span><span class="o">.</span><span class="n">shape</span><span class="p">)[</span><span class="mi">2</span><span class="p">:]</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="helper-function">
+</section>
+<section id="helper-function">
 <h2>Helper function<a class="headerlink" href="#helper-function" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">plt_show</span></code> function is used to show image</p></li>
@@ -716,8 +725,8 @@ specified device with <code class="docutils literal notranslate"><span class="pr
     <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">raw_image</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="read-and-display-a-test-image">
+</section>
+<section id="read-and-display-a-test-image">
 <h2>Read and display a test image<a class="headerlink" href="#read-and-display-a-test-image" title="Permalink to this headline">¶</a></h2>
 <p>For the detection model’s input shape is <code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">3,</span> <span class="pre">256,</span> <span class="pre">256]</span></code>, so we
 need to resize the image size to <code class="docutils literal notranslate"><span class="pre">256</span> <span class="pre">x</span> <span class="pre">256</span></code>, and expand batch channel
@@ -742,14 +751,16 @@ with <code class="docutils literal notranslate"><span class="pre">expand_dims</s
 </pre></div>
 </div>
 <img alt="../_images/218-vehicle-detection-and-recognition-with-output_12_0.png" src="../_images/218-vehicle-detection-and-recognition-with-output_12_0.png" />
-</div>
-</div>
-<div class="section" id="use-detection-model-to-detect-vehicles">
+</section>
+</section>
+<section id="use-detection-model-to-detect-vehicles">
 <h1>Use detection model to detect vehicles<a class="headerlink" href="#use-detection-model-to-detect-vehicles" title="Permalink to this headline">¶</a></h1>
-<div class="figure align-default" id="id2">
+<figure class="align-default" id="id2">
 <img alt="pipline" src="https://user-images.githubusercontent.com/47499836/157867076-9e997781-f9ef-45f6-9a51-b515bbf41048.png" />
-<p class="caption"><span class="caption-text">pipline</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
-</div>
+<figcaption>
+<p><span class="caption-text">pipline</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
 <p>As shown in the flowchart, images of individual vehicles are sent to the
 recognition model. First, we use <code class="docutils literal notranslate"><span class="pre">infer</span></code> function to get the result.</p>
 <p>The detection model output has the format [image_id, label, conf, x_min,
@@ -770,7 +781,7 @@ y_min, x_max, y_max], where:</p>
 <span class="n">boxes</span> <span class="o">=</span> <span class="n">boxes</span><span class="p">[</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">boxes</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span>
 </pre></div>
 </div>
-<div class="section" id="detection-processing">
+<section id="detection-processing">
 <h2>Detection Processing<a class="headerlink" href="#detection-processing" title="Permalink to this headline">¶</a></h2>
 <p>In this function, we change the ratio to the real position in the image,
 then we filter out low-confidence results</p>
@@ -815,8 +826,8 @@ then we filter out low-confidence results</p>
 <span class="n">car_position</span> <span class="o">=</span> <span class="n">crop_images</span><span class="p">(</span><span class="n">image_de</span><span class="p">,</span> <span class="n">resized_image_de</span><span class="p">,</span> <span class="n">boxes</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="recognize-vehicle-attributes">
+</section>
+<section id="recognize-vehicle-attributes">
 <h2>Recognize vehicle attributes<a class="headerlink" href="#recognize-vehicle-attributes" title="Permalink to this headline">¶</a></h2>
 <p>Select one of the detected boxes, then crop to area containing the
 vehicle to test with recognition model. Again, we need to resize the
@@ -832,7 +843,7 @@ input image and run infererence.</p>
 </pre></div>
 </div>
 <img alt="../_images/218-vehicle-detection-and-recognition-with-output_19_0.png" src="../_images/218-vehicle-detection-and-recognition-with-output_19_0.png" />
-<div class="section" id="recognition-processing">
+<section id="recognition-processing">
 <h3>Recognition processing<a class="headerlink" href="#recognition-processing" title="Permalink to this headline">¶</a></h3>
 <p>The result contains vehicle colors (white, gray, yellow, red, green,
 blue, black) and vehicle types (car, bus, truck, van). Next, we need to
@@ -874,9 +885,9 @@ maximum probability as the result.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Attributes</span><span class="p">:(</span><span class="s1">&#39;Gray&#39;</span><span class="p">,</span> <span class="s1">&#39;Car&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="conbine-two-models">
+</section>
+</section>
+<section id="conbine-two-models">
 <h2>Conbine two models<a class="headerlink" href="#conbine-two-models" title="Permalink to this headline">¶</a></h2>
 <p>Congratulations! We succeassfully used a detection model to crop an
 image with a vehicle and recognize the vehicle attributes.</p>
@@ -933,8 +944,8 @@ image with a vehicle and recognize the vehicle attributes.</p>
 </pre></div>
 </div>
 <img alt="../_images/218-vehicle-detection-and-recognition-with-output_25_0.png" src="../_images/218-vehicle-detection-and-recognition-with-output_25_0.png" />
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -965,7 +976,7 @@ image with a vehicle and recognize the vehicle attributes.</p>
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

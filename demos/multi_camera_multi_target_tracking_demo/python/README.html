@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Multi Camera Multi Target Python* Demo &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../../../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -2091,10 +2098,10 @@
             
                 <div>
                   
-  <div class="section" id="multi-camera-multi-target-python-demo">
+  <section id="multi-camera-multi-target-python-demo">
 <h1>Multi Camera Multi Target Python* Demo<a class="headerlink" href="#multi-camera-multi-target-python-demo" title="Permalink to this headline">¶</a></h1>
 <p>This demo demonstrates how to run Multi Camera Multi Target (e.g. person or vehicle) demo using OpenVINO™.</p>
-<div class="section" id="how-it-works">
+<section id="how-it-works">
 <h2>How It Works<a class="headerlink" href="#how-it-works" title="Permalink to this headline">¶</a></h2>
 <p>The demo expects the following models in the Intermediate Representation (IR) format:</p>
 <ul class="simple">
@@ -2117,8 +2124,8 @@ and then for each detected object it extracts embeddings using re-identification
 <blockquote>
 <div><p><strong>NOTE</strong>: By default, Open Model Zoo demos expect input with BGR channels order. If you trained your model to work with RGB order, you need to manually rearrange the default channels order in the demo application or reconvert your model using the Model Optimizer tool with the <code class="docutils literal notranslate"><span class="pre">--reverse_input_channels</span></code> argument specified. For more information about the argument, refer to <strong>When to Reverse Input Channels</strong> section of [Embedding Preprocessing Computation](&#64;ref openvino_docs_MO_DG_Additional_Optimization_Use_Cases).</p>
 </div></blockquote>
-</div>
-<div class="section" id="preparing-to-run">
+</section>
+<section id="preparing-to-run">
 <h2>Preparing to Run<a class="headerlink" href="#preparing-to-run" title="Permalink to this headline">¶</a></h2>
 <p>For demo input image or video files, refer to the section <strong>Media Files Available for Demos</strong> in the <a class="reference internal" href="../../README.html"><span class="doc std std-doc">Open Model Zoo Demos Overview</span></a>.
 The list of models supported by the demo is in <code class="docutils literal notranslate"><span class="pre">&lt;omz_dir&gt;/demos/multi_camera_multi_target_tracking_demo/python/models.lst</span></code> file.
@@ -2131,7 +2138,7 @@ This file can be used as a parameter for <span class="xref myst">Model Downloade
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>omz_converter --list models.lst
 </pre></div>
 </div>
-<div class="section" id="supported-models">
+<section id="supported-models">
 <h3>Supported Models<a class="headerlink" href="#supported-models" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>instance-segmentation-security-0002</p></li>
@@ -2149,11 +2156,11 @@ This file can be used as a parameter for <span class="xref myst">Model Downloade
 <blockquote>
 <div><p><strong>NOTE</strong>: Refer to the tables <a class="reference internal" href="../../../models/intel/device_support.html"><span class="doc std std-doc">Intel’s Pre-Trained Models Device Support</span></a> and <a class="reference internal" href="../../../models/public/device_support.html"><span class="doc std std-doc">Public Pre-Trained Models Device Support</span></a> for the details on models inference support at different devices.</p>
 </div></blockquote>
-</div>
-</div>
-<div class="section" id="running">
+</section>
+</section>
+<section id="running">
 <h2>Running<a class="headerlink" href="#running" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="command-line-arguments">
+<section id="command-line-arguments">
 <h3>Command Line Arguments<a class="headerlink" href="#command-line-arguments" title="Permalink to this headline">¶</a></h3>
 <p>Run the application with the <code class="docutils literal notranslate"><span class="pre">-h</span></code> option to see the following usage message:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">multi_camera_multi_target_tracking_demo</span><span class="o">.</span><span class="n">py</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="o">-</span><span class="n">i</span> <span class="n">INPUT</span> <span class="p">[</span><span class="n">INPUT</span> <span class="o">...</span><span class="p">]</span>
@@ -2261,9 +2268,9 @@ The structure of this file should be as follows:</p>
 </pre></div>
 </div>
 <p>Such file with detections can be saved from the demo. Specify the argument <code class="docutils literal notranslate"><span class="pre">--save_detections</span></code> with path to an output file.</p>
-</div>
-</div>
-<div class="section" id="demo-output">
+</section>
+</section>
+<section id="demo-output">
 <h2>Demo Output<a class="headerlink" href="#demo-output" title="Permalink to this headline">¶</a></h2>
 <p>The demo displays bounding boxes of tracked objects and unique IDs of those objects.
 The demo reports</p>
@@ -2282,8 +2289,8 @@ to change configuration parameters please open the <code class="docutils literal
 </ul>
 <p>Also demo can dump resulting tracks to a json file. To specify the file use the
 <code class="docutils literal notranslate"><span class="pre">--history_file</span></code> argument.</p>
-</div>
-<div class="section" id="quality-measuring">
+</section>
+<section id="quality-measuring">
 <h2>Quality Measuring<a class="headerlink" href="#quality-measuring" title="Permalink to this headline">¶</a></h2>
 <p>The demo provides tools for measure quality of the multi camera multi target tracker:</p>
 <ul class="simple">
@@ -2294,23 +2301,23 @@ to change configuration parameters please open the <code class="docutils literal
 It is necessary to have ground truth annotation file for the evaluation. Supported format
 of the ground truth annotation can be obtained via the annotation tool <a class="reference external" href="https://github.com/openvinotoolkit/cvat">CVAT</a>.
 The annotation must includes the following labels and attributes:</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
-  <span class="p">{</span>
-    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;person&quot;</span><span class="p">,</span>
-    <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="nt">&quot;attributes&quot;</span><span class="p">:</span> <span class="p">[</span>
-      <span class="p">{</span>
-        <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;id&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;mutable&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-        <span class="nt">&quot;values&quot;</span><span class="p">:</span> <span class="p">[</span>
-          <span class="s2">&quot; &quot;</span>
-        <span class="p">]</span>
-      <span class="p">}</span>
-    <span class="p">]</span>
-  <span class="p">}</span>
-<span class="p">]</span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;person&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;attributes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">      </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;id&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;text&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;mutable&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;values&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot; &quot;</span><span class="w"></span>
+<span class="w">        </span><span class="p">]</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">]</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">]</span><span class="w"></span>
 </pre></div>
 </div>
 <p>To run evaluation MOT metrics use the following command:</p>
@@ -2352,8 +2359,8 @@ The annotation must includes the following labels and attributes:</p>
 </pre></div>
 </div>
 <p>Ground truth files have the same format that was described in the MOT metrics evaluation part.</p>
-</div>
-<div class="section" id="process-analysis">
+</section>
+<section id="process-analysis">
 <h2>Process Analysis<a class="headerlink" href="#process-analysis" title="Permalink to this headline">¶</a></h2>
 <p>Two options are available during the demo execution:</p>
 <ol class="arabic simple">
@@ -2368,16 +2375,16 @@ Then, for <code class="docutils literal notranslate"><span class="pre">embedding
 that is a directory where data related to embeddings will be saved
 (if it is an empty string the option is disabled). There is paramater <code class="docutils literal notranslate"><span class="pre">use_images</span></code> in <code class="docutils literal notranslate"><span class="pre">embeddings</span></code>.
 If it is <code class="docutils literal notranslate"><span class="pre">True</span></code> an image with object will be drawn for every embedding instead of point.</p>
-</div>
-<div class="section" id="see-also">
+</section>
+<section id="see-also">
 <h2>See Also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="../../README.html"><span class="doc std std-doc">Open Model Zoo Demos</span></a></p></li>
 <li><p><a class="reference external" href="https://docs.openvino.ai/latest/openvino_docs_MO_DG_Deep_Learning_Model_Optimizer_DevGuide.html">Model Optimizer</a></p></li>
 <li><p><span class="xref myst">Model Downloader</span></p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -2408,7 +2415,7 @@ If it is <code class="docutils literal notranslate"><span class="pre">True</span
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

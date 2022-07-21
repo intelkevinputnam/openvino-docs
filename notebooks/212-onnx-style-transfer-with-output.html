@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Style Transfer on ONNX Models with OpenVINO &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -507,12 +514,14 @@
             
                 <div>
                   
-  <div class="section" id="style-transfer-on-onnx-models-with-openvino">
+  <section id="style-transfer-on-onnx-models-with-openvino">
 <h1>Style Transfer on ONNX Models with OpenVINO<a class="headerlink" href="#style-transfer-on-onnx-models-with-openvino" title="Permalink to this headline">¶</a></h1>
-<div class="figure align-default" id="id1">
+<figure class="align-default" id="id1">
 <img alt="Neural Style Transfer network output" src="https://user-images.githubusercontent.com/77325899/147354137-4fc9e79e-0195-4927-9608-0e3f17973d75.png" />
-<p class="caption"><span class="caption-text">Neural Style Transfer network output</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
-</div>
+<figcaption>
+<p><span class="caption-text">Neural Style Transfer network output</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
 <p>This notebook demonstrates <a class="reference external" href="https://github.com/onnx/models/tree/master/vision/style_transfer/fast_neural_style">Fast Neural Style
 Transfer</a>
 on ONNX models with OpenVINO. Style Transfer models mix the content of
@@ -524,9 +533,9 @@ and are based on the research paper <a class="reference external" href="https://
 Style Transfer and
 Super-Resolution</a> by Justin
 Johnson, Alexandre Alahi and Li Fei-Fei.</p>
-<div class="section" id="preparation">
+<section id="preparation">
 <h2>Preparation<a class="headerlink" href="#preparation" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="imports">
+<section id="imports">
 <h3>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span>
@@ -543,8 +552,8 @@ Johnson, Alexandre Alahi and Li Fei-Fei.</p>
 <span class="kn">from</span> <span class="nn">notebook_utils</span> <span class="kn">import</span> <span class="n">download_file</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="download-models">
+</section>
+<section id="download-models">
 <h3>Download Models<a class="headerlink" href="#download-models" title="Permalink to this headline">¶</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">Style</span></code> Enum lists the supported styles with url, title and model
 path properties. Models for all supported styles will be downloaded to
@@ -571,8 +580,8 @@ path properties. Models for all supported styles will be downloaded to
         <span class="n">download_file</span><span class="p">(</span><span class="n">style</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="n">directory</span><span class="o">=</span><span class="n">MODEL_DIR</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="load-image">
+</section>
+<section id="load-image">
 <h3>Load Image<a class="headerlink" href="#load-image" title="Permalink to this headline">¶</a></h3>
 <p>Load an image with OpenCV and convert it to RGB. The style transfer
 model will be resized to the image shape. This gives the most detailed
@@ -608,9 +617,9 @@ maximum size.</p>
 <span class="c1"># image = resize_to_max(image=image, max_side=1024)</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="do-inference-and-show-results">
+</section>
+</section>
+<section id="do-inference-and-show-results">
 <h2>Do Inference and Show Results<a class="headerlink" href="#do-inference-and-show-results" title="Permalink to this headline">¶</a></h2>
 <p>For all five models: do inference, convert the result to an 8-bit image,
 show the results, and save the results to disk.</p>
@@ -693,8 +702,8 @@ show the results, and save the results to disk.</p>
 </pre></div>
 </div>
 <img alt="../_images/212-onnx-style-transfer-with-output_9_0.png" src="../_images/212-onnx-style-transfer-with-output_9_0.png" />
-Saved image files:Mosaic image: output/coco_square_mosaic-9_2048x1366.png<br>Rain Princess image: output/coco_square_rain-princess-9_2048x1366.png<br>Candy image: output/coco_square_candy-9_2048x1366.png<br>Udnie image: output/coco_square_udnie-9_2048x1366.png<br>Pointilism image: output/coco_square_pointilism-9_2048x1366.png<br>Overview image: output/coco_square_2048x1366_style_transfer.jpg<br></div>
-</div>
+Saved image files:Mosaic image: output/coco_square_mosaic-9_2048x1366.png<br>Rain Princess image: output/coco_square_rain-princess-9_2048x1366.png<br>Candy image: output/coco_square_candy-9_2048x1366.png<br>Udnie image: output/coco_square_udnie-9_2048x1366.png<br>Pointilism image: output/coco_square_pointilism-9_2048x1366.png<br>Overview image: output/coco_square_2048x1366_style_transfer.jpg<br></section>
+</section>
 
 
                 </div>
@@ -725,7 +734,7 @@ Saved image files:Mosaic image: output/coco_square_mosaic-9_2048x1366.png<br>Rai
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

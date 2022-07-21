@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>text-recognition-resnet-fc &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../../../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -2082,13 +2089,13 @@
             
                 <div>
                   
-  <div class="section" id="text-recognition-resnet-fc">
+  <section id="text-recognition-resnet-fc">
 <h1>text-recognition-resnet-fc<a class="headerlink" href="#text-recognition-resnet-fc" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="use-case-and-high-level-description">
+<section id="use-case-and-high-level-description">
 <h2>Use-case and high-level description<a class="headerlink" href="#use-case-and-high-level-description" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">text-recognition-resnet-fc</span></code> is a simple and preformant scene text recognition model based on ResNet with Fully Connected text recognition head. Source implementation on a PyTorch* framework could be found <a class="reference external" href="https://github.com/Media-Smart/vedastr">here</a>. Model is able to recognize alphanumeric text.</p>
-</div>
-<div class="section" id="specification">
+</section>
+<section id="specification">
 <h2>Specification<a class="headerlink" href="#specification" title="Permalink to this headline">¶</a></h2>
 <table class="colwidths-auto table">
 <thead>
@@ -2111,8 +2118,8 @@
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="accuracy">
+</section>
+<section id="accuracy">
 <h2>Accuracy<a class="headerlink" href="#accuracy" title="Permalink to this headline">¶</a></h2>
 <p>Alphanumeric subset of common scene text recognition benchmarks are used. For your convenience you can see dataset size. Note, that we use here ICDAR15 alphanumeric subset without irregular (arbitrary oriented, perspective or curved) texts. See details <a class="reference external" href="https://arxiv.org/abs/1709.02054">here</a>, section 4.1. All reported results are achieved without using any lexicon.</p>
 <table class="colwidths-auto table">
@@ -2145,8 +2152,8 @@
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="input">
+</section>
+<section id="input">
 <h2>Input<a class="headerlink" href="#input" title="Permalink to this headline">¶</a></h2>
 <p>Image, name: <code class="docutils literal notranslate"><span class="pre">input</span></code>, shape: <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">1,</span> <span class="pre">32,</span> <span class="pre">100</span></code> in the format <code class="docutils literal notranslate"><span class="pre">B,</span> <span class="pre">C,</span> <span class="pre">H,</span> <span class="pre">W</span></code>, where:</p>
 <ul class="simple">
@@ -2156,8 +2163,8 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">W</span></code> - image width</p></li>
 </ul>
 <p>Note that the source image should be tight aligned crop with detected text converted to grayscale. Mean values: [127.5, 127.5, 127.5], scale factor for each channel: 127.5.</p>
-</div>
-<div class="section" id="outputs">
+</section>
+<section id="outputs">
 <h2>Outputs<a class="headerlink" href="#outputs" title="Permalink to this headline">¶</a></h2>
 <p>Output tensor, name: <code class="docutils literal notranslate"><span class="pre">output</span></code>, shape: <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">26,</span> <span class="pre">37</span></code> in the format <code class="docutils literal notranslate"><span class="pre">B,</span> <span class="pre">W,</span> <span class="pre">L</span></code>, where:</p>
 <ul class="simple">
@@ -2167,8 +2174,8 @@
 <code class="docutils literal notranslate"><span class="pre">[s]0123456789abcdefghijklmnopqrstuvwxyz</span></code>, where [s] - special end of sequence character for decoder.</p></li>
 </ul>
 <p>The network output decoding process is pretty easy: get the argmax on <code class="docutils literal notranslate"><span class="pre">L</span></code> dimension, transform indices to letters and slice the resulting phrase on the first entry of <code class="docutils literal notranslate"><span class="pre">end-of-sequence</span></code> symbol.</p>
-</div>
-<div class="section" id="use-text-detection-demo">
+</section>
+<section id="use-text-detection-demo">
 <h2>Use text-detection demo<a class="headerlink" href="#use-text-detection-demo" title="Permalink to this headline">¶</a></h2>
 <p>Model is supported by text-detection c++ demo(<code class="docutils literal notranslate"><span class="pre">&lt;omz_dir&gt;/demos/text_detection_demo/cpp/main.cpp</span></code>). In order to use this model in the demo, user should pass the following options:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  <span class="o">-</span><span class="n">tr_pt_first</span>
@@ -2176,22 +2183,22 @@
 </pre></div>
 </div>
 <p>For more information, please, see documentation of the demo.</p>
-</div>
-<div class="section" id="demo-usage">
+</section>
+<section id="demo-usage">
 <h2>Demo usage<a class="headerlink" href="#demo-usage" title="Permalink to this headline">¶</a></h2>
 <p>The model can be used in the following demos provided by the Open Model Zoo to show its capabilities:</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="../../../demos/text_detection_demo/cpp/README.html"><span class="doc std std-doc">Text Detection C++ Demo</span></a></p></li>
 </ul>
-</div>
-<div class="section" id="legal-information">
+</section>
+<section id="legal-information">
 <h2>Legal Information<a class="headerlink" href="#legal-information" title="Permalink to this headline">¶</a></h2>
 <p>The original model is distributed under the
 <a class="reference external" href="https://github.com/Media-Smart/vedastr/blob/0fd2a0bd7819ae4daa2a161501e9f1c2ac67e96a/LICENSE">Apache License, Version 2.0</a>.
 A copy of the license is provided in <code class="docutils literal notranslate"><span class="pre">&lt;omz_dir&gt;/models/public/licenses/APACHE-2.0.txt</span></code>.</p>
 <p>[*] Other names and brands may be claimed as the property of others.</p>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -2222,7 +2229,7 @@ A copy of the license is provided in <code class="docutils literal notranslate">
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

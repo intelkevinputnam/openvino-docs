@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Automatic Speech Recognition Python* Sample &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -644,7 +651,7 @@
             
                 <div>
                   
-  <div class="section" id="automatic-speech-recognition-python-sample">
+  <section id="automatic-speech-recognition-python-sample">
 <span id="doxid-openvino-inference-engine-ie-bridges-python-sample-speech-sample-r-e-a-d-m-e"></span><span id="index-0"></span><h1>Automatic Speech Recognition Python* Sample<a class="headerlink" href="#automatic-speech-recognition-python-sample" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-openvino-inference-engine-ie-bridges-python-sample-speech-sample-r-e-a-d-m-e-1md-openvino-samples-python-speech-sample-readme"></span> This sample demonstrates how to do a Synchronous Inference of acoustic model based on Kaldi* neural models and speech feature vectors.</p>
 <p>The sample works with Kaldi ARK or Numpy* uncompressed NPZ files, so it does not cover an end-to-end speech recognition scenario (speech to text), requiring additional preprocessing (feature extraction) to get a feature vector from a speech signal, as well as postprocessing (decoding) to produce text from scores.</p>
@@ -714,14 +721,14 @@
 </tr>
 </tbody>
 </table>
-<div class="section" id="how-it-works">
+<section id="how-it-works">
 <h2>How It Works<a class="headerlink" href="#how-it-works" title="Permalink to this headline">¶</a></h2>
 <p>At startup, the sample application reads command-line parameters, loads a specified model and input data to the OpenVINO™ Runtime plugin, performs synchronous inference on all speech utterances stored in the input file, logging each step in a standard output stream.</p>
 <p>You can see the explicit description of each sample step at <a class="reference internal" href="openvino_docs_OV_UG_Integrate_OV_with_your_application.html#doxid-openvino-docs-o-v-u-g-integrate-o-v-with-your-application"><span class="std std-ref">Integration Steps</span></a> section of “Integrate OpenVINO™ Runtime with Your Application” guide.</p>
-</div>
-<div class="section" id="gna-specific-details">
+</section>
+<section id="gna-specific-details">
 <h2>GNA-specific details<a class="headerlink" href="#gna-specific-details" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="quantization">
+<section id="quantization">
 <h3>Quantization<a class="headerlink" href="#quantization" title="Permalink to this headline">¶</a></h3>
 <p>If the GNA device is selected (for example, using the <code class="docutils literal notranslate"><span class="pre">-d</span></code> GNA flag), the GNA OpenVINO™ Runtime plugin quantizes the model and input feature vector sequence to integer representation before performing inference.</p>
 <p>Several neural model quantization modes:</p>
@@ -737,8 +744,8 @@
 <li><p>It is not always possible to use 8-bit weights due to GNA hardware limitations. For example, convolutional layers always use 16-bit weights (GNA hardware version 1 and 2). This limitation will be removed in GNA hardware version 3 and higher.</p></li>
 </ul>
 </div>
-</div>
-<div class="section" id="execution-modes">
+</section>
+<section id="execution-modes">
 <h3>Execution Modes<a class="headerlink" href="#execution-modes" title="Permalink to this headline">¶</a></h3>
 <p>Several execution modes are supported via the <code class="docutils literal notranslate"><span class="pre">-d</span></code> flag:</p>
 <ul class="simple">
@@ -751,8 +758,8 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">GNA_SW_FP32</span></code> - Substitutes parameters and calculations from low precision to floating point (FP32).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">GNA_SW_EXACT</span></code> - GNA device is emulated in bit-exact mode.</p></li>
 </ul>
-</div>
-<div class="section" id="loading-and-saving-models">
+</section>
+<section id="loading-and-saving-models">
 <h3>Loading and Saving Models<a class="headerlink" href="#loading-and-saving-models" title="Permalink to this headline">¶</a></h3>
 <p>The GNA plugin supports loading and saving of the GNA-optimized model (non-IR) via the <code class="docutils literal notranslate"><span class="pre">-rg</span></code> and <code class="docutils literal notranslate"><span class="pre">-wg</span></code> flags.</p>
 <p>Thereby, it is possible to avoid the cost of full model quantization at run time.</p>
@@ -763,9 +770,9 @@
 <li><p>Convert from IR format to embedded format model file (<code class="docutils literal notranslate"><span class="pre">-m</span></code>, <code class="docutils literal notranslate"><span class="pre">-we</span></code>)</p></li>
 <li><p>Convert from GNA format to embedded format model file (<code class="docutils literal notranslate"><span class="pre">-rg</span></code>, <code class="docutils literal notranslate"><span class="pre">-we</span></code>)</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="running">
+</section>
+</section>
+<section id="running">
 <h2>Running<a class="headerlink" href="#running" title="Permalink to this headline">¶</a></h2>
 <p>Run the application with the <code class="docutils literal notranslate"><span class="pre">-h</span></code> option to see the usage message:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">speech_sample</span><span class="p">.</span><span class="n">py</span> <span class="o">-</span><span class="n">h</span></pre></div></div><p>Usage message:</p>
@@ -830,8 +837,8 @@
                         <span class="n">Optional</span><span class="p">.</span> <span class="n">Number</span> <span class="n">of</span> <span class="n">frames</span> <span class="k">for</span> <span class="n">right</span> <span class="n">context</span> <span class="n">windows</span> <span class="p">(</span><span class="k">default</span> <span class="n">is</span> <span class="mi">0</span><span class="p">).</span> <span class="n">Works</span> <span class="n">only</span> <span class="n">with</span> <span class="n">context</span> <span class="n">window</span>
                         <span class="n">models</span><span class="p">.</span> <span class="n">If</span> <span class="n">you</span> <span class="n">use</span> <span class="n">the</span> <span class="n">cw_l</span> <span class="n">or</span> <span class="n">cw_r</span> <span class="n">flag</span><span class="p">,</span> <span class="n">then</span> <span class="n">batch</span> <span class="n">size</span> <span class="n">argument</span> <span class="n">is</span> <span class="n">ignored</span><span class="p">.</span>
   <span class="o">-</span><span class="n">pwl_me</span> <span class="n">PWL_ME</span>        <span class="n">Optional</span><span class="p">.</span> <span class="n">The</span> <span class="n">maximum</span> <span class="n">percent</span> <span class="n">of</span> <span class="n">error</span> <span class="k">for</span> <span class="n">PWL</span> <span class="n">function</span><span class="p">.</span> <span class="n">The</span> <span class="n">value</span> <span class="n">must</span> <span class="n">be</span> <span class="n">in</span> <span class="o">&lt;</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="o">&gt;</span> <span class="n">range</span><span class="p">.</span> <span class="n">The</span>
-                        <span class="k">default</span> <span class="n">value</span> <span class="n">is</span> <span class="mf">1.0</span><span class="p">.</span></pre></div></div></div>
-<div class="section" id="model-preparation">
+                        <span class="k">default</span> <span class="n">value</span> <span class="n">is</span> <span class="mf">1.0</span><span class="p">.</span></pre></div></div></section>
+<section id="model-preparation">
 <h2>Model Preparation<a class="headerlink" href="#model-preparation" title="Permalink to this headline">¶</a></h2>
 <p>You can use the following model optimizer command to convert a Kaldi nnet1 or nnet2 neural model to OpenVINO™ toolkit Intermediate Representation format:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">mo</span> <span class="o">--</span><span class="n">framework</span> <span class="n">kaldi</span> <span class="o">--</span><span class="n">input_model</span> <span class="n">wsj_dnn5b</span><span class="p">.</span><span class="n">nnet</span> <span class="o">--</span><span class="n">counts</span> <span class="n">wsj_dnn5b</span><span class="p">.</span><span class="n">counts</span> <span class="o">--</span><span class="n">remove_output_softmax</span> <span class="o">--</span><span class="n">output_dir</span> <span class="o">&lt;</span><span class="n">OUTPUT_MODEL_DIR</span><span class="o">&gt;</span></pre></div></div><p>The following pre-trained models are available:</p>
@@ -841,8 +848,8 @@
 <li><p>rm_cnn4a_smbr</p></li>
 </ul>
 <p>All of them can be downloaded from <a class="reference external" href="https://storage.openvinotoolkit.org/models_contrib/speech/2021.2">https://storage.openvinotoolkit.org/models_contrib/speech/2021.2</a>.</p>
-</div>
-<div class="section" id="speech-inference">
+</section>
+<section id="speech-inference">
 <h2>Speech Inference<a class="headerlink" href="#speech-inference" title="Permalink to this headline">¶</a></h2>
 <p>You can do inference on Intel® Processors with the GNA co-processor (or emulation library):</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">speech_sample</span><span class="p">.</span><span class="n">py</span> <span class="o">-</span><span class="n">m</span> <span class="n">wsj_dnn5b</span><span class="p">.</span><span class="n">xml</span> <span class="o">-</span><span class="n">i</span> <span class="n">dev93_10</span><span class="p">.</span><span class="n">ark</span> <span class="o">-</span><span class="n">r</span> <span class="n">dev93_scores_10</span><span class="p">.</span><span class="n">ark</span> <span class="o">-</span><span class="n">d</span> <span class="n">GNA_AUTO</span> <span class="o">-</span><span class="n">o</span> <span class="n">result</span><span class="p">.</span><span class="n">npz</span></pre></div></div><p><strong>NOTES</strong> :</p>
@@ -850,8 +857,8 @@
 <li><p>Before running the sample with a trained model, make sure the model is converted to the intermediate representation (IR) format (*.xml + *.bin) using the <a class="reference internal" href="openvino_docs_MO_DG_Deep_Learning_Model_Optimizer_DevGuide.html#doxid-openvino-docs-m-o-d-g-deep-learning-model-optimizer-dev-guide"><span class="std std-ref">Model Optimizer tool</span></a>.</p></li>
 <li><p>The sample supports input and output in numpy file format (.npz)</p></li>
 </ul>
-</div>
-<div class="section" id="sample-output">
+</section>
+<section id="sample-output">
 <h2>Sample Output<a class="headerlink" href="#sample-output" title="Permalink to this headline">¶</a></h2>
 <p>The sample application logs each step in a standard output stream.</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Creating</span> <span class="n">OpenVINO</span> <span class="n">Runtime</span> <span class="n">Core</span>
@@ -993,8 +1000,8 @@
 <span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span>
 <span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Total</span> <span class="n">sample</span> <span class="nl">time</span><span class="p">:</span> <span class="mf">39722.60</span><span class="n">ms</span>
 <span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">File</span> <span class="n">result</span><span class="p">.</span><span class="n">npz</span> <span class="n">was</span> <span class="n">created</span><span class="o">!</span>
-<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">This</span> <span class="n">sample</span> <span class="n">is</span> <span class="n">an</span> <span class="n">API</span> <span class="n">example</span><span class="p">,</span> <span class="k">for</span> <span class="n">any</span> <span class="n">performance</span> <span class="n">measurements</span> <span class="n">please</span> <span class="n">use</span> <span class="n">the</span> <span class="n">dedicated</span> <span class="n">benchmark_app</span> <span class="n">tool</span></pre></div></div></div>
-<div class="section" id="see-also">
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">This</span> <span class="n">sample</span> <span class="n">is</span> <span class="n">an</span> <span class="n">API</span> <span class="n">example</span><span class="p">,</span> <span class="k">for</span> <span class="n">any</span> <span class="n">performance</span> <span class="n">measurements</span> <span class="n">please</span> <span class="n">use</span> <span class="n">the</span> <span class="n">dedicated</span> <span class="n">benchmark_app</span> <span class="n">tool</span></pre></div></div></section>
+<section id="see-also">
 <h2>See Also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="openvino_docs_OV_UG_Integrate_OV_with_your_application.html#doxid-openvino-docs-o-v-u-g-integrate-o-v-with-your-application"><span class="std std-ref">Integrate the OpenVINO™ Runtime with Your Application</span></a></p></li>
@@ -1002,8 +1009,8 @@
 <li><p>Model Downloader</p></li>
 <li><p><a class="reference internal" href="openvino_docs_MO_DG_Deep_Learning_Model_Optimizer_DevGuide.html#doxid-openvino-docs-m-o-d-g-deep-learning-model-optimizer-dev-guide"><span class="std std-ref">Model Optimizer</span></a></p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -1034,7 +1041,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

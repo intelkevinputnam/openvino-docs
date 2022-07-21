@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Optimizing for Throughput &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -1835,15 +1842,15 @@
             
                 <div>
                   
-  <div class="section" id="optimizing-for-throughput">
+  <section id="optimizing-for-throughput">
 <span id="doxid-openvino-docs-deployment-optimization-guide-tput"></span><span id="index-0"></span><h1>Optimizing for Throughput<a class="headerlink" href="#optimizing-for-throughput" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-openvino-docs-deployment-optimization-guide-tput-1md-openvino-docs-optimization-guide-dldt-deployment-optimization-tput"></span></p>
-<div class="section" id="general-throughput-considerations">
+<section id="general-throughput-considerations">
 <h2>General Throughput Considerations<a class="headerlink" href="#general-throughput-considerations" title="Permalink to this headline">¶</a></h2>
 <p>As described in the section on the <a class="reference internal" href="openvino_docs_deployment_optimization_guide_latency.html#doxid-openvino-docs-deployment-optimization-guide-latency"><span class="std std-ref">latency-specific considerations</span></a> one possible use-case is <em>delivering every single request at the minimal delay</em>. Throughput on the other hand, is about inference scenarios in which potentially large <strong>number of inference requests are served simultaneously to improve the device utilization</strong>.</p>
 <p>The associated increase in latency is not linearly dependent on the number of requests executed in parallel. Here, a trade-off between overall throughput and serial performance of individual requests can be achieved with the right OpenVINO performance configuration.</p>
-</div>
-<div class="section" id="basic-and-advanced-ways-of-leveraging-throughput">
+</section>
+<section id="basic-and-advanced-ways-of-leveraging-throughput">
 <h2>Basic and Advanced Ways of Leveraging Throughput<a class="headerlink" href="#basic-and-advanced-ways-of-leveraging-throughput" title="Permalink to this headline">¶</a></h2>
 <p>With the OpenVINO there are two means of leveraging the throughput with the individual device:</p>
 <ul class="simple">
@@ -1853,39 +1860,31 @@
 <p>In both cases application should be designed to execute multiple inference requests in parallel as detailed in the <a class="reference internal" href="#doxid-openvino-docs-deployment-optimization-guide-tput-1throughput-app-design"><span class="std std-ref">next section</span></a>.</p>
 <p>Finally, consider the <em>automatic</em> multi-device execution covered below.</p>
 <p><span class="target" id="doxid-openvino-docs-deployment-optimization-guide-tput-1throughput-app-design"></span></p>
-</div>
-<div class="section" id="throughput-oriented-application-design">
+</section>
+<section id="throughput-oriented-application-design">
 <h2>Throughput-Oriented Application Design<a class="headerlink" href="#throughput-oriented-application-design" title="Permalink to this headline">¶</a></h2>
 <p>Most generally, throughput-oriented inference applications should:</p>
 <ul>
 <li><p>Expose substantial amounts of <em>inputs</em> parallelism (e.g. process multiple video- or audio- sources, text documents, etc)</p></li>
 <li><p>Decompose the data flow into a collection of concurrent inference requests that are aggressively scheduled to be executed in parallel</p>
 <ul>
-<li><p>Setup the configuration for the <em>device</em> (e.g. as parameters of the <code class="docutils literal notranslate"><span class="pre">ov::Core::compile_model</span></code>) via either <a class="reference internal" href="openvino_docs_deployment_optimization_guide_tput_advanced.html#doxid-openvino-docs-deployment-optimization-guide-tput-advanced"><span class="std std-ref">low-level explicit options</span></a>, introduced in the previous section or <a class="reference internal" href="openvino_docs_OV_UG_Performance_Hints.html#doxid-openvino-docs-o-v-u-g-performance-hints"><span class="std std-ref">OpenVINO performance hints</span></a> (<strong>preferable</strong>):</p>
+<li><p>Setup the configuration for the <em>device</em> (e.g. as parameters of the <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1Core.html#doxid-classov-1-1-core-1a46555f0803e8c29524626be08e7f5c5a"><span class="std std-ref"><span class="pre">ov::Core::compile_model</span></span></a></code>) via either <a class="reference internal" href="openvino_docs_deployment_optimization_guide_tput_advanced.html#doxid-openvino-docs-deployment-optimization-guide-tput-advanced"><span class="std std-ref">low-level explicit options</span></a>, introduced in the previous section or <a class="reference internal" href="openvino_docs_OV_UG_Performance_Hints.html#doxid-openvino-docs-o-v-u-g-performance-hints"><span class="std std-ref">OpenVINO performance hints</span></a> (<strong>preferable</strong>):</p>
 <blockquote>
 <div><div class="tab-set docutils">
 <input checked="True" class="tab-input" id="tab-set--0-input--1" name="tab-set--0" type="radio"><label class="tab-label" for="tab-set--0-input--1">C++</label><div class="tab-content docutils">
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span> <span class="n">compiled_model</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s">&quot;GPU&quot;</span><span class="p">,</span>
-    <span class="n">ov</span><span class="o">::</span><span class="n">hint</span><span class="o">::</span><span class="n">performance_mode</span><span class="p">(</span><span class="n">ov</span><span class="o">::</span><span class="n">hint</span><span class="o">::</span><span class="n">PerformanceMode</span><span class="o">::</span><span class="n">THROUGHPUT</span><span class="p">));</span>
-</pre></div>
-</div>
 </div>
 <input class="tab-input" id="tab-set--0-input--2" name="tab-set--0" type="radio"><label class="tab-label" for="tab-set--0-input--2">Python</label><div class="tab-content docutils">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">config</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;PERFORMANCE_HINT&quot;</span><span class="p">:</span> <span class="s2">&quot;THROUGHPUT&quot;</span><span class="p">}</span>
-<span class="n">compiled_model</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s2">&quot;GPU&quot;</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
-</pre></div>
-</div>
 </div>
 </div>
 </div></blockquote>
 </li>
-<li><p>Query the <code class="docutils literal notranslate"><span class="pre">ov::optimal_number_of_infer_requests</span></code> from the <code class="docutils literal notranslate"><span class="pre">ov::CompiledModel</span></code> (resulted from compilation of the model for a device) to create the number of the requests required to saturate the device</p></li>
+<li><p>Query the <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga087c6da667f7c3d8374aec5f6cbba027"><span class="std std-ref"><span class="pre">ov::optimal_number_of_infer_requests</span></span></a></code> from the <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1CompiledModel.html#doxid-classov-1-1-compiled-model"><span class="std std-ref"><span class="pre">ov::CompiledModel</span></span></a></code> (resulted from compilation of the model for a device) to create the number of the requests required to saturate the device</p></li>
 </ul>
 </li>
 <li><p>Use the Async API with callbacks, to avoid any dependency on the requests’ completion order and possible device starvation, as explained in the <a class="reference internal" href="openvino_docs_deployment_optimization_guide_common.html#doxid-openvino-docs-deployment-optimization-guide-common"><span class="std std-ref">common-optimizations section</span></a></p></li>
 </ul>
-</div>
-<div class="section" id="multi-device-execution">
+</section>
+<section id="multi-device-execution">
 <h2>Multi-Device Execution<a class="headerlink" href="#multi-device-execution" title="Permalink to this headline">¶</a></h2>
 <p>OpenVINO offers automatic, <a class="reference internal" href="openvino_docs_OV_UG_Running_on_multiple_devices.html#doxid-openvino-docs-o-v-u-g-running-on-multiple-devices"><span class="std std-ref">scalable multi-device inference</span></a>. This is simple <em>application-transparent</em> way to improve the throughput. No need to re-architecture existing applications for any explicit multi-device support: no explicit network loading to each device, no separate per-device queues, no additional logic to balance the inference requests between devices, etc. From the application point of view, it is communicating to the single device that internally handles the actual machinery. Just like with other throughput-oriented scenarios, there are two major pre-requisites for optimal multi-device performance:</p>
 <ul class="simple">
@@ -1897,8 +1896,8 @@
 <p class="admonition-title">Note</p>
 <p>While the legacy approach of optimizing the parameters of each device separately works, the <a class="reference internal" href="openvino_docs_OV_UG_Performance_Hints.html#doxid-openvino-docs-o-v-u-g-performance-hints"><span class="std std-ref">OpenVINO performance hints</span></a> allow to configure all devices (that are part of the specific multi-device configuration) at once.</p>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -1929,7 +1928,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

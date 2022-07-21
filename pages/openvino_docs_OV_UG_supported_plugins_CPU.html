@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>CPU device &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -1906,25 +1913,25 @@
             
                 <div>
                   
-  <div class="section" id="cpu-device">
+  <section id="cpu-device">
 <span id="doxid-openvino-docs-o-v-u-g-supported-plugins-c-p-u"></span><span id="index-0"></span><h1>CPU device<a class="headerlink" href="#cpu-device" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-openvino-docs-o-v-u-g-supported-plugins-c-p-u-1md-openvino-docs-ov-runtime-ug-supported-plugins-cpu"></span> The CPU plugin is a part of the Intel® Distribution of OpenVINO™ toolkit and is developed to achieve high performance inference of neural networks on Intel® x86-64 CPUs. For an in-depth description of the plugin, see:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://github.com/openvinotoolkit/openvino/wiki/CPUPluginDevelopersDocs">CPU plugin developers documentation</a></p></li>
 <li><p><a class="reference external" href="https://github.com/openvinotoolkit/openvino/tree/master/src/plugins/intel_cpu/">OpenVINO Runtime CPU plugin source files</a></p></li>
 </ul>
-<div class="section" id="device-name">
+<section id="device-name">
 <h2>Device name<a class="headerlink" href="#device-name" title="Permalink to this headline">¶</a></h2>
 <p>The CPU device plugin uses the label of <code class="docutils literal notranslate"><span class="pre">&quot;CPU&quot;</span></code> and is the only device of this kind, even if multiple sockets are present on the platform. On multi-socket platforms, load balancing and memory usage distribution between NUMA nodes are handled automatically.</p>
-<p>In order to use CPU for inference the device name should be passed to the <code class="docutils literal notranslate"><span class="pre">ov::Core::compile_model()</span></code> method:</p>
-<div class='sphinxtabset'><div class="sphinxtab" data-sphinxtab-value="C++"><div class="highlight"><div class="highlight"><pre>ov::Core<span></span> <span class="n">core</span><span class="p">;</span>
-<span class="k">auto</span> model<span></span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span>read_model<span></span><span class="p">(</span><span class="s">&quot;model.xml&quot;</span><span class="p">);</span>
-<span class="k">auto</span> <span class="n">compiled_model</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span>compile_model<span></span><span class="p">(</span>model<span></span><span class="p">,</span> <span class="s">&quot;CPU&quot;</span><span class="p">);</span></pre></div></div></div><div class="sphinxtab" data-sphinxtab-value="Python"><div class="highlight"><div class="highlight"><pre><span></span><span class="n">from</span> <span class="n">openvino</span><span class="p">.</span><span class="n">runtime</span> <span class="n">import</span> <span class="n">Core</span>
+<p>In order to use CPU for inference the device name should be passed to the <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1Core.html#doxid-classov-1-1-core-1a46555f0803e8c29524626be08e7f5c5a"><span class="std std-ref"><span class="pre">ov::Core::compile_model()</span></span></a></code> method:</p>
+<div class='sphinxtabset'><div class="sphinxtab" data-sphinxtab-value="C++"><div class="highlight"><div class="highlight"><pre><a class="reference internal" href="../api/groups/classov_1_1Core.html#doxid-classov-1-1-core"><span class="std std-ref">ov::Core</span></a><span></span> <span class="n">core</span><span class="p">;</span>
+<span class="k">auto</span> <a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga461856fdfb6d7533dc53355aec9e9fad"><span class="std std-ref">model</span></a><span></span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span>read_model<span></span><span class="p">(</span><span class="s">&quot;model.xml&quot;</span><span class="p">);</span>
+<span class="k">auto</span> <span class="n">compiled_model</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><a class="reference internal" href="../api/groups/classov_1_1Core.html#doxid-classov-1-1-core-1a46555f0803e8c29524626be08e7f5c5a"><span class="std std-ref">compile_model</span></a><span></span><span class="p">(</span><a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga461856fdfb6d7533dc53355aec9e9fad"><span class="std std-ref">model</span></a><span></span><span class="p">,</span> <span class="s">&quot;CPU&quot;</span><span class="p">);</span></pre></div></div></div><div class="sphinxtab" data-sphinxtab-value="Python"><div class="highlight"><div class="highlight"><pre><span></span><span class="n">from</span> <span class="n">openvino</span><span class="p">.</span><span class="n">runtime</span> <span class="n">import</span> <span class="n">Core</span>
 
 <span class="n">core</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span>
 <span class="n">model</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><span class="n">read_model</span><span class="p">(</span><span class="s">&quot;model.xml&quot;</span><span class="p">)</span>
-<span class="n">compiled_model</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s">&quot;CPU&quot;</span><span class="p">)</span></pre></div></div></div></div></div>
-<div class="section" id="supported-inference-data-types">
+<span class="n">compiled_model</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s">&quot;CPU&quot;</span><span class="p">)</span></pre></div></div></div></div></section>
+<section id="supported-inference-data-types">
 <h2>Supported inference data types<a class="headerlink" href="#supported-inference-data-types" title="Permalink to this headline">¶</a></h2>
 <p>The CPU device plugin supports the following data types as inference precision of internal primitives:</p>
 <ul class="simple">
@@ -1948,7 +1955,7 @@
 </li>
 </ul>
 <p><a class="reference internal" href="openvino_inference_engine_samples_hello_query_device_README.html#doxid-openvino-inference-engine-samples-hello-query-device-r-e-a-d-m-e"><span class="std std-ref">Hello Query Device C++ Sample</span></a> can be used to print out the supported data types for all detected devices.</p>
-<div class="section" id="quantized-data-type-specifics">
+<section id="quantized-data-type-specifics">
 <h3>Quantized data type specifics<a class="headerlink" href="#quantized-data-type-specifics" title="Permalink to this headline">¶</a></h3>
 <p>Selected precision of each primitive depends on the operation precision in IR, quantization primitives, and available hardware capabilities. u1/u8/i8 data types are used for quantized operations only, i.e. those are not selected automatically for non-quantized operations.</p>
 <p>See the <a class="reference internal" href="openvino_docs_model_optimization_guide.html#doxid-openvino-docs-model-optimization-guide"><span class="std std-ref">low-precision optimization guide</span></a> for more details on how to get a quantized model.</p>
@@ -1956,8 +1963,8 @@
 <p class="admonition-title">Note</p>
 <p>Platforms that do not support Intel® AVX512-VNNI have a known “saturation issue” which in some cases leads to reduced computational accuracy for u8/i8 precision calculations. See the <a class="reference internal" href="pot_saturation_issue.html#doxid-pot-saturation-issue"><span class="std std-ref">saturation (overflow) issue section</span></a> to get more information on how to detect such issues and find possible workarounds.</p>
 </div>
-</div>
-<div class="section" id="floating-point-data-type-specifics">
+</section>
+<section id="floating-point-data-type-specifics">
 <h3>Floating point data type specifics<a class="headerlink" href="#floating-point-data-type-specifics" title="Permalink to this headline">¶</a></h3>
 <p>The default floating-point precision of a CPU primitive is f32. To support f16 IRs, the plugin internally converts all the f16 values to f32 and all the calculations are performed using the native f32 precision. On platforms that natively support bfloat16 calculations (have AVX512_BF16 extension), the bf16 type is automatically used instead of f32 to achieve better performance, thus no special steps are required to run a model with bf16 precision. See the <a class="reference external" href="https://software.intel.com/content/dam/develop/external/us/en/documents/bf16-hardware-numerics-definition-white-paper.pdf">BFLOAT16 – Hardware Numerics Definition white paper</a> for more details about bfloat16.</p>
 <p>Using bf16 provides the following performance benefits:</p>
@@ -1965,39 +1972,39 @@
 <li><p>Faster multiplication of two bfloat16 numbers because of shorter mantissa of bfloat16 data.</p></li>
 <li><p>Reduced memory consumption since bfloat16 data is half the size of 32-bit float.</p></li>
 </ul>
-<p>To check if the CPU device can support the bfloat16 data type use the <a class="reference internal" href="openvino_docs_OV_UG_query_api.html#doxid-openvino-docs-o-v-u-g-query-api"><span class="std std-ref">query device properties interface</span></a> to query <span class="xref std std-ref">ov::device::capabilities</span> property, which should contain <code class="docutils literal notranslate"><span class="pre">BF16</span></code> in the list of CPU capabilities:</p>
-<div class='sphinxtabset'><div class="sphinxtab" data-sphinxtab-value="C++"><div class="highlight"><div class="highlight"><pre>ov::Core<span></span> <span class="n">core</span><span class="p">;</span>
-<span class="k">auto</span> <span class="n">cpuOptimizationCapabilities</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span>get_property<span></span><span class="p">(</span><span class="s">&quot;CPU&quot;</span><span class="p">,</span> ov::device::capabilities<span></span><span class="p">);</span></pre></div></div></div><div class="sphinxtab" data-sphinxtab-value="Python"><div class="highlight"><div class="highlight"><pre><span></span><span class="n">core</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span>
-<span class="n">cpu_optimization_capabilities</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><span class="n">get_property</span><span class="p">(</span><span class="s">&quot;CPU&quot;</span><span class="p">,</span> <span class="s">&quot;OPTIMIZATION_CAPABILITIES&quot;</span><span class="p">)</span></pre></div></div></div></div><p>If the model has been converted to bf16, <span class="xref std std-ref">ov::hint::inference_precision</span> is set to <span class="xref std std-ref">ov::element::bf16</span> and can be checked via <span class="xref std std-ref">ov::CompiledModel::get_property</span> call. The code below demonstrates how to get the element type:</p>
-<div class="highlight"><div class="highlight"><pre>ov::Core<span></span> <span class="n">core</span><span class="p">;</span>
+<p>To check if the CPU device can support the bfloat16 data type use the <a class="reference internal" href="openvino_docs_OV_UG_query_api.html#doxid-openvino-docs-o-v-u-g-query-api"><span class="std std-ref">query device properties interface</span></a> to query <a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1gadb13d62787fc4485733329f044987294"><span class="std std-ref">ov::device::capabilities</span></a> property, which should contain <code class="docutils literal notranslate"><span class="pre">BF16</span></code> in the list of CPU capabilities:</p>
+<div class='sphinxtabset'><div class="sphinxtab" data-sphinxtab-value="C++"><div class="highlight"><div class="highlight"><pre><a class="reference internal" href="../api/groups/classov_1_1Core.html#doxid-classov-1-1-core"><span class="std std-ref">ov::Core</span></a><span></span> <span class="n">core</span><span class="p">;</span>
+<span class="k">auto</span> <span class="n">cpuOptimizationCapabilities</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><a class="reference internal" href="../api/groups/classov_1_1Core.html#doxid-classov-1-1-core-1a4fb9fc7375d04f744a27a9588cbcff1a"><span class="std std-ref">get_property</span></a><span></span><span class="p">(</span><span class="s">&quot;CPU&quot;</span><span class="p">,</span> <a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1gadb13d62787fc4485733329f044987294"><span class="std std-ref">ov::device::capabilities</span></a><span></span><span class="p">);</span></pre></div></div></div><div class="sphinxtab" data-sphinxtab-value="Python"><div class="highlight"><div class="highlight"><pre><span></span><span class="n">core</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span>
+<span class="n">cpu_optimization_capabilities</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><span class="n">get_property</span><span class="p">(</span><span class="s">&quot;CPU&quot;</span><span class="p">,</span> <span class="s">&quot;OPTIMIZATION_CAPABILITIES&quot;</span><span class="p">)</span></pre></div></div></div></div><p>If the model has been converted to bf16, <a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1gad605a888f3c9b7598ab55023fbf44240"><span class="std std-ref">ov::hint::inference_precision</span></a> is set to <a class="reference internal" href="../api/groups/groupov_element_cpp_api.html#doxid-group-ov-element-cpp-api-1ga57b838ff7f62e66151e0b53b24c27819"><span class="std std-ref">ov::element::bf16</span></a> and can be checked via <a class="reference internal" href="../api/groups/classov_1_1CompiledModel.html#doxid-classov-1-1-compiled-model-1a109d701ffe8b5de096961c7c98ff0bed"><span class="std std-ref">ov::CompiledModel::get_property</span></a> call. The code below demonstrates how to get the element type:</p>
+<div class="highlight"><div class="highlight"><pre><a class="reference internal" href="../api/groups/classov_1_1Core.html#doxid-classov-1-1-core"><span class="std std-ref">ov::Core</span></a><span></span> <span class="n">core</span><span class="p">;</span>
 <span class="k">auto</span> <span class="n">network</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span>read_model<span></span><span class="p">(</span><span class="s">&quot;sample.xml&quot;</span><span class="p">);</span>
-<span class="k">auto</span> <span class="n">exec_network</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span>compile_model<span></span><span class="p">(</span><span class="n">network</span><span class="p">,</span> <span class="s">&quot;CPU&quot;</span><span class="p">);</span>
-<span class="k">auto</span> inference_precision<span></span> <span class="o">=</span> <span class="n">exec_network</span><span class="p">.</span><span class="n">get_property</span><span class="p">(</span>ov::hint::inference_precision<span></span><span class="p">);</span></pre></div></div><p>To infer the model in f32 instead of bf16 on targets with native bf16 support, set the <span class="xref std std-ref">ov::hint::inference_precision</span> to <span class="xref std std-ref">ov::element::f32</span>.</p>
-<div class='sphinxtabset'><div class="sphinxtab" data-sphinxtab-value="C++"><div class="highlight"><div class="highlight"><pre>ov::Core<span></span> <span class="n">core</span><span class="p">;</span>
-<span class="n">core</span><span class="p">.</span>set_property<span></span><span class="p">(</span><span class="s">&quot;CPU&quot;</span><span class="p">,</span> ov::hint::inference_precision<span></span><span class="p">(</span>ov::element::f32<span></span><span class="p">));</span></pre></div></div></div><div class="sphinxtab" data-sphinxtab-value="Python"><div class="highlight"><div class="highlight"><pre><span></span><span class="n">core</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span>
-<span class="n">core</span><span class="p">.</span><span class="n">set_property</span><span class="p">(</span><span class="s">&quot;CPU&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s">&quot;INFERENCE_PRECISION_HINT&quot;</span><span class="o">:</span> <span class="s">&quot;f32&quot;</span><span class="p">})</span></pre></div></div></div></div><p>Bfloat16 software simulation mode is available on CPUs with Intel® AVX-512 instruction set which does not support the native <code class="docutils literal notranslate"><span class="pre">avx512_bf16</span></code> instruction. This mode is used for development purposes and it does not guarantee good performance. To enable the simulation, you have to explicitly set <span class="xref std std-ref">ov::hint::inference_precision</span> to <span class="xref std std-ref">ov::element::bf16</span>.</p>
+<span class="k">auto</span> <span class="n">exec_network</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><a class="reference internal" href="../api/groups/classov_1_1Core.html#doxid-classov-1-1-core-1a46555f0803e8c29524626be08e7f5c5a"><span class="std std-ref">compile_model</span></a><span></span><span class="p">(</span><span class="n">network</span><span class="p">,</span> <span class="s">&quot;CPU&quot;</span><span class="p">);</span>
+<span class="k">auto</span> <a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1gad605a888f3c9b7598ab55023fbf44240"><span class="std std-ref">inference_precision</span></a><span></span> <span class="o">=</span> <span class="n">exec_network</span><span class="p">.</span><span class="n">get_property</span><span class="p">(</span><a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1gad605a888f3c9b7598ab55023fbf44240"><span class="std std-ref">ov::hint::inference_precision</span></a><span></span><span class="p">);</span></pre></div></div><p>To infer the model in f32 instead of bf16 on targets with native bf16 support, set the <a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1gad605a888f3c9b7598ab55023fbf44240"><span class="std std-ref">ov::hint::inference_precision</span></a> to <a class="reference internal" href="../api/groups/groupov_element_cpp_api.html#doxid-group-ov-element-cpp-api-1gadc8a5dda3244028a5c0b024897215d43"><span class="std std-ref">ov::element::f32</span></a>.</p>
+<div class='sphinxtabset'><div class="sphinxtab" data-sphinxtab-value="C++"><div class="highlight"><div class="highlight"><pre><a class="reference internal" href="../api/groups/classov_1_1Core.html#doxid-classov-1-1-core"><span class="std std-ref">ov::Core</span></a><span></span> <span class="n">core</span><span class="p">;</span>
+<span class="n">core</span><span class="p">.</span><a class="reference internal" href="../api/groups/classov_1_1Core.html#doxid-classov-1-1-core-1aa953cb0a1601dbc9a34ef6ba82b8476e"><span class="std std-ref">set_property</span></a><span></span><span class="p">(</span><span class="s">&quot;CPU&quot;</span><span class="p">,</span> <a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1gad605a888f3c9b7598ab55023fbf44240"><span class="std std-ref">ov::hint::inference_precision</span></a><span></span><span class="p">(</span><a class="reference internal" href="../api/groups/groupov_element_cpp_api.html#doxid-group-ov-element-cpp-api-1gadc8a5dda3244028a5c0b024897215d43"><span class="std std-ref">ov::element::f32</span></a><span></span><span class="p">));</span></pre></div></div></div><div class="sphinxtab" data-sphinxtab-value="Python"><div class="highlight"><div class="highlight"><pre><span></span><span class="n">core</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span>
+<span class="n">core</span><span class="p">.</span><span class="n">set_property</span><span class="p">(</span><span class="s">&quot;CPU&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s">&quot;INFERENCE_PRECISION_HINT&quot;</span><span class="o">:</span> <span class="s">&quot;f32&quot;</span><span class="p">})</span></pre></div></div></div></div><p>Bfloat16 software simulation mode is available on CPUs with Intel® AVX-512 instruction set which does not support the native <code class="docutils literal notranslate"><span class="pre">avx512_bf16</span></code> instruction. This mode is used for development purposes and it does not guarantee good performance. To enable the simulation, you have to explicitly set <a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1gad605a888f3c9b7598ab55023fbf44240"><span class="std std-ref">ov::hint::inference_precision</span></a> to <a class="reference internal" href="../api/groups/groupov_element_cpp_api.html#doxid-group-ov-element-cpp-api-1ga57b838ff7f62e66151e0b53b24c27819"><span class="std std-ref">ov::element::bf16</span></a>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>An exception is thrown if <span class="xref std std-ref">ov::hint::inference_precision</span> is set to <span class="xref std std-ref">ov::element::bf16</span> on a CPU without native bfloat16 support or bfloat16 simulation mode.</p>
+<p>An exception is thrown if <a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1gad605a888f3c9b7598ab55023fbf44240"><span class="std std-ref">ov::hint::inference_precision</span></a> is set to <a class="reference internal" href="../api/groups/groupov_element_cpp_api.html#doxid-group-ov-element-cpp-api-1ga57b838ff7f62e66151e0b53b24c27819"><span class="std std-ref">ov::element::bf16</span></a> on a CPU without native bfloat16 support or bfloat16 simulation mode.</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Due to the reduced mantissa size of the bfloat16 data type, the resulting bf16 inference accuracy may differ from the f32 inference, especially for models that were not trained using the bfloat16 data type. If the bf16 inference accuracy is not acceptable, it is recommended to switch to the f32 precision.</p>
 </div>
-</div>
-</div>
-<div class="section" id="supported-features">
+</section>
+</section>
+<section id="supported-features">
 <h2>Supported features<a class="headerlink" href="#supported-features" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="multi-device-execution">
+<section id="multi-device-execution">
 <h3>Multi-device execution<a class="headerlink" href="#multi-device-execution" title="Permalink to this headline">¶</a></h3>
 <p>If a machine has OpenVINO-supported devices other than the CPU (for example an integrated GPU), then any supported model can be executed on CPU and all the other devices simultaneously. This can be achieved by specifying <code class="docutils literal notranslate"><span class="pre">&quot;MULTI:CPU,GPU.0&quot;</span></code> as a target device in case of simultaneous usage of CPU and GPU.</p>
-<div class='sphinxtabset'><div class="sphinxtab" data-sphinxtab-value="C++"><div class="highlight"><div class="highlight"><pre>ov::Core<span></span> <span class="n">core</span><span class="p">;</span>
-<span class="k">auto</span> model<span></span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span>read_model<span></span><span class="p">(</span><span class="s">&quot;model.xml&quot;</span><span class="p">);</span>
-<span class="k">auto</span> <span class="n">compiled_model</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span>compile_model<span></span><span class="p">(</span>model<span></span><span class="p">,</span> <span class="s">&quot;MULTI:CPU,GPU.0&quot;</span><span class="p">);</span></pre></div></div></div><div class="sphinxtab" data-sphinxtab-value="Python"><div class="highlight"><div class="highlight"><pre><span></span><span class="n">core</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span>
+<div class='sphinxtabset'><div class="sphinxtab" data-sphinxtab-value="C++"><div class="highlight"><div class="highlight"><pre><a class="reference internal" href="../api/groups/classov_1_1Core.html#doxid-classov-1-1-core"><span class="std std-ref">ov::Core</span></a><span></span> <span class="n">core</span><span class="p">;</span>
+<span class="k">auto</span> <a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga461856fdfb6d7533dc53355aec9e9fad"><span class="std std-ref">model</span></a><span></span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span>read_model<span></span><span class="p">(</span><span class="s">&quot;model.xml&quot;</span><span class="p">);</span>
+<span class="k">auto</span> <span class="n">compiled_model</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><a class="reference internal" href="../api/groups/classov_1_1Core.html#doxid-classov-1-1-core-1a46555f0803e8c29524626be08e7f5c5a"><span class="std std-ref">compile_model</span></a><span></span><span class="p">(</span><a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga461856fdfb6d7533dc53355aec9e9fad"><span class="std std-ref">model</span></a><span></span><span class="p">,</span> <span class="s">&quot;MULTI:CPU,GPU.0&quot;</span><span class="p">);</span></pre></div></div></div><div class="sphinxtab" data-sphinxtab-value="Python"><div class="highlight"><div class="highlight"><pre><span></span><span class="n">core</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span>
 <span class="n">model</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><span class="n">read_model</span><span class="p">(</span><span class="s">&quot;model.xml&quot;</span><span class="p">)</span>
 <span class="n">compiled_model</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s">&quot;MULTI:CPU,GPU.0&quot;</span><span class="p">)</span></pre></div></div></div></div><p>See <a class="reference internal" href="openvino_docs_OV_UG_Running_on_multiple_devices.html#doxid-openvino-docs-o-v-u-g-running-on-multiple-devices"><span class="std std-ref">Multi-device execution page</span></a> for more details.</p>
-</div>
-<div class="section" id="multi-stream-execution">
+</section>
+<section id="multi-stream-execution">
 <h3>Multi-stream execution<a class="headerlink" href="#multi-stream-execution" title="Permalink to this headline">¶</a></h3>
 <p>If either <code class="docutils literal notranslate"><span class="pre">ov::num_streams(n_streams)</span></code> with <code class="docutils literal notranslate"><span class="pre">n_streams</span> <span class="pre">&gt;</span> <span class="pre">1</span></code> or the <code class="docutils literal notranslate"><span class="pre">ov::hint::performance_mode(ov::hint::PerformanceMode::THROUGHPUT)</span></code> property is set for the CPU plugin, multiple streams are created for the model. In the case of the CPU plugin, each stream has its own host thread, which means that incoming infer requests can be processed simultaneously. Each stream is pinned to its own group of physical cores with respect to NUMA nodes physical memory usage to minimize overhead on data transfer between NUMA nodes.</p>
 <p>See <a class="reference internal" href="openvino_docs_deployment_optimization_guide_dldt_optimization_guide.html#doxid-openvino-docs-deployment-optimization-guide-dldt-optimization-guide"><span class="std std-ref">optimization guide</span></a> for more details.</p>
@@ -2005,8 +2012,8 @@
 <p class="admonition-title">Note</p>
 <p>When it comes to latency, keep in mind that running only one stream on a multi-socket platform may introduce additional overheads on data transfer between NUMA nodes. In that case it is better to use ov::hint::PerformanceMode::LATENCY performance hint (please see <a class="reference internal" href="openvino_docs_OV_UG_Performance_Hints.html#doxid-openvino-docs-o-v-u-g-performance-hints"><span class="std std-ref">performance hints overview</span></a> for details).</p>
 </div>
-</div>
-<div class="section" id="dynamic-shapes">
+</section>
+<section id="dynamic-shapes">
 <h3>Dynamic shapes<a class="headerlink" href="#dynamic-shapes" title="Permalink to this headline">¶</a></h3>
 <p>The CPU device plugin provides full functional support for models with dynamic shapes in terms of the opset coverage.</p>
 <div class="admonition note">
@@ -2014,25 +2021,25 @@
 <p>CPU does not support tensors with a dynamically changing rank. If you try to infer a model with such tensors, an exception will be thrown.</p>
 </div>
 <p>Dynamic shapes support introduces additional overhead on memory management and may limit internal runtime optimizations. The more degrees of freedom are used, the more difficult it is to achieve the best performance. The most flexible configuration and the most convenient approach is the fully undefined shape, where no constraints to the shape dimensions are applied. But reducing the level of uncertainty brings gains in performance. You can reduce memory consumption through memory reuse and achieve better cache locality, leading to better inference performance, if you explicitly set dynamic shapes with defined upper bounds.</p>
-<div class='sphinxtabset'><div class="sphinxtab" data-sphinxtab-value="C++"><div class="highlight"><div class="highlight"><pre>ov::Core<span></span> <span class="n">core</span><span class="p">;</span>
-<span class="k">auto</span> model<span></span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span>read_model<span></span><span class="p">(</span><span class="s">&quot;model.xml&quot;</span><span class="p">);</span>
+<div class='sphinxtabset'><div class="sphinxtab" data-sphinxtab-value="C++"><div class="highlight"><div class="highlight"><pre><a class="reference internal" href="../api/groups/classov_1_1Core.html#doxid-classov-1-1-core"><span class="std std-ref">ov::Core</span></a><span></span> <span class="n">core</span><span class="p">;</span>
+<span class="k">auto</span> <a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga461856fdfb6d7533dc53355aec9e9fad"><span class="std std-ref">model</span></a><span></span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span>read_model<span></span><span class="p">(</span><span class="s">&quot;model.xml&quot;</span><span class="p">);</span>
 
-model<span></span><span class="o">-&gt;</span><span class="n">reshape</span><span class="p">({{</span>ov::Dimension<span></span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> ov::Dimension<span></span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span> ov::Dimension<span></span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span> ov::Dimension<span></span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">40</span><span class="p">)}});</span></pre></div></div></div><div class="sphinxtab" data-sphinxtab-value="Python"><div class="highlight"><div class="highlight"><pre><span></span><span class="n">core</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span>
+<a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga461856fdfb6d7533dc53355aec9e9fad"><span class="std std-ref">model</span></a><span></span><span class="o">-&gt;</span><span class="n">reshape</span><span class="p">({{</span><a class="reference internal" href="../api/groups/classov_1_1Dimension.html#doxid-classov-1-1-dimension"><span class="std std-ref">ov::Dimension</span></a><span></span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <a class="reference internal" href="../api/groups/classov_1_1Dimension.html#doxid-classov-1-1-dimension"><span class="std std-ref">ov::Dimension</span></a><span></span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span> <a class="reference internal" href="../api/groups/classov_1_1Dimension.html#doxid-classov-1-1-dimension"><span class="std std-ref">ov::Dimension</span></a><span></span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span> <a class="reference internal" href="../api/groups/classov_1_1Dimension.html#doxid-classov-1-1-dimension"><span class="std std-ref">ov::Dimension</span></a><span></span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">40</span><span class="p">)}});</span></pre></div></div></div><div class="sphinxtab" data-sphinxtab-value="Python"><div class="highlight"><div class="highlight"><pre><span></span><span class="n">core</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span>
 <span class="n">model</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><span class="n">read_model</span><span class="p">(</span><span class="s">&quot;model.xml&quot;</span><span class="p">)</span>
 <span class="n">model</span><span class="p">.</span><span class="n">reshape</span><span class="p">([(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">40</span><span class="p">)])</span></pre></div></div></div></div><div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Using fully undefined shapes may result in significantly higher memory consumption compared to inferring the same model with static shapes. If the level of memory consumption is unacceptable but dynamic shapes are still required, you can reshape the model using shapes with defined upper bounds to reduce memory footprint.</p>
 </div>
 <p>Some runtime optimizations work better if the model shapes are known in advance. Therefore, if the input data shape is not changed between inference calls, it is recommended to use a model with static shapes or reshape the existing model with the static input shape to get the best performance.</p>
-<div class='sphinxtabset'><div class="sphinxtab" data-sphinxtab-value="C++"><div class="highlight"><div class="highlight"><pre>ov::Core<span></span> <span class="n">core</span><span class="p">;</span>
-<span class="k">auto</span> model<span></span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span>read_model<span></span><span class="p">(</span><span class="s">&quot;model.xml&quot;</span><span class="p">);</span>
-ov::Shape<span></span> <span class="n">static_shape</span> <span class="o">=</span> <span class="p">{</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">};</span>
+<div class='sphinxtabset'><div class="sphinxtab" data-sphinxtab-value="C++"><div class="highlight"><div class="highlight"><pre><a class="reference internal" href="../api/groups/classov_1_1Core.html#doxid-classov-1-1-core"><span class="std std-ref">ov::Core</span></a><span></span> <span class="n">core</span><span class="p">;</span>
+<span class="k">auto</span> <a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga461856fdfb6d7533dc53355aec9e9fad"><span class="std std-ref">model</span></a><span></span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span>read_model<span></span><span class="p">(</span><span class="s">&quot;model.xml&quot;</span><span class="p">);</span>
+<a class="reference internal" href="../api/groups/classov_1_1Shape.html#doxid-classov-1-1-shape"><span class="std std-ref">ov::Shape</span></a><span></span> <span class="n">static_shape</span> <span class="o">=</span> <span class="p">{</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">};</span>
 
-model<span></span><span class="o">-&gt;</span><span class="n">reshape</span><span class="p">(</span><span class="n">static_shape</span><span class="p">);</span></pre></div></div></div><div class="sphinxtab" data-sphinxtab-value="Python"><div class="highlight"><div class="highlight"><pre><span></span><span class="n">core</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span>
+<a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga461856fdfb6d7533dc53355aec9e9fad"><span class="std std-ref">model</span></a><span></span><span class="o">-&gt;</span><span class="n">reshape</span><span class="p">(</span><span class="n">static_shape</span><span class="p">);</span></pre></div></div></div><div class="sphinxtab" data-sphinxtab-value="Python"><div class="highlight"><div class="highlight"><pre><span></span><span class="n">core</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span>
 <span class="n">model</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><span class="n">read_model</span><span class="p">(</span><span class="s">&quot;model.xml&quot;</span><span class="p">)</span>
 <span class="n">model</span><span class="p">.</span><span class="n">reshape</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">])</span></pre></div></div></div></div><p>See <a class="reference internal" href="openvino_docs_OV_UG_DynamicShapes.html#doxid-openvino-docs-o-v-u-g-dynamic-shapes"><span class="std std-ref">dynamic shapes guide</span></a> for more details.</p>
-</div>
-<div class="section" id="preprocessing-acceleration">
+</section>
+<section id="preprocessing-acceleration">
 <h3>Preprocessing acceleration<a class="headerlink" href="#preprocessing-acceleration" title="Permalink to this headline">¶</a></h3>
 <p>CPU plugin supports a full set of the preprocessing operations, providing high performance implementations for them.</p>
 <p>See <a class="reference internal" href="openvino_docs_OV_UG_Preprocessing_Overview.html#doxid-openvino-docs-o-v-u-g-preprocessing-overview"><span class="std std-ref">preprocessing API guide</span></a> for more details.</p>
@@ -2059,56 +2066,56 @@ The CPU plugin support for handling tensor precision conversion is limited to th
 <li><p class="card-text">boolean</p></li>
 </ul>
 </div>
-</details></div>
-<div class="section" id="model-caching">
+</details></section>
+<section id="model-caching">
 <h3>Model caching<a class="headerlink" href="#model-caching" title="Permalink to this headline">¶</a></h3>
-<p>The CPU device plugin supports Import/Export network capability. If model caching is enabled via the common OpenVINO™ <code class="docutils literal notranslate"><span class="pre">ov::cache_dir</span></code> property, the plugin will automatically create a cached blob inside the specified directory during model compilation. This cached blob contains partial representation of the network, having performed common runtime optimizations and low precision transformations. At the next attempt to compile the model, the cached representation will be loaded to the plugin instead of the initial IR, so the aforementioned steps will be skipped. These operations take a significant amount of time during model compilation, so caching their results makes subsequent compilations of the model much faster, thus reducing first inference latency (FIL).</p>
+<p>The CPU device plugin supports Import/Export network capability. If model caching is enabled via the common OpenVINO™ <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga3276fc4ed7cc7d0bbdcf0ae12063728d"><span class="std std-ref"><span class="pre">ov::cache_dir</span></span></a></code> property, the plugin will automatically create a cached blob inside the specified directory during model compilation. This cached blob contains partial representation of the network, having performed common runtime optimizations and low precision transformations. At the next attempt to compile the model, the cached representation will be loaded to the plugin instead of the initial IR, so the aforementioned steps will be skipped. These operations take a significant amount of time during model compilation, so caching their results makes subsequent compilations of the model much faster, thus reducing first inference latency (FIL).</p>
 <p>See <a class="reference internal" href="openvino_docs_OV_UG_Model_caching_overview.html#doxid-openvino-docs-o-v-u-g-model-caching-overview"><span class="std std-ref">model caching overview</span></a> for more details.</p>
-</div>
-<div class="section" id="extensibility">
+</section>
+<section id="extensibility">
 <h3>Extensibility<a class="headerlink" href="#extensibility" title="Permalink to this headline">¶</a></h3>
 <p>The CPU device plugin supports fallback on <code class="docutils literal notranslate"><span class="pre">ov::Op</span></code> reference implementation if it lacks own implementation of such operation. This means that <a class="reference internal" href="openvino_docs_Extensibility_UG_Intro.html#doxid-openvino-docs-extensibility-u-g-intro"><span class="std std-ref">OpenVINO™ Extensibility Mechanism</span></a> can be used for the plugin extension as well. To enable fallback on a custom operation implementation, override the <code class="docutils literal notranslate"><span class="pre">ov::Op::evaluate</span></code> method in the derived operation class (see <a class="reference internal" href="openvino_docs_Extensibility_UG_add_openvino_ops.html#doxid-openvino-docs-extensibility-u-g-add-openvino-ops"><span class="std std-ref">custom OpenVINO™ operations</span></a> for details).</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>At the moment, custom operations with internal dynamism (when the output tensor shape can only be determined as a result of performing the operation) are not supported by the plugin.</p>
 </div>
-</div>
-<div class="section" id="stateful-models">
+</section>
+<section id="stateful-models">
 <h3>Stateful models<a class="headerlink" href="#stateful-models" title="Permalink to this headline">¶</a></h3>
 <p>The CPU device plugin supports stateful models without any limitations.</p>
 <p>See <a class="reference internal" href="openvino_docs_OV_UG_network_state_intro.html#doxid-openvino-docs-o-v-u-g-network-state-intro"><span class="std std-ref">stateful models guide</span></a> for details.</p>
-</div>
-</div>
-<div class="section" id="supported-properties">
+</section>
+</section>
+<section id="supported-properties">
 <h2>Supported properties<a class="headerlink" href="#supported-properties" title="Permalink to this headline">¶</a></h2>
 <p>The plugin supports the following properties:</p>
-<div class="section" id="read-write-properties">
+<section id="read-write-properties">
 <h3>Read-write properties<a class="headerlink" href="#read-write-properties" title="Permalink to this headline">¶</a></h3>
-<p>All parameters must be set before calling <code class="docutils literal notranslate"><span class="pre">ov::Core::compile_model()</span></code> in order to take effect or passed as additional argument to <code class="docutils literal notranslate"><span class="pre">ov::Core::compile_model()</span></code></p>
+<p>All parameters must be set before calling <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1Core.html#doxid-classov-1-1-core-1a46555f0803e8c29524626be08e7f5c5a"><span class="std std-ref"><span class="pre">ov::Core::compile_model()</span></span></a></code> in order to take effect or passed as additional argument to <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1Core.html#doxid-classov-1-1-core-1a46555f0803e8c29524626be08e7f5c5a"><span class="std std-ref"><span class="pre">ov::Core::compile_model()</span></span></a></code></p>
 <ul class="simple">
-<li><p><span class="xref std std-ref">ov::enable_profiling</span></p></li>
-<li><p><span class="xref std std-ref">ov::hint::inference_precision</span></p></li>
-<li><p><span class="xref std std-ref">ov::hint::performance_mode</span></p></li>
+<li><p><a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1gafc5bef2fc2b5cfb5a0709cfb04346438"><span class="std std-ref">ov::enable_profiling</span></a></p></li>
+<li><p><a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1gad605a888f3c9b7598ab55023fbf44240"><span class="std std-ref">ov::hint::inference_precision</span></a></p></li>
+<li><p><a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga2691fe27acc8aa1d1700ad40b6da3ba2"><span class="std std-ref">ov::hint::performance_mode</span></a></p></li>
 <li><p>ov::hint::num_request</p></li>
-<li><p><span class="xref std std-ref">ov::num_streams</span></p></li>
-<li><p><span class="xref std std-ref">ov::affinity</span></p></li>
-<li><p><span class="xref std std-ref">ov::inference_num_threads</span></p></li>
+<li><p><a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga6c63a0223565f650475450fdb466bc0c"><span class="std std-ref">ov::num_streams</span></a></p></li>
+<li><p><a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga9c99a177a56685a70875302c59541887"><span class="std std-ref">ov::affinity</span></a></p></li>
+<li><p><a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1gae73c9d9977901744090317e2afe09440"><span class="std std-ref">ov::inference_num_threads</span></a></p></li>
 </ul>
-</div>
-<div class="section" id="read-only-properties">
+</section>
+<section id="read-only-properties">
 <h3>Read-only properties<a class="headerlink" href="#read-only-properties" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><p><span class="xref std std-ref">ov::cache_dir</span></p></li>
-<li><p><span class="xref std std-ref">ov::supported_properties</span></p></li>
-<li><p><span class="xref std std-ref">ov::available_devices</span></p></li>
-<li><p><span class="xref std std-ref">ov::range_for_async_infer_requests</span></p></li>
-<li><p><span class="xref std std-ref">ov::range_for_streams</span></p></li>
-<li><p><span class="xref std std-ref">ov::device::full_name</span></p></li>
-<li><p><span class="xref std std-ref">ov::device::capabilities</span></p></li>
+<li><p><a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga3276fc4ed7cc7d0bbdcf0ae12063728d"><span class="std std-ref">ov::cache_dir</span></a></p></li>
+<li><p><a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga097f1274f26f3f4e1aa4fc3928748592"><span class="std std-ref">ov::supported_properties</span></a></p></li>
+<li><p><a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1gac4d3e86ef4fc43b1a80ec28c7be39ef1"><span class="std std-ref">ov::available_devices</span></a></p></li>
+<li><p><a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga3549425153790834c212d905b8216196"><span class="std std-ref">ov::range_for_async_infer_requests</span></a></p></li>
+<li><p><a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga8a5d84196f6873729167aa512c34a94a"><span class="std std-ref">ov::range_for_streams</span></a></p></li>
+<li><p><a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1gaabacd9ea113b966be7b53b1d70fd6f42"><span class="std std-ref">ov::device::full_name</span></a></p></li>
+<li><p><a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1gadb13d62787fc4485733329f044987294"><span class="std std-ref">ov::device::capabilities</span></a></p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="external-dependencies">
+</section>
+</section>
+<section id="external-dependencies">
 <h2>External dependencies<a class="headerlink" href="#external-dependencies" title="Permalink to this headline">¶</a></h2>
 <p>For some performance-critical DL operations, the CPU plugin uses optimized implementations from the oneAPI Deep Neural Network Library (<a class="reference external" href="https://github.com/oneapi-src/oneDNN">oneDNN</a>).</p>
 <details class="sphinx-bs dropdown card mb-3">
@@ -2137,16 +2144,16 @@ The following operations are implemented using primitives from the OneDNN librar
 <li><p class="card-text">SoftMax</p></li>
 </ul>
 </div>
-</details></div>
-<div class="section" id="see-also">
+</details></section>
+<section id="see-also">
 <h2>See Also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="openvino_docs_OV_UG_supported_plugins_Supported_Devices.html#doxid-openvino-docs-o-v-u-g-supported-plugins-supported-devices"><span class="std std-ref">Supported Devices</span></a></p></li>
 <li><p><a class="reference internal" href="openvino_docs_optimization_guide_dldt_optimization_guide.html#doxid-openvino-docs-optimization-guide-dldt-optimization-guide"><span class="std std-ref">Optimization guide</span></a></p></li>
 <li><p><a class="reference external" href="https://github.com/openvinotoolkit/openvino/wiki/CPUPluginDevelopersDocs">СPU plugin developers documentation</a></p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -2177,7 +2184,7 @@ The following operations are implemented using primitives from the OneDNN librar
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

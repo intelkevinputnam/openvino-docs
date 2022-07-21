@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Smartlab Python* Demo &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../../../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -2074,7 +2081,7 @@
             
                 <div>
                   
-  <div class="section" id="smartlab-python-demo">
+  <section id="smartlab-python-demo">
 <h1>Smartlab Python* Demo<a class="headerlink" href="#smartlab-python-demo" title="Permalink to this headline">¶</a></h1>
 <p>This is the demo application with smartlab action recognition and smartlab object detection algorithms.
 This demo takes multi-view video inputs to identify actions and objects, then evaluates scores of current state.
@@ -2085,7 +2092,7 @@ The following pre-trained models are delivered with the product:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">i3d-rgb-tf</span></code> + <code class="docutils literal notranslate"><span class="pre">smartlab-sequence-modelling-0001</span></code>, which are other models for identifying actions 2 actions of smartlab (adjust_rider, put_take).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">smartlab-object-detection-0001</span></code> + <code class="docutils literal notranslate"><span class="pre">smartlab-object-detection-0002</span></code> + <code class="docutils literal notranslate"><span class="pre">smartlab-object-detection-0003</span></code> + <code class="docutils literal notranslate"><span class="pre">smartlab-object-detection-0004</span></code>, which are models for detecting smartlab objects (10 objects). They detect balance, weights, tweezers, box, battery, tray, ruler, rider, scale, hand.</p></li>
 </ul>
-<div class="section" id="how-it-works">
+<section id="how-it-works">
 <h2>How It works<a class="headerlink" href="#how-it-works" title="Permalink to this headline">¶</a></h2>
 <p>The demo pipeline consists of several steps:</p>
 <ul class="simple">
@@ -2098,8 +2105,8 @@ The following pre-trained models are delivered with the product:</p>
 <blockquote>
 <div><p><strong>NOTE</strong>: By default, Open Model Zoo demos expect input with BGR channels order. If you trained your model to work with RGB order, you need to manually rearrange the default channels order in the demo application or reconvert your model using the Model Optimizer tool with the <code class="docutils literal notranslate"><span class="pre">--reverse_input_channels</span></code> argument specified. For more information about the argument, refer to <strong>When to Reverse Input Channels</strong> section of [Embedding Preprocessing Computation](&#64;ref openvino_docs_MO_DG_Additional_Optimization_Use_Cases).</p>
 </div></blockquote>
-</div>
-<div class="section" id="preparing-to-run">
+</section>
+<section id="preparing-to-run">
 <h2>Preparing to Run<a class="headerlink" href="#preparing-to-run" title="Permalink to this headline">¶</a></h2>
 <p>For demo input image or video files, you need to provide smartlab videos (https://storage.openvinotoolkit.org/data/test_data/videos/smartlab/).
 The list of models supported by the demo is in <code class="docutils literal notranslate"><span class="pre">&lt;omz_dir&gt;/demos/smartlab_demo/python/models.lst</span></code> file.
@@ -2108,7 +2115,7 @@ This file can be used as a parameter for <span class="xref myst">Model Downloade
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>omz_downloader --list models.lst
 </pre></div>
 </div>
-<div class="section" id="supported-models">
+<section id="supported-models">
 <h3>Supported Models<a class="headerlink" href="#supported-models" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>smartlab-object-detection-0001</p></li>
@@ -2121,9 +2128,9 @@ This file can be used as a parameter for <span class="xref myst">Model Downloade
 <blockquote>
 <div><p><strong>NOTE</strong>: Refer to the tables <a class="reference internal" href="../../../models/intel/device_support.html"><span class="doc std std-doc">Intel’s Pre-Trained Models Device Support</span></a> and <a class="reference internal" href="../../../models/public/device_support.html"><span class="doc std std-doc">Public Pre-Trained Models Device Support</span></a> for the details on models inference support at different devices.</p>
 </div></blockquote>
-</div>
-</div>
-<div class="section" id="running">
+</section>
+</section>
+<section id="running">
 <h2>Running<a class="headerlink" href="#running" title="Permalink to this headline">¶</a></h2>
 <p>Running the demo with <code class="docutils literal notranslate"><span class="pre">-h</span></code> shows this help message:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">smartlab_demo</span><span class="o">.</span><span class="n">py</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">d</span> <span class="n">DEVICE</span><span class="p">]</span> <span class="o">-</span><span class="n">tv</span> <span class="n">TOPVIEW</span> <span class="o">-</span><span class="n">fv</span> <span class="n">FRONTVIEW</span> <span class="o">-</span><span class="n">m_ta</span> <span class="n">M_TOPALL</span> <span class="o">-</span><span class="n">m_tm</span> <span class="n">M_TOPMOVE</span> <span class="o">-</span><span class="n">m_fa</span> <span class="n">M_FRONTALL</span>
@@ -2165,20 +2172,20 @@ This file can be used as a parameter for <span class="xref myst">Model Downloade
     -m_de <span class="s2">&quot;./intel/smartlab-sequence-modelling-0001/FP32/smartlab-sequence-modelling-0001.xml&quot;</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="demo-output">
+</section>
+<section id="demo-output">
 <h2>Demo Output<a class="headerlink" href="#demo-output" title="Permalink to this headline">¶</a></h2>
 <p>The application uses OpenCV to display the real-time object detection, action recognition results and evaluation results.</p>
-</div>
-<div class="section" id="see-also">
+</section>
+<section id="see-also">
 <h2>See Also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="../../README.html"><span class="doc std std-doc">Open Model Zoo Demos</span></a></p></li>
 <li><p><a class="reference external" href="https://docs.openvino.ai/latest/openvino_docs_MO_DG_Deep_Learning_Model_Optimizer_DevGuide.html">Model Optimizer</a></p></li>
 <li><p><span class="xref myst">Model Downloader</span></p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -2209,7 +2216,7 @@ This file can be used as a parameter for <span class="xref myst">Model Downloade
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

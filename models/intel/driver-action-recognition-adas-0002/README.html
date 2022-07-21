@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>driver-action-recognition-adas-0002 (composite) &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../../../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -2101,17 +2108,17 @@
             
                 <div>
                   
-  <div class="section" id="driver-action-recognition-adas-0002-composite">
+  <section id="driver-action-recognition-adas-0002-composite">
 <h1>driver-action-recognition-adas-0002 (composite)<a class="headerlink" href="#driver-action-recognition-adas-0002-composite" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="use-case-and-high-level-description">
+<section id="use-case-and-high-level-description">
 <h2>Use Case and High-Level Description<a class="headerlink" href="#use-case-and-high-level-description" title="Permalink to this headline">¶</a></h2>
 <p>This is an action recognition composite model for the driver monitoring use case, consisting of encoder and decoder parts. The encoder model uses Video Transformer approach with MobileNetV2 encoder. It is able to recognize actions such as drinking, doing hair or making up, operating the radio, reaching behind, safe driving, talking on the phone, texting. The full list of recognized actions is located at <code class="docutils literal notranslate"><span class="pre">&lt;omz_dir&gt;/demos/action_recognition_demo/python/driver_actions.txt</span></code>.</p>
-</div>
-<div class="section" id="example">
+</section>
+<section id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <p><img alt="" src="../../../_images/action-recognition-kelly.png" /></p>
-</div>
-<div class="section" id="composite-model-specification">
+</section>
+<section id="composite-model-specification">
 <h2>Composite model specification<a class="headerlink" href="#composite-model-specification" title="Permalink to this headline">¶</a></h2>
 <table class="colwidths-auto table">
 <thead>
@@ -2125,8 +2132,8 @@
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="encoder-model-specification">
+</section>
+<section id="encoder-model-specification">
 <h2>Encoder model specification<a class="headerlink" href="#encoder-model-specification" title="Permalink to this headline">¶</a></h2>
 <p>The driver-action-recognition-adas-0002-encoder model accepts video frame and produces embedding.
 Video frames should be sampled to cover ~1 second fragment (i.e. skip every second frame in 30 fps video).</p>
@@ -2145,7 +2152,7 @@ Video frames should be sampled to cover ~1 second fragment (i.e. skip every seco
 </tr>
 </tbody>
 </table>
-<div class="section" id="inputs">
+<section id="inputs">
 <h3>Inputs<a class="headerlink" href="#inputs" title="Permalink to this headline">¶</a></h3>
 <p>Image, name: <code class="docutils literal notranslate"><span class="pre">0</span></code>, shape: <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">3,</span> <span class="pre">224,</span> <span class="pre">224</span></code> in the format <code class="docutils literal notranslate"><span class="pre">B,</span> <span class="pre">C,</span> <span class="pre">H,</span> <span class="pre">W</span></code>, where:</p>
 <ul class="simple">
@@ -2155,13 +2162,13 @@ Video frames should be sampled to cover ~1 second fragment (i.e. skip every seco
 <li><p><code class="docutils literal notranslate"><span class="pre">W</span></code> - image width</p></li>
 </ul>
 <p>Expected color order is <code class="docutils literal notranslate"><span class="pre">BGR</span></code>.</p>
-</div>
-<div class="section" id="outputs">
+</section>
+<section id="outputs">
 <h3>Outputs<a class="headerlink" href="#outputs" title="Permalink to this headline">¶</a></h3>
 <p>The model outputs a tensor with the shape <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">512,</span> <span class="pre">1,</span> <span class="pre">1</span></code>, representing embedding of processed frame.</p>
-</div>
-</div>
-<div class="section" id="decoder-model-specification">
+</section>
+</section>
+<section id="decoder-model-specification">
 <h2>Decoder model specification<a class="headerlink" href="#decoder-model-specification" title="Permalink to this headline">¶</a></h2>
 <p>The driver-action-recognition-adas-0002-decoder model accepts stack of frame embeddings, computed by driver-action-recognition-adas-0002-encoder, and produces prediction on input video.</p>
 <table class="colwidths-auto table">
@@ -2179,7 +2186,7 @@ Video frames should be sampled to cover ~1 second fragment (i.e. skip every seco
 </tr>
 </tbody>
 </table>
-<div class="section" id="id1">
+<section id="id1">
 <h3>Inputs<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <p>An embedding image, name: <code class="docutils literal notranslate"><span class="pre">0</span></code>, shape: <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">16,</span> <span class="pre">512</span></code> in the format <code class="docutils literal notranslate"><span class="pre">B,</span> <span class="pre">T,</span> <span class="pre">C</span></code>, where:</p>
 <ul class="simple">
@@ -2187,24 +2194,24 @@ Video frames should be sampled to cover ~1 second fragment (i.e. skip every seco
 <li><p><code class="docutils literal notranslate"><span class="pre">T</span></code> - duration of input clip</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">C</span></code> - dimension of embedding</p></li>
 </ul>
-</div>
-<div class="section" id="id2">
+</section>
+<section id="id2">
 <h3>Outputs<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <p>The model outputs a tensor with the shape <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">9</span></code>, each row is a logits vector of performed actions.</p>
-</div>
-</div>
-<div class="section" id="demo-usage">
+</section>
+</section>
+<section id="demo-usage">
 <h2>Demo usage<a class="headerlink" href="#demo-usage" title="Permalink to this headline">¶</a></h2>
 <p>The model can be used in the following demos provided by the Open Model Zoo to show its capabilities:</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="../../../demos/action_recognition_demo/python/README.html"><span class="doc std std-doc">Action Recognition Python* Demo</span></a></p></li>
 </ul>
-</div>
-<div class="section" id="legal-information">
+</section>
+<section id="legal-information">
 <h2>Legal Information<a class="headerlink" href="#legal-information" title="Permalink to this headline">¶</a></h2>
 <p>[*] Other names and brands may be claimed as the property of others.</p>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -2235,7 +2242,7 @@ Video frames should be sampled to cover ~1 second fragment (i.e. skip every seco
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

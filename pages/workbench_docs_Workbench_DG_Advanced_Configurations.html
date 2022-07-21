@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Advanced DL Workbench Configurations &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -1840,10 +1847,10 @@
             
                 <div>
                   
-  <div class="section" id="advanced-dl-workbench-configurations">
+  <section id="advanced-dl-workbench-configurations">
 <span id="doxid-workbench-docs-workbench-d-g-advanced-configurations"></span><span id="index-0"></span><h1>Advanced DL Workbench Configurations<a class="headerlink" href="#advanced-dl-workbench-configurations" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-workbench-docs-workbench-d-g-advanced-configurations-1md-openvino-workbench-docs-workbench-dg-advanced-config"></span> This document contains information on how to run DL Workbench in a more secure mode, the complete list of command-line interface arguments for Python Starter, and additional docker run command-line options.</p>
-<div class="section" id="python-starter-command-line-interface">
+<section id="python-starter-command-line-interface">
 <h2>Python Starter Command-Line Interface<a class="headerlink" href="#python-starter-command-line-interface" title="Permalink to this headline">¶</a></h2>
 <div class="collapsible-section"><p>Run this command to get a list of available starting arguments:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">openvino</span><span class="o">-</span><span class="n">workbench</span> <span class="o">--</span><span class="n">help</span></pre></div></div><p>Python Starter arguments:</p>
@@ -1983,8 +1990,8 @@
 <p class="admonition-title">Note</p>
 <p><code class="docutils literal notranslate"><span class="pre">--enable-myriad</span></code> and <code class="docutils literal notranslate"><span class="pre">--enable-hddl</span></code> cannot be set simultaneously because Intel® Neural Compute Stick 2 and Intel® Vision Accelerator Design with Intel® Movidius™ VPUs are incompatible and cannot be used in the DL Workbench together.</p>
 </div>
-</div></div>
-<div class="section" id="docker-run-command-line-interface">
+</div></section>
+<section id="docker-run-command-line-interface">
 <h2>Docker Run Command-Line Interface<a class="headerlink" href="#docker-run-command-line-interface" title="Permalink to this headline">¶</a></h2>
 <div class="collapsible-section"><p>You can run Docker containers with the following arguments:</p>
 <table class="table">
@@ -2043,17 +2050,17 @@
 </tbody>
 </table>
 <p>For other options, like launching the DL Workbench container or restarting the container, see <a class="reference internal" href="workbench_docs_Workbench_DG_Docker_Container.html#doxid-workbench-docs-workbench-d-g-docker-container"><span class="std std-ref">Docker Container section</span></a>.</p>
-</div></div>
-<div class="section" id="run-dl-workbench-securely">
+</div></section>
+<section id="run-dl-workbench-securely">
 <h2>Run DL Workbench Securely<a class="headerlink" href="#run-dl-workbench-securely" title="Permalink to this headline">¶</a></h2>
 <p>By default, the DL Workbench is started without authentication settings. If you want to protect your sensitive data, like the model details or performance information, you can <a class="reference external" href="https://docs.openvinotoolkit.org/latest/workbench_docs_Workbench_DG_Authentication.html">enable authentication</a> in DL Workbench and use a <a class="reference external" href="https://docs.openvinotoolkit.org/latest/workbench_docs_Workbench_DG_Configure_TLS.html">self-signed certificate</a>.</p>
-</div>
-<div class="section" id="disable-jupyterlab-inside-dl-workbench">
+</section>
+<section id="disable-jupyterlab-inside-dl-workbench">
 <h2>Disable JupyterLab inside DL Workbench<a class="headerlink" href="#disable-jupyterlab-inside-dl-workbench" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference internal" href="workbench_docs_Workbench_DG_Jupyter_Notebooks.html#doxid-workbench-docs-workbench-d-g-jupyter-notebooks"><span class="std std-ref">Jupyter notebooks</span></a> running in the same Docker container as the DL Workbench can impact inference results of experiments inside the DL Workbench. To get more accurate performance information, you might want to disable JupyterLab Environment. Use the <code class="docutils literal notranslate"><span class="pre">DISABLE_JUPYTER</span></code> or <code class="docutils literal notranslate"><span class="pre">--no-jupyter</span></code> argument when starting the DL Workbench. For example:</p>
 <div class="tab-set docutils">
 <input checked="True" class="tab-input" id="tab-set--0-input--1" name="tab-set--0" type="radio"><label class="tab-label" for="tab-set--0-input--1"><cite>docker run</cite> command</label><div class="tab-content docutils">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">p</span> <span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">5665</span><span class="p">:</span><span class="mi">5665</span> <span class="o">--</span><span class="n">name</span> <span class="n">workbench</span> <span class="o">-</span><span class="n">e</span> <span class="n">DISABLE_JUPYTER</span><span class="o">=</span><span class="mi">1</span> <span class="o">-</span><span class="n">it</span> <span class="n">openvino</span><span class="o">/</span><span class="n">workbench</span><span class="p">:</span><span class="n">latest</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">p</span> <span class="mf">127.0.0.1</span><span class="p">:</span><span class="mi">5665</span><span class="p">:</span><span class="mi">5665</span> <span class="o">--</span><span class="n">name</span> <span class="n">workbench</span> <span class="o">-</span><span class="n">e</span> <span class="n">DISABLE_JUPYTER</span><span class="o">=</span><span class="mi">1</span> <span class="o">-</span><span class="n">it</span> <span class="n">openvino</span><span class="o">/</span><span class="n">workbench</span><span class="p">:</span><span class="n">latest</span>
 </pre></div>
 </div>
 </div>
@@ -2063,15 +2070,15 @@
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="see-also">
+</section>
+<section id="see-also">
 <h2>See Also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="workbench_docs_Workbench_DG_Work_with_Models_and_Sample_Datasets.html#doxid-workbench-docs-workbench-d-g-work-with-models-and-sample-datasets"><span class="std std-ref">Next Step: Get Started with DL Workbench</span></a></p></li>
 <li><p><a class="reference internal" href="workbench_docs_Workbench_DG_Troubleshooting.html#doxid-workbench-docs-workbench-d-g-troubleshooting"><span class="std std-ref">Troubleshooting</span></a></p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -2102,7 +2109,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

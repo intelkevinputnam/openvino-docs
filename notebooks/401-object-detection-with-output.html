@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Live Object Detection with OpenVINO &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -546,7 +553,7 @@
             
                 <div>
                   
-  <div class="section" id="live-object-detection-with-openvino">
+  <section id="live-object-detection-with-openvino">
 <h1>Live Object Detection with OpenVINO<a class="headerlink" href="#live-object-detection-with-openvino" title="Permalink to this headline">¶</a></h1>
 <p>This notebook demonstrates live object detection with OpenVINO. We use
 the <a class="reference external" href="https://github.com/openvinotoolkit/open_model_zoo/tree/master/models/public/ssdlite_mobilenet_v2">SSDLite
@@ -561,7 +568,7 @@ notebook on a computer with a webcam. If you run the notebook on a
 server, the webcam will not work. You can still do inference on a
 video.</em></p>
 </div></blockquote>
-<div class="section" id="imports">
+<section id="imports">
 <h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">collections</span>
 <span class="kn">import</span> <span class="nn">os</span>
@@ -577,10 +584,10 @@ video.</em></p>
 <span class="kn">import</span> <span class="nn">notebook_utils</span> <span class="k">as</span> <span class="nn">utils</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="the-model">
+</section>
+<section id="the-model">
 <h2>The Model<a class="headerlink" href="#the-model" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="download-the-model">
+<section id="download-the-model">
 <h3>Download the Model<a class="headerlink" href="#download-the-model" title="Permalink to this headline">¶</a></h3>
 <p>We use <code class="docutils literal notranslate"><span class="pre">omz_downloader</span></code>, which is a command-line tool from the
 <code class="docutils literal notranslate"><span class="pre">openvino-dev</span></code> package. <code class="docutils literal notranslate"><span class="pre">omz_downloader</span></code> automatically creates a
@@ -614,8 +621,8 @@ different pre- and post-processing.</em></p>
 <span class="o">==========</span> <span class="n">Unpacking</span> <span class="n">model</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">ssdlite_mobilenet_v2</span><span class="o">/</span><span class="n">ssdlite_mobilenet_v2_coco_2018_05_09</span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="convert-the-model">
+</section>
+<section id="convert-the-model">
 <h3>Convert the Model<a class="headerlink" href="#convert-the-model" title="Permalink to this headline">¶</a></h3>
 <p>The pre-trained model is in TensorFlow format. To use it with OpenVINO,
 we need to convert it to OpenVINO IR format. To do this, we use Model
@@ -639,7 +646,7 @@ model may have different precisions available</em></p>
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">==========</span> <span class="n">Converting</span> <span class="n">ssdlite_mobilenet_v2</span> <span class="n">to</span> <span class="n">IR</span> <span class="p">(</span><span class="n">FP16</span><span class="p">)</span>
-<span class="n">Conversion</span> <span class="n">command</span><span class="p">:</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8</span><span class="o">.</span><span class="mi">12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">python</span> <span class="o">--</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8</span><span class="o">.</span><span class="mi">12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">mo</span> <span class="o">--</span><span class="n">framework</span><span class="o">=</span><span class="n">tf</span> <span class="o">--</span><span class="n">data_type</span><span class="o">=</span><span class="n">FP16</span> <span class="o">--</span><span class="n">output_dir</span><span class="o">=</span><span class="n">model</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">ssdlite_mobilenet_v2</span><span class="o">/</span><span class="n">FP16</span> <span class="o">--</span><span class="n">model_name</span><span class="o">=</span><span class="n">ssdlite_mobilenet_v2</span> <span class="o">--</span><span class="nb">input</span><span class="o">=</span><span class="n">image_tensor</span> <span class="o">--</span><span class="n">reverse_input_channels</span> <span class="o">--</span><span class="n">output</span><span class="o">=</span><span class="n">detection_scores</span><span class="p">,</span><span class="n">detection_boxes</span><span class="p">,</span><span class="n">num_detections</span> <span class="o">--</span><span class="n">transformations_config</span><span class="o">=/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8</span><span class="o">.</span><span class="mi">12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">openvino</span><span class="o">/</span><span class="n">tools</span><span class="o">/</span><span class="n">mo</span><span class="o">/</span><span class="n">front</span><span class="o">/</span><span class="n">tf</span><span class="o">/</span><span class="n">ssd_v2_support</span><span class="o">.</span><span class="n">json</span> <span class="o">--</span><span class="n">tensorflow_object_detection_api_pipeline_config</span><span class="o">=</span><span class="n">model</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">ssdlite_mobilenet_v2</span><span class="o">/</span><span class="n">ssdlite_mobilenet_v2_coco_2018_05_09</span><span class="o">/</span><span class="n">pipeline</span><span class="o">.</span><span class="n">config</span> <span class="o">--</span><span class="n">input_model</span><span class="o">=</span><span class="n">model</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">ssdlite_mobilenet_v2</span><span class="o">/</span><span class="n">ssdlite_mobilenet_v2_coco_2018_05_09</span><span class="o">/</span><span class="n">frozen_inference_graph</span><span class="o">.</span><span class="n">pb</span> <span class="s1">&#39;--layout=image_tensor(NHWC)&#39;</span> <span class="s1">&#39;--input_shape=[1, 300, 300, 3]&#39;</span>
+<span class="n">Conversion</span> <span class="n">command</span><span class="p">:</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">python</span> <span class="o">--</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">mo</span> <span class="o">--</span><span class="n">framework</span><span class="o">=</span><span class="n">tf</span> <span class="o">--</span><span class="n">data_type</span><span class="o">=</span><span class="n">FP16</span> <span class="o">--</span><span class="n">output_dir</span><span class="o">=</span><span class="n">model</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">ssdlite_mobilenet_v2</span><span class="o">/</span><span class="n">FP16</span> <span class="o">--</span><span class="n">model_name</span><span class="o">=</span><span class="n">ssdlite_mobilenet_v2</span> <span class="o">--</span><span class="nb">input</span><span class="o">=</span><span class="n">image_tensor</span> <span class="o">--</span><span class="n">reverse_input_channels</span> <span class="o">--</span><span class="n">output</span><span class="o">=</span><span class="n">detection_scores</span><span class="p">,</span><span class="n">detection_boxes</span><span class="p">,</span><span class="n">num_detections</span> <span class="o">--</span><span class="n">transformations_config</span><span class="o">=/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">openvino</span><span class="o">/</span><span class="n">tools</span><span class="o">/</span><span class="n">mo</span><span class="o">/</span><span class="n">front</span><span class="o">/</span><span class="n">tf</span><span class="o">/</span><span class="n">ssd_v2_support</span><span class="o">.</span><span class="n">json</span> <span class="o">--</span><span class="n">tensorflow_object_detection_api_pipeline_config</span><span class="o">=</span><span class="n">model</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">ssdlite_mobilenet_v2</span><span class="o">/</span><span class="n">ssdlite_mobilenet_v2_coco_2018_05_09</span><span class="o">/</span><span class="n">pipeline</span><span class="o">.</span><span class="n">config</span> <span class="o">--</span><span class="n">input_model</span><span class="o">=</span><span class="n">model</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">ssdlite_mobilenet_v2</span><span class="o">/</span><span class="n">ssdlite_mobilenet_v2_coco_2018_05_09</span><span class="o">/</span><span class="n">frozen_inference_graph</span><span class="o">.</span><span class="n">pb</span> <span class="s1">&#39;--layout=image_tensor(NHWC)&#39;</span> <span class="s1">&#39;--input_shape=[1, 300, 300, 3]&#39;</span>
 
 <span class="n">Model</span> <span class="n">Optimizer</span> <span class="n">arguments</span><span class="p">:</span>
 <span class="n">Common</span> <span class="n">parameters</span><span class="p">:</span>
@@ -662,7 +669,7 @@ model may have different precisions available</em></p>
     <span class="o">-</span> <span class="n">User</span> <span class="n">transformations</span><span class="p">:</span>     <span class="n">Not</span> <span class="n">specified</span>
     <span class="o">-</span> <span class="n">Reverse</span> <span class="nb">input</span> <span class="n">channels</span><span class="p">:</span>   <span class="kc">True</span>
     <span class="o">-</span> <span class="n">Enable</span> <span class="n">IR</span> <span class="n">generation</span> <span class="k">for</span> <span class="n">fixed</span> <span class="nb">input</span> <span class="n">shape</span><span class="p">:</span>   <span class="kc">False</span>
-    <span class="o">-</span> <span class="n">Use</span> <span class="n">the</span> <span class="n">transformations</span> <span class="n">config</span> <span class="n">file</span><span class="p">:</span>  <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8</span><span class="o">.</span><span class="mi">12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">openvino</span><span class="o">/</span><span class="n">tools</span><span class="o">/</span><span class="n">mo</span><span class="o">/</span><span class="n">front</span><span class="o">/</span><span class="n">tf</span><span class="o">/</span><span class="n">ssd_v2_support</span><span class="o">.</span><span class="n">json</span>
+    <span class="o">-</span> <span class="n">Use</span> <span class="n">the</span> <span class="n">transformations</span> <span class="n">config</span> <span class="n">file</span><span class="p">:</span>  <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">openvino</span><span class="o">/</span><span class="n">tools</span><span class="o">/</span><span class="n">mo</span><span class="o">/</span><span class="n">front</span><span class="o">/</span><span class="n">tf</span><span class="o">/</span><span class="n">ssd_v2_support</span><span class="o">.</span><span class="n">json</span>
 <span class="n">Advanced</span> <span class="n">parameters</span><span class="p">:</span>
     <span class="o">-</span> <span class="n">Force</span> <span class="n">the</span> <span class="n">usage</span> <span class="n">of</span> <span class="n">legacy</span> <span class="n">Frontend</span> <span class="n">of</span> <span class="n">Model</span> <span class="n">Optimizer</span> <span class="k">for</span> <span class="n">model</span> <span class="n">conversion</span> <span class="n">into</span> <span class="n">IR</span><span class="p">:</span>   <span class="kc">False</span>
     <span class="o">-</span> <span class="n">Force</span> <span class="n">the</span> <span class="n">usage</span> <span class="n">of</span> <span class="n">new</span> <span class="n">Frontend</span> <span class="n">of</span> <span class="n">Model</span> <span class="n">Optimizer</span> <span class="k">for</span> <span class="n">model</span> <span class="n">conversion</span> <span class="n">into</span> <span class="n">IR</span><span class="p">:</span>  <span class="kc">False</span>
@@ -673,9 +680,9 @@ model may have different precisions available</em></p>
     <span class="o">-</span> <span class="n">Update</span> <span class="n">the</span> <span class="n">configuration</span> <span class="n">file</span> <span class="k">with</span> <span class="nb">input</span><span class="o">/</span><span class="n">output</span> <span class="n">node</span> <span class="n">names</span><span class="p">:</span>   <span class="kc">None</span>
     <span class="o">-</span> <span class="n">Use</span> <span class="n">configuration</span> <span class="n">file</span> <span class="n">used</span> <span class="n">to</span> <span class="n">generate</span> <span class="n">the</span> <span class="n">model</span> <span class="k">with</span> <span class="n">Object</span> <span class="n">Detection</span> <span class="n">API</span><span class="p">:</span>  <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">work</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">notebooks</span><span class="o">/</span><span class="mi">401</span><span class="o">-</span><span class="nb">object</span><span class="o">-</span><span class="n">detection</span><span class="o">-</span><span class="n">webcam</span><span class="o">/</span><span class="n">model</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">ssdlite_mobilenet_v2</span><span class="o">/</span><span class="n">ssdlite_mobilenet_v2_coco_2018_05_09</span><span class="o">/</span><span class="n">pipeline</span><span class="o">.</span><span class="n">config</span>
     <span class="o">-</span> <span class="n">Use</span> <span class="n">the</span> <span class="n">config</span> <span class="n">file</span><span class="p">:</span>  <span class="kc">None</span>
-<span class="n">OpenVINO</span> <span class="n">runtime</span> <span class="n">found</span> <span class="ow">in</span><span class="p">:</span>  <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8</span><span class="o">.</span><span class="mi">12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">openvino</span>
-<span class="n">OpenVINO</span> <span class="n">runtime</span> <span class="n">version</span><span class="p">:</span>   <span class="mf">2022.1</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="mi">7019</span><span class="o">-</span><span class="n">cdb9bec7210</span><span class="o">-</span><span class="n">releases</span><span class="o">/</span><span class="mi">2022</span><span class="o">/</span><span class="mi">1</span>
-<span class="n">Model</span> <span class="n">Optimizer</span> <span class="n">version</span><span class="p">:</span>    <span class="mf">2022.1</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="mi">7019</span><span class="o">-</span><span class="n">cdb9bec7210</span><span class="o">-</span><span class="n">releases</span><span class="o">/</span><span class="mi">2022</span><span class="o">/</span><span class="mi">1</span>
+<span class="n">OpenVINO</span> <span class="n">runtime</span> <span class="n">found</span> <span class="ow">in</span><span class="p">:</span>  <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">openvino</span>
+<span class="n">OpenVINO</span> <span class="n">runtime</span> <span class="n">version</span><span class="p">:</span>   <span class="mf">2022.1.0</span><span class="o">-</span><span class="mi">7019</span><span class="o">-</span><span class="n">cdb9bec7210</span><span class="o">-</span><span class="n">releases</span><span class="o">/</span><span class="mi">2022</span><span class="o">/</span><span class="mi">1</span>
+<span class="n">Model</span> <span class="n">Optimizer</span> <span class="n">version</span><span class="p">:</span>    <span class="mf">2022.1.0</span><span class="o">-</span><span class="mi">7019</span><span class="o">-</span><span class="n">cdb9bec7210</span><span class="o">-</span><span class="n">releases</span><span class="o">/</span><span class="mi">2022</span><span class="o">/</span><span class="mi">1</span>
 <span class="p">[</span> <span class="n">WARNING</span> <span class="p">]</span>  <span class="n">The</span> <span class="n">Preprocessor</span> <span class="n">block</span> <span class="n">has</span> <span class="n">been</span> <span class="n">removed</span><span class="o">.</span> <span class="n">Only</span> <span class="n">nodes</span> <span class="n">performing</span> <span class="n">mean</span> <span class="n">value</span> <span class="n">subtraction</span> <span class="ow">and</span> <span class="n">scaling</span> <span class="p">(</span><span class="k">if</span> <span class="n">applicable</span><span class="p">)</span> <span class="n">are</span> <span class="n">kept</span><span class="o">.</span>
 <span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">Generated</span> <span class="n">IR</span> <span class="n">version</span> <span class="mi">11</span> <span class="n">model</span><span class="o">.</span>
 <span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">XML</span> <span class="n">file</span><span class="p">:</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">work</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">notebooks</span><span class="o">/</span><span class="mi">401</span><span class="o">-</span><span class="nb">object</span><span class="o">-</span><span class="n">detection</span><span class="o">-</span><span class="n">webcam</span><span class="o">/</span><span class="n">model</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">ssdlite_mobilenet_v2</span><span class="o">/</span><span class="n">FP16</span><span class="o">/</span><span class="n">ssdlite_mobilenet_v2</span><span class="o">.</span><span class="n">xml</span>
@@ -683,12 +690,12 @@ model may have different precisions available</em></p>
 <span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">Total</span> <span class="n">execution</span> <span class="n">time</span><span class="p">:</span> <span class="mf">64.69</span> <span class="n">seconds</span><span class="o">.</span>
 <span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">Memory</span> <span class="n">consumed</span><span class="p">:</span> <span class="mi">474</span> <span class="n">MB</span><span class="o">.</span>
 <span class="n">It</span><span class="s1">&#39;s been a while, check for a new version of Intel(R) Distribution of OpenVINO(TM) toolkit here https://software.intel.com/content/www/us/en/develop/tools/openvino-toolkit/download.html?cid=other&amp;source=prod&amp;campid=ww_2022_bu_IOTG_OpenVINO-2022-1&amp;content=upg_all&amp;medium=organic or on the GitHub*</span>
-<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">The</span> <span class="n">model</span> <span class="n">was</span> <span class="n">converted</span> <span class="n">to</span> <span class="n">IR</span> <span class="n">v11</span><span class="p">,</span> <span class="n">the</span> <span class="n">latest</span> <span class="n">model</span> <span class="nb">format</span> <span class="n">that</span> <span class="n">corresponds</span> <span class="n">to</span> <span class="n">the</span> <span class="n">source</span> <span class="n">DL</span> <span class="n">framework</span> <span class="nb">input</span><span class="o">/</span><span class="n">output</span> <span class="nb">format</span><span class="o">.</span> <span class="n">While</span> <span class="n">IR</span> <span class="n">v11</span> <span class="ow">is</span> <span class="n">backwards</span> <span class="n">compatible</span> <span class="k">with</span> <span class="n">OpenVINO</span> <span class="n">Inference</span> <span class="n">Engine</span> <span class="n">API</span> <span class="n">v1</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span> <span class="n">please</span> <span class="n">use</span> <span class="n">API</span> <span class="n">v2</span><span class="o">.</span><span class="mi">0</span> <span class="p">(</span><span class="k">as</span> <span class="n">of</span> <span class="mf">2022.1</span><span class="p">)</span> <span class="n">to</span> <span class="n">take</span> <span class="n">advantage</span> <span class="n">of</span> <span class="n">the</span> <span class="n">latest</span> <span class="n">improvements</span> <span class="ow">in</span> <span class="n">IR</span> <span class="n">v11</span><span class="o">.</span>
-<span class="n">Find</span> <span class="n">more</span> <span class="n">information</span> <span class="n">about</span> <span class="n">API</span> <span class="n">v2</span><span class="o">.</span><span class="mi">0</span> <span class="ow">and</span> <span class="n">IR</span> <span class="n">v11</span> <span class="n">at</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">docs</span><span class="o">.</span><span class="n">openvino</span><span class="o">.</span><span class="n">ai</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">The</span> <span class="n">model</span> <span class="n">was</span> <span class="n">converted</span> <span class="n">to</span> <span class="n">IR</span> <span class="n">v11</span><span class="p">,</span> <span class="n">the</span> <span class="n">latest</span> <span class="n">model</span> <span class="nb">format</span> <span class="n">that</span> <span class="n">corresponds</span> <span class="n">to</span> <span class="n">the</span> <span class="n">source</span> <span class="n">DL</span> <span class="n">framework</span> <span class="nb">input</span><span class="o">/</span><span class="n">output</span> <span class="nb">format</span><span class="o">.</span> <span class="n">While</span> <span class="n">IR</span> <span class="n">v11</span> <span class="ow">is</span> <span class="n">backwards</span> <span class="n">compatible</span> <span class="k">with</span> <span class="n">OpenVINO</span> <span class="n">Inference</span> <span class="n">Engine</span> <span class="n">API</span> <span class="n">v1</span><span class="mf">.0</span><span class="p">,</span> <span class="n">please</span> <span class="n">use</span> <span class="n">API</span> <span class="n">v2</span><span class="mf">.0</span> <span class="p">(</span><span class="k">as</span> <span class="n">of</span> <span class="mf">2022.1</span><span class="p">)</span> <span class="n">to</span> <span class="n">take</span> <span class="n">advantage</span> <span class="n">of</span> <span class="n">the</span> <span class="n">latest</span> <span class="n">improvements</span> <span class="ow">in</span> <span class="n">IR</span> <span class="n">v11</span><span class="o">.</span>
+<span class="n">Find</span> <span class="n">more</span> <span class="n">information</span> <span class="n">about</span> <span class="n">API</span> <span class="n">v2</span><span class="mf">.0</span> <span class="ow">and</span> <span class="n">IR</span> <span class="n">v11</span> <span class="n">at</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">docs</span><span class="o">.</span><span class="n">openvino</span><span class="o">.</span><span class="n">ai</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="load-the-model">
+</section>
+<section id="load-the-model">
 <h3>Load the Model<a class="headerlink" href="#load-the-model" title="Permalink to this headline">¶</a></h3>
 <p>Downloaded models are located in a fixed structure, which indicates
 vendor (intel or public), model name and precision.</p>
@@ -726,11 +733,11 @@ and one output.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="s1">&#39;image_tensor&#39;</span><span class="p">,</span> <span class="s1">&#39;detection_boxes&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="processing">
+</section>
+</section>
+<section id="processing">
 <h2>Processing<a class="headerlink" href="#processing" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="process-results">
+<section id="process-results">
 <h3>Process Results<a class="headerlink" href="#process-results" title="Permalink to this headline">¶</a></h3>
 <p>Firstly, we list all available classes and create colors for them. Then,
 in the post-process stage, we transform boxes with normalized
@@ -817,8 +824,8 @@ threshold (0.5). Finally, we draw boxes and labels inside them.</p>
     <span class="k">return</span> <span class="n">frame</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="main-processing-function">
+</section>
+<section id="main-processing-function">
 <h3>Main Processing Function<a class="headerlink" href="#main-processing-function" title="Permalink to this headline">¶</a></h3>
 <p>Run object detection on the specified source. Either a webcam or a video
 file.</p>
@@ -926,11 +933,11 @@ file.</p>
             <span class="n">cv2</span><span class="o">.</span><span class="n">destroyAllWindows</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="run">
+</section>
+</section>
+<section id="run">
 <h2>Run<a class="headerlink" href="#run" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="run-live-object-detection">
+<section id="run-live-object-detection">
 <h3>Run Live Object Detection<a class="headerlink" href="#run-live-object-detection" title="Permalink to this headline">¶</a></h3>
 <p>Run using a webcam as the video input. By default, the primary webcam is
 set with <code class="docutils literal notranslate"><span class="pre">source=0</span></code>. If you have multiple webcams, each one will be
@@ -949,8 +956,8 @@ computer (e.g. Binder).</em></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Cannot</span> <span class="nb">open</span> <span class="n">camera</span> <span class="mi">0</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="run-object-detection-on-a-video-file">
+</section>
+<section id="run-object-detection-on-a-video-file">
 <h3>Run Object Detection on a Video File<a class="headerlink" href="#run-object-detection-on-a-video-file" title="Permalink to this headline">¶</a></h3>
 <p>If you don’t have a webcam, you can still run this demo with a video
 file. Any <a class="reference external" href="https://docs.opencv.org/4.5.1/dd/d43/tutorial_py_video_display.html">format supported by
@@ -965,9 +972,9 @@ will work.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Source</span> <span class="n">ended</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="references">
+</section>
+</section>
+<section id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
 <li><p><a class="reference external" href="https://github.com/openvinotoolkit/open_model_zoo/tree/master/models/public/ssdlite_mobilenet_v2">SSDLite
@@ -977,8 +984,8 @@ Zoo</a></p></li>
 <li><p><a class="reference external" href="https://paperswithcode.com/method/non-maximum-suppression">Non-Maximum
 Suppression</a></p></li>
 </ol>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -1009,7 +1016,7 @@ Suppression</a></p></li>
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

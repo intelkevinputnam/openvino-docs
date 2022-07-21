@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Convert Kaldi* ASpIRE Chain Time Delay Neural Network (TDNN) Model &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -1842,15 +1849,15 @@
             
                 <div>
                   
-  <div class="section" id="convert-kaldi-aspire-chain-time-delay-neural-network-tdnn-model">
+  <section id="convert-kaldi-aspire-chain-time-delay-neural-network-tdnn-model">
 <span id="doxid-openvino-docs-m-o-d-g-prepare-model-convert-model-kaldi-specific-aspire-tdnn-model"></span><span id="index-0"></span><h1>Convert Kaldi* ASpIRE Chain Time Delay Neural Network (TDNN) Model<a class="headerlink" href="#convert-kaldi-aspire-chain-time-delay-neural-network-tdnn-model" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-openvino-docs-m-o-d-g-prepare-model-convert-model-kaldi-specific-aspire-tdnn-model-1md-openvino-docs-mo-dg-prepare-model-convert-model-kaldi-specific-aspire-tdnn-model"></span> You can <a class="reference external" href="https://kaldi-asr.org/models/1/0001_aspire_chain_model.tar.gz">download a pre-trained model</a> for the ASpIRE Chain Time Delay Neural Network (TDNN) from the Kaldi* project official website.</p>
-<div class="section" id="convert-aspire-chain-tdnn-model-to-ir">
+<section id="convert-aspire-chain-tdnn-model-to-ir">
 <h2>Convert ASpIRE Chain TDNN Model to IR<a class="headerlink" href="#convert-aspire-chain-tdnn-model-to-ir" title="Permalink to this headline">¶</a></h2>
 <p>To generate the Intermediate Representation (IR) of the model, run the Model Optimizer with the following parameters:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">mo</span> <span class="o">--</span><span class="n">input_model</span> <span class="n">exp</span><span class="o">/</span><span class="n">chain</span><span class="o">/</span><span class="n">tdnn_7b</span><span class="o">/</span><span class="k">final</span><span class="p">.</span><span class="n">mdl</span> <span class="o">--</span><span class="n">output</span> <span class="n">output</span></pre></div></div><p>The IR will have two inputs: <code class="docutils literal notranslate"><span class="pre">input</span></code> for data and <code class="docutils literal notranslate"><span class="pre">ivector</span></code> for ivectors.</p>
-</div>
-<div class="section" id="example-run-aspire-chain-tdnn-model-with-the-speech-recognition-sample">
+</section>
+<section id="example-run-aspire-chain-tdnn-model-with-the-speech-recognition-sample">
 <h2>Example: Run ASpIRE Chain TDNN Model with the Speech Recognition Sample<a class="headerlink" href="#example-run-aspire-chain-tdnn-model-with-the-speech-recognition-sample" title="Permalink to this headline">¶</a></h2>
 <p>These instructions show how to run the converted model with the <a class="reference internal" href="openvino_inference_engine_samples_speech_sample_README.html#doxid-openvino-inference-engine-samples-speech-sample-r-e-a-d-m-e"><span class="std std-ref">Speech Recognition sample</span></a>. In this example, the input data contains one utterance from one speaker.</p>
 <p>To follow the steps described below, you must first do the following:</p>
@@ -1865,12 +1872,12 @@
 <li><p>Prepare the model for decoding. Refer to the <code class="docutils literal notranslate"><span class="pre">README.txt</span></code> file from the downloaded model archive for instructions.</p></li>
 <li><p>Convert data and ivectors to <code class="docutils literal notranslate"><span class="pre">.ark</span></code> format. Refer to the corresponding sections below for instructions.</p></li>
 </ol>
-<div class="section" id="prepare-data">
+<section id="prepare-data">
 <h3>Prepare Data<a class="headerlink" href="#prepare-data" title="Permalink to this headline">¶</a></h3>
 <p>If you have a <code class="docutils literal notranslate"><span class="pre">.wav</span></code> data file, you can convert it to <code class="docutils literal notranslate"><span class="pre">.ark</span></code> format using the following command:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">path_to_kaldi_repo</span><span class="o">&gt;/</span><span class="n">src</span><span class="o">/</span><span class="n">featbin</span><span class="o">/</span><span class="n">compute</span><span class="o">-</span><span class="n">mfcc</span><span class="o">-</span><span class="n">feats</span> <span class="o">--</span><span class="n">config</span><span class="o">=&lt;</span><span class="n">path_to_kaldi_repo</span><span class="o">&gt;/</span><span class="n">egs</span><span class="o">/</span><span class="n">aspire</span><span class="o">/</span><span class="n">s5</span><span class="o">/</span><span class="n">conf</span><span class="o">/</span><span class="n">mfcc_hires</span><span class="p">.</span><span class="n">conf</span> <span class="nl">scp</span><span class="p">:.</span><span class="o">/</span><span class="n">wav</span><span class="p">.</span><span class="n">scp</span> <span class="n">ark</span><span class="p">,</span><span class="nl">scp</span><span class="p">:</span><span class="n">feats</span><span class="p">.</span><span class="n">ark</span><span class="p">,</span><span class="n">feats</span><span class="p">.</span><span class="n">scp</span></pre></div></div><p>Add the <code class="docutils literal notranslate"><span class="pre">feats.ark</span></code> absolute path to <code class="docutils literal notranslate"><span class="pre">feats.scp</span></code> to avoid errors in later commands.</p>
-</div>
-<div class="section" id="prepare-ivectors">
+</section>
+<section id="prepare-ivectors">
 <h3>Prepare Ivectors<a class="headerlink" href="#prepare-ivectors" title="Permalink to this headline">¶</a></h3>
 <p>To prepare ivectors for the Speech Recognition sample, do the following:</p>
 <ol class="arabic">
@@ -1911,14 +1918,14 @@
 <li><p>Create an <code class="docutils literal notranslate"><span class="pre">.ark</span></code> file from <code class="docutils literal notranslate"><span class="pre">.txt</span></code> :</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">path_to_kaldi_repo</span><span class="o">&gt;/</span><span class="n">src</span><span class="o">/</span><span class="n">featbin</span><span class="o">/</span><span class="n">copy</span><span class="o">-</span><span class="n">feats</span> <span class="o">--</span><span class="n">binary</span><span class="o">=</span><span class="n">True</span> <span class="n">ark</span><span class="p">,</span><span class="nl">t</span><span class="p">:</span><span class="n">ivector_online_ie</span><span class="p">.</span><span class="n">ark</span><span class="p">.</span><span class="n">txt</span> <span class="nl">ark</span><span class="p">:</span><span class="n">ivector_online_ie</span><span class="p">.</span><span class="n">ark</span></pre></div></div></li>
 </ol>
-</div>
-<div class="section" id="run-the-speech-recognition-sample">
+</section>
+<section id="run-the-speech-recognition-sample">
 <h3>Run the Speech Recognition Sample<a class="headerlink" href="#run-the-speech-recognition-sample" title="Permalink to this headline">¶</a></h3>
 <p>Run the Speech Recognition sample with the created ivector <code class="docutils literal notranslate"><span class="pre">.ark</span></code> file as follows:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">speech_sample</span> <span class="o">-</span><span class="n">i</span> <span class="n">feats</span><span class="p">.</span><span class="n">ark</span><span class="p">,</span><span class="n">ivector_online_ie</span><span class="p">.</span><span class="n">ark</span> <span class="o">-</span><span class="n">m</span> <span class="k">final</span><span class="p">.</span><span class="n">xml</span> <span class="o">-</span><span class="n">d</span> <span class="n">CPU</span> <span class="o">-</span><span class="n">o</span> <span class="n">prediction</span><span class="p">.</span><span class="n">ark</span> <span class="o">-</span><span class="n">cw_l</span> <span class="mi">17</span> <span class="o">-</span><span class="n">cw_r</span> <span class="mi">12</span></pre></div></div><p>Results can be decoded as described in “Use of Sample in Kaldi* Speech Recognition Pipeline” chapter in <a class="reference internal" href="openvino_inference_engine_samples_speech_sample_README.html#doxid-openvino-inference-engine-samples-speech-sample-r-e-a-d-m-e"><span class="std std-ref">the Speech Recognition Sample description</span></a>.</p>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
                 </div>
@@ -1949,7 +1956,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

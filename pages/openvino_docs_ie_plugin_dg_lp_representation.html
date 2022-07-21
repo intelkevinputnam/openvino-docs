@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Representation of low-precision models &#8212; OpenVINO™  documentation</title>
     
     
@@ -125,6 +126,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -278,14 +285,14 @@
             
                 <div>
                   
-  <div class="section" id="representation-of-low-precision-models">
+  <section id="representation-of-low-precision-models">
 <span id="doxid-openvino-docs-ie-plugin-dg-lp-representation"></span><span id="index-0"></span><h1>Representation of low-precision models<a class="headerlink" href="#representation-of-low-precision-models" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-openvino-docs-ie-plugin-dg-lp-representation-1md-openvino-docs-ie-plugin-dg-lowprecisionmodelrepresentation"></span> The goal of this document is to describe how optimized models are represented in OpenVINO Intermediate Representation (IR) and provide guidance on interpretation rules for such models at runtime. Currently, there are two groups of optimization methods that can influence on the IR after applying them to the full-precision model:</p>
 <ul class="simple">
 <li><p><strong>Sparsity</strong>. It is represented by zeros inside the weights and this is up to the hardware plugin how to interpret these zeros (use weights as is or apply special compression algorithms and sparse arithmetic). No additional mask is provided with the model.</p></li>
 <li><p><strong>Quantization</strong>. The rest of this document is dedicated to the representation of quantized models.</p></li>
 </ul>
-<div class="section" id="representation-of-quantized-models">
+<section id="representation-of-quantized-models">
 <h2>Representation of quantized models<a class="headerlink" href="#representation-of-quantized-models" title="Permalink to this headline">¶</a></h2>
 <p>The OpenVINO Toolkit represents all the quantized models using the so-called FakeQuantize operation (see the description in <a class="reference internal" href="openvino_docs_ops_quantization_FakeQuantize_1.html#doxid-openvino-docs-ops-quantization-fake-quantize-1"><span class="std std-ref">this document</span></a>). This operation is very expressive and allows mapping values from arbitrary input and output ranges. The whole idea behind that is quite simple: we project (discretize) the input values to the low-precision data type using affine transformation (with clamp and rounding) and then reproject discrete values back to the original range and data type. It can be considered as an emulation of the quantization process which happens at runtime. In order to be able to execute a particular DL operation in low-precision all its inputs should be quantized i.e. should have FakeQuantize between operation and data blobs. The figure below shows an example of quantized Convolution which contains two FakeQuantize nodes: one for weights and one for activations (bias is quantized using the same parameters).</p>
 <img alt="../_images/quantized_convolution.png" src="../_images/quantized_convolution.png" />
@@ -293,8 +300,8 @@
 <p>Starting from OpenVINO 2020.2 release all the quantized models are represented in the compressed form. It means that the weights of low-precision operations are converted into the target precision (e.g. INT8). It helps to substantially reduce the model size. The rest of the parameters can be represented in FLOAT32 or FLOAT16 precision depending on the input full-precision model used in the quantization process. Fig. 2 below shows an example of the part of the compressed IR.</p>
 <img alt="../_images/quantized_model_example.png" src="../_images/quantized_model_example.png" />
 <p>Figure 2. Example of compressed quantized model.</p>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -323,7 +330,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

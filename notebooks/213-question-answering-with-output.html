@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Interactive question answering with OpenVINO &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -541,7 +548,7 @@
             
                 <div>
                   
-  <div class="section" id="interactive-question-answering-with-openvino">
+  <section id="interactive-question-answering-with-openvino">
 <h1>Interactive question answering with OpenVINO<a class="headerlink" href="#interactive-question-answering-with-openvino" title="Permalink to this headline">¶</a></h1>
 <p>This demo shows interactive question answering with OpenVINO. We use
 <a class="reference external" href="https://github.com/openvinotoolkit/open_model_zoo/tree/master/models/intel/bert-small-uncased-whole-word-masking-squad-int8-0002">small BERT-large-like
@@ -551,7 +558,7 @@ BERT-large model. The model comes from <a class="reference external" href="https
 Zoo</a>. At the
 bottom of this notebook, you will see live inference results from your
 inputs.</p>
-<div class="section" id="imports">
+<section id="imports">
 <h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">operator</span>
 <span class="kn">import</span> <span class="nn">time</span>
@@ -564,10 +571,10 @@ inputs.</p>
 <span class="kn">import</span> <span class="nn">tokens_bert</span> <span class="k">as</span> <span class="nn">tokens</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="the-model">
+</section>
+<section id="the-model">
 <h2>The model<a class="headerlink" href="#the-model" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="download-the-model">
+<section id="download-the-model">
 <h3>Download the model<a class="headerlink" href="#download-the-model" title="Permalink to this headline">¶</a></h3>
 <p>We use <code class="docutils literal notranslate"><span class="pre">omz_downloader</span></code>, which is a command-line tool from the
 <code class="docutils literal notranslate"><span class="pre">openvino-dev</span></code> package. <code class="docutils literal notranslate"><span class="pre">omz_downloader</span></code> automatically creates a
@@ -613,8 +620,8 @@ OpenVINO Intermediate Representation (IR), so there is no need to use
 <span class="o">==========</span> <span class="n">Downloading</span> <span class="n">model</span><span class="o">/</span><span class="n">intel</span><span class="o">/</span><span class="n">bert</span><span class="o">-</span><span class="n">small</span><span class="o">-</span><span class="n">uncased</span><span class="o">-</span><span class="n">whole</span><span class="o">-</span><span class="n">word</span><span class="o">-</span><span class="n">masking</span><span class="o">-</span><span class="n">squad</span><span class="o">-</span><span class="n">int8</span><span class="o">-</span><span class="mi">0002</span><span class="o">/</span><span class="n">FP16</span><span class="o">-</span><span class="n">INT8</span><span class="o">/</span><span class="n">bert</span><span class="o">-</span><span class="n">small</span><span class="o">-</span><span class="n">uncased</span><span class="o">-</span><span class="n">whole</span><span class="o">-</span><span class="n">word</span><span class="o">-</span><span class="n">masking</span><span class="o">-</span><span class="n">squad</span><span class="o">-</span><span class="n">int8</span><span class="o">-</span><span class="mf">0002.</span><span class="n">bin</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="load-the-model">
+</section>
+<section id="load-the-model">
 <h3>Load the model<a class="headerlink" href="#load-the-model" title="Permalink to this headline">¶</a></h3>
 <p>Downloaded models are located in a fixed structure, which indicates
 vendor, model name and precision. Only a few lines of code are required
@@ -647,9 +654,9 @@ model, we have four inputs and two outputs.</p>
  <span class="p">[</span><span class="s1">&#39;output_s&#39;</span><span class="p">,</span> <span class="s1">&#39;output_e&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="processing">
+</section>
+</section>
+<section id="processing">
 <h2>Processing<a class="headerlink" href="#processing" title="Permalink to this headline">¶</a></h2>
 <p>NLP models usually take a list of tokens as standard input. A token is a
 single word converted to some integer. To provide the proper input, we
@@ -684,7 +691,7 @@ provided URLs.</p>
     <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">paragraphs</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="section" id="preprocessing">
+<section id="preprocessing">
 <h3>Preprocessing<a class="headerlink" href="#preprocessing" title="Permalink to this headline">¶</a></h3>
 <p>The input size in this case is 384 tokens long. The main input
 (<code class="docutils literal notranslate"><span class="pre">input_ids</span></code>) to used BERT model consist of two parts: question tokens
@@ -758,8 +765,8 @@ input, please read
     <span class="k">return</span> <span class="p">(</span><span class="n">input_ids</span><span class="p">,</span> <span class="n">attention_mask</span><span class="p">,</span> <span class="n">token_type_ids</span><span class="p">),</span> <span class="n">diff_input_size</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="postprocessing">
+</section>
+<section id="postprocessing">
 <h3>Postprocessing<a class="headerlink" href="#postprocessing" title="Permalink to this headline">¶</a></h3>
 <p>The results from the network are raw (logits). We need to use the
 softmax function to get the probability distribution. Then, we are
@@ -849,8 +856,8 @@ score.</p>
     <span class="k">return</span> <span class="n">context</span><span class="p">[</span><span class="n">answer</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span><span class="n">answer</span><span class="p">[</span><span class="mi">2</span><span class="p">]],</span> <span class="n">answer</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="main-processing-function">
+</section>
+<section id="main-processing-function">
 <h3>Main Processing Function<a class="headerlink" href="#main-processing-function" title="Permalink to this headline">¶</a></h3>
 <p>Run question answering on specific knowledge base (websites) and iterate
 through the questions.</p>
@@ -889,11 +896,11 @@ through the questions.</p>
             <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Time: </span><span class="si">{</span><span class="n">end_time</span> <span class="o">-</span> <span class="n">start_time</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">s&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="run">
+</section>
+</section>
+<section id="run">
 <h2>Run<a class="headerlink" href="#run" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="run-on-local-paragraphs">
+<section id="run-on-local-paragraphs">
 <h3>Run on local paragraphs<a class="headerlink" href="#run-on-local-paragraphs" title="Permalink to this headline">¶</a></h3>
 <p>Change sources to your own to answer your questions. You can use as many
 sources as you want. Usually, you need to wait a few seconds for the
@@ -929,8 +936,8 @@ Score: 0.48
 Time: 0.10s
 </pre></div>
 </div>
-</div>
-<div class="section" id="run-on-websites">
+</section>
+<section id="run-on-websites">
 <h3>Run on websites<a class="headerlink" href="#run-on-websites" title="Permalink to this headline">¶</a></h3>
 <p>You can also provide urls. Note that the context (knowledge base) is
 built from website paragraphs. If some information is outside the
@@ -954,9 +961,9 @@ Score: 0.94
 Time: 0.17s
 </pre></div>
 </div>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
                 </div>
@@ -987,7 +994,7 @@ Time: 0.17s
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

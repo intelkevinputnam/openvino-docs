@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>OpenVINO Graph Rewrite Pass &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -1820,17 +1827,17 @@
             
                 <div>
                   
-  <div class="section" id="openvino-graph-rewrite-pass">
+  <section id="openvino-graph-rewrite-pass">
 <span id="doxid-openvino-docs-extensibility-u-g-graph-rewrite-pass"></span><span id="index-0"></span><h1>OpenVINO Graph Rewrite Pass<a class="headerlink" href="#openvino-graph-rewrite-pass" title="Permalink to this headline">¶</a></h1>
-<p><span class="target" id="doxid-openvino-docs-extensibility-u-g-graph-rewrite-pass-1md-openvino-docs-extensibility-ug-graph-rewrite-pass"></span> <code class="docutils literal notranslate"><span class="pre">ov::pass::GraphRewrite</span></code> serves for running multiple matcher passes on <code class="docutils literal notranslate"><span class="pre">ov::Model</span></code> in a single graph traversal. Example:</p>
+<p><span class="target" id="doxid-openvino-docs-extensibility-u-g-graph-rewrite-pass-1md-openvino-docs-extensibility-ug-graph-rewrite-pass"></span> <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1pass_1_1GraphRewrite.html#doxid-classov-1-1pass-1-1-graph-rewrite"><span class="std std-ref"><span class="pre">ov::pass::GraphRewrite</span></span></a></code> serves for running multiple matcher passes on <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1Model.html#doxid-classov-1-1-model"><span class="std std-ref"><span class="pre">ov::Model</span></span></a></code> in a single graph traversal. Example:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="c1">// Two matcher passes will run simultaneously in a single graph traversal</span>
-ov::pass::GraphRewrite<span></span> <span class="n">pass</span><span class="p">;</span>
+<a class="reference internal" href="../api/groups/classov_1_1pass_1_1GraphRewrite.html#doxid-classov-1-1pass-1-1-graph-rewrite"><span class="std std-ref">ov::pass::GraphRewrite</span></a><span></span> <span class="n">pass</span><span class="p">;</span>
 <span class="n">pass</span><span class="p">.</span>add_matcher<span></span><span class="o">&lt;</span><span class="n">ov</span><span class="o">::</span><span class="n">pass</span><span class="o">::</span><span class="n">DecomposeDivideMatcher</span><span class="o">&gt;</span><span class="p">();</span>
 <span class="n">pass</span><span class="p">.</span>add_matcher<span></span><span class="o">&lt;</span><span class="n">ov</span><span class="o">::</span><span class="n">pass</span><span class="o">::</span><span class="n">ReluReluFusionMatcher</span><span class="o">&gt;</span><span class="p">();</span>
-<span class="n">pass</span><span class="p">.</span>run_on_model<span></span><span class="p">(</span>f<span></span><span class="p">);</span></pre></div></div><p>In addition, GraphRewrite handles nodes that were registered by MatcherPasses during their execution. This nodes will be added to the beginning of the sequence with nodes for pattern matching.</p>
+<span class="n">pass</span><span class="p">.</span><a class="reference internal" href="../api/groups/classov_1_1pass_1_1GraphRewrite.html#doxid-classov-1-1pass-1-1-graph-rewrite-1ad27ed8542330330ce9a524ff17564c21"><span class="std std-ref">run_on_model</span></a><span></span><span class="p">(</span><a class="reference internal" href="../api/groups/namespacengraph_1_1runtime_1_1reference.html#doxid-namespacengraph-1-1runtime-1-1reference-1a4582949bb0b6082a5159f90c43a71ca9"><span class="std std-ref">f</span></a><span></span><span class="p">);</span></pre></div></div><p>In addition, GraphRewrite handles nodes that were registered by MatcherPasses during their execution. This nodes will be added to the beginning of the sequence with nodes for pattern matching.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>when using <code class="docutils literal notranslate"><span class="pre">ov::pass::Manager</span></code> temporary GraphRewrite is used to execute single MatcherPass.</p>
+<p>when using <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1pass_1_1Manager.html#doxid-classov-1-1pass-1-1-manager"><span class="std std-ref"><span class="pre">ov::pass::Manager</span></span></a></code> temporary GraphRewrite is used to execute single MatcherPass.</p>
 </div>
 <p>GraphRewrite has two algorithms for MatcherPasses execution. First algorithm is straightforward. It applies each MatcherPass in registration order to current node.</p>
 <img alt="../_images/graph_rewrite_execution.png" src="../_images/graph_rewrite_execution.png" />
@@ -1840,13 +1847,13 @@ ov::pass::GraphRewrite<span></span> <span class="n">pass</span><span class="p">;
 <p class="admonition-title">Note</p>
 <p>GraphRewrite execution algorithm cannot be set manually and depends only on root nodes registered inside MatcherPasses.</p>
 </div>
-<div class="section" id="see-also">
+<section id="see-also">
 <h2>See Also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="openvino_docs_transformations.html#doxid-openvino-docs-transformations"><span class="std std-ref">OpenVINO™ Transformations</span></a></p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -1877,7 +1884,7 @@ ov::pass::GraphRewrite<span></span> <span class="n">pass</span><span class="p">;
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

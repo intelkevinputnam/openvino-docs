@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Model Optimizer Frequently Asked Questions &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -2328,10 +2335,10 @@
             
                 <div>
                   
-  <div class="section" id="model-optimizer-frequently-asked-questions">
+  <section id="model-optimizer-frequently-asked-questions">
 <span id="doxid-openvino-docs-m-o-d-g-prepare-model-model-optimizer-f-a-q"></span><span id="index-0"></span><h1>Model Optimizer Frequently Asked Questions<a class="headerlink" href="#model-optimizer-frequently-asked-questions" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-openvino-docs-m-o-d-g-prepare-model-model-optimizer-f-a-q-1md-openvino-docs-mo-dg-prepare-model-model-optimizer-faq"></span> If your question is not covered by the topics below, use the <a class="reference external" href="https://software.intel.com/en-us/openvino-toolkit/documentation/get-started">OpenVINO Support page</a>, where you can participate on a free forum.</p>
-<div class="section" id="what-does-the-message-error-current-caffe-proto-does-not-contain-field-mean">
+<section id="what-does-the-message-error-current-caffe-proto-does-not-contain-field-mean">
 <span id="question-1"></span><h2>1. What does the message “[ ERROR ]: Current caffe.proto does not contain field” mean?<a class="headerlink" href="#what-does-the-message-error-current-caffe-proto-does-not-contain-field-mean" title="Permalink to this headline">¶</a></h2>
 <p>Internally, the Model Optimizer uses a protobuf library to parse and load Caffe* models. This library requires a file grammar and a generated parser. For a Caffe fallback, the Model Optimizer uses a Caffe-generated parser for a Caffe-specific <code class="docutils literal notranslate"><span class="pre">.proto</span></code> file (which is usually located in the <code class="docutils literal notranslate"><span class="pre">src/caffe/proto</span></code> directory). So, if you have Caffe installed on your machine with Python* interface available, make sure that this is exactly the version of Caffe that was used to create the model.</p>
 <p>If you just want to experiment with the Model Optimizer and test a Python extension for working with your custom layers without building Caffe, add the layer description to the <code class="docutils literal notranslate"><span class="pre">caffe.proto</span></code> file and generate a parser for it.</p>
@@ -2358,31 +2365,31 @@
 <li><p>Now, the Model Optimizer is able to load the model into memory and start working with your extensions if there are any.</p></li>
 </ol>
 <p>However, because your model has custom layers, you must register your custom layers as custom. To learn more about it, refer to the section <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_customize_model_optimizer_Customize_Model_Optimizer.html#doxid-openvino-docs-m-o-d-g-prepare-model-customize-model-optimizer-customize-model-optimizer"><span class="std std-ref">Custom Layers in Model Optimizer</span></a>.</p>
-</div>
-<div class="section" id="how-do-i-create-a-bare-caffemodel-if-i-have-only-prototxt">
+</section>
+<section id="how-do-i-create-a-bare-caffemodel-if-i-have-only-prototxt">
 <span id="question-2"></span><h2>2. How do I create a bare caffemodel, if I have only prototxt?<a class="headerlink" href="#how-do-i-create-a-bare-caffemodel-if-i-have-only-prototxt" title="Permalink to this headline">¶</a></h2>
 <p>You need the Caffe* Python* interface. In this case, do the following:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">python3</span>
 <span class="n">import</span> <span class="n">caffe</span>
 <span class="n">net</span> <span class="o">=</span> <span class="n">caffe</span><span class="p">.</span><span class="n">Net</span><span class="p">(</span><span class="sc">&#39;&lt;PATH_TO_PROTOTXT&gt;/my_net.prototxt&#39;</span><span class="p">,</span> <span class="n">caffe</span><span class="p">.</span><span class="n">TEST</span><span class="p">)</span>
-<span class="n">net</span><span class="p">.</span><span class="n">save</span><span class="p">(</span><span class="sc">&#39;&lt;PATH_TO_PROTOTXT&gt;/my_net.caffemodel&#39;</span><span class="p">)</span></pre></div></div></div>
-<div class="section" id="what-does-the-message-error-unable-to-create-ports-for-node-with-id-mean">
+<span class="n">net</span><span class="p">.</span><span class="n">save</span><span class="p">(</span><span class="sc">&#39;&lt;PATH_TO_PROTOTXT&gt;/my_net.caffemodel&#39;</span><span class="p">)</span></pre></div></div></section>
+<section id="what-does-the-message-error-unable-to-create-ports-for-node-with-id-mean">
 <span id="question-3"></span><h2>3. What does the message “[ ERROR ]: Unable to create ports for node with id” mean?<a class="headerlink" href="#what-does-the-message-error-unable-to-create-ports-for-node-with-id-mean" title="Permalink to this headline">¶</a></h2>
 <p>Most likely, the Model Optimizer does not know how to infer output shapes of some layers in the given topology. To lessen the scope, compile the list of layers that are custom for the Model Optimizer: present in the topology, absent in <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_Supported_Frameworks_Layers.html#doxid-openvino-docs-m-o-d-g-prepare-model-supported-frameworks-layers"><span class="std std-ref">list of supported layers</span></a> for the target framework. Then refer to available options in the corresponding section in <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_customize_model_optimizer_Customize_Model_Optimizer.html#doxid-openvino-docs-m-o-d-g-prepare-model-customize-model-optimizer-customize-model-optimizer"><span class="std std-ref">Custom Layers in Model Optimizer</span></a>.</p>
-</div>
-<div class="section" id="what-does-the-message-input-image-of-shape-is-larger-than-mean-image-from-file-mean">
+</section>
+<section id="what-does-the-message-input-image-of-shape-is-larger-than-mean-image-from-file-mean">
 <span id="question-4"></span><h2>4. What does the message “Input image of shape is larger than mean image from file” mean?<a class="headerlink" href="#what-does-the-message-input-image-of-shape-is-larger-than-mean-image-from-file-mean" title="Permalink to this headline">¶</a></h2>
 <p>Your model input shapes must be smaller than or equal to the shapes of the mean image file you provide. The idea behind the mean file is to subtract its values from the input image in an element-wise manner. When the mean file is smaller than the input image, there are not enough values to perform element-wise subtraction. Also, make sure that you use the mean file that was used during the network training phase. Note that the mean file is dataset dependent.</p>
-</div>
-<div class="section" id="what-does-the-message-mean-file-is-empty-mean">
+</section>
+<section id="what-does-the-message-mean-file-is-empty-mean">
 <span id="question-5"></span><h2>5. What does the message “Mean file is empty” mean?<a class="headerlink" href="#what-does-the-message-mean-file-is-empty-mean" title="Permalink to this headline">¶</a></h2>
 <p>Most likely, the mean file that you have is specified with <code class="docutils literal notranslate"><span class="pre">--mean_file</span></code> flag, while launching the Model Optimizer is empty. Make sure that this is exactly the required mean file and try to regenerate it from the given dataset if possible.</p>
-</div>
-<div class="section" id="what-does-the-message-probably-mean-file-has-incorrect-format-mean">
+</section>
+<section id="what-does-the-message-probably-mean-file-has-incorrect-format-mean">
 <span id="question-6"></span><h2>6. What does the message “Probably mean file has incorrect format” mean?<a class="headerlink" href="#what-does-the-message-probably-mean-file-has-incorrect-format-mean" title="Permalink to this headline">¶</a></h2>
 <p>The mean file that you provide for the Model Optimizer must be in a <code class="docutils literal notranslate"><span class="pre">.binaryproto</span></code> format. You can try to check the content using recommendations from the BVLC Caffe* (<a class="reference external" href="https://github.com/BVLC/caffe/issues/290">#290</a>).</p>
-</div>
-<div class="section" id="what-does-the-message-invalid-proto-file-there-is-neither-layer-nor-layers-top-level-messages-mean">
+</section>
+<section id="what-does-the-message-invalid-proto-file-there-is-neither-layer-nor-layers-top-level-messages-mean">
 <span id="question-7"></span><h2>7. What does the message “Invalid proto file: there is neither ‘layer’ nor ‘layers’ top-level messages” mean?<a class="headerlink" href="#what-does-the-message-invalid-proto-file-there-is-neither-layer-nor-layers-top-level-messages-mean" title="Permalink to this headline">¶</a></h2>
 <p>The structure of any Caffe* topology is described in the <code class="docutils literal notranslate"><span class="pre">caffe.proto</span></code> file of any Caffe version. For example, in the Model Optimizer, you can find the following proto file, used by default: <code class="docutils literal notranslate"><span class="pre">mo/front/caffe/proto/my_caffe.proto</span></code>. There you can find the structure:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">message</span> <span class="n">NetParameter</span> <span class="p">{</span>
@@ -2393,8 +2400,8 @@
   <span class="c1">// DEPRECATED: use &#39;layer&#39; instead.</span>
   <span class="n">repeated</span> <span class="n">V1LayerParameter</span> <span class="n">layers</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
 <span class="p">}</span></pre></div></div><p>This means that any topology should contain layers as top-level structures in <code class="docutils literal notranslate"><span class="pre">prototxt</span></code>. For example, see the <a class="reference external" href="https://github.com/BVLC/caffe/blob/master/examples/mnist/lenet.prototxt">LeNet topology</a>.</p>
-</div>
-<div class="section" id="what-does-the-message-old-style-inputs-via-input-dims-are-not-supported-please-specify-inputs-via-input-shape-mean">
+</section>
+<section id="what-does-the-message-old-style-inputs-via-input-dims-are-not-supported-please-specify-inputs-via-input-shape-mean">
 <span id="question-8"></span><h2>8. What does the message “Old-style inputs (via ‘input_dims’) are not supported. Please specify inputs via ‘input_shape’” mean?<a class="headerlink" href="#what-does-the-message-old-style-inputs-via-input-dims-are-not-supported-please-specify-inputs-via-input-shape-mean" title="Permalink to this headline">¶</a></h2>
 <p>The structure of any Caffe* topology is described in the <code class="docutils literal notranslate"><span class="pre">caffe.proto</span></code> file for any Caffe version. For example, in the Model Optimizer you can find the following <code class="docutils literal notranslate"><span class="pre">.proto</span></code> file, used by default: <code class="docutils literal notranslate"><span class="pre">mo/front/caffe/proto/my_caffe.proto</span></code>. There you can find the structure:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">message</span> <span class="n">NetParameter</span> <span class="p">{</span>
@@ -2454,197 +2461,197 @@
 <span class="nl">input_dim</span><span class="p">:</span> <span class="mi">500</span></pre></div></div></li>
 </ul>
 <p>However, if your model contains more than one input, the Model Optimizer is able to convert the model with inputs specified in a form of 1, 2, 3 of the list above. The last form is not supported for multi-input topologies.</p>
-</div>
-<div class="section" id="what-does-the-message-mean-file-for-topologies-with-multiple-inputs-is-not-supported-mean">
+</section>
+<section id="what-does-the-message-mean-file-for-topologies-with-multiple-inputs-is-not-supported-mean">
 <span id="question-9"></span><h2>9. What does the message “Mean file for topologies with multiple inputs is not supported” mean?<a class="headerlink" href="#what-does-the-message-mean-file-for-topologies-with-multiple-inputs-is-not-supported-mean" title="Permalink to this headline">¶</a></h2>
 <p>Model Optimizer does not support mean file processing for topologies with more than one input. In this case, you need to perform preprocessing of the inputs for a generated Intermediate Representation in the OpenVINO Runtime to perform subtraction for every input of your multi-input model, see <a class="reference internal" href="openvino_docs_OV_UG_Preprocessing_Overview.html#doxid-openvino-docs-o-v-u-g-preprocessing-overview"><span class="std std-ref">Overview of Preprocessing</span></a> for details.</p>
-</div>
-<div class="section" id="what-does-the-message-cannot-load-or-process-mean-file-value-error-mean">
+</section>
+<section id="what-does-the-message-cannot-load-or-process-mean-file-value-error-mean">
 <span id="question-10"></span><h2>10. What does the message “Cannot load or process mean file: value error” mean?<a class="headerlink" href="#what-does-the-message-cannot-load-or-process-mean-file-value-error-mean" title="Permalink to this headline">¶</a></h2>
 <p>There are multiple reasons why the Model Optimizer does not accept the mean file. See FAQs <a class="reference external" href="#question-4">#4</a>, <a class="reference external" href="#question-5">#5</a>, and <a class="reference external" href="#question-6">#6</a>.</p>
-</div>
-<div class="section" id="what-does-the-message-invalid-prototxt-file-value-error-mean">
+</section>
+<section id="what-does-the-message-invalid-prototxt-file-value-error-mean">
 <span id="question-11"></span><h2>11. What does the message “Invalid prototxt file: value error” mean?<a class="headerlink" href="#what-does-the-message-invalid-prototxt-file-value-error-mean" title="Permalink to this headline">¶</a></h2>
 <p>There are multiple reasons why the Model Optimizer does not accept a Caffe* topology. See FAQs <a class="reference external" href="#question-7">#7</a> and <a class="reference external" href="#question-20">#20</a>.</p>
-</div>
-<div class="section" id="what-does-the-message-error-happened-while-constructing-caffe-net-in-the-caffe-fallback-function-mean">
+</section>
+<section id="what-does-the-message-error-happened-while-constructing-caffe-net-in-the-caffe-fallback-function-mean">
 <span id="question-12"></span><h2>12. What does the message “Error happened while constructing caffe.Net in the Caffe fallback function” mean?<a class="headerlink" href="#what-does-the-message-error-happened-while-constructing-caffe-net-in-the-caffe-fallback-function-mean" title="Permalink to this headline">¶</a></h2>
 <p>Model Optimizer tried to infer a specified layer via the Caffe* framework, however it cannot construct a net using the Caffe Python* interface. Make sure that your <code class="docutils literal notranslate"><span class="pre">caffemodel</span></code> and <code class="docutils literal notranslate"><span class="pre">prototxt</span></code> files are correct. To prove that the problem is not in the <code class="docutils literal notranslate"><span class="pre">prototxt</span></code> file, see FAQ <a class="reference external" href="#question-2">#2</a>.</p>
-</div>
-<div class="section" id="what-does-the-message-cannot-infer-shapes-due-to-exception-in-caffe-mean">
+</section>
+<section id="what-does-the-message-cannot-infer-shapes-due-to-exception-in-caffe-mean">
 <span id="question-13"></span><h2>13. What does the message “Cannot infer shapes due to exception in Caffe” mean?<a class="headerlink" href="#what-does-the-message-cannot-infer-shapes-due-to-exception-in-caffe-mean" title="Permalink to this headline">¶</a></h2>
 <p>Model Optimizer tried to infer a custom layer via the Caffe* framework, but an error occurred, meaning that the model could not be inferred using Caffe. This might happen if you try to convert the model with some noise weights and biases that result in problems with layers that have dynamic shapes. You should write your own extension for every custom layer you topology might have. For more details, refer to <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_customize_model_optimizer_Customize_Model_Optimizer.html#doxid-openvino-docs-m-o-d-g-prepare-model-customize-model-optimizer-customize-model-optimizer"><span class="std std-ref">Model Optimizer Extensibility</span></a>.</p>
-</div>
-<div class="section" id="what-does-the-message-cannot-infer-shape-for-node-because-there-is-no-caffe-available-please-register-python-infer-function-for-op-or-use-caffe-for-shape-inference-mean">
+</section>
+<section id="what-does-the-message-cannot-infer-shape-for-node-because-there-is-no-caffe-available-please-register-python-infer-function-for-op-or-use-caffe-for-shape-inference-mean">
 <span id="question-14"></span><h2>14. What does the message “Cannot infer shape for node {} because there is no Caffe available. Please register python infer function for op or use Caffe for shape inference” mean?<a class="headerlink" href="#what-does-the-message-cannot-infer-shape-for-node-because-there-is-no-caffe-available-please-register-python-infer-function-for-op-or-use-caffe-for-shape-inference-mean" title="Permalink to this headline">¶</a></h2>
 <p>Your model contains a custom layer and you have correctly registered it with the <code class="docutils literal notranslate"><span class="pre">CustomLayersMapping.xml</span></code> file. These steps are required to offload shape inference of the custom layer with the help of the system Caffe*. However, the Model Optimizer could not import a Caffe package. Make sure that you have built Caffe with a <code class="docutils literal notranslate"><span class="pre">pycaffe</span></code> target and added it into the <code class="docutils literal notranslate"><span class="pre">PYTHONPATH</span></code> environment variable. At the same time, it is highly recommend to avoid dependency on Caffe and write your own Model Optimizer extension for your custom layer. For more information, refer to the FAQ <a class="reference external" href="#question-45">#45</a>.</p>
-</div>
-<div class="section" id="what-does-the-message-framework-name-can-not-be-deduced-from-the-given-options-use-framework-to-choose-one-of-caffe-tensorflow-mxnet-mean">
+</section>
+<section id="what-does-the-message-framework-name-can-not-be-deduced-from-the-given-options-use-framework-to-choose-one-of-caffe-tensorflow-mxnet-mean">
 <span id="question-15"></span><h2>15. What does the message “Framework name can not be deduced from the given options. Use –framework to choose one of Caffe, TensorFlow, MXNet” mean?<a class="headerlink" href="#what-does-the-message-framework-name-can-not-be-deduced-from-the-given-options-use-framework-to-choose-one-of-caffe-tensorflow-mxnet-mean" title="Permalink to this headline">¶</a></h2>
 <p>You have run the Model Optimizer without a flag <code class="docutils literal notranslate"><span class="pre">--framework</span> <span class="pre">caffe|tf|mxnet</span></code>. Model Optimizer tries to deduce the framework by the input model file extension (<code class="docutils literal notranslate"><span class="pre">.pb</span></code> for TensorFlow*, <code class="docutils literal notranslate"><span class="pre">.caffemodel</span></code> for Caffe*, <code class="docutils literal notranslate"><span class="pre">.params</span></code> for MXNet*). Your input model might have a different extension and you need to explicitly set the source framework. For example, use <code class="docutils literal notranslate"><span class="pre">--framework</span> <span class="pre">caffe</span></code>.</p>
-</div>
-<div class="section" id="what-does-the-message-input-shape-is-required-to-convert-mxnet-model-please-provide-it-with-input-shape-mean">
+</section>
+<section id="what-does-the-message-input-shape-is-required-to-convert-mxnet-model-please-provide-it-with-input-shape-mean">
 <span id="question-16"></span><h2>16. What does the message “Input shape is required to convert MXNet model. Please provide it with –input_shape” mean?<a class="headerlink" href="#what-does-the-message-input-shape-is-required-to-convert-mxnet-model-please-provide-it-with-input-shape-mean" title="Permalink to this headline">¶</a></h2>
 <p>Input shape was not provided. That is mandatory for converting an MXNet* model to the Intermediate Representation, because MXNet models do not contain information about input shapes. Please, use the <code class="docutils literal notranslate"><span class="pre">--input_shape</span></code> flag to specify it. For more information about using the <code class="docutils literal notranslate"><span class="pre">--input_shape</span></code>, refer to the FAQ <a class="reference external" href="#question-57">#57</a>.</p>
-</div>
-<div class="section" id="what-does-the-message-both-mean-file-and-mean-values-are-specified-specify-either-mean-file-or-mean-values-mean">
+</section>
+<section id="what-does-the-message-both-mean-file-and-mean-values-are-specified-specify-either-mean-file-or-mean-values-mean">
 <span id="question-17"></span><h2>17. What does the message “Both –mean_file and mean_values are specified. Specify either mean file or mean values” mean?<a class="headerlink" href="#what-does-the-message-both-mean-file-and-mean-values-are-specified-specify-either-mean-file-or-mean-values-mean" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">--mean_file</span></code> and <code class="docutils literal notranslate"><span class="pre">--mean_values</span></code> are two ways of specifying preprocessing for the input. However, they cannot be used together, as it would mean double subtraction and lead to ambiguity. Choose one of these options and pass it using the corresponding CLI option.</p>
-</div>
-<div class="section" id="what-does-the-message-negative-value-specified-for-mean-file-offsets-option-please-specify-positive-integer-values-in-format-x-y-mean">
+</section>
+<section id="what-does-the-message-negative-value-specified-for-mean-file-offsets-option-please-specify-positive-integer-values-in-format-x-y-mean">
 <span id="question-18"></span><h2>18. What does the message “Negative value specified for –mean_file_offsets option. Please specify positive integer values in format ‘(x,y)’” mean?<a class="headerlink" href="#what-does-the-message-negative-value-specified-for-mean-file-offsets-option-please-specify-positive-integer-values-in-format-x-y-mean" title="Permalink to this headline">¶</a></h2>
 <p>You might have specified negative values with <code class="docutils literal notranslate"><span class="pre">--mean_file_offsets</span></code>. Only positive integer values in format ‘(x,y)’ must be used.</p>
-</div>
-<div class="section" id="what-does-the-message-both-scale-and-scale-values-are-defined-specify-either-scale-factor-or-scale-values-per-input-channels-mean">
+</section>
+<section id="what-does-the-message-both-scale-and-scale-values-are-defined-specify-either-scale-factor-or-scale-values-per-input-channels-mean">
 <span id="question-19"></span><h2>19. What does the message “Both –scale and –scale_values are defined. Specify either scale factor or scale values per input channels” mean?<a class="headerlink" href="#what-does-the-message-both-scale-and-scale-values-are-defined-specify-either-scale-factor-or-scale-values-per-input-channels-mean" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">--scale</span></code> sets a scaling factor for all channels. <code class="docutils literal notranslate"><span class="pre">--scale_values</span></code> sets a scaling factor per each channel. Using both of them simultaneously produces ambiguity, so you must use only one of them. For more information, refer to the Using Framework-Agnostic Conversion Parameters: for <a class="reference external" href="ConvertFromCaffe.html#using-framework-agnostic-conv-param">Converting a Caffe* Model</a>, <a class="reference external" href="ConvertFromTensorFlow.html#using-framework-agnostic-conv-param">Converting a TensorFlow* Model</a>, <a class="reference external" href="ConvertFromMXNet.html#using-framework-agnostic-conv-param">Converting an MXNet* Model</a>.</p>
-</div>
-<div class="section" id="what-does-the-message-cannot-find-prototxt-file-for-caffe-please-specify-input-proto-a-protobuf-file-that-stores-topology-and-input-model-that-stores-pre-trained-weights-mean">
+</section>
+<section id="what-does-the-message-cannot-find-prototxt-file-for-caffe-please-specify-input-proto-a-protobuf-file-that-stores-topology-and-input-model-that-stores-pre-trained-weights-mean">
 <span id="question-20"></span><h2>20. What does the message “Cannot find prototxt file: for Caffe please specify –input_proto - a protobuf file that stores topology and –input_model that stores pre-trained weights” mean?<a class="headerlink" href="#what-does-the-message-cannot-find-prototxt-file-for-caffe-please-specify-input-proto-a-protobuf-file-that-stores-topology-and-input-model-that-stores-pre-trained-weights-mean" title="Permalink to this headline">¶</a></h2>
 <p>Model Optimizer cannot find a <code class="docutils literal notranslate"><span class="pre">.prototxt</span></code> file for a specified model. By default, it must be located in the same directory as the input model with the same name (except extension). If any of these conditions is not satisfied, use <code class="docutils literal notranslate"><span class="pre">--input_proto</span></code> to specify the path to the <code class="docutils literal notranslate"><span class="pre">.prototxt</span></code> file.</p>
-</div>
-<div class="section" id="what-does-the-message-failed-to-create-directory-permission-denied-mean">
+</section>
+<section id="what-does-the-message-failed-to-create-directory-permission-denied-mean">
 <span id="question-22"></span><h2>22. What does the message “Failed to create directory .. . Permission denied!” mean?<a class="headerlink" href="#what-does-the-message-failed-to-create-directory-permission-denied-mean" title="Permalink to this headline">¶</a></h2>
 <p>Model Optimizer cannot create a directory specified via <code class="docutils literal notranslate"><span class="pre">--output_dir</span></code>. Make sure that you have enough permissions to create the specified directory.</p>
-</div>
-<div class="section" id="what-does-the-message-discovered-data-node-without-inputs-and-value-mean">
+</section>
+<section id="what-does-the-message-discovered-data-node-without-inputs-and-value-mean">
 <span id="question-23"></span><h2>23. What does the message “Discovered data node without inputs and value” mean?<a class="headerlink" href="#what-does-the-message-discovered-data-node-without-inputs-and-value-mean" title="Permalink to this headline">¶</a></h2>
 <p>One of the layers in the specified topology might not have inputs or values. Please make sure that the provided <code class="docutils literal notranslate"><span class="pre">caffemodel</span></code> and <code class="docutils literal notranslate"><span class="pre">protobuf</span></code> files are correct.</p>
-</div>
-<div class="section" id="what-does-the-message-part-of-the-nodes-was-not-translated-to-ie-stopped-mean">
+</section>
+<section id="what-does-the-message-part-of-the-nodes-was-not-translated-to-ie-stopped-mean">
 <span id="question-24"></span><h2>24. What does the message “Part of the nodes was not translated to IE. Stopped” mean?<a class="headerlink" href="#what-does-the-message-part-of-the-nodes-was-not-translated-to-ie-stopped-mean" title="Permalink to this headline">¶</a></h2>
 <p>Some of the operations are not supported by the OpenVINO Runtime and cannot be translated to an Intermediate Representation. You can extend the Model Optimizer by allowing generation of new types of operations and implement these operations in the dedicated OpenVINO plugins. For more information, refer to the <a class="reference internal" href="openvino_docs_Extensibility_UG_Intro.html#doxid-openvino-docs-extensibility-u-g-intro"><span class="std std-ref">OpenVINO™ Extensibility Mechanism</span></a></p>
-</div>
-<div class="section" id="what-does-the-message-while-creating-an-edge-from-to-node-name-is-undefined-in-the-graph-check-correctness-of-the-input-model-mean">
+</section>
+<section id="what-does-the-message-while-creating-an-edge-from-to-node-name-is-undefined-in-the-graph-check-correctness-of-the-input-model-mean">
 <span id="question-25"></span><h2>25. What does the message “While creating an edge from .. to .. : node name is undefined in the graph. Check correctness of the input model” mean?<a class="headerlink" href="#what-does-the-message-while-creating-an-edge-from-to-node-name-is-undefined-in-the-graph-check-correctness-of-the-input-model-mean" title="Permalink to this headline">¶</a></h2>
 <p>Model Optimizer cannot build a graph based on a specified model. Most likely, it is incorrect.</p>
-</div>
-<div class="section" id="what-does-the-message-node-does-not-exist-in-the-graph-mean">
+</section>
+<section id="what-does-the-message-node-does-not-exist-in-the-graph-mean">
 <span id="question-26"></span><h2>26. What does the message “Node does not exist in the graph” mean?<a class="headerlink" href="#what-does-the-message-node-does-not-exist-in-the-graph-mean" title="Permalink to this headline">¶</a></h2>
 <p>You might have specified an output node via the <code class="docutils literal notranslate"><span class="pre">--output</span></code> flag that does not exist in a provided model. Make sure that the specified output is correct and this node exists in the current model.</p>
-</div>
-<div class="section" id="what-does-the-message-input-parameter-was-provided-other-inputs-are-needed-for-output-computation-provide-more-inputs-or-choose-another-place-to-cut-the-net-mean">
+</section>
+<section id="what-does-the-message-input-parameter-was-provided-other-inputs-are-needed-for-output-computation-provide-more-inputs-or-choose-another-place-to-cut-the-net-mean">
 <span id="question-27"></span><h2>27. What does the message “–input parameter was provided. Other inputs are needed for output computation. Provide more inputs or choose another place to cut the net” mean?<a class="headerlink" href="#what-does-the-message-input-parameter-was-provided-other-inputs-are-needed-for-output-computation-provide-more-inputs-or-choose-another-place-to-cut-the-net-mean" title="Permalink to this headline">¶</a></h2>
 <p>Most likely, the Model Optimizer tried to cut the model by a specified input. However, other inputs are needed.</p>
-</div>
-<div class="section" id="what-does-the-message-placeholder-node-does-not-have-an-input-port-but-input-port-was-provided-mean">
+</section>
+<section id="what-does-the-message-placeholder-node-does-not-have-an-input-port-but-input-port-was-provided-mean">
 <span id="question-28"></span><h2>28. What does the message “Placeholder node does not have an input port, but input port was provided” mean?<a class="headerlink" href="#what-does-the-message-placeholder-node-does-not-have-an-input-port-but-input-port-was-provided-mean" title="Permalink to this headline">¶</a></h2>
 <p>You might have specified a placeholder node with an input node, while the placeholder node does not have it the model.</p>
-</div>
-<div class="section" id="what-does-the-message-port-index-is-out-of-number-of-available-input-ports-for-node-mean">
+</section>
+<section id="what-does-the-message-port-index-is-out-of-number-of-available-input-ports-for-node-mean">
 <span id="question-29"></span><h2>29. What does the message “Port index is out of number of available input ports for node” mean?<a class="headerlink" href="#what-does-the-message-port-index-is-out-of-number-of-available-input-ports-for-node-mean" title="Permalink to this headline">¶</a></h2>
 <p>This error occurs when an incorrect input port is specified with the <code class="docutils literal notranslate"><span class="pre">--input</span></code> command line argument. When using <code class="docutils literal notranslate"><span class="pre">--input</span></code>, you can optionally specify an input port in the form: <code class="docutils literal notranslate"><span class="pre">X:node_name</span></code>, where <code class="docutils literal notranslate"><span class="pre">X</span></code> is an integer index of the input port starting from 0 and <code class="docutils literal notranslate"><span class="pre">node_name</span></code> is the name of a node in the model. This error occurs when the specified input port <code class="docutils literal notranslate"><span class="pre">X</span></code> is not in the range 0..(n-1), where n is the number of input ports for the node. Please, specify a correct port index, or do not use it if it is not needed.</p>
-</div>
-<div class="section" id="what-does-the-message-node-has-more-than-1-input-and-input-shapes-were-provided-try-not-to-provide-input-shapes-or-specify-input-port-with-port-node-notation-where-port-is-an-integer-mean">
+</section>
+<section id="what-does-the-message-node-has-more-than-1-input-and-input-shapes-were-provided-try-not-to-provide-input-shapes-or-specify-input-port-with-port-node-notation-where-port-is-an-integer-mean">
 <span id="question-30"></span><h2>30. What does the message “Node has more than 1 input and input shapes were provided. Try not to provide input shapes or specify input port with PORT:NODE notation, where PORT is an integer” mean?<a class="headerlink" href="#what-does-the-message-node-has-more-than-1-input-and-input-shapes-were-provided-try-not-to-provide-input-shapes-or-specify-input-port-with-port-node-notation-where-port-is-an-integer-mean" title="Permalink to this headline">¶</a></h2>
 <p>This error occurs when an incorrect combination of the <code class="docutils literal notranslate"><span class="pre">--input</span></code> and <code class="docutils literal notranslate"><span class="pre">--input_shape</span></code> command line options is used. Using both <code class="docutils literal notranslate"><span class="pre">--input</span></code> and <code class="docutils literal notranslate"><span class="pre">--input_shape</span></code> is valid only if <code class="docutils literal notranslate"><span class="pre">--input</span></code> points to the <code class="docutils literal notranslate"><span class="pre">Placeholder</span></code> node, a node with one input port or <code class="docutils literal notranslate"><span class="pre">--input</span></code> has the form <code class="docutils literal notranslate"><span class="pre">PORT:NODE</span></code>, where <code class="docutils literal notranslate"><span class="pre">PORT</span></code> is an integer port index of input for node <code class="docutils literal notranslate"><span class="pre">NODE</span></code>. Otherwise, the combination of <code class="docutils literal notranslate"><span class="pre">--input</span></code> and <code class="docutils literal notranslate"><span class="pre">--input_shape</span></code> is incorrect.</p>
-</div>
-<div class="section" id="what-does-the-message-input-port-0-in-input-is-not-supported-if-input-shape-is-not-provided-node-name-of-the-node-omit-port-index-and-all-input-ports-will-be-replaced-by-placeholders-or-provide-input-shape-mean">
+</section>
+<section id="what-does-the-message-input-port-0-in-input-is-not-supported-if-input-shape-is-not-provided-node-name-of-the-node-omit-port-index-and-all-input-ports-will-be-replaced-by-placeholders-or-provide-input-shape-mean">
 <span id="question-31"></span><h2>31. What does the message “Input port &gt; 0 in –input is not supported if –input_shape is not provided. Node: NAME_OF_THE_NODE. Omit port index and all input ports will be replaced by placeholders. Or provide –input_shape” mean?<a class="headerlink" href="#what-does-the-message-input-port-0-in-input-is-not-supported-if-input-shape-is-not-provided-node-name-of-the-node-omit-port-index-and-all-input-ports-will-be-replaced-by-placeholders-or-provide-input-shape-mean" title="Permalink to this headline">¶</a></h2>
 <p>When using the <code class="docutils literal notranslate"><span class="pre">PORT:NODE</span></code> notation for the <code class="docutils literal notranslate"><span class="pre">--input</span></code> command line argument and <code class="docutils literal notranslate"><span class="pre">PORT</span></code>&gt; 0, you should specify <code class="docutils literal notranslate"><span class="pre">--input_shape</span></code> for this input. This is a limitation of the current Model Optimizer implementation.</p>
 <p><strong>NOTE</strong> : It is no longer relevant message since the limitation on input port index for model truncation has been resolved.</p>
-</div>
-<div class="section" id="what-does-the-message-no-or-multiple-placeholders-in-the-model-but-only-one-shape-is-provided-cannot-set-it-mean">
+</section>
+<section id="what-does-the-message-no-or-multiple-placeholders-in-the-model-but-only-one-shape-is-provided-cannot-set-it-mean">
 <span id="question-32"></span><h2>32. What does the message “No or multiple placeholders in the model, but only one shape is provided, cannot set it” mean?<a class="headerlink" href="#what-does-the-message-no-or-multiple-placeholders-in-the-model-but-only-one-shape-is-provided-cannot-set-it-mean" title="Permalink to this headline">¶</a></h2>
 <p>Looks like you have provided only one shape for the placeholder, however there are no or multiple inputs in the model. Please, make sure that you have provided correct data for placeholder nodes.</p>
-</div>
-<div class="section" id="what-does-the-message-the-amount-of-input-nodes-for-port-is-not-equal-to-1-mean">
+</section>
+<section id="what-does-the-message-the-amount-of-input-nodes-for-port-is-not-equal-to-1-mean">
 <span id="question-33"></span><h2>33. What does the message “The amount of input nodes for port is not equal to 1” mean?<a class="headerlink" href="#what-does-the-message-the-amount-of-input-nodes-for-port-is-not-equal-to-1-mean" title="Permalink to this headline">¶</a></h2>
 <p>This error occurs when the <code class="docutils literal notranslate"><span class="pre">SubgraphMatch.single_input_node</span></code> function is used for an input port that supplies more than one node in a sub-graph. The <code class="docutils literal notranslate"><span class="pre">single_input_node</span></code> function can be used only for ports that has a single consumer inside the matching sub-graph. When multiple nodes are connected to the port, use the <code class="docutils literal notranslate"><span class="pre">input_nodes</span></code> function or <code class="docutils literal notranslate"><span class="pre">node_by_pattern</span></code> function instead of <code class="docutils literal notranslate"><span class="pre">single_input_node</span></code>. Please, refer to <strong>Graph Transformation Extensions</strong> section in the <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_customize_model_optimizer_Customize_Model_Optimizer.html#doxid-openvino-docs-m-o-d-g-prepare-model-customize-model-optimizer-customize-model-optimizer"><span class="std std-ref">Model Optimizer Extensibility</span></a> documentation for more details.</p>
-</div>
-<div class="section" id="what-does-the-message-output-node-for-port-has-already-been-specified-mean">
+</section>
+<section id="what-does-the-message-output-node-for-port-has-already-been-specified-mean">
 <span id="question-34"></span><h2>34. What does the message “Output node for port has already been specified” mean?<a class="headerlink" href="#what-does-the-message-output-node-for-port-has-already-been-specified-mean" title="Permalink to this headline">¶</a></h2>
 <p>This error occurs when the <code class="docutils literal notranslate"><span class="pre">SubgraphMatch._add_output_node</span></code> function is called manually from user’s extension code. This is an internal function, and you should not call it directly.</p>
-</div>
-<div class="section" id="what-does-the-message-unsupported-match-kind-match-kinds-points-or-scope-are-supported-only-mean">
+</section>
+<section id="what-does-the-message-unsupported-match-kind-match-kinds-points-or-scope-are-supported-only-mean">
 <span id="question-35"></span><h2>35. What does the message “Unsupported match kind…. Match kinds “points” or “scope” are supported only” mean?<a class="headerlink" href="#what-does-the-message-unsupported-match-kind-match-kinds-points-or-scope-are-supported-only-mean" title="Permalink to this headline">¶</a></h2>
 <p>While using configuration file to implement a TensorFlow* front replacement extension, an incorrect match kind was used. Only <code class="docutils literal notranslate"><span class="pre">points</span></code> or <code class="docutils literal notranslate"><span class="pre">scope</span></code> match kinds are supported. Please refer to <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_customize_model_optimizer_Customize_Model_Optimizer.html#doxid-openvino-docs-m-o-d-g-prepare-model-customize-model-optimizer-customize-model-optimizer"><span class="std std-ref">Model Optimizer Extensibility</span></a> for more details.</p>
-</div>
-<div class="section" id="what-does-the-message-cannot-write-an-event-file-for-the-tensorboard-to-directory-mean">
+</section>
+<section id="what-does-the-message-cannot-write-an-event-file-for-the-tensorboard-to-directory-mean">
 <span id="question-36"></span><h2>36. What does the message “Cannot write an event file for the TensorBoard to directory” mean?<a class="headerlink" href="#what-does-the-message-cannot-write-an-event-file-for-the-tensorboard-to-directory-mean" title="Permalink to this headline">¶</a></h2>
 <p>Model Optimizer tried to write an event file in the specified directory but failed to do that. That could happen because the specified directory does not exist or you do not have enough permissions to write in it.</p>
-</div>
-<div class="section" id="what-does-the-message-there-is-no-registered-infer-function-for-node-with-op-please-implement-this-function-in-the-extensions-mean">
+</section>
+<section id="what-does-the-message-there-is-no-registered-infer-function-for-node-with-op-please-implement-this-function-in-the-extensions-mean">
 <span id="question-37"></span><h2>37. What does the message “There is no registered ‘infer’ function for node  with op = .. . Please implement this function in the extensions” mean?<a class="headerlink" href="#what-does-the-message-there-is-no-registered-infer-function-for-node-with-op-please-implement-this-function-in-the-extensions-mean" title="Permalink to this headline">¶</a></h2>
 <p>Most likely, you tried to extend Model Optimizer with a new primitive, but did not specify an infer function. For more information on extensions, see <a class="reference internal" href="openvino_docs_Extensibility_UG_Intro.html#doxid-openvino-docs-extensibility-u-g-intro"><span class="std std-ref">OpenVINO™ Extensibility Mechanism</span></a>.</p>
-</div>
-<div class="section" id="what-does-the-message-stopped-shape-value-propagation-at-node-mean">
+</section>
+<section id="what-does-the-message-stopped-shape-value-propagation-at-node-mean">
 <span id="question-38"></span><h2>38. What does the message “Stopped shape/value propagation at node” mean?<a class="headerlink" href="#what-does-the-message-stopped-shape-value-propagation-at-node-mean" title="Permalink to this headline">¶</a></h2>
 <p>Model Optimizer cannot infer shapes or values for the specified node. It can happen because of a bug in the custom shape infer function, because the node inputs have incorrect values/shapes, or because the input shapes are incorrect.</p>
-</div>
-<div class="section" id="what-does-the-message-the-input-with-shape-does-not-have-the-batch-dimension-mean">
+</section>
+<section id="what-does-the-message-the-input-with-shape-does-not-have-the-batch-dimension-mean">
 <span id="question-39"></span><h2>39. What does the message “The input with shape .. does not have the batch dimension” mean?<a class="headerlink" href="#what-does-the-message-the-input-with-shape-does-not-have-the-batch-dimension-mean" title="Permalink to this headline">¶</a></h2>
 <p>Batch dimension is the first dimension in the shape and it should be equal to 1 or undefined. In your case, it is not equal to either 1 or undefined, which is why the <code class="docutils literal notranslate"><span class="pre">-b</span></code> shortcut produces undefined and unspecified behavior. To resolve the issue, specify full shapes for each input with the <code class="docutils literal notranslate"><span class="pre">--input_shape</span></code> option. Run Model Optimizer with the <code class="docutils literal notranslate"><span class="pre">--help</span></code> option to learn more about the notation for input shapes.</p>
-</div>
-<div class="section" id="what-does-the-message-not-all-output-shapes-were-inferred-or-fully-defined-for-node-mean">
+</section>
+<section id="what-does-the-message-not-all-output-shapes-were-inferred-or-fully-defined-for-node-mean">
 <span id="question-40"></span><h2>40. What does the message “Not all output shapes were inferred or fully defined for node” mean?<a class="headerlink" href="#what-does-the-message-not-all-output-shapes-were-inferred-or-fully-defined-for-node-mean" title="Permalink to this headline">¶</a></h2>
 <p>Most likely, the shape is not defined (partially or fully) for the specified node. You can use <code class="docutils literal notranslate"><span class="pre">--input_shape</span></code> with positive integers to override model input shapes.</p>
-</div>
-<div class="section" id="what-does-the-message-shape-for-tensor-is-not-defined-can-not-proceed-mean">
+</section>
+<section id="what-does-the-message-shape-for-tensor-is-not-defined-can-not-proceed-mean">
 <span id="question-41"></span><h2>41. What does the message “Shape for tensor is not defined. Can not proceed” mean?<a class="headerlink" href="#what-does-the-message-shape-for-tensor-is-not-defined-can-not-proceed-mean" title="Permalink to this headline">¶</a></h2>
 <p>This error occurs when the <code class="docutils literal notranslate"><span class="pre">--input</span></code> command line option is used to cut a model and <code class="docutils literal notranslate"><span class="pre">--input_shape</span></code> is not used to override shapes for a node and a shape for the node cannot be inferred by Model Optimizer. You need to help Model Optimizer and specify shapes with <code class="docutils literal notranslate"><span class="pre">--input_shape</span></code> for each node that is specified with the <code class="docutils literal notranslate"><span class="pre">--input</span></code> command line option.</p>
-</div>
-<div class="section" id="what-does-the-message-module-tensorflow-was-not-found-please-install-tensorflow-1-2-or-higher-mean">
+</section>
+<section id="what-does-the-message-module-tensorflow-was-not-found-please-install-tensorflow-1-2-or-higher-mean">
 <span id="question-42"></span><h2>42. What does the message “Module TensorFlow was not found. Please install TensorFlow 1.2 or higher” mean?<a class="headerlink" href="#what-does-the-message-module-tensorflow-was-not-found-please-install-tensorflow-1-2-or-higher-mean" title="Permalink to this headline">¶</a></h2>
 <p>To convert TensorFlow* models with Model Optimizer, TensorFlow 1.2 or newer must be installed. For more information on prerequisites, see <a class="reference internal" href="openvino_docs_MO_DG_Deep_Learning_Model_Optimizer_DevGuide.html#doxid-openvino-docs-m-o-d-g-deep-learning-model-optimizer-dev-guide"><span class="std std-ref">Configuring the Model Optimizer</span></a>.</p>
-</div>
-<div class="section" id="what-does-the-message-cannot-read-the-model-file-it-is-incorrect-tensorflow-model-file-or-missing-mean">
+</section>
+<section id="what-does-the-message-cannot-read-the-model-file-it-is-incorrect-tensorflow-model-file-or-missing-mean">
 <span id="question-43"></span><h2>43. What does the message “Cannot read the model file: it is incorrect TensorFlow model file or missing” mean?<a class="headerlink" href="#what-does-the-message-cannot-read-the-model-file-it-is-incorrect-tensorflow-model-file-or-missing-mean" title="Permalink to this headline">¶</a></h2>
 <p>The model file should contain a frozen TensorFlow* graph in the text or binary format. Make sure that <code class="docutils literal notranslate"><span class="pre">--input_model_is_text</span></code> is provided for a model in the text format. By default, a model is interpreted as binary file.</p>
-</div>
-<div class="section" id="what-does-the-message-cannot-pre-process-tensorflow-graph-after-reading-from-model-file-file-is-corrupt-or-has-unsupported-format-mean">
+</section>
+<section id="what-does-the-message-cannot-pre-process-tensorflow-graph-after-reading-from-model-file-file-is-corrupt-or-has-unsupported-format-mean">
 <span id="question-44"></span><h2>44. What does the message “Cannot pre-process TensorFlow graph after reading from model file. File is corrupt or has unsupported format” mean?<a class="headerlink" href="#what-does-the-message-cannot-pre-process-tensorflow-graph-after-reading-from-model-file-file-is-corrupt-or-has-unsupported-format-mean" title="Permalink to this headline">¶</a></h2>
 <p>Most likely, there is a problem with the specified file for model. The file exists, but it has bad formatting or is corrupted.</p>
-</div>
-<div class="section" id="what-does-the-message-found-custom-layer-model-optimizer-does-not-support-this-layer-please-register-it-in-customlayersmapping-xml-or-implement-extension-mean">
+</section>
+<section id="what-does-the-message-found-custom-layer-model-optimizer-does-not-support-this-layer-please-register-it-in-customlayersmapping-xml-or-implement-extension-mean">
 <span id="question-45"></span><h2>45. What does the message “Found custom layer. Model Optimizer does not support this layer. Please, register it in CustomLayersMapping.xml or implement extension” mean?<a class="headerlink" href="#what-does-the-message-found-custom-layer-model-optimizer-does-not-support-this-layer-please-register-it-in-customlayersmapping-xml-or-implement-extension-mean" title="Permalink to this headline">¶</a></h2>
 <p>This means that the layer <code class="docutils literal notranslate"><span class="pre">{layer_name}</span></code> is not supported in the Model Optimizer. You can find a list of all unsupported layers in the corresponding section. You should implement the extensions for this layer (<a class="reference internal" href="openvino_docs_Extensibility_UG_Intro.html#doxid-openvino-docs-extensibility-u-g-intro"><span class="std std-ref">OpenVINO™ Extensibility Mechanism</span></a>).</p>
-</div>
-<div class="section" id="what-does-the-message-custom-replacement-configuration-file-does-not-exist-mean">
+</section>
+<section id="what-does-the-message-custom-replacement-configuration-file-does-not-exist-mean">
 <span id="question-46"></span><h2>46. What does the message “Custom replacement configuration file does not exist” mean?<a class="headerlink" href="#what-does-the-message-custom-replacement-configuration-file-does-not-exist-mean" title="Permalink to this headline">¶</a></h2>
 <p>Path to the custom replacement configuration file was provided with the <code class="docutils literal notranslate"><span class="pre">--transformations_config</span></code> flag, but the file could not be found. Please, make sure that the specified path is correct and the file exists.</p>
-</div>
-<div class="section" id="what-does-the-message-extractors-collection-have-case-insensitive-duplicates-mean">
+</section>
+<section id="what-does-the-message-extractors-collection-have-case-insensitive-duplicates-mean">
 <span id="question-47"></span><h2>47. What does the message “Extractors collection have case insensitive duplicates” mean?<a class="headerlink" href="#what-does-the-message-extractors-collection-have-case-insensitive-duplicates-mean" title="Permalink to this headline">¶</a></h2>
 <p>When extending Model Optimizer with new primitives keep in mind that their names are case insensitive. Most likely, another operation with the same name is already defined. For more information, see <a class="reference internal" href="openvino_docs_Extensibility_UG_Intro.html#doxid-openvino-docs-extensibility-u-g-intro"><span class="std std-ref">OpenVINO™ Extensibility Mechanism</span></a>.</p>
-</div>
-<div class="section" id="what-does-the-message-input-model-name-is-not-in-an-expected-format-cannot-extract-iteration-number-mean">
+</section>
+<section id="what-does-the-message-input-model-name-is-not-in-an-expected-format-cannot-extract-iteration-number-mean">
 <span id="question-48"></span><h2>48. What does the message “Input model name is not in an expected format, cannot extract iteration number” mean?<a class="headerlink" href="#what-does-the-message-input-model-name-is-not-in-an-expected-format-cannot-extract-iteration-number-mean" title="Permalink to this headline">¶</a></h2>
 <p>Model Optimizer can not load an MXNet* model in the specified file format. Please, use the <code class="docutils literal notranslate"><span class="pre">.json</span></code> or <code class="docutils literal notranslate"><span class="pre">.param</span></code> format.</p>
-</div>
-<div class="section" id="what-does-the-message-cannot-convert-type-of-placeholder-because-not-all-of-its-outputs-are-cast-to-float-operations-mean">
+</section>
+<section id="what-does-the-message-cannot-convert-type-of-placeholder-because-not-all-of-its-outputs-are-cast-to-float-operations-mean">
 <span id="question-49"></span><h2>49. What does the message “Cannot convert type of placeholder because not all of its outputs are ‘Cast’ to float operations” mean?<a class="headerlink" href="#what-does-the-message-cannot-convert-type-of-placeholder-because-not-all-of-its-outputs-are-cast-to-float-operations-mean" title="Permalink to this headline">¶</a></h2>
 <p>There are models where <code class="docutils literal notranslate"><span class="pre">Placeholder</span></code> has the UINT8 type and the first operation after it is ‘Cast’, which casts the input to FP32. Model Optimizer detected that the <code class="docutils literal notranslate"><span class="pre">Placeholder</span></code> has the UINT8 type, but the next operation is not ‘Cast’ to float. Model Optimizer does not support such a case. Please, change the model to have placeholder FP32 data type.</p>
-</div>
-<div class="section" id="what-does-the-message-data-type-is-unsupported-mean">
+</section>
+<section id="what-does-the-message-data-type-is-unsupported-mean">
 <span id="question-50"></span><h2>50. What does the message “Data type is unsupported” mean?<a class="headerlink" href="#what-does-the-message-data-type-is-unsupported-mean" title="Permalink to this headline">¶</a></h2>
 <p>Model Optimizer cannot convert the model to the specified data type. Currently, FP16 and FP32 are supported. Please, specify the data type with the <code class="docutils literal notranslate"><span class="pre">--data_type</span></code> flag. The available values are: FP16, FP32, half, float.</p>
-</div>
-<div class="section" id="what-does-the-message-no-node-with-name-mean">
+</section>
+<section id="what-does-the-message-no-node-with-name-mean">
 <span id="question-51"></span><h2>51. What does the message “No node with name …” mean?<a class="headerlink" href="#what-does-the-message-no-node-with-name-mean" title="Permalink to this headline">¶</a></h2>
 <p>Model Optimizer tried to access a node that does not exist. This could happen if you have incorrectly specified placeholder, input or output node name.</p>
-</div>
-<div class="section" id="what-does-the-message-module-mxnet-was-not-found-please-install-mxnet-1-0-0-mean">
+</section>
+<section id="what-does-the-message-module-mxnet-was-not-found-please-install-mxnet-1-0-0-mean">
 <span id="question-52"></span><h2>52. What does the message “Module mxnet was not found. Please install MXNet 1.0.0” mean?<a class="headerlink" href="#what-does-the-message-module-mxnet-was-not-found-please-install-mxnet-1-0-0-mean" title="Permalink to this headline">¶</a></h2>
 <p>To convert MXNet* models with Model Optimizer, MXNet 1.0.0 must be installed. For more information about prerequisites, see <a class="reference internal" href="openvino_docs_MO_DG_Deep_Learning_Model_Optimizer_DevGuide.html#doxid-openvino-docs-m-o-d-g-deep-learning-model-optimizer-dev-guide"><span class="std std-ref">Configuring the Model Optimizer</span></a>.</p>
-</div>
-<div class="section" id="what-does-the-message-the-following-error-happened-while-loading-mxnet-model-mean">
+</section>
+<section id="what-does-the-message-the-following-error-happened-while-loading-mxnet-model-mean">
 <span id="question-53"></span><h2>53. What does the message “The following error happened while loading MXNet model ..” mean?<a class="headerlink" href="#what-does-the-message-the-following-error-happened-while-loading-mxnet-model-mean" title="Permalink to this headline">¶</a></h2>
 <p>Most likely, there is a problem with loading of the MXNet* model. Please, make sure that the specified path is correct, the model exists, it is not corrupted, and you have sufficient permissions to work with it.</p>
-</div>
-<div class="section" id="what-does-the-message-the-following-error-happened-while-processing-input-shapes-mean">
+</section>
+<section id="what-does-the-message-the-following-error-happened-while-processing-input-shapes-mean">
 <span id="question-54"></span><h2>54. What does the message “The following error happened while processing input shapes: ..” mean?<a class="headerlink" href="#what-does-the-message-the-following-error-happened-while-processing-input-shapes-mean" title="Permalink to this headline">¶</a></h2>
 <p>Please, make sure that inputs are defined and have correct shapes. You can use <code class="docutils literal notranslate"><span class="pre">--input_shape</span></code> with positive integers to override model input shapes.</p>
-</div>
-<div class="section" id="what-does-the-message-attempt-to-register-of-custom-name-for-the-second-time-as-class-note-that-custom-names-are-case-insensitive-mean">
+</section>
+<section id="what-does-the-message-attempt-to-register-of-custom-name-for-the-second-time-as-class-note-that-custom-names-are-case-insensitive-mean">
 <span id="question-55"></span><h2>55. What does the message “Attempt to register of custom name for the second time as class. Note that custom names are case-insensitive” mean?<a class="headerlink" href="#what-does-the-message-attempt-to-register-of-custom-name-for-the-second-time-as-class-note-that-custom-names-are-case-insensitive-mean" title="Permalink to this headline">¶</a></h2>
 <p>When extending Model Optimizer with new primitives keep in mind that their names are case insensitive. Most likely, another operation with the same name is already defined. For more information, see <a class="reference internal" href="openvino_docs_Extensibility_UG_Intro.html#doxid-openvino-docs-extensibility-u-g-intro"><span class="std std-ref">OpenVINO™ Extensibility Mechanism</span></a>.</p>
-</div>
-<div class="section" id="what-does-the-message-both-input-shape-and-batch-were-provided-please-provide-only-one-of-them-mean">
+</section>
+<section id="what-does-the-message-both-input-shape-and-batch-were-provided-please-provide-only-one-of-them-mean">
 <span id="question-56"></span><h2>56. What does the message “Both –input_shape and –batch were provided. Please, provide only one of them” mean?<a class="headerlink" href="#what-does-the-message-both-input-shape-and-batch-were-provided-please-provide-only-one-of-them-mean" title="Permalink to this headline">¶</a></h2>
 <p>You cannot specify the batch and the input shape at the same time. You should specify a desired batch as the first value of the input shape.</p>
-</div>
-<div class="section" id="what-does-the-message-input-shape-cannot-be-parsed-mean">
+</section>
+<section id="what-does-the-message-input-shape-cannot-be-parsed-mean">
 <span id="question-57"></span><h2>57. What does the message “Input shape .. cannot be parsed” mean?<a class="headerlink" href="#what-does-the-message-input-shape-cannot-be-parsed-mean" title="Permalink to this headline">¶</a></h2>
 <p>The specified input shape cannot be parsed. Please, define it in one of the following ways:</p>
 <ul>
@@ -2654,125 +2661,125 @@
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">mo</span> <span class="o">--</span><span class="n">input_model</span> <span class="o">/</span><span class="n">path</span><span class="o">-</span><span class="n">to</span><span class="o">/</span><span class="n">your</span><span class="o">-</span><span class="n">model</span><span class="p">.</span><span class="n">caffemodel</span> <span class="o">--</span><span class="n">input</span> <span class="n">data</span><span class="p">,</span><span class="n">rois</span> <span class="o">--</span><span class="n">input_shape</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">227</span><span class="p">,</span><span class="mi">227</span><span class="p">),(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span></pre></div></div></li>
 </ul>
 <p>Keep in mind that there is no space between and inside the brackets for input shapes.</p>
-</div>
-<div class="section" id="what-does-the-message-please-provide-input-layer-names-for-input-layer-shapes-mean">
+</section>
+<section id="what-does-the-message-please-provide-input-layer-names-for-input-layer-shapes-mean">
 <span id="question-58"></span><h2>58. What does the message “Please provide input layer names for input layer shapes” mean?<a class="headerlink" href="#what-does-the-message-please-provide-input-layer-names-for-input-layer-shapes-mean" title="Permalink to this headline">¶</a></h2>
 <p>When specifying input shapes for several layers, you must provide names for inputs, whose shapes will be overwritten. For usage examples, see [Converting a Caffe* Model](<a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_Convert_Model_From_Caffe.html#doxid-openvino-docs-m-o-d-g-prepare-model-convert-model-convert-model-from-caffe"><span class="std std-ref">Converting a Caffe* Model</span></a>. Additional information for <code class="docutils literal notranslate"><span class="pre">--input_shape</span></code> is in FAQ <a class="reference external" href="#question-57">#57</a>.</p>
-</div>
-<div class="section" id="what-does-the-message-values-cannot-be-parsed-mean">
+</section>
+<section id="what-does-the-message-values-cannot-be-parsed-mean">
 <span id="question-59"></span><h2>59. What does the message “Values cannot be parsed” mean?<a class="headerlink" href="#what-does-the-message-values-cannot-be-parsed-mean" title="Permalink to this headline">¶</a></h2>
 <p>Mean values for the given parameter cannot be parsed. It should be a string with a list of mean values. For example, in ‘(1,2,3)’, 1 stands for the RED channel, 2 for the GREEN channel, 3 for the BLUE channel.</p>
-</div>
-<div class="section" id="what-does-the-message-channels-are-expected-for-given-values-mean">
+</section>
+<section id="what-does-the-message-channels-are-expected-for-given-values-mean">
 <span id="question-60"></span><h2>60. What does the message “.. channels are expected for given values” mean?<a class="headerlink" href="#what-does-the-message-channels-are-expected-for-given-values-mean" title="Permalink to this headline">¶</a></h2>
 <p>The number of channels and the number of given values for mean values do not match. The shape should be defined as ‘(R,G,B)’ or ‘[R,G,B]’. The shape should not contain undefined dimensions (? or -1). The order of values is as follows: (value for a RED channel, value for a GREEN channel, value for a BLUE channel).</p>
-</div>
-<div class="section" id="what-does-the-message-you-should-specify-input-for-each-mean-value-mean">
+</section>
+<section id="what-does-the-message-you-should-specify-input-for-each-mean-value-mean">
 <span id="question-61"></span><h2>61. What does the message “You should specify input for each mean value” mean?<a class="headerlink" href="#what-does-the-message-you-should-specify-input-for-each-mean-value-mean" title="Permalink to this headline">¶</a></h2>
 <p>Most likely, you have not specified inputs using <code class="docutils literal notranslate"><span class="pre">--mean_values</span></code>. Please, specify inputs with the <code class="docutils literal notranslate"><span class="pre">--input</span></code> flag. For usage examples, please, refer to FAQ <a class="reference external" href="#question-63">#63</a>.</p>
-</div>
-<div class="section" id="what-does-the-message-you-should-specify-input-for-each-scale-value-mean">
+</section>
+<section id="what-does-the-message-you-should-specify-input-for-each-scale-value-mean">
 <span id="question-62"></span><h2>62. What does the message “You should specify input for each scale value” mean?<a class="headerlink" href="#what-does-the-message-you-should-specify-input-for-each-scale-value-mean" title="Permalink to this headline">¶</a></h2>
 <p>Most likely, you have not specified inputs using <code class="docutils literal notranslate"><span class="pre">--scale_values</span></code>. Please, specify inputs with the <code class="docutils literal notranslate"><span class="pre">--input</span></code> flag. For usage examples, please, refer to FAQ <a class="reference external" href="#question-64">#64</a>.</p>
-</div>
-<div class="section" id="what-does-the-message-number-of-inputs-and-mean-values-does-not-match-mean">
+</section>
+<section id="what-does-the-message-number-of-inputs-and-mean-values-does-not-match-mean">
 <span id="question-63"></span><h2>63. What does the message “Number of inputs and mean values does not match” mean?<a class="headerlink" href="#what-does-the-message-number-of-inputs-and-mean-values-does-not-match-mean" title="Permalink to this headline">¶</a></h2>
 <p>The number of specified mean values and the number of inputs must be equal. Please, refer to <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_Convert_Model_From_Caffe.html#doxid-openvino-docs-m-o-d-g-prepare-model-convert-model-convert-model-from-caffe"><span class="std std-ref">Converting a Caffe* Model</span></a> for a usage example.</p>
-</div>
-<div class="section" id="what-does-the-message-number-of-inputs-and-scale-values-does-not-match-mean">
+</section>
+<section id="what-does-the-message-number-of-inputs-and-scale-values-does-not-match-mean">
 <span id="question-64"></span><h2>64. What does the message “Number of inputs and scale values does not match” mean?<a class="headerlink" href="#what-does-the-message-number-of-inputs-and-scale-values-does-not-match-mean" title="Permalink to this headline">¶</a></h2>
 <p>The number of specified scale values and the number of inputs must be equal. Please, refer to <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_Convert_Model_From_Caffe.html#doxid-openvino-docs-m-o-d-g-prepare-model-convert-model-convert-model-from-caffe"><span class="std std-ref">Converting a Caffe* Model</span></a> for a usage example.</p>
-</div>
-<div class="section" id="what-does-the-message-no-class-registered-for-match-kind-supported-match-kinds-are-mean">
+</section>
+<section id="what-does-the-message-no-class-registered-for-match-kind-supported-match-kinds-are-mean">
 <span id="question-65"></span><h2>65. What does the message “No class registered for match kind … Supported match kinds are .. ” mean?<a class="headerlink" href="#what-does-the-message-no-class-registered-for-match-kind-supported-match-kinds-are-mean" title="Permalink to this headline">¶</a></h2>
 <p>A replacement defined in the configuration file for sub-graph replacement using node names patterns or start/end nodes has the <code class="docutils literal notranslate"><span class="pre">match_kind</span></code> attribute. The attribute may have only one of the values: <code class="docutils literal notranslate"><span class="pre">scope</span></code> or <code class="docutils literal notranslate"><span class="pre">points</span></code>. If a different value is provided, this error is displayed.</p>
-</div>
-<div class="section" id="what-does-the-message-no-instance-s-is-are-defined-for-the-custom-replacement-mean">
+</section>
+<section id="what-does-the-message-no-instance-s-is-are-defined-for-the-custom-replacement-mean">
 <span id="question-66"></span><h2>66. What does the message “No instance(s) is(are) defined for the custom replacement” mean?<a class="headerlink" href="#what-does-the-message-no-instance-s-is-are-defined-for-the-custom-replacement-mean" title="Permalink to this headline">¶</a></h2>
 <p>A replacement defined in the configuration file for sub-graph replacement using node names patterns or start/end nodes has the <code class="docutils literal notranslate"><span class="pre">instances</span></code> attribute. This attribute is mandatory, and it causes this error if it is missing. Refer to documentation with a description of the sub-graph replacement feature.</p>
-</div>
-<div class="section" id="what-does-the-message-the-instance-must-be-a-single-dictionary-for-the-custom-replacement-with-id-mean">
+</section>
+<section id="what-does-the-message-the-instance-must-be-a-single-dictionary-for-the-custom-replacement-with-id-mean">
 <span id="question-67"></span><h2>67. What does the message “The instance must be a single dictionary for the custom replacement with id ..” mean?<a class="headerlink" href="#what-does-the-message-the-instance-must-be-a-single-dictionary-for-the-custom-replacement-with-id-mean" title="Permalink to this headline">¶</a></h2>
 <p>A replacement defined in the configuration file for sub-graph replacement using start/end nodes has the <code class="docutils literal notranslate"><span class="pre">instances</span></code> attribute. For this type of replacement, the instance must be defined with a dictionary with two keys <code class="docutils literal notranslate"><span class="pre">start_points</span></code> and <code class="docutils literal notranslate"><span class="pre">end_points</span></code>. Values for these keys are lists with the start and end node names, respectively. Refer to documentation with a description of the sub-graph replacement feature.</p>
-</div>
-<div class="section" id="what-does-the-message-no-instances-are-defined-for-replacement-with-id-mean">
+</section>
+<section id="what-does-the-message-no-instances-are-defined-for-replacement-with-id-mean">
 <span id="question-68"></span><h2>68. What does the message “No instances are defined for replacement with id .. ” mean?<a class="headerlink" href="#what-does-the-message-no-instances-are-defined-for-replacement-with-id-mean" title="Permalink to this headline">¶</a></h2>
 <p>A replacement for the specified id is not defined in the configuration file. Please, refer to FAQ <a class="reference external" href="#question-66">#66</a> for more information.</p>
-</div>
-<div class="section" id="what-does-the-message-custom-replacements-configuration-file-does-not-exist-mean">
+</section>
+<section id="what-does-the-message-custom-replacements-configuration-file-does-not-exist-mean">
 <span id="question-69"></span><h2>69. What does the message “Custom replacements configuration file .. does not exist” mean?<a class="headerlink" href="#what-does-the-message-custom-replacements-configuration-file-does-not-exist-mean" title="Permalink to this headline">¶</a></h2>
 <p>Path to a custom replacement configuration file was provided with the <code class="docutils literal notranslate"><span class="pre">--transformations_config</span></code> flag, but it cannot be found. Please, make sure that the specified path is correct and the file exists.</p>
-</div>
-<div class="section" id="what-does-the-message-failed-to-parse-custom-replacements-configuration-file-mean">
+</section>
+<section id="what-does-the-message-failed-to-parse-custom-replacements-configuration-file-mean">
 <span id="question-70"></span><h2>70. What does the message “Failed to parse custom replacements configuration file ..” mean?<a class="headerlink" href="#what-does-the-message-failed-to-parse-custom-replacements-configuration-file-mean" title="Permalink to this headline">¶</a></h2>
 <p>The file for custom replacement configuration provided with the <code class="docutils literal notranslate"><span class="pre">--transformations_config</span></code> flag cannot be parsed. In particular, it should have a valid JSON structure. For more details, refer to <a class="reference external" href="https://spacetelescope.github.io/understanding-json-schema/reference/index.html">JSON Schema Reference</a>.</p>
-</div>
-<div class="section" id="what-does-the-message-one-of-the-custom-replacements-in-the-configuration-file-does-not-contain-attribute-id-mean">
+</section>
+<section id="what-does-the-message-one-of-the-custom-replacements-in-the-configuration-file-does-not-contain-attribute-id-mean">
 <span id="question-71"></span><h2>71. What does the message “One of the custom replacements in the configuration file .. does not contain attribute ‘id’” mean?<a class="headerlink" href="#what-does-the-message-one-of-the-custom-replacements-in-the-configuration-file-does-not-contain-attribute-id-mean" title="Permalink to this headline">¶</a></h2>
 <p>Every custom replacement should declare a set of mandatory attributes and their values. For more details, refer to FAQ <a class="reference external" href="#question-72">#72</a>.</p>
-</div>
-<div class="section" id="what-does-the-message-file-validation-failed-mean">
+</section>
+<section id="what-does-the-message-file-validation-failed-mean">
 <span id="question-72"></span><h2>72. What does the message “File .. validation failed” mean?<a class="headerlink" href="#what-does-the-message-file-validation-failed-mean" title="Permalink to this headline">¶</a></h2>
 <p>The file for custom replacement configuration provided with the <code class="docutils literal notranslate"><span class="pre">--transformations_config</span></code> flag cannot pass validation. Make sure that you have specified <code class="docutils literal notranslate"><span class="pre">id</span></code>, <code class="docutils literal notranslate"><span class="pre">instances</span></code> and <code class="docutils literal notranslate"><span class="pre">match_kind</span></code> for all the patterns.</p>
-</div>
-<div class="section" id="what-does-the-message-cannot-update-the-file-because-it-is-broken-mean">
+</section>
+<section id="what-does-the-message-cannot-update-the-file-because-it-is-broken-mean">
 <span id="question-73"></span><h2>73. What does the message “Cannot update the file .. because it is broken” mean?<a class="headerlink" href="#what-does-the-message-cannot-update-the-file-because-it-is-broken-mean" title="Permalink to this headline">¶</a></h2>
 <p>The custom replacement configuration file provided with the <code class="docutils literal notranslate"><span class="pre">--tensorflow_custom_operations_config_update</span></code> cannot be parsed. Please, make sure that the file is correct and refer to FAQs <a class="reference external" href="#question-69">#69</a>, <a class="reference external" href="#question-70">#70</a>, <a class="reference external" href="#question-71">#71</a>, and <a class="reference external" href="#question-72">#72</a>.</p>
-</div>
-<div class="section" id="what-does-the-message-end-node-is-not-reachable-from-start-nodes-mean">
+</section>
+<section id="what-does-the-message-end-node-is-not-reachable-from-start-nodes-mean">
 <span id="question-74"></span><h2>74. What does the message “End node .. is not reachable from start nodes: ..” mean?<a class="headerlink" href="#what-does-the-message-end-node-is-not-reachable-from-start-nodes-mean" title="Permalink to this headline">¶</a></h2>
 <p>This error occurs when you try to make a sub-graph match. It is detected that between the start and end nodes that were specified as inputs/outputs of the subgraph to find, there are nodes that are marked as outputs but there is no path from them to the input nodes. Make sure that the subgraph you want to match does actually contain all the specified output nodes.</p>
-</div>
-<div class="section" id="what-does-the-message-sub-graph-contains-network-input-node-mean">
+</section>
+<section id="what-does-the-message-sub-graph-contains-network-input-node-mean">
 <span id="question-75"></span><h2>75. What does the message “Sub-graph contains network input node ..” mean?<a class="headerlink" href="#what-does-the-message-sub-graph-contains-network-input-node-mean" title="Permalink to this headline">¶</a></h2>
 <p>Start or end node for the sub-graph replacement using start/end nodes is specified incorrectly. Model Optimizer finds internal nodes of the sub-graph strictly “between” the start and end nodes. Then it adds all input nodes to the sub-graph (and inputs of their inputs and so on) for these “internal” nodes. The error reports, that the Model Optimizer reached input node during this phase. This means that the start/end points are specified incorrectly in the configuration file. Refer to documentation with a description of the sub-graph replacement feature.</p>
-</div>
-<div class="section" id="what-does-the-message-elements-of-were-clipped-to-infinity-while-converting-a-blob-for-node-to-mean">
+</section>
+<section id="what-does-the-message-elements-of-were-clipped-to-infinity-while-converting-a-blob-for-node-to-mean">
 <span id="question-76"></span><h2>76. What does the message “… elements of … were clipped to infinity while converting a blob for node […] to …” mean?<a class="headerlink" href="#what-does-the-message-elements-of-were-clipped-to-infinity-while-converting-a-blob-for-node-to-mean" title="Permalink to this headline">¶</a></h2>
 <p>This message may appear when the <code class="docutils literal notranslate"><span class="pre">--data_type=FP16</span></code> command line option is used. This option implies conversion of all the blobs in the node to FP16. If a value in a blob is out of the range of valid FP16 values, the value is converted to positive or negative infinity. It may lead to incorrect results of inference or may not be a problem, depending on the model. The number of such elements and the total number of elements in the blob is printed out together with the name of the node, where this blob is used.</p>
-</div>
-<div class="section" id="what-does-the-message-elements-of-were-clipped-to-zero-while-converting-a-blob-for-node-to-mean">
+</section>
+<section id="what-does-the-message-elements-of-were-clipped-to-zero-while-converting-a-blob-for-node-to-mean">
 <span id="question-77"></span><h2>77. What does the message “… elements of … were clipped to zero while converting a blob for node […] to …” mean?<a class="headerlink" href="#what-does-the-message-elements-of-were-clipped-to-zero-while-converting-a-blob-for-node-to-mean" title="Permalink to this headline">¶</a></h2>
 <p>This message may appear when the <code class="docutils literal notranslate"><span class="pre">--data_type=FP16</span></code> command line option is used. This option implies conversion of all blobs in the mode to FP16. If a value in the blob is so close to zero that it cannot be represented as a valid FP16 value, it is converted to a true zero FP16 value. Depending on the model, it may lead to incorrect results of inference or may not be a problem. The number of such elements and the total number of elements in the blob are printed out together with a name of the node, where this blob is used.</p>
-</div>
-<div class="section" id="what-does-the-message-the-amount-of-nodes-matched-pattern-is-not-equal-to-1-mean">
+</section>
+<section id="what-does-the-message-the-amount-of-nodes-matched-pattern-is-not-equal-to-1-mean">
 <span id="question-78"></span><h2>78. What does the message “The amount of nodes matched pattern … is not equal to 1” mean?<a class="headerlink" href="#what-does-the-message-the-amount-of-nodes-matched-pattern-is-not-equal-to-1-mean" title="Permalink to this headline">¶</a></h2>
 <p>This error occurs when the <code class="docutils literal notranslate"><span class="pre">SubgraphMatch.node_by_pattern</span></code> function is used with a pattern that does not uniquely identify a single node in a sub-graph. Try to extend the pattern string to make unambiguous match to a single sub-graph node. For more details, refer to <strong>Graph Transformation Extensions</strong> section in the <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_customize_model_optimizer_Customize_Model_Optimizer.html#doxid-openvino-docs-m-o-d-g-prepare-model-customize-model-optimizer-customize-model-optimizer"><span class="std std-ref">Model Optimizer Extensibility</span></a> documentation.</p>
-</div>
-<div class="section" id="what-does-the-message-the-topology-contains-no-input-layers-mean">
+</section>
+<section id="what-does-the-message-the-topology-contains-no-input-layers-mean">
 <span id="question-79"></span><h2>79. What does the message “The topology contains no “input” layers” mean?<a class="headerlink" href="#what-does-the-message-the-topology-contains-no-input-layers-mean" title="Permalink to this headline">¶</a></h2>
 <p>Your Caffe* topology <code class="docutils literal notranslate"><span class="pre">.prototxt</span></code> file is intended for training. Model Optimizer expects a deployment-ready <code class="docutils literal notranslate"><span class="pre">.prototxt</span></code> file. To fix the problem, prepare a deployment-ready <code class="docutils literal notranslate"><span class="pre">.prototxt</span></code> file. Usually, preparation of a deploy-ready topology results in removing <code class="docutils literal notranslate"><span class="pre">data</span></code> layer(s), adding <code class="docutils literal notranslate"><span class="pre">input</span></code> layer(s), and removing loss layer(s).</p>
-</div>
-<div class="section" id="what-does-the-message-warning-please-expect-that-model-optimizer-conversion-might-be-slow-mean">
+</section>
+<section id="what-does-the-message-warning-please-expect-that-model-optimizer-conversion-might-be-slow-mean">
 <span id="question-80"></span><h2>80. What does the message “Warning: please expect that Model Optimizer conversion might be slow” mean?<a class="headerlink" href="#what-does-the-message-warning-please-expect-that-model-optimizer-conversion-might-be-slow-mean" title="Permalink to this headline">¶</a></h2>
 <p>You are using an unsupported Python* version. Use only versions 3.4 - 3.6 for the C++ <code class="docutils literal notranslate"><span class="pre">protobuf</span></code> implementation that is supplied with the OpenVINO Toolkit. You can still boost conversion speed by building protobuf library from sources. For complete instructions about building <code class="docutils literal notranslate"><span class="pre">protobuf</span></code> from sources, see the appropriate section in <a class="reference internal" href="openvino_docs_MO_DG_Deep_Learning_Model_Optimizer_DevGuide.html#doxid-openvino-docs-m-o-d-g-deep-learning-model-optimizer-dev-guide"><span class="std std-ref">Converting a Model to Intermediate Representation</span></a>.</p>
-</div>
-<div class="section" id="what-does-the-message-arguments-nd-prefix-name-pretrained-model-name-and-input-symbol-should-be-provided-please-provide-all-or-do-not-use-any-mean">
+</section>
+<section id="what-does-the-message-arguments-nd-prefix-name-pretrained-model-name-and-input-symbol-should-be-provided-please-provide-all-or-do-not-use-any-mean">
 <span id="question-81"></span><h2>81. What does the message “Arguments –nd_prefix_name, –pretrained_model_name and –input_symbol should be provided. Please provide all or do not use any.” mean?<a class="headerlink" href="#what-does-the-message-arguments-nd-prefix-name-pretrained-model-name-and-input-symbol-should-be-provided-please-provide-all-or-do-not-use-any-mean" title="Permalink to this headline">¶</a></h2>
 <p>This error occurs if you do not provide <code class="docutils literal notranslate"><span class="pre">--nd_prefix_name</span></code>, <code class="docutils literal notranslate"><span class="pre">--pretrained_model_name</span></code> and <code class="docutils literal notranslate"><span class="pre">--input_symbol</span></code> parameters. Model Optimizer requires both <code class="docutils literal notranslate"><span class="pre">.params</span></code> and <code class="docutils literal notranslate"><span class="pre">.nd</span></code> model files to merge into the result file (<code class="docutils literal notranslate"><span class="pre">.params</span></code>). Topology description (<code class="docutils literal notranslate"><span class="pre">.json</span></code> file) should be prepared (merged) in advance and provided with <code class="docutils literal notranslate"><span class="pre">--input_symbol</span></code> parameter.</p>
 <p>If you add to your model additional layers and weights that are in <code class="docutils literal notranslate"><span class="pre">.nd</span></code> files, the Model Optimizer can build a model from one <code class="docutils literal notranslate"><span class="pre">.params</span></code> file and two additional <code class="docutils literal notranslate"><span class="pre">.nd</span></code> files (<code class="docutils literal notranslate"><span class="pre">\*_args.nd</span></code>, <code class="docutils literal notranslate"><span class="pre">\*_auxs.nd</span></code>). To do that, provide both CLI options or do not pass them if you want to convert an MXNet model without additional weights. For more information, refer to <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_Convert_Model_From_MxNet.html#doxid-openvino-docs-m-o-d-g-prepare-model-convert-model-convert-model-from-mx-net"><span class="std std-ref">Converting a MXNet* Model</span></a>.</p>
-</div>
-<div class="section" id="what-does-the-message-you-should-specify-input-for-mean-scale-values-mean">
+</section>
+<section id="what-does-the-message-you-should-specify-input-for-mean-scale-values-mean">
 <span id="question-82"></span><h2>82. What does the message “You should specify input for mean/scale values” mean?<a class="headerlink" href="#what-does-the-message-you-should-specify-input-for-mean-scale-values-mean" title="Permalink to this headline">¶</a></h2>
 <p>In case when the model has multiple inputs and you want to provide mean/scale values, you need to pass those values for each input. More specifically, a number of passed values should be the same as the number of inputs of the model. For more information, refer to <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_Converting_Model.html#doxid-openvino-docs-m-o-d-g-prepare-model-convert-model-converting-model"><span class="std std-ref">Converting a Model to Intermediate Representation</span></a>.</p>
-</div>
-<div class="section" id="what-does-the-message-input-with-name-not-found-mean">
+</section>
+<section id="what-does-the-message-input-with-name-not-found-mean">
 <span id="question-83"></span><h2>83. What does the message “Input with name … not found!” mean?<a class="headerlink" href="#what-does-the-message-input-with-name-not-found-mean" title="Permalink to this headline">¶</a></h2>
 <p>When you passed the mean/scale values and specify names of input layers of the model, you might have used the name that does not correspond to any input layer. Make sure that by passing values with <code class="docutils literal notranslate"><span class="pre">--input</span></code> option, you list only names of the input layers of your model. For more information, refer to the <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_Converting_Model.html#doxid-openvino-docs-m-o-d-g-prepare-model-convert-model-converting-model"><span class="std std-ref">Converting a Model to Intermediate Representation</span></a>.</p>
-</div>
-<div class="section" id="what-does-the-message-specified-input-json-does-not-exist-mean">
+</section>
+<section id="what-does-the-message-specified-input-json-does-not-exist-mean">
 <span id="question-84"></span><h2>84. What does the message “Specified input json … does not exist” mean?<a class="headerlink" href="#what-does-the-message-specified-input-json-does-not-exist-mean" title="Permalink to this headline">¶</a></h2>
 <p>Most likely, <code class="docutils literal notranslate"><span class="pre">.json</span></code> file does not exist or has a name that does not match the notation of MXNet. Make sure that the file exists and it has a correct name. For more information, refer to <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_Convert_Model_From_MxNet.html#doxid-openvino-docs-m-o-d-g-prepare-model-convert-model-convert-model-from-mx-net"><span class="std std-ref">Converting a MXNet\* Model</span></a>.</p>
-</div>
-<div class="section" id="what-does-the-message-unsupported-input-model-file-type-model-optimizer-support-only-params-and-nd-files-format-mean">
+</section>
+<section id="what-does-the-message-unsupported-input-model-file-type-model-optimizer-support-only-params-and-nd-files-format-mean">
 <span id="question-85"></span><h2>85. What does the message “Unsupported Input model file type … Model Optimizer support only .params and .nd files format” mean?<a class="headerlink" href="#what-does-the-message-unsupported-input-model-file-type-model-optimizer-support-only-params-and-nd-files-format-mean" title="Permalink to this headline">¶</a></h2>
 <p>Model Optimizer for MXNet supports only <code class="docutils literal notranslate"><span class="pre">.params</span></code> and <code class="docutils literal notranslate"><span class="pre">.nd</span></code> files formats. Most likely, you specified some unsupported file format in <code class="docutils literal notranslate"><span class="pre">--input_model</span></code>. For more information, refer to <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_Convert_Model_From_MxNet.html#doxid-openvino-docs-m-o-d-g-prepare-model-convert-model-convert-model-from-mx-net"><span class="std std-ref">Converting a MXNet* Model</span></a>.</p>
-</div>
-<div class="section" id="what-does-the-message-operation-not-supported-please-register-it-as-custom-op-mean">
+</section>
+<section id="what-does-the-message-operation-not-supported-please-register-it-as-custom-op-mean">
 <span id="question-86"></span><h2>86. What does the message “Operation … not supported. Please register it as custom op” mean?<a class="headerlink" href="#what-does-the-message-operation-not-supported-please-register-it-as-custom-op-mean" title="Permalink to this headline">¶</a></h2>
 <p>Model Optimizer tried to load the model that contains some unsupported operations. If you want to convert model that contains unsupported operations you need to prepare extension for all such operations. For more information, refer to <a class="reference internal" href="openvino_docs_Extensibility_UG_Intro.html#doxid-openvino-docs-extensibility-u-g-intro"><span class="std std-ref">OpenVINO™ Extensibility Mechanism</span></a>.</p>
-</div>
-<div class="section" id="what-does-the-message-can-not-register-op-please-call-function-register-caffe-python-extractor-with-parameter-name-mean">
+</section>
+<section id="what-does-the-message-can-not-register-op-please-call-function-register-caffe-python-extractor-with-parameter-name-mean">
 <span id="question-87"></span><h2>87. What does the message “Can not register Op … Please, call function ‘register_caffe_python_extractor’ with parameter ‘name’” mean?<a class="headerlink" href="#what-does-the-message-can-not-register-op-please-call-function-register-caffe-python-extractor-with-parameter-name-mean" title="Permalink to this headline">¶</a></h2>
 <p>This error appears if the class of implementation of op for Python Caffe layer could not be used by Model Optimizer. Python layers should be handled differently compared to ordinary Caffe layers.</p>
 <p>In particular, you need to call the function <code class="docutils literal notranslate"><span class="pre">register_caffe_python_extractor</span></code> and pass <code class="docutils literal notranslate"><span class="pre">name</span></code> as the second argument of the function. The name should be the compilation of the layer name and the module name separated by a dot.</p>
@@ -2798,32 +2805,32 @@
 <span class="n">register_caffe_python_extractor</span><span class="p">(</span><span class="n">ProposalPythonExampleOp</span><span class="p">,</span> <span class="sc">&#39;rpn.proposal_layer.ProposalLayer&#39;</span><span class="p">)</span>
 <span class="n">Op</span><span class="p">.</span><span class="n">excluded_classes</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">ProposalPythonExampleOp</span><span class="p">)</span></pre></div></div><p>Note that the first call <code class="docutils literal notranslate"><span class="pre">register_caffe_python_extractor(ProposalPythonExampleOp,</span> <span class="pre">'rpn.proposal_layer.ProposalLayer')</span></code> registers extension of the layer in the Model Optimizer that will be found by the specific name (mandatory to join module name and layer name): <code class="docutils literal notranslate"><span class="pre">rpn.proposal_layer.ProposalLayer</span></code>.</p>
 <p>The second call prevents Model Optimizer from using this extension as if it is an extension for a layer with type <code class="docutils literal notranslate"><span class="pre">Proposal</span></code>. Otherwise, this layer can be chosen as an implementation of extension that can lead to potential issues. For more information, refer to the <a class="reference internal" href="openvino_docs_Extensibility_UG_Intro.html#doxid-openvino-docs-extensibility-u-g-intro"><span class="std std-ref">OpenVINO™ Extensibility Mechanism</span></a>.</p>
-</div>
-<div class="section" id="what-does-the-message-model-optimizer-is-unable-to-calculate-output-shape-of-memory-node-mean">
+</section>
+<section id="what-does-the-message-model-optimizer-is-unable-to-calculate-output-shape-of-memory-node-mean">
 <span id="question-88"></span><h2>88. What does the message “Model Optimizer is unable to calculate output shape of Memory node ..” mean?<a class="headerlink" href="#what-does-the-message-model-optimizer-is-unable-to-calculate-output-shape-of-memory-node-mean" title="Permalink to this headline">¶</a></h2>
 <p>Model Optimizer supports only <code class="docutils literal notranslate"><span class="pre">Memory</span></code> layers, in which <code class="docutils literal notranslate"><span class="pre">input_memory</span></code> goes before <code class="docutils literal notranslate"><span class="pre">ScaleShift</span></code> or <code class="docutils literal notranslate"><span class="pre">FullyConnected</span></code> layer. This error message means that in your model the layer after input memory is not of type <code class="docutils literal notranslate"><span class="pre">ScaleShift</span></code> or <code class="docutils literal notranslate"><span class="pre">FullyConnected</span></code>. This is a known limitation.</p>
-</div>
-<div class="section" id="what-do-the-messages-file-does-not-appear-to-be-a-kaldi-file-magic-number-does-not-match-kaldi-model-should-start-with-nnet-tag-mean">
+</section>
+<section id="what-do-the-messages-file-does-not-appear-to-be-a-kaldi-file-magic-number-does-not-match-kaldi-model-should-start-with-nnet-tag-mean">
 <span id="question-89"></span><h2>89. What do the messages “File …  does not appear to be a Kaldi file (magic number does not match)”, “Kaldi model should start with &lt;Nnet&gt; tag” mean?<a class="headerlink" href="#what-do-the-messages-file-does-not-appear-to-be-a-kaldi-file-magic-number-does-not-match-kaldi-model-should-start-with-nnet-tag-mean" title="Permalink to this headline">¶</a></h2>
 <p>These error messages mean that the Model Optimizer does not support your Kaldi* model, because check sum of the model is not 16896 (the model should start with this number) or model file does not contain tag <code class="docutils literal notranslate"><span class="pre">&lt;Net&gt;</span></code> as a starting one. Double check that you provide a path to a true Kaldi model and try again.</p>
-</div>
-<div class="section" id="what-do-the-messages-expect-counts-file-to-be-one-line-file-or-expect-counts-file-to-contain-list-of-integers-mean">
+</section>
+<section id="what-do-the-messages-expect-counts-file-to-be-one-line-file-or-expect-counts-file-to-contain-list-of-integers-mean">
 <span id="question-90"></span><h2>90. What do the messages “Expect counts file to be one-line file.” or “Expect counts file to contain list of integers” mean?<a class="headerlink" href="#what-do-the-messages-expect-counts-file-to-be-one-line-file-or-expect-counts-file-to-contain-list-of-integers-mean" title="Permalink to this headline">¶</a></h2>
 <p>These messages mean that you passed the file counts containing not one line. The count file should start with <code class="docutils literal notranslate"><span class="pre">[</span></code> and end with <code class="docutils literal notranslate"><span class="pre">]</span></code>, and integer values should be separated by space between those signs.</p>
-</div>
-<div class="section" id="what-does-the-message-model-optimizer-is-not-able-to-read-kaldi-model-mean">
+</section>
+<section id="what-does-the-message-model-optimizer-is-not-able-to-read-kaldi-model-mean">
 <span id="question-91"></span><h2>91. What does the message “Model Optimizer is not able to read Kaldi model ..” mean?<a class="headerlink" href="#what-does-the-message-model-optimizer-is-not-able-to-read-kaldi-model-mean" title="Permalink to this headline">¶</a></h2>
 <p>There are multiple reasons why the Model Optimizer does not accept a Kaldi topology: file is not available or does not exist. Refer to FAQ <a class="reference external" href="#question-89">#89</a>.</p>
-</div>
-<div class="section" id="what-does-the-message-model-optimizer-is-not-able-to-read-counts-file-mean">
+</section>
+<section id="what-does-the-message-model-optimizer-is-not-able-to-read-counts-file-mean">
 <span id="question-92"></span><h2>92. What does the message “Model Optimizer is not able to read counts file  ..” mean?<a class="headerlink" href="#what-does-the-message-model-optimizer-is-not-able-to-read-counts-file-mean" title="Permalink to this headline">¶</a></h2>
 <p>There are multiple reasons why the Model Optimizer does not accept a counts file: file is not available or does not exist. Also refer to FAQ <a class="reference external" href="#question-90">#90</a>.</p>
-</div>
-<div class="section" id="what-does-the-message-for-legacy-mxnet-models-model-optimizer-does-not-support-conversion-of-old-mxnet-models-trained-with-1-0-0-version-of-mxnet-and-lower-with-custom-layers-mean">
+</section>
+<section id="what-does-the-message-for-legacy-mxnet-models-model-optimizer-does-not-support-conversion-of-old-mxnet-models-trained-with-1-0-0-version-of-mxnet-and-lower-with-custom-layers-mean">
 <span id="question-93"></span><h2>93. What does the message “For legacy MXNet models Model Optimizer does not support conversion of old MXNet models (trained with 1.0.0 version of MXNet and lower) with custom layers.” mean?<a class="headerlink" href="#what-does-the-message-for-legacy-mxnet-models-model-optimizer-does-not-support-conversion-of-old-mxnet-models-trained-with-1-0-0-version-of-mxnet-and-lower-with-custom-layers-mean" title="Permalink to this headline">¶</a></h2>
 <p>This message means that if you have model with custom layers and its json file has been generated with MXNet version lower than 1.0.0, Model Optimizer does not support such topologies. If you want to convert it you have to rebuild MXNet with unsupported layers or generate new json with MXNet version 1.0.0 and higher. Also you need to implement OpenVINO extension for used custom layers. For more information, refer to the <a class="reference internal" href="openvino_docs_Extensibility_UG_Intro.html#doxid-openvino-docs-extensibility-u-g-intro"><span class="std std-ref">OpenVINO™ Extensibility Mechanism</span></a>.</p>
-</div>
-<div class="section" id="what-does-the-message-graph-contains-a-cycle-can-not-proceed-mean">
+</section>
+<section id="what-does-the-message-graph-contains-a-cycle-can-not-proceed-mean">
 <span id="question-97"></span><h2>97. What does the message “Graph contains a cycle. Can not proceed ..” mean?<a class="headerlink" href="#what-does-the-message-graph-contains-a-cycle-can-not-proceed-mean" title="Permalink to this headline">¶</a></h2>
 <p>Model Optimizer supports only straightforward models without cycles.</p>
 <p>There are multiple ways to avoid cycles:</p>
@@ -2840,48 +2847,48 @@
 <ul class="simple">
 <li><p>Edit model in original framework to exclude cycle.</p></li>
 </ul>
-</div>
-<div class="section" id="what-does-the-message-can-not-transpose-attribute-with-value-for-node-mean">
+</section>
+<section id="what-does-the-message-can-not-transpose-attribute-with-value-for-node-mean">
 <span id="question-98"></span><h2>98. What does the message “Can not transpose attribute ‘..’ with value .. for node ‘..’ ..” mean?<a class="headerlink" href="#what-does-the-message-can-not-transpose-attribute-with-value-for-node-mean" title="Permalink to this headline">¶</a></h2>
 <p>This message means that model is not supported. It may be caused by using shapes larger than 4-D. There are two ways to avoid such message:</p>
 <ol class="arabic simple">
 <li><p><a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_Cutting_Model.html#doxid-openvino-docs-m-o-d-g-prepare-model-convert-model-cutting-model"><span class="std std-ref">Cutting Off Parts of a Model</span></a></p></li>
 <li><p>Edit network in original framework to exclude such layers.</p></li>
 </ol>
-</div>
-<div class="section" id="what-does-the-message-expected-token-parallelcomponent-has-mean">
+</section>
+<section id="what-does-the-message-expected-token-parallelcomponent-has-mean">
 <span id="question-99"></span><h2>99. What does the message “Expected token <cite>&lt;/ParallelComponent&gt;</cite>, has <cite>…</cite>” mean?<a class="headerlink" href="#what-does-the-message-expected-token-parallelcomponent-has-mean" title="Permalink to this headline">¶</a></h2>
 <p>This error messages mean that Model Optimizer does not support your Kaldi model, because the Net contains <code class="docutils literal notranslate"><span class="pre">ParallelComponent</span></code> that does not end by tag <code class="docutils literal notranslate"><span class="pre">&lt;/ParallelComponent&gt;</span></code>. Double check that you provide a path to a true Kaldi model and try again.</p>
-</div>
-<div class="section" id="what-does-the-message-interp-layer-shape-inference-function-may-be-wrong-please-try-to-update-layer-shape-inference-function-in-the-file-extensions-ops-interp-op-at-the-line-mean">
+</section>
+<section id="what-does-the-message-interp-layer-shape-inference-function-may-be-wrong-please-try-to-update-layer-shape-inference-function-in-the-file-extensions-ops-interp-op-at-the-line-mean">
 <span id="question-100"></span><h2>100. What does the message “Interp layer shape inference function may be wrong, please, try to update layer shape inference function in the file (extensions/ops/interp.op at the line …).” mean?<a class="headerlink" href="#what-does-the-message-interp-layer-shape-inference-function-may-be-wrong-please-try-to-update-layer-shape-inference-function-in-the-file-extensions-ops-interp-op-at-the-line-mean" title="Permalink to this headline">¶</a></h2>
 <p>There are many flavors of Caffe framework, and most layers in them are implemented identically. But there are exceptions. For example, output value of layer Interp is calculated differently in Deeplab-Caffe and classic Caffe. So if your model contain layer Interp and converting of your model has failed, please modify the ‘interp_infer’ function in the file extensions/ops/interp.op according to the comments of the file.</p>
-</div>
-<div class="section" id="what-does-the-message-mean-scale-values-should-mean">
+</section>
+<section id="what-does-the-message-mean-scale-values-should-mean">
 <span id="question-101"></span><h2>101. What does the message “Mean/scale values should …” mean?<a class="headerlink" href="#what-does-the-message-mean-scale-values-should-mean" title="Permalink to this headline">¶</a></h2>
 <p>It means that your mean/scale values have wrong format. Specify mean/scale values using the form <code class="docutils literal notranslate"><span class="pre">layer_name(val1,val2,val3)</span></code>. You need to specify values for each input of the model. For more information, refer to <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_Converting_Model.html#doxid-openvino-docs-m-o-d-g-prepare-model-convert-model-converting-model"><span class="std std-ref">Converting a Model to Intermediate Representation</span></a>.</p>
-</div>
-<div class="section" id="what-does-the-message-operation-contrib-box-nms-is-not-supported-mean">
+</section>
+<section id="what-does-the-message-operation-contrib-box-nms-is-not-supported-mean">
 <span id="question-102"></span><h2>102. What does the message “Operation _contrib_box_nms is not supported …” mean?<a class="headerlink" href="#what-does-the-message-operation-contrib-box-nms-is-not-supported-mean" title="Permalink to this headline">¶</a></h2>
 <p>It means that you trying to convert the topology which contains ‘_contrib_box_nms’ operation which is not supported directly. However the sub-graph of operations including the ‘_contrib_box_nms’ could be replaced with DetectionOutput layer if your topology is one of the gluoncv topologies. Specify ‘ enable_ssd_gluoncv’ command line parameter for the Model Optimizer to enable this transformation.</p>
-</div>
-<div class="section" id="what-does-the-message-modeloptimizer-is-not-able-to-parse-caffemodel-mean">
+</section>
+<section id="what-does-the-message-modeloptimizer-is-not-able-to-parse-caffemodel-mean">
 <span id="question-103"></span><h2>103. What does the message “ModelOptimizer is not able to parse *.caffemodel” mean?<a class="headerlink" href="#what-does-the-message-modeloptimizer-is-not-able-to-parse-caffemodel-mean" title="Permalink to this headline">¶</a></h2>
 <p>If a ‘*.caffemodel’ file exists and it is correct, the error possibly occured due to the use of Python protobuf implementation. In some cases, it shows error message during model parsing, for example: “‘utf-8’ codec can’t decode byte 0xe0 in position 4: invalid continuation byte in field: mo_caffe.SpatialTransformerParameter.transform_type”. You can either use Python 3.6/3.7 or build ‘cpp’ implementation of protobuf yourself for your version of Python. For the complete instructions about building <code class="docutils literal notranslate"><span class="pre">protobuf</span></code> from sources, see the appropriate section in <a class="reference internal" href="openvino_docs_MO_DG_Deep_Learning_Model_Optimizer_DevGuide.html#doxid-openvino-docs-m-o-d-g-deep-learning-model-optimizer-dev-guide"><span class="std std-ref">Converting a Model to Intermediate Representation</span></a>.</p>
-</div>
-<div class="section" id="what-does-the-message-syntaxerror-yield-inside-list-comprehension-during-mxnet-model-conversion-mean">
+</section>
+<section id="what-does-the-message-syntaxerror-yield-inside-list-comprehension-during-mxnet-model-conversion-mean">
 <span id="question-104"></span><h2>104. What does the message “SyntaxError: ‘yield’ inside list comprehension” during MxNet* model conversion mean?<a class="headerlink" href="#what-does-the-message-syntaxerror-yield-inside-list-comprehension-during-mxnet-model-conversion-mean" title="Permalink to this headline">¶</a></h2>
 <p>The issue “SyntaxError: ‘yield’ inside list comprehension” might occur during converting MXNet* models (mobilefacedet-v1-mxnet, brain-tumor-segmentation-0001) on Windows* platform with Python* 3.8 environment. This issue is caused by API changes for <code class="docutils literal notranslate"><span class="pre">yield</span> <span class="pre">expression</span></code> in Python 3.8. The following workarounds are suggested to resolve this issue:</p>
 <ol class="arabic simple">
 <li><p>Use Python 3.6/3.7 to convert MXNet* models on Windows</p></li>
 <li><p>Update MXNet: pip install mxnet=1.7.0.post2 Note that you might have conflicts between previously installed PyPI dependencies.</p></li>
 </ol>
-</div>
-<div class="section" id="what-does-the-message-the-ir-preparation-was-executed-by-the-legacy-mo-path-mean">
+</section>
+<section id="what-does-the-message-the-ir-preparation-was-executed-by-the-legacy-mo-path-mean">
 <span id="question-105"></span><h2>105. What does the message “The IR preparation was executed by the legacy MO path. …” mean?<a class="headerlink" href="#what-does-the-message-the-ir-preparation-was-executed-by-the-legacy-mo-path-mean" title="Permalink to this headline">¶</a></h2>
 <p>For the models in ONNX* format, there are two available paths of IR conversion. The old one is handled by the old Python* implementation, while the new one uses new C++ frontends. Starting from the 2022.1 version, the default IR conversion path for ONNX models is processed using the new ONNX frontend. Certain features, such as <code class="docutils literal notranslate"><span class="pre">--extensions</span></code> and <code class="docutils literal notranslate"><span class="pre">--transformations_config</span></code>, are not yet fully supported on the new frontends. For <code class="docutils literal notranslate"><span class="pre">--extensions</span></code>, the new frontends support only paths to shared libraries (.dll and .so). For <code class="docutils literal notranslate"><span class="pre">--transformations_config</span></code>, they support JSON configurations with defined library fields. Inputs freezing (enabled by <code class="docutils literal notranslate"><span class="pre">--freeze_placeholder_with_value</span></code> or <code class="docutils literal notranslate"><span class="pre">--input</span></code> arguments) is not supported on the new frontends. The IR conversion falls back to the old path if a user does not select any expected path of conversion explicitly (by <code class="docutils literal notranslate"><span class="pre">--use_new_frontend</span></code> or <code class="docutils literal notranslate"><span class="pre">--use_legacy_frontend</span></code> MO arguments) and unsupported pre-defined scenario is detected on the new frontend path.</p>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -2912,7 +2919,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

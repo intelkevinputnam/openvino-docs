@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Model Caching Overview &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -1837,112 +1844,69 @@
             
                 <div>
                   
-  <div class="section" id="model-caching-overview">
+  <section id="model-caching-overview">
 <span id="doxid-openvino-docs-o-v-u-g-model-caching-overview"></span><span id="index-0"></span><h1>Model Caching Overview<a class="headerlink" href="#model-caching-overview" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-openvino-docs-o-v-u-g-model-caching-overview-1md-openvino-docs-ov-runtime-ug-model-caching-overview"></span></p>
-<div class="section" id="introduction">
+<section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>As described in the <a class="reference internal" href="openvino_docs_OV_UG_Integrate_OV_with_your_application.html#doxid-openvino-docs-o-v-u-g-integrate-o-v-with-your-application"><span class="std std-ref">Integrate OpenVINO™ with Your Application</span></a>, a common application flow consists of the following steps:</p>
 <ol class="arabic simple">
 <li><p><strong>Create a Core object</strong> : First step to manage available devices and read model objects</p></li>
-<li><p><strong>Read the Intermediate Representation</strong> : Read an Intermediate Representation file into an object of the <code class="docutils literal notranslate"><span class="pre">ov::Model</span></code></p></li>
+<li><p><strong>Read the Intermediate Representation</strong> : Read an Intermediate Representation file into an object of the <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1Model.html#doxid-classov-1-1-model"><span class="std std-ref"><span class="pre">ov::Model</span></span></a></code></p></li>
 <li><p><strong>Prepare inputs and outputs</strong> : If needed, manipulate precision, memory layout, size or color format</p></li>
 <li><p><strong>Set configuration</strong> : Pass device-specific loading configurations to the device</p></li>
-<li><p><strong>Compile and Load Network to device</strong> : Use the <code class="docutils literal notranslate"><span class="pre">ov::Core::compile_model()</span></code> method with a specific device</p></li>
+<li><p><strong>Compile and Load Network to device</strong> : Use the <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1Core.html#doxid-classov-1-1-core-1a46555f0803e8c29524626be08e7f5c5a"><span class="std std-ref"><span class="pre">ov::Core::compile_model()</span></span></a></code> method with a specific device</p></li>
 <li><p><strong>Set input data</strong> : Specify input tensor</p></li>
 <li><p><strong>Execute</strong> : Carry out inference and process results</p></li>
 </ol>
 <p>Step 5 can potentially perform several time-consuming device-specific optimizations and network compilations, and such delays can lead to a bad user experience on application startup. To avoid this, some devices offer import/export network capability, and it is possible to either use the <a class="reference internal" href="openvino_inference_engine_tools_compile_tool_README.html#doxid-openvino-inference-engine-tools-compile-tool-r-e-a-d-m-e"><span class="std std-ref">Compile tool</span></a> or enable model caching to export compiled model automatically. Reusing cached model can significantly reduce compile model time.</p>
-<div class="section" id="set-cache-dir-config-option-to-enable-model-caching">
+<section id="set-cache-dir-config-option-to-enable-model-caching">
 <h3>Set “cache_dir” config option to enable model caching<a class="headerlink" href="#set-cache-dir-config-option-to-enable-model-caching" title="Permalink to this headline">¶</a></h3>
 <p>To enable model caching, the application must specify a folder to store cached blobs, which is done like this:</p>
 <div class="tab-set docutils">
 <input checked="True" class="tab-input" id="tab-set--0-input--1" name="tab-set--0" type="radio"><label class="tab-label" for="tab-set--0-input--1">C++</label><div class="tab-content docutils">
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">ov</span><span class="o">::</span><span class="n">Core</span> <span class="n">core</span><span class="p">;</span>                                              <span class="c1">// Step 1: create ov::Core object</span>
-<span class="n">core</span><span class="p">.</span><span class="n">set_property</span><span class="p">(</span><span class="n">ov</span><span class="o">::</span><span class="n">cache_dir</span><span class="p">(</span><span class="s">&quot;/path/to/cache/dir&quot;</span><span class="p">));</span>     <span class="c1">// Step 1b: Enable caching</span>
-<span class="k">auto</span> <span class="n">model</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><span class="n">read_model</span><span class="p">(</span><span class="n">modelPath</span><span class="p">);</span>                    <span class="c1">// Step 2: Read Model</span>
-<span class="c1">//...                                                       // Step 3: Prepare inputs/outputs</span>
-<span class="c1">//...                                                       // Step 4: Set device configuration</span>
-<span class="k">auto</span> <span class="n">compiled</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">device</span><span class="p">,</span> <span class="n">config</span><span class="p">);</span>  <span class="c1">// Step 5: LoadNetwork</span>
-</pre></div>
-</div>
 </div>
 <input class="tab-input" id="tab-set--0-input--2" name="tab-set--0" type="radio"><label class="tab-label" for="tab-set--0-input--2">Python</label><div class="tab-content docutils">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">core</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span>
-<span class="n">core</span><span class="o">.</span><span class="n">set_property</span><span class="p">({</span><span class="s1">&#39;CACHE_DIR&#39;</span><span class="p">:</span> <span class="s1">&#39;/path/to/cache/dir&#39;</span><span class="p">})</span>
-<span class="n">model</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">read_model</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">xml_path</span><span class="p">)</span>
-<span class="n">compiled_model</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">device_name</span><span class="o">=</span><span class="n">device_name</span><span class="p">)</span>
-</pre></div>
-</div>
 </div>
 </div>
 <p>With this code, if the device specified by <code class="docutils literal notranslate"><span class="pre">device_name</span></code> supports import/export model capability, a cached blob is automatically created inside the <code class="docutils literal notranslate"><span class="pre">/path/to/cache/dir</span></code> folder. If the device does not support import/export capability, cache is not created and no error is thrown.</p>
 <p>Depending on your device, total time for compiling model on application startup can be significantly reduced. Also note that the very first <code class="docutils literal notranslate"><span class="pre">compile_model</span></code> (when cache is not yet created) takes slightly longer time to “export” the compiled blob into a cache file:</p>
 <img alt="../_images/caching_enabled.png" src="../_images/caching_enabled.png" />
-</div>
-<div class="section" id="even-faster-use-compile-model-modelpath">
+</section>
+<section id="even-faster-use-compile-model-modelpath">
 <h3>Even faster: use compile_model(modelPath)<a class="headerlink" href="#even-faster-use-compile-model-modelpath" title="Permalink to this headline">¶</a></h3>
 <p>In some cases, applications do not need to customize inputs and outputs every time. Such application always call <code class="docutils literal notranslate"><span class="pre">model</span> <span class="pre">=</span> <span class="pre">core.read_model(...)</span></code>, then <code class="docutils literal notranslate"><span class="pre">core.compile_model(model,</span> <span class="pre">..)</span></code> and it can be further optimized. For these cases, there is a more convenient API to compile the model in a single call, skipping the read step:</p>
 <div class="tab-set docutils">
 <input checked="True" class="tab-input" id="tab-set--1-input--1" name="tab-set--1" type="radio"><label class="tab-label" for="tab-set--1-input--1">C++</label><div class="tab-content docutils">
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">ov</span><span class="o">::</span><span class="n">Core</span> <span class="n">core</span><span class="p">;</span>                                                  <span class="c1">// Step 1: create ov::Core object</span>
-<span class="k">auto</span> <span class="n">compiled</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">modelPath</span><span class="p">,</span> <span class="n">device</span><span class="p">,</span> <span class="n">config</span><span class="p">);</span>  <span class="c1">// Step 2: Compile model by file path</span>
-</pre></div>
-</div>
 </div>
 <input class="tab-input" id="tab-set--1-input--2" name="tab-set--1" type="radio"><label class="tab-label" for="tab-set--1-input--2">Python</label><div class="tab-content docutils">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">core</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span>
-<span class="n">compiled_model</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model_path</span><span class="o">=</span><span class="n">xml_path</span><span class="p">,</span> <span class="n">device_name</span><span class="o">=</span><span class="n">device_name</span><span class="p">)</span>
-</pre></div>
-</div>
 </div>
 </div>
 <p>With model caching enabled, total load time is even smaller, if <code class="docutils literal notranslate"><span class="pre">read_model</span></code> is optimized as well.</p>
 <div class="tab-set docutils">
 <input checked="True" class="tab-input" id="tab-set--2-input--1" name="tab-set--2" type="radio"><label class="tab-label" for="tab-set--2-input--1">C++</label><div class="tab-content docutils">
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">ov</span><span class="o">::</span><span class="n">Core</span> <span class="n">core</span><span class="p">;</span>                                                  <span class="c1">// Step 1: create ov::Core object</span>
-<span class="n">core</span><span class="p">.</span><span class="n">set_property</span><span class="p">(</span><span class="n">ov</span><span class="o">::</span><span class="n">cache_dir</span><span class="p">(</span><span class="s">&quot;/path/to/cache/dir&quot;</span><span class="p">));</span>         <span class="c1">// Step 1b: Enable caching</span>
-<span class="k">auto</span> <span class="n">compiled</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">modelPath</span><span class="p">,</span> <span class="n">device</span><span class="p">,</span> <span class="n">config</span><span class="p">);</span>  <span class="c1">// Step 2: Compile model by file path</span>
-</pre></div>
-</div>
 </div>
 <input class="tab-input" id="tab-set--2-input--2" name="tab-set--2" type="radio"><label class="tab-label" for="tab-set--2-input--2">Python</label><div class="tab-content docutils">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">core</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span>
-<span class="n">core</span><span class="o">.</span><span class="n">set_property</span><span class="p">({</span><span class="s1">&#39;CACHE_DIR&#39;</span><span class="p">:</span> <span class="s1">&#39;/path/to/cache/dir&#39;</span><span class="p">})</span>
-<span class="n">compiled_model</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model_path</span><span class="o">=</span><span class="n">xml_path</span><span class="p">,</span> <span class="n">device_name</span><span class="o">=</span><span class="n">device_name</span><span class="p">)</span>
-</pre></div>
-</div>
 </div>
 </div>
 <img alt="../_images/caching_times.png" src="../_images/caching_times.png" />
-</div>
-<div class="section" id="advanced-examples">
+</section>
+<section id="advanced-examples">
 <h3>Advanced Examples<a class="headerlink" href="#advanced-examples" title="Permalink to this headline">¶</a></h3>
 <p>Not every device supports network import/export capability. For those that don’t, enabling caching has no effect. To check in advance if a particular device supports model caching, your application can use the following code:</p>
 <div class="tab-set docutils">
 <input checked="True" class="tab-input" id="tab-set--3-input--1" name="tab-set--3" type="radio"><label class="tab-label" for="tab-set--3-input--1">C++</label><div class="tab-content docutils">
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Get list of supported device capabilities</span>
-<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">caps</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><span class="n">get_property</span><span class="p">(</span><span class="n">deviceName</span><span class="p">,</span> <span class="n">ov</span><span class="o">::</span><span class="n">device</span><span class="o">::</span><span class="n">capabilities</span><span class="p">);</span>
-
-<span class="c1">// Find &#39;EXPORT_IMPORT&#39; capability in supported capabilities</span>
-<span class="kt">bool</span> <span class="n">cachingSupported</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">find</span><span class="p">(</span><span class="n">caps</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">caps</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">ov</span><span class="o">::</span><span class="n">device</span><span class="o">::</span><span class="n">capability</span><span class="o">::</span><span class="n">EXPORT_IMPORT</span><span class="p">)</span> <span class="o">!=</span> <span class="n">caps</span><span class="p">.</span><span class="n">end</span><span class="p">();</span>
-</pre></div>
-</div>
 </div>
 <input class="tab-input" id="tab-set--3-input--2" name="tab-set--3" type="radio"><label class="tab-label" for="tab-set--3-input--2">Python</label><div class="tab-content docutils">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Find &#39;EXPORT_IMPORT&#39; capability in supported capabilities</span>
-<span class="n">caching_supported</span> <span class="o">=</span> <span class="s1">&#39;EXPORT_IMPORT&#39;</span> <span class="ow">in</span> <span class="n">core</span><span class="o">.</span><span class="n">get_property</span><span class="p">(</span><span class="n">device_name</span><span class="p">,</span> <span class="s1">&#39;OPTIMIZATION_CAPABILITIES&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
 </div>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The GPU plugin does not have the EXPORT_IMPORT capability, and does not support model caching yet. However, the GPU plugin supports caching kernels (see the <a class="reference internal" href="openvino_docs_OV_UG_supported_plugins_GPU.html#doxid-openvino-docs-o-v-u-g-supported-plugins-g-p-u"><span class="std std-ref">GPU plugin documentation</span></a>). Kernel caching for the GPU plugin can be accessed the same way as model caching: by setting the <code class="docutils literal notranslate"><span class="pre">CACHE_DIR</span></code> configuration key to a folder where the cache should be stored.</p>
 </div>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
                 </div>
@@ -1973,7 +1937,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

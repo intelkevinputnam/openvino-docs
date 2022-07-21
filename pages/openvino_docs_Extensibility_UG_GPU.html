@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>How to Implement Custom GPU Operations &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -1887,21 +1894,21 @@
             
                 <div>
                   
-  <div class="section" id="how-to-implement-custom-gpu-operations">
+  <section id="how-to-implement-custom-gpu-operations">
 <span id="doxid-openvino-docs-extensibility-u-g-g-p-u"></span><span id="index-0"></span><h1>How to Implement Custom GPU Operations<a class="headerlink" href="#how-to-implement-custom-gpu-operations" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-openvino-docs-extensibility-u-g-g-p-u-1md-openvino-docs-extensibility-ug-gpu-extensibility"></span> To enable operations not supported by OpenVINO out of the box, you may need an extension for an OpenVINO operation set, and a custom kernel for the device you will target. This page describes custom kernel support for the GPU device.</p>
 <p>The GPU codepath abstracts many details about OpenCL. You need to provide the kernel code in OpenCL C and an XML configuration file that connects the kernel and its parameters to the parameters of the operation.</p>
 <p>There are two options for using the custom operation configuration file:</p>
 <ul class="simple">
 <li><p>Include a section with your kernels into the automatically-loaded <code class="docutils literal notranslate"><span class="pre">&lt;lib_path&gt;/cldnn_global_custom_kernels/cldnn_global_custom_kernels.xml</span></code> file.</p></li>
-<li><p>Call the <code class="docutils literal notranslate"><span class="pre">ov::Core::set_property()</span></code> method from your application with the <code class="docutils literal notranslate"><span class="pre">&quot;CONFIG_FILE&quot;</span></code> key and the configuration file name as a value before loading the network that uses custom operations to the plugin:</p></li>
+<li><p>Call the <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1Core.html#doxid-classov-1-1-core-1aa953cb0a1601dbc9a34ef6ba82b8476e"><span class="std std-ref"><span class="pre">ov::Core::set_property()</span></span></a></code> method from your application with the <code class="docutils literal notranslate"><span class="pre">&quot;CONFIG_FILE&quot;</span></code> key and the configuration file name as a value before loading the network that uses custom operations to the plugin:</p></li>
 </ul>
-<div class='sphinxtabset'><div class="sphinxtab" data-sphinxtab-value="C++"><div class="highlight"><div class="highlight"><pre>ov::Core<span></span> <span class="n">core</span><span class="p">;</span>
+<div class='sphinxtabset'><div class="sphinxtab" data-sphinxtab-value="C++"><div class="highlight"><div class="highlight"><pre><a class="reference internal" href="../api/groups/classov_1_1Core.html#doxid-classov-1-1-core"><span class="std std-ref">ov::Core</span></a><span></span> <span class="n">core</span><span class="p">;</span>
 <span class="c1">// Load GPU Extensions</span>
-<span class="n">core</span><span class="p">.</span>set_property<span></span><span class="p">(</span><span class="s">&quot;GPU&quot;</span><span class="p">,</span> <span class="p">{{</span> CONFIG_KEY<span></span><span class="p">(</span><span class="n">CONFIG_FILE</span><span class="p">),</span> <span class="s">&quot;&lt;path_to_the_xml_file&gt;&quot;</span> <span class="p">}});</span></pre></div></div></div><div class="sphinxtab" data-sphinxtab-value="Python"><div class="highlight"><div class="highlight"><pre><span></span><span class="n">core</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span>
+<span class="n">core</span><span class="p">.</span><a class="reference internal" href="../api/groups/classov_1_1Core.html#doxid-classov-1-1-core-1aa953cb0a1601dbc9a34ef6ba82b8476e"><span class="std std-ref">set_property</span></a><span></span><span class="p">(</span><span class="s">&quot;GPU&quot;</span><span class="p">,</span> <span class="p">{{</span> CONFIG_KEY<span></span><span class="p">(</span><span class="n">CONFIG_FILE</span><span class="p">),</span> <span class="s">&quot;&lt;path_to_the_xml_file&gt;&quot;</span> <span class="p">}});</span></pre></div></div></div><div class="sphinxtab" data-sphinxtab-value="Python"><div class="highlight"><div class="highlight"><pre><span></span><span class="n">core</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span>
 <span class="n">core</span><span class="p">.</span><span class="n">set_property</span><span class="p">(</span><span class="s">&quot;GPU&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s">&quot;CONFIG_FILE&quot;</span><span class="o">:</span> <span class="s">&quot;&lt;path_to_the_xml_file&gt;&quot;</span><span class="p">})</span></pre></div></div></div></div><p>All OpenVINO samples, except the trivial <code class="docutils literal notranslate"><span class="pre">hello_classification</span></code>, and most Open Model Zoo demos feature a dedicated command-line option <code class="docutils literal notranslate"><span class="pre">-c</span></code> to load custom kernels. For example, to load custom operations for the classification sample, run the command below:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="err">$</span> <span class="p">.</span><span class="o">/</span><span class="n">classification_sample</span> <span class="o">-</span><span class="n">m</span> <span class="o">&lt;</span><span class="n">path_to_model</span><span class="o">&gt;/</span><span class="n">bvlc_alexnet_fp16</span><span class="p">.</span><span class="n">xml</span> <span class="o">-</span><span class="n">i</span> <span class="p">.</span><span class="o">/</span><span class="n">validation_set</span><span class="o">/</span><span class="n">daily</span><span class="o">/</span><span class="mi">227</span><span class="n">x227</span><span class="o">/</span><span class="n">apron</span><span class="p">.</span><span class="n">bmp</span> <span class="o">-</span><span class="n">d</span> <span class="n">GPU</span>
- <span class="o">-</span><span class="n">c</span> <span class="o">&lt;</span><span class="n">absolute_path_to_config</span><span class="o">&gt;/</span><span class="n">custom_layer_example</span><span class="p">.</span><span class="n">xml</span></pre></div></div><div class="section" id="configuration-file-format">
+ <span class="o">-</span><span class="n">c</span> <span class="o">&lt;</span><span class="n">absolute_path_to_config</span><span class="o">&gt;/</span><span class="n">custom_layer_example</span><span class="p">.</span><span class="n">xml</span></pre></div></div><section id="configuration-file-format">
 <span id="config-file-format"></span><h2>Configuration File Format<a class="headerlink" href="#configuration-file-format" title="Permalink to this headline">¶</a></h2>
 <p>The configuration file is expected to follow the <code class="docutils literal notranslate"><span class="pre">.xml</span></code> file structure with a node of the <code class="docutils literal notranslate"><span class="pre">CustomLayer</span></code> type for every custom operation you provide.</p>
 <p>The definitions described in the sections below use the following notations:</p>
@@ -1933,7 +1940,7 @@
 </tr>
 </tbody>
 </table>
-<div class="section" id="customlayer-node-and-sub-node-structure">
+<section id="customlayer-node-and-sub-node-structure">
 <h3>CustomLayer Node and Sub-Node Structure<a class="headerlink" href="#customlayer-node-and-sub-node-structure" title="Permalink to this headline">¶</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">CustomLayer</span></code> node contains the entire configuration for a single custom operation.</p>
 <table class="table">
@@ -1973,13 +1980,13 @@
 </tbody>
 </table>
 <p><strong>Sub-nodes</strong> : <code class="docutils literal notranslate"><span class="pre">Kernel</span></code> (1), <code class="docutils literal notranslate"><span class="pre">Buffers</span></code> (1), <code class="docutils literal notranslate"><span class="pre">CompilerOptions</span></code> (0+), <code class="docutils literal notranslate"><span class="pre">WorkSizes</span></code> (0/1)</p>
-</div>
-<div class="section" id="kernel-node-and-sub-node-structure">
+</section>
+<section id="kernel-node-and-sub-node-structure">
 <h3>Kernel Node and Sub-Node Structure<a class="headerlink" href="#kernel-node-and-sub-node-structure" title="Permalink to this headline">¶</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">Kernel</span></code> node contains all kernel source code configuration.</p>
 <p><strong>Sub-nodes</strong> : <code class="docutils literal notranslate"><span class="pre">Source</span></code> (1+), <code class="docutils literal notranslate"><span class="pre">Define</span></code> (0+)</p>
-</div>
-<div class="section" id="source-node-and-sub-node-structure">
+</section>
+<section id="source-node-and-sub-node-structure">
 <h3>Source Node and Sub-Node Structure<a class="headerlink" href="#source-node-and-sub-node-structure" title="Permalink to this headline">¶</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">Source</span></code> node points to a single OpenCL source file.</p>
 <table class="table">
@@ -2005,8 +2012,8 @@
 </tbody>
 </table>
 <p><strong>Sub-nodes</strong> : None</p>
-</div>
-<div class="section" id="define-node-and-sub-node-structure">
+</section>
+<section id="define-node-and-sub-node-structure">
 <h3>Define Node and Sub-Node Structure<a class="headerlink" href="#define-node-and-sub-node-structure" title="Permalink to this headline">¶</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">Define</span></code> node configures a single <code class="docutils literal notranslate"><span class="pre">#define</span></code> instruction to be added to the sources during compilation (JIT).</p>
 <table class="table">
@@ -2045,13 +2052,13 @@
 </table>
 <p><strong>Sub-nodes:</strong> None</p>
 <p>The resulting JIT has the following form: <code class="docutils literal notranslate"><span class="pre">#define</span> <span class="pre">[name]</span> <span class="pre">[type]</span> <span class="pre">[value/default]</span></code>.</p>
-</div>
-<div class="section" id="buffers-node-and-sub-node-structure">
+</section>
+<section id="buffers-node-and-sub-node-structure">
 <h3>Buffers Node and Sub-Node Structure<a class="headerlink" href="#buffers-node-and-sub-node-structure" title="Permalink to this headline">¶</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">Buffers</span></code> node configures all input/output buffers for the OpenCL entry function. No buffers node structure exists.</p>
 <p><strong>Sub-nodes:</strong> <code class="docutils literal notranslate"><span class="pre">Data</span></code> (0+), <code class="docutils literal notranslate"><span class="pre">Tensor</span></code> (1+)</p>
-</div>
-<div class="section" id="data-node-and-sub-node-structure">
+</section>
+<section id="data-node-and-sub-node-structure">
 <h3>Data Node and Sub-Node Structure<a class="headerlink" href="#data-node-and-sub-node-structure" title="Permalink to this headline">¶</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">Data</span></code> node configures a single input with static data, for example, weights or biases.</p>
 <table class="table">
@@ -2084,8 +2091,8 @@
 </tbody>
 </table>
 <p><strong>Sub-nodes</strong> : None</p>
-</div>
-<div class="section" id="tensor-node-and-sub-node-structure">
+</section>
+<section id="tensor-node-and-sub-node-structure">
 <h3>Tensor Node and Sub-Node Structure<a class="headerlink" href="#tensor-node-and-sub-node-structure" title="Permalink to this headline">¶</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">Tensor</span></code> node configures a single input or output tensor.</p>
 <table class="table">
@@ -2128,8 +2135,8 @@
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="compileroptions-node-and-sub-node-structure">
+</section>
+<section id="compileroptions-node-and-sub-node-structure">
 <h3>CompilerOptions Node and Sub-Node Structure<a class="headerlink" href="#compileroptions-node-and-sub-node-structure" title="Permalink to this headline">¶</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">CompilerOptions</span></code> node configures the compilation flags for the OpenCL sources.</p>
 <table class="table">
@@ -2155,8 +2162,8 @@
 </tbody>
 </table>
 <p><strong>Sub-nodes</strong> : None</p>
-</div>
-<div class="section" id="worksizes-node-and-sub-node-structure">
+</section>
+<section id="worksizes-node-and-sub-node-structure">
 <h3>WorkSizes Node and Sub-Node Structure<a class="headerlink" href="#worksizes-node-and-sub-node-structure" title="Permalink to this headline">¶</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">WorkSizes</span></code> node configures the global/local work sizes to be used when queuing an OpenCL program for execution.</p>
 <table class="table">
@@ -2183,9 +2190,9 @@
 </tbody>
 </table>
 <p><strong>Sub-nodes</strong> : None</p>
-</div>
-</div>
-<div class="section" id="example-configuration-file">
+</section>
+</section>
+<section id="example-configuration-file">
 <h2>Example Configuration File<a class="headerlink" href="#example-configuration-file" title="Permalink to this headline">¶</a></h2>
 <p>The following code sample provides an example configuration file in XML format. For information on the configuration file structure, see <a class="reference external" href="#config-file-format">Configuration File Format</a>.</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">CustomLayer</span> <span class="n">name</span><span class="o">=</span><span class="s">&quot;ReLU&quot;</span> <span class="n">type</span><span class="o">=</span><span class="s">&quot;SimpleGPU&quot;</span> <span class="n">version</span><span class="o">=</span><span class="s">&quot;1&quot;</span><span class="o">&gt;</span>
@@ -2199,8 +2206,8 @@
   <span class="o">&lt;/</span><span class="n">Buffers</span><span class="o">&gt;</span>
   <span class="o">&lt;</span><span class="n">CompilerOptions</span> <span class="n">options</span><span class="o">=</span><span class="s">&quot;-cl-mad-enable&quot;</span><span class="o">/&gt;</span>
   <span class="o">&lt;</span><span class="n">WorkSizes</span> <span class="n">global</span><span class="o">=</span><span class="s">&quot;X,Y,B\*F&quot;</span><span class="o">/&gt;</span>
-<span class="o">&lt;/</span><span class="n">CustomLayer</span><span class="o">&gt;</span></pre></div></div></div>
-<div class="section" id="built-in-definitions-for-custom-layers">
+<span class="o">&lt;/</span><span class="n">CustomLayer</span><span class="o">&gt;</span></pre></div></div></section>
+<section id="built-in-definitions-for-custom-layers">
 <h2>Built-In Definitions for Custom Layers<a class="headerlink" href="#built-in-definitions-for-custom-layers" title="Permalink to this headline">¶</a></h2>
 <p>The following table includes definitions that are attached before user sources.</p>
 <p>For an example, see <a class="reference external" href="#example-kernel">Example Kernel</a>.</p>
@@ -2267,8 +2274,8 @@
 </table>
 <p>All <code class="docutils literal notranslate"><span class="pre">&lt;TENSOR&gt;</span></code> values are automatically defined for every tensor bound to this operation, such as <code class="docutils literal notranslate"><span class="pre">INPUT0</span></code>, <code class="docutils literal notranslate"><span class="pre">INPUT1</span></code>, and <code class="docutils literal notranslate"><span class="pre">OUTPUT0</span></code>, as shown in the following example:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="cp">#define INPUT0_DIMS_SIZE 4</span>
-<span class="cp">#define INPUT0_DIMS (int []){ 1,96,55,55, }</span></pre></div></div></div>
-<div class="section" id="example-kernel">
+<span class="cp">#define INPUT0_DIMS (int []){ 1,96,55,55, }</span></pre></div></div></section>
+<section id="example-kernel">
 <span id="id1"></span><h2>Example Kernel<a class="headerlink" href="#example-kernel" title="Permalink to this headline">¶</a></h2>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="cp">#pragma OPENCL EXTENSION cl_khr_fp16 : enable</span>
 <span class="n">__kernel</span> <span class="kt">void</span> <span class="nf">example_relu_kernel</span><span class="p">(</span>
@@ -2291,15 +2298,15 @@
 <p class="admonition-title">Note</p>
 <p>As described in the previous section, all items like <code class="docutils literal notranslate"><span class="pre">INPUT0_TYPE</span></code> are actually defined as OpenCL (pre-)compiler inputs by OpenVINO for efficiency reasons. See <a class="reference external" href="#debugging-tips">Debugging Tips</a> for information on debugging the results.</p>
 </div>
-</div>
-<div class="section" id="debugging-tips">
+</section>
+<section id="debugging-tips">
 <span id="id2"></span><h2>Debugging Tips<a class="headerlink" href="#debugging-tips" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>Using <code class="docutils literal notranslate"><span class="pre">printf</span></code> in the OpenCL™ Kernels. To debug the specific values, you can use <code class="docutils literal notranslate"><span class="pre">printf</span></code> in your kernels. However, be careful not to output excessively, which could generate too much data. The <code class="docutils literal notranslate"><span class="pre">printf</span></code> output is typical, so your output can be truncated to fit the buffer. Also, because of buffering, you actually get an entire buffer of output when the execution ends.</p></li>
 </ul>
 <p>For more information, refer to the <a class="reference external" href="https://www.khronos.org/registry/OpenCL/sdk/1.2/docs/man/xhtml/printfFunction.html">printf Function</a>.</p>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -2330,7 +2337,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

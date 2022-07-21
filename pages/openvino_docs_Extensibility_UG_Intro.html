@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>OpenVINO Extensibility Mechanism &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -1847,7 +1854,7 @@
             
                 <div>
                   
-  <div class="section" id="openvino-extensibility-mechanism">
+  <section id="openvino-extensibility-mechanism">
 <span id="doxid-openvino-docs-extensibility-u-g-intro"></span><span id="index-0"></span><h1>OpenVINO Extensibility Mechanism<a class="headerlink" href="#openvino-extensibility-mechanism" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-openvino-docs-extensibility-u-g-intro-1md-openvino-docs-extensibility-ug-intro"></span></p>
 <div class="toctree-wrapper compound">
@@ -1865,13 +1872,13 @@
 <li><p>Mapping rule that facilitates conversion of framework operation representation to OpenVINO defined operation semantics.</p></li>
 </ol>
 <p>The first part is required for inference, the second part is required for successful import of a model containing such operations from the original framework model format. There are several options to implement each part, the next sections will describe them in detail.</p>
-<div class="section" id="definition-of-operation-semantics">
+<section id="definition-of-operation-semantics">
 <h2>Definition of Operation Semantics<a class="headerlink" href="#definition-of-operation-semantics" title="Permalink to this headline">¶</a></h2>
 <p>If the custom operation can be mathematically represented as a combination of exiting OpenVINO operations and such decomposition gives desired performance, then low-level operation implementation is not required. When deciding feasibility of such decomposition refer to the latest OpenVINO operation set. You can use any valid combination of exiting operations. How to map a custom operation is described in the next section of this document.</p>
 <p>If such decomposition is not possible or appears too bulky with lots of consisting operations that are not performing well, then a new class for the custom operation should be implemented as described in the <a class="reference internal" href="openvino_docs_Extensibility_UG_add_openvino_ops.html#doxid-openvino-docs-extensibility-u-g-add-openvino-ops"><span class="std std-ref">Custom Operation Guide</span></a>.</p>
 <p>Prefer implementing a custom operation class if you already have a generic C++ implementation of operation kernel. Otherwise try to decompose the operation first as described above and then after verifying correctness of inference and resulting performance, optionally invest to implementing bare metal C++ implementation.</p>
-</div>
-<div class="section" id="mapping-from-framework-operation">
+</section>
+<section id="mapping-from-framework-operation">
 <h2>Mapping from Framework Operation<a class="headerlink" href="#mapping-from-framework-operation" title="Permalink to this headline">¶</a></h2>
 <p>Depending on model format used for import, mapping of custom operation is implemented differently, choose one of:</p>
 <ol class="arabic simple">
@@ -1886,41 +1893,35 @@
 </ol>
 <p>You cannot write new frontend extensions using Python API if you plan to use them with Model Optimizer.</p>
 <p>Remaining part of this guide uses Frontend Extension API applicable for new frontends.</p>
-</div>
-<div class="section" id="registering-extensions">
+</section>
+<section id="registering-extensions">
 <h2>Registering Extensions<a class="headerlink" href="#registering-extensions" title="Permalink to this headline">¶</a></h2>
 <p>A custom operation class and a new mapping frontend extension class object should be registered to be usable in OpenVINO runtime.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This documentation is written based on the <a class="reference external" href="https://github.com/openvinotoolkit/openvino/tree/master/docs/template_extension/new">Template extension</a>, which demonstrates extension development details based on minimalistic <code class="docutils literal notranslate"><span class="pre">Identity</span></code> operation that is a placeholder for your real custom operation. You can review the complete code, which is fully compliable, to see how it works.</p>
 </div>
-<p>To load the extensions to the <code class="docutils literal notranslate"><span class="pre">ov::Core</span></code> object, use the <code class="docutils literal notranslate"><span class="pre">ov::Core::add_extension</span></code> method, this method allows to load library with extensions or extensions from the code.</p>
-<div class="section" id="load-extensions-to-core">
+<p>To load the extensions to the <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1Core.html#doxid-classov-1-1-core"><span class="std std-ref"><span class="pre">ov::Core</span></span></a></code> object, use the <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1Core.html#doxid-classov-1-1-core-1a68d0dea1cbcd42a67bea32780e32acea"><span class="std std-ref"><span class="pre">ov::Core::add_extension</span></span></a></code> method, this method allows to load library with extensions or extensions from the code.</p>
+<section id="load-extensions-to-core">
 <h3>Load extensions to core<a class="headerlink" href="#load-extensions-to-core" title="Permalink to this headline">¶</a></h3>
-<p>Extensions can be loaded from code with <code class="docutils literal notranslate"><span class="pre">ov::Core::add_extension</span></code> method:</p>
-<div class='sphinxtabset'><div class="sphinxtab" data-sphinxtab-value="C++"><div class="highlight"><div class="highlight"><pre>ov::Core<span></span> <span class="n">core</span><span class="p">;</span>
+<p>Extensions can be loaded from code with <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1Core.html#doxid-classov-1-1-core-1a68d0dea1cbcd42a67bea32780e32acea"><span class="std std-ref"><span class="pre">ov::Core::add_extension</span></span></a></code> method:</p>
+<div class='sphinxtabset'><div class="sphinxtab" data-sphinxtab-value="C++"><div class="highlight"><div class="highlight"><pre><a class="reference internal" href="../api/groups/classov_1_1Core.html#doxid-classov-1-1-core"><span class="std std-ref">ov::Core</span></a><span></span> <span class="n">core</span><span class="p">;</span>
 
 <span class="c1">// Use operation type to add operation extension</span>
-<span class="n">core</span><span class="p">.</span>add_extension<span></span><span class="o">&lt;</span><span class="n">TemplateExtension</span><span class="o">::</span><span class="n">Identity</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="n">core</span><span class="p">.</span><a class="reference internal" href="../api/groups/classov_1_1Core.html#doxid-classov-1-1-core-1a68d0dea1cbcd42a67bea32780e32acea"><span class="std std-ref">add_extension</span></a><span></span><span class="o">&lt;</span><span class="n">TemplateExtension</span><span class="o">::</span><span class="n">Identity</span><span class="o">&gt;</span><span class="p">();</span>
 
 <span class="c1">// or you can add operation extension object which is equivalent form</span>
-<span class="n">core</span><span class="p">.</span>add_extension<span></span><span class="p">(</span>ov::OpExtension&lt;TemplateExtension::Identity&gt;<span></span><span class="p">());</span></pre></div></div></div><div class="sphinxtab" data-sphinxtab-value="Python"><div class="highlight"><div class="highlight"><pre><span></span><span class="cp"># Not implemented</span></pre></div></div></div></div><p><code class="docutils literal notranslate"><span class="pre">Identity</span></code> is custom operation class defined in <a class="reference internal" href="openvino_docs_Extensibility_UG_add_openvino_ops.html#doxid-openvino-docs-extensibility-u-g-add-openvino-ops"><span class="std std-ref">Custom Operation Guide</span></a>. This is enough to enable reading IR which uses <code class="docutils literal notranslate"><span class="pre">Identity</span></code> extension operation emitted by Model Optimizer. To be able to load original model directly to the runtime, you need to add also a mapping extension:</p>
+<span class="n">core</span><span class="p">.</span><a class="reference internal" href="../api/groups/classov_1_1Core.html#doxid-classov-1-1-core-1a68d0dea1cbcd42a67bea32780e32acea"><span class="std std-ref">add_extension</span></a><span></span><span class="p">(</span><a class="reference internal" href="../api/groups/classov_1_1OpExtension.html#doxid-classov-1-1-op-extension"><span class="std std-ref">ov::OpExtension&lt;TemplateExtension::Identity&gt;</span></a><span></span><span class="p">());</span></pre></div></div></div><div class="sphinxtab" data-sphinxtab-value="Python"><div class="highlight"><div class="highlight"><pre><span></span><span class="cp"># Not implemented</span></pre></div></div></div></div><p><code class="docutils literal notranslate"><span class="pre">Identity</span></code> is custom operation class defined in <a class="reference internal" href="openvino_docs_Extensibility_UG_add_openvino_ops.html#doxid-openvino-docs-extensibility-u-g-add-openvino-ops"><span class="std std-ref">Custom Operation Guide</span></a>. This is enough to enable reading IR which uses <code class="docutils literal notranslate"><span class="pre">Identity</span></code> extension operation emitted by Model Optimizer. To be able to load original model directly to the runtime, you need to add also a mapping extension:</p>
 <div class="tab-set docutils">
 <input checked="True" class="tab-input" id="tab-set--0-input--1" name="tab-set--0" type="radio"><label class="tab-label" for="tab-set--0-input--1">C++</label><div class="tab-content docutils">
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;openvino/frontend/extension.hpp&gt;</span><span class="cp"></span>
-</pre></div>
-</div>
 </div>
 <input class="tab-input" id="tab-set--0-input--2" name="tab-set--0" type="radio"><label class="tab-label" for="tab-set--0-input--2">Python</label><div class="tab-content docutils">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Not implemented</span>
-</pre></div>
-</div>
 </div>
 </div>
 <p>When Python API is used there is no way to implement a custom OpenVINO operation. Also, even if custom OpenVINO operation is implemented in C++ and loaded to the runtime through a shared library, there is still no way to add a frontend mapping extension that refers to this custom operation. Use C++ shared library approach to implement both operations semantics and framework mapping in this case.</p>
 <p>You still can use Python for operation mapping and decomposition in case if operations from the standard OpenVINO operation set is used only.</p>
-</div>
-<div class="section" id="create-library-with-extensions">
+</section>
+<section id="create-library-with-extensions">
 <h3>Create library with extensions<a class="headerlink" href="#create-library-with-extensions" title="Permalink to this headline">¶</a></h3>
 <p>You need to create extension library in the following cases:</p>
 <ul class="simple">
@@ -1937,7 +1938,7 @@
         <span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">ov</span><span class="o">::</span><span class="n">OpExtension</span><span class="o">&lt;</span><span class="n">TemplateExtension</span><span class="o">::</span><span class="n">Identity</span><span class="o">&gt;&gt;</span><span class="p">(),</span>
 
         <span class="c1">// Register operaton mapping, required when converted from framework model format</span>
-        <span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span>ov::frontend::OpExtension&lt;TemplateExtension::Identity&gt;<span></span><span class="o">&gt;</span><span class="p">()</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><a class="reference internal" href="../api/groups/classov_1_1frontend_1_1OpExtensionBase.html#doxid-classov-1-1frontend-1-1-op-extension-base"><span class="std std-ref">ov::frontend::OpExtension&lt;TemplateExtension::Identity&gt;</span></a><span></span><span class="o">&gt;</span><span class="p">()</span>
     <span class="p">}));</span></pre></div></div><p>To configure the build of your extension library, use the following CMake script:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">set</span><span class="p">(</span><span class="n">CMAKE_CXX_STANDARD</span> <span class="mi">11</span><span class="p">)</span>
 
@@ -1957,21 +1958,21 @@
 <span class="err">$</span> <span class="n">cd</span> <span class="n">build</span>
 <span class="err">$</span> <span class="n">cmake</span> <span class="o">-</span><span class="n">DOpenVINO_DIR</span><span class="o">=&lt;</span><span class="n">OpenVINO_DIR</span><span class="o">&gt;</span> <span class="p">..</span><span class="o">/</span>
 <span class="err">$</span> <span class="n">cmake</span> <span class="o">--</span><span class="n">build</span> <span class="p">.</span></pre></div></div><p>After the build you can use path to your extension library to load your extensions to OpenVINO™ Runtime:</p>
-<div class='sphinxtabset'><div class="sphinxtab" data-sphinxtab-value="C++"><div class="highlight"><div class="highlight"><pre>ov::Core<span></span> <span class="n">core</span><span class="p">;</span>
+<div class='sphinxtabset'><div class="sphinxtab" data-sphinxtab-value="C++"><div class="highlight"><div class="highlight"><pre><a class="reference internal" href="../api/groups/classov_1_1Core.html#doxid-classov-1-1-core"><span class="std std-ref">ov::Core</span></a><span></span> <span class="n">core</span><span class="p">;</span>
 <span class="c1">// Load extensions library to ov::Core</span>
-<span class="n">core</span><span class="p">.</span>add_extension<span></span><span class="p">(</span><span class="s">&quot;openvino_template_extension.so&quot;</span><span class="p">);</span></pre></div></div></div><div class="sphinxtab" data-sphinxtab-value="Python"><div class="highlight"><div class="highlight"><pre><span></span><span class="n">core</span> <span class="o">=</span> ov.Core<span></span><span class="p">()</span>
+<span class="n">core</span><span class="p">.</span><a class="reference internal" href="../api/groups/classov_1_1Core.html#doxid-classov-1-1-core-1a68d0dea1cbcd42a67bea32780e32acea"><span class="std std-ref">add_extension</span></a><span></span><span class="p">(</span><span class="s">&quot;openvino_template_extension.so&quot;</span><span class="p">);</span></pre></div></div></div><div class="sphinxtab" data-sphinxtab-value="Python"><div class="highlight"><div class="highlight"><pre><span></span><span class="n">core</span> <span class="o">=</span> <a class="reference internal" href="../api/groups/classov_1_1Core.html#doxid-classov-1-1-core"><span class="std std-ref">ov.Core</span></a><span></span><span class="p">()</span>
 <span class="cp"># Load extensions library to ov.Core</span>
-<span class="n">core</span><span class="p">.</span><span class="n">add_extension</span><span class="p">(</span><span class="s">&quot;openvino_template_extension.so&quot;</span><span class="p">)</span></pre></div></div></div></div></div>
-</div>
-<div class="section" id="see-also">
+<span class="n">core</span><span class="p">.</span><span class="n">add_extension</span><span class="p">(</span><span class="s">&quot;openvino_template_extension.so&quot;</span><span class="p">)</span></pre></div></div></div></div></section>
+</section>
+<section id="see-also">
 <h2>See Also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="openvino_docs_transformations.html#doxid-openvino-docs-transformations"><span class="std std-ref">OpenVINO Transformations</span></a></p></li>
 <li><p><a class="reference internal" href="openvino_docs_OV_UG_Samples_Overview.html#doxid-openvino-docs-o-v-u-g-samples-overview"><span class="std std-ref">Using OpenVINO Runtime Samples</span></a></p></li>
 <li><p><a class="reference internal" href="openvino_inference_engine_samples_hello_reshape_ssd_README.html#doxid-openvino-inference-engine-samples-hello-reshape-ssd-r-e-a-d-m-e"><span class="std std-ref">Hello Shape Infer SSD sample</span></a></p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -2002,7 +2003,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

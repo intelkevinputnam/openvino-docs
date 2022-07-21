@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Plugin Testing &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -1820,7 +1827,7 @@
             
                 <div>
                   
-  <div class="section" id="plugin-testing">
+  <section id="plugin-testing">
 <span id="doxid-openvino-docs-ie-plugin-dg-plugin-testing"></span><span id="index-0"></span><h1>Plugin Testing<a class="headerlink" href="#plugin-testing" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-openvino-docs-ie-plugin-dg-plugin-testing-1md-openvino-docs-ie-plugin-dg-plugintesting"></span> Inference Engine (IE) tests infrastructure provides a predefined set of functional tests and utilities. They are used to verify a plugin using the Inference Engine public API. All the tests are written in the <a class="reference external" href="https://github.com/google/googletest">Google Test C++ framework</a>.</p>
 <p>Inference Engine Plugin tests are included in the <code class="docutils literal notranslate"><span class="pre">IE::funcSharedTests</span></code> CMake target which is built within the OpenVINO repository (see <a class="reference internal" href="openvino_docs_ie_plugin_dg_plugin_build.html#doxid-openvino-docs-ie-plugin-dg-plugin-build"><span class="std std-ref">Build Plugin Using CMake</span></a> guide). This library contains tests definitions (the tests bodies) which can be parametrized and instantiated in plugins depending on whether a plugin supports a particular feature, specific sets of parameters for test on supported operation set and so on.</p>
@@ -1832,22 +1839,22 @@
 <li><p>From the declaration of convolution test class we can see that it’s a parametrized GoogleTest based class with the <code class="docutils literal notranslate"><span class="pre">convLayerTestParamsSet</span></code> tuple of parameters:</p></li>
 </ul>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="k">typedef</span> <span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span>
-        InferenceEngine::SizeVector<span></span><span class="p">,</span>    <span class="c1">// Kernel size</span>
-        InferenceEngine::SizeVector<span></span><span class="p">,</span>    <span class="c1">// Strides</span>
+        <a class="reference internal" href="../api/groups/namespaceInferenceEngine.html#doxid-namespace-inference-engine-1a9400de686d3d0f48c30cd73d40e48576"><span class="std std-ref">InferenceEngine::SizeVector</span></a><span></span><span class="p">,</span>    <span class="c1">// Kernel size</span>
+        <a class="reference internal" href="../api/groups/namespaceInferenceEngine.html#doxid-namespace-inference-engine-1a9400de686d3d0f48c30cd73d40e48576"><span class="std std-ref">InferenceEngine::SizeVector</span></a><span></span><span class="p">,</span>    <span class="c1">// Strides</span>
         <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">ptrdiff_t</span><span class="o">&gt;</span><span class="p">,</span>         <span class="c1">// Pad begin</span>
         <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">ptrdiff_t</span><span class="o">&gt;</span><span class="p">,</span>         <span class="c1">// Pad end</span>
-        InferenceEngine::SizeVector<span></span><span class="p">,</span>    <span class="c1">// Dilation</span>
+        <a class="reference internal" href="../api/groups/namespaceInferenceEngine.html#doxid-namespace-inference-engine-1a9400de686d3d0f48c30cd73d40e48576"><span class="std std-ref">InferenceEngine::SizeVector</span></a><span></span><span class="p">,</span>    <span class="c1">// Dilation</span>
         <span class="kt">size_t</span><span class="p">,</span>                         <span class="c1">// Num out channels</span>
-        ngraph::op::PadType<span></span>             <span class="c1">// Padding type</span>
+        <a class="reference internal" href="../api/groups/enumov_1_1op_1_1PadType.html#doxid-namespaceov-1-1op-1a287af03f211ecac2b876d35a1130e50d"><span class="std std-ref">ngraph::op::PadType</span></a><span></span>             <span class="c1">// Padding type</span>
 <span class="o">&gt;</span> <span class="n">convSpecificParams</span><span class="p">;</span>
 <span class="k">typedef</span> <span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span>
         <span class="n">convSpecificParams</span><span class="p">,</span>
-        InferenceEngine::Precision<span></span><span class="p">,</span>     <span class="c1">// Net precision</span>
-        InferenceEngine::Precision<span></span><span class="p">,</span>     <span class="c1">// Input precision</span>
-        InferenceEngine::Precision<span></span><span class="p">,</span>     <span class="c1">// Output precision</span>
-        InferenceEngine::Layout<span></span><span class="p">,</span>        <span class="c1">// Input layout</span>
-        InferenceEngine::Layout<span></span><span class="p">,</span>        <span class="c1">// Output layout</span>
-        InferenceEngine::SizeVector<span></span><span class="p">,</span>    <span class="c1">// Input shapes</span>
+        <a class="reference internal" href="../api/groups/classInferenceEngine_1_1Precision.html#doxid-class-inference-engine-1-1-precision"><span class="std std-ref">InferenceEngine::Precision</span></a><span></span><span class="p">,</span>     <span class="c1">// Net precision</span>
+        <a class="reference internal" href="../api/groups/classInferenceEngine_1_1Precision.html#doxid-class-inference-engine-1-1-precision"><span class="std std-ref">InferenceEngine::Precision</span></a><span></span><span class="p">,</span>     <span class="c1">// Input precision</span>
+        <a class="reference internal" href="../api/groups/classInferenceEngine_1_1Precision.html#doxid-class-inference-engine-1-1-precision"><span class="std std-ref">InferenceEngine::Precision</span></a><span></span><span class="p">,</span>     <span class="c1">// Output precision</span>
+        <a class="reference internal" href="../api/groups/enumInferenceEngine_1_1Layout.html#doxid-namespace-inference-engine-1a246d143abc5ca07da8d2cadeeb88fdb8"><span class="std std-ref">InferenceEngine::Layout</span></a><span></span><span class="p">,</span>        <span class="c1">// Input layout</span>
+        <a class="reference internal" href="../api/groups/enumInferenceEngine_1_1Layout.html#doxid-namespace-inference-engine-1a246d143abc5ca07da8d2cadeeb88fdb8"><span class="std std-ref">InferenceEngine::Layout</span></a><span></span><span class="p">,</span>        <span class="c1">// Output layout</span>
+        <a class="reference internal" href="../api/groups/namespaceInferenceEngine.html#doxid-namespace-inference-engine-1a9400de686d3d0f48c30cd73d40e48576"><span class="std std-ref">InferenceEngine::SizeVector</span></a><span></span><span class="p">,</span>    <span class="c1">// Input shapes</span>
         <span class="n">LayerTestsUtils</span><span class="o">::</span><span class="n">TargetDevice</span>   <span class="c1">// Device name</span>
 <span class="o">&gt;</span> <span class="n">convLayerTestParamsSet</span><span class="p">;</span>
 
@@ -1862,8 +1869,8 @@
 <li><p>Based on that, define a set of parameters for <code class="docutils literal notranslate"><span class="pre">Template</span></code> plugin functional test instantiation:</p></li>
 </ul>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">InferenceEngine</span><span class="o">::</span><span class="n">Precision</span><span class="o">&gt;</span> <span class="n">netPrecisions</span> <span class="o">=</span> <span class="p">{</span>
-        InferenceEngine::Precision::FP32<span></span><span class="p">,</span>
-        InferenceEngine::Precision::FP16<span></span><span class="p">,</span>
+        <a class="reference internal" href="../api/groups/enumInferenceEngine_1_1Precision_1_1ePrecision.html#doxid-class-inference-engine-1-1-precision-1ade75bd7073b4aa966c0dda4025bcd0f5a6b062312b968a46ae0baf14cc3665e1e"><span class="std std-ref">InferenceEngine::Precision::FP32</span></a><span></span><span class="p">,</span>
+        <a class="reference internal" href="../api/groups/enumInferenceEngine_1_1Precision_1_1ePrecision.html#doxid-class-inference-engine-1-1-precision-1ade75bd7073b4aa966c0dda4025bcd0f5a084e737560206865337ee681e1ab3f5a"><span class="std std-ref">InferenceEngine::Precision::FP16</span></a><span></span><span class="p">,</span>
 <span class="p">};</span>
 
 <span class="o">/</span><span class="err">\</span><span class="o">*</span> <span class="o">=============</span> <span class="mi">2</span><span class="n">D</span> <span class="n">Convolution</span> <span class="o">=============</span> <span class="err">\*/</span>
@@ -1899,14 +1906,14 @@
                          <span class="o">::</span><span class="n">testing</span><span class="o">::</span><span class="n">Combine</span><span class="p">(</span>
                                  <span class="n">conv2DParams_ExplicitPadding</span><span class="p">,</span>
                                  <span class="o">::</span><span class="n">testing</span><span class="o">::</span><span class="n">ValuesIn</span><span class="p">(</span><span class="n">netPrecisions</span><span class="p">),</span>
-                                 <span class="o">::</span><span class="n">testing</span><span class="o">::</span><span class="n">Values</span><span class="p">(</span>InferenceEngine::Precision::UNSPECIFIED<span></span><span class="p">),</span>
-                                 <span class="o">::</span><span class="n">testing</span><span class="o">::</span><span class="n">Values</span><span class="p">(</span>InferenceEngine::Precision::UNSPECIFIED<span></span><span class="p">),</span>
-                                 <span class="o">::</span><span class="n">testing</span><span class="o">::</span><span class="n">Values</span><span class="p">(</span>InferenceEngine::Layout::ANY<span></span><span class="p">),</span>
-                                 <span class="o">::</span><span class="n">testing</span><span class="o">::</span><span class="n">Values</span><span class="p">(</span>InferenceEngine::Layout::ANY<span></span><span class="p">),</span>
+                                 <span class="o">::</span><span class="n">testing</span><span class="o">::</span><span class="n">Values</span><span class="p">(</span><a class="reference internal" href="../api/groups/enumInferenceEngine_1_1Precision_1_1ePrecision.html#doxid-class-inference-engine-1-1-precision-1ade75bd7073b4aa966c0dda4025bcd0f5ae27ff65d395667d17067e83d932a2045"><span class="std std-ref">InferenceEngine::Precision::UNSPECIFIED</span></a><span></span><span class="p">),</span>
+                                 <span class="o">::</span><span class="n">testing</span><span class="o">::</span><span class="n">Values</span><span class="p">(</span><a class="reference internal" href="../api/groups/enumInferenceEngine_1_1Precision_1_1ePrecision.html#doxid-class-inference-engine-1-1-precision-1ade75bd7073b4aa966c0dda4025bcd0f5ae27ff65d395667d17067e83d932a2045"><span class="std std-ref">InferenceEngine::Precision::UNSPECIFIED</span></a><span></span><span class="p">),</span>
+                                 <span class="o">::</span><span class="n">testing</span><span class="o">::</span><span class="n">Values</span><span class="p">(</span><a class="reference internal" href="../api/groups/enumInferenceEngine_1_1Layout.html#doxid-namespace-inference-engine-1a246d143abc5ca07da8d2cadeeb88fdb8a890528943ea12cf9832d7f437ea149b5"><span class="std std-ref">InferenceEngine::Layout::ANY</span></a><span></span><span class="p">),</span>
+                                 <span class="o">::</span><span class="n">testing</span><span class="o">::</span><span class="n">Values</span><span class="p">(</span><a class="reference internal" href="../api/groups/enumInferenceEngine_1_1Layout.html#doxid-namespace-inference-engine-1a246d143abc5ca07da8d2cadeeb88fdb8a890528943ea12cf9832d7f437ea149b5"><span class="std std-ref">InferenceEngine::Layout::ANY</span></a><span></span><span class="p">),</span>
                                  <span class="o">::</span><span class="n">testing</span><span class="o">::</span><span class="n">Values</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">size_t</span> <span class="o">&gt;</span><span class="p">({</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">})),</span>
                                  <span class="o">::</span><span class="n">testing</span><span class="o">::</span><span class="n">Values</span><span class="p">(</span><span class="n">CommonTestUtils</span><span class="o">::</span><span class="n">DEVICE_TEMPLATE</span><span class="p">)),</span>
                          <span class="n">ConvolutionLayerTest</span><span class="o">::</span><span class="n">getTestCaseName</span><span class="p">);</span></pre></div></div></li>
-<li><p><strong>Sub-graph tests</strong> (<code class="docutils literal notranslate"><span class="pre">subgraph_tests</span></code> sub-folder). This group of tests is designed to tests small patterns or combination of layers. E.g. when a particular topology is being enabled in a plugin e.g. TF ResNet-50, there is no need to add the whole topology to test tests. In opposite way, a particular repetitive subgraph or pattern can be extracted from <code class="docutils literal notranslate"><span class="pre">ResNet-50</span></code> and added to the tests. The instantiation of the sub-graph tests is done in the same way as for single layer tests.    <strong>Note</strong>, such sub-graphs or patterns for sub-graph tests should be added to <code class="docutils literal notranslate"><span class="pre">IE::ngraphFunctions</span></code> library first (this library is a pre-defined set of small <code class="docutils literal notranslate"><span class="pre">ov::Model</span></code>) and re-used in sub-graph tests after.</p></li>
+<li><p><strong>Sub-graph tests</strong> (<code class="docutils literal notranslate"><span class="pre">subgraph_tests</span></code> sub-folder). This group of tests is designed to tests small patterns or combination of layers. E.g. when a particular topology is being enabled in a plugin e.g. TF ResNet-50, there is no need to add the whole topology to test tests. In opposite way, a particular repetitive subgraph or pattern can be extracted from <code class="docutils literal notranslate"><span class="pre">ResNet-50</span></code> and added to the tests. The instantiation of the sub-graph tests is done in the same way as for single layer tests.    <strong>Note</strong>, such sub-graphs or patterns for sub-graph tests should be added to <code class="docutils literal notranslate"><span class="pre">IE::ngraphFunctions</span></code> library first (this library is a pre-defined set of small <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1Model.html#doxid-classov-1-1-model"><span class="std std-ref"><span class="pre">ov::Model</span></span></a></code>) and re-used in sub-graph tests after.</p></li>
 <li><p><strong>HETERO tests</strong> (<code class="docutils literal notranslate"><span class="pre">subgraph_tests</span></code> sub-folder) contains tests for <code class="docutils literal notranslate"><span class="pre">HETERO</span></code> scenario (manual or automatic affinities settings, tests for <code class="docutils literal notranslate"><span class="pre">QueryNetwork</span></code>).</p></li>
 <li><p><strong>Other tests</strong>, which contain tests for other scenarios and has the following types of tests:</p>
 <ul class="simple">
@@ -1921,16 +1928,16 @@
 <p>A plugin may contain its own tests for use cases that are specific to hardware or need to be extensively tested.</p>
 </div>
 <p>To build test binaries together with other build artifacts, use the <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">all</span></code> command. For details, see <a class="reference internal" href="openvino_docs_ie_plugin_dg_plugin_build.html#doxid-openvino-docs-ie-plugin-dg-plugin-build"><span class="std std-ref">Build Plugin Using CMake*</span></a>.</p>
-<div class="section" id="how-to-extend-inference-engine-plugin-tests">
+<section id="how-to-extend-inference-engine-plugin-tests">
 <h2>How to Extend Inference Engine Plugin Tests<a class="headerlink" href="#how-to-extend-inference-engine-plugin-tests" title="Permalink to this headline">¶</a></h2>
 <p>Inference Engine Plugin tests are open for contribution. Add common test case definitions applicable for all plugins to the <code class="docutils literal notranslate"><span class="pre">IE::funcSharedTests</span></code> target within the DLDT repository. Then, any other plugin supporting corresponding functionality can instantiate the new test.</p>
-<p>All Inference Engine per-layer tests check test layers functionality. They are developed using <span class="xref std std-ref">ov::Model</span>. as input graphs used by tests. In this case, to test a new layer with layer tests, extend the <code class="docutils literal notranslate"><span class="pre">IE::ngraphFunctions</span></code> library, which is also included in the Inference Engine Developer package, with a new model. including the corresponding operation.</p>
+<p>All Inference Engine per-layer tests check test layers functionality. They are developed using <a class="reference internal" href="../api/groups/classov_1_1Model.html#doxid-classov-1-1-model"><span class="std std-ref">ov::Model</span></a>. as input graphs used by tests. In this case, to test a new layer with layer tests, extend the <code class="docutils literal notranslate"><span class="pre">IE::ngraphFunctions</span></code> library, which is also included in the Inference Engine Developer package, with a new model. including the corresponding operation.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>When implementing a new subgraph test, add new single-layer tests for each operation of the subgraph if such test does not exist.</p>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -1961,7 +1968,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

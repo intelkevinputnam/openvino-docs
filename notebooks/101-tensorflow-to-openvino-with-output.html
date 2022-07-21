@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Convert a TensorFlow Model to OpenVINO &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -534,7 +541,7 @@
             
                 <div>
                   
-  <div class="section" id="convert-a-tensorflow-model-to-openvino">
+  <section id="convert-a-tensorflow-model-to-openvino">
 <h1>Convert a TensorFlow Model to OpenVINO<a class="headerlink" href="#convert-a-tensorflow-model-to-openvino" title="Permalink to this headline">¶</a></h1>
 <p>This short tutorial shows how to convert a TensorFlow
 <a class="reference external" href="https://docs.openvino.ai/latest/omz_models_model_mobilenet_v3_small_1_0_224_tf.html">MobileNetV3</a>
@@ -545,7 +552,7 @@ Optimizer</a>
 tool. After creating the IR, we load the model in OpenVINO’s <a class="reference external" href="https://docs.openvino.ai/latest/openvino_docs_IE_DG_Deep_Learning_Inference_Engine_DevGuide.html">Inference
 Engine</a>
 and perform inference with a sample image.</p>
-<div class="section" id="imports">
+<section id="imports">
 <h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -557,18 +564,18 @@ and perform inference with a sample image.</p>
 <span class="kn">from</span> <span class="nn">openvino.runtime</span> <span class="kn">import</span> <span class="n">Core</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="settings">
+</section>
+<section id="settings">
 <h2>Settings<a class="headerlink" href="#settings" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The paths of the source and converted models</span>
 <span class="n">model_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;model/v3-small_224_1.0_float.pb&quot;</span><span class="p">)</span>
 <span class="n">ir_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">model_path</span><span class="p">)</span><span class="o">.</span><span class="n">with_suffix</span><span class="p">(</span><span class="s2">&quot;.xml&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="convert-the-model-to-openvino-ir-format">
+</section>
+<section id="convert-the-model-to-openvino-ir-format">
 <h2>Convert the Model to OpenVINO IR Format<a class="headerlink" href="#convert-the-model-to-openvino-ir-format" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="convert-tensorflow-model-to-openvino-ir-format">
+<section id="convert-tensorflow-model-to-openvino-ir-format">
 <h3>Convert TensorFlow Model to OpenVINO IR Format<a class="headerlink" href="#convert-tensorflow-model-to-openvino-ir-format" title="Permalink to this headline">¶</a></h3>
 <p>Call the OpenVINO Model Optimizer tool to convert the TensorFlow model
 to OpenVINO IR with FP16 precision. The models are saved to the current
@@ -619,9 +626,9 @@ was succesful if the last lines of the output include
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Exporting</span> <span class="n">TensorFlow</span> <span class="n">model</span> <span class="n">to</span> <span class="n">IR</span><span class="o">...</span> <span class="n">This</span> <span class="n">may</span> <span class="n">take</span> <span class="n">a</span> <span class="n">few</span> <span class="n">minutes</span><span class="o">.</span>
 <span class="n">Model</span> <span class="n">Optimizer</span> <span class="n">arguments</span><span class="p">:</span>
 <span class="n">Common</span> <span class="n">parameters</span><span class="p">:</span>
-    <span class="o">-</span> <span class="n">Path</span> <span class="n">to</span> <span class="n">the</span> <span class="n">Input</span> <span class="n">Model</span><span class="p">:</span>  <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">work</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">notebooks</span><span class="o">/</span><span class="mi">101</span><span class="o">-</span><span class="n">tensorflow</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">openvino</span><span class="o">/</span><span class="n">model</span><span class="o">/</span><span class="n">v3</span><span class="o">-</span><span class="n">small_224_1</span><span class="o">.</span><span class="mi">0</span><span class="n">_float</span><span class="o">.</span><span class="n">pb</span>
+    <span class="o">-</span> <span class="n">Path</span> <span class="n">to</span> <span class="n">the</span> <span class="n">Input</span> <span class="n">Model</span><span class="p">:</span>  <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">work</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">notebooks</span><span class="o">/</span><span class="mi">101</span><span class="o">-</span><span class="n">tensorflow</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">openvino</span><span class="o">/</span><span class="n">model</span><span class="o">/</span><span class="n">v3</span><span class="o">-</span><span class="n">small_224_1</span><span class="mf">.0</span><span class="n">_float</span><span class="o">.</span><span class="n">pb</span>
     <span class="o">-</span> <span class="n">Path</span> <span class="k">for</span> <span class="n">generated</span> <span class="n">IR</span><span class="p">:</span>    <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">work</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">notebooks</span><span class="o">/</span><span class="mi">101</span><span class="o">-</span><span class="n">tensorflow</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">openvino</span><span class="o">/</span><span class="n">model</span>
-    <span class="o">-</span> <span class="n">IR</span> <span class="n">output</span> <span class="n">name</span><span class="p">:</span>   <span class="n">v3</span><span class="o">-</span><span class="n">small_224_1</span><span class="o">.</span><span class="mi">0</span><span class="n">_float</span>
+    <span class="o">-</span> <span class="n">IR</span> <span class="n">output</span> <span class="n">name</span><span class="p">:</span>   <span class="n">v3</span><span class="o">-</span><span class="n">small_224_1</span><span class="mf">.0</span><span class="n">_float</span>
     <span class="o">-</span> <span class="n">Log</span> <span class="n">level</span><span class="p">:</span>    <span class="n">ERROR</span>
     <span class="o">-</span> <span class="n">Batch</span><span class="p">:</span>    <span class="n">Not</span> <span class="n">specified</span><span class="p">,</span> <span class="n">inherited</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">model</span>
     <span class="o">-</span> <span class="n">Input</span> <span class="n">layers</span><span class="p">:</span>     <span class="n">Not</span> <span class="n">specified</span><span class="p">,</span> <span class="n">inherited</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">model</span>
@@ -649,42 +656,42 @@ was succesful if the last lines of the output include
     <span class="o">-</span> <span class="n">Update</span> <span class="n">the</span> <span class="n">configuration</span> <span class="n">file</span> <span class="k">with</span> <span class="nb">input</span><span class="o">/</span><span class="n">output</span> <span class="n">node</span> <span class="n">names</span><span class="p">:</span>   <span class="kc">None</span>
     <span class="o">-</span> <span class="n">Use</span> <span class="n">configuration</span> <span class="n">file</span> <span class="n">used</span> <span class="n">to</span> <span class="n">generate</span> <span class="n">the</span> <span class="n">model</span> <span class="k">with</span> <span class="n">Object</span> <span class="n">Detection</span> <span class="n">API</span><span class="p">:</span>  <span class="kc">None</span>
     <span class="o">-</span> <span class="n">Use</span> <span class="n">the</span> <span class="n">config</span> <span class="n">file</span><span class="p">:</span>  <span class="kc">None</span>
-<span class="n">OpenVINO</span> <span class="n">runtime</span> <span class="n">found</span> <span class="ow">in</span><span class="p">:</span>  <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8</span><span class="o">.</span><span class="mi">12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">openvino</span>
-<span class="n">OpenVINO</span> <span class="n">runtime</span> <span class="n">version</span><span class="p">:</span>   <span class="mf">2022.1</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="mi">7019</span><span class="o">-</span><span class="n">cdb9bec7210</span><span class="o">-</span><span class="n">releases</span><span class="o">/</span><span class="mi">2022</span><span class="o">/</span><span class="mi">1</span>
-<span class="n">Model</span> <span class="n">Optimizer</span> <span class="n">version</span><span class="p">:</span>    <span class="mf">2022.1</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="mi">7019</span><span class="o">-</span><span class="n">cdb9bec7210</span><span class="o">-</span><span class="n">releases</span><span class="o">/</span><span class="mi">2022</span><span class="o">/</span><span class="mi">1</span>
-<span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8</span><span class="o">.</span><span class="mi">12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">numpy</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">function_base</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">792</span><span class="p">:</span> <span class="n">VisibleDeprecationWarning</span><span class="p">:</span> <span class="n">Creating</span> <span class="n">an</span> <span class="n">ndarray</span> <span class="kn">from</span> <span class="nn">ragged</span> <span class="n">nested</span> <span class="n">sequences</span> <span class="p">(</span><span class="n">which</span> <span class="ow">is</span> <span class="n">a</span> <span class="nb">list</span><span class="o">-</span><span class="ow">or</span><span class="o">-</span><span class="nb">tuple</span> <span class="n">of</span> <span class="n">lists</span><span class="o">-</span><span class="ow">or</span><span class="o">-</span><span class="n">tuples</span><span class="o">-</span><span class="ow">or</span> <span class="n">ndarrays</span> <span class="k">with</span> <span class="n">different</span> <span class="n">lengths</span> <span class="ow">or</span> <span class="n">shapes</span><span class="p">)</span> <span class="ow">is</span> <span class="n">deprecated</span><span class="o">.</span> <span class="n">If</span> <span class="n">you</span> <span class="n">meant</span> <span class="n">to</span> <span class="n">do</span> <span class="n">this</span><span class="p">,</span> <span class="n">you</span> <span class="n">must</span> <span class="n">specify</span> <span class="s1">&#39;dtype=object&#39;</span> <span class="n">when</span> <span class="n">creating</span> <span class="n">the</span> <span class="n">ndarray</span>
+<span class="n">OpenVINO</span> <span class="n">runtime</span> <span class="n">found</span> <span class="ow">in</span><span class="p">:</span>  <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">openvino</span>
+<span class="n">OpenVINO</span> <span class="n">runtime</span> <span class="n">version</span><span class="p">:</span>   <span class="mf">2022.1.0</span><span class="o">-</span><span class="mi">7019</span><span class="o">-</span><span class="n">cdb9bec7210</span><span class="o">-</span><span class="n">releases</span><span class="o">/</span><span class="mi">2022</span><span class="o">/</span><span class="mi">1</span>
+<span class="n">Model</span> <span class="n">Optimizer</span> <span class="n">version</span><span class="p">:</span>    <span class="mf">2022.1.0</span><span class="o">-</span><span class="mi">7019</span><span class="o">-</span><span class="n">cdb9bec7210</span><span class="o">-</span><span class="n">releases</span><span class="o">/</span><span class="mi">2022</span><span class="o">/</span><span class="mi">1</span>
+<span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">numpy</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">function_base</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">792</span><span class="p">:</span> <span class="n">VisibleDeprecationWarning</span><span class="p">:</span> <span class="n">Creating</span> <span class="n">an</span> <span class="n">ndarray</span> <span class="kn">from</span> <span class="nn">ragged</span> <span class="n">nested</span> <span class="n">sequences</span> <span class="p">(</span><span class="n">which</span> <span class="ow">is</span> <span class="n">a</span> <span class="nb">list</span><span class="o">-</span><span class="ow">or</span><span class="o">-</span><span class="nb">tuple</span> <span class="n">of</span> <span class="n">lists</span><span class="o">-</span><span class="ow">or</span><span class="o">-</span><span class="n">tuples</span><span class="o">-</span><span class="ow">or</span> <span class="n">ndarrays</span> <span class="k">with</span> <span class="n">different</span> <span class="n">lengths</span> <span class="ow">or</span> <span class="n">shapes</span><span class="p">)</span> <span class="ow">is</span> <span class="n">deprecated</span><span class="o">.</span> <span class="n">If</span> <span class="n">you</span> <span class="n">meant</span> <span class="n">to</span> <span class="n">do</span> <span class="n">this</span><span class="p">,</span> <span class="n">you</span> <span class="n">must</span> <span class="n">specify</span> <span class="s1">&#39;dtype=object&#39;</span> <span class="n">when</span> <span class="n">creating</span> <span class="n">the</span> <span class="n">ndarray</span>
   <span class="k">return</span> <span class="n">array</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="n">order</span><span class="p">,</span> <span class="n">subok</span><span class="o">=</span><span class="n">subok</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">Generated</span> <span class="n">IR</span> <span class="n">version</span> <span class="mi">11</span> <span class="n">model</span><span class="o">.</span>
-<span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">XML</span> <span class="n">file</span><span class="p">:</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">work</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">notebooks</span><span class="o">/</span><span class="mi">101</span><span class="o">-</span><span class="n">tensorflow</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">openvino</span><span class="o">/</span><span class="n">model</span><span class="o">/</span><span class="n">v3</span><span class="o">-</span><span class="n">small_224_1</span><span class="o">.</span><span class="mi">0</span><span class="n">_float</span><span class="o">.</span><span class="n">xml</span>
-<span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">BIN</span> <span class="n">file</span><span class="p">:</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">work</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">notebooks</span><span class="o">/</span><span class="mi">101</span><span class="o">-</span><span class="n">tensorflow</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">openvino</span><span class="o">/</span><span class="n">model</span><span class="o">/</span><span class="n">v3</span><span class="o">-</span><span class="n">small_224_1</span><span class="o">.</span><span class="mi">0</span><span class="n">_float</span><span class="o">.</span><span class="n">bin</span>
+<span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">XML</span> <span class="n">file</span><span class="p">:</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">work</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">notebooks</span><span class="o">/</span><span class="mi">101</span><span class="o">-</span><span class="n">tensorflow</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">openvino</span><span class="o">/</span><span class="n">model</span><span class="o">/</span><span class="n">v3</span><span class="o">-</span><span class="n">small_224_1</span><span class="mf">.0</span><span class="n">_float</span><span class="o">.</span><span class="n">xml</span>
+<span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">BIN</span> <span class="n">file</span><span class="p">:</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">work</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">notebooks</span><span class="o">/</span><span class="mi">101</span><span class="o">-</span><span class="n">tensorflow</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">openvino</span><span class="o">/</span><span class="n">model</span><span class="o">/</span><span class="n">v3</span><span class="o">-</span><span class="n">small_224_1</span><span class="mf">.0</span><span class="n">_float</span><span class="o">.</span><span class="n">bin</span>
 <span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">Total</span> <span class="n">execution</span> <span class="n">time</span><span class="p">:</span> <span class="mf">19.84</span> <span class="n">seconds</span><span class="o">.</span>
 <span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">Memory</span> <span class="n">consumed</span><span class="p">:</span> <span class="mi">382</span> <span class="n">MB</span><span class="o">.</span>
 <span class="n">It</span><span class="s1">&#39;s been a while, check for a new version of Intel(R) Distribution of OpenVINO(TM) toolkit here https://software.intel.com/content/www/us/en/develop/tools/openvino-toolkit/download.html?cid=other&amp;source=prod&amp;campid=ww_2022_bu_IOTG_OpenVINO-2022-1&amp;content=upg_all&amp;medium=organic or on the GitHub*</span>
-<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">The</span> <span class="n">model</span> <span class="n">was</span> <span class="n">converted</span> <span class="n">to</span> <span class="n">IR</span> <span class="n">v11</span><span class="p">,</span> <span class="n">the</span> <span class="n">latest</span> <span class="n">model</span> <span class="nb">format</span> <span class="n">that</span> <span class="n">corresponds</span> <span class="n">to</span> <span class="n">the</span> <span class="n">source</span> <span class="n">DL</span> <span class="n">framework</span> <span class="nb">input</span><span class="o">/</span><span class="n">output</span> <span class="nb">format</span><span class="o">.</span> <span class="n">While</span> <span class="n">IR</span> <span class="n">v11</span> <span class="ow">is</span> <span class="n">backwards</span> <span class="n">compatible</span> <span class="k">with</span> <span class="n">OpenVINO</span> <span class="n">Inference</span> <span class="n">Engine</span> <span class="n">API</span> <span class="n">v1</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span> <span class="n">please</span> <span class="n">use</span> <span class="n">API</span> <span class="n">v2</span><span class="o">.</span><span class="mi">0</span> <span class="p">(</span><span class="k">as</span> <span class="n">of</span> <span class="mf">2022.1</span><span class="p">)</span> <span class="n">to</span> <span class="n">take</span> <span class="n">advantage</span> <span class="n">of</span> <span class="n">the</span> <span class="n">latest</span> <span class="n">improvements</span> <span class="ow">in</span> <span class="n">IR</span> <span class="n">v11</span><span class="o">.</span>
-<span class="n">Find</span> <span class="n">more</span> <span class="n">information</span> <span class="n">about</span> <span class="n">API</span> <span class="n">v2</span><span class="o">.</span><span class="mi">0</span> <span class="ow">and</span> <span class="n">IR</span> <span class="n">v11</span> <span class="n">at</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">docs</span><span class="o">.</span><span class="n">openvino</span><span class="o">.</span><span class="n">ai</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">The</span> <span class="n">model</span> <span class="n">was</span> <span class="n">converted</span> <span class="n">to</span> <span class="n">IR</span> <span class="n">v11</span><span class="p">,</span> <span class="n">the</span> <span class="n">latest</span> <span class="n">model</span> <span class="nb">format</span> <span class="n">that</span> <span class="n">corresponds</span> <span class="n">to</span> <span class="n">the</span> <span class="n">source</span> <span class="n">DL</span> <span class="n">framework</span> <span class="nb">input</span><span class="o">/</span><span class="n">output</span> <span class="nb">format</span><span class="o">.</span> <span class="n">While</span> <span class="n">IR</span> <span class="n">v11</span> <span class="ow">is</span> <span class="n">backwards</span> <span class="n">compatible</span> <span class="k">with</span> <span class="n">OpenVINO</span> <span class="n">Inference</span> <span class="n">Engine</span> <span class="n">API</span> <span class="n">v1</span><span class="mf">.0</span><span class="p">,</span> <span class="n">please</span> <span class="n">use</span> <span class="n">API</span> <span class="n">v2</span><span class="mf">.0</span> <span class="p">(</span><span class="k">as</span> <span class="n">of</span> <span class="mf">2022.1</span><span class="p">)</span> <span class="n">to</span> <span class="n">take</span> <span class="n">advantage</span> <span class="n">of</span> <span class="n">the</span> <span class="n">latest</span> <span class="n">improvements</span> <span class="ow">in</span> <span class="n">IR</span> <span class="n">v11</span><span class="o">.</span>
+<span class="n">Find</span> <span class="n">more</span> <span class="n">information</span> <span class="n">about</span> <span class="n">API</span> <span class="n">v2</span><span class="mf">.0</span> <span class="ow">and</span> <span class="n">IR</span> <span class="n">v11</span> <span class="n">at</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">docs</span><span class="o">.</span><span class="n">openvino</span><span class="o">.</span><span class="n">ai</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="test-inference-on-the-converted-model">
+</section>
+</section>
+<section id="test-inference-on-the-converted-model">
 <h2>Test Inference on the Converted Model<a class="headerlink" href="#test-inference-on-the-converted-model" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="load-the-model">
+<section id="load-the-model">
 <h3>Load the Model<a class="headerlink" href="#load-the-model" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ie</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span>
 <span class="n">model</span> <span class="o">=</span> <span class="n">ie</span><span class="o">.</span><span class="n">read_model</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">ir_path</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">ir_path</span><span class="o">.</span><span class="n">with_suffix</span><span class="p">(</span><span class="s2">&quot;.bin&quot;</span><span class="p">))</span>
 <span class="n">compiled_model</span> <span class="o">=</span> <span class="n">ie</span><span class="o">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">device_name</span><span class="o">=</span><span class="s2">&quot;CPU&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="get-model-information">
+</section>
+<section id="get-model-information">
 <h3>Get Model Information<a class="headerlink" href="#get-model-information" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">input_key</span> <span class="o">=</span> <span class="n">compiled_model</span><span class="o">.</span><span class="n">input</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">output_key</span> <span class="o">=</span> <span class="n">compiled_model</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">network_input_shape</span> <span class="o">=</span> <span class="n">input_key</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="load-an-image">
+</section>
+<section id="load-an-image">
 <h3>Load an Image<a class="headerlink" href="#load-an-image" title="Permalink to this headline">¶</a></h3>
 <p>Load an image, resize it, and convert it to the input shape of the
 network.</p>
@@ -701,8 +708,8 @@ network.</p>
 </pre></div>
 </div>
 <img alt="../_images/101-tensorflow-to-openvino-with-output_14_0.png" src="../_images/101-tensorflow-to-openvino-with-output_14_0.png" />
-</div>
-<div class="section" id="do-inference">
+</section>
+<section id="do-inference">
 <h3>Do Inference<a class="headerlink" href="#do-inference" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">compiled_model</span><span class="p">([</span><span class="n">input_image</span><span class="p">])[</span><span class="n">output_key</span><span class="p">]</span>
 
@@ -722,9 +729,9 @@ network.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;n02099267 flat-coated retriever&#39;</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="timing">
+</section>
+</section>
+<section id="timing">
 <h2>Timing<a class="headerlink" href="#timing" title="Permalink to this headline">¶</a></h2>
 <p>Measure the time it takes to do inference on thousand images. This gives
 an indication of performance. For more accurate benchmarking, use the
@@ -750,8 +757,8 @@ Note that many optimizations are possible to improve the performance.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">IR</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">Inference</span> <span class="n">Engine</span><span class="o">/</span><span class="n">CPU</span><span class="p">:</span> <span class="mf">0.0016</span> <span class="n">seconds</span> <span class="n">per</span> <span class="n">image</span><span class="p">,</span> <span class="n">FPS</span><span class="p">:</span> <span class="mf">612.29</span>
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -782,7 +789,7 @@ Note that many optimizations are possible to improve the performance.</p>
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

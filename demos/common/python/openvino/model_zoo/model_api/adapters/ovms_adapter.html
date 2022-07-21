@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>OpenVINO Model Server Adapter &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../../../../../../../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../../../../../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -2091,36 +2098,36 @@
             
                 <div>
                   
-  <div class="section" id="openvino-model-server-adapter">
+  <section id="openvino-model-server-adapter">
 <h1>OpenVINO Model Server Adapter<a class="headerlink" href="#openvino-model-server-adapter" title="Permalink to this headline">¶</a></h1>
 <p>The <code class="docutils literal notranslate"><span class="pre">OVMSAdapter</span></code> implements <code class="docutils literal notranslate"><span class="pre">ModelAdapter</span></code> interface. The <code class="docutils literal notranslate"><span class="pre">OVMSAdapter</span></code> makes it possible to use Model API with models hosted in OpenVINO Model Server.</p>
-<div class="section" id="prerequisites">
+<section id="prerequisites">
 <h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">OVMSAdapter</span></code> enables inference via gRPC calls to OpenVINO Model Server, so in order to use it you need two things:</p>
 <ul class="simple">
 <li><p>OpenVINO Model Server that serves your model</p></li>
 <li><p><a class="reference external" href="https://pypi.org/project/ovmsclient/"><code class="docutils literal notranslate"><span class="pre">ovmsclient</span></code></a> package installed to enable communication with the model server</p></li>
 </ul>
-<div class="section" id="deploy-openvino-model-server">
+<section id="deploy-openvino-model-server">
 <h3>Deploy OpenVINO Model Server<a class="headerlink" href="#deploy-openvino-model-server" title="Permalink to this headline">¶</a></h3>
 <p>Model Server is distributed as a docker image and it’s available in DockerHub, so you can use it with <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span></code> command. See <a class="reference external" href="https://github.com/openvinotoolkit/model_server/blob/main/docs/docker_container.md">model server documentation</a> to learn how to deploy OpenVINO optimized models with OpenVINO Model Server.</p>
-</div>
-<div class="section" id="install-ovmsclient">
+</section>
+<section id="install-ovmsclient">
 <h3>Install ovmsclient<a class="headerlink" href="#install-ovmsclient" title="Permalink to this headline">¶</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">ovmsclient</span></code> package is distributed on PyPi, so the easiest way to install it is via:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip3</span> <span class="n">install</span> <span class="n">ovmsclient</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="model-configuration">
+</section>
+</section>
+<section id="model-configuration">
 <h2>Model configuration<a class="headerlink" href="#model-configuration" title="Permalink to this headline">¶</a></h2>
 <p>When using OpenVINO Model Server model cannot be directly accessed from the client application (like OMZ demos). Therefore any configuration must be done on model server side.</p>
-<div class="section" id="input-reshaping">
+<section id="input-reshaping">
 <h3>Input reshaping<a class="headerlink" href="#input-reshaping" title="Permalink to this headline">¶</a></h3>
 <p>For some use cases you may want your model to reshape to match input of certain size. In that case, you should provide <code class="docutils literal notranslate"><span class="pre">--shape</span> <span class="pre">auto</span></code> parameter to model server startup command. With that option, model server will reshape model input on demand to match the input data.</p>
-</div>
-<div class="section" id="inference-options">
+</section>
+<section id="inference-options">
 <h3>Inference options<a class="headerlink" href="#inference-options" title="Permalink to this headline">¶</a></h3>
 <p>It’s possible to configure inference related options for the model in OpenVINO Model Server with options:</p>
 <ul class="simple">
@@ -2129,8 +2136,8 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">--plugin_config</span></code> - configuration of the device plugin</p></li>
 </ul>
 <p>See <a class="reference external" href="https://github.com/openvinotoolkit/model_server/blob/main/docs/docker_container.md#configuration-parameters">model server configuration parameters</a> for more details.</p>
-</div>
-<div class="section" id="example-ovms-startup-command">
+</section>
+<section id="example-ovms-startup-command">
 <h3>Example OVMS startup command<a class="headerlink" href="#example-ovms-startup-command" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">d</span> <span class="o">--</span><span class="n">rm</span> <span class="o">-</span><span class="n">v</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">user</span><span class="o">/</span><span class="n">models</span><span class="p">:</span><span class="o">/</span><span class="n">models</span> <span class="o">-</span><span class="n">p</span> <span class="mi">9000</span><span class="p">:</span><span class="mi">9000</span> <span class="n">openvino</span><span class="o">/</span><span class="n">model_server</span><span class="p">:</span><span class="n">latest</span> <span class="o">--</span><span class="n">model_path</span> <span class="o">/</span><span class="n">models</span><span class="o">/</span><span class="n">model1</span> <span class="o">--</span><span class="n">model_name</span> <span class="n">model1</span> <span class="o">--</span><span class="n">port</span> <span class="mi">9000</span> <span class="o">--</span><span class="n">shape</span> <span class="n">auto</span> <span class="o">--</span><span class="n">nireq</span> <span class="mi">32</span> <span class="o">--</span><span class="n">target_device</span> <span class="n">CPU</span> <span class="o">--</span><span class="n">plugin_config</span> <span class="s2">&quot;{</span><span class="se">\&quot;</span><span class="s2">CPU_THROUGHPUT_STREAMS</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">CPU_THROUGHPUT_AUTO</span><span class="se">\&quot;</span><span class="s2">}&quot;</span>
 </pre></div>
@@ -2138,9 +2145,9 @@
 <blockquote>
 <div><p><strong>Note</strong>: In demos, while using <code class="docutils literal notranslate"><span class="pre">--adapter</span> <span class="pre">ovms</span></code>, inference options like: <code class="docutils literal notranslate"><span class="pre">-nireq</span></code>, <code class="docutils literal notranslate"><span class="pre">-nstreams</span></code> <code class="docutils literal notranslate"><span class="pre">-nthreads</span></code> as well as device specification with <code class="docutils literal notranslate"><span class="pre">-d</span></code> will be ignored.</p>
 </div></blockquote>
-</div>
-</div>
-<div class="section" id="running-demos-with-ovmsadapter">
+</section>
+</section>
+<section id="running-demos-with-ovmsadapter">
 <h2>Running demos with OVMSAdapter<a class="headerlink" href="#running-demos-with-ovmsadapter" title="Permalink to this headline">¶</a></h2>
 <p>To run the demo with model served in OpenVINO Model Server, you would have to provide <code class="docutils literal notranslate"><span class="pre">--adapter</span> <span class="pre">ovms</span></code> option and modify <code class="docutils literal notranslate"><span class="pre">-m</span></code> parameter to indicate model inference service instead of the model files. Model parameter for <code class="docutils literal notranslate"><span class="pre">OVMSAdapter</span></code> follows this schema:</p>
 <p><code class="docutils literal notranslate"><span class="pre">&lt;service_address&gt;/models/&lt;model_name&gt;[:&lt;model_version&gt;]</span></code></p>
@@ -2154,14 +2161,14 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">localhost:9000/models/model1</span></code> - requesting latest model version</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">localhost:9000/models/model1:2</span></code> - requesting model version number 2</p></li>
 </ul>
-</div>
-<div class="section" id="see-also">
+</section>
+<section id="see-also">
 <h2>See Also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://github.com/openvinotoolkit/model_server">OpenVINO Model Server</a></p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -2192,7 +2199,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

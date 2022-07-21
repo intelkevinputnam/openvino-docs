@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Install Intel® Distribution of OpenVINO™ toolkit for Linux from a Docker Image &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -680,10 +687,10 @@
             
                 <div>
                   
-  <div class="section" id="install-intel-distribution-of-openvino-toolkit-for-linux-from-a-docker-image">
+  <section id="install-intel-distribution-of-openvino-toolkit-for-linux-from-a-docker-image">
 <span id="doxid-openvino-docs-install-guides-installing-openvino-docker-linux"></span><span id="index-0"></span><h1>Install Intel® Distribution of OpenVINO™ toolkit for Linux from a Docker Image<a class="headerlink" href="#install-intel-distribution-of-openvino-toolkit-for-linux-from-a-docker-image" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-openvino-docs-install-guides-installing-openvino-docker-linux-1md-openvino-docs-install-guides-installing-openvino-docker-linux"></span> This guide provides steps on creating a Docker image with Intel® Distribution of OpenVINO™ toolkit for Linux and using the image on different devices.</p>
-<div class="section" id="system-requirements">
+<section id="system-requirements">
 <span id="system-requirments"></span><h2>System Requirements<a class="headerlink" href="#system-requirements" title="Permalink to this headline">¶</a></h2>
 <div class="tab-set docutils">
 <input checked="True" class="tab-input" id="tab-set--0-input--1" name="tab-set--0" type="radio"><label class="tab-label" for="tab-set--0-input--1">Target Operating Systems with Python Version</label><div class="tab-content docutils">
@@ -724,8 +731,8 @@
 </ul>
 </div>
 </div>
-</div>
-<div class="section" id="installation-flow">
+</section>
+<section id="installation-flow">
 <h2>Installation Flow<a class="headerlink" href="#installation-flow" title="Permalink to this headline">¶</a></h2>
 <p>There are two ways to install OpenVINO with Docker. You can choose either of them according to your needs:</p>
 <ul class="simple">
@@ -745,8 +752,8 @@
 </ol>
 </li>
 </ul>
-</div>
-<div class="section" id="getting-a-prebuilt-image-from-provided-sources">
+</section>
+<section id="getting-a-prebuilt-image-from-provided-sources">
 <span id="get-prebuilt-image"></span><h2>Getting a Prebuilt Image from Provided Sources<a class="headerlink" href="#getting-a-prebuilt-image-from-provided-sources" title="Permalink to this headline">¶</a></h2>
 <p>You can find prebuilt images on:</p>
 <ul class="simple">
@@ -756,15 +763,15 @@
 <li><p><a class="reference external" href="https://catalog.redhat.com/software/containers/intel/openvino-dev/613a450dc9bc35f21dc4a1f7">Red Hat Ecosystem Catalog (development image)</a></p></li>
 <li><p><a class="reference external" href="https://azuremarketplace.microsoft.com/en-us/marketplace/apps/intel_corporation.openvino">Azure Marketplace</a></p></li>
 </ul>
-</div>
-<div class="section" id="preparing-a-dockerfile">
+</section>
+<section id="preparing-a-dockerfile">
 <span id="prepare-dockerfile"></span><h2>Preparing a Dockerfile<a class="headerlink" href="#preparing-a-dockerfile" title="Permalink to this headline">¶</a></h2>
 <p>You can use the <a class="reference external" href="https://github.com/openvinotoolkit/docker_ci/tree/master/dockerfiles">available Dockerfiles on GitHub</a> or generate a Dockerfile with your settings via <a class="reference external" href="https://github.com/openvinotoolkit/docker_ci">DockerHub CI Framework</a> which can generate a Dockerfile, build, test and deploy an image with the Intel® Distribution of OpenVINO™ toolkit. You can also try our <a class="reference external" href="https://github.com/openvinotoolkit/docker_ci/tree/master/docs/tutorials">Tutorials</a> which demonstrate the usage of Docker containers with OpenVINO.</p>
-</div>
-<div class="section" id="configuring-the-image-for-different-devices">
+</section>
+<section id="configuring-the-image-for-different-devices">
 <span id="configure-image"></span><h2>Configuring the Image for Different Devices<a class="headerlink" href="#configuring-the-image-for-different-devices" title="Permalink to this headline">¶</a></h2>
 <p>If you want to run inferences on a CPU or Intel® Neural Compute Stick 2, no extra configuration is needed. Go to <a class="reference external" href="#run-image">Running the image on different devices</a> for the next step.</p>
-<div class="section" id="configuring-docker-image-for-gpu">
+<section id="configuring-docker-image-for-gpu">
 <h3>Configuring Docker Image for GPU<a class="headerlink" href="#configuring-docker-image-for-gpu" title="Permalink to this headline">¶</a></h3>
 <p>By default, the distributed Docker image for OpenVINO has the recommended version of Intel® Graphics Compute Runtime for oneAPI Level Zero and OpenCL Driver for the operating system installed inside. If you want to build an image with a custom version of OpenCL Runtime included, you need to modify the Dockerfile using the lines below (the 19.41.14441 version is used as an example) and build the image manually:</p>
 <p><strong>Ubuntu 18.04/20.04</strong> :</p>
@@ -800,8 +807,8 @@
 <span class="c1">    rpm -ivh ${TEMP_DIR}/\*.rpm &amp;&amp; \</span>
 <span class="c1">    ldconfig &amp;&amp; \</span>
 <span class="c1">    rm -rf ${TEMP_DIR} &amp;&amp; \</span>
-<span class="c1">    yum remove -y epel-release</span></pre></div></div></div>
-<div class="section" id="configuring-docker-image-for-intel-vision-accelerator-design-with-intel-movidius-vpus">
+<span class="c1">    yum remove -y epel-release</span></pre></div></div></section>
+<section id="configuring-docker-image-for-intel-vision-accelerator-design-with-intel-movidius-vpus">
 <span id="set-up-hddldaemon"></span><h3>Configuring Docker Image for Intel® Vision Accelerator Design with Intel® Movidius™ VPUs<a class="headerlink" href="#configuring-docker-image-for-intel-vision-accelerator-design-with-intel-movidius-vpus" title="Permalink to this headline">¶</a></h3>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -812,11 +819,11 @@
 <li><p>Set up the environment on the host machine to be used for running Docker. It is required to execute <code class="docutils literal notranslate"><span class="pre">hddldaemon</span></code>, which is responsible for communication between the HDDL plugin and the board. To learn how to set up the environment (the OpenVINO package or HDDL package must be pre-installed), see <a class="reference external" href="https://github.com/openvinotoolkit/docker_ci/blob/master/install_guide_vpu_hddl.md">Configuration guide for HDDL device</a> or <a class="reference internal" href="openvino_docs_install_guides_installing_openvino_ivad_vpu.html#doxid-openvino-docs-install-guides-installing-openvino-ivad-vpu"><span class="std std-ref">Configurations for Intel® Vision Accelerator Design with Intel® Movidius™ VPUs on Linux</span></a>.</p></li>
 <li><p>Run <code class="docutils literal notranslate"><span class="pre">hddldaemon</span></code> on the host in a separate terminal session using the following command: <code class="docutils literal notranslate"><span class="pre">`sh</span> <span class="pre">$HDDL_INSTALL_DIR/hddldaemon</span> <span class="pre">`</span></code></p></li>
 </ol>
-</div>
-</div>
-<div class="section" id="running-the-docker-image-on-different-devices">
+</section>
+</section>
+<section id="running-the-docker-image-on-different-devices">
 <span id="run-image"></span><h2>Running the Docker Image on Different Devices<a class="headerlink" href="#running-the-docker-image-on-different-devices" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="running-the-image-on-cpu">
+<section id="running-the-image-on-cpu">
 <h3>Running the Image on CPU<a class="headerlink" href="#running-the-image-on-cpu" title="Permalink to this headline">¶</a></h3>
 <p>Run the Docker image with the following command:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">it</span> <span class="o">--</span><span class="n">rm</span> <span class="o">&lt;</span><span class="n">image_name</span><span class="o">&gt;</span></pre></div></div><p>Note the following things:</p>
@@ -825,8 +832,8 @@
 <li><p>All instructions that are available to host process available for process in container, including, for example, AVX2, AVX512. No restrictions.</p></li>
 <li><p>Docker does not use virtualization or emulation. The process in Docker is just a regular Linux process, but it is isolated from external world on kernel level. Performance loss is minor.</p></li>
 </ul>
-</div>
-<div class="section" id="running-the-image-on-gpu">
+</section>
+<section id="running-the-image-on-gpu">
 <h3>Running the Image on GPU<a class="headerlink" href="#running-the-image-on-gpu" title="Permalink to this headline">¶</a></h3>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -843,8 +850,8 @@
 <li><p>Ubuntu 18 or RHEL 8: <code class="docutils literal notranslate"><span class="pre">`sh</span> <span class="pre">docker</span> <span class="pre">run</span> <span class="pre">-it</span> <span class="pre">rm</span> <span class="pre">device</span> <span class="pre">/dev/dri</span> <span class="pre">&lt;image_name&gt;</span> <span class="pre">`</span></code> &gt; <strong>NOTE</strong> : If your host system is Ubuntu 20, follow the <a class="reference external" href="https://github.com/openvinotoolkit/docker_ci/blob/master/configure_gpu_ubuntu20.md">Configuration Guide for the Intel® Graphics Compute Runtime for OpenCL™ on Ubuntu* 20.04</a>.</p></li>
 <li><p>WSL2: <code class="docutils literal notranslate"><span class="pre">`sh</span> <span class="pre">docker</span> <span class="pre">run</span> <span class="pre">-it</span> <span class="pre">rm</span> <span class="pre">device</span> <span class="pre">/dev/dxg</span> <span class="pre">volume</span> <span class="pre">/usr/lib/wsl:/usr/lib/wsl</span> <span class="pre">&lt;image_name&gt;</span> <span class="pre">`</span></code> &gt; <strong>NOTE</strong> : To launch a Linux image on WSL2, make sure that the additional requirements in <a class="reference external" href="#system-requirements">System Requirements</a> are met.</p></li>
 </ul>
-</div>
-<div class="section" id="running-the-image-on-intel-neural-compute-stick-2">
+</section>
+<section id="running-the-image-on-intel-neural-compute-stick-2">
 <h3>Running the Image on Intel® Neural Compute Stick 2<a class="headerlink" href="#running-the-image-on-intel-neural-compute-stick-2" title="Permalink to this headline">¶</a></h3>
 <p>Run the Docker image with the following command:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">it</span> <span class="o">--</span><span class="n">rm</span> <span class="o">--</span><span class="n">device</span><span class="o">-</span><span class="n">cgroup</span><span class="o">-</span><span class="n">rule</span><span class="o">=</span><span class="sc">&#39;c 189:\* rmw&#39;</span> <span class="o">-</span><span class="n">v</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">bus</span><span class="o">/</span><span class="nl">usb</span><span class="p">:</span><span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">bus</span><span class="o">/</span><span class="n">usb</span> <span class="o">&lt;</span><span class="n">image_name</span><span class="o">&gt;</span></pre></div></div><p>While the command above is not working, you can also run container in the privileged mode, enable the Docker network configuration as host, and mount all devices to the container. Run the following command:</p>
@@ -852,16 +859,16 @@
 <p class="admonition-title">Note</p>
 <p>This option is not recommended, as conflicts with Kubernetes and other tools that use orchestration and private networks may occur. Please use it with caution and only for troubleshooting purposes.</p>
 </div>
-<div class="section" id="known-limitations">
+<section id="known-limitations">
 <h4>Known Limitations<a class="headerlink" href="#known-limitations" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
 <li><p>Intel® Neural Compute Stick 2 device changes its VendorID and DeviceID during execution and each time looks for a host system as a brand new device. It means it cannot be mounted as usual.</p></li>
 <li><p>UDEV events are not forwarded to the container by default, and it does not know about the device reconnection. The prebuilt Docker images and provided Dockerfiles include <code class="docutils literal notranslate"><span class="pre">libusb</span></code> rebuilt without UDEV support.</p></li>
 <li><p>Only one NCS2 device connected to the host can be used when running inference in a container.</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="running-the-image-on-intel-vision-accelerator-design-with-intel-movidius-vpus">
+</section>
+</section>
+<section id="running-the-image-on-intel-vision-accelerator-design-with-intel-movidius-vpus">
 <h3>Running the Image on Intel® Vision Accelerator Design with Intel® Movidius™ VPUs<a class="headerlink" href="#running-the-image-on-intel-vision-accelerator-design-with-intel-movidius-vpus" title="Permalink to this headline">¶</a></h3>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -874,14 +881,14 @@
 <li><p>The device <code class="docutils literal notranslate"><span class="pre">/dev/ion</span></code> needs to be shared to be able to use ion buffers among the plugin, <code class="docutils literal notranslate"><span class="pre">hddldaemon</span></code> and the kernel.</p></li>
 <li><p>Since separate inference tasks share the same HDDL service communication interface (the service creates mutexes and a socket file in <code class="docutils literal notranslate"><span class="pre">/var/tmp</span></code>), <code class="docutils literal notranslate"><span class="pre">/var/tmp</span></code> needs to be mounted and shared among them.</p></li>
 </ul>
-<div class="section" id="if-the-ion-driver-is-not-enabled">
+<section id="if-the-ion-driver-is-not-enabled">
 <h4>If the ion Driver is Not Enabled<a class="headerlink" href="#if-the-ion-driver-is-not-enabled" title="Permalink to this headline">¶</a></h4>
 <p>In some cases, the ion driver is not enabled (for example, due to a newer kernel version or iommu (Input-Output Memory Management Unit) incompatibility). <code class="docutils literal notranslate"><span class="pre">lsmod</span> <span class="pre">|</span> <span class="pre">grep</span> <span class="pre">myd_ion</span></code> returns empty output. To resolve this issue, use the following command:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">it</span> <span class="o">--</span><span class="n">rm</span> <span class="o">--</span><span class="n">ipc</span><span class="o">=</span><span class="n">host</span> <span class="o">--</span><span class="n">net</span><span class="o">=</span><span class="n">host</span> <span class="o">-</span><span class="n">v</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="nl">tmp</span><span class="p">:</span><span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">tmp</span> <span class="o">&lt;</span><span class="n">image_name</span><span class="o">&gt;</span></pre></div></div><p>If that still does not solve the issue, try starting <code class="docutils literal notranslate"><span class="pre">hddldaemon</span></code> with the root user on host. However, this approach is not recommended. Please use with caution.</p>
-</div>
-</div>
-</div>
-<div class="section" id="running-samples-in-docker-image">
+</section>
+</section>
+</section>
+<section id="running-samples-in-docker-image">
 <span id="run-samples"></span><h2>Running Samples in Docker Image<a class="headerlink" href="#running-samples-in-docker-image" title="Permalink to this headline">¶</a></h2>
 <p>To run the <code class="docutils literal notranslate"><span class="pre">Hello</span> <span class="pre">Classification</span> <span class="pre">Sample</span></code> on a specific inference device, run the following commands:</p>
 <p><strong>CPU</strong> :</p>
@@ -892,16 +899,16 @@
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">itu</span> <span class="nl">root</span><span class="p">:</span><span class="n">root</span> <span class="o">--</span><span class="n">rm</span> <span class="o">--</span><span class="n">device</span><span class="o">-</span><span class="n">cgroup</span><span class="o">-</span><span class="n">rule</span><span class="o">=</span><span class="sc">&#39;c 189:\* rmw&#39;</span> <span class="o">-</span><span class="n">v</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">bus</span><span class="o">/</span><span class="nl">usb</span><span class="p">:</span><span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">bus</span><span class="o">/</span><span class="n">usb</span> <span class="o">&lt;</span><span class="n">image_name</span><span class="o">&gt;</span>
 <span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">bash</span> <span class="o">-</span><span class="n">c</span> <span class="s">&quot;omz_downloader --name googlenet-v1 --precisions FP16 &amp;&amp; omz_converter --name googlenet-v1 --precision FP16 &amp;&amp; curl -O https://storage.openvinotoolkit.org/data/test_data/images/car_1.bmp &amp;&amp; python3 samples/python/hello_classification/hello_classification.py public/googlenet-v1/FP16/googlenet-v1.xml car_1.bmp MYRIAD&quot;</span></pre></div></div><p><strong>HDDL</strong> :</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">itu</span> <span class="nl">root</span><span class="p">:</span><span class="n">root</span> <span class="o">--</span><span class="n">rm</span> <span class="o">--</span><span class="n">device</span><span class="o">=/</span><span class="n">dev</span><span class="o">/</span><span class="nl">ion</span><span class="p">:</span><span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">ion</span> <span class="o">-</span><span class="n">v</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="nl">tmp</span><span class="p">:</span><span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">tmp</span> <span class="o">-</span><span class="n">v</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="nl">shm</span><span class="p">:</span><span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">shm</span> <span class="o">&lt;</span><span class="n">image_name</span><span class="o">&gt;</span>
-<span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">bash</span> <span class="o">-</span><span class="n">c</span> <span class="s">&quot;omz_downloader --name googlenet-v1 --precisions FP16 &amp;&amp; omz_converter --name googlenet-v1 --precision FP16 &amp;&amp; curl -O https://storage.openvinotoolkit.org/data/test_data/images/car_1.bmp &amp;&amp; umask 000 &amp;&amp; python3 samples/python/hello_classification/hello_classification.py public/googlenet-v1/FP16/googlenet-v1.xml car_1.bmp HDDL&quot;</span></pre></div></div></div>
-<div class="section" id="additional-resources">
+<span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">bash</span> <span class="o">-</span><span class="n">c</span> <span class="s">&quot;omz_downloader --name googlenet-v1 --precisions FP16 &amp;&amp; omz_converter --name googlenet-v1 --precision FP16 &amp;&amp; curl -O https://storage.openvinotoolkit.org/data/test_data/images/car_1.bmp &amp;&amp; umask 000 &amp;&amp; python3 samples/python/hello_classification/hello_classification.py public/googlenet-v1/FP16/googlenet-v1.xml car_1.bmp HDDL&quot;</span></pre></div></div></section>
+<section id="additional-resources">
 <h2>Additional Resources<a class="headerlink" href="#additional-resources" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://github.com/openvinotoolkit/docker_ci">DockerHub CI Framework</a> for Intel® Distribution of OpenVINO™ toolkit. The Framework can generate a Dockerfile, build, test, and deploy an image with the Intel® Distribution of OpenVINO™ toolkit. You can reuse available Dockerfiles, add your layer and customize the image of OpenVINO™ for your needs.</p></li>
 <li><p>Intel® Distribution of OpenVINO™ toolkit home page: <a class="reference external" href="https://software.intel.com/en-us/openvino-toolkit">https://software.intel.com/en-us/openvino-toolkit</a></p></li>
 <li><p>Intel® Neural Compute Stick 2 Get Started: <a class="reference external" href="https://software.intel.com/en-us/neural-compute-stick/get-started">https://software.intel.com/en-us/neural-compute-stick/get-started</a></p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -932,7 +939,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

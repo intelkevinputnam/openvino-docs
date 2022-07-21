@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Cutting Off Parts of a Model &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -1857,10 +1864,10 @@
             
                 <div>
                   
-  <div class="section" id="cutting-off-parts-of-a-model">
+  <section id="cutting-off-parts-of-a-model">
 <span id="doxid-openvino-docs-m-o-d-g-prepare-model-convert-model-cutting-model"></span><span id="index-0"></span><h1>Cutting Off Parts of a Model<a class="headerlink" href="#cutting-off-parts-of-a-model" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-openvino-docs-m-o-d-g-prepare-model-convert-model-cutting-model-1md-openvino-docs-mo-dg-prepare-model-convert-model-cutting-model"></span> Sometimes some parts of a model must be removed while the Model Optimizer is converting models to the Intermediate Representation. This chapter describes methods of doing cutting off parts of a model using Model Optimizer command-line options. Model cutting applies mostly to TensorFlow* models, but is also useful for other frameworks. In this chapter, TensorFlow examples are used for illustration.</p>
-<div class="section" id="purpose-of-model-cutting">
+<section id="purpose-of-model-cutting">
 <h2>Purpose of Model Cutting<a class="headerlink" href="#purpose-of-model-cutting" title="Permalink to this headline">¶</a></h2>
 <p>The following examples are the situations when model cutting is useful or even required:</p>
 <ul class="simple">
@@ -1870,8 +1877,8 @@
 <li><p>problem with model conversion in the Model Optimizer or inference in the OpenVINO Runtime occurred. To localize the issue, limit the scope for conversion by iteratively searching for problematic places in the model.</p></li>
 <li><p>single custom layer or a combination of custom layers is isolated for debugging purposes.</p></li>
 </ul>
-</div>
-<div class="section" id="command-line-options">
+</section>
+<section id="command-line-options">
 <h2>Command-Line Options<a class="headerlink" href="#command-line-options" title="Permalink to this headline">¶</a></h2>
 <p>Model Optimizer provides command line options <code class="docutils literal notranslate"><span class="pre">--input</span></code> and <code class="docutils literal notranslate"><span class="pre">--output</span></code> to specify new entry and exit nodes, while ignoring the rest of the model:</p>
 <ul class="simple">
@@ -1880,8 +1887,8 @@
 </ul>
 <p>The <code class="docutils literal notranslate"><span class="pre">--input</span></code> option is required for cases unrelated to model cutting. For example, when the model contains several inputs and <code class="docutils literal notranslate"><span class="pre">--input_shape</span></code> or <code class="docutils literal notranslate"><span class="pre">--mean_values</span></code> options are used, you should use the <code class="docutils literal notranslate"><span class="pre">--input</span></code> option to specify the order of input nodes for correct mapping between multiple items provided in <code class="docutils literal notranslate"><span class="pre">--input_shape</span></code> and <code class="docutils literal notranslate"><span class="pre">--mean_values</span></code> and the inputs in the model. Details on these options are out of scope for this document, which focuses on model cutting.</p>
 <p>Model cutting is illustrated with Inception V1. This model is in <code class="docutils literal notranslate"><span class="pre">models/research/slim</span></code> repository. <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_Converting_Model.html#doxid-openvino-docs-m-o-d-g-prepare-model-convert-model-converting-model"><span class="std std-ref">This section</span></a> describes pre-work to prepare the model for the Model Optimizer to be ready to proceed with this chapter.</p>
-</div>
-<div class="section" id="default-behavior-without-input-and-output">
+</section>
+<section id="default-behavior-without-input-and-output">
 <h2>Default Behavior without input and output<a class="headerlink" href="#default-behavior-without-input-and-output" title="Permalink to this headline">¶</a></h2>
 <p>The input model is converted as a whole if neither <code class="docutils literal notranslate"><span class="pre">--input</span></code> nor <code class="docutils literal notranslate"><span class="pre">--output</span></code> command line options are used. All <code class="docutils literal notranslate"><span class="pre">Placeholder</span></code> operations in a TensorFlow* graph are automatically identified as entry points. The <code class="docutils literal notranslate"><span class="pre">Input</span></code> layer type is generated for each of them. All nodes that have no consumers are automatically identified as exit points.</p>
 <p>For Inception_V1, there is one <code class="docutils literal notranslate"><span class="pre">Placeholder</span></code> : input. If the model is viewed in the TensorBoard*, the input operation is easy to find:</p>
@@ -1922,12 +1929,12 @@
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">mo</span> <span class="o">--</span><span class="n">input_model</span> <span class="n">inception_v1</span><span class="p">.</span><span class="n">pb</span> <span class="o">-</span><span class="n">b</span> <span class="mi">1</span> <span class="o">--</span><span class="n">output_dir</span> <span class="o">&lt;</span><span class="n">OUTPUT_MODEL_DIR</span><span class="o">&gt;</span>
 
 <span class="n">mo</span> <span class="o">--</span><span class="n">input_model</span> <span class="n">inception_v1</span><span class="p">.</span><span class="n">pb</span> <span class="o">-</span><span class="n">b</span> <span class="mi">1</span> <span class="o">--</span><span class="n">input</span> <span class="n">input</span> <span class="o">--</span><span class="n">output</span> <span class="n">InceptionV1</span><span class="o">/</span><span class="n">Logits</span><span class="o">/</span><span class="n">Predictions</span><span class="o">/</span><span class="n">Reshape_1</span> <span class="o">--</span><span class="n">output_dir</span> <span class="o">&lt;</span><span class="n">OUTPUT_MODEL_DIR</span><span class="o">&gt;</span></pre></div></div><p>The Intermediate Representations are identical for both conversions. The same is true if the model has multiple inputs and/or outputs.</p>
-</div>
-<div class="section" id="model-cutting">
+</section>
+<section id="model-cutting">
 <h2>Model Cutting<a class="headerlink" href="#model-cutting" title="Permalink to this headline">¶</a></h2>
 <p>Now consider how to cut some parts of the model off. This chapter uses the first convolution block <code class="docutils literal notranslate"><span class="pre">InceptionV1/InceptionV1/Conv2d_1a_7x7</span></code> of the Inception V1 model to illustrate cutting:</p>
 <img alt="Inception V1 first convolution block" src="../_images/inception_v1_first_block.png" />
-<div class="section" id="cutting-at-the-end">
+<section id="cutting-at-the-end">
 <h3>Cutting at the End<a class="headerlink" href="#cutting-at-the-end" title="Permalink to this headline">¶</a></h3>
 <p>If you want to cut your model at the end, you have the following options:</p>
 <ol class="arabic">
@@ -2036,8 +2043,8 @@
     <span class="o">&lt;/</span><span class="n">edges</span><span class="o">&gt;</span>
 <span class="o">&lt;/</span><span class="n">net</span><span class="o">&gt;</span></pre></div></div></li>
 </ol>
-</div>
-<div class="section" id="cutting-from-the-beginning">
+</section>
+<section id="cutting-from-the-beginning">
 <h3>Cutting from the Beginning<a class="headerlink" href="#cutting-from-the-beginning" title="Permalink to this headline">¶</a></h3>
 <p>If you want to go further and cut the beginning of the model, leaving only the <code class="docutils literal notranslate"><span class="pre">ReLU</span></code> layer, you have the following options:</p>
 <ol class="arabic">
@@ -2115,9 +2122,9 @@
     <span class="o">&lt;/</span><span class="n">edges</span><span class="o">&gt;</span>
 <span class="o">&lt;/</span><span class="n">net</span><span class="o">&gt;</span></pre></div></div></li>
 </ol>
-</div>
-</div>
-<div class="section" id="shape-override-for-new-inputs">
+</section>
+</section>
+<section id="shape-override-for-new-inputs">
 <h2>Shape Override for New Inputs<a class="headerlink" href="#shape-override-for-new-inputs" title="Permalink to this headline">¶</a></h2>
 <p>The input shape can be overridden with <code class="docutils literal notranslate"><span class="pre">--input_shape</span></code>. In this case, the shape is applied to the node referenced in <code class="docutils literal notranslate"><span class="pre">--input</span></code>, not to the original <code class="docutils literal notranslate"><span class="pre">Placeholder</span></code> in the model. For example, the command below</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">mo</span> <span class="o">--</span><span class="n">input_model</span> <span class="n">inception_v1</span><span class="p">.</span><span class="n">pb</span> <span class="o">--</span><span class="n">input_shape</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">20</span><span class="p">]</span> <span class="o">--</span><span class="n">output</span> <span class="n">InceptionV1</span><span class="o">/</span><span class="n">InceptionV1</span><span class="o">/</span><span class="n">Conv2d_1a_7x7</span><span class="o">/</span><span class="n">Relu</span> <span class="o">--</span><span class="n">input</span> <span class="n">InceptionV1</span><span class="o">/</span><span class="n">InceptionV1</span><span class="o">/</span><span class="n">Conv2d_1a_7x7</span><span class="o">/</span><span class="n">Relu</span> <span class="o">--</span><span class="n">output_dir</span> <span class="o">&lt;</span><span class="n">OUTPUT_MODEL_DIR</span><span class="o">&gt;</span></pre></div></div><p>gives the following shapes in the <code class="docutils literal notranslate"><span class="pre">Input</span></code> and <code class="docutils literal notranslate"><span class="pre">ReLU</span></code> layers:</p>
@@ -2150,8 +2157,8 @@
     <span class="o">&lt;/</span><span class="n">output</span><span class="o">&gt;</span>
 <span class="o">&lt;/</span><span class="n">layer</span><span class="o">&gt;</span></pre></div></div><p>An input shape [1,20,5,10] in the final Intermediate Representation differs from the shape [1,5,10,20] specified in the command line, because the original TensorFlow* model uses NHWC layout, but the Intermediate Representation uses NCHW layout. So usual NHWC to NCHW layout conversion occurred.</p>
 <p>When <code class="docutils literal notranslate"><span class="pre">--input_shape</span></code> is specified, shape inference inside the Model Optimizer is not performed for the nodes in the beginning of the model that are not included in the translated region. It differs from the case when <code class="docutils literal notranslate"><span class="pre">--input_shape</span></code> is not specified as noted in the previous section where the shape inference is still performed for such nodes to deduce shape for the layers that should fall into the final Intermediate Representation. So <code class="docutils literal notranslate"><span class="pre">--input_shape</span></code> should be used for a model with a complex graph with loops, which are not supported by the Model Optimizer, to exclude such parts from the Model Optimizer shape inference process completely.</p>
-</div>
-<div class="section" id="inputs-with-multiple-input-ports">
+</section>
+<section id="inputs-with-multiple-input-ports">
 <h2>Inputs with Multiple Input Ports<a class="headerlink" href="#inputs-with-multiple-input-ports" title="Permalink to this headline">¶</a></h2>
 <p>There are operations that contain more than one input ports. In the example considered here, the convolution <code class="docutils literal notranslate"><span class="pre">InceptionV1/InceptionV1/Conv2d_1a_7x7/convolution</span></code> is such operation. When <code class="docutils literal notranslate"><span class="pre">--input_shape</span></code> is not provided, a new <code class="docutils literal notranslate"><span class="pre">Input</span></code> layer is created for each dynamic input port for the node. If a port is evaluated to a constant blob, this constant remains in the model and a corresponding input layer is not created. TensorFlow convolution used in this model contains two ports:</p>
 <ul class="simple">
@@ -2166,8 +2173,8 @@
 <span class="n">Try</span> <span class="n">not</span> <span class="n">to</span> <span class="n">provide</span> <span class="n">input</span> <span class="n">shapes</span> <span class="n">or</span> <span class="n">specify</span> <span class="n">input</span> <span class="n">port</span> <span class="n">with</span> <span class="nl">PORT</span><span class="p">:</span><span class="n">NODE</span> <span class="n">notation</span><span class="p">,</span> <span class="n">where</span> <span class="n">PORT</span> <span class="n">is</span> <span class="n">an</span> <span class="n">integer</span><span class="p">.</span>
 <span class="n">For</span> <span class="n">more</span> <span class="n">information</span><span class="p">,</span> <span class="n">see</span> <span class="n">FAQ</span> <span class="err">#</span><span class="mi">30</span></pre></div></div><p>In this case, when <code class="docutils literal notranslate"><span class="pre">--input_shape</span></code> is specified and the node contains multiple input ports, you need to specify an input port index together with an input node name. The input port index is specified in front of the node name with ‘:’ as a separator (<code class="docutils literal notranslate"><span class="pre">PORT:NODE</span></code>). In the considered case, the port index 0 of the node <code class="docutils literal notranslate"><span class="pre">InceptionV1/InceptionV1/Conv2d_1a_7x7/convolution</span></code> should be specified as <code class="docutils literal notranslate"><span class="pre">0:InceptionV1/InceptionV1/Conv2d_1a_7x7/convolution</span></code>.</p>
 <p>The correct command line is:</p>
-<div class="highlight"><div class="highlight"><pre><span></span><span class="n">mo</span> <span class="o">--</span><span class="n">input_model</span> <span class="n">inception_v1</span><span class="p">.</span><span class="n">pb</span> <span class="o">--</span><span class="n">input</span> <span class="mi">0</span><span class="o">:</span><span class="n">InceptionV1</span><span class="o">/</span><span class="n">InceptionV1</span><span class="o">/</span><span class="n">Conv2d_1a_7x7</span><span class="o">/</span><span class="n">convolution</span> <span class="o">--</span><span class="n">input_shape</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">224</span><span class="p">,</span><span class="mi">224</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span> <span class="o">--</span><span class="n">output_dir</span> <span class="o">&lt;</span><span class="n">OUTPUT_MODEL_DIR</span><span class="o">&gt;</span></pre></div></div></div>
-</div>
+<div class="highlight"><div class="highlight"><pre><span></span><span class="n">mo</span> <span class="o">--</span><span class="n">input_model</span> <span class="n">inception_v1</span><span class="p">.</span><span class="n">pb</span> <span class="o">--</span><span class="n">input</span> <span class="mi">0</span><span class="o">:</span><span class="n">InceptionV1</span><span class="o">/</span><span class="n">InceptionV1</span><span class="o">/</span><span class="n">Conv2d_1a_7x7</span><span class="o">/</span><span class="n">convolution</span> <span class="o">--</span><span class="n">input_shape</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">224</span><span class="p">,</span><span class="mi">224</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span> <span class="o">--</span><span class="n">output_dir</span> <span class="o">&lt;</span><span class="n">OUTPUT_MODEL_DIR</span><span class="o">&gt;</span></pre></div></div></section>
+</section>
 
 
                 </div>
@@ -2198,7 +2205,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

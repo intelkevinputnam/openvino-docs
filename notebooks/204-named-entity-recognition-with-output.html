@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Document Entity Extraction with OpenVINO &#8212; OpenVINO™  documentation</title>
     
     
@@ -125,6 +126,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -339,7 +346,7 @@
             
                 <div>
                   
-  <div class="section" id="document-entity-extraction-with-openvino">
+  <section id="document-entity-extraction-with-openvino">
 <h1>Document Entity Extraction with OpenVINO<a class="headerlink" href="#document-entity-extraction-with-openvino" title="Permalink to this headline">¶</a></h1>
 <p>This demo shows named entity recognition from text with OpenVINO. We use
 <a class="reference external" href="https://github.com/openvinotoolkit/open_model_zoo/tree/master/models/intel/bert-small-uncased-whole-word-masking-squad-int8-0002">small BERT-large-like
@@ -350,7 +357,7 @@ Zoo</a>. At the
 bottom of this notebook, you will see live inference results from your
 inputs and templates. In the notebook we show how to create the
 following pipeline:</p>
-<p align="center" width="100%"></p><div class="section" id="imports">
+<p align="center" width="100%"></p><section id="imports">
 <h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">import</span> <span class="nn">json</span>
@@ -362,10 +369,10 @@ following pipeline:</p>
 <span class="kn">from</span> <span class="nn">openvino.runtime</span> <span class="kn">import</span> <span class="n">Dimension</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="the-model">
+</section>
+<section id="the-model">
 <h2>The model<a class="headerlink" href="#the-model" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="download-the-model">
+<section id="download-the-model">
 <h3>Download the model<a class="headerlink" href="#download-the-model" title="Permalink to this headline">¶</a></h3>
 <p>We use <code class="docutils literal notranslate"><span class="pre">omz_downloader</span></code>, which is a command-line tool from the
 <code class="docutils literal notranslate"><span class="pre">openvino-dev</span></code> package. <code class="docutils literal notranslate"><span class="pre">omz_downloader</span></code> automatically creates a
@@ -411,8 +418,8 @@ OpenVINO Intermediate Representation (IR), so there is no need to use
 <span class="o">==========</span> <span class="n">Downloading</span> <span class="n">model</span><span class="o">/</span><span class="n">intel</span><span class="o">/</span><span class="n">bert</span><span class="o">-</span><span class="n">small</span><span class="o">-</span><span class="n">uncased</span><span class="o">-</span><span class="n">whole</span><span class="o">-</span><span class="n">word</span><span class="o">-</span><span class="n">masking</span><span class="o">-</span><span class="n">squad</span><span class="o">-</span><span class="n">int8</span><span class="o">-</span><span class="mi">0002</span><span class="o">/</span><span class="n">FP16</span><span class="o">-</span><span class="n">INT8</span><span class="o">/</span><span class="n">bert</span><span class="o">-</span><span class="n">small</span><span class="o">-</span><span class="n">uncased</span><span class="o">-</span><span class="n">whole</span><span class="o">-</span><span class="n">word</span><span class="o">-</span><span class="n">masking</span><span class="o">-</span><span class="n">squad</span><span class="o">-</span><span class="n">int8</span><span class="o">-</span><span class="mf">0002.</span><span class="n">bin</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="load-the-model-for-entity-extraction-with-dynamic-shape">
+</section>
+<section id="load-the-model-for-entity-extraction-with-dynamic-shape">
 <h3>Load the model for Entity Extraction with Dynamic Shape<a class="headerlink" href="#load-the-model-for-entity-extraction-with-dynamic-shape" title="Permalink to this headline">¶</a></h3>
 <p>Input to entity extraction model refers to text with different content
 sizes, i.e, dynamic into shapes. Hence:</p>
@@ -454,9 +461,9 @@ BERT-large-like model, we have four inputs.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="s1">&#39;input_ids&#39;</span><span class="p">,</span> <span class="s1">&#39;attention_mask&#39;</span><span class="p">,</span> <span class="s1">&#39;token_type_ids&#39;</span><span class="p">,</span> <span class="s1">&#39;position_ids&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="processing">
+</section>
+</section>
+<section id="processing">
 <h2>Processing<a class="headerlink" href="#processing" title="Permalink to this headline">¶</a></h2>
 <p>NLP models usually take a list of tokens as standard input. A token is a
 single word converted to some integer. To provide the proper input, we
@@ -477,7 +484,7 @@ from simple text.</p>
 <span class="n">confidence_threshold</span> <span class="o">=</span> <span class="mf">0.4</span>
 </pre></div>
 </div>
-<div class="section" id="preprocessing">
+<section id="preprocessing">
 <h3>Preprocessing<a class="headerlink" href="#preprocessing" title="Permalink to this headline">¶</a></h3>
 <p>The main input (<code class="docutils literal notranslate"><span class="pre">input_ids</span></code>) to used BERT model consist of two parts:
 entity tokens and context tokens separated by some special tokens. We
@@ -514,8 +521,8 @@ for each input token. To know more about input, please read
     <span class="k">return</span> <span class="n">input_dict</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="postprocessing">
+</section>
+<section id="postprocessing">
 <h3>Postprocessing<a class="headerlink" href="#postprocessing" title="Permalink to this headline">¶</a></h3>
 <p>The results from the network are raw (logits). We need to use the
 softmax function to get the probability distribution. Then, we are
@@ -601,8 +608,8 @@ with the highest score.</p>
     <span class="k">return</span> <span class="n">context</span><span class="p">[</span><span class="n">score_start_end</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span><span class="n">score_start_end</span><span class="p">[</span><span class="mi">2</span><span class="p">]],</span> <span class="n">score_start_end</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="set-the-entity-recognition-template">
+</section>
+<section id="set-the-entity-recognition-template">
 <h3>Set the Entity Recognition Template<a class="headerlink" href="#set-the-entity-recognition-template" title="Permalink to this headline">¶</a></h3>
 <p>Only the entities which have prediction confidence score more than 0.4
 will be captured in the final output. This can be set by setting the
@@ -642,11 +649,11 @@ persons, city, state, height, floor and address</p>
     <span class="nb">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="run-on-simple-text">
+</section>
+</section>
+<section id="run-on-simple-text">
 <h2>Run on Simple Text<a class="headerlink" href="#run-on-simple-text" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="sample-1">
+<section id="sample-1">
 <h3>Sample 1<a class="headerlink" href="#sample-1" title="Permalink to this headline">¶</a></h3>
 <p>Change sources to your own text, supported by the template, to perform
 entity extraction. It supports only one input text at a time. Usually,
@@ -689,8 +696,8 @@ in that case, you can see random results.</p>
 <span class="p">}</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="sample-2">
+</section>
+<section id="sample-2">
 <h3>Sample 2<a class="headerlink" href="#sample-2" title="Permalink to this headline">¶</a></h3>
 <p>Sample source: Intel - Wikipedia (from
 <a class="reference external" href="https://en.wikipedia.org/wiki/Intel">here</a>)</p>
@@ -731,8 +738,8 @@ in that case, you can see random results.</p>
 <span class="p">}</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="sample-3">
+</section>
+<section id="sample-3">
 <h3>Sample 3<a class="headerlink" href="#sample-3" title="Permalink to this headline">¶</a></h3>
 <p>Sample source: Converted Paragraph (from
 <a class="reference external" href="https://www.emporis.com/buildings/338440/robert-noyce-building-santa-clara-ca-usa">here</a>)</p>
@@ -789,9 +796,9 @@ in that case, you can see random results.</p>
 <span class="p">}</span>
 </pre></div>
 </div>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
                 </div>
@@ -820,7 +827,7 @@ in that case, you can see random results.</p>
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

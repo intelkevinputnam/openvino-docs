@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>fastseg-large &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../../../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -2106,13 +2113,13 @@
             
                 <div>
                   
-  <div class="section" id="fastseg-large">
+  <section id="fastseg-large">
 <h1>fastseg-large<a class="headerlink" href="#fastseg-large" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="use-case-and-high-level-description">
+<section id="use-case-and-high-level-description">
 <h2>Use Case and High-Level Description<a class="headerlink" href="#use-case-and-high-level-description" title="Permalink to this headline">¶</a></h2>
 <p>fastseg-large is an accurate real-time semantic segmentation model, pre-trained on <a class="reference external" href="https://www.cityscapes-dataset.com">Cityscapes</a> dataset for 19 object classes, listed in <code class="docutils literal notranslate"><span class="pre">&lt;omz_dir&gt;/data/dataset_classes/cityscapes_19cl_bkgr.txt</span></code> file. See Cityscapes classes <a class="reference external" href="https://www.cityscapes-dataset.com/dataset-overview">definition</a> for more details. The model was built on MobileNetV3 large backbone and modified segmentation head based on LR-ASPP. This model can be used for efficient segmentation on a variety of real-world street images. For model implementation details see original <a class="reference external" href="https://github.com/ekzhang/fastseg">repository</a>.</p>
-</div>
-<div class="section" id="specification">
+</section>
+<section id="specification">
 <h2>Specification<a class="headerlink" href="#specification" title="Permalink to this headline">¶</a></h2>
 <table class="colwidths-auto table">
 <thead>
@@ -2135,8 +2142,8 @@
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="accuracy">
+</section>
+<section id="accuracy">
 <h2>Accuracy<a class="headerlink" href="#accuracy" title="Permalink to this headline">¶</a></h2>
 <table class="colwidths-auto table">
 <thead>
@@ -2150,10 +2157,10 @@
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="input">
+</section>
+<section id="input">
 <h2>Input<a class="headerlink" href="#input" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="original-model">
+<section id="original-model">
 <h3>Original model<a class="headerlink" href="#original-model" title="Permalink to this headline">¶</a></h3>
 <p>Image, name: <code class="docutils literal notranslate"><span class="pre">input0</span></code>, shape: <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">3,</span> <span class="pre">1024,</span> <span class="pre">2048</span></code>, format: <code class="docutils literal notranslate"><span class="pre">B,</span> <span class="pre">C,</span> <span class="pre">H,</span> <span class="pre">W</span></code>, where:</p>
 <ul class="simple">
@@ -2164,8 +2171,8 @@
 </ul>
 <p>Expected color order: <code class="docutils literal notranslate"><span class="pre">RGB</span></code>.
 Mean values: [123.675, 116.28, 103.53], scale values: [58.395, 57.12, 57.375]</p>
-</div>
-<div class="section" id="converted-model">
+</section>
+<section id="converted-model">
 <h3>Converted Model<a class="headerlink" href="#converted-model" title="Permalink to this headline">¶</a></h3>
 <p>Image, name: <code class="docutils literal notranslate"><span class="pre">input0</span></code>, shape: <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">3,</span> <span class="pre">1024,</span> <span class="pre">2048</span></code>, format: <code class="docutils literal notranslate"><span class="pre">B,</span> <span class="pre">C,</span> <span class="pre">H,</span> <span class="pre">W</span></code>, where:</p>
 <ul class="simple">
@@ -2175,11 +2182,11 @@ Mean values: [123.675, 116.28, 103.53], scale values: [58.395, 57.12, 57.375]</p
 <li><p><code class="docutils literal notranslate"><span class="pre">W</span></code> - image width</p></li>
 </ul>
 <p>Expected color order: <code class="docutils literal notranslate"><span class="pre">BGR</span></code>.</p>
-</div>
-</div>
-<div class="section" id="output">
+</section>
+</section>
+<section id="output">
 <h2>Output<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id1">
+<section id="id1">
 <h3>Original Model<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <p>Float values, which represent scores of a predicted class for each image pixel. The model was trained on Cityscapes dataset with 19 categories of objects. Name: <code class="docutils literal notranslate"><span class="pre">output0</span></code>, shape: <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">19,</span> <span class="pre">1024,</span> <span class="pre">2048</span></code> in <code class="docutils literal notranslate"><span class="pre">B,</span> <span class="pre">N,</span> <span class="pre">H,</span> <span class="pre">W</span></code> format, where:</p>
 <ul class="simple">
@@ -2188,8 +2195,8 @@ Mean values: [123.675, 116.28, 103.53], scale values: [58.395, 57.12, 57.375]</p
 <li><p><code class="docutils literal notranslate"><span class="pre">H</span></code> - image height</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">W</span></code> - image width</p></li>
 </ul>
-</div>
-<div class="section" id="id2">
+</section>
+<section id="id2">
 <h3>Converted Model<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <p>Float values, which represent scores of a predicted class for each image pixel. The model was trained on Cityscapes dataset with 19 categories of objects. Name: <code class="docutils literal notranslate"><span class="pre">output0</span></code>, shape: <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">19,</span> <span class="pre">1024,</span> <span class="pre">2048</span></code> in <code class="docutils literal notranslate"><span class="pre">B,</span> <span class="pre">N,</span> <span class="pre">H,</span> <span class="pre">W</span></code> format, where:</p>
 <ul class="simple">
@@ -2198,9 +2205,9 @@ Mean values: [123.675, 116.28, 103.53], scale values: [58.395, 57.12, 57.375]</p
 <li><p><code class="docutils literal notranslate"><span class="pre">H</span></code> - image height</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">W</span></code> - image width</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="download-a-model-and-convert-it-into-openvino-ir-format">
+</section>
+</section>
+<section id="download-a-model-and-convert-it-into-openvino-ir-format">
 <h2>Download a Model and Convert it into OpenVINO™ IR Format<a class="headerlink" href="#download-a-model-and-convert-it-into-openvino-ir-format" title="Permalink to this headline">¶</a></h2>
 <p>You can download models and if necessary convert them into OpenVINO™ IR format using the <span class="xref myst">Model Downloader and other automation tools</span> as shown in the examples below.</p>
 <p>An example of using the Model Downloader:</p>
@@ -2211,16 +2218,16 @@ Mean values: [123.675, 116.28, 103.53], scale values: [58.395, 57.12, 57.375]</p
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">omz_converter</span> <span class="o">--</span><span class="n">name</span> <span class="o">&lt;</span><span class="n">model_name</span><span class="o">&gt;</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="demo-usage">
+</section>
+<section id="demo-usage">
 <h2>Demo usage<a class="headerlink" href="#demo-usage" title="Permalink to this headline">¶</a></h2>
 <p>The model can be used in the following demos provided by the Open Model Zoo to show its capabilities:</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="../../../demos/segmentation_demo/cpp/README.html"><span class="doc std std-doc">Image Segmentation C++ Demo</span></a></p></li>
 <li><p><a class="reference internal" href="../../../demos/segmentation_demo/python/README.html"><span class="doc std std-doc">Image Segmentation Python* Demo</span></a></p></li>
 </ul>
-</div>
-<div class="section" id="legal-information">
+</section>
+<section id="legal-information">
 <h2>Legal Information<a class="headerlink" href="#legal-information" title="Permalink to this headline">¶</a></h2>
 <p>The original model is distributed under the following
 <a class="reference external" href="https://raw.githubusercontent.com/ekzhang/fastseg/master/LICENSE.txt">license</a>:</p>
@@ -2247,8 +2254,8 @@ Mean values: [123.675, 116.28, 103.53], scale values: [58.395, 57.12, 57.375]</p
 <span class="n">SOFTWARE</span><span class="o">.</span>
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -2279,7 +2286,7 @@ Mean values: [123.675, 116.28, 103.53], scale values: [58.395, 57.12, 57.375]</p
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

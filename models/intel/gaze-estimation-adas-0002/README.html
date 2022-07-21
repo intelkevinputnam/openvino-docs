@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>gaze-estimation-adas-0002 &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../../../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -2087,18 +2094,18 @@
             
                 <div>
                   
-  <div class="section" id="gaze-estimation-adas-0002">
+  <section id="gaze-estimation-adas-0002">
 <h1>gaze-estimation-adas-0002<a class="headerlink" href="#gaze-estimation-adas-0002" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="use-case-and-high-level-description">
+<section id="use-case-and-high-level-description">
 <h2>Use Case and High-Level Description<a class="headerlink" href="#use-case-and-high-level-description" title="Permalink to this headline">¶</a></h2>
 <p>This is a custom VGG-like convolutional neural network for gaze direction estimation.</p>
-</div>
-<div class="section" id="example-and-gaze-vector-definition">
+</section>
+<section id="example-and-gaze-vector-definition">
 <h2>Example and Gaze Vector Definition<a class="headerlink" href="#example-and-gaze-vector-definition" title="Permalink to this headline">¶</a></h2>
 <p><img alt="" src="../../../_images/ill_for_gaze.png" /></p>
 <p>The network takes three inputs: square crop of left eye image, square crop of right eye image, and three head pose angles - (yaw, pitch, and roll) (see figure). The network outputs 3-D vector corresponding to the direction of a person’s gaze in a Cartesian coordinate system in which z-axis is directed from person’s eyes (mid-point between left and right eyes’ centers) to the camera center, y-axis is vertical, and x-axis is orthogonal to both z,y axes so that (x,y,z) constitute a right-handed coordinate system.</p>
-</div>
-<div class="section" id="specification">
+</section>
+<section id="specification">
 <h2>Specification<a class="headerlink" href="#specification" title="Permalink to this headline">¶</a></h2>
 <table class="colwidths-auto table">
 <thead>
@@ -2118,12 +2125,12 @@
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="validation-dataset">
+</section>
+<section id="validation-dataset">
 <h2>Validation Dataset<a class="headerlink" href="#validation-dataset" title="Permalink to this headline">¶</a></h2>
 <p>Two random held out individuals from an internal dataset containing images of 60 people with different gaze directions.</p>
-</div>
-<div class="section" id="validation-results">
+</section>
+<section id="validation-results">
 <h2>Validation Results<a class="headerlink" href="#validation-results" title="Permalink to this headline">¶</a></h2>
 <p>The accuracy of gaze direction prediction is evaluated through the use of <a class="reference external" href="https://en.wikipedia.org/wiki/Mean_absolute_error">MAE</a> of angle (in degrees) between the ground truth and predicted gaze direction.</p>
 <table class="colwidths-auto table">
@@ -2140,8 +2147,8 @@
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="inputs">
+</section>
+<section id="inputs">
 <h2>Inputs<a class="headerlink" href="#inputs" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
 <li><p>Blob, name: <code class="docutils literal notranslate"><span class="pre">left_eye_image</span></code>, shape: <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">3,</span> <span class="pre">60,</span> <span class="pre">60</span></code> in the format <code class="docutils literal notranslate"><span class="pre">B,</span> <span class="pre">C,</span> <span class="pre">H,</span> <span class="pre">W</span></code>, where:</p>
@@ -2167,24 +2174,24 @@
 </ul>
 </li>
 </ol>
-</div>
-<div class="section" id="outputs">
+</section>
+<section id="outputs">
 <h2>Outputs<a class="headerlink" href="#outputs" title="Permalink to this headline">¶</a></h2>
 <p>The net output is a blob with name <code class="docutils literal notranslate"><span class="pre">gaze_vector</span></code> and the shape: <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">3</span></code>, containing Cartesian coordinates of gaze direction vector. Please note that the output vector is not normalizes and has non-unit length.</p>
-</div>
-<div class="section" id="demo-usage">
+</section>
+<section id="demo-usage">
 <h2>Demo usage<a class="headerlink" href="#demo-usage" title="Permalink to this headline">¶</a></h2>
 <p>The model can be used in the following demos provided by the Open Model Zoo to show its capabilities:</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="../../../demos/gaze_estimation_demo/cpp/README.html"><span class="doc std std-doc">Gaze Estimation Demo</span></a></p></li>
 <li><p><a class="reference internal" href="../../../demos/gaze_estimation_demo/cpp_gapi/README.html"><span class="doc std std-doc">G-API Gaze Estimation Demo</span></a></p></li>
 </ul>
-</div>
-<div class="section" id="legal-information">
+</section>
+<section id="legal-information">
 <h2>Legal Information<a class="headerlink" href="#legal-information" title="Permalink to this headline">¶</a></h2>
 <p>[*] Other names and brands may be claimed as the property of others.</p>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -2215,7 +2222,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

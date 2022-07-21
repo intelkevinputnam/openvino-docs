@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Converting a Caffe* Model &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -1852,10 +1859,10 @@
             
                 <div>
                   
-  <div class="section" id="converting-a-caffe-model">
+  <section id="converting-a-caffe-model">
 <span id="doxid-openvino-docs-m-o-d-g-prepare-model-convert-model-convert-model-from-caffe"></span><span id="index-0"></span><h1>Converting a Caffe* Model<a class="headerlink" href="#converting-a-caffe-model" title="Permalink to this headline">¶</a></h1>
 <p id="convert-from-caffe"><span class="target" id="doxid-openvino-docs-m-o-d-g-prepare-model-convert-model-convert-model-from-caffe-1md-openvino-docs-mo-dg-prepare-model-convert-model-convert-model-from-caffe"></span></p>
-<div class="section" id="convert-a-caffe-model">
+<section id="convert-a-caffe-model">
 <h2>Convert a Caffe* Model<a class="headerlink" href="#convert-a-caffe-model" title="Permalink to this headline">¶</a></h2>
 <p>To convert a Caffe* model, run Model Optimizer with the path to the input model <code class="docutils literal notranslate"><span class="pre">.caffemodel</span></code> file:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">mo</span> <span class="o">--</span><span class="n">input_model</span> <span class="o">&lt;</span><span class="n">INPUT_MODEL</span><span class="o">&gt;</span><span class="p">.</span><span class="n">caffemodel</span></pre></div></div><p>The following list provides the Caffe*-specific parameters.</p>
@@ -1891,7 +1898,7 @@
                         <span class="n">custom</span> <span class="n">layers</span><span class="p">.</span> <span class="n">Use</span> <span class="k">this</span> <span class="n">option</span> <span class="k">if</span> <span class="n">you</span> <span class="n">want</span> <span class="n">to</span> <span class="n">transfer</span>
                         <span class="n">attributes</span> <span class="n">of</span> <span class="n">a</span> <span class="n">custom</span> <span class="n">layer</span> <span class="n">to</span> <span class="n">IR</span> <span class="n">with</span> <span class="n">flattened</span>
                         <span class="n">nested</span> <span class="n">parameters</span><span class="p">.</span> <span class="n">Default</span> <span class="n">behavior</span> <span class="n">is</span> <span class="n">to</span> <span class="n">transfer</span> <span class="n">the</span>
-                        <span class="n">attributes</span> <span class="n">without</span> <span class="n">flattening</span> <span class="n">nested</span> <span class="n">parameters</span><span class="p">.</span></pre></div></div><div class="section" id="command-line-interface-cli-examples-using-caffe-specific-parameters">
+                        <span class="n">attributes</span> <span class="n">without</span> <span class="n">flattening</span> <span class="n">nested</span> <span class="n">parameters</span><span class="p">.</span></pre></div></div><section id="command-line-interface-cli-examples-using-caffe-specific-parameters">
 <h3>Command-Line Interface (CLI) Examples Using Caffe*-Specific Parameters<a class="headerlink" href="#command-line-interface-cli-examples-using-caffe-specific-parameters" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p>Launching the Model Optimizer for the <a class="reference external" href="https://github.com/BVLC/caffe/tree/master/models/bvlc_alexnet">bvlc_alexnet.caffemodel</a> with a specified <code class="docutils literal notranslate"><span class="pre">prototxt</span></code> file. This is needed when the name of the Caffe* model and the <code class="docutils literal notranslate"><span class="pre">.prototxt</span></code> file are different or are placed in different directories. Otherwise, it is enough to provide only the path to the input <code class="docutils literal notranslate"><span class="pre">model.caffemodel</span></code> file.</p>
@@ -1917,21 +1924,21 @@
 <li><p>Launching the Model Optimizer for a multi-input model with two inputs and providing a new shape for each input in the order they are passed to the Model Optimizer. In particular, for data, set the shape to <code class="docutils literal notranslate"><span class="pre">1,3,227,227</span></code>. For rois, set the shape to <code class="docutils literal notranslate"><span class="pre">1,6,1,1</span></code> :</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">mo</span> <span class="o">--</span><span class="n">input_model</span> <span class="o">/</span><span class="n">path</span><span class="o">-</span><span class="n">to</span><span class="o">/</span><span class="n">your</span><span class="o">-</span><span class="n">model</span><span class="p">.</span><span class="n">caffemodel</span> <span class="o">--</span><span class="n">input</span> <span class="n">data</span><span class="p">,</span><span class="n">rois</span> <span class="o">--</span><span class="n">input_shape</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">227</span><span class="p">,</span><span class="mi">227</span><span class="p">),[</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span></pre></div></div></li>
 </ul>
-</div>
-</div>
-<div class="section" id="custom-layer-definition">
+</section>
+</section>
+<section id="custom-layer-definition">
 <h2>Custom Layer Definition<a class="headerlink" href="#custom-layer-definition" title="Permalink to this headline">¶</a></h2>
 <p>Internally, when you run the Model Optimizer, it loads the model, goes through the topology, and tries to find each layer type in a list of known layers. Custom layers are layers that are not included in the list of known layers. If your topology contains any layers that are not in this list of known layers, the Model Optimizer classifies them as custom.</p>
-</div>
-<div class="section" id="supported-caffe-layers">
+</section>
+<section id="supported-caffe-layers">
 <h2>Supported Caffe* Layers<a class="headerlink" href="#supported-caffe-layers" title="Permalink to this headline">¶</a></h2>
 <p>Refer to <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_Supported_Frameworks_Layers.html#doxid-openvino-docs-m-o-d-g-prepare-model-supported-frameworks-layers"><span class="std std-ref">Supported Framework Layers</span></a> for the list of supported standard layers.</p>
-</div>
-<div class="section" id="frequently-asked-questions-faq">
+</section>
+<section id="frequently-asked-questions-faq">
 <h2>Frequently Asked Questions (FAQ)<a class="headerlink" href="#frequently-asked-questions-faq" title="Permalink to this headline">¶</a></h2>
 <p>The Model Optimizer provides explanatory messages if it is unable to run to completion due to issues like typographical errors, incorrectly used options, or other issues. The message describes the potential cause of the problem and gives a link to the <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_Model_Optimizer_FAQ.html#doxid-openvino-docs-m-o-d-g-prepare-model-model-optimizer-f-a-q"><span class="std std-ref">Model Optimizer FAQ</span></a>. The FAQ has instructions on how to resolve most issues. The FAQ also includes links to relevant sections in the Model Optimizer Developer Guide to help you understand what went wrong.</p>
-</div>
-<div class="section" id="summary">
+</section>
+<section id="summary">
 <h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
 <p>In this document, you learned:</p>
 <ul class="simple">
@@ -1939,12 +1946,12 @@
 <li><p>Which Caffe* models are supported</p></li>
 <li><p>How to convert a trained Caffe* model using the Model Optimizer with both framework-agnostic and Caffe-specific command-line options</p></li>
 </ul>
-</div>
-<div class="section" id="see-also">
+</section>
+<section id="see-also">
 <h2>See Also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_tutorials.html#doxid-openvino-docs-m-o-d-g-prepare-model-convert-model-tutorials"><span class="std std-ref">Model Conversion Tutorials</span></a></p>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -1975,7 +1982,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

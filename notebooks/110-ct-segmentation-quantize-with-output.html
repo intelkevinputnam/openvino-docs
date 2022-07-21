@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Quantize a Segmentation Model and Show Live Inference &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -581,9 +588,9 @@
             
                 <div>
                   
-  <div class="section" id="quantize-a-segmentation-model-and-show-live-inference">
+  <section id="quantize-a-segmentation-model-and-show-live-inference">
 <h1>Quantize a Segmentation Model and Show Live Inference<a class="headerlink" href="#quantize-a-segmentation-model-and-show-live-inference" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="kidney-segmentation-with-pytorch-lightning-and-openvino-part-3">
+<section id="kidney-segmentation-with-pytorch-lightning-and-openvino-part-3">
 <h2>Kidney Segmentation with PyTorch Lightning and OpenVINO™ - Part 3<a class="headerlink" href="#kidney-segmentation-with-pytorch-lightning-and-openvino-part-3" title="Permalink to this headline">¶</a></h2>
 <p>This tutorial is part of a series on how to train, optimize, quantize
 and show live inference on a medical segmentation model. The goal is to
@@ -614,8 +621,8 @@ Lightning</a></p></li>
 <li><p><a class="reference external" href="210-ct-scan-live-inference-with-output.html">Live Inference and Benchmark CT-scan
 data</a></p></li>
 </ul>
-</div>
-<div class="section" id="instructions">
+</section>
+<section id="instructions">
 <h2>Instructions<a class="headerlink" href="#instructions" title="Permalink to this headline">¶</a></h2>
 <p>This notebook needs a trained UNet model that is converted to
 <a class="reference external" href="https://github.com/onnx/onnx">ONNX</a> format. We provide a pretrained
@@ -627,8 +634,8 @@ available in <a class="reference external" href="pytorch-monai-training.ipynb">t
 demonstration purposes, this tutorial will download one converted CT
 scan and use that scan for quantization and inference. For production
 use, please use a larger dataset for more generalizable results.</p>
-</div>
-<div class="section" id="imports">
+</section>
+<section id="imports">
 <h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h2>
 <p>The Post Training Optimization API is implemented in the <code class="docutils literal notranslate"><span class="pre">compression</span></code>
 library.</p>
@@ -660,8 +667,8 @@ library.</p>
 <span class="kn">from</span> <span class="nn">notebook_utils</span> <span class="kn">import</span> <span class="n">benchmark_model</span><span class="p">,</span> <span class="n">download_file</span><span class="p">,</span> <span class="n">show_live_inference</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="settings">
+</section>
+<section id="settings">
 <h2>Settings<a class="headerlink" href="#settings" title="Permalink to this headline">¶</a></h2>
 <p>To use the pretrained models, set <code class="docutils literal notranslate"><span class="pre">ONNX_PATH</span></code> to
 <code class="docutils literal notranslate"><span class="pre">&quot;pretrained_model/unet_kits19.onnx&quot;</span></code>. To use a model that you trained
@@ -694,8 +701,8 @@ dataset, and use that for quantization. To use the full dataset, set
 <span class="n">Optimized</span> <span class="n">model</span> <span class="n">will</span> <span class="n">be</span> <span class="n">saved</span> <span class="n">to</span><span class="p">:</span> <span class="n">model</span><span class="o">/</span><span class="n">pretrained_unet_kits19</span><span class="o">.</span><span class="n">xml</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="download-ct-scan-data">
+</section>
+<section id="download-ct-scan-data">
 <h2>Download CT-scan Data<a class="headerlink" href="#download-ct-scan-data" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The CT scan case number. For example: 2 for data from the case_00002 directory</span>
 <span class="c1"># Currently only 117 is supported</span>
@@ -716,8 +723,8 @@ dataset, and use that for quantization. To use the full dataset, set
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Data</span> <span class="k">for</span> <span class="n">case_00117</span> <span class="n">exists</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="convert-model-to-openvino-ir">
+</section>
+<section id="convert-model-to-openvino-ir">
 <h2>Convert Model to OpenVINO IR<a class="headerlink" href="#convert-model-to-openvino-ir" title="Permalink to this headline">¶</a></h2>
 <p>Call the Model Optimizer tool to convert the ONNX model to OpenVINO IR,
 with FP16 precision. The model files are saved to the MODEL_DIR
@@ -755,28 +762,28 @@ include <code class="docutils literal notranslate"><span class="pre">[</span> <s
 <span class="n">Advanced</span> <span class="n">parameters</span><span class="p">:</span>
     <span class="o">-</span> <span class="n">Force</span> <span class="n">the</span> <span class="n">usage</span> <span class="n">of</span> <span class="n">legacy</span> <span class="n">Frontend</span> <span class="n">of</span> <span class="n">Model</span> <span class="n">Optimizer</span> <span class="k">for</span> <span class="n">model</span> <span class="n">conversion</span> <span class="n">into</span> <span class="n">IR</span><span class="p">:</span>   <span class="kc">False</span>
     <span class="o">-</span> <span class="n">Force</span> <span class="n">the</span> <span class="n">usage</span> <span class="n">of</span> <span class="n">new</span> <span class="n">Frontend</span> <span class="n">of</span> <span class="n">Model</span> <span class="n">Optimizer</span> <span class="k">for</span> <span class="n">model</span> <span class="n">conversion</span> <span class="n">into</span> <span class="n">IR</span><span class="p">:</span>  <span class="kc">False</span>
-<span class="n">OpenVINO</span> <span class="n">runtime</span> <span class="n">found</span> <span class="ow">in</span><span class="p">:</span>  <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8</span><span class="o">.</span><span class="mi">12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">openvino</span>
-<span class="n">OpenVINO</span> <span class="n">runtime</span> <span class="n">version</span><span class="p">:</span>   <span class="mf">2022.1</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="mi">7019</span><span class="o">-</span><span class="n">cdb9bec7210</span><span class="o">-</span><span class="n">releases</span><span class="o">/</span><span class="mi">2022</span><span class="o">/</span><span class="mi">1</span>
-<span class="n">Model</span> <span class="n">Optimizer</span> <span class="n">version</span><span class="p">:</span>    <span class="mf">2022.1</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="mi">7019</span><span class="o">-</span><span class="n">cdb9bec7210</span><span class="o">-</span><span class="n">releases</span><span class="o">/</span><span class="mi">2022</span><span class="o">/</span><span class="mi">1</span>
+<span class="n">OpenVINO</span> <span class="n">runtime</span> <span class="n">found</span> <span class="ow">in</span><span class="p">:</span>  <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">openvino</span>
+<span class="n">OpenVINO</span> <span class="n">runtime</span> <span class="n">version</span><span class="p">:</span>   <span class="mf">2022.1.0</span><span class="o">-</span><span class="mi">7019</span><span class="o">-</span><span class="n">cdb9bec7210</span><span class="o">-</span><span class="n">releases</span><span class="o">/</span><span class="mi">2022</span><span class="o">/</span><span class="mi">1</span>
+<span class="n">Model</span> <span class="n">Optimizer</span> <span class="n">version</span><span class="p">:</span>    <span class="mf">2022.1.0</span><span class="o">-</span><span class="mi">7019</span><span class="o">-</span><span class="n">cdb9bec7210</span><span class="o">-</span><span class="n">releases</span><span class="o">/</span><span class="mi">2022</span><span class="o">/</span><span class="mi">1</span>
 <span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">Generated</span> <span class="n">IR</span> <span class="n">version</span> <span class="mi">11</span> <span class="n">model</span><span class="o">.</span>
 <span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">XML</span> <span class="n">file</span><span class="p">:</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">work</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">notebooks</span><span class="o">/</span><span class="mi">110</span><span class="o">-</span><span class="n">ct</span><span class="o">-</span><span class="n">segmentation</span><span class="o">-</span><span class="n">quantize</span><span class="o">/</span><span class="n">model</span><span class="o">/</span><span class="n">pretrained_unet_kits19</span><span class="o">.</span><span class="n">xml</span>
 <span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">BIN</span> <span class="n">file</span><span class="p">:</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">work</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">notebooks</span><span class="o">/</span><span class="mi">110</span><span class="o">-</span><span class="n">ct</span><span class="o">-</span><span class="n">segmentation</span><span class="o">-</span><span class="n">quantize</span><span class="o">/</span><span class="n">model</span><span class="o">/</span><span class="n">pretrained_unet_kits19</span><span class="o">.</span><span class="n">bin</span>
 <span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">Total</span> <span class="n">execution</span> <span class="n">time</span><span class="p">:</span> <span class="mf">0.69</span> <span class="n">seconds</span><span class="o">.</span>
 <span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">Memory</span> <span class="n">consumed</span><span class="p">:</span> <span class="mi">83</span> <span class="n">MB</span><span class="o">.</span>
 <span class="n">It</span><span class="s1">&#39;s been a while, check for a new version of Intel(R) Distribution of OpenVINO(TM) toolkit here https://software.intel.com/content/www/us/en/develop/tools/openvino-toolkit/download.html?cid=other&amp;source=prod&amp;campid=ww_2022_bu_IOTG_OpenVINO-2022-1&amp;content=upg_all&amp;medium=organic or on the GitHub*</span>
-<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">The</span> <span class="n">model</span> <span class="n">was</span> <span class="n">converted</span> <span class="n">to</span> <span class="n">IR</span> <span class="n">v11</span><span class="p">,</span> <span class="n">the</span> <span class="n">latest</span> <span class="n">model</span> <span class="nb">format</span> <span class="n">that</span> <span class="n">corresponds</span> <span class="n">to</span> <span class="n">the</span> <span class="n">source</span> <span class="n">DL</span> <span class="n">framework</span> <span class="nb">input</span><span class="o">/</span><span class="n">output</span> <span class="nb">format</span><span class="o">.</span> <span class="n">While</span> <span class="n">IR</span> <span class="n">v11</span> <span class="ow">is</span> <span class="n">backwards</span> <span class="n">compatible</span> <span class="k">with</span> <span class="n">OpenVINO</span> <span class="n">Inference</span> <span class="n">Engine</span> <span class="n">API</span> <span class="n">v1</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span> <span class="n">please</span> <span class="n">use</span> <span class="n">API</span> <span class="n">v2</span><span class="o">.</span><span class="mi">0</span> <span class="p">(</span><span class="k">as</span> <span class="n">of</span> <span class="mf">2022.1</span><span class="p">)</span> <span class="n">to</span> <span class="n">take</span> <span class="n">advantage</span> <span class="n">of</span> <span class="n">the</span> <span class="n">latest</span> <span class="n">improvements</span> <span class="ow">in</span> <span class="n">IR</span> <span class="n">v11</span><span class="o">.</span>
-<span class="n">Find</span> <span class="n">more</span> <span class="n">information</span> <span class="n">about</span> <span class="n">API</span> <span class="n">v2</span><span class="o">.</span><span class="mi">0</span> <span class="ow">and</span> <span class="n">IR</span> <span class="n">v11</span> <span class="n">at</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">docs</span><span class="o">.</span><span class="n">openvino</span><span class="o">.</span><span class="n">ai</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">The</span> <span class="n">model</span> <span class="n">was</span> <span class="n">converted</span> <span class="n">to</span> <span class="n">IR</span> <span class="n">v11</span><span class="p">,</span> <span class="n">the</span> <span class="n">latest</span> <span class="n">model</span> <span class="nb">format</span> <span class="n">that</span> <span class="n">corresponds</span> <span class="n">to</span> <span class="n">the</span> <span class="n">source</span> <span class="n">DL</span> <span class="n">framework</span> <span class="nb">input</span><span class="o">/</span><span class="n">output</span> <span class="nb">format</span><span class="o">.</span> <span class="n">While</span> <span class="n">IR</span> <span class="n">v11</span> <span class="ow">is</span> <span class="n">backwards</span> <span class="n">compatible</span> <span class="k">with</span> <span class="n">OpenVINO</span> <span class="n">Inference</span> <span class="n">Engine</span> <span class="n">API</span> <span class="n">v1</span><span class="mf">.0</span><span class="p">,</span> <span class="n">please</span> <span class="n">use</span> <span class="n">API</span> <span class="n">v2</span><span class="mf">.0</span> <span class="p">(</span><span class="k">as</span> <span class="n">of</span> <span class="mf">2022.1</span><span class="p">)</span> <span class="n">to</span> <span class="n">take</span> <span class="n">advantage</span> <span class="n">of</span> <span class="n">the</span> <span class="n">latest</span> <span class="n">improvements</span> <span class="ow">in</span> <span class="n">IR</span> <span class="n">v11</span><span class="o">.</span>
+<span class="n">Find</span> <span class="n">more</span> <span class="n">information</span> <span class="n">about</span> <span class="n">API</span> <span class="n">v2</span><span class="mf">.0</span> <span class="ow">and</span> <span class="n">IR</span> <span class="n">v11</span> <span class="n">at</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">docs</span><span class="o">.</span><span class="n">openvino</span><span class="o">.</span><span class="n">ai</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="post-training-optimization-tool-pot-quantization">
+</section>
+<section id="post-training-optimization-tool-pot-quantization">
 <h2>Post-Training Optimization Tool (POT) Quantization<a class="headerlink" href="#post-training-optimization-tool-pot-quantization" title="Permalink to this headline">¶</a></h2>
 <p>The Post-Training Optimization Tool (POT) <code class="docutils literal notranslate"><span class="pre">compression</span></code> API defines
 base classes for <code class="docutils literal notranslate"><span class="pre">Metric</span></code> and <code class="docutils literal notranslate"><span class="pre">DataLoader</span></code>. In this notebook, we use
 a custom Metric and DataLoader that show all the required methods.</p>
-<div class="section" id="configuration">
+<section id="configuration">
 <h3>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="metric">
+<section id="metric">
 <h4>Metric<a class="headerlink" href="#metric" title="Permalink to this headline">¶</a></h4>
 <p>Define a metric to determine the performance of the model. For the
 Default Quantization algorithm that is used in this tutorial, defining a
@@ -867,8 +874,8 @@ the <a class="reference external" href="pytorch-monai-training.ipynb">training n
         <span class="k">return</span> <span class="p">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;direction&quot;</span><span class="p">:</span> <span class="s2">&quot;higher-better&quot;</span><span class="p">,</span> <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;F1&quot;</span><span class="p">}}</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="dataset">
+</section>
+<section id="dataset">
 <h4>Dataset<a class="headerlink" href="#dataset" title="Permalink to this headline">¶</a></h4>
 <p>The KitsDataLoader in the next cell expects images and masks in the
 <em>basedir</em> directory, in a folder per patient. For more information about
@@ -979,8 +986,8 @@ annotations look correct.</p>
 </pre></div>
 </div>
 <img alt="../_images/110-ct-segmentation-quantize-with-output_15_1.png" src="../_images/110-ct-segmentation-quantize-with-output_15_1.png" />
-</div>
-<div class="section" id="quantization-config">
+</section>
+<section id="quantization-config">
 <h4>Quantization Config<a class="headerlink" href="#quantization-config" title="Permalink to this headline">¶</a></h4>
 <p>POT methods expect configuration dictionaries as arguments, which are
 defined in the cell below. The variable <code class="docutils literal notranslate"><span class="pre">ir_path</span></code> is defined in the
@@ -1018,9 +1025,9 @@ for more information on the settings.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">model_config</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;model_name&#39;</span><span class="p">:</span> <span class="s1">&#39;quantized_pretrained_unet_kits19&#39;</span><span class="p">,</span> <span class="s1">&#39;model&#39;</span><span class="p">:</span> <span class="n">PosixPath</span><span class="p">(</span><span class="s1">&#39;model/pretrained_unet_kits19.xml&#39;</span><span class="p">),</span> <span class="s1">&#39;weights&#39;</span><span class="p">:</span> <span class="n">PosixPath</span><span class="p">(</span><span class="s1">&#39;model/pretrained_unet_kits19.bin&#39;</span><span class="p">)}</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="run-quantization-pipeline">
+</section>
+</section>
+<section id="run-quantization-pipeline">
 <h3>Run Quantization Pipeline<a class="headerlink" href="#run-quantization-pipeline" title="Permalink to this headline">¶</a></h3>
 <p>The POT pipeline needs a loaded model, an<code class="docutils literal notranslate"><span class="pre">IEEngine</span></code> instance, a POT
 implementation of Inference Engine, and finally a POT <code class="docutils literal notranslate"><span class="pre">Pipeline</span></code>
@@ -1081,9 +1088,9 @@ disk.</p>
 The quantized model is stored at optimized_model/quantized_pretrained_unet_kits19_performance_DefaultQuantization.xml
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="compare-metrics-of-fp16-and-int8-model">
+</section>
+</section>
+<section id="compare-metrics-of-fp16-and-int8-model">
 <h2>Compare Metrics of FP16 and INT8 Model<a class="headerlink" href="#compare-metrics-of-fp16-and-int8-model" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute the F1 score on the original and quantized model</span>
 <span class="n">ir_model</span> <span class="o">=</span> <span class="n">load_model</span><span class="p">(</span><span class="n">model_config</span><span class="o">=</span><span class="n">model_config</span><span class="p">)</span>
@@ -1108,8 +1115,8 @@ The quantized model is stored at optimized_model/quantized_pretrained_unet_kits1
 The F1 score of the quantized INT8 model is 0.976
 </pre></div>
 </div>
-</div>
-<div class="section" id="compare-performance-of-the-original-and-quantized-models">
+</section>
+<section id="compare-performance-of-the-original-and-quantized-models">
 <h2>Compare Performance of the Original and Quantized Models<a class="headerlink" href="#compare-performance-of-the-original-and-quantized-models" title="Permalink to this headline">¶</a></h2>
 <p>To measure the inference performance of the FP16 and INT8 models, we use
 <a class="reference external" href="https://docs.openvino.ai/latest/openvino_inference_engine_tools_benchmark_tool_README.html">Benchmark
@@ -1172,8 +1179,8 @@ with CPU for 15 seconds with async inference</strong></p>
 <span class="n">Device</span><span class="p">:</span> <span class="n">Intel</span><span class="p">(</span><span class="n">R</span><span class="p">)</span> <span class="n">Xeon</span><span class="p">(</span><span class="n">R</span><span class="p">)</span> <span class="n">Platinum</span> <span class="mi">8272</span><span class="n">CL</span> <span class="n">CPU</span> <span class="o">@</span> <span class="mf">2.60</span><span class="n">GHz</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="visually-compare-inference-results">
+</section>
+<section id="visually-compare-inference-results">
 <h2>Visually Compare Inference Results<a class="headerlink" href="#visually-compare-inference-results" title="Permalink to this headline">¶</a></h2>
 <p>Visualize the results of the model on four slices of the validation set.
 Compare the results of the FP16 IR model with the results of the
@@ -1245,8 +1252,8 @@ the Kits19 dataset all but one of the cases has input shape
 </pre></div>
 </div>
 <img alt="../_images/110-ct-segmentation-quantize-with-output_29_1.png" src="../_images/110-ct-segmentation-quantize-with-output_29_1.png" />
-</div>
-<div class="section" id="show-live-inference">
+</section>
+<section id="show-live-inference">
 <h2>Show Live Inference<a class="headerlink" href="#show-live-inference" title="Permalink to this headline">¶</a></h2>
 <p>To show live inference on the model in the notebook, we use the
 asynchronous processing feature of OpenVINO Inference Engine.</p>
@@ -1265,7 +1272,7 @@ AsyncPipeline and Model API to perform asynchronous inference. After
 inference on the specified CT scan has completed, the total time and
 throughput (fps), including preprocessing and displaying, will be
 printed.</p>
-<div class="section" id="load-model-and-list-of-image-files">
+<section id="load-model-and-list-of-image-files">
 <h3>Load Model and List of Image Files<a class="headerlink" href="#load-model-and-list-of-image-files" title="Permalink to this headline">¶</a></h3>
 <p>We load the segmentation model to Inference Engine with
 <code class="docutils literal notranslate"><span class="pre">SegmentationModel</span></code>, based on the <a class="reference external" href="https://github.com/openvinotoolkit/open_model_zoo/">Open Model
@@ -1291,8 +1298,8 @@ the next cell to see the implementation.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">case_00117</span><span class="p">,</span> <span class="mi">69</span> <span class="n">images</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="show-inference">
+</section>
+<section id="show-inference">
 <h3>Show Inference<a class="headerlink" href="#show-inference" title="Permalink to this headline">¶</a></h3>
 <p>In the next cell, we run the <code class="docutils literal notranslate"><span class="pre">show_live_inference</span></code> function, which
 loads the <code class="docutils literal notranslate"><span class="pre">segmentation_model</span></code> to the specified <code class="docutils literal notranslate"><span class="pre">device</span></code> (using
@@ -1312,9 +1319,9 @@ performs inference, and displays the results on the frames loaded in
 <span class="n">Total</span> <span class="n">time</span> <span class="k">for</span> <span class="mi">68</span> <span class="n">frames</span><span class="p">:</span> <span class="mf">9.59</span> <span class="n">seconds</span><span class="p">,</span> <span class="n">fps</span><span class="p">:</span><span class="mf">7.20</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="references">
+</section>
+</section>
+<section id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
 <p><strong>OpenVINO</strong></p>
 <ul class="simple">
@@ -1336,8 +1343,8 @@ Outcomes</a> - <a class="reference external" href="https://www.sciencedirect.com
 in kidney and kidney tumor segmentation in contrast-enhanced CT imaging:
 Results of the KiTS19
 challenge</a></p>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -1368,7 +1375,7 @@ challenge</a></p>
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

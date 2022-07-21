@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>OpenVINO™ Security Add-on &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -1995,7 +2002,7 @@
             
                 <div>
                   
-  <div class="section" id="openvino-security-add-on">
+  <section id="openvino-security-add-on">
 <span id="doxid-ovsa-get-started"></span><span id="index-0"></span><h1>OpenVINO™ Security Add-on<a class="headerlink" href="#openvino-security-add-on" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-ovsa-get-started-1md-openvino-docs-ovsa-ovsa-get-started"></span> This guide provides instructions for people who use the OpenVINO™ Security Add-on to create, distribute, and use models that are created with the OpenVINO™ toolkit:</p>
 <ul class="simple">
@@ -2004,7 +2011,7 @@
 <li><p><strong>User</strong> : This document includes instructions for end users who need to access and run access controlled models through the OpenVINO™ Security Add-on.</p></li>
 </ul>
 <p>In this release, one person performs the role of both the Model Developer and the Independent Software Vendor. Therefore, this document provides instructions to configure one system for these two roles and one system for the User role. This document also provides a way for the same person to play the role of the Model Developer, Independent Software Vendor, and User to let you see how the OpenVINO™ Security Add-on functions from the User perspective.</p>
-<div class="section" id="overview">
+<section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
 <p>The OpenVINO™ Security Add-on works with the OpenVINO™ Model Server on Intel® architecture. Together, the OpenVINO™ Security Add-on and the OpenVINO™ Model Server provide a way for Model Developers and Independent Software Vendors to use secure packaging and secure model execution to enable access control to the OpenVINO™ models, and for model Users to run inference within assigned limits.</p>
 <p>The OpenVINO™ Security Add-on consists of three components that run in Kernel-based Virtual Machines (KVMs). These components provide a way to run security-sensitive operations in an isolated environment. A brief description of the three components are as follows. Click each triangled line for more information about each.</p>
@@ -2023,8 +2030,8 @@
 </div><p><strong>Where the OpenVINO™ Security Add-on Fits into Model Development and Deployment</strong></p>
 <img alt="Security Add-on Diagram" src="../_images/ovsa_diagram.png" />
 <p>The binding between SWTPM (vTPM used in guest VM) and HW TPM (TPM on the host) is explained in <a class="reference external" href="https://github.com/openvinotoolkit/security_addon/blob/release_2021_4/docs/fingerprint-changes.md">this document</a></p>
-</div>
-<div class="section" id="about-the-installation">
+</section>
+<section id="about-the-installation">
 <h2>About the Installation<a class="headerlink" href="#about-the-installation" title="Permalink to this headline">¶</a></h2>
 <p>The Model Developer, Independent Software Vendor, and User each must prepare one physical hardware machine and one Kernel-based Virtual Machine (KVM). In addition, each person must prepare a Guest Virtual Machine (Guest VM) for each role that person plays.</p>
 <p>For example:</p>
@@ -2055,8 +2062,8 @@
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="prerequisites">
+</section>
+<section id="prerequisites">
 <span id="id1"></span><h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
 <p><strong>Hardware</strong></p>
 <ul class="simple">
@@ -2073,11 +2080,11 @@
 <li><p>The Independent Software Vendor must have access to a Certificate Authority (CA) that implements the Online Certificate Status Protocol (OCSP), supporting Elliptic Curve Cryptography (ECC) certificates for deployment.</p></li>
 <li><p>The example in this document uses self-signed certificates.</p></li>
 </ul>
-</div>
-<div class="section" id="how-to-prepare-a-host-machine">
+</section>
+<section id="how-to-prepare-a-host-machine">
 <span id="setup-host"></span><h2>How to Prepare a Host Machine<a class="headerlink" href="#how-to-prepare-a-host-machine" title="Permalink to this headline">¶</a></h2>
 <p>This section is for the combined role of Model Developer and Independent Software Vendor, and the separate User role.</p>
-<div class="section" id="step-1-set-up-packages-on-the-host-machine">
+<section id="step-1-set-up-packages-on-the-host-machine">
 <span id="setup-packages"></span><h3>Step 1: Set up Packages on the Host Machine<a class="headerlink" href="#step-1-set-up-packages-on-the-host-machine" title="Permalink to this headline">¶</a></h3>
 <p>Begin this step on the Intel® Core™ or Xeon® processor machine that meets the <a class="reference external" href="#prerequisites">prerequisites</a>.</p>
 <div class="admonition note">
@@ -2132,8 +2139,8 @@
 <li><p>Docker</p></li>
 </ul>
 <p>You’re ready to configure the Host Machine for networking.</p>
-</div>
-<div class="section" id="step-2-set-up-networking-on-the-host-machine">
+</section>
+<section id="step-2-set-up-networking-on-the-host-machine">
 <span id="setup-networking"></span><h3>Step 2: Set up Networking on the Host Machine<a class="headerlink" href="#step-2-set-up-networking-on-the-host-machine" title="Permalink to this headline">¶</a></h3>
 <p>This step is for the combined Model Developer and Independent Software Vendor roles. If Model User VM is running on different physical host, repeat the following steps for that host also.</p>
 <p>In this step you prepare two network bridges:</p>
@@ -2216,12 +2223,12 @@
 </ol>
 <p>See the QEMU documentation for more information about the QEMU network configuration.</p>
 <p>Networking is set up on the Host Machine. Continue to the Step 3 to prepare a Guest VM for the combined role of Model Developer and Independent Software Vendor.</p>
-</div>
-<div class="section" id="step-3-clone-the-openvino-security-add-on">
+</section>
+<section id="step-3-clone-the-openvino-security-add-on">
 <h3>Step 3: Clone the OpenVINO™ Security Add-on<a class="headerlink" href="#step-3-clone-the-openvino-security-add-on" title="Permalink to this headline">¶</a></h3>
 <p>Download the <a class="reference external" href="https://github.com/openvinotoolkit/security_addon">OpenVINO™ Security Add-on</a>.</p>
-</div>
-<div class="section" id="step-4-set-up-one-guest-vm-for-the-combined-roles-of-model-developer-and-independent-software-vendor">
+</section>
+<section id="step-4-set-up-one-guest-vm-for-the-combined-roles-of-model-developer-and-independent-software-vendor">
 <span id="dev-isv-vm"></span><h3>Step 4: Set Up one Guest VM for the combined roles of Model Developer and Independent Software Vendor<a class="headerlink" href="#step-4-set-up-one-guest-vm-for-the-combined-roles-of-model-developer-and-independent-software-vendor" title="Permalink to this headline">¶</a></h3>
 <p>For each separate role you play, you must prepare a virtual machine, called a Guest VM. Because in this release, the Model Developer and Independent Software Vendor roles are combined, these instructions guide you to set up one Guest VM, named <code class="docutils literal notranslate"><span class="pre">ovsa_isv</span></code>.</p>
 <p>Begin these steps on the Host Machine.</p>
@@ -2309,8 +2316,8 @@
 </li>
 <li><p>Use a VNC client to log on to the Guest VM at <code class="docutils literal notranslate"><span class="pre">&lt;host-ip-address&gt;:1</span></code></p></li>
 </ol>
-</div>
-<div class="section" id="step-5-set-up-one-guest-vm-for-the-user-role">
+</section>
+<section id="step-5-set-up-one-guest-vm-for-the-user-role">
 <h3>Step 5: Set Up one Guest VM for the User role<a class="headerlink" href="#step-5-set-up-one-guest-vm-for-the-user-role" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic">
 <li><p>Choose <strong>ONE</strong> of these options to create a Guest VM for the User role:</p>
@@ -2412,12 +2419,12 @@
 </li>
 <li><p>Use a VNC client to log on to the Guest VM at <code class="docutils literal notranslate"><span class="pre">&lt;host-ip-address&gt;:&lt;x&gt;</span></code> where <code class="docutils literal notranslate"><span class="pre">&lt;x&gt;</span></code> corresponds to the vnc number in the <code class="docutils literal notranslate"><span class="pre">start_ovsa_isv_vm.sh</span></code> or in step 8.</p></li>
 </ol>
-</div>
-</div>
-<div class="section" id="how-to-build-and-install-the-openvino-security-add-on-software">
+</section>
+</section>
+<section id="how-to-build-and-install-the-openvino-security-add-on-software">
 <span id="install-ovsa"></span><h2>How to Build and Install the OpenVINO™ Security Add-on Software<a class="headerlink" href="#how-to-build-and-install-the-openvino-security-add-on-software" title="Permalink to this headline">¶</a></h2>
 <p>Follow the below steps to build and Install OpenVINO™ Security Add-on on host and different VMs.</p>
-<div class="section" id="step-1-build-the-openvino-model-server-image">
+<section id="step-1-build-the-openvino-model-server-image">
 <h3>Step 1: Build the OpenVINO™ Model Server image<a class="headerlink" href="#step-1-build-the-openvino-model-server-image" title="Permalink to this headline">¶</a></h3>
 <p>Building OpenVINO™ Security Add-on depends on OpenVINO™ Model Server docker containers. Download and build OpenVINO™ Model Server first on the host.</p>
 <ol class="arabic">
@@ -2427,8 +2434,8 @@
 <span class="n">cd</span> <span class="n">model_server</span>
 <span class="n">make</span> <span class="n">docker_build</span></pre></div></div></li>
 </ol>
-</div>
-<div class="section" id="step-2-build-the-software-required-for-all-roles">
+</section>
+<section id="step-2-build-the-software-required-for-all-roles">
 <h3>Step 2: Build the software required for all roles<a class="headerlink" href="#step-2-build-the-software-required-for-all-roles" title="Permalink to this headline">¶</a></h3>
 <p>This step is for the combined role of Model Developer and Independent Software Vendor, and the User</p>
 <ol class="arabic">
@@ -2444,8 +2451,8 @@
 </ul>
 </li>
 </ol>
-</div>
-<div class="section" id="step-3-install-the-host-software">
+</section>
+<section id="step-3-install-the-host-software">
 <h3>Step 3: Install the host software<a class="headerlink" href="#step-3-install-the-host-software" title="Permalink to this headline">¶</a></h3>
 <p>This step is for the combined role of Model Developer and Independent Software Vendor, and the User.</p>
 <ol class="arabic">
@@ -2460,8 +2467,8 @@
 <span class="p">.</span><span class="o">/</span><span class="n">install</span><span class="p">.</span><span class="n">sh</span></pre></div></div></li>
 </ol>
 <p>If you are using more than one Host Machine repeat Step 3 on each.</p>
-</div>
-<div class="section" id="step-4-install-the-openvino-security-add-on-model-developer-isv-components">
+</section>
+<section id="step-4-install-the-openvino-security-add-on-model-developer-isv-components">
 <h3>Step 4: Install the OpenVINO™ Security Add-on Model Developer / ISV Components<a class="headerlink" href="#step-4-install-the-openvino-security-add-on-model-developer-isv-components" title="Permalink to this headline">¶</a></h3>
 <p>This step is for the combined role of Model Developer and Independent Software Vendor. References to the Guest VM are to <code class="docutils literal notranslate"><span class="pre">ovsa_isv_dev</span></code>.</p>
 <ol class="arabic">
@@ -2486,8 +2493,8 @@
 <span class="p">.</span><span class="o">/</span><span class="n">license_server</span></pre></div></div><p><strong>NOTE</strong> : If you are behind a firewall, check and set your proxy settings to ensure the license server is able to validate the certificates.</p>
 </li>
 </ol>
-</div>
-<div class="section" id="step-5-install-the-openvino-security-add-on-model-hosting-component">
+</section>
+<section id="step-5-install-the-openvino-security-add-on-model-hosting-component">
 <h3>Step 5: Install the OpenVINO™ Security Add-on Model Hosting Component<a class="headerlink" href="#step-5-install-the-openvino-security-add-on-model-hosting-component" title="Permalink to this headline">¶</a></h3>
 <p>This step is for the User. References to the Guest VM are to <code class="docutils literal notranslate"><span class="pre">ovsa_runtime</span></code>.</p>
 <p>The Model Hosting components install the OpenVINO™ Security Add-on Runtime Docker container based on OpenVINO™ Model Server NGINX Docker to host a access controlled model.</p>
@@ -2508,27 +2515,27 @@
 <span class="n">cd</span> <span class="n">ovsa</span><span class="o">-</span><span class="n">model</span><span class="o">-</span><span class="n">hosting</span>
 <span class="n">sudo</span> <span class="p">.</span><span class="o">/</span><span class="n">install</span><span class="p">.</span><span class="n">sh</span></pre></div></div></li>
 </ol>
-</div>
-</div>
-<div class="section" id="how-to-use-the-openvino-security-add-on">
+</section>
+</section>
+<section id="how-to-use-the-openvino-security-add-on">
 <h2>How to Use the OpenVINO™ Security Add-on<a class="headerlink" href="#how-to-use-the-openvino-security-add-on" title="Permalink to this headline">¶</a></h2>
 <p>This section requires interactions between the Model Developer/Independent Software vendor and the User. All roles must complete all applicable <a class="reference external" href="#setup-host">set up steps</a> and <a class="reference external" href="#ovsa-install">installation steps</a> before beginning this section.</p>
 <p>This document uses the face-detection-retail-0004 model as an example.</p>
 <p>The following figure describes the interactions between the Model Developer, Independent Software Vendor, and User.</p>
 <p><strong>Remember</strong> : The Model Developer/Independent Software Vendor and User roles are related to virtual machine use and one person might fill the tasks required by multiple roles. In this document the tasks of Model Developer and Independent Software Vendor are combined and use the Guest VM named <code class="docutils literal notranslate"><span class="pre">ovsa_isv</span></code>. It is possible to have all roles set up on the same Host Machine.</p>
 <img alt="OpenVINO™ Security Add-on Example Diagram" src="../_images/ovsa_example.png" />
-<div class="section" id="model-developer-instructions">
+<section id="model-developer-instructions">
 <h3>Model Developer Instructions<a class="headerlink" href="#model-developer-instructions" title="Permalink to this headline">¶</a></h3>
 <p>The Model Developer creates model, defines access control and creates the user license. After the model is created, access control enabled, and the license is ready, the Model Developer provides the license details to the Independent Software Vendor before sharing to the Model User.</p>
 <p>References to the Guest VM are to <code class="docutils literal notranslate"><span class="pre">ovsa_isv_dev</span></code>. Log on to the Guest VM as <code class="docutils literal notranslate"><span class="pre">ovsa</span></code> user.</p>
-<div class="section" id="step-1-set-up-the-artefacts-directory">
+<section id="step-1-set-up-the-artefacts-directory">
 <h4>Step 1: Set up the artefacts directory<a class="headerlink" href="#step-1-set-up-the-artefacts-directory" title="Permalink to this headline">¶</a></h4>
 <p>Create a directory named artefacts. This directory will hold artefacts required to create licenses:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="o">-</span><span class="n">p</span> <span class="o">~/</span><span class="n">OVSA</span><span class="o">/</span><span class="n">artefacts</span>
 <span class="n">cd</span> <span class="o">~/</span><span class="n">OVSA</span><span class="o">/</span><span class="n">artefacts</span>
 <span class="k">export</span> <span class="n">OVSA_DEV_ARTEFACTS</span><span class="o">=</span><span class="err">$</span><span class="n">PWD</span>
-<span class="n">source</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">ovsa</span><span class="o">/</span><span class="n">scripts</span><span class="o">/</span><span class="n">setupvars</span><span class="p">.</span><span class="n">sh</span></pre></div></div></div>
-<div class="section" id="step-2-create-a-key-store-and-add-a-certificate-to-it">
+<span class="n">source</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">ovsa</span><span class="o">/</span><span class="n">scripts</span><span class="o">/</span><span class="n">setupvars</span><span class="p">.</span><span class="n">sh</span></pre></div></div></section>
+<section id="step-2-create-a-key-store-and-add-a-certificate-to-it">
 <h4>Step 2: Create a key store and add a certificate to it<a class="headerlink" href="#step-2-create-a-key-store-and-add-a-certificate-to-it" title="Permalink to this headline">¶</a></h4>
 <ol class="arabic">
 <li><p>Create files to request a certificate: This example uses a self-signed certificate for demonstration purposes. In a production environment, use CSR files to request for a CA-signed certificate.</p>
@@ -2543,29 +2550,29 @@
 <li><p>Add the certificate to the key store</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">ovsa</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">ovsatool</span> <span class="n">keygen</span> <span class="o">-</span><span class="n">storecert</span> <span class="o">-</span><span class="n">c</span> <span class="n">isv_keystore</span><span class="p">.</span><span class="n">csr</span><span class="p">.</span><span class="n">crt</span> <span class="o">-</span><span class="n">k</span> <span class="n">isv_keystore</span></pre></div></div></li>
 </ol>
-</div>
-<div class="section" id="step-3-create-the-model">
+</section>
+<section id="step-3-create-the-model">
 <h4>Step 3: Create the model<a class="headerlink" href="#step-3-create-the-model" title="Permalink to this headline">¶</a></h4>
 <p>This example uses <code class="docutils literal notranslate"><span class="pre">curl</span></code> to download the <code class="docutils literal notranslate"><span class="pre">face-detection-retail-004</span></code> model from the OpenVINO Model Zoo. If you are behind a firewall, check and set your proxy settings.</p>
 <p>Download a model from the Model Zoo:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">--</span><span class="n">create</span><span class="o">-</span><span class="n">dirs</span> <span class="nl">https</span><span class="p">:</span><span class="c1">//download.01.org/opencv/2021/openvinotoolkit/2021.1/open_model_zoo/models_bin/1/face-detection-retail-0004/FP32/face-detection-retail-0004.xml https://download.01.org/opencv/2021/openvinotoolkit/2021.1/open_model_zoo/models_bin/1/face-detection-retail-0004/FP32/face-detection-retail-0004.bin -o model/face-detection-retail-0004.xml -o model/face-detection-retail-0004.bin</span></pre></div></div><p>The model is downloaded to the <code class="docutils literal notranslate"><span class="pre">OVSA_DEV_ARTEFACTS/model</span></code> directory</p>
-</div>
-<div class="section" id="step-4-define-access-control-for-the-model-and-create-a-master-license-for-it">
+</section>
+<section id="step-4-define-access-control-for-the-model-and-create-a-master-license-for-it">
 <h4>Step 4: Define access control for the model and create a master license for it<a class="headerlink" href="#step-4-define-access-control-for-the-model-and-create-a-master-license-for-it" title="Permalink to this headline">¶</a></h4>
 <p>Define and enable the model access control and master license:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">uuid</span><span class="o">=</span><span class="err">$</span><span class="p">(</span><span class="n">uuidgen</span><span class="p">)</span>
 <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">ovsa</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">ovsatool</span> <span class="n">controlAccess</span> <span class="o">-</span><span class="n">i</span> <span class="n">model</span><span class="o">/</span><span class="n">face</span><span class="o">-</span><span class="n">detection</span><span class="o">-</span><span class="n">retail</span><span class="o">-</span><span class="mf">0004.</span><span class="n">xml</span> <span class="n">model</span><span class="o">/</span><span class="n">face</span><span class="o">-</span><span class="n">detection</span><span class="o">-</span><span class="n">retail</span><span class="o">-</span><span class="mf">0004.</span><span class="n">bin</span> <span class="o">-</span><span class="n">n</span> <span class="s">&quot;face detection&quot;</span> <span class="o">-</span><span class="n">d</span> <span class="s">&quot;face detection retail&quot;</span> <span class="o">-</span><span class="n">v</span> <span class="mo">0004</span> <span class="o">-</span><span class="n">p</span> <span class="n">face_detection_model</span><span class="p">.</span><span class="n">dat</span> <span class="o">-</span><span class="n">m</span> <span class="n">face_detection_model</span><span class="p">.</span><span class="n">masterlic</span> <span class="o">-</span><span class="n">k</span> <span class="n">isv_keystore</span> <span class="o">-</span><span class="n">g</span> <span class="err">$</span><span class="n">uuid</span></pre></div></div><p>The Intermediate Representation files for the <code class="docutils literal notranslate"><span class="pre">face-detection-retail-0004</span></code> model are encrypted as <code class="docutils literal notranslate"><span class="pre">face_detection_model.dat</span></code> and a master license is generated as <code class="docutils literal notranslate"><span class="pre">face_detection_model.masterlic</span></code></p>
-</div>
-<div class="section" id="step-5-create-a-runtime-reference-tcb">
+</section>
+<section id="step-5-create-a-runtime-reference-tcb">
 <h4>Step 5: Create a Runtime Reference TCB<a class="headerlink" href="#step-5-create-a-runtime-reference-tcb" title="Permalink to this headline">¶</a></h4>
 <p>Use the runtime reference TCB to create a customer license for the access controlled model and the specific runtime.</p>
 <p>Generate the reference TCB for the runtime</p>
-<div class="highlight"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">ovsa</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">ovsaruntime</span> <span class="n">gen</span><span class="o">-</span><span class="n">tcb</span><span class="o">-</span><span class="n">signature</span> <span class="o">-</span><span class="n">n</span> <span class="s">&quot;Face Detect @ Runtime VM&quot;</span> <span class="o">-</span><span class="n">v</span> <span class="s">&quot;1.0&quot;</span> <span class="o">-</span><span class="n">f</span> <span class="n">face_detect_runtime_vm</span><span class="p">.</span><span class="n">tcb</span> <span class="o">-</span><span class="n">k</span> <span class="n">isv_keystore</span></pre></div></div></div>
-<div class="section" id="step-6-publish-the-access-controlled-model-and-runtime-reference-tcb">
+<div class="highlight"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">ovsa</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">ovsaruntime</span> <span class="n">gen</span><span class="o">-</span><span class="n">tcb</span><span class="o">-</span><span class="n">signature</span> <span class="o">-</span><span class="n">n</span> <span class="s">&quot;Face Detect @ Runtime VM&quot;</span> <span class="o">-</span><span class="n">v</span> <span class="s">&quot;1.0&quot;</span> <span class="o">-</span><span class="n">f</span> <span class="n">face_detect_runtime_vm</span><span class="p">.</span><span class="n">tcb</span> <span class="o">-</span><span class="n">k</span> <span class="n">isv_keystore</span></pre></div></div></section>
+<section id="step-6-publish-the-access-controlled-model-and-runtime-reference-tcb">
 <h4>Step 6: Publish the access controlled Model and Runtime Reference TCB<a class="headerlink" href="#step-6-publish-the-access-controlled-model-and-runtime-reference-tcb" title="Permalink to this headline">¶</a></h4>
 <p>The access controlled model is ready to be shared with the User and the reference TCB is ready to perform license checks.</p>
-</div>
-<div class="section" id="step-7-receive-a-user-request">
+</section>
+<section id="step-7-receive-a-user-request">
 <h4>Step 7: Receive a User Request<a class="headerlink" href="#step-7-receive-a-user-request" title="Permalink to this headline">¶</a></h4>
 <ol class="arabic">
 <li><p>Obtain artefacts from the User who needs access to a access controlled model:</p>
@@ -2591,12 +2598,12 @@
 </ul>
 </li>
 </ol>
-</div>
-</div>
-<div class="section" id="model-user-instructions">
+</section>
+</section>
+<section id="model-user-instructions">
 <h3>Model User Instructions<a class="headerlink" href="#model-user-instructions" title="Permalink to this headline">¶</a></h3>
 <p>References to the Guest VM are to <code class="docutils literal notranslate"><span class="pre">ovsa_rumtime</span></code>. Log on to the Guest VM as <code class="docutils literal notranslate"><span class="pre">ovsa</span></code> user.</p>
-<div class="section" id="step-1-setup-up-the-artefacts-directory">
+<section id="step-1-setup-up-the-artefacts-directory">
 <h4>Step 1: Setup up the artefacts directory<a class="headerlink" href="#step-1-setup-up-the-artefacts-directory" title="Permalink to this headline">¶</a></h4>
 <ol class="arabic">
 <li><p>Create a directory named artefacts. This directory will hold artefacts required to create licenses:</p>
@@ -2605,8 +2612,8 @@
 <span class="k">export</span> <span class="n">OVSA_RUNTIME_ARTEFACTS</span><span class="o">=</span><span class="err">$</span><span class="n">PWD</span>
 <span class="n">source</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">ovsa</span><span class="o">/</span><span class="n">scripts</span><span class="o">/</span><span class="n">setupvars</span><span class="p">.</span><span class="n">sh</span></pre></div></div></li>
 </ol>
-</div>
-<div class="section" id="step-2-add-a-ca-signed-certificate-to-a-key-store">
+</section>
+<section id="step-2-add-a-ca-signed-certificate-to-a-key-store">
 <h4>Step 2: Add a CA-Signed Certificate to a Key Store<a class="headerlink" href="#step-2-add-a-ca-signed-certificate-to-a-key-store" title="Permalink to this headline">¶</a></h4>
 <ol class="arabic">
 <li><p>Generate a Customer key store file:</p>
@@ -2621,8 +2628,8 @@
 <li><p>Add the certificate to the key store:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">ovsa</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">ovsatool</span> <span class="n">keygen</span> <span class="o">-</span><span class="n">storecert</span> <span class="o">-</span><span class="n">c</span> <span class="n">custkeystore</span><span class="p">.</span><span class="n">csr</span><span class="p">.</span><span class="n">crt</span> <span class="o">-</span><span class="n">k</span> <span class="n">custkeystore</span></pre></div></div></li>
 </ol>
-</div>
-<div class="section" id="step-3-request-an-access-controlled-model-from-the-model-developer">
+</section>
+<section id="step-3-request-an-access-controlled-model-from-the-model-developer">
 <h4>Step 3: Request an access controlled Model from the Model Developer<a class="headerlink" href="#step-3-request-an-access-controlled-model-from-the-model-developer" title="Permalink to this headline">¶</a></h4>
 <p>This example uses scp to share data between the ovsa_runtime and ovsa_dev Guest VMs on the same Host Machine.</p>
 <ol class="arabic">
@@ -2631,8 +2638,8 @@
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="err">$</span><span class="n">OVSA_RUNTIME_ARTEFACTS</span>
 <span class="n">scp</span> <span class="n">custkeystore</span><span class="p">.</span><span class="n">csr</span><span class="p">.</span><span class="n">crt</span> <span class="n">username</span><span class="err">@</span><span class="o">&lt;</span><span class="n">developer</span><span class="o">-</span><span class="n">vm</span><span class="o">-</span><span class="n">ip</span><span class="o">-</span><span class="n">address</span><span class="o">&gt;:/&lt;</span><span class="n">username</span><span class="o">-</span><span class="n">home</span><span class="o">-</span><span class="n">directory</span><span class="o">&gt;/</span><span class="n">OVSA</span><span class="o">/</span><span class="n">artefacts</span></pre></div></div></li>
 </ol>
-</div>
-<div class="section" id="step-4-receive-and-load-the-access-controlled-model-into-the-openvino-model-server">
+</section>
+<section id="step-4-receive-and-load-the-access-controlled-model-into-the-openvino-model-server">
 <h4>Step 4: Receive and load the access controlled model into the OpenVINO™ Model Server<a class="headerlink" href="#step-4-receive-and-load-the-access-controlled-model-into-the-openvino-model-server" title="Permalink to this headline">¶</a></h4>
 <ol class="arabic">
 <li><p>Receive the model as files named:</p>
@@ -2676,13 +2683,13 @@
 <span class="p">]</span>
 <span class="p">}</span></pre></div></div></li>
 </ol>
-</div>
-<div class="section" id="step-5-start-the-nginx-model-server">
+</section>
+<section id="step-5-start-the-nginx-model-server">
 <h4>Step 5: Start the NGINX Model Server<a class="headerlink" href="#step-5-start-the-nginx-model-server" title="Permalink to this headline">¶</a></h4>
 <p>The NGINX Model Server publishes the access controlled model.</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="p">.</span><span class="o">/</span><span class="n">start_secure_ovsa_model_server</span><span class="p">.</span><span class="n">sh</span></pre></div></div><p>For information about the NGINX interface, see <a class="reference external" href="https://github.com/openvinotoolkit/model_server/blob/main/extras/nginx-mtls-auth/README.md">https://github.com/openvinotoolkit/model_server/blob/main/extras/nginx-mtls-auth/README.md</a></p>
-</div>
-<div class="section" id="step-6-prepare-to-run-inference">
+</section>
+<section id="step-6-prepare-to-run-inference">
 <h4>Step 6: Prepare to run Inference<a class="headerlink" href="#step-6-prepare-to-run-inference" title="Permalink to this headline">¶</a></h4>
 <ol class="arabic">
 <li><p>Log on to the Guest VM from another terminal.</p></li>
@@ -2699,14 +2706,14 @@
 <li><p>Copy the sample images for inferencing. An image directory is created that includes a sample image for inferencing.</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">--</span><span class="n">create</span><span class="o">-</span><span class="n">dirs</span> <span class="nl">https</span><span class="p">:</span><span class="c1">//raw.githubusercontent.com/openvinotoolkit/model_server/master/example_client/images/people/people1.jpeg -o images/people1.jpeg</span></pre></div></div></li>
 </ol>
-</div>
-<div class="section" id="step-7-run-inference">
+</section>
+<section id="step-7-run-inference">
 <h4>Step 7: Run Inference<a class="headerlink" href="#step-7-run-inference" title="Permalink to this headline">¶</a></h4>
 <p>Run the <code class="docutils literal notranslate"><span class="pre">face_detection.py</span></code> script:</p>
-<div class="highlight"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="n">face_detection</span><span class="p">.</span><span class="n">py</span> <span class="o">--</span><span class="n">grpc_port</span> <span class="mi">3335</span> <span class="o">--</span><span class="n">batch_size</span> <span class="mi">1</span> <span class="o">--</span><span class="n">width</span> <span class="mi">300</span> <span class="o">--</span><span class="n">height</span> <span class="mi">300</span> <span class="o">--</span><span class="n">input_images_dir</span> <span class="n">images</span> <span class="o">--</span><span class="n">output_dir</span> <span class="n">results</span> <span class="o">--</span><span class="n">tls</span> <span class="o">--</span><span class="n">server_cert</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">OVSA</span><span class="o">/</span><span class="n">Modelserver</span><span class="o">/</span><span class="n">server</span><span class="p">.</span><span class="n">pem</span> <span class="o">--</span><span class="n">client_cert</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">OVSA</span><span class="o">/</span><span class="n">Modelserver</span><span class="o">/</span><span class="n">client</span><span class="p">.</span><span class="n">pem</span> <span class="o">--</span><span class="n">client_key</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">OVSA</span><span class="o">/</span><span class="n">Modelserver</span><span class="o">/</span><span class="n">client</span><span class="p">.</span><span class="n">key</span> <span class="o">--</span><span class="n">model_name</span> <span class="n">controlled</span><span class="o">-</span><span class="n">access</span><span class="o">-</span><span class="n">model</span></pre></div></div></div>
-</div>
-</div>
-<div class="section" id="summary">
+<div class="highlight"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="n">face_detection</span><span class="p">.</span><span class="n">py</span> <span class="o">--</span><span class="n">grpc_port</span> <span class="mi">3335</span> <span class="o">--</span><span class="n">batch_size</span> <span class="mi">1</span> <span class="o">--</span><span class="n">width</span> <span class="mi">300</span> <span class="o">--</span><span class="n">height</span> <span class="mi">300</span> <span class="o">--</span><span class="n">input_images_dir</span> <span class="n">images</span> <span class="o">--</span><span class="n">output_dir</span> <span class="n">results</span> <span class="o">--</span><span class="n">tls</span> <span class="o">--</span><span class="n">server_cert</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">OVSA</span><span class="o">/</span><span class="n">Modelserver</span><span class="o">/</span><span class="n">server</span><span class="p">.</span><span class="n">pem</span> <span class="o">--</span><span class="n">client_cert</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">OVSA</span><span class="o">/</span><span class="n">Modelserver</span><span class="o">/</span><span class="n">client</span><span class="p">.</span><span class="n">pem</span> <span class="o">--</span><span class="n">client_key</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">OVSA</span><span class="o">/</span><span class="n">Modelserver</span><span class="o">/</span><span class="n">client</span><span class="p">.</span><span class="n">key</span> <span class="o">--</span><span class="n">model_name</span> <span class="n">controlled</span><span class="o">-</span><span class="n">access</span><span class="o">-</span><span class="n">model</span></pre></div></div></section>
+</section>
+</section>
+<section id="summary">
 <h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
 <p>You have completed these tasks:</p>
 <ul class="simple">
@@ -2719,8 +2726,8 @@
 <li><p>As a User, you set up and launched a Host Server on which you can run licensed and access controlled models.</p></li>
 <li><p>As a User, you loaded a access controlled model, validated the license for the model, and used the model to run inference.</p></li>
 </ul>
-</div>
-<div class="section" id="references">
+</section>
+<section id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
 <p>Use these links for more information:</p>
 <ul class="simple">
@@ -2728,8 +2735,8 @@
 <li><p><a class="reference external" href="https://github.com/openvinotoolkit/model_server/blob/main/docs/ovms_quickstart.md">OpenVINO Model Server Quick Start Guide</a></p></li>
 <li><p><a class="reference external" href="https://github.com/openvinotoolkit/model_server/blob/main/docs/models_repository.md">Model repository</a></p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -2760,7 +2767,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

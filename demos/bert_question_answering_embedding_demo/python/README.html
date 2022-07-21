@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>BERT Question Answering Embedding Python* Demo &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../../../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -2094,10 +2101,10 @@
             
                 <div>
                   
-  <div class="section" id="bert-question-answering-embedding-python-demo">
+  <section id="bert-question-answering-embedding-python-demo">
 <h1>BERT Question Answering Embedding Python* Demo<a class="headerlink" href="#bert-question-answering-embedding-python-demo" title="Permalink to this headline">¶</a></h1>
 <p>This README describes the Question Answering Embedding demo application that uses a Squad-tuned BERT model to calculate embedding vectors for context and question to find right context for question. The primary difference from the <a class="reference internal" href="../../bert_question_answering_demo/python/README.html"><span class="doc std std-doc">bert_question_answering_demo</span></a> is that this demo demonstrates how the inference can be accelerated via pre-computing the embeddings for the contexts.</p>
-<div class="section" id="how-it-works">
+<section id="how-it-works">
 <h2>How It Works<a class="headerlink" href="#how-it-works" title="Permalink to this headline">¶</a></h2>
 <p>On startup the demo application reads command line parameters and loads model(s) to OpenVINO™ Runtime plugin.
 It also fetches data from the user-provided urls to populate the list of “contexts” with the text.
@@ -2108,13 +2115,13 @@ Using the L2 distance between the embedding vector of the question and the embed
 as candidates to further seek for the final answer to the question. At this point, the contexts are displayed to the user.</p>
 <p>Notice that question is usually much shorter than the contexts, so calculating the embedding for that is really fast. Also calculating the L2 distance between a context and question is almost free, compared to the actual inference. Together, during question answering, this substantially saves on the actual inference, which is needed ONLY for the question (while contexts are pre-calculated), compared to the conventional approach that has to concatenate each context with the question and do an inference on this large input (per context).</p>
 <p>If second (conventional SQuAD-tuned) Bert model is provided as well, it is used to further search for the exact answer in the best contexts found in the first step, and the result then also displayed to the user.</p>
-</div>
-<div class="section" id="model-api">
+</section>
+<section id="model-api">
 <h2>Model API<a class="headerlink" href="#model-api" title="Permalink to this headline">¶</a></h2>
 <p>The demo utilizes model wrappers, adapters and pipelines from <a class="reference internal" href="../../common/python/openvino/model_zoo/model_api/README.html"><span class="doc std std-doc">Python* Model API</span></a>.</p>
 <p>The generalized interface of wrappers with its unified results representation provides the support of multiple different question answering model topologies in one demo.</p>
-</div>
-<div class="section" id="preparing-to-run">
+</section>
+<section id="preparing-to-run">
 <h2>Preparing to Run<a class="headerlink" href="#preparing-to-run" title="Permalink to this headline">¶</a></h2>
 <p>The list of models supported by the demo is in <code class="docutils literal notranslate"><span class="pre">&lt;omz_dir&gt;/demos/bert_question_answering_embedding_demo/python/models.lst</span></code> file.
 This file can be used as a parameter for <span class="xref myst">Model Downloader</span> and Converter to download and, if necessary, convert models to OpenVINO IR format (*.xml + *.bin).</p>
@@ -2126,7 +2133,7 @@ This file can be used as a parameter for <span class="xref myst">Model Downloade
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>omz_converter --list models.lst
 </pre></div>
 </div>
-<div class="section" id="supported-models">
+<section id="supported-models">
 <h3>Supported Models<a class="headerlink" href="#supported-models" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>bert-large-uncased-whole-word-masking-squad-0001</p></li>
@@ -2140,9 +2147,9 @@ This file can be used as a parameter for <span class="xref myst">Model Downloade
 <blockquote>
 <div><p><strong>NOTE</strong>: Refer to the tables <a class="reference internal" href="../../../models/intel/device_support.html"><span class="doc std std-doc">Intel’s Pre-Trained Models Device Support</span></a> and <a class="reference internal" href="../../../models/public/device_support.html"><span class="doc std std-doc">Public Pre-Trained Models Device Support</span></a> for the details on models inference support at different devices.</p>
 </div></blockquote>
-</div>
-</div>
-<div class="section" id="running">
+</section>
+</section>
+<section id="running">
 <h2>Running<a class="headerlink" href="#running" title="Permalink to this headline">¶</a></h2>
 <p>Running the application with the <code class="docutils literal notranslate"><span class="pre">-h</span></code> option yields the following usage message:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">bert_question_answering_embedding_demo</span><span class="o">.</span><span class="n">py</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="o">-</span><span class="n">i</span> <span class="n">INPUT</span>
@@ -2206,8 +2213,8 @@ This file can be used as a parameter for <span class="xref myst">Model Downloade
                         <span class="n">CPU</span> <span class="p">(</span><span class="n">including</span> <span class="n">HETERO</span> <span class="n">cases</span><span class="p">)</span><span class="o">.</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="example-demo-cmd-line">
+</section>
+<section id="example-demo-cmd-line">
 <h2>Example Demo Cmd-Line<a class="headerlink" href="#example-demo-cmd-line" title="Permalink to this headline">¶</a></h2>
 <p>You can use the following command to try the demo:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>    python3 bert_question_answering_embedding_demo.py
@@ -2224,8 +2231,8 @@ This file can be used as a parameter for <span class="xref myst">Model Downloade
 </div>
 <p>The demo will use the Wikipedia articles about the Bert character and the speed of light to answer your questions like
 “what is the speed of light”, “how to measure the speed of light”, “who is Bert”, “how old is Bert”, etc.</p>
-</div>
-<div class="section" id="demo-inputs">
+</section>
+<section id="demo-inputs">
 <h2>Demo Inputs<a class="headerlink" href="#demo-inputs" title="Permalink to this headline">¶</a></h2>
 <p>The application reads text from the HTML pages at the given urls and then answers questions typed from the console.
 The models and its parameters (inputs and outputs) are also important demo arguments.
@@ -2234,8 +2241,8 @@ from the command line match the actual network inputs.
 The embedding model is reshaped by the demo to infer embedding vectors for long contexts and short question.
 Make sure that the original model converted by Model Optimizer with reshape option.
 Please see general <a class="reference external" href="https://docs.openvino.ai/latest/_docs_IE_DG_ShapeInference.html">reshape intro and limitations</a></p>
-</div>
-<div class="section" id="demo-outputs">
+</section>
+<section id="demo-outputs">
 <h2>Demo Outputs<a class="headerlink" href="#demo-outputs" title="Permalink to this headline">¶</a></h2>
 <p>The application outputs contexts with answers to the same console.
 The application reports</p>
@@ -2243,14 +2250,14 @@ The application reports</p>
 <li><p><strong>Latency (all stages)</strong>: total processing time required to process input data (from loading the vocab and processing the context as tokens to displaying the results).</p></li>
 <li><p><strong>Context embeddings latency (stage 1)</strong>: total processing time required to calculate all context embeddings.</p></li>
 </ul>
-</div>
-<div class="section" id="classifying-documents-with-long-texts">
+</section>
+<section id="classifying-documents-with-long-texts">
 <h2>Classifying Documents with Long Texts<a class="headerlink" href="#classifying-documents-with-long-texts" title="Permalink to this headline">¶</a></h2>
 <p>Notice that when the original “context” (paragraph text from the url) alone or together with the question do not fit the model input
 (usually 384 tokens for the Bert-Large, or 128 for the Bert-Base), the demo splits the paragraph into overlapping segments.
 Thus, for the long paragraph texts, the network is called multiple times as for separate contexts.</p>
-</div>
-<div class="section" id="see-also">
+</section>
+<section id="see-also">
 <h2>See Also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="../../README.html"><span class="doc std std-doc">Open Model Zoo Demos</span></a></p></li>
@@ -2258,8 +2265,8 @@ Thus, for the long paragraph texts, the network is called multiple times as for 
 <li><p><span class="xref myst">Model Downloader</span></p></li>
 <li><p><a class="reference external" href="https://docs.openvino.ai/latest/_inference_engine_samples_benchmark_app_README.html">Benchmark C++ Sample</a></p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -2290,7 +2297,7 @@ Thus, for the long paragraph texts, the network is called multiple times as for 
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

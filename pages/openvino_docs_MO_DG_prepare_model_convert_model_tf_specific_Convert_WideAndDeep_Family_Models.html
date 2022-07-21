@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Convert TensorFlow Wide and Deep Family Models &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -1825,7 +1832,7 @@
             
                 <div>
                   
-  <div class="section" id="convert-tensorflow-wide-and-deep-family-models">
+  <section id="convert-tensorflow-wide-and-deep-family-models">
 <span id="doxid-openvino-docs-m-o-d-g-prepare-model-convert-model-tf-specific-convert-wide-and-deep-family-models"></span><span id="index-0"></span><h1>Convert TensorFlow Wide and Deep Family Models<a class="headerlink" href="#convert-tensorflow-wide-and-deep-family-models" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-openvino-docs-m-o-d-g-prepare-model-convert-model-tf-specific-convert-wide-and-deep-family-models-1md-openvino-docs-mo-dg-prepare-model-convert-model-tf-specific-convert-wideanddeep-family-models"></span> The Wide and Deep models is a combination of wide and deep parts for memorization and generalization of object features respectively. These models can contain different types of object features such as numerical, categorical, sparse and sequential features. These feature types are specified through Tensorflow* tf.feature_column API. Table below presents what feature types are supported by the OpenVINO toolkit.</p>
 <table class="table">
@@ -1857,7 +1864,7 @@
 </tbody>
 </table>
 <p><strong>NOTE</strong> : the categorical with hash and crossed features are currently unsupported since The OpenVINO toolkit does not support tensors of <code class="docutils literal notranslate"><span class="pre">string</span></code> type and operations with them.</p>
-<div class="section" id="prepare-an-example-of-wide-and-deep-model">
+<section id="prepare-an-example-of-wide-and-deep-model">
 <h2>Prepare an Example of Wide and Deep Model<a class="headerlink" href="#prepare-an-example-of-wide-and-deep-model" title="Permalink to this headline">¶</a></h2>
 <p><strong>Step 1</strong>. Clone the GitHub repository with TensorFlow models and move to the directory with an example of Wide and Deep model:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="nl">https</span><span class="p">:</span><span class="c1">//github.com/tensorflow/models.git --branch r2.2.0;</span>
@@ -1915,8 +1922,8 @@
       <span class="cp"># To show an example of embedding</span>
   <span class="p">]</span>
   <span class="k">return</span> <span class="n">wide_columns</span><span class="p">,</span> <span class="n">deep_columns</span></pre></div></div><p>After that start training by the following command:</p>
-<div class="highlight"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">census_main</span><span class="p">.</span><span class="n">py</span></pre></div></div></div>
-<div class="section" id="convert-the-wide-and-deep-model-to-ir">
+<div class="highlight"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">census_main</span><span class="p">.</span><span class="n">py</span></pre></div></div></section>
+<section id="convert-the-wide-and-deep-model-to-ir">
 <h2>Convert the Wide and Deep Model to IR<a class="headerlink" href="#convert-the-wide-and-deep-model-to-ir" title="Permalink to this headline">¶</a></h2>
 <p>Use the following command line to convert the saved model file with the checkpoint:</p>
 <div class="highlight"><div class="highlight"><pre><span></span> <span class="n">mo</span>
@@ -1952,8 +1959,8 @@
          <span class="n">dnn</span><span class="o">/</span><span class="n">input_from_feature_columns</span><span class="o">/</span><span class="n">input_layer</span><span class="o">/</span><span class="n">workclass_indicator</span><span class="o">/</span><span class="n">to_sparse_input</span><span class="o">/</span><span class="nl">dense_shape</span><span class="p">:</span><span class="mi">0</span><span class="p">[</span><span class="mi">2</span><span class="p">]{</span><span class="n">i64</span><span class="p">}</span><span class="o">-&gt;</span><span class="p">[</span><span class="mi">2</span> <span class="mi">50</span><span class="p">]</span><span class="s">&quot;</span>
 <span class="o">--</span><span class="n">output</span> <span class="n">head</span><span class="o">/</span><span class="n">predictions</span><span class="o">/</span><span class="n">probabilities</span></pre></div></div><p>The model contains operations unsupported by the OpenVINO toolkit such as <code class="docutils literal notranslate"><span class="pre">IteratorGetNext</span></code> and <code class="docutils literal notranslate"><span class="pre">LookupTableFindV2</span></code>, so the Model Optimizer must prune these nodes. The pruning is specified through <code class="docutils literal notranslate"><span class="pre">--input</span></code> option. The prunings for <code class="docutils literal notranslate"><span class="pre">IteratorGetNext:\*</span></code> nodes correspond to numeric features. The pruning for each categorical feature consists of three prunings for the following nodes: <code class="docutils literal notranslate"><span class="pre">\*/to_sparse_input/indices:0</span></code>, <code class="docutils literal notranslate"><span class="pre">\*/hash_table_Lookup/LookupTableFindV2:0</span></code>, and <code class="docutils literal notranslate"><span class="pre">\*/to_sparse_input/dense_shape:0</span></code>.</p>
 <p>The above command line generates IR for a batch of two objects, with total number of actual categorical feature values equal to 10 and maximum size of sparse categorical feature for one object equal to 50.</p>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -1984,7 +1991,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

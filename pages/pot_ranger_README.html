@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Experimental: Protecting Deep Learning Model through Range Supervision (“Ranger”) &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -1849,17 +1856,17 @@
             
                 <div>
                   
-  <div class="section" id="experimental-protecting-deep-learning-model-through-range-supervision-ranger">
+  <section id="experimental-protecting-deep-learning-model-through-range-supervision-ranger">
 <span id="doxid-pot-ranger-r-e-a-d-m-e"></span><span id="index-0"></span><h1>Experimental: Protecting Deep Learning Model through Range Supervision (“Ranger”)<a class="headerlink" href="#experimental-protecting-deep-learning-model-through-range-supervision-ranger" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-pot-ranger-r-e-a-d-m-e-1md-openvino-tools-pot-openvino-tools-pot-algorithms-quantization-ranger-readme"></span></p>
-<div class="section" id="introdution">
+<section id="introdution">
 <h2>Introdution<a class="headerlink" href="#introdution" title="Permalink to this headline">¶</a></h2>
 <p>Deep neural network find applications in many scenarios where the prediction is a critical component for safety-relevant decisions. Such workloads can benefit from additional protection against underlying errors. For example, memory bit flips (**”soft errors”** originating, e.g., from external radiation or internal electrical disturbances within the circuitry) in der platform hosting the network inference can corrupt the learned network parameters and lead to incorrect predictions. Typically, errors resulting in very large parameter values have a more drastic impact on the network behavior. <strong>The range supervision algorithm (“Ranger”) described here establishes and inserts additional protection layers after already present activation layers</strong>. Those layers truncate values that are found to be out of an expected activation range in order to mitigate the traces of potential platform errors. They do so during inference by applying a <em>clamp</em> operation to any activation <em>x</em> in the input to the Ranger layer,</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">clamp</span><span class="p">(</span><span class="n">x</span> <span class="p">;</span> <span class="n">T_</span><span class="p">{</span><span class="n">low</span><span class="p">},</span> <span class="n">T_</span><span class="p">{</span><span class="n">up</span><span class="p">})</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">max</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">T_</span><span class="p">{</span><span class="n">low</span><span class="p">}),</span> <span class="n">T_</span><span class="p">{</span><span class="n">high</span><span class="p">}))),</span></pre></div></div><p>where $ <code class="docutils literal notranslate"><span class="pre">T_{low}</span></code> $ and $ <code class="docutils literal notranslate"><span class="pre">T_{up}</span></code> $ are the lower and upper bounds for the particular protection layer, respectively.</p>
 <p>The process flow follows the diagram <a class="reference external" href="#Schematic">Fig 1</a>. Starting from the internal representation (IR) of an OpenVINO model, the POT Ranger algorithm is called to <strong>add protection layers into the model graph</strong>. This step requires <strong>appropriate threshold values that are automatically extracted from a specified test dataset</strong>. The result is an IR representation of the model with additional “Ranger” layers after each supported activation layer. The original and the modified model can be called in the same way through the OpenVINO inference engine to evaluate the impact on accuracy, performance, and dependability in the presence of potential soft errors (for example using the <em>benchmark_app</em> and <em>accuracy_checker</em> functions). <strong>The algorithm is designed to provide efficient protection at negligible performance overhead or accuracy impact in the absence of faults.</strong> Bound extraction is a one-time effort and the protected IR model returned by the Ranger algorithm can be used independently from there on. No changes in the learned parameters of the network are needed.</p>
 <img alt="Schematic" src="../_images/scheme3.png" />
 <p><em>Fig 1: Schematic of Ranger process flow.</em></p>
-<div class="section" id="supported-activation-layers">
+<section id="supported-activation-layers">
 <h3>Supported activation layers<a class="headerlink" href="#supported-activation-layers" title="Permalink to this headline">¶</a></h3>
 <p>The following activation layers are currently supported for range supervision:</p>
 <ul class="simple">
@@ -1872,12 +1879,12 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">Tanh</span></code></p></li>
 </ul>
 <p>This means that any activation layer of one of the above types, that the model under consideration contains, will be protected with an appropriate subsequent Ranger layer.</p>
-</div>
-</div>
-<div class="section" id="usage">
+</section>
+</section>
+<section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
 <p>Ranger protection can be used the same way as <a class="reference internal" href="pot_default_quantization_usage.html#doxid-pot-default-quantization-usage"><span class="std std-ref">DefaultQuantization</span></a> method.</p>
-<div class="section" id="algorithm-configuration">
+<section id="algorithm-configuration">
 <h3>Algorithm configuration<a class="headerlink" href="#algorithm-configuration" title="Permalink to this headline">¶</a></h3>
 <p>Algorithm has a minimal configuration. Below is an example of such configuration:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="p">{</span>
@@ -1891,15 +1898,15 @@
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">&quot;stat_subset_size&quot;</span></code> : This parameter defines <em>how many images</em> of the specified dataset in “engine: config” are used to extract the bounds (images are randomly chosen if a subset is chosen). This value is set to <strong>300</strong> by default. The more images are selected for the bound generation, the more accurate the estimation of an out-of-bound event will be, at the cost of increasing extraction time.</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="example-of-ranger-results">
+</section>
+</section>
+<section id="example-of-ranger-results">
 <h2>Example of Ranger results<a class="headerlink" href="#example-of-ranger-results" title="Permalink to this headline">¶</a></h2>
 <p>The following example shows a traffic camera image and predicted objects using a Yolov3 pretrained on the Coco dataset. A single weight fault was injected in a randomly chosen convolution layer of Yolo, flipping the most significant bit of the selected network parameter. If range supervision is applied, the original network performance is recovered despite the presence of the fault.</p>
 <img alt="../_images/img_combined_2.png" src="../_images/img_combined_2.png" />
 <p><em>Fig 2: Example of fault mitigation via range supervision.</em></p>
-</div>
-<div class="section" id="resources">
+</section>
+<section id="resources">
 <h2>Resources:<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><ol class="upperalpha simple" start="26">
@@ -1911,8 +1918,8 @@
 </ol>
 </li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -1943,7 +1950,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

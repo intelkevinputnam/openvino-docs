@@ -1,0 +1,675 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>namespace InferenceEngine::gapi &#8212; OpenVINO™  documentation</title>
+    
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/blank.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/doxyrest-pygments.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <link href="../../_static/css/media/favicon.ico" rel="shortcut icon">
+    <link rel="stylesheet" href="../../_static/css/openvino_sphinx_theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/css/button.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/css/input.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/css/textfield.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/css/tabs.css" type="text/css" />
+    <script src="../../_static/js/openvino_sphinx_theme.js"></script>
+    <link rel="stylesheet" href="../../_static/css/viewer.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/0.5.7/chartjs-plugin-annotation.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-barchart-background@1.3.0/build/Plugin.Barchart.Background.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-deferred@1"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.1/papaparse.min.js"></script>
+    <script src="../../_static/js/viewer.min.js"></script>
+    <script src="/assets/versions_raw.js"></script>
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/tabs.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/js/custom.js"></script>
+    <script src="../../_static/js/graphs.js"></script>
+    <script src="../../_static/js/graphs_ov_tf.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/target-highlight.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <link rel="canonical" href="https://docs.openvino.ai/latest/api/groups/namespaceInferenceEngine_1_1gapi.html" />
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+      <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+
+<a class="navbar-brand" href="../../index.html">
+  <img src="../../_static/logo.svg" class="logo" alt="logo">
+</a>
+
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../pages/get_started.html">
+  Get Started
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../pages/documentation.html">
+  Documentation
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../tutorials.html">
+  Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api_reference.html">
+  API Reference
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../model_zoo.html">
+  Model Zoo
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../pages/resources.html">
+  Resources
+ </a>
+</li>
+
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/openvinotoolkit/openvino" rel="noopener" target="_blank" title="GitHub">
+            <span><i class="sst-github"></i></span>
+            <label class="sr-only">GitHub</label>
+          </a>
+        </li>
+</ul>
+      </div>
+      
+      <div class="navbar-end-item">
+        
+<div class="dropdown sst-dropdown sst-dropdown-navbar">
+  <button class="btn sst-btn dropdown-toggle" type="button" id="version-selector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+  <div class="dropdown-menu" aria-labelledby="version-selector">
+  </div>
+</div>
+      </div>
+      
+      <div class="navbar-end-item">
+        
+
+<div class="dropdown sst-dropdown sst-dropdown-navbar">
+  <button class="btn sst-btn dropdown-toggle" type="button" id="language-selector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">English</button>
+  <div class="dropdown-menu" aria-labelledby="language-selector">
+    
+      
+        <a class="dropdown-item font-weight-bold" href="/latest/api/groups/namespaceInferenceEngine_1_1gapi.html">English</a>
+      
+    
+      
+        <a  class="dropdown-item" href="/cn/latest/api/groups/namespaceInferenceEngine_1_1gapi.html">Chinese</a>
+      
+    
+  </div>
+</div>
+
+      </div>
+      
+    </div>
+  </div>
+</div>
+        <div id="collapse-nav-wrapper" class="container-xl">
+          <button id="collapse-nav" class="button bttn-prm button-size-m" type="button" data-toggle="collapse" data-target="#nav-tree" aria-expanded="false" aria-controls="nav-tree">
+            Documentation navigation <i class="fas fa-chevron-down"></i>
+          </button>
+        </div>
+      </nav>
+      <div class="transition-banner container-fluid alert alert-info alert-dismissible fade show" role="alert">
+        <p>OpenVINO 2022.1 introduces a new version of OpenVINO API (API 2.0). For more information on the changes and transition steps, see the <a href="https://docs.openvino.ai/latest/openvino_2_0_transition_guide.html">transition guide</a></p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar" id="nav-tree"><form class="searchForm bd-search d-flex align-items-center" action="../../search.html" method="get">
+    <i class="icon fas fa-search"></i>
+    <input type="search" class="form-control" name="query" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    <ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="namespaceInferenceEngine_1_1gapi_1_1kernels.html">
+   kernels
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="namespaceInferenceEngine_1_1gapi_1_1kernels_1_1areaDownscale32f.html">
+     areaDownscale32f
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+    <label for="toctree-checkbox-2">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="structInferenceEngine_1_1gapi_1_1kernels_1_1areaDownscale32f_1_1Mapper.html">
+       Mapper
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="namespaceInferenceEngine_1_1gapi_1_1kernels_1_1areaDownscale8u.html">
+     areaDownscale8u
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+    <label for="toctree-checkbox-3">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="structInferenceEngine_1_1gapi_1_1kernels_1_1areaDownscale8u_1_1Mapper.html">
+       Mapper
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="namespaceInferenceEngine_1_1gapi_1_1kernels_1_1areaUpscale.html">
+     areaUpscale
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+    <label for="toctree-checkbox-4">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="structInferenceEngine_1_1gapi_1_1kernels_1_1areaUpscale_1_1Mapper.html">
+       Mapper
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="namespaceInferenceEngine_1_1gapi_1_1kernels_1_1areaUpscale32f.html">
+     areaUpscale32f
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+    <label for="toctree-checkbox-5">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="structInferenceEngine_1_1gapi_1_1kernels_1_1areaUpscale32f_1_1Mapper.html">
+       Mapper
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="namespaceInferenceEngine_1_1gapi_1_1kernels_1_1avx.html">
+     avx
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="namespaceInferenceEngine_1_1gapi_1_1kernels_1_1avx512.html">
+     avx512
+    </a>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="namespaceInferenceEngine_1_1gapi_1_1kernels_1_1linear.html">
+     linear
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+    <label for="toctree-checkbox-6">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="structInferenceEngine_1_1gapi_1_1kernels_1_1linear_1_1Mapper.html">
+       Mapper
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="namespaceInferenceEngine_1_1gapi_1_1kernels_1_1linear32f.html">
+     linear32f
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+    <label for="toctree-checkbox-7">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="structInferenceEngine_1_1gapi_1_1kernels_1_1linear32f_1_1Mapper.html">
+       Mapper
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="namespaceInferenceEngine_1_1gapi_1_1kernels_1_1neon.html">
+     neon
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="structInferenceEngine_1_1gapi_1_1kernels_1_1AreaDownMapper.html">
+     AreaDownMapper
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="structInferenceEngine_1_1gapi_1_1kernels_1_1MapperUnit.html">
+     MapperUnit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="structInferenceEngine_1_1gapi_1_1kernels_1_1avx2_tag.html">
+     avx2_tag
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="structInferenceEngine_1_1gapi_1_1kernels_1_1avx512_tag.html">
+     avx512_tag
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="structInferenceEngine_1_1gapi_1_1kernels_1_1concat.html">
+     concat
+    </a>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="structInferenceEngine_1_1gapi_1_1kernels_1_1cv_type_to_depth.html">
+     cv_type_to_depth
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+    <label for="toctree-checkbox-8">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul class="simple">
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="structInferenceEngine_1_1gapi_1_1kernels_1_1fp_16_t.html">
+     fp_16_t
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="structInferenceEngine_1_1gapi_1_1kernels_1_1head.html">
+     head
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="structInferenceEngine_1_1gapi_1_1kernels_1_1is_isa_present.html">
+     is_isa_present
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="structInferenceEngine_1_1gapi_1_1kernels_1_1linearScratchDesc.html">
+     linearScratchDesc
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="structInferenceEngine_1_1gapi_1_1kernels_1_1neon_tag.html">
+     neon_tag
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="structInferenceEngine_1_1gapi_1_1kernels_1_1remove.html">
+     remove
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="structInferenceEngine_1_1gapi_1_1kernels_1_1scalar_tag.html">
+     scalar_tag
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="structInferenceEngine_1_1gapi_1_1kernels_1_1sse42_tag.html">
+     sse42_tag
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="structInferenceEngine_1_1gapi_1_1kernels_1_1type_to_type.html">
+     type_to_type
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="structInferenceEngine_1_1gapi_1_1kernels_1_1typelist.html">
+     typelist
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="structInferenceEngine_1_1gapi_1_1kernels_1_1vector_type_of.html">
+     vector_type_of
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+  </div>
+</nav>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+              
+              <div class="toc-item">
+                
+
+<nav id="bd-toc-nav">
+    
+</nav>
+              </div>
+              
+              <div class="toc-item">
+                <div class="tocsection download-docs">
+  <div class="dropdown sst-dropdown">
+    <button class="button bttn-prm button-size-m" data-display="static" type="button" id="download-options"
+      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Download Docs
+    </button>
+    <div class="dropdown-menu" aria-labelledby="download-options">
+      <a class="dropdown-item" href="#" onclick="window.print()">.pdf</a>
+      <a id="download-zip-btn" class="dropdown-item" href="#">.zip</a>
+    </div>
+  </div>
+</div>
+              </div>
+              
+            
+          </div>
+          
+
+          
+          
+              
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+
+<div class="tocsection editthispage">
+    <a href="None">
+        <i class="fas fa-pencil-alt"></i> Edit this page
+    </a>
+</div>
+
+            
+                <div>
+                  
+  <section id="namespace-inferenceengine-gapi">
+<span id="doxid-namespace-inference-engine-1-1gapi"></span><span id="index-0"></span><h1>namespace InferenceEngine::gapi<a class="headerlink" href="#namespace-inferenceengine-gapi" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<div class="highlight doxyrest-overview-code-block"><div class="highlight"><pre><span></span><span class="k">namespace</span> <span class="n">gapi</span> <span class="p">{</span>
+
+<span class="c1">// namespaces</span>
+
+<span class="k">namespace</span> <a class="reference internal" href="namespaceInferenceEngine_1_1gapi_1_1kernels.html#doxid-namespace-inference-engine-1-1gapi-1-1kernels"><span class="std std-ref">InferenceEngine::gapi::kernels</span></a><span></span><span class="p">;</span>
+    <span class="k">namespace</span> <a class="reference internal" href="namespaceInferenceEngine_1_1gapi_1_1kernels_1_1areaDownscale32f.html#doxid-namespace-inference-engine-1-1gapi-1-1kernels-1-1area-downscale32f"><span class="std std-ref">InferenceEngine::gapi::kernels::areaDownscale32f</span></a><span></span><span class="p">;</span>
+    <span class="k">namespace</span> <a class="reference internal" href="namespaceInferenceEngine_1_1gapi_1_1kernels_1_1areaDownscale8u.html#doxid-namespace-inference-engine-1-1gapi-1-1kernels-1-1area-downscale8u"><span class="std std-ref">InferenceEngine::gapi::kernels::areaDownscale8u</span></a><span></span><span class="p">;</span>
+    <span class="k">namespace</span> <a class="reference internal" href="namespaceInferenceEngine_1_1gapi_1_1kernels_1_1areaUpscale.html#doxid-namespace-inference-engine-1-1gapi-1-1kernels-1-1area-upscale"><span class="std std-ref">InferenceEngine::gapi::kernels::areaUpscale</span></a><span></span><span class="p">;</span>
+    <span class="k">namespace</span> <a class="reference internal" href="namespaceInferenceEngine_1_1gapi_1_1kernels_1_1areaUpscale32f.html#doxid-namespace-inference-engine-1-1gapi-1-1kernels-1-1area-upscale32f"><span class="std std-ref">InferenceEngine::gapi::kernels::areaUpscale32f</span></a><span></span><span class="p">;</span>
+    <span class="k">namespace</span> <a class="reference internal" href="namespaceInferenceEngine_1_1gapi_1_1kernels_1_1avx.html#doxid-namespace-inference-engine-1-1gapi-1-1kernels-1-1avx"><span class="std std-ref">InferenceEngine::gapi::kernels::avx</span></a><span></span><span class="p">;</span>
+    <span class="k">namespace</span> <a class="reference internal" href="namespaceInferenceEngine_1_1gapi_1_1kernels_1_1avx512.html#doxid-namespace-inference-engine-1-1gapi-1-1kernels-1-1avx512"><span class="std std-ref">InferenceEngine::gapi::kernels::avx512</span></a><span></span><span class="p">;</span>
+    <span class="k">namespace</span> <a class="reference internal" href="namespaceInferenceEngine_1_1gapi_1_1kernels_1_1linear.html#doxid-namespace-inference-engine-1-1gapi-1-1kernels-1-1linear"><span class="std std-ref">InferenceEngine::gapi::kernels::linear</span></a><span></span><span class="p">;</span>
+    <span class="k">namespace</span> <a class="reference internal" href="namespaceInferenceEngine_1_1gapi_1_1kernels_1_1linear32f.html#doxid-namespace-inference-engine-1-1gapi-1-1kernels-1-1linear32f"><span class="std std-ref">InferenceEngine::gapi::kernels::linear32f</span></a><span></span><span class="p">;</span>
+    <span class="k">namespace</span> <a class="reference internal" href="namespaceInferenceEngine_1_1gapi_1_1kernels_1_1neon.html#doxid-namespace-inference-engine-1-1gapi-1-1kernels-1-1neon"><span class="std std-ref">InferenceEngine::gapi::kernels::neon</span></a><span></span><span class="p">;</span>
+
+<span class="c1">// typedefs</span>
+
+<span class="k">typedef</span> <span class="n">cv</span><span class="o">::</span><span class="n">gapi</span><span class="o">::</span><span class="n">own</span><span class="o">::</span><span class="n">Size</span> <span class="doxyrest-code-target target" id="doxid-namespace-inference-engine-1-1gapi-1abfae352fcf3162d0b3a795593049bd5b"><span></span><span class="n">Size</span></span><span></span><span class="p">;</span>
+<span class="k">typedef</span> <span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">,</span> <span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="o">&gt;</span> <span class="doxyrest-code-target target" id="doxid-namespace-inference-engine-1-1gapi-1a8ffde0e347b5aaba1aa145788906e3a2"><span></span><span class="n">GMat2</span></span><span></span><span class="p">;</span>
+<span class="k">typedef</span> <span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">,</span> <span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">,</span> <span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="o">&gt;</span> <span class="doxyrest-code-target target" id="doxid-namespace-inference-engine-1-1gapi-1a8073b6a65a3e1f73c148fe8a6033e5bb"><span></span><span class="n">GMat3</span></span><span></span><span class="p">;</span>
+<span class="k">typedef</span> <span class="n">std</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">,</span> <span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">,</span> <span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">,</span> <span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="o">&gt;</span> <span class="doxyrest-code-target target" id="doxid-namespace-inference-engine-1-1gapi-1ab005904b1493309cbc8a708406b89017"><span></span><span class="n">GMat4</span></span><span></span><span class="p">;</span>
+
+<span class="c1">// global functions</span>
+
+<span class="n">cv</span><span class="o">::</span><span class="n">gapi</span><span class="o">::</span><span class="n">GKernelPackage</span> <span class="doxyrest-code-target target" id="doxid-namespace-inference-engine-1-1gapi-1a6b44ed6c2d53ae6385e3aec508231137"><span></span><span class="n">preprocKernels</span></span><span></span><span class="p">();</span>
+
+<span class="doxyrest-code-target target" id="doxid-namespace-inference-engine-1-1gapi-1aa790e0daed7c378173a497fee4adbbbf"><span></span><span class="n">G_TYPED_KERNEL</span></span><span></span><span class="p">(</span>
+    <span class="n">ChanToPlane</span><span class="p">,</span>
+    <span class="o">&lt;</span><span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">(</span><span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">,</span> <span class="kt">int</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="s">&quot;com.intel.ie.chan_to_plane&quot;</span>
+    <span class="p">);</span>
+
+<span class="doxyrest-code-target target" id="doxid-namespace-inference-engine-1-1gapi-1aec01a0c870f54e5df17b39541e58be30"><span></span><span class="n">G_TYPED_KERNEL</span></span><span></span><span class="p">(</span>
+    <span class="n">ScalePlane</span><span class="p">,</span>
+    <span class="o">&lt;</span><span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">(</span><span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">,</span> <span class="kt">int</span><span class="p">,</span> <a class="reference internal" href="#doxid-namespace-inference-engine-1-1gapi-1abfae352fcf3162d0b3a795593049bd5b"><span class="std std-ref">Size</span></a><span></span><span class="p">,</span> <a class="reference internal" href="#doxid-namespace-inference-engine-1-1gapi-1abfae352fcf3162d0b3a795593049bd5b"><span class="std std-ref">Size</span></a><span></span><span class="p">,</span> <span class="kt">int</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="s">&quot;com.intel.ie.scale_plane&quot;</span>
+    <span class="p">);</span>
+
+<span class="doxyrest-code-target target" id="doxid-namespace-inference-engine-1-1gapi-1a35fd3f4b5e8696bfc08d7ad973e441d4"><span></span><span class="n">G_TYPED_KERNEL_M</span></span><span></span><span class="p">(</span>
+    <span class="n">ScalePlanes</span><span class="p">,</span>
+    <span class="o">&lt;</span><a class="reference internal" href="#doxid-namespace-inference-engine-1-1gapi-1a8073b6a65a3e1f73c148fe8a6033e5bb"><span class="std std-ref">GMat3</span></a><span></span><span class="p">(</span><span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">,</span> <span class="kt">int</span><span class="p">,</span> <a class="reference internal" href="#doxid-namespace-inference-engine-1-1gapi-1abfae352fcf3162d0b3a795593049bd5b"><span class="std std-ref">Size</span></a><span></span><span class="p">,</span> <a class="reference internal" href="#doxid-namespace-inference-engine-1-1gapi-1abfae352fcf3162d0b3a795593049bd5b"><span class="std std-ref">Size</span></a><span></span><span class="p">,</span> <span class="kt">int</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="s">&quot;com.intel.ie.scale_planes&quot;</span>
+    <span class="p">);</span>
+
+<span class="doxyrest-code-target target" id="doxid-namespace-inference-engine-1-1gapi-1a41a0d2be82a8be8d0b5d7eee7aa4b69b"><span></span><span class="n">G_TYPED_KERNEL_M</span></span><span></span><span class="p">(</span>
+    <span class="n">ScalePlanes4</span><span class="p">,</span>
+    <span class="o">&lt;</span><a class="reference internal" href="#doxid-namespace-inference-engine-1-1gapi-1ab005904b1493309cbc8a708406b89017"><span class="std std-ref">GMat4</span></a><span></span><span class="p">(</span><span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">,</span> <span class="kt">int</span><span class="p">,</span> <a class="reference internal" href="#doxid-namespace-inference-engine-1-1gapi-1abfae352fcf3162d0b3a795593049bd5b"><span class="std std-ref">Size</span></a><span></span><span class="p">,</span> <a class="reference internal" href="#doxid-namespace-inference-engine-1-1gapi-1abfae352fcf3162d0b3a795593049bd5b"><span class="std std-ref">Size</span></a><span></span><span class="p">,</span> <span class="kt">int</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="s">&quot;com.intel.ie.scale_planes4&quot;</span>
+    <span class="p">);</span>
+
+<span class="doxyrest-code-target target" id="doxid-namespace-inference-engine-1-1gapi-1aff517b8f8317a337bef72d24fbab0d27"><span></span><span class="n">G_TYPED_KERNEL</span></span><span></span><span class="p">(</span>
+    <span class="n">ScalePlane8u</span><span class="p">,</span>
+    <span class="o">&lt;</span><span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">(</span><span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">,</span> <a class="reference internal" href="#doxid-namespace-inference-engine-1-1gapi-1abfae352fcf3162d0b3a795593049bd5b"><span class="std std-ref">Size</span></a><span></span><span class="p">,</span> <span class="kt">int</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="s">&quot;com.intel.ie.scale_plane_8u&quot;</span>
+    <span class="p">);</span>
+
+<span class="doxyrest-code-target target" id="doxid-namespace-inference-engine-1-1gapi-1a9e94a2b75a98b2f36230ac7d9b92b8cd"><span></span><span class="n">G_TYPED_KERNEL</span></span><span></span><span class="p">(</span>
+    <span class="n">ScalePlane32f</span><span class="p">,</span>
+    <span class="o">&lt;</span><span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">(</span><span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">,</span> <a class="reference internal" href="#doxid-namespace-inference-engine-1-1gapi-1abfae352fcf3162d0b3a795593049bd5b"><span class="std std-ref">Size</span></a><span></span><span class="p">,</span> <span class="kt">int</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="s">&quot;com.intel.ie.scale_plane_32f&quot;</span>
+    <span class="p">);</span>
+
+<span class="doxyrest-code-target target" id="doxid-namespace-inference-engine-1-1gapi-1a1ca996e9fe9fcfd7472c4b8bf833a0b6"><span></span><span class="n">G_TYPED_KERNEL</span></span><span></span><span class="p">(</span>
+    <span class="n">UpscalePlaneArea8u</span><span class="p">,</span>
+    <span class="o">&lt;</span><span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">(</span><span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">,</span> <a class="reference internal" href="#doxid-namespace-inference-engine-1-1gapi-1abfae352fcf3162d0b3a795593049bd5b"><span class="std std-ref">Size</span></a><span></span><span class="p">,</span> <span class="kt">int</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="s">&quot;com.intel.ie.upscale_plane_area_8u&quot;</span>
+    <span class="p">);</span>
+
+<span class="doxyrest-code-target target" id="doxid-namespace-inference-engine-1-1gapi-1ad9120c410a9bb0cb89522a5c45a00e62"><span></span><span class="n">G_TYPED_KERNEL</span></span><span></span><span class="p">(</span>
+    <span class="n">UpscalePlaneArea32f</span><span class="p">,</span>
+    <span class="o">&lt;</span><span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">(</span><span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">,</span> <a class="reference internal" href="#doxid-namespace-inference-engine-1-1gapi-1abfae352fcf3162d0b3a795593049bd5b"><span class="std std-ref">Size</span></a><span></span><span class="p">,</span> <span class="kt">int</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="s">&quot;com.intel.ie.upscale_plane_area_32f&quot;</span>
+    <span class="p">);</span>
+
+<span class="doxyrest-code-target target" id="doxid-namespace-inference-engine-1-1gapi-1a5ffa1151bc8401253a3a183105762e54"><span></span><span class="n">G_TYPED_KERNEL</span></span><span></span><span class="p">(</span>
+    <span class="n">ScalePlaneArea8u</span><span class="p">,</span>
+    <span class="o">&lt;</span><span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">(</span><span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">,</span> <a class="reference internal" href="#doxid-namespace-inference-engine-1-1gapi-1abfae352fcf3162d0b3a795593049bd5b"><span class="std std-ref">Size</span></a><span></span><span class="p">,</span> <span class="kt">int</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="s">&quot;com.intel.ie.scale_plane_area_8u&quot;</span>
+    <span class="p">);</span>
+
+<span class="doxyrest-code-target target" id="doxid-namespace-inference-engine-1-1gapi-1aa46edd37cb25f9198aef78342ed6bef6"><span></span><span class="n">G_TYPED_KERNEL</span></span><span></span><span class="p">(</span>
+    <span class="n">ScalePlaneArea32f</span><span class="p">,</span>
+    <span class="o">&lt;</span><span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">(</span><span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">,</span> <a class="reference internal" href="#doxid-namespace-inference-engine-1-1gapi-1abfae352fcf3162d0b3a795593049bd5b"><span class="std std-ref">Size</span></a><span></span><span class="p">,</span> <span class="kt">int</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="s">&quot;com.intel.ie.scale_plane_area_32f&quot;</span>
+    <span class="p">);</span>
+
+<span class="doxyrest-code-target target" id="doxid-namespace-inference-engine-1-1gapi-1aaf24cd25f01179e21114bb658358d661"><span></span><span class="n">G_TYPED_KERNEL</span></span><span></span><span class="p">(</span><span class="n">Merge2</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">(</span><span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">,</span> <span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span> <span class="s">&quot;com.intel.ie.merge2&quot;</span><span class="p">);</span>
+
+<span class="doxyrest-code-target target" id="doxid-namespace-inference-engine-1-1gapi-1af11a6a101efb5d0b1c429df14a576e3f"><span></span><span class="n">G_TYPED_KERNEL</span></span><span></span><span class="p">(</span>
+    <span class="n">Merge3</span><span class="p">,</span>
+    <span class="o">&lt;</span><span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">(</span><span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">,</span> <span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">,</span> <span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="s">&quot;com.intel.ie.merge3&quot;</span>
+    <span class="p">);</span>
+
+<span class="doxyrest-code-target target" id="doxid-namespace-inference-engine-1-1gapi-1a9e753e652e0031e69e112fc06b89904f"><span></span><span class="n">G_TYPED_KERNEL</span></span><span></span><span class="p">(</span>
+    <span class="n">Merge4</span><span class="p">,</span>
+    <span class="o">&lt;</span><span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">(</span><span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">,</span> <span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">,</span> <span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">,</span> <span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="s">&quot;com.intel.ie.merge4&quot;</span>
+    <span class="p">);</span>
+
+<span class="doxyrest-code-target target" id="doxid-namespace-inference-engine-1-1gapi-1a5d5171a9bc12b2a70d13ca317e11a512"><span></span><span class="n">G_TYPED_KERNEL_M</span></span><span></span><span class="p">(</span><span class="n">Split2</span><span class="p">,</span> <span class="o">&lt;</span><a class="reference internal" href="#doxid-namespace-inference-engine-1-1gapi-1a8ffde0e347b5aaba1aa145788906e3a2"><span class="std std-ref">GMat2</span></a><span></span><span class="p">(</span><span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span> <span class="s">&quot;com.intel.ie.split2&quot;</span><span class="p">);</span>
+<span class="doxyrest-code-target target" id="doxid-namespace-inference-engine-1-1gapi-1a6a6f308ddeed3525790d53121200697a"><span></span><span class="n">G_TYPED_KERNEL_M</span></span><span></span><span class="p">(</span><span class="n">Split3</span><span class="p">,</span> <span class="o">&lt;</span><a class="reference internal" href="#doxid-namespace-inference-engine-1-1gapi-1a8073b6a65a3e1f73c148fe8a6033e5bb"><span class="std std-ref">GMat3</span></a><span></span><span class="p">(</span><span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span> <span class="s">&quot;com.intel.ie.split3&quot;</span><span class="p">);</span>
+<span class="doxyrest-code-target target" id="doxid-namespace-inference-engine-1-1gapi-1a4c86e79e57bc214fc503447c64c02558"><span></span><span class="n">G_TYPED_KERNEL_M</span></span><span></span><span class="p">(</span><span class="n">Split4</span><span class="p">,</span> <span class="o">&lt;</span><a class="reference internal" href="#doxid-namespace-inference-engine-1-1gapi-1ab005904b1493309cbc8a708406b89017"><span class="std std-ref">GMat4</span></a><span></span><span class="p">(</span><span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span> <span class="s">&quot;com.intel.ie.split4&quot;</span><span class="p">);</span>
+
+<span class="doxyrest-code-target target" id="doxid-namespace-inference-engine-1-1gapi-1aa6986972e5d0611df5d08124960e53d0"><span></span><span class="n">G_TYPED_KERNEL</span></span><span></span><span class="p">(</span>
+    <span class="n">NV12toRGB</span><span class="p">,</span>
+    <span class="o">&lt;</span><span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">(</span><span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">,</span> <span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="s">&quot;com.intel.ie.nv12torgb&quot;</span>
+    <span class="p">);</span>
+
+<span class="doxyrest-code-target target" id="doxid-namespace-inference-engine-1-1gapi-1a373b2720aefb5ea41331908320e02f1e"><span></span><span class="n">G_TYPED_KERNEL</span></span><span></span><span class="p">(</span>
+    <span class="n">I420toRGB</span><span class="p">,</span>
+    <span class="o">&lt;</span><span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">(</span><span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">,</span> <span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">,</span> <span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="s">&quot;com.intel.ie.i420torgb&quot;</span>
+    <span class="p">);</span>
+
+<span class="doxyrest-code-target target" id="doxid-namespace-inference-engine-1-1gapi-1a872f944ad782b43aa0e156c25ea5264a"><span></span><span class="n">G_TYPED_KERNEL</span></span><span></span><span class="p">(</span>
+    <span class="n">ConvertDepth</span><span class="p">,</span>
+    <span class="o">&lt;</span><span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">(</span><span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">,</span> <span class="kt">int</span> <span class="n">depth</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="s">&quot;com.intel.ie.ConvertDepth&quot;</span>
+    <span class="p">);</span>
+
+<span class="doxyrest-code-target target" id="doxid-namespace-inference-engine-1-1gapi-1aa479f49cacba8dda5c82de4c0c7b18cf"><span></span><span class="n">G_TYPED_KERNEL</span></span><span></span><span class="p">(</span>
+    <span class="n">GSubC</span><span class="p">,</span>
+    <span class="o">&lt;</span><span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">(</span><span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">,</span> <span class="n">cv</span><span class="o">::</span><span class="n">GScalar</span><span class="p">,</span> <span class="kt">int</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="s">&quot;com.intel.ie.math.subC&quot;</span>
+    <span class="p">);</span>
+
+<span class="doxyrest-code-target target" id="doxid-namespace-inference-engine-1-1gapi-1a603d7b635abf7d4261c353f9b68d518d"><span></span><span class="n">G_TYPED_KERNEL</span></span><span></span><span class="p">(</span>
+    <span class="n">GDivC</span><span class="p">,</span>
+    <span class="o">&lt;</span><span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">(</span><span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">,</span> <span class="n">cv</span><span class="o">::</span><span class="n">GScalar</span><span class="p">,</span> <span class="kt">double</span><span class="p">,</span> <span class="kt">int</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="s">&quot;com.intel.ie.math.divC&quot;</span>
+    <span class="p">);</span>
+
+<span class="p">}</span> <span class="c1">// namespace gapi</span></pre></div></div></section>
+
+
+                </div>
+            
+            
+                <div class='prev-next-bottom'>
+                  
+
+                </div>
+            
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+<footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2021, Intel®.<br>
+</p>
+    </div>
+    
+    <div class="footer-item">
+      <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Installation &amp; Deployment &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -1859,7 +1866,7 @@
             
                 <div>
                   
-  <div class="section" id="installation-deployment">
+  <section id="installation-deployment">
 <span id="doxid-openvino-2-0-deployment"></span><span id="index-0"></span><h1>Installation &amp; Deployment<a class="headerlink" href="#installation-deployment" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-openvino-2-0-deployment-1md-openvino-docs-ov-runtime-ug-migration-ov-2-0-deployment-migration"></span> One of the main concepts for OpenVINO™ API 2.0 is being *”easy to use”*, which includes:</p>
 <ul class="simple">
@@ -1869,7 +1876,7 @@
 <li><p>Development and deployment of OpenVINO-based applications.</p></li>
 </ul>
 <p>To accomplish that, the 2022.1 release OpenVINO introduced significant changes to the installation and deployment processes. This guide will walk you through these changes.</p>
-<div class="section" id="the-installer-package-contains-openvino-runtime-only">
+<section id="the-installer-package-contains-openvino-runtime-only">
 <h2>The Installer Package Contains OpenVINO™ Runtime Only<a class="headerlink" href="#the-installer-package-contains-openvino-runtime-only" title="Permalink to this headline">¶</a></h2>
 <p>Since OpenVINO 2022.1, development tools have been distributed only via <a class="reference external" href="https://pypi.org/project/openvino-dev/">PyPI</a>, and are no longer included in the OpenVINO installer package. For a list of these components, refer to the <code class="docutils literal notranslate"><span class="pre">installation</span> <span class="pre">overview</span></code> guide. Benefits of this approach include:</p>
 <ul class="simple">
@@ -1882,27 +1889,27 @@
 <li><p>The <code class="docutils literal notranslate"><span class="pre">tools</span></code> folder contains <a class="reference internal" href="openvino_inference_engine_tools_compile_tool_README.html#doxid-openvino-inference-engine-tools-compile-tool-r-e-a-d-m-e"><span class="std std-ref">the compile tool</span></a>, <a class="reference internal" href="openvino_docs_install_guides_deployment_manager_tool.html#doxid-openvino-docs-install-guides-deployment-manager-tool"><span class="std std-ref">deployment manager</span></a>, and a set of <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> files with links to the corresponding versions of the <code class="docutils literal notranslate"><span class="pre">openvino-dev</span></code> package.</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">python</span></code> folder contains the Python version for OpenVINO Runtime.</p></li>
 </ul>
-</div>
-<div class="section" id="installing-openvino-development-tools-via-pypi">
+</section>
+<section id="installing-openvino-development-tools-via-pypi">
 <h2>Installing OpenVINO Development Tools via PyPI<a class="headerlink" href="#installing-openvino-development-tools-via-pypi" title="Permalink to this headline">¶</a></h2>
 <p>Since OpenVINO Development Tools is no longer in the installer package, the installation process has also changed. This section describes it through a comparison with previous versions.</p>
-<div class="section" id="for-versions-prior-to-2022-1">
+<section id="for-versions-prior-to-2022-1">
 <h3>For Versions Prior to 2022.1<a class="headerlink" href="#for-versions-prior-to-2022-1" title="Permalink to this headline">¶</a></h3>
 <p>In previous versions, OpenVINO Development Tools was a part of the main package. After the package was installed, to convert models (for example, TensorFlow), you needed to install additional dependencies by using the requirement files, such as <code class="docutils literal notranslate"><span class="pre">requirements_tf.txt</span></code>, install Post-Training Optimization tool and Accuracy Checker tool via the <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> scripts, and then use the <code class="docutils literal notranslate"><span class="pre">setupvars</span></code> scripts to make the tools available to the following command:</p>
-<div class="highlight"><div class="highlight"><pre><span></span><span class="err">$</span> <span class="n">mo</span><span class="p">.</span><span class="n">py</span> <span class="o">-</span><span class="n">h</span></pre></div></div></div>
-<div class="section" id="for-2022-1-and-after">
+<div class="highlight"><div class="highlight"><pre><span></span><span class="err">$</span> <span class="n">mo</span><span class="p">.</span><span class="n">py</span> <span class="o">-</span><span class="n">h</span></pre></div></div></section>
+<section id="for-2022-1-and-after">
 <h3>For 2022.1 and After<a class="headerlink" href="#for-2022-1-and-after" title="Permalink to this headline">¶</a></h3>
 <p>In OpenVINO 2022.1 and later, you can install the development tools only from a <a class="reference external" href="https://pypi.org/project/openvino-dev/">PyPI</a> repository, using the following command (taking TensorFlow as an example):</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="err">$</span> <span class="n">python3</span> <span class="o">-</span><span class="n">m</span> <span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="o">&lt;</span><span class="n">INSTALL_DIR</span><span class="o">&gt;/</span><span class="n">tools</span><span class="o">/</span><span class="n">requirements_tf</span><span class="p">.</span><span class="n">txt</span></pre></div></div><p>This will install all the development tools and additional components necessary to work with TensorFlow via the <code class="docutils literal notranslate"><span class="pre">openvino-dev</span></code> package (see <strong>Step 4. Install the Package</strong> on the <a class="reference external" href="https://pypi.org/project/openvino-dev/">PyPI page</a> for parameters of other frameworks).</p>
 <p>Then, the tools can be used by commands like:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="err">$</span> <span class="n">mo</span> <span class="o">-</span><span class="n">h</span>
 <span class="err">$</span> <span class="n">pot</span> <span class="o">-</span><span class="n">h</span></pre></div></div><p>Installation of any other dependencies is not required. For more details on the installation steps, see the <a class="reference internal" href="openvino_docs_install_guides_install_dev_tools.html#doxid-openvino-docs-install-guides-install-dev-tools"><span class="std std-ref">Install OpenVINO Development Tools</span></a>.</p>
-</div>
-</div>
-<div class="section" id="interface-changes-for-building-c-c-applications">
+</section>
+</section>
+<section id="interface-changes-for-building-c-c-applications">
 <h2>Interface Changes for Building C/C++ Applications<a class="headerlink" href="#interface-changes-for-building-c-c-applications" title="Permalink to this headline">¶</a></h2>
 <p>The new OpenVINO Runtime with its API 2.0 has also brought some changes for building C/C++ applications.</p>
-<div class="section" id="cmake-interface">
+<section id="cmake-interface">
 <h3>CMake Interface<a class="headerlink" href="#cmake-interface" title="Permalink to this headline">¶</a></h3>
 <p>The CMake interface has been changed as follows:</p>
 <p><strong>With Inference Engine of previous versions</strong> :</p>
@@ -1915,8 +1922,8 @@
 <span class="n">target_link_libraries</span><span class="p">(</span><span class="n">ov_app</span> <span class="n">PRIVATE</span> <span class="n">openvino</span><span class="o">::</span><span class="n">runtime</span><span class="p">)</span>
 
 <span class="n">add_executable</span><span class="p">(</span><span class="n">ov_c_app</span> <span class="n">main</span><span class="p">.</span><span class="n">c</span><span class="p">)</span>
-<span class="n">target_link_libraries</span><span class="p">(</span><span class="n">ov_c_app</span> <span class="n">PRIVATE</span> <span class="n">openvino</span><span class="o">::</span><span class="n">runtime</span><span class="o">::</span><span class="n">c</span><span class="p">)</span></pre></div></div></div>
-<div class="section" id="native-interfaces">
+<span class="n">target_link_libraries</span><span class="p">(</span><span class="n">ov_c_app</span> <span class="n">PRIVATE</span> <span class="n">openvino</span><span class="o">::</span><span class="n">runtime</span><span class="o">::</span><span class="n">c</span><span class="p">)</span></pre></div></div></section>
+<section id="native-interfaces">
 <h3>Native Interfaces<a class="headerlink" href="#native-interfaces" title="Permalink to this headline">¶</a></h3>
 <p>It is possible to build applications without the CMake interface by using: MSVC IDE, UNIX makefiles, and any other interface, which has been changed as shown here:</p>
 <p><strong>With Inference Engine of previous versions</strong> :</p>
@@ -1976,15 +1983,15 @@ openvino.dll
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="clearer-library-structure-for-deployment">
+</section>
+</section>
+<section id="clearer-library-structure-for-deployment">
 <h2>Clearer Library Structure for Deployment<a class="headerlink" href="#clearer-library-structure-for-deployment" title="Permalink to this headline">¶</a></h2>
 <p>OpenVINO 2022.1 introduced a reorganization of the libraries, to make deployment easier. In the previous versions, it was required to use several libraries to perform deployment steps. Now you can just use <code class="docutils literal notranslate"><span class="pre">openvino</span></code> or <code class="docutils literal notranslate"><span class="pre">openvino_c</span></code> based on your developing language, with the necessary plugins to complete your task. For example, <code class="docutils literal notranslate"><span class="pre">openvino_intel_cpu_plugin</span></code> and <code class="docutils literal notranslate"><span class="pre">openvino_ir_frontend</span></code> plugins will enable loading OpenVINO IRs and performing inference on the CPU device (for more details, see the <a class="reference internal" href="openvino_docs_deploy_local_distribution.html#doxid-openvino-docs-deploy-local-distribution"><span class="std std-ref">Local distribution with OpenVINO</span></a>).</p>
 <p>Below are detailed comparisons of the library structure between OpenVINO 2022.1 and the previous versions:</p>
 <ul class="simple">
 <li><p>Starting with 2022.1 release, a single core library with all the functionalities (<code class="docutils literal notranslate"><span class="pre">openvino</span></code> for C++ Runtime, <code class="docutils literal notranslate"><span class="pre">openvino_c</span></code> for Inference Engine API C interface) is used, instead of the previous core libraries which contained <code class="docutils literal notranslate"><span class="pre">inference_engine</span></code>, <code class="docutils literal notranslate"><span class="pre">ngraph</span></code>, <code class="docutils literal notranslate"><span class="pre">inference_engine_transformations</span></code> and <code class="docutils literal notranslate"><span class="pre">inference_engine_lp_transformations</span></code>.</p></li>
-<li><p>The optional <code class="docutils literal notranslate"><span class="pre">inference_engine_preproc</span></code> preprocessing library (if <code class="docutils literal notranslate"><span class="pre">InferenceEngine::PreProcessInfo::setColorFormat</span></code> or <code class="docutils literal notranslate"><span class="pre">InferenceEngine::PreProcessInfo::setResizeAlgorithm</span></code> is used) has been renamed to <code class="docutils literal notranslate"><span class="pre">openvino_gapi_preproc</span></code> and deprecated in 2022.1. For more details, see the <a class="reference internal" href="openvino_2_0_preprocessing.html#doxid-openvino-2-0-preprocessing"><span class="std std-ref">Preprocessing capabilities of OpenVINO API 2.0</span></a>.</p></li>
+<li><p>The optional <code class="docutils literal notranslate"><span class="pre">inference_engine_preproc</span></code> preprocessing library (if <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classInferenceEngine_1_1PreProcessInfo.html#doxid-class-inference-engine-1-1-pre-process-info-1a3a10ba0d562a2268fe584d4d2db94cac"><span class="std std-ref"><span class="pre">InferenceEngine::PreProcessInfo::setColorFormat</span></span></a></code> or <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classInferenceEngine_1_1PreProcessInfo.html#doxid-class-inference-engine-1-1-pre-process-info-1a0c083c43d01c53c327f09095e3e3f004"><span class="std std-ref"><span class="pre">InferenceEngine::PreProcessInfo::setResizeAlgorithm</span></span></a></code> is used) has been renamed to <code class="docutils literal notranslate"><span class="pre">openvino_gapi_preproc</span></code> and deprecated in 2022.1. For more details, see the <a class="reference internal" href="openvino_2_0_preprocessing.html#doxid-openvino-2-0-preprocessing"><span class="std std-ref">Preprocessing capabilities of OpenVINO API 2.0</span></a>.</p></li>
 <li><p>The libraries of plugins have been renamed as follows:</p>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">openvino_intel_cpu_plugin</span></code> is used for <a class="reference internal" href="openvino_docs_OV_UG_supported_plugins_CPU.html#doxid-openvino-docs-o-v-u-g-supported-plugins-c-p-u"><span class="std std-ref">CPU</span></a> device instead of <code class="docutils literal notranslate"><span class="pre">MKLDNNPlugin</span></code>.</p></li>
@@ -2000,8 +2007,8 @@ openvino.dll
 </ul>
 </li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -2032,7 +2039,7 @@ openvino.dll
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

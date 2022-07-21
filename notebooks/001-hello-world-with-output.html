@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Hello Image Classification &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -500,7 +507,7 @@
             
                 <div>
                   
-  <div class="section" id="hello-image-classification">
+  <section id="hello-image-classification">
 <h1>Hello Image Classification<a class="headerlink" href="#hello-image-classification" title="Permalink to this headline">¶</a></h1>
 <p>A very basic introduction to OpenVINO that shows how to perform
 inference with an image classification model.</p>
@@ -512,7 +519,7 @@ Zoo</a>. See the
 OpenVINO</a>
 tutorial to learn more about how OpenVINO IR model like this one is
 created.</p>
-<div class="section" id="imports">
+<section id="imports">
 <h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cv2</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -520,8 +527,8 @@ created.</p>
 <span class="kn">from</span> <span class="nn">openvino.runtime</span> <span class="kn">import</span> <span class="n">Core</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="load-the-model">
+</section>
+<section id="load-the-model">
 <h2>Load the Model<a class="headerlink" href="#load-the-model" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ie</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span>
 <span class="n">model</span> <span class="o">=</span> <span class="n">ie</span><span class="o">.</span><span class="n">read_model</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s2">&quot;model/v3-small_224_1.0_float.xml&quot;</span><span class="p">)</span>
@@ -530,8 +537,8 @@ created.</p>
 <span class="n">output_layer</span> <span class="o">=</span> <span class="n">compiled_model</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="load-an-image">
+</section>
+<section id="load-an-image">
 <h2>Load an Image<a class="headerlink" href="#load-an-image" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The MobileNet model expects images in RGB format</span>
 <span class="n">image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s2">&quot;data/coco.jpg&quot;</span><span class="p">),</span> <span class="n">code</span><span class="o">=</span><span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2RGB</span><span class="p">)</span>
@@ -545,8 +552,8 @@ created.</p>
 </pre></div>
 </div>
 <img alt="../_images/001-hello-world-with-output_6_0.png" src="../_images/001-hello-world-with-output_6_0.png" />
-</div>
-<div class="section" id="do-inference">
+</section>
+<section id="do-inference">
 <h2>Do Inference<a class="headerlink" href="#do-inference" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result_infer</span> <span class="o">=</span> <span class="n">compiled_model</span><span class="p">([</span><span class="n">input_image</span><span class="p">])[</span><span class="n">output_layer</span><span class="p">]</span>
 <span class="n">result_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">result_infer</span><span class="p">)</span>
@@ -565,8 +572,8 @@ created.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;n02099267 flat-coated retriever&#39;</span>
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -597,7 +604,7 @@ created.</p>
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

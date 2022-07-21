@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>OpenVINO™ Model Server Benchmark Results &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -1944,11 +1951,11 @@
             
                 <div>
                   
-  <div class="section" id="openvino-model-server-benchmark-results">
+  <section id="openvino-model-server-benchmark-results">
 <span id="doxid-openvino-docs-performance-benchmarks-ovms"></span><span id="index-0"></span><h1>OpenVINO™ Model Server Benchmark Results<a class="headerlink" href="#openvino-model-server-benchmark-results" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-openvino-docs-performance-benchmarks-ovms-1md-openvino-docs-benchmarks-performance-benchmarks-ovms"></span> OpenVINO™ Model Server is an open-source, production-grade inference platform that exposes a set of models via a convenient inference API over gRPC or HTTP/REST. It employs the OpenVINO™ Runtime libraries from the Intel® Distribution of OpenVINO™ toolkit to extend workloads across Intel® hardware including CPU, GPU and others.</p>
 <img alt="OpenVINO™ Model Server" src="../_images/performance_benchmarks_ovms_01.png" />
-<div class="section" id="measurement-methodology">
+<section id="measurement-methodology">
 <h2>Measurement Methodology<a class="headerlink" href="#measurement-methodology" title="Permalink to this headline">¶</a></h2>
 <p>OpenVINO™ Model Server is measured in multiple-client-single-server configuration using two hardware platforms connected by ethernet network. The network bandwidth depends on the platforms as well as models under investigation and it is set to not be a bottleneck for workload intensity. This connection is dedicated only to the performance measurements. The benchmark setup is consists of four main parts:</p>
 <img alt="OVMS Benchmark Setup Diagram" src="../_images/performance_benchmarks_ovms_02.png" />
@@ -1958,75 +1965,75 @@
 <li><p><strong>Load balancer</strong> works on the client platform in a docker container. HAProxy is used for this purpose. Its main role is counting of requests forwarded from clients to OpenVINO™ Model Server, estimating its latency, and sharing this information by Prometheus service. The reason of locating the load balancer on the client site is to simulate real life scenario that includes impact of physical network on reported metrics.</p></li>
 <li><p><strong>Execution Controller</strong> is launched on the client platform. It is responsible for synchronization of the whole measurement process, downloading metrics from the load balancer, and presenting the final report of the execution.</p></li>
 </ul>
-</div>
-<div class="section" id="resnet-50-tf-int8">
+</section>
+<section id="resnet-50-tf-int8">
 <h2>resnet-50-TF (INT8)<a class="headerlink" href="#resnet-50-tf-int8" title="Permalink to this headline">¶</a></h2>
 <img alt="../_images/throughput_ovms_resnet50_int8.png" src="../_images/throughput_ovms_resnet50_int8.png" />
-</div>
-<div class="section" id="resnet-50-tf-fp32">
+</section>
+<section id="resnet-50-tf-fp32">
 <h2>resnet-50-TF (FP32)<a class="headerlink" href="#resnet-50-tf-fp32" title="Permalink to this headline">¶</a></h2>
 <img alt="../_images/throughput_ovms_resnet50_fp32_bs_1.png" src="../_images/throughput_ovms_resnet50_fp32_bs_1.png" />
-</div>
-<div class="section" id="googlenet-v4-tf-fp32">
+</section>
+<section id="googlenet-v4-tf-fp32">
 <h2>googlenet-v4-TF (FP32)<a class="headerlink" href="#googlenet-v4-tf-fp32" title="Permalink to this headline">¶</a></h2>
 <img alt="../_images/throughput_ovms_googlenet4_fp32.png" src="../_images/throughput_ovms_googlenet4_fp32.png" />
-</div>
-<div class="section" id="yolo-v3-tf-fp32">
+</section>
+<section id="yolo-v3-tf-fp32">
 <h2>yolo-v3-tf (FP32)<a class="headerlink" href="#yolo-v3-tf-fp32" title="Permalink to this headline">¶</a></h2>
 <img alt="../_images/throughput_ovms_yolo3_fp32.png" src="../_images/throughput_ovms_yolo3_fp32.png" />
-</div>
-<div class="section" id="yolo-v4-tf-fp32">
+</section>
+<section id="yolo-v4-tf-fp32">
 <h2>yolo-v4-tf (FP32)<a class="headerlink" href="#yolo-v4-tf-fp32" title="Permalink to this headline">¶</a></h2>
 <img alt="../_images/throughput_ovms_yolo4_fp32.png" src="../_images/throughput_ovms_yolo4_fp32.png" />
-</div>
-<div class="section" id="brain-tumor-segmentation-0002">
+</section>
+<section id="brain-tumor-segmentation-0002">
 <h2>brain-tumor-segmentation-0002<a class="headerlink" href="#brain-tumor-segmentation-0002" title="Permalink to this headline">¶</a></h2>
 <img alt="../_images/throughput_ovms_braintumorsegmentation.png" src="../_images/throughput_ovms_braintumorsegmentation.png" />
-</div>
-<div class="section" id="alexnet">
+</section>
+<section id="alexnet">
 <h2>alexnet<a class="headerlink" href="#alexnet" title="Permalink to this headline">¶</a></h2>
 <img alt="../_images/throughput_ovms_alexnet.png" src="../_images/throughput_ovms_alexnet.png" />
-</div>
-<div class="section" id="mobilenet-v3-large-1-0-224-tf-fp32">
+</section>
+<section id="mobilenet-v3-large-1-0-224-tf-fp32">
 <h2>mobilenet-v3-large-1.0-224-TF (FP32)<a class="headerlink" href="#mobilenet-v3-large-1-0-224-tf-fp32" title="Permalink to this headline">¶</a></h2>
 <img alt="../_images/throughput_ovms_mobilenet3large_fp32.png" src="../_images/throughput_ovms_mobilenet3large_fp32.png" />
-</div>
-<div class="section" id="deeplabv3-fp32">
+</section>
+<section id="deeplabv3-fp32">
 <h2>deeplabv3 (FP32)<a class="headerlink" href="#deeplabv3-fp32" title="Permalink to this headline">¶</a></h2>
 <img alt="../_images/throughput_ovms_deeplabv3_fp32.png" src="../_images/throughput_ovms_deeplabv3_fp32.png" />
-</div>
-<div class="section" id="bert-small-uncased-whole-word-masking-squad-int8-0002-int8">
+</section>
+<section id="bert-small-uncased-whole-word-masking-squad-int8-0002-int8">
 <h2>bert-small-uncased-whole-word-masking-squad-int8-0002 (INT8)<a class="headerlink" href="#bert-small-uncased-whole-word-masking-squad-int8-0002-int8" title="Permalink to this headline">¶</a></h2>
 <img alt="../_images/throughput_ovms_bertsmall_int8.png" src="../_images/throughput_ovms_bertsmall_int8.png" />
-</div>
-<div class="section" id="bert-small-uncased-whole-word-masking-squad-0002-fp32">
+</section>
+<section id="bert-small-uncased-whole-word-masking-squad-0002-fp32">
 <h2>bert-small-uncased-whole-word-masking-squad-0002 (FP32)<a class="headerlink" href="#bert-small-uncased-whole-word-masking-squad-0002-fp32" title="Permalink to this headline">¶</a></h2>
 <img alt="../_images/throughput_ovms_bertsmall_fp32.png" src="../_images/throughput_ovms_bertsmall_fp32.png" />
-</div>
-<div class="section" id="d-u-net-fp32">
+</section>
+<section id="d-u-net-fp32">
 <h2>3D U-Net (FP32)<a class="headerlink" href="#d-u-net-fp32" title="Permalink to this headline">¶</a></h2>
 <img alt="../_images/throughput_ovms_3dunet.png" src="../_images/throughput_ovms_3dunet.png" />
-</div>
-<div class="section" id="image-compression-for-improved-throughput">
+</section>
+<section id="image-compression-for-improved-throughput">
 <h2>Image Compression for Improved Throughput<a class="headerlink" href="#image-compression-for-improved-throughput" title="Permalink to this headline">¶</a></h2>
 <p>OpenVINO Model Server supports compressed binary input data (images in JPEG and PNG formats) for vision processing models. This feature improves overall performance on networks where the bandwidth constitutes a system bottleneck. A good example of such use could be wireless 5G communication, a typical 1 Gbit/sec Ethernet network or a usage scenario with many client machines issuing a high rate of inference requests to one single central OpenVINO model server. Generally the performance improvement increases with increased compressibility of the data/image. The decompression on the server-side is performed by the OpenCV library. Please refer to <a class="reference external" href="#supported-image-formats-for-ovms-compression">Supported Image Formats</a>.</p>
-<div class="section" id="id1">
+<section id="id1">
 <h3>googlenet-v4-tf (FP32)<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <img alt="../_images/throughput_ovms_1gbps_googlenet4_fp32.png" src="../_images/throughput_ovms_1gbps_googlenet4_fp32.png" />
-</div>
-<div class="section" id="id2">
+</section>
+<section id="id2">
 <h3>resnet-50-tf (INT8)<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <img alt="../_images/throughput_ovms_1gbps_resnet50_int8.png" src="../_images/throughput_ovms_1gbps_resnet50_int8.png" />
-</div>
-<div class="section" id="id3">
+</section>
+<section id="id3">
 <h3>resnet-50-tf (FP32)<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <img alt="../_images/throughput_ovms_1gbps_resnet50_fp32.png" src="../_images/throughput_ovms_1gbps_resnet50_fp32.png" />
-</div>
-</div>
-<div class="section" id="platform-configurations">
+</section>
+</section>
+<section id="platform-configurations">
 <h2>Platform Configurations<a class="headerlink" href="#platform-configurations" title="Permalink to this headline">¶</a></h2>
 <p>OpenVINO™ Model Server performance benchmark numbers are based on release 2021.4. Performance results are based on testing as of June 17, 2021 and may not reflect all publicly available updates.</p>
-<div class="section" id="platform-with-intel-xeon-platinum-8260m">
+<section id="platform-with-intel-xeon-platinum-8260m">
 <h3>Platform with Intel® Xeon® Platinum 8260M<a class="headerlink" href="#platform-with-intel-xeon-platinum-8260m" title="Permalink to this headline">¶</a></h3>
 <table class="table">
   <tr>
@@ -2088,8 +2095,8 @@
     <td><strong>Network Speed</strong></td>
     <td colspan="2">40 Gb/s</td>
   </tr>
-</table></div>
-<div class="section" id="platform-with-intel-xeon-gold-6252">
+</table></section>
+<section id="platform-with-intel-xeon-gold-6252">
 <h3>Platform with Intel® Xeon® Gold 6252<a class="headerlink" href="#platform-with-intel-xeon-gold-6252" title="Permalink to this headline">¶</a></h3>
 <table class="table">
   <tr>
@@ -2151,8 +2158,8 @@
     <td><strong>Network Speed</strong></td>
     <td colspan="2" align="center">40 Gb/s</td>
   </tr>
-</table></div>
-<div class="section" id="platform-with-intel-core-i9-10920x">
+</table></section>
+<section id="platform-with-intel-core-i9-10920x">
 <h3>Platform with Intel® Core™ i9-10920X<a class="headerlink" href="#platform-with-intel-core-i9-10920x" title="Permalink to this headline">¶</a></h3>
 <table class="table">
 <tr>
@@ -2215,8 +2222,8 @@
   <td><strong>Network Speed</strong></td>
   <td colspan="2" align="center">10 Gb/s</td>
 </tr>
-</table></div>
-<div class="section" id="platform-with-intel-core-i7-8700t">
+</table></section>
+<section id="platform-with-intel-core-i7-8700t">
 <h3>Platform with Intel® Core™ i7-8700T<a class="headerlink" href="#platform-with-intel-core-i7-8700t" title="Permalink to this headline">¶</a></h3>
 <table class="table">
 <tr>
@@ -2279,8 +2286,8 @@
   <td><strong>Network Speed</strong></td>
   <td colspan="2" align="center">10 Gb/s</td>
 </tr>
-</table></div>
-<div class="section" id="platform-with-intel-core-i5-8500">
+</table></section>
+<section id="platform-with-intel-core-i5-8500">
 <h3>Platform with Intel® Core™ i5-8500<a class="headerlink" href="#platform-with-intel-core-i5-8500" title="Permalink to this headline">¶</a></h3>
 <table class="table">
 <tr>
@@ -2343,8 +2350,8 @@
   <td><strong>Network Speed</strong></td>
   <td colspan="2" align="center">40 Gb/s</td>
 </tr>
-</table></div>
-<div class="section" id="platform-with-intel-core-i3-8100">
+</table></section>
+<section id="platform-with-intel-core-i3-8100">
 <h3>Platform with Intel® Core™ i3-8100<a class="headerlink" href="#platform-with-intel-core-i3-8100" title="Permalink to this headline">¶</a></h3>
 <table class="table">
 <tr>
@@ -2407,9 +2414,9 @@
   <td><strong>Network Speed</strong></td>
   <td colspan="2" align="center">40 Gb/s</td>
 </tr>
-</table></div>
-</div>
-<div class="section" id="supported-image-formats-for-ovms-compression">
+</table></section>
+</section>
+<section id="supported-image-formats-for-ovms-compression">
 <h2>Supported Image Formats for OVMS Compression<a class="headerlink" href="#supported-image-formats-for-ovms-compression" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>Always supported:</p>
@@ -2432,8 +2439,8 @@
 </ul>
 </li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -2464,7 +2471,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

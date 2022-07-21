@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Live Human Pose Estimation with OpenVINO &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -546,7 +553,7 @@
             
                 <div>
                   
-  <div class="section" id="live-human-pose-estimation-with-openvino">
+  <section id="live-human-pose-estimation-with-openvino">
 <h1>Live Human Pose Estimation with OpenVINO<a class="headerlink" href="#live-human-pose-estimation-with-openvino" title="Permalink to this headline">¶</a></h1>
 <p>This notebook demonstrates live pose estimation with OpenVINO. We use
 the OpenPose model
@@ -561,7 +568,7 @@ computer with a webcam. If you run on a server, the webcam will not
 work. However, you can still do inference on a video in the final
 step.</em></p>
 </div></blockquote>
-<div class="section" id="imports">
+<section id="imports">
 <h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">collections</span>
 <span class="kn">import</span> <span class="nn">os</span>
@@ -580,10 +587,10 @@ step.</em></p>
 <span class="kn">import</span> <span class="nn">notebook_utils</span> <span class="k">as</span> <span class="nn">utils</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="the-model">
+</section>
+<section id="the-model">
 <h2>The model<a class="headerlink" href="#the-model" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="download-the-model">
+<section id="download-the-model">
 <h3>Download the model<a class="headerlink" href="#download-the-model" title="Permalink to this headline">¶</a></h3>
 <p>We use <code class="docutils literal notranslate"><span class="pre">omz_downloader</span></code>, which is a command line tool from the
 <code class="docutils literal notranslate"><span class="pre">openvino-dev</span></code> package. <code class="docutils literal notranslate"><span class="pre">omz_downloader</span></code> automatically creates a
@@ -617,8 +624,8 @@ precision. <em>Note: This will require a different pose decoder</em>.</p>
 <span class="o">==========</span> <span class="n">Downloading</span> <span class="n">model</span><span class="o">/</span><span class="n">intel</span><span class="o">/</span><span class="n">human</span><span class="o">-</span><span class="n">pose</span><span class="o">-</span><span class="n">estimation</span><span class="o">-</span><span class="mi">0001</span><span class="o">/</span><span class="n">FP16</span><span class="o">-</span><span class="n">INT8</span><span class="o">/</span><span class="n">human</span><span class="o">-</span><span class="n">pose</span><span class="o">-</span><span class="n">estimation</span><span class="o">-</span><span class="mf">0001.</span><span class="n">bin</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="load-the-model">
+</section>
+<section id="load-the-model">
 <h3>Load the model<a class="headerlink" href="#load-the-model" title="Permalink to this headline">¶</a></h3>
 <p>Downloaded models are located in a fixed structure, which indicates
 vendor, model name and precision.</p>
@@ -650,11 +657,11 @@ we have one input and two outputs: pafs and keypoints heatmap.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;Mconv7_stage2_L1&#39;</span><span class="p">,</span> <span class="s1">&#39;Mconv7_stage2_L2&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="processing">
+</section>
+</section>
+<section id="processing">
 <h2>Processing<a class="headerlink" href="#processing" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="openposedecoder">
+<section id="openposedecoder">
 <h3>OpenPoseDecoder<a class="headerlink" href="#openposedecoder" title="Permalink to this headline">¶</a></h3>
 <p>We need a decoder to transform the raw results from the neural network
 into pose estimations. This magic happens inside Open Pose Decoder,
@@ -669,8 +676,8 @@ of Open Model Zoo.</p>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">decoder</span> <span class="o">=</span> <span class="n">OpenPoseDecoder</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="process-results">
+</section>
+<section id="process-results">
 <h3>Process Results<a class="headerlink" href="#process-results" title="Permalink to this headline">¶</a></h3>
 <p>A bunch of useful functions to transform results into poses.</p>
 <p>First, we will pool the heatmap. Since pooling is not available in
@@ -737,8 +744,8 @@ scaling factor.</p>
     <span class="k">return</span> <span class="n">poses</span><span class="p">,</span> <span class="n">scores</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="draw-pose-overlays">
+</section>
+<section id="draw-pose-overlays">
 <h3>Draw Pose Overlays<a class="headerlink" href="#draw-pose-overlays" title="Permalink to this headline">¶</a></h3>
 <p>Draw pose overlays on the image to visualize estimated poses. Joints are
 drawn as circles and limbs are drawn as lines. The code is based on the
@@ -773,8 +780,8 @@ from Open Model Zoo.</p>
     <span class="k">return</span> <span class="n">img</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="main-processing-function">
+</section>
+<section id="main-processing-function">
 <h3>Main Processing Function<a class="headerlink" href="#main-processing-function" title="Permalink to this headline">¶</a></h3>
 <p>Run pose estimation on the specified source. Either a webcam or a video
 file.</p>
@@ -866,11 +873,11 @@ file.</p>
             <span class="n">cv2</span><span class="o">.</span><span class="n">destroyAllWindows</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="run">
+</section>
+</section>
+<section id="run">
 <h2>Run<a class="headerlink" href="#run" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="run-live-pose-estimation">
+<section id="run-live-pose-estimation">
 <h3>Run Live Pose Estimation<a class="headerlink" href="#run-live-pose-estimation" title="Permalink to this headline">¶</a></h3>
 <p>Run using a webcam as the video input. By default, the primary webcam is
 set with <code class="docutils literal notranslate"><span class="pre">source=0</span></code>. If you have multiple webcams, each one will be
@@ -889,8 +896,8 @@ computer (e.g. Binder).</em></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Cannot</span> <span class="nb">open</span> <span class="n">camera</span> <span class="mi">0</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="run-pose-estimation-on-a-video-file">
+</section>
+<section id="run-pose-estimation-on-a-video-file">
 <h3>Run Pose Estimation on a Video File<a class="headerlink" href="#run-pose-estimation-on-a-video-file" title="Permalink to this headline">¶</a></h3>
 <p>If you don’t have a webcam, you can still run this demo with a video
 file. Any <a class="reference external" href="https://docs.opencv.org/4.5.1/dd/d43/tutorial_py_video_display.html">format supported by
@@ -905,9 +912,9 @@ will work. You can skip first N frames to fast forward video.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Source</span> <span class="n">ended</span>
 </pre></div>
 </div>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
                 </div>
@@ -938,7 +945,7 @@ will work. You can skip first N frames to fast forward video.</p>
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

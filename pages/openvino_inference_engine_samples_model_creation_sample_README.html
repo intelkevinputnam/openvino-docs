@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Model Creation C++ Sample &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -622,10 +629,10 @@
             
                 <div>
                   
-  <div class="section" id="model-creation-c-sample">
+  <section id="model-creation-c-sample">
 <span id="doxid-openvino-inference-engine-samples-model-creation-sample-r-e-a-d-m-e"></span><span id="index-0"></span><h1>Model Creation C++ Sample<a class="headerlink" href="#model-creation-c-sample" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-openvino-inference-engine-samples-model-creation-sample-r-e-a-d-m-e-1md-openvino-samples-cpp-model-creation-sample-readme"></span> This sample demonstrates how to execute an synchronous inference using <a class="reference internal" href="openvino_docs_OV_UG_Model_Representation.html#doxid-openvino-docs-o-v-u-g-model-representation"><span class="std std-ref">model</span></a> built on the fly which uses weights from LeNet classification model, which is known to work well on digit classification tasks.</p>
-<p>You do not need an XML file to create a model. The API of <span class="xref std std-ref">ov::Model</span> allows creating a model on the fly from the source code.</p>
+<p>You do not need an XML file to create a model. The API of <a class="reference internal" href="../api/groups/classov_1_1Model.html#doxid-classov-1-1-model"><span class="std std-ref">ov::Model</span></a> allows creating a model on the fly from the source code.</p>
 <p>The following C++ API is used in the application:</p>
 <table class="table">
 <colgroup>
@@ -645,23 +652,23 @@
 <td><p>Get device plugins versions</p></td>
 </tr>
 <tr class="row-odd"><td><p>Shape Operations</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">ov::Output::get_shape</span></code> , <code class="docutils literal notranslate"><span class="pre">ov::Shape::size</span></code> , <code class="docutils literal notranslate"><span class="pre">ov::shape_size</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ov::Output::get_shape</span></code> , <code class="docutils literal notranslate"><span class="pre">ov::Shape::size</span></code> , <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/groupov_model_cpp_api.html#doxid-group-ov-model-cpp-api-1gafe8cdd6477ae9810c2bf368602d35883"><span class="std std-ref"><span class="pre">ov::shape_size</span></span></a></code></p></td>
 <td><p>Operate with shape</p></td>
 </tr>
 <tr class="row-even"><td><p>Tensor Operations</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">ov::Tensor::get_byte_size</span></code> , <code class="docutils literal notranslate"><span class="pre">ov::Tensor</span><span class="pre">:data</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1Tensor.html#doxid-classov-1-1-tensor-1ae540fcafc1e9dc9181e86a1ec2682935"><span class="std std-ref"><span class="pre">ov::Tensor::get_byte_size</span></span></a></code> , <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1Tensor.html#doxid-classov-1-1-tensor"><span class="std std-ref"><span class="pre">ov::Tensor</span></span></a><span class="pre">:data</span></code></p></td>
 <td><p>Get tensor byte size and its data</p></td>
 </tr>
 <tr class="row-odd"><td><p>Model Operations</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">ov::set_batch</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/namespaceov.html#doxid-namespaceov-1a3314e2ff91fcc9ffec05b1a77c37862b"><span class="std std-ref"><span class="pre">ov::set_batch</span></span></a></code></p></td>
 <td><p>Operate with model batch size</p></td>
 </tr>
 <tr class="row-even"><td><p>Infer Request Operations</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">ov::InferRequest::get_input_tensor</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1InferRequest.html#doxid-classov-1-1-infer-request-1a5f0bc1ab40de6a7a12136b4a4e6a8b54"><span class="std std-ref"><span class="pre">ov::InferRequest::get_input_tensor</span></span></a></code></p></td>
 <td><p>Get a input tensor</p></td>
 </tr>
 <tr class="row-odd"><td><p>Model creation objects</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">ov::opset8::Parameter</span></code> , <code class="docutils literal notranslate"><span class="pre">ov::Node::output</span></code> , <code class="docutils literal notranslate"><span class="pre">ov::opset8::Constant</span></code> , <code class="docutils literal notranslate"><span class="pre">ov::opset8::Convolution</span></code> , <code class="docutils literal notranslate"><span class="pre">ov::opset8::Add</span></code> , <code class="docutils literal notranslate"><span class="pre">ov::opset1::MaxPool</span></code> , <code class="docutils literal notranslate"><span class="pre">ov::opset8::Reshape</span></code> , <code class="docutils literal notranslate"><span class="pre">ov::opset8::MatMul</span></code> , <code class="docutils literal notranslate"><span class="pre">ov::opset8::Relu</span></code> , <code class="docutils literal notranslate"><span class="pre">ov::opset8::Softmax</span></code> , <code class="docutils literal notranslate"><span class="pre">ov::descriptor::Tensor::set_names</span></code> , <code class="docutils literal notranslate"><span class="pre">ov::opset8::Result</span></code> , <code class="docutils literal notranslate"><span class="pre">ov::Model</span></code> , <code class="docutils literal notranslate"><span class="pre">ov::ParameterVector::vector</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ov::opset8::Parameter</span></code> , <code class="docutils literal notranslate"><span class="pre">ov::Node::output</span></code> , <code class="docutils literal notranslate"><span class="pre">ov::opset8::Constant</span></code> , <code class="docutils literal notranslate"><span class="pre">ov::opset8::Convolution</span></code> , <code class="docutils literal notranslate"><span class="pre">ov::opset8::Add</span></code> , <code class="docutils literal notranslate"><span class="pre">ov::opset1::MaxPool</span></code> , <code class="docutils literal notranslate"><span class="pre">ov::opset8::Reshape</span></code> , <code class="docutils literal notranslate"><span class="pre">ov::opset8::MatMul</span></code> , <code class="docutils literal notranslate"><span class="pre">ov::opset8::Relu</span></code> , <code class="docutils literal notranslate"><span class="pre">ov::opset8::Softmax</span></code> , <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1descriptor_1_1Tensor.html#doxid-classov-1-1descriptor-1-1-tensor-1a5f21c3cb845cbee0b7350163644776a0"><span class="std std-ref"><span class="pre">ov::descriptor::Tensor::set_names</span></span></a></code> , <code class="docutils literal notranslate"><span class="pre">ov::opset8::Result</span></code> , <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1Model.html#doxid-classov-1-1-model"><span class="std std-ref"><span class="pre">ov::Model</span></span></a></code> , <code class="docutils literal notranslate"><span class="pre">ov::ParameterVector::vector</span></code></p></td>
 <td><p>Used to construct an OpenVINO model</p></td>
 </tr>
 </tbody>
@@ -695,7 +702,7 @@
 </tr>
 </tbody>
 </table>
-<div class="section" id="how-it-works">
+<section id="how-it-works">
 <h2>How It Works<a class="headerlink" href="#how-it-works" title="Permalink to this headline">¶</a></h2>
 <p>At startup, the sample application does the following:</p>
 <ul class="simple">
@@ -705,12 +712,12 @@
 <li><p>Performs synchronous inference and processes output data, logging each step in a standard output stream</p></li>
 </ul>
 <p>You can see the explicit description of each sample step at <a class="reference internal" href="openvino_docs_OV_UG_Integrate_OV_with_your_application.html#doxid-openvino-docs-o-v-u-g-integrate-o-v-with-your-application"><span class="std std-ref">Integration Steps</span></a> section of “Integrate OpenVINO™ Runtime with Your Application” guide.</p>
-</div>
-<div class="section" id="building">
+</section>
+<section id="building">
 <h2>Building<a class="headerlink" href="#building" title="Permalink to this headline">¶</a></h2>
 <p>To build the sample, please use instructions available at <a class="reference internal" href="openvino_docs_OV_UG_Samples_Overview.html#doxid-openvino-docs-o-v-u-g-samples-overview"><span class="std std-ref">Build the Sample Applications</span></a> section in OpenVINO™ Toolkit Samples guide.</p>
-</div>
-<div class="section" id="running">
+</section>
+<section id="running">
 <h2>Running<a class="headerlink" href="#running" title="Permalink to this headline">¶</a></h2>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">model_creation_sample</span> <span class="o">&lt;</span><span class="n">path_to_lenet_weights</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">device</span><span class="o">&gt;</span></pre></div></div><p><strong>NOTES</strong> :</p>
 <ul class="simple">
@@ -719,8 +726,8 @@
 </ul>
 <p>The original model is available in the <a class="reference external" href="https://github.com/BVLC/caffe/tree/master/examples/mnist">Caffe* repository</a> on GitHub*.</p>
 <p>You can do inference of an image using a pre-trained model on a GPU using the following command:</p>
-<div class="highlight"><div class="highlight"><pre><span></span><span class="n">model_creation_sample</span> <span class="n">lenet</span><span class="p">.</span><span class="n">bin</span> <span class="n">GPU</span></pre></div></div></div>
-<div class="section" id="sample-output">
+<div class="highlight"><div class="highlight"><pre><span></span><span class="n">model_creation_sample</span> <span class="n">lenet</span><span class="p">.</span><span class="n">bin</span> <span class="n">GPU</span></pre></div></div></section>
+<section id="sample-output">
 <h2>Sample Output<a class="headerlink" href="#sample-output" title="Permalink to this headline">¶</a></h2>
 <p>The sample application logs each step in a standard output stream and outputs top-10 inference results.</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">OpenVINO</span> <span class="n">Runtime</span> <span class="n">version</span> <span class="p">.........</span> <span class="o">&lt;</span><span class="n">version</span><span class="o">&gt;</span>
@@ -818,8 +825,8 @@
 
 <span class="n">classid</span> <span class="n">probability</span> <span class="n">label</span>
 <span class="o">-------</span> <span class="o">-----------</span> <span class="o">-----</span>
-<span class="mi">9</span>       <span class="mf">1.0000000</span>   <span class="mi">9</span></pre></div></div></div>
-<div class="section" id="deprecation-notice">
+<span class="mi">9</span>       <span class="mf">1.0000000</span>   <span class="mi">9</span></pre></div></div></section>
+<section id="deprecation-notice">
 <h2>Deprecation Notice<a class="headerlink" href="#deprecation-notice" title="Permalink to this headline">¶</a></h2>
 <table class="table">
 <colgroup>
@@ -837,16 +844,16 @@
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="see-also">
+</section>
+<section id="see-also">
 <h2>See Also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="openvino_docs_OV_UG_Integrate_OV_with_your_application.html#doxid-openvino-docs-o-v-u-g-integrate-o-v-with-your-application"><span class="std std-ref">Integrate the OpenVINO™ Runtime with Your Application</span></a></p></li>
 <li><p><a class="reference internal" href="openvino_docs_OV_UG_Samples_Overview.html#doxid-openvino-docs-o-v-u-g-samples-overview"><span class="std std-ref">Using OpenVINO™ Toolkit Samples</span></a></p></li>
 <li><p><a class="reference internal" href="openvino_docs_MO_DG_Deep_Learning_Model_Optimizer_DevGuide.html#doxid-openvino-docs-m-o-d-g-deep-learning-model-optimizer-dev-guide"><span class="std std-ref">Model Optimizer</span></a></p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -877,7 +884,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>High-level Performance Hints &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -1862,19 +1869,19 @@
             
                 <div>
                   
-  <div class="section" id="high-level-performance-hints">
+  <section id="high-level-performance-hints">
 <span id="doxid-openvino-docs-o-v-u-g-performance-hints"></span><span id="index-0"></span><h1>High-level Performance Hints<a class="headerlink" href="#high-level-performance-hints" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-openvino-docs-o-v-u-g-performance-hints-1md-openvino-docs-ov-runtime-ug-performance-hints"></span> Each of OpenVINO’s <a class="reference internal" href="openvino_docs_OV_UG_Working_with_devices.html#doxid-openvino-docs-o-v-u-g-working-with-devices"><span class="std std-ref">supported devices</span></a> offers low-level performance settings. Tweaking this detailed configuration requires deep architecture understanding. Also, while the performance may be optimal for the specific combination of the device and the inferred model, the resulting configuration is not necessarily optimal for another device or model. The OpenVINO performance hints are the new way to configure the performance with <em>portability</em> in mind. As the hints are supported by every OpenVINO device, this is a future-proof solution that is fully compatible with the <a class="reference internal" href="openvino_docs_OV_UG_supported_plugins_AUTO.html#doxid-openvino-docs-o-v-u-g-supported-plugins-a-u-t-o"><span class="std std-ref">automatic device selection</span></a>.</p>
 <p>The hints also “reverse” the direction of the configuration in the right fashion: rather than map the application needs to the low-level performance settings, and keep an associated application logic to configure each possible device separately, the idea is to express a target scenario with a single config key and let the <em>device</em> to configure itself in response.</p>
-<p>Previously, a certain level of automatic configuration was coming from the <em>default</em> values of the parameters. For example, the number of CPU streams was deduced from the number of CPU cores, when <code class="docutils literal notranslate"><span class="pre">ov::streams::AUTO</span></code> (<code class="docutils literal notranslate"><span class="pre">CPU_THROUGHPUT_AUTO</span></code> in the pre-OpenVINO 2.0 parlance) is set. However, the resulting number of streams didn’t account for actual compute requirements of the model to be inferred. The hints, in contrast, respect the actual model, so the parameters for optimal throughput are calculated for each model individually (based on its compute versus memory bandwidth requirements and capabilities of the device).</p>
-<div class="section" id="performance-hints-latency-and-throughput">
+<p>Previously, a certain level of automatic configuration was coming from the <em>default</em> values of the parameters. For example, the number of CPU streams was deduced from the number of CPU cores, when <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1gaddb29425af71fbb6ad3379c59342ff0e"><span class="std std-ref"><span class="pre">ov::streams::AUTO</span></span></a></code> (<code class="docutils literal notranslate"><span class="pre">CPU_THROUGHPUT_AUTO</span></code> in the pre-OpenVINO 2.0 parlance) is set. However, the resulting number of streams didn’t account for actual compute requirements of the model to be inferred. The hints, in contrast, respect the actual model, so the parameters for optimal throughput are calculated for each model individually (based on its compute versus memory bandwidth requirements and capabilities of the device).</p>
+<section id="performance-hints-latency-and-throughput">
 <h2>Performance Hints: Latency and Throughput<a class="headerlink" href="#performance-hints-latency-and-throughput" title="Permalink to this headline">¶</a></h2>
 <p>As discussed in the <a class="reference internal" href="openvino_docs_optimization_guide_dldt_optimization_guide.html#doxid-openvino-docs-optimization-guide-dldt-optimization-guide"><span class="std std-ref">Optimization Guide</span></a> there are a few different metrics associated with inference speed. Throughput and latency are some of the most widely used metrics that measure the overall performance of an application.</p>
 <p>This is why, to ease the configuration of the device, OpenVINO offers two dedicated hints, namely <code class="docutils literal notranslate"><span class="pre">ov::hint::PerformanceMode::THROUGHPUT</span></code> and <code class="docutils literal notranslate"><span class="pre">ov::hint::PerformanceMode::LATENCY</span></code>. A special <code class="docutils literal notranslate"><span class="pre">ov::hint::PerformanceMode::UNDEFINED</span></code> acts the same as specifying no hint.</p>
 <p>Please also see the last section in this document on conducting performance measurements with the benchmark_app`.</p>
 <p>Note that a typical model may take significantly more time to load with <code class="docutils literal notranslate"><span class="pre">ov::hint::PerformanceMode::THROUGHPUT</span></code> and consume much more memory, compared with <code class="docutils literal notranslate"><span class="pre">ov::hint::PerformanceMode::LATENCY</span></code>.</p>
-</div>
-<div class="section" id="performance-hints-how-it-works">
+</section>
+<section id="performance-hints-how-it-works">
 <h2>Performance Hints: How It Works?<a class="headerlink" href="#performance-hints-how-it-works" title="Permalink to this headline">¶</a></h2>
 <p>Internally, every device “translates” the value of the hint to the actual performance settings. For example the <code class="docutils literal notranslate"><span class="pre">ov::hint::PerformanceMode::THROUGHPUT</span></code> selects number of CPU or GPU streams. For the GPU, additionally the optimal batch size is selected and the <a class="reference internal" href="openvino_docs_OV_UG_Automatic_Batching.html#doxid-openvino-docs-o-v-u-g-automatic-batching"><span class="std std-ref">automatic batching</span></a> is applied whenever possible (and also if the device supports that <a class="reference internal" href="openvino_docs_OV_UG_Working_with_devices.html#doxid-openvino-docs-o-v-u-g-working-with-devices"><span class="std std-ref">refer to the devices/features support matrix</span></a>).</p>
 <p>The resulting (device-specific) settings can be queried back from the instance of the <code class="docutils literal notranslate"><span class="pre">ov:Compiled_Model</span></code>.</p>
@@ -1887,105 +1894,54 @@
 <span class="p">...</span>
 <span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span>   <span class="p">{</span> <span class="n">OPTIMAL_NUMBER_OF_INFER_REQUESTS</span> <span class="p">,</span> <span class="mi">4</span> <span class="p">}</span>
 <span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span>   <span class="p">{</span> <span class="n">NUM_STREAMS</span> <span class="p">,</span> <span class="mi">4</span> <span class="p">}</span>
-<span class="p">...</span></pre></div></div></div>
-<div class="section" id="using-the-performance-hints-basic-api">
+<span class="p">...</span></pre></div></div></section>
+<section id="using-the-performance-hints-basic-api">
 <h2>Using the Performance Hints: Basic API<a class="headerlink" href="#using-the-performance-hints-basic-api" title="Permalink to this headline">¶</a></h2>
-<p>In the example code-snippet below the <code class="docutils literal notranslate"><span class="pre">ov::hint::PerformanceMode::THROUGHPUT</span></code> is specified for the <code class="docutils literal notranslate"><span class="pre">ov::hint::performance_mode</span></code> property for the compile_model:</p>
+<p>In the example code-snippet below the <code class="docutils literal notranslate"><span class="pre">ov::hint::PerformanceMode::THROUGHPUT</span></code> is specified for the <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga2691fe27acc8aa1d1700ad40b6da3ba2"><span class="std std-ref"><span class="pre">ov::hint::performance_mode</span></span></a></code> property for the compile_model:</p>
 <div class="tab-set docutils">
 <input checked="True" class="tab-input" id="tab-set--0-input--1" name="tab-set--0" type="radio"><label class="tab-label" for="tab-set--0-input--1">C++</label><div class="tab-content docutils">
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span> <span class="n">compiled_model</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s">&quot;GPU&quot;</span><span class="p">,</span>
-    <span class="n">ov</span><span class="o">::</span><span class="n">hint</span><span class="o">::</span><span class="n">performance_mode</span><span class="p">(</span><span class="n">ov</span><span class="o">::</span><span class="n">hint</span><span class="o">::</span><span class="n">PerformanceMode</span><span class="o">::</span><span class="n">THROUGHPUT</span><span class="p">));</span>
-</pre></div>
-</div>
 </div>
 <input class="tab-input" id="tab-set--0-input--2" name="tab-set--0" type="radio"><label class="tab-label" for="tab-set--0-input--2">Python</label><div class="tab-content docutils">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">config</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;PERFORMANCE_HINT&quot;</span><span class="p">:</span> <span class="s2">&quot;THROUGHPUT&quot;</span><span class="p">}</span>
-<span class="n">compiled_model</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s2">&quot;GPU&quot;</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
-</pre></div>
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="additional-optional-hints-from-the-app">
+</section>
+<section id="additional-optional-hints-from-the-app">
 <h2>Additional (Optional) Hints from the App<a class="headerlink" href="#additional-optional-hints-from-the-app" title="Permalink to this headline">¶</a></h2>
 <p>Let’s take an example of an application that processes 4 video streams. The most future-proof way to communicate the limitation of the parallel slack is to equip the performance hint with the optional <code class="docutils literal notranslate"><span class="pre">ov::hint::num_requests</span></code> configuration key set to 4. As discussed previosly, for the GPU this will limit the batch size, for the CPU - the number of inference streams, so each device uses the <code class="docutils literal notranslate"><span class="pre">ov::hint::num_requests</span></code> while converting the hint to the actual device configuration options:</p>
 <div class="tab-set docutils">
 <input checked="True" class="tab-input" id="tab-set--1-input--1" name="tab-set--1" type="radio"><label class="tab-label" for="tab-set--1-input--1">C++</label><div class="tab-content docutils">
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// limiting the available parallel slack for the &#39;throughput&#39; hint via the ov::hint::num_requests</span>
-<span class="c1">// so that certain parameters (like selected batch size) are automatically accommodated accordingly </span>
-<span class="k">auto</span> <span class="n">compiled_model</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s">&quot;GPU&quot;</span><span class="p">,</span>
-    <span class="n">ov</span><span class="o">::</span><span class="n">hint</span><span class="o">::</span><span class="n">performance_mode</span><span class="p">(</span><span class="n">ov</span><span class="o">::</span><span class="n">hint</span><span class="o">::</span><span class="n">PerformanceMode</span><span class="o">::</span><span class="n">THROUGHPUT</span><span class="p">),</span>
-    <span class="n">ov</span><span class="o">::</span><span class="n">hint</span><span class="o">::</span><span class="n">num_requests</span><span class="p">(</span><span class="mi">4</span><span class="p">));</span>
-</pre></div>
-</div>
 </div>
 <input class="tab-input" id="tab-set--1-input--2" name="tab-set--1" type="radio"><label class="tab-label" for="tab-set--1-input--2">Python</label><div class="tab-content docutils">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">config</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;PERFORMANCE_HINT&quot;</span><span class="p">:</span> <span class="s2">&quot;THROUGHPUT&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;PERFORMANCE_HINT_NUM_REQUESTS&quot;</span><span class="p">:</span> <span class="s2">&quot;4&quot;</span><span class="p">}</span>
-<span class="c1"># limiting the available parallel slack for the &#39;throughput&#39;</span>
-<span class="c1"># so that certain parameters (like selected batch size) are automatically accommodated accordingly </span>
-<span class="n">compiled_model</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s2">&quot;GPU&quot;</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
-</pre></div>
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="optimal-number-of-inference-requests">
+</section>
+<section id="optimal-number-of-inference-requests">
 <h2>Optimal Number of Inference Requests<a class="headerlink" href="#optimal-number-of-inference-requests" title="Permalink to this headline">¶</a></h2>
-<p>Using the hints assumes that the application queries the <code class="docutils literal notranslate"><span class="pre">ov::optimal_number_of_infer_requests</span></code> to create and run the returned number of requests simultaneously:</p>
+<p>Using the hints assumes that the application queries the <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga087c6da667f7c3d8374aec5f6cbba027"><span class="std std-ref"><span class="pre">ov::optimal_number_of_infer_requests</span></span></a></code> to create and run the returned number of requests simultaneously:</p>
 <div class="tab-set docutils">
 <input checked="True" class="tab-input" id="tab-set--2-input--1" name="tab-set--2" type="radio"><label class="tab-label" for="tab-set--2-input--1">C++</label><div class="tab-content docutils">
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// when the batch size is automatically selected by the implementation</span>
-<span class="c1">// it is important to query/create and run the sufficient #requests</span>
-<span class="k">auto</span> <span class="n">compiled_model</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s">&quot;GPU&quot;</span><span class="p">,</span>
-    <span class="n">ov</span><span class="o">::</span><span class="n">hint</span><span class="o">::</span><span class="n">performance_mode</span><span class="p">(</span><span class="n">ov</span><span class="o">::</span><span class="n">hint</span><span class="o">::</span><span class="n">PerformanceMode</span><span class="o">::</span><span class="n">THROUGHPUT</span><span class="p">));</span>
-<span class="k">auto</span> <span class="n">num_requests</span> <span class="o">=</span> <span class="n">compiled_model</span><span class="p">.</span><span class="n">get_property</span><span class="p">(</span><span class="n">ov</span><span class="o">::</span><span class="n">optimal_number_of_infer_requests</span><span class="p">);</span>
-</pre></div>
-</div>
 </div>
 <input class="tab-input" id="tab-set--2-input--2" name="tab-set--2" type="radio"><label class="tab-label" for="tab-set--2-input--2">Python</label><div class="tab-content docutils">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># when the batch size is automatically selected by the implementation</span>
-<span class="c1"># it is important to query/create and run the sufficient requests</span>
-<span class="n">config</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;PERFORMANCE_HINT&quot;</span><span class="p">:</span> <span class="s2">&quot;THROUGHPUT&quot;</span><span class="p">}</span>
-<span class="n">compiled_model</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s2">&quot;GPU&quot;</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
-<span class="n">num_requests</span> <span class="o">=</span> <span class="n">compiled_model</span><span class="o">.</span><span class="n">get_property</span><span class="p">(</span><span class="s2">&quot;OPTIMAL_NUMBER_OF_INFER_REQUESTS&quot;</span><span class="p">)</span>
-</pre></div>
 </div>
 </div>
-</div>
-<p>While an application is free to create more requests if needed (for example to support asynchronous inputs population) it is very important to at least run the <code class="docutils literal notranslate"><span class="pre">ov::optimal_number_of_infer_requests</span></code> of the inference requests in parallel, for efficiency (device utilization) reasons.</p>
-<p>Also, notice that <code class="docutils literal notranslate"><span class="pre">ov::hint::PerformanceMode::LATENCY</span></code> does not necessarily imply using single inference request. For example, multi-socket CPUs can deliver as high number of requests (at the same minimal latency) as there are NUMA nodes the machine features. To make your application fully scalable, prefer to query the <code class="docutils literal notranslate"><span class="pre">ov::optimal_number_of_infer_requests</span></code> directly.</p>
-</div>
-<div class="section" id="prefer-async-api">
+<p>While an application is free to create more requests if needed (for example to support asynchronous inputs population) it is very important to at least run the <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga087c6da667f7c3d8374aec5f6cbba027"><span class="std std-ref"><span class="pre">ov::optimal_number_of_infer_requests</span></span></a></code> of the inference requests in parallel, for efficiency (device utilization) reasons.</p>
+<p>Also, notice that <code class="docutils literal notranslate"><span class="pre">ov::hint::PerformanceMode::LATENCY</span></code> does not necessarily imply using single inference request. For example, multi-socket CPUs can deliver as high number of requests (at the same minimal latency) as there are NUMA nodes the machine features. To make your application fully scalable, prefer to query the <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga087c6da667f7c3d8374aec5f6cbba027"><span class="std std-ref"><span class="pre">ov::optimal_number_of_infer_requests</span></span></a></code> directly.</p>
+</section>
+<section id="prefer-async-api">
 <h2>Prefer Async API<a class="headerlink" href="#prefer-async-api" title="Permalink to this headline">¶</a></h2>
-<p>The API of the inference requests offers Sync and Async execution. While the <code class="docutils literal notranslate"><span class="pre">ov::InferRequest::infer()</span></code> is inherently synchronous and simple to operate (as it serializes the execution flow in the current application thread), the Async “splits” the <code class="docutils literal notranslate"><span class="pre">infer()</span></code> into <code class="docutils literal notranslate"><span class="pre">ov::InferRequest::start_async()</span></code> and use of the <code class="docutils literal notranslate"><span class="pre">ov::InferRequest::wait()</span></code> (or callbacks). Please consider the <a class="reference internal" href="openvino_docs_OV_UG_Infer_request.html#doxid-openvino-docs-o-v-u-g-infer-request"><span class="std std-ref">API examples</span></a>. Although the Synchronous API can be somewhat easier to start with, in the production code always prefer to use the Asynchronous (callbacks-based) API, as it is the most general and scalable way to implement the flow control for any possible number of requests (and hence both latency and throughput scenarios).</p>
-</div>
-<div class="section" id="combining-the-hints-and-individual-low-level-settings">
+<p>The API of the inference requests offers Sync and Async execution. While the <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1InferRequest.html#doxid-classov-1-1-infer-request-1abcb7facc9f7c4b9226a1fd343e56958d"><span class="std std-ref"><span class="pre">ov::InferRequest::infer()</span></span></a></code> is inherently synchronous and simple to operate (as it serializes the execution flow in the current application thread), the Async “splits” the <code class="docutils literal notranslate"><span class="pre">infer()</span></code> into <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1InferRequest.html#doxid-classov-1-1-infer-request-1a5a05ae4352f804c865e11f5d68b983d5"><span class="std std-ref"><span class="pre">ov::InferRequest::start_async()</span></span></a></code> and use of the <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1InferRequest.html#doxid-classov-1-1-infer-request-1ab0e0739da45789d816f8b5584a0b5691"><span class="std std-ref"><span class="pre">ov::InferRequest::wait()</span></span></a></code> (or callbacks). Please consider the <a class="reference internal" href="openvino_docs_OV_UG_Infer_request.html#doxid-openvino-docs-o-v-u-g-infer-request"><span class="std std-ref">API examples</span></a>. Although the Synchronous API can be somewhat easier to start with, in the production code always prefer to use the Asynchronous (callbacks-based) API, as it is the most general and scalable way to implement the flow control for any possible number of requests (and hence both latency and throughput scenarios).</p>
+</section>
+<section id="combining-the-hints-and-individual-low-level-settings">
 <h2>Combining the Hints and Individual Low-Level Settings<a class="headerlink" href="#combining-the-hints-and-individual-low-level-settings" title="Permalink to this headline">¶</a></h2>
 <p>While sacrificing the portability at a some extent, it is possible to combine the hints with individual device-specific settings. For example, you can let the device prepare a configuration <code class="docutils literal notranslate"><span class="pre">ov::hint::PerformanceMode::THROUGHPUT</span></code> while overriding any specific value:</p>
 <div class="tab-set docutils">
 <input checked="True" class="tab-input" id="tab-set--3-input--1" name="tab-set--3" type="radio"><label class="tab-label" for="tab-set--3-input--1">C++</label><div class="tab-content docutils">
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-    <span class="c1">// high-level performance hints are compatible with low-level device-specific settings </span>
-<span class="k">auto</span> <span class="n">compiled_model</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s">&quot;CPU&quot;</span><span class="p">,</span>
-    <span class="n">ov</span><span class="o">::</span><span class="n">hint</span><span class="o">::</span><span class="n">performance_mode</span><span class="p">(</span><span class="n">ov</span><span class="o">::</span><span class="n">hint</span><span class="o">::</span><span class="n">PerformanceMode</span><span class="o">::</span><span class="n">THROUGHPUT</span><span class="p">),</span>
-    <span class="n">ov</span><span class="o">::</span><span class="n">inference_num_threads</span><span class="p">(</span><span class="mi">4</span><span class="p">));</span>
-<span class="p">}</span>
-</pre></div>
-</div>
 </div>
 <input class="tab-input" id="tab-set--3-input--2" name="tab-set--3" type="radio"><label class="tab-label" for="tab-set--3-input--2">Python</label><div class="tab-content docutils">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">config</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;PERFORMANCE_HINT&quot;</span><span class="p">:</span> <span class="s2">&quot;THROUGHPUT&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;INFERENCE_NUM_THREADS&quot;</span><span class="p">:</span> <span class="s2">&quot;4&quot;</span><span class="p">}</span>
-<span class="c1"># limiting the available parallel slack for the &#39;throughput&#39;</span>
-<span class="c1"># so that certain parameters (like selected batch size) are automatically accommodated accordingly</span>
-<span class="n">compiled_model</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s2">&quot;CPU&quot;</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
-</pre></div>
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="testing-the-performance-of-the-hints-with-the-benchmark-app">
+</section>
+<section id="testing-the-performance-of-the-hints-with-the-benchmark-app">
 <h2>Testing the Performance of The Hints with the Benchmark_App<a class="headerlink" href="#testing-the-performance-of-the-hints-with-the-benchmark-app" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">benchmark_app</span></code>, that exists in both <a class="reference internal" href="openvino_inference_engine_samples_benchmark_app_README.html#doxid-openvino-inference-engine-samples-benchmark-app-r-e-a-d-m-e"><span class="std std-ref">C++</span></a> and <a class="reference internal" href="openvino_inference_engine_tools_benchmark_tool_README.html#doxid-openvino-inference-engine-tools-benchmark-tool-r-e-a-d-m-e"><span class="std std-ref">Python</span></a> versions, is the best way to evaluate the performance of the performance hints for a particular device:</p>
 <ul class="simple">
@@ -1999,12 +1955,12 @@
 </ul>
 </li>
 </ul>
-<div class="section" id="see-also">
+<section id="see-also">
 <h3>See Also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference internal" href="openvino_docs_OV_UG_supported_plugins_Supported_Devices.html#doxid-openvino-docs-o-v-u-g-supported-plugins-supported-devices"><span class="std std-ref">Supported Devices</span></a></p>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
                 </div>
@@ -2035,7 +1991,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

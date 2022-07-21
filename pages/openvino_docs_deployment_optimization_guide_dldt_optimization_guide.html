@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Runtime Inference Optimizations &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -1820,13 +1827,13 @@
             
                 <div>
                   
-  <div class="section" id="runtime-inference-optimizations">
+  <section id="runtime-inference-optimizations">
 <span id="doxid-openvino-docs-deployment-optimization-guide-dldt-optimization-guide"></span><span id="index-0"></span><h1>Runtime Inference Optimizations<a class="headerlink" href="#runtime-inference-optimizations" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-openvino-docs-deployment-optimization-guide-dldt-optimization-guide-1md-openvino-docs-optimization-guide-dldt-deployment-optimization-guide"></span></p>
 <div class="toctree-wrapper compound">
 </div>
 <p>Runtime or deployment optimizations are focused on tuning of the inference <em>parameters</em> (e.g. optimal number of the requests executed simultaneously) and other means of how a model is <em>executed</em>.</p>
-<p>As referenced in the parent <a class="reference internal" href="openvino_docs_optimization_guide_dldt_optimization_guide.html#doxid-openvino-docs-optimization-guide-dldt-optimization-guide"><span class="std std-ref">performance introduction topic</span></a>, the <a class="reference internal" href="openvino_docs_model_optimization_guide.html#doxid-openvino-docs-model-optimization-guide"><span class="std std-ref">dedicated document</span></a> covers the <strong>model-level optimizations</strong> like quantization that unlocks the 8-bit inference. Model-optimizations are most general and help any scenario and any device (that e.g. accelerates the quantized models). The relevant <em>runtime</em> configuration is <code class="docutils literal notranslate"><span class="pre">ov::hint::inference_precision</span></code> which trades the accuracy for the performance (e.g. by allowing the fp16/bf16 execution for the layers that remain in fp32 after quantization of the original fp32 model).</p>
+<p>As referenced in the parent <a class="reference internal" href="openvino_docs_optimization_guide_dldt_optimization_guide.html#doxid-openvino-docs-optimization-guide-dldt-optimization-guide"><span class="std std-ref">performance introduction topic</span></a>, the <a class="reference internal" href="openvino_docs_model_optimization_guide.html#doxid-openvino-docs-model-optimization-guide"><span class="std std-ref">dedicated document</span></a> covers the <strong>model-level optimizations</strong> like quantization that unlocks the 8-bit inference. Model-optimizations are most general and help any scenario and any device (that e.g. accelerates the quantized models). The relevant <em>runtime</em> configuration is <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1gad605a888f3c9b7598ab55023fbf44240"><span class="std std-ref"><span class="pre">ov::hint::inference_precision</span></span></a></code> which trades the accuracy for the performance (e.g. by allowing the fp16/bf16 execution for the layers that remain in fp32 after quantization of the original fp32 model).</p>
 <p>Then, possible optimization should start with defining the use-case. For example, whether the target scenario emphasizes throughput over latency like processing millions of samples by overnight jobs in the data centers. In contrast, real-time usages would likely trade off the throughput to deliver the results at minimal latency. Often this is a combined scenario that targets highest possible throughput while maintaining a specific latency threshold. Below you can find summary on the associated tips.</p>
 <p>How the full-stack application uses the inference component <em>end-to-end</em> is also important. For example, what are the stages that needs to be orchestrated? In some cases a significant part of the workload time is spent on bringing and preparing the input data. Below you can find multiple tips on connecting the data input pipeline and the model inference efficiently. These are also common performance tricks that help both latency and throughput scenarios.</p>
 <p>Further documents cover the associated <em>runtime</em> performance optimizations topics. Please also consider <a class="reference internal" href="openvino_docs_OV_UG_Working_with_devices.html#doxid-openvino-docs-o-v-u-g-working-with-devices-1features-support-matrix"><span class="std std-ref">matrix support of the features by the individual devices</span></a>.</p>
@@ -1837,7 +1844,7 @@
 <li><p>For variably-sized inputs, consider <a class="reference internal" href="openvino_docs_OV_UG_DynamicShapes.html#doxid-openvino-docs-o-v-u-g-dynamic-shapes"><span class="std std-ref">dynamic shapes</span></a></p></li>
 </ul>
 <p><strong>Use-case specific optimizations</strong> such as optimizing for <a class="reference internal" href="openvino_docs_deployment_optimization_guide_latency.html#doxid-openvino-docs-deployment-optimization-guide-latency"><span class="std std-ref">latency</span></a> or <a class="reference internal" href="openvino_docs_deployment_optimization_guide_tput.html#doxid-openvino-docs-deployment-optimization-guide-tput"><span class="std std-ref">throughput</span></a></p>
-<div class="section" id="writing-performance-portable-inference-application">
+<section id="writing-performance-portable-inference-application">
 <h2>Writing Performance Portable Inference Application<a class="headerlink" href="#writing-performance-portable-inference-application" title="Permalink to this headline">¶</a></h2>
 <p>Each of the OpenVINO’s <a class="reference internal" href="openvino_docs_OV_UG_supported_plugins_Supported_Devices.html#doxid-openvino-docs-o-v-u-g-supported-plugins-supported-devices"><span class="std std-ref">supported devices</span></a> offers a bunch of low-level performance settings. Tweaking this detailed configuration requires deep architecture understanding.</p>
 <p>Also, while the resulting performance may be optimal for the specific combination of the device and the model that is inferred, it is actually neither device/model nor future-proof:</p>
@@ -1856,8 +1863,8 @@
 <p>The hints really hide the <em>execution</em> specifics required to saturate the device. In the <a class="reference internal" href="openvino_docs_deployment_optimization_guide_internals.html#doxid-openvino-docs-deployment-optimization-guide-internals"><span class="std std-ref">internals</span></a> sections you can find the implementation details (particularly how the OpenVINO implements the ‘throughput’ approach) for the specific devices. Keep in mind that the hints make this transparent to the application. For example, the hints obviates the need for explicit (application-side) batching or streams.</p>
 <p>With the hints, it is enough to keep separate infer requests per camera or another source of input and process the requests in parallel using Async API as explained in the <a class="reference internal" href="openvino_docs_deployment_optimization_guide_tput.html#doxid-openvino-docs-deployment-optimization-guide-tput-1throughput-app-design"><span class="std std-ref">application design considerations section</span></a>. The main requirement for the application to leverage the throughput is <strong>running multiple inference requests in parallel</strong>.</p>
 <p>In summary, when the performance <em>portability</em> is of concern, consider the Performance Hints as a solution. You may find further details and API examples <a class="reference internal" href="openvino_docs_OV_UG_Performance_Hints.html#doxid-openvino-docs-o-v-u-g-performance-hints"><span class="std std-ref">here</span></a>.</p>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -1888,7 +1895,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>G-API Gesture Recognition Demo &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../../../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -2086,10 +2093,10 @@
             
                 <div>
                   
-  <div class="section" id="g-api-gesture-recognition-demo">
+  <section id="g-api-gesture-recognition-demo">
 <h1>G-API Gesture Recognition Demo<a class="headerlink" href="#g-api-gesture-recognition-demo" title="Permalink to this headline">¶</a></h1>
 <p>This demo demonstrates how to run Gesture (e.g. American Sign Language (ASL) gestures) Recognition models using OpenVINO™ toolkit.</p>
-<div class="section" id="how-it-works">
+<section id="how-it-works">
 <h2>How It Works<a class="headerlink" href="#how-it-works" title="Permalink to this headline">¶</a></h2>
 <p>The demo application expects a gesture recognition model in the Intermediate Representation (IR) format.</p>
 <p>As input, the demo application takes:</p>
@@ -2112,16 +2119,16 @@
 <blockquote>
 <div><p><strong>NOTE</strong>: By default, Open Model Zoo demos expect input with BGR channels order. If you trained your model to work with RGB order, you need to manually rearrange the default channels order in the demo application or reconvert your model using the Model Optimizer tool with the <code class="docutils literal notranslate"><span class="pre">--reverse_input_channels</span></code> argument specified. For more information about the argument, refer to <strong>When to Reverse Input Channels</strong> section of [Embedding Preprocessing Computation](&#64;ref openvino_docs_MO_DG_Additional_Optimization_Use_Cases).</p>
 </div></blockquote>
-</div>
-<div class="section" id="creating-a-gallery-for-gestures-window">
+</section>
+<section id="creating-a-gallery-for-gestures-window">
 <h2>Creating a Gallery for Gestures Window<a class="headerlink" href="#creating-a-gallery-for-gestures-window" title="Permalink to this headline">¶</a></h2>
 <p>The gallery of sample videos and list of paths to gesture videos must be created to show the sample gestures on an additional window:</p>
 <ol class="arabic simple">
 <li><p>Put videos containing gestures to a separate empty folder. Each video must have only one gesture.</p></li>
 <li><p>Run the <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">&lt;omz_dir&gt;/demos/gesture_recognition_demo/cpp_gapi/create_list.py</span> <span class="pre">--classes_map</span> <span class="pre">&lt;path_to_a_file_with_gesture_classes&gt;</span> <span class="pre">--gesture_storage</span> <span class="pre">&lt;path_to_directory_with_gesture_videos&gt;</span></code> command, which will create a <code class="docutils literal notranslate"><span class="pre">gesture_gallery.json</span></code> file with list of gestures and paths to appropriate videos.</p></li>
 </ol>
-</div>
-<div class="section" id="preparing-to-run">
+</section>
+<section id="preparing-to-run">
 <h2>Preparing to Run<a class="headerlink" href="#preparing-to-run" title="Permalink to this headline">¶</a></h2>
 <p>For demo input image or video files, refer to the section <strong>Media Files Available for Demos</strong> in the <a class="reference internal" href="../../README.html"><span class="doc std std-doc">Open Model Zoo Demos Overview</span></a>.
 The list of models supported by the demo is in <code class="docutils literal notranslate"><span class="pre">&lt;omz_dir&gt;/demos/gesture_recognition_demo/cpp_gapi/models.lst</span></code> file.
@@ -2134,7 +2141,7 @@ This file can be used as a parameter for <span class="xref myst">Model Downloade
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>omz_converter --list models.lst
 </pre></div>
 </div>
-<div class="section" id="supported-models">
+<section id="supported-models">
 <h3>Supported Models<a class="headerlink" href="#supported-models" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>asl-recognition-0004</p></li>
@@ -2145,9 +2152,9 @@ This file can be used as a parameter for <span class="xref myst">Model Downloade
 <blockquote>
 <div><p><strong>NOTE</strong>: Refer to the tables <a class="reference internal" href="../../../models/intel/device_support.html"><span class="doc std std-doc">Intel’s Pre-Trained Models Device Support</span></a> and <a class="reference internal" href="../../../models/public/device_support.html"><span class="doc std std-doc">Public Pre-Trained Models Device Support</span></a> for the details on models inference support at different devices.</p>
 </div></blockquote>
-</div>
-</div>
-<div class="section" id="running">
+</section>
+</section>
+<section id="running">
 <h2>Running<a class="headerlink" href="#running" title="Permalink to this headline">¶</a></h2>
 <p>Running the application with the <code class="docutils literal notranslate"><span class="pre">-h</span></code> option yields the following usage message:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gesture_recognition_demo_gapi</span> <span class="p">[</span><span class="n">OPTION</span><span class="p">]</span>
@@ -2176,7 +2183,7 @@ This file can be used as a parameter for <span class="xref myst">Model Downloade
     -c &lt;omz_dir&gt;/data/dataset_classes/msasl100.json
 </pre></div>
 </div>
-<div class="section" id="run-time-control-keys">
+<section id="run-time-control-keys">
 <h3>Run-Time Control Keys<a class="headerlink" href="#run-time-control-keys" title="Permalink to this headline">¶</a></h3>
 <p>The demo starts in person tracking mode and to switch it in the action recognition mode you should press <code class="docutils literal notranslate"><span class="pre">0-9</span></code> button with appropriate detection ID (the number in top-left of each bounding box). If frame contains only one person, they will be chosen automatically. After that you can switch back to tracking mode by pressing space button.</p>
 <p>An example of file with class names can be found within the OMZ directory:</p>
@@ -2195,21 +2202,21 @@ To avoid disk space overrun in case of continuous input stream, like camera, you
 <blockquote>
 <div><p><strong>NOTE</strong>: Windows* systems may not have the Motion JPEG codec installed by default. If this is the case, OpenCV FFMPEG backend can be downloaded by the PowerShell script provided with the OpenVINO install package and located at <code class="docutils literal notranslate"><span class="pre">&lt;INSTALL_DIR&gt;/opencv/ffmpeg-download.ps1</span></code>. Run the script with Administrative privileges. Alternatively, you can save results as images.</p>
 </div></blockquote>
-</div>
-</div>
-<div class="section" id="demo-output">
+</section>
+</section>
+<section id="demo-output">
 <h2>Demo Output<a class="headerlink" href="#demo-output" title="Permalink to this headline">¶</a></h2>
 <p>The application uses OpenCV to display gesture recognition result and current inference performance.</p>
-</div>
-<div class="section" id="see-also">
+</section>
+<section id="see-also">
 <h2>See Also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="../../README.html"><span class="doc std std-doc">Open Model Zoo Demos</span></a></p></li>
 <li><p><a class="reference external" href="https://docs.openvino.ai/latest/openvino_docs_MO_DG_Deep_Learning_Model_Optimizer_DevGuide.html">Model Optimizer</a></p></li>
 <li><p><span class="xref myst">Model Downloader</span></p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -2240,7 +2247,7 @@ To avoid disk space overrun in case of continuous input stream, like camera, you
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

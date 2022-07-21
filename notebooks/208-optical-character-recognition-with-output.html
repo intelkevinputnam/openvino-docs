@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Optical Character Recognition (OCR) with OpenVINO &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -571,7 +578,7 @@
             
                 <div>
                   
-  <div class="section" id="optical-character-recognition-ocr-with-openvino">
+  <section id="optical-character-recognition-ocr-with-openvino">
 <h1>Optical Character Recognition (OCR) with OpenVINO<a class="headerlink" href="#optical-character-recognition-ocr-with-openvino" title="Permalink to this headline">¶</a></h1>
 <p>This tutorial demonstrates how to perform optical character recognition
 (OCR) with OpenVINO models. It is a continuation of the
@@ -588,7 +595,7 @@ from the <a class="reference external" href="https://github.com/openvinotoolkit/
 Zoo</a>. See the
 <a class="reference external" href="104-model-tools-with-output.html">104-model-tools</a> tutorial
 for more information about these tools.</p>
-<div class="section" id="imports">
+<section id="imports">
 <h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">shutil</span>
 <span class="kn">import</span> <span class="nn">sys</span>
@@ -606,8 +613,8 @@ for more information about these tools.</p>
 <span class="kn">from</span> <span class="nn">notebook_utils</span> <span class="kn">import</span> <span class="n">load_image</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="settings">
+</section>
+<section id="settings">
 <h2>Settings<a class="headerlink" href="#settings" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ie</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span>
 
@@ -621,8 +628,8 @@ for more information about these tools.</p>
 <span class="n">model_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="download-models">
+</section>
+<section id="download-models">
 <h2>Download Models<a class="headerlink" href="#download-models" title="Permalink to this headline">¶</a></h2>
 <p>The next cells will run Open Model Zoo’s Model Downloader to download
 the detection and recognition models. If the models have been downloaded
@@ -649,8 +656,8 @@ before, they will not be downloaded again.</p>
 <span class="c1">#    print(line)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="convert-models">
+</section>
+<section id="convert-models">
 <h2>Convert Models<a class="headerlink" href="#convert-models" title="Permalink to this headline">¶</a></h2>
 <p>The downloaded detection model is an Intel model, which is already in
 OpenVINO’s Intermediate Representation (IR) format. The text recognition
@@ -670,12 +677,12 @@ the last lines of output include
 <code class="docutils literal notranslate"><span class="pre">omz_converter</span> <span class="pre">--name</span> <span class="pre">text-recognition-resnet-fc</span> <span class="pre">--precisions</span> <span class="pre">FP16</span> <span class="pre">--download_dir</span> <span class="pre">/home/runner/open_model_zoo_models</span> <span class="pre">--output_dir</span> <span class="pre">/home/runner/open_model_zoo_models</span></code></p>
 <p>Converting text-recognition-resnet-fc…</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">==========</span> <span class="n">Converting</span> <span class="n">text</span><span class="o">-</span><span class="n">recognition</span><span class="o">-</span><span class="n">resnet</span><span class="o">-</span><span class="n">fc</span> <span class="n">to</span> <span class="n">ONNX</span>
-<span class="n">Conversion</span> <span class="n">to</span> <span class="n">ONNX</span> <span class="n">command</span><span class="p">:</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8</span><span class="o">.</span><span class="mi">12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">python</span> <span class="o">--</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8</span><span class="o">.</span><span class="mi">12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">openvino</span><span class="o">/</span><span class="n">model_zoo</span><span class="o">/</span><span class="n">internal_scripts</span><span class="o">/</span><span class="n">pytorch_to_onnx</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">model</span><span class="o">-</span><span class="n">path</span><span class="o">=/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8</span><span class="o">.</span><span class="mi">12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">openvino</span><span class="o">/</span><span class="n">model_zoo</span><span class="o">/</span><span class="n">models</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">text</span><span class="o">-</span><span class="n">recognition</span><span class="o">-</span><span class="n">resnet</span><span class="o">-</span><span class="n">fc</span> <span class="o">--</span><span class="n">model</span><span class="o">-</span><span class="n">path</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">open_model_zoo_models</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">text</span><span class="o">-</span><span class="n">recognition</span><span class="o">-</span><span class="n">resnet</span><span class="o">-</span><span class="n">fc</span> <span class="o">--</span><span class="n">model</span><span class="o">-</span><span class="n">name</span><span class="o">=</span><span class="n">get_model</span> <span class="o">--</span><span class="n">import</span><span class="o">-</span><span class="n">module</span><span class="o">=</span><span class="n">model</span> <span class="s1">&#39;--model-param=file_config=r&quot;/home/runner/open_model_zoo_models/public/text-recognition-resnet-fc/vedastr/configs/resnet_fc.py&quot;&#39;</span> <span class="s1">&#39;--model-param=weights=r&quot;/home/runner/open_model_zoo_models/public/text-recognition-resnet-fc/vedastr/ckpt/resnet_fc.pth&quot;&#39;</span> <span class="o">--</span><span class="nb">input</span><span class="o">-</span><span class="n">shape</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">32</span><span class="p">,</span><span class="mi">100</span> <span class="o">--</span><span class="nb">input</span><span class="o">-</span><span class="n">names</span><span class="o">=</span><span class="nb">input</span> <span class="o">--</span><span class="n">output</span><span class="o">-</span><span class="n">names</span><span class="o">=</span><span class="n">output</span> <span class="o">--</span><span class="n">output</span><span class="o">-</span><span class="n">file</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">open_model_zoo_models</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">text</span><span class="o">-</span><span class="n">recognition</span><span class="o">-</span><span class="n">resnet</span><span class="o">-</span><span class="n">fc</span><span class="o">/</span><span class="n">resnet_fc</span><span class="o">.</span><span class="n">onnx</span>
+<span class="n">Conversion</span> <span class="n">to</span> <span class="n">ONNX</span> <span class="n">command</span><span class="p">:</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">python</span> <span class="o">--</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">openvino</span><span class="o">/</span><span class="n">model_zoo</span><span class="o">/</span><span class="n">internal_scripts</span><span class="o">/</span><span class="n">pytorch_to_onnx</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">model</span><span class="o">-</span><span class="n">path</span><span class="o">=/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">openvino</span><span class="o">/</span><span class="n">model_zoo</span><span class="o">/</span><span class="n">models</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">text</span><span class="o">-</span><span class="n">recognition</span><span class="o">-</span><span class="n">resnet</span><span class="o">-</span><span class="n">fc</span> <span class="o">--</span><span class="n">model</span><span class="o">-</span><span class="n">path</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">open_model_zoo_models</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">text</span><span class="o">-</span><span class="n">recognition</span><span class="o">-</span><span class="n">resnet</span><span class="o">-</span><span class="n">fc</span> <span class="o">--</span><span class="n">model</span><span class="o">-</span><span class="n">name</span><span class="o">=</span><span class="n">get_model</span> <span class="o">--</span><span class="n">import</span><span class="o">-</span><span class="n">module</span><span class="o">=</span><span class="n">model</span> <span class="s1">&#39;--model-param=file_config=r&quot;/home/runner/open_model_zoo_models/public/text-recognition-resnet-fc/vedastr/configs/resnet_fc.py&quot;&#39;</span> <span class="s1">&#39;--model-param=weights=r&quot;/home/runner/open_model_zoo_models/public/text-recognition-resnet-fc/vedastr/ckpt/resnet_fc.pth&quot;&#39;</span> <span class="o">--</span><span class="nb">input</span><span class="o">-</span><span class="n">shape</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">32</span><span class="p">,</span><span class="mi">100</span> <span class="o">--</span><span class="nb">input</span><span class="o">-</span><span class="n">names</span><span class="o">=</span><span class="nb">input</span> <span class="o">--</span><span class="n">output</span><span class="o">-</span><span class="n">names</span><span class="o">=</span><span class="n">output</span> <span class="o">--</span><span class="n">output</span><span class="o">-</span><span class="n">file</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">open_model_zoo_models</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">text</span><span class="o">-</span><span class="n">recognition</span><span class="o">-</span><span class="n">resnet</span><span class="o">-</span><span class="n">fc</span><span class="o">/</span><span class="n">resnet_fc</span><span class="o">.</span><span class="n">onnx</span>
 
 <span class="n">ONNX</span> <span class="n">check</span> <span class="n">passed</span> <span class="n">successfully</span><span class="o">.</span>
 
 <span class="o">==========</span> <span class="n">Converting</span> <span class="n">text</span><span class="o">-</span><span class="n">recognition</span><span class="o">-</span><span class="n">resnet</span><span class="o">-</span><span class="n">fc</span> <span class="n">to</span> <span class="n">IR</span> <span class="p">(</span><span class="n">FP16</span><span class="p">)</span>
-<span class="n">Conversion</span> <span class="n">command</span><span class="p">:</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8</span><span class="o">.</span><span class="mi">12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">python</span> <span class="o">--</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8</span><span class="o">.</span><span class="mi">12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">mo</span> <span class="o">--</span><span class="n">framework</span><span class="o">=</span><span class="n">onnx</span> <span class="o">--</span><span class="n">data_type</span><span class="o">=</span><span class="n">FP16</span> <span class="o">--</span><span class="n">output_dir</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">open_model_zoo_models</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">text</span><span class="o">-</span><span class="n">recognition</span><span class="o">-</span><span class="n">resnet</span><span class="o">-</span><span class="n">fc</span><span class="o">/</span><span class="n">FP16</span> <span class="o">--</span><span class="n">model_name</span><span class="o">=</span><span class="n">text</span><span class="o">-</span><span class="n">recognition</span><span class="o">-</span><span class="n">resnet</span><span class="o">-</span><span class="n">fc</span> <span class="o">--</span><span class="nb">input</span><span class="o">=</span><span class="nb">input</span> <span class="s1">&#39;--mean_values=input[127.5]&#39;</span> <span class="s1">&#39;--scale_values=input[127.5]&#39;</span> <span class="o">--</span><span class="n">output</span><span class="o">=</span><span class="n">output</span> <span class="o">--</span><span class="n">input_model</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">open_model_zoo_models</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">text</span><span class="o">-</span><span class="n">recognition</span><span class="o">-</span><span class="n">resnet</span><span class="o">-</span><span class="n">fc</span><span class="o">/</span><span class="n">resnet_fc</span><span class="o">.</span><span class="n">onnx</span> <span class="s1">&#39;--layout=input(NCHW)&#39;</span> <span class="s1">&#39;--input_shape=[1, 1, 32, 100]&#39;</span>
+<span class="n">Conversion</span> <span class="n">command</span><span class="p">:</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">python</span> <span class="o">--</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">mo</span> <span class="o">--</span><span class="n">framework</span><span class="o">=</span><span class="n">onnx</span> <span class="o">--</span><span class="n">data_type</span><span class="o">=</span><span class="n">FP16</span> <span class="o">--</span><span class="n">output_dir</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">open_model_zoo_models</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">text</span><span class="o">-</span><span class="n">recognition</span><span class="o">-</span><span class="n">resnet</span><span class="o">-</span><span class="n">fc</span><span class="o">/</span><span class="n">FP16</span> <span class="o">--</span><span class="n">model_name</span><span class="o">=</span><span class="n">text</span><span class="o">-</span><span class="n">recognition</span><span class="o">-</span><span class="n">resnet</span><span class="o">-</span><span class="n">fc</span> <span class="o">--</span><span class="nb">input</span><span class="o">=</span><span class="nb">input</span> <span class="s1">&#39;--mean_values=input[127.5]&#39;</span> <span class="s1">&#39;--scale_values=input[127.5]&#39;</span> <span class="o">--</span><span class="n">output</span><span class="o">=</span><span class="n">output</span> <span class="o">--</span><span class="n">input_model</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">open_model_zoo_models</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">text</span><span class="o">-</span><span class="n">recognition</span><span class="o">-</span><span class="n">resnet</span><span class="o">-</span><span class="n">fc</span><span class="o">/</span><span class="n">resnet_fc</span><span class="o">.</span><span class="n">onnx</span> <span class="s1">&#39;--layout=input(NCHW)&#39;</span> <span class="s1">&#39;--input_shape=[1, 1, 32, 100]&#39;</span>
 
 <span class="n">Model</span> <span class="n">Optimizer</span> <span class="n">arguments</span><span class="p">:</span>
 <span class="n">Common</span> <span class="n">parameters</span><span class="p">:</span>
@@ -702,21 +709,21 @@ the last lines of output include
 <span class="n">Advanced</span> <span class="n">parameters</span><span class="p">:</span>
     <span class="o">-</span> <span class="n">Force</span> <span class="n">the</span> <span class="n">usage</span> <span class="n">of</span> <span class="n">legacy</span> <span class="n">Frontend</span> <span class="n">of</span> <span class="n">Model</span> <span class="n">Optimizer</span> <span class="k">for</span> <span class="n">model</span> <span class="n">conversion</span> <span class="n">into</span> <span class="n">IR</span><span class="p">:</span>   <span class="kc">False</span>
     <span class="o">-</span> <span class="n">Force</span> <span class="n">the</span> <span class="n">usage</span> <span class="n">of</span> <span class="n">new</span> <span class="n">Frontend</span> <span class="n">of</span> <span class="n">Model</span> <span class="n">Optimizer</span> <span class="k">for</span> <span class="n">model</span> <span class="n">conversion</span> <span class="n">into</span> <span class="n">IR</span><span class="p">:</span>  <span class="kc">False</span>
-<span class="n">OpenVINO</span> <span class="n">runtime</span> <span class="n">found</span> <span class="ow">in</span><span class="p">:</span>  <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8</span><span class="o">.</span><span class="mi">12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">openvino</span>
-<span class="n">OpenVINO</span> <span class="n">runtime</span> <span class="n">version</span><span class="p">:</span>   <span class="mf">2022.1</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="mi">7019</span><span class="o">-</span><span class="n">cdb9bec7210</span><span class="o">-</span><span class="n">releases</span><span class="o">/</span><span class="mi">2022</span><span class="o">/</span><span class="mi">1</span>
-<span class="n">Model</span> <span class="n">Optimizer</span> <span class="n">version</span><span class="p">:</span>    <span class="mf">2022.1</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="mi">7019</span><span class="o">-</span><span class="n">cdb9bec7210</span><span class="o">-</span><span class="n">releases</span><span class="o">/</span><span class="mi">2022</span><span class="o">/</span><span class="mi">1</span>
+<span class="n">OpenVINO</span> <span class="n">runtime</span> <span class="n">found</span> <span class="ow">in</span><span class="p">:</span>  <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">openvino</span>
+<span class="n">OpenVINO</span> <span class="n">runtime</span> <span class="n">version</span><span class="p">:</span>   <span class="mf">2022.1.0</span><span class="o">-</span><span class="mi">7019</span><span class="o">-</span><span class="n">cdb9bec7210</span><span class="o">-</span><span class="n">releases</span><span class="o">/</span><span class="mi">2022</span><span class="o">/</span><span class="mi">1</span>
+<span class="n">Model</span> <span class="n">Optimizer</span> <span class="n">version</span><span class="p">:</span>    <span class="mf">2022.1.0</span><span class="o">-</span><span class="mi">7019</span><span class="o">-</span><span class="n">cdb9bec7210</span><span class="o">-</span><span class="n">releases</span><span class="o">/</span><span class="mi">2022</span><span class="o">/</span><span class="mi">1</span>
 <span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">Generated</span> <span class="n">IR</span> <span class="n">version</span> <span class="mi">11</span> <span class="n">model</span><span class="o">.</span>
 <span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">XML</span> <span class="n">file</span><span class="p">:</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">open_model_zoo_models</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">text</span><span class="o">-</span><span class="n">recognition</span><span class="o">-</span><span class="n">resnet</span><span class="o">-</span><span class="n">fc</span><span class="o">/</span><span class="n">FP16</span><span class="o">/</span><span class="n">text</span><span class="o">-</span><span class="n">recognition</span><span class="o">-</span><span class="n">resnet</span><span class="o">-</span><span class="n">fc</span><span class="o">.</span><span class="n">xml</span>
 <span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">BIN</span> <span class="n">file</span><span class="p">:</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">open_model_zoo_models</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">text</span><span class="o">-</span><span class="n">recognition</span><span class="o">-</span><span class="n">resnet</span><span class="o">-</span><span class="n">fc</span><span class="o">/</span><span class="n">FP16</span><span class="o">/</span><span class="n">text</span><span class="o">-</span><span class="n">recognition</span><span class="o">-</span><span class="n">resnet</span><span class="o">-</span><span class="n">fc</span><span class="o">.</span><span class="n">bin</span>
 <span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">Total</span> <span class="n">execution</span> <span class="n">time</span><span class="p">:</span> <span class="mf">4.30</span> <span class="n">seconds</span><span class="o">.</span>
 <span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">Memory</span> <span class="n">consumed</span><span class="p">:</span> <span class="mi">1443</span> <span class="n">MB</span><span class="o">.</span>
 <span class="n">It</span><span class="s1">&#39;s been a while, check for a new version of Intel(R) Distribution of OpenVINO(TM) toolkit here https://software.intel.com/content/www/us/en/develop/tools/openvino-toolkit/download.html?cid=other&amp;source=prod&amp;campid=ww_2022_bu_IOTG_OpenVINO-2022-1&amp;content=upg_all&amp;medium=organic or on the GitHub*</span>
-<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">The</span> <span class="n">model</span> <span class="n">was</span> <span class="n">converted</span> <span class="n">to</span> <span class="n">IR</span> <span class="n">v11</span><span class="p">,</span> <span class="n">the</span> <span class="n">latest</span> <span class="n">model</span> <span class="nb">format</span> <span class="n">that</span> <span class="n">corresponds</span> <span class="n">to</span> <span class="n">the</span> <span class="n">source</span> <span class="n">DL</span> <span class="n">framework</span> <span class="nb">input</span><span class="o">/</span><span class="n">output</span> <span class="nb">format</span><span class="o">.</span> <span class="n">While</span> <span class="n">IR</span> <span class="n">v11</span> <span class="ow">is</span> <span class="n">backwards</span> <span class="n">compatible</span> <span class="k">with</span> <span class="n">OpenVINO</span> <span class="n">Inference</span> <span class="n">Engine</span> <span class="n">API</span> <span class="n">v1</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span> <span class="n">please</span> <span class="n">use</span> <span class="n">API</span> <span class="n">v2</span><span class="o">.</span><span class="mi">0</span> <span class="p">(</span><span class="k">as</span> <span class="n">of</span> <span class="mf">2022.1</span><span class="p">)</span> <span class="n">to</span> <span class="n">take</span> <span class="n">advantage</span> <span class="n">of</span> <span class="n">the</span> <span class="n">latest</span> <span class="n">improvements</span> <span class="ow">in</span> <span class="n">IR</span> <span class="n">v11</span><span class="o">.</span>
-<span class="n">Find</span> <span class="n">more</span> <span class="n">information</span> <span class="n">about</span> <span class="n">API</span> <span class="n">v2</span><span class="o">.</span><span class="mi">0</span> <span class="ow">and</span> <span class="n">IR</span> <span class="n">v11</span> <span class="n">at</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">docs</span><span class="o">.</span><span class="n">openvino</span><span class="o">.</span><span class="n">ai</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">The</span> <span class="n">model</span> <span class="n">was</span> <span class="n">converted</span> <span class="n">to</span> <span class="n">IR</span> <span class="n">v11</span><span class="p">,</span> <span class="n">the</span> <span class="n">latest</span> <span class="n">model</span> <span class="nb">format</span> <span class="n">that</span> <span class="n">corresponds</span> <span class="n">to</span> <span class="n">the</span> <span class="n">source</span> <span class="n">DL</span> <span class="n">framework</span> <span class="nb">input</span><span class="o">/</span><span class="n">output</span> <span class="nb">format</span><span class="o">.</span> <span class="n">While</span> <span class="n">IR</span> <span class="n">v11</span> <span class="ow">is</span> <span class="n">backwards</span> <span class="n">compatible</span> <span class="k">with</span> <span class="n">OpenVINO</span> <span class="n">Inference</span> <span class="n">Engine</span> <span class="n">API</span> <span class="n">v1</span><span class="mf">.0</span><span class="p">,</span> <span class="n">please</span> <span class="n">use</span> <span class="n">API</span> <span class="n">v2</span><span class="mf">.0</span> <span class="p">(</span><span class="k">as</span> <span class="n">of</span> <span class="mf">2022.1</span><span class="p">)</span> <span class="n">to</span> <span class="n">take</span> <span class="n">advantage</span> <span class="n">of</span> <span class="n">the</span> <span class="n">latest</span> <span class="n">improvements</span> <span class="ow">in</span> <span class="n">IR</span> <span class="n">v11</span><span class="o">.</span>
+<span class="n">Find</span> <span class="n">more</span> <span class="n">information</span> <span class="n">about</span> <span class="n">API</span> <span class="n">v2</span><span class="mf">.0</span> <span class="ow">and</span> <span class="n">IR</span> <span class="n">v11</span> <span class="n">at</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">docs</span><span class="o">.</span><span class="n">openvino</span><span class="o">.</span><span class="n">ai</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="copy-models">
+</section>
+<section id="copy-models">
 <h2>Copy Models<a class="headerlink" href="#copy-models" title="Permalink to this headline">¶</a></h2>
 <p>To make it easier to work with the models, we copy the models from the
 Open Model Zoo tree to the <em>model</em> subdirectory relative to this Jupyter
@@ -775,12 +782,12 @@ Open Model Zoo’s <code class="docutils literal notranslate"><span class="pre">
 <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">open_model_zoo_models</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">text</span><span class="o">-</span><span class="n">recognition</span><span class="o">-</span><span class="n">resnet</span><span class="o">-</span><span class="n">fc</span><span class="o">/</span><span class="n">FP16</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="object-detection">
+</section>
+<section id="object-detection">
 <h2>Object Detection<a class="headerlink" href="#object-detection" title="Permalink to this headline">¶</a></h2>
 <p>Load the detection model, load an image, do inference and get the
 detection inference result.</p>
-<div class="section" id="load-detection-model">
+<section id="load-detection-model">
 <h3>Load Detection Model<a class="headerlink" href="#load-detection-model" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">detection_model</span> <span class="o">=</span> <span class="n">ie</span><span class="o">.</span><span class="n">read_model</span><span class="p">(</span>
     <span class="n">model</span><span class="o">=</span><span class="n">detection_model_path</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">detection_model_path</span><span class="o">.</span><span class="n">with_suffix</span><span class="p">(</span><span class="s2">&quot;.bin&quot;</span><span class="p">)</span>
@@ -790,8 +797,8 @@ detection inference result.</p>
 <span class="n">detection_input_layer</span> <span class="o">=</span> <span class="n">detection_compiled_model</span><span class="o">.</span><span class="n">input</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="load-an-image">
+</section>
+<section id="load-an-image">
 <h3>Load an Image<a class="headerlink" href="#load-an-image" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># image_file can point to a URL or local image</span>
 <span class="n">image_file</span> <span class="o">=</span> <span class="s2">&quot;https://github.com/openvinotoolkit/openvino_notebooks/raw/main/notebooks/004-hello-detection/data/intel_rnb.jpg&quot;</span>
@@ -811,8 +818,8 @@ detection inference result.</p>
 </pre></div>
 </div>
 <img alt="../_images/208-optical-character-recognition-with-output_15_0.png" src="../_images/208-optical-character-recognition-with-output_15_0.png" />
-</div>
-<div class="section" id="do-inference">
+</section>
+<section id="do-inference">
 <h3>Do Inference<a class="headerlink" href="#do-inference" title="Permalink to this headline">¶</a></h3>
 <p>Text boxes are detected in the images and returned as blobs of data in
 the shape of <code class="docutils literal notranslate"><span class="pre">[100,</span> <span class="pre">5]</span></code>. Each detection description has the format
@@ -824,8 +831,8 @@ the shape of <code class="docutils literal notranslate"><span class="pre">[100,<
 <span class="n">boxes</span> <span class="o">=</span> <span class="n">boxes</span><span class="p">[</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">boxes</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="get-detection-results">
+</section>
+<section id="get-detection-results">
 <h3>Get Detection Results<a class="headerlink" href="#get-detection-results" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">multiply_by_ratio</span><span class="p">(</span><span class="n">ratio_x</span><span class="p">,</span> <span class="n">ratio_y</span><span class="p">,</span> <span class="n">box</span><span class="p">):</span>
     <span class="k">return</span> <span class="p">[</span>
@@ -892,13 +899,13 @@ the shape of <code class="docutils literal notranslate"><span class="pre">[100,<
     <span class="k">return</span> <span class="n">rgb_image</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="text-recogntion">
+</section>
+</section>
+<section id="text-recogntion">
 <h2>Text Recogntion<a class="headerlink" href="#text-recogntion" title="Permalink to this headline">¶</a></h2>
 <p>Load the text recognition model and do inference on the detected boxes
 from the detection model.</p>
-<div class="section" id="load-text-recognition-model">
+<section id="load-text-recognition-model">
 <h3>Load Text Recognition Model<a class="headerlink" href="#load-text-recognition-model" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">recognition_model</span> <span class="o">=</span> <span class="n">ie</span><span class="o">.</span><span class="n">read_model</span><span class="p">(</span>
     <span class="n">model</span><span class="o">=</span><span class="n">recognition_model_path</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">recognition_model_path</span><span class="o">.</span><span class="n">with_suffix</span><span class="p">(</span><span class="s2">&quot;.bin&quot;</span><span class="p">)</span>
@@ -913,8 +920,8 @@ from the detection model.</p>
 <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">W</span> <span class="o">=</span> <span class="n">recognition_input_layer</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="id1">
+</section>
+<section id="id1">
 <h3>Do Inference<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate scale for image resizing</span>
 <span class="p">(</span><span class="n">real_y</span><span class="p">,</span> <span class="n">real_x</span><span class="p">),</span> <span class="p">(</span><span class="n">resized_y</span><span class="p">,</span> <span class="n">resized_x</span><span class="p">)</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">2</span><span class="p">],</span> <span class="n">resized_image</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
@@ -958,11 +965,11 @@ from the detection model.</p>
 <span class="n">boxes_with_annotations</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">boxes</span><span class="p">,</span> <span class="n">annotations</span><span class="p">))</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="show-results">
+</section>
+</section>
+<section id="show-results">
 <h2>Show Results<a class="headerlink" href="#show-results" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="show-detected-text-boxes-and-ocr-results-for-the-image">
+<section id="show-detected-text-boxes-and-ocr-results-for-the-image">
 <h3>Show Detected Text Boxes and OCR Results for the Image<a class="headerlink" href="#show-detected-text-boxes-and-ocr-results-for-the-image" title="Permalink to this headline">¶</a></h3>
 <p>Visualize the result by drawing boxes around recognized text and showing
 the OCR result from the text recognition model</p>
@@ -971,8 +978,8 @@ the OCR result from the text recognition model</p>
 </pre></div>
 </div>
 <img alt="../_images/208-optical-character-recognition-with-output_25_0.png" src="../_images/208-optical-character-recognition-with-output_25_0.png" />
-</div>
-<div class="section" id="show-the-ocr-result-per-bounding-box">
+</section>
+<section id="show-the-ocr-result-per-bounding-box">
 <h3>Show the OCR Result per Bounding Box<a class="headerlink" href="#show-the-ocr-result-per-bounding-box" title="Permalink to this headline">¶</a></h3>
 <p>Depending on the image, the OCR result may not be readable in the image
 with boxes as displayed in the cell above. In the next cell, we show the
@@ -993,8 +1000,8 @@ extracted boxes, and the OCR result per box.</p>
 <p>center</p>
 <img alt="../_images/208-optical-character-recognition-with-output_27_10.png" src="../_images/208-optical-character-recognition-with-output_27_10.png" />
 <p>robert</p>
-</div>
-<div class="section" id="print-annotations-in-plain-text-format">
+</section>
+<section id="print-annotations-in-plain-text-format">
 <h3>Print Annotations in Plain Text Format<a class="headerlink" href="#print-annotations-in-plain-text-format" title="Permalink to this headline">¶</a></h3>
 <p>Print annotations for detected text based on their position in the input
 image starting from the upper left corner.</p>
@@ -1007,9 +1014,9 @@ image starting from the upper left corner.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="s1">&#39;robert&#39;</span><span class="p">,</span> <span class="s1">&#39;n&#39;</span><span class="p">,</span> <span class="s1">&#39;noyce&#39;</span><span class="p">,</span> <span class="s1">&#39;building&#39;</span><span class="p">,</span> <span class="s1">&#39;2200&#39;</span><span class="p">,</span> <span class="s1">&#39;center&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
                 </div>
@@ -1040,7 +1047,7 @@ image starting from the upper left corner.</p>
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

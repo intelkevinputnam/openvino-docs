@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Convert PyTorch* RNN-T Model &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -1810,7 +1817,7 @@
             
                 <div>
                   
-  <div class="section" id="convert-pytorch-rnn-t-model">
+  <section id="convert-pytorch-rnn-t-model">
 <span id="doxid-openvino-docs-m-o-d-g-prepare-model-convert-model-pytorch-specific-convert-r-n-n-t"></span><span id="index-0"></span><h1>Convert PyTorch* RNN-T Model<a class="headerlink" href="#convert-pytorch-rnn-t-model" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-openvino-docs-m-o-d-g-prepare-model-convert-model-pytorch-specific-convert-r-n-n-t-1md-openvino-docs-mo-dg-prepare-model-convert-model-pytorch-specific-convert-rnnt"></span> This instruction covers conversion of RNN-T model from <a class="reference external" href="https://github.com/mlcommons">MLCommons</a> repository. Follow the steps below to export a PyTorch* model into ONNX* before converting it to IR:</p>
 <p><strong>Step 1</strong>. Clone RNN-T PyTorch implementation from MLCommons repository (revision r1.0). Make a shallow clone to pull only RNN-T model without full repository. If you already have a full repository, skip this and go to <strong>Step 2</strong> :</p>
@@ -1878,7 +1885,7 @@
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">mo</span> <span class="o">--</span><span class="n">input_model</span> <span class="n">rnnt_encoder</span><span class="p">.</span><span class="n">onnx</span> <span class="o">--</span><span class="n">input</span> <span class="s">&quot;input[157 1 240],feature_length-&gt;157&quot;</span>
 <span class="n">mo</span> <span class="o">--</span><span class="n">input_model</span> <span class="n">rnnt_prediction</span><span class="p">.</span><span class="n">onnx</span> <span class="o">--</span><span class="n">input</span> <span class="s">&quot;symbol[1 1],hidden_in_1[2 1 320],hidden_in_2[2 1 320]&quot;</span>
 <span class="n">mo</span> <span class="o">--</span><span class="n">input_model</span> <span class="n">rnnt_joint</span><span class="p">.</span><span class="n">onnx</span> <span class="o">--</span><span class="n">input</span> <span class="s">&quot;0[1 1 1024],1[1 1 320]&quot;</span></pre></div></div><p>Please note that hardcoded value for sequence length = 157 was taken from the MLCommons but conversion to IR preserves network <a class="reference internal" href="openvino_docs_OV_UG_ShapeInference.html#doxid-openvino-docs-o-v-u-g-shape-inference"><span class="std std-ref">reshapeability</span></a>, this means you can change input shapes manually to any value either during conversion or inference.</p>
-</div>
+</section>
 
 
                 </div>
@@ -1909,7 +1916,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

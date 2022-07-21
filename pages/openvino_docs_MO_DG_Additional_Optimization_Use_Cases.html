@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Embedding Preprocessing Computation &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -1840,18 +1847,18 @@
             
                 <div>
                   
-  <div class="section" id="embedding-preprocessing-computation">
+  <section id="embedding-preprocessing-computation">
 <span id="doxid-openvino-docs-m-o-d-g-additional-optimization-use-cases"></span><span id="index-0"></span><h1>Embedding Preprocessing Computation<a class="headerlink" href="#embedding-preprocessing-computation" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-openvino-docs-m-o-d-g-additional-optimization-use-cases-1md-openvino-docs-mo-dg-prepare-model-additional-optimizations"></span> Input data for inference can be different from the training dataset and requires additional preprocessing before inference. To accelerate the whole pipeline including preprocessing and inference, Model Optimizer provides special parameters such as <code class="docutils literal notranslate"><span class="pre">--mean_values</span></code>, <code class="docutils literal notranslate"><span class="pre">--scale_values</span></code>, <code class="docutils literal notranslate"><span class="pre">--reverse_input_channels</span></code>, and <code class="docutils literal notranslate"><span class="pre">--layout</span></code>. Based on these parameters, Model Optimizer generates IR with additionally inserted sub-graph that performs the defined preprocessing. This preprocessing block can perform mean-scale normalization of input data, reverting data along channel dimension, and changing the data layout. For more details about these parameters, refer to the paragraphs below. The same functionality is also available in runtime, please refer to <a class="reference internal" href="openvino_docs_OV_UG_Preprocessing_Overview.html#doxid-openvino-docs-o-v-u-g-preprocessing-overview"><span class="std std-ref">Overview of Preprocessing API</span></a> for more information.</p>
-<div class="section" id="when-to-specify-layout">
+<section id="when-to-specify-layout">
 <h2>When to Specify Layout<a class="headerlink" href="#when-to-specify-layout" title="Permalink to this headline">¶</a></h2>
 <p>You may need to set input layouts, as it is required by some preprocessing, for example, setting a batch, applying mean or scales, and reversing input channels (BGR&lt;-&gt;RGB).</p>
 <p>Layout defines the meaning of dimensions in shape and can be specified for both inputs and outputs. For the layout syntax, check the <a class="reference internal" href="openvino_docs_OV_UG_Layout_Overview.html#doxid-openvino-docs-o-v-u-g-layout-overview"><span class="std std-ref">Layout API overview</span></a>. To specify the layout, you can use <code class="docutils literal notranslate"><span class="pre">--layout</span></code> option followed by the layout value.</p>
 <p>For example, for Tensorflow* <code class="docutils literal notranslate"><span class="pre">nasnet_large</span></code> model that was exported to ONNX format and thus has input with <code class="docutils literal notranslate"><span class="pre">NHWC</span></code> layout:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">mo</span> <span class="o">--</span><span class="n">input_model</span> <span class="n">tf_nasnet_large</span><span class="p">.</span><span class="n">onnx</span> <span class="o">--</span><span class="n">layout</span> <span class="n">nhwc</span></pre></div></div><p>Additionally, if a model has more than one input or needs both input and output layouts specified, you need to provide the name of each input or output to which you apply the layout.</p>
 <p>For example, for ONNX* <code class="docutils literal notranslate"><span class="pre">Yolo</span> <span class="pre">v3</span> <span class="pre">Tiny</span></code> model that has first input <code class="docutils literal notranslate"><span class="pre">input_1</span></code> in <code class="docutils literal notranslate"><span class="pre">NCHW</span></code> layout and second input <code class="docutils literal notranslate"><span class="pre">image_shape</span></code> with 2 dimensions: batch and size of the image which can be expressed as <code class="docutils literal notranslate"><span class="pre">N?</span></code> layout:</p>
-<div class="highlight"><div class="highlight"><pre><span></span><span class="n">mo</span> <span class="o">--</span><span class="n">input_model</span> <span class="n">yolov3</span><span class="o">-</span><span class="n">tiny</span><span class="p">.</span><span class="n">onnx</span> <span class="o">--</span><span class="n">layout</span> <span class="n">input_1</span><span class="p">(</span><span class="n">nchw</span><span class="p">),</span><span class="n">image_shape</span><span class="p">(</span><span class="n">n</span><span class="o">?</span><span class="p">)</span></pre></div></div></div>
-<div class="section" id="how-to-change-layout-of-a-model-inputs-and-outputs">
+<div class="highlight"><div class="highlight"><pre><span></span><span class="n">mo</span> <span class="o">--</span><span class="n">input_model</span> <span class="n">yolov3</span><span class="o">-</span><span class="n">tiny</span><span class="p">.</span><span class="n">onnx</span> <span class="o">--</span><span class="n">layout</span> <span class="n">input_1</span><span class="p">(</span><span class="n">nchw</span><span class="p">),</span><span class="n">image_shape</span><span class="p">(</span><span class="n">n</span><span class="o">?</span><span class="p">)</span></pre></div></div></section>
+<section id="how-to-change-layout-of-a-model-inputs-and-outputs">
 <h2>How to Change Layout of a Model Inputs and Outputs<a class="headerlink" href="#how-to-change-layout-of-a-model-inputs-and-outputs" title="Permalink to this headline">¶</a></h2>
 <p>Changing the model layout may be necessary if it differs from the one presented by input data. To change the layout, you can use either <code class="docutils literal notranslate"><span class="pre">--layout</span></code> or <code class="docutils literal notranslate"><span class="pre">--source_layout</span></code> with <code class="docutils literal notranslate"><span class="pre">--target_layout</span></code>.</p>
 <p>For example, for the same <code class="docutils literal notranslate"><span class="pre">nasnet_large</span></code> that were mentioned previously we may want to provide data in <code class="docutils literal notranslate"><span class="pre">NCHW</span></code> layout:</p>
@@ -1859,8 +1866,8 @@
 <span class="n">mo</span> <span class="o">--</span><span class="n">input_model</span> <span class="n">tf_nasnet_large</span><span class="p">.</span><span class="n">onnx</span> <span class="o">--</span><span class="n">layout</span> <span class="s">&quot;nhwc-&gt;nchw&quot;</span></pre></div></div><p>Again, if a model has more than one input or needs both input and output layouts specified, you need to provide the name of each input or output to which you apply the layout.</p>
 <p>For example, to provide data in the <code class="docutils literal notranslate"><span class="pre">NHWC</span></code> layout for the <code class="docutils literal notranslate"><span class="pre">Yolo</span> <span class="pre">v3</span> <span class="pre">Tiny</span></code> model mentioned earlier:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">mo</span> <span class="o">--</span><span class="n">input_model</span> <span class="n">yolov3</span><span class="o">-</span><span class="n">tiny</span><span class="p">.</span><span class="n">onnx</span> <span class="o">--</span><span class="n">source_layout</span> <span class="s">&quot;input_1(nchw),image_shape(n?)&quot;</span> <span class="o">--</span><span class="n">target_layout</span> <span class="s">&quot;input_1(nhwc)&quot;</span>
-<span class="n">mo</span> <span class="o">--</span><span class="n">input_model</span> <span class="n">yolov3</span><span class="o">-</span><span class="n">tiny</span><span class="p">.</span><span class="n">onnx</span> <span class="o">--</span><span class="n">layout</span> <span class="s">&quot;input_1(nchw-&gt;nhwc),image_shape(n?)&quot;</span></pre></div></div></div>
-<div class="section" id="when-to-specify-mean-and-scale-values">
+<span class="n">mo</span> <span class="o">--</span><span class="n">input_model</span> <span class="n">yolov3</span><span class="o">-</span><span class="n">tiny</span><span class="p">.</span><span class="n">onnx</span> <span class="o">--</span><span class="n">layout</span> <span class="s">&quot;input_1(nchw-&gt;nhwc),image_shape(n?)&quot;</span></pre></div></div></section>
+<section id="when-to-specify-mean-and-scale-values">
 <h2>When to Specify Mean and Scale Values<a class="headerlink" href="#when-to-specify-mean-and-scale-values" title="Permalink to this headline">¶</a></h2>
 <p>Usually neural network models are trained with the normalized input data. This means that the input data values are converted to be in a specific range, for example, <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">1]</span></code> or <code class="docutils literal notranslate"><span class="pre">[-1,</span> <span class="pre">1]</span></code>. Sometimes the mean values (mean images) are subtracted from the input data values as part of the pre-processing. There are two cases of how the input data pre-processing is implemented.</p>
 <ul class="simple">
@@ -1870,8 +1877,8 @@
 <p>In the first case, the Model Optimizer generates the IR with required pre-processing operations and no <code class="docutils literal notranslate"><span class="pre">mean</span></code> and <code class="docutils literal notranslate"><span class="pre">scale</span></code> parameters are required.</p>
 <p>In the second case, information about mean/scale values should be provided to the Model Optimizer to embed it to the generated IR. Model Optimizer provides command-line parameters to specify the values: <code class="docutils literal notranslate"><span class="pre">--mean_values</span></code>, <code class="docutils literal notranslate"><span class="pre">--scale_values</span></code>, <code class="docutils literal notranslate"><span class="pre">--scale</span></code>. Using these parameters, Model Optimizer embeds the corresponding preprocessing block for mean-value normalization of the input data and optimizes this block so that the preprocessing takes negligible time for inference.</p>
 <p>For example, run the Model Optimizer for the PaddlePaddle* UNet model and apply mean-scale normalization to the input data.</p>
-<div class="highlight"><div class="highlight"><pre><span></span><span class="n">mo</span> <span class="o">--</span><span class="n">input_model</span> <span class="n">unet</span><span class="p">.</span><span class="n">pdmodel</span> <span class="o">--</span><span class="n">mean_values</span> <span class="p">[</span><span class="mi">123</span><span class="p">,</span><span class="mi">117</span><span class="p">,</span><span class="mi">104</span><span class="p">]</span> <span class="o">--</span><span class="n">scale</span> <span class="mi">255</span></pre></div></div></div>
-<div class="section" id="when-to-reverse-input-channels">
+<div class="highlight"><div class="highlight"><pre><span></span><span class="n">mo</span> <span class="o">--</span><span class="n">input_model</span> <span class="n">unet</span><span class="p">.</span><span class="n">pdmodel</span> <span class="o">--</span><span class="n">mean_values</span> <span class="p">[</span><span class="mi">123</span><span class="p">,</span><span class="mi">117</span><span class="p">,</span><span class="mi">104</span><span class="p">]</span> <span class="o">--</span><span class="n">scale</span> <span class="mi">255</span></pre></div></div></section>
+<section id="when-to-reverse-input-channels">
 <span id="id1"></span><h2>When to Reverse Input Channels<a class="headerlink" href="#when-to-reverse-input-channels" title="Permalink to this headline">¶</a></h2>
 <p>Sometimes input images for your application can be of the RGB (BGR) format and the model is trained on images of the BGR (RGB) format, the opposite color channel order. In this case, it is important to preprocess the input images by reverting the color channels before inference. To embed this preprocessing step into IR, Model Optimizer provides the <code class="docutils literal notranslate"><span class="pre">--reverse_input_channels</span></code> command-line parameter to shuffle the color channels.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">--reverse_input_channels</span></code> parameter applies to an input of the model in two cases.</p>
@@ -1886,14 +1893,14 @@
 <p>If both mean and scale values are specified, the mean is subtracted first and then the scale is applied regardless of the order of options</p>
 </div>
 <p>in the command line. Input values are <em>divided</em> by the scale value(s). If also <code class="docutils literal notranslate"><span class="pre">--reverse_input_channels</span></code> option is used, the <code class="docutils literal notranslate"><span class="pre">reverse_input_channels</span></code> will be applied first, then <code class="docutils literal notranslate"><span class="pre">mean</span></code> and after that <code class="docutils literal notranslate"><span class="pre">scale</span></code>. The data flow in the model looks as follows: <code class="docutils literal notranslate"><span class="pre">Parameter</span> <span class="pre">-&gt;</span> <span class="pre">ReverseInputChannels</span> <span class="pre">-&gt;</span> <span class="pre">Mean</span> <span class="pre">apply-&gt;</span> <span class="pre">Scale</span> <span class="pre">apply</span> <span class="pre">-&gt;</span> <span class="pre">the</span> <span class="pre">original</span> <span class="pre">body</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">model</span></code>.</p>
-</div>
-<div class="section" id="see-also">
+</section>
+<section id="see-also">
 <h2>See Also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="openvino_docs_OV_UG_Preprocessing_Overview.html#doxid-openvino-docs-o-v-u-g-preprocessing-overview"><span class="std std-ref">Overview of Preprocessing API</span></a></p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -1924,7 +1931,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

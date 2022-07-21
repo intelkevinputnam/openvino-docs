@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Graph API Kernel API &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -1837,18 +1844,18 @@
             
                 <div>
                   
-  <div class="section" id="graph-api-kernel-api">
+  <section id="graph-api-kernel-api">
 <span id="doxid-openvino-docs-gapi-kernel-api"></span><span id="index-0"></span><h1>Graph API Kernel API<a class="headerlink" href="#graph-api-kernel-api" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-openvino-docs-gapi-kernel-api-1md-openvino-docs-gapi-kernel-api"></span> The core idea behind Graph API (G-API) is portability – a pipeline built with G-API must be portable (or at least able to be portable). It means that either it works out-of-the box when compiled for new platform, or G-API provides necessary tools to make it running there, with little-to-no changes in the algorithm itself.</p>
 <p>This idea can be achieved by separating kernel interface from its implementation. Once a pipeline is built using kernel interfaces, it becomes implementation-neutral – the implementation details (i.e. which kernels to use) are passed on a separate stage (graph compilation).</p>
 <p>Kernel-implementation hierarchy may look like:</p>
 <img alt="Kernel API/implementation hierarchy example" src="../_images/gapi_kernel_implementation_hierarchy.png" />
 <p>A pipeline itself then can be expressed only in terms of <code class="docutils literal notranslate"><span class="pre">A</span></code>, <code class="docutils literal notranslate"><span class="pre">B</span></code>, and so on, and choosing which implementation to use in execution becomes an external parameter.</p>
-<div class="section" id="define-a-kernel">
+<section id="define-a-kernel">
 <h2>Define a Kernel<a class="headerlink" href="#define-a-kernel" title="Permalink to this headline">¶</a></h2>
-<p>G-API provides a macro to define a new kernel interface <code class="docutils literal notranslate"><span class="pre">G_TYPED_KERNEL()</span></code> :</p>
+<p>G-API provides a macro to define a new kernel interface <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/namespaceInferenceEngine_1_1gapi.html#doxid-namespace-inference-engine-1-1gapi-1aa790e0daed7c378173a497fee4adbbbf"><span class="std std-ref"><span class="pre">G_TYPED_KERNEL()</span></span></a></code> :</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;opencv2/gapi.hpp&gt;</span><span class="cp"></span>
-G_TYPED_KERNEL<span></span><span class="p">(</span><span class="n">GFilter2D</span><span class="p">,</span>
+<a class="reference internal" href="../api/groups/namespaceInferenceEngine_1_1gapi.html#doxid-namespace-inference-engine-1-1gapi-1aa790e0daed7c378173a497fee4adbbbf"><span class="std std-ref">G_TYPED_KERNEL</span></a><span></span><span class="p">(</span><span class="n">GFilter2D</span><span class="p">,</span>
                <span class="o">&lt;</span><span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">(</span><span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">,</span><span class="kt">int</span><span class="p">,</span><span class="n">cv</span><span class="o">::</span><span class="n">Mat</span><span class="p">,</span><span class="n">cv</span><span class="o">::</span><span class="n">Point</span><span class="p">,</span><span class="kt">double</span><span class="p">,</span><span class="kt">int</span><span class="p">,</span><span class="n">cv</span><span class="o">::</span><span class="n">Scalar</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span>
                <span class="s">&quot;org.opencv.imgproc.filters.filter2D&quot;</span><span class="p">)</span>
 <span class="p">{</span>
@@ -1875,7 +1882,7 @@ G_TYPED_KERNEL<span></span><span class="p">(</span><span class="n">GFilter2D</sp
 <p>Kernel’s return value can only be of G-API dynamic type – <code class="docutils literal notranslate"><span class="pre">cv::GMat</span></code>, <code class="docutils literal notranslate"><span class="pre">cv::GScalar</span></code>, or <code class="docutils literal notranslate"><span class="pre">cv::GArray&lt;T&gt;</span></code>. If an operation has more than one output, it should be wrapped into an <code class="docutils literal notranslate"><span class="pre">std::tuple&lt;&gt;</span></code> (which can contain only mentioned G-API types). Arbitrary-output-number operations are not supported.</p>
 <p>Once a kernel is defined, it can be used in pipelines with special, G-API-supplied method <code class="docutils literal notranslate"><span class="pre">on()</span></code>. This method has the same signature as defined in kernel, so the following code is a perfectly legal construction:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">cv</span><span class="o">::</span><span class="n">GMat</span> <span class="n">in</span><span class="p">;</span>
-<span class="n">cv</span><span class="o">::</span><span class="n">GMat</span> out<span></span> <span class="o">=</span> <span class="n">GFilter2D</span><span class="o">::</span><span class="n">on</span><span class="p">(</span><span class="o">/</span><span class="err">\</span><span class="o">*</span> <span class="n">GMat</span>    <span class="err">\*/</span>  <span class="n">in</span><span class="p">,</span>
+<span class="n">cv</span><span class="o">::</span><span class="n">GMat</span> <a class="reference internal" href="../api/groups/namespacengraph_1_1runtime_1_1reference.html#doxid-namespacengraph-1-1runtime-1-1reference-1ac9d07fc6d49867bb411a4f4132777aae"><span class="std std-ref">out</span></a><span></span> <span class="o">=</span> <span class="n">GFilter2D</span><span class="o">::</span><span class="n">on</span><span class="p">(</span><span class="o">/</span><span class="err">\</span><span class="o">*</span> <span class="n">GMat</span>    <span class="err">\*/</span>  <span class="n">in</span><span class="p">,</span>
                              <span class="o">/</span><span class="err">\</span><span class="o">*</span> <span class="kt">int</span>     <span class="err">\*/</span>  <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
                              <span class="o">/</span><span class="err">\</span><span class="o">*</span> <span class="n">Mat</span>     <span class="err">\*/</span>  <span class="n">conv_kernel_mat</span><span class="p">,</span>
                              <span class="o">/</span><span class="err">\</span><span class="o">*</span> <span class="n">Point</span>   <span class="err">\*/</span>  <span class="n">cv</span><span class="o">::</span><span class="n">Point</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span>
@@ -1893,15 +1900,15 @@ G_TYPED_KERNEL<span></span><span class="p">(</span><span class="n">GFilter2D</sp
     <span class="k">return</span> <span class="n">GFilter2D</span><span class="o">::</span><span class="n">on</span><span class="p">(</span><span class="n">in</span><span class="p">,</span> <span class="n">ddepth</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">anchor</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="n">border</span><span class="p">,</span> <span class="n">bval</span><span class="p">);</span>
 <span class="p">}</span></pre></div></div><p>So now it can be used like:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">cv</span><span class="o">::</span><span class="n">GMat</span> <span class="n">in</span><span class="p">;</span>
-<span class="n">cv</span><span class="o">::</span><span class="n">GMat</span> out<span></span> <span class="o">=</span> <span class="n">filter2D</span><span class="p">(</span><span class="n">in</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">conv_kernel_mat</span><span class="p">);</span></pre></div></div><div class="section" id="extra-information">
+<span class="n">cv</span><span class="o">::</span><span class="n">GMat</span> <a class="reference internal" href="../api/groups/namespacengraph_1_1runtime_1_1reference.html#doxid-namespacengraph-1-1runtime-1-1reference-1ac9d07fc6d49867bb411a4f4132777aae"><span class="std std-ref">out</span></a><span></span> <span class="o">=</span> <span class="n">filter2D</span><span class="p">(</span><span class="n">in</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">conv_kernel_mat</span><span class="p">);</span></pre></div></div><section id="extra-information">
 <h3>Extra information<a class="headerlink" href="#extra-information" title="Permalink to this headline">¶</a></h3>
 <p>In the current version, kernel declaration body (everything within the curly braces) must contain a static function <code class="docutils literal notranslate"><span class="pre">outMeta()</span></code>. This function establishes a functional dependency between operation’s input and output metadata.</p>
 <p>Metadata is an information about data kernel operates on. Since non-G-API types are opaque to G-API, G-API cares only about G* data descriptors (i.e. dimensions and format of <code class="docutils literal notranslate"><span class="pre">cv::GMat</span></code>, etc).</p>
 <p><code class="docutils literal notranslate"><span class="pre">outMeta()</span></code> is also an example of how kernel’s signature can be transformed into a derived callback – note that in this example, outMeta() signature exactly follows the kernel signature (defined within the macro) but is different – where kernel expects <code class="docutils literal notranslate"><span class="pre">cv::GMat</span></code>, <code class="docutils literal notranslate"><span class="pre">outMeta()</span></code> takes and returns <code class="docutils literal notranslate"><span class="pre">cv::GMatDesc</span></code> (a G-API structure metadata for <code class="docutils literal notranslate"><span class="pre">cv::GMat</span></code>).</p>
 <p>The point of <code class="docutils literal notranslate"><span class="pre">outMeta()</span></code> is to propagate metadata information within computation from inputs to outputs and infer metadata of internal (intermediate, temporary) data objects. This information is required for further pipeline optimizations, memory allocation, and other operations done by G-API framework during graph compilation.</p>
-</div>
-</div>
-<div class="section" id="implement-a-kernel">
+</section>
+</section>
+<section id="implement-a-kernel">
 <h2>Implement a Kernel<a class="headerlink" href="#implement-a-kernel" title="Permalink to this headline">¶</a></h2>
 <p>Once a kernel is declared, its interface can be used to implement versions of this kernel in different backends. This concept is naturally projected from object-oriented programming “Interface/Implementation” idiom: an interface can be implemented multiple times, and different implementations of a kernel should be substitutable with each other without breaking the algorithm (pipeline) logic (Liskov Substitution Principle).</p>
 <p>Every backend defines its own way to implement a kernel interface. This way is regular, though – whatever plugin is, its kernel implementation must be “derived” from a kernel interface type.</p>
@@ -1919,9 +1926,9 @@ G_TYPED_KERNEL<span></span><span class="p">(</span><span class="n">GFilter2D</sp
         <span class="k">const</span> <span class="kt">double</span>      <span class="n">delta</span><span class="p">,</span>    <span class="c1">// opaque (passed as-is)</span>
         <span class="k">const</span> <span class="kt">int</span>         <span class="n">border</span><span class="p">,</span>   <span class="c1">// opaque (passed as-is)</span>
         <span class="k">const</span> <span class="n">cv</span><span class="o">::</span><span class="n">Scalar</span> <span class="o">&amp;</span><span class="p">,</span>         <span class="c1">// opaque (passed as-is)</span>
-        <span class="n">cv</span><span class="o">::</span><span class="n">Mat</span>          <span class="o">&amp;</span>out<span></span><span class="p">)</span>      <span class="c1">// out - derived from GMat (retval)</span>
+        <span class="n">cv</span><span class="o">::</span><span class="n">Mat</span>          <span class="o">&amp;</span><a class="reference internal" href="../api/groups/namespacengraph_1_1runtime_1_1reference.html#doxid-namespacengraph-1-1runtime-1-1reference-1ac9d07fc6d49867bb411a4f4132777aae"><span class="std std-ref">out</span></a><span></span><span class="p">)</span>      <span class="c1">// out - derived from GMat (retval)</span>
     <span class="p">{</span>
-        <span class="n">cv</span><span class="o">::</span><span class="n">filter2D</span><span class="p">(</span><span class="n">in</span><span class="p">,</span> out<span></span><span class="p">,</span> <span class="n">ddepth</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">anchor</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span> <span class="n">border</span><span class="p">);</span>
+        <span class="n">cv</span><span class="o">::</span><span class="n">filter2D</span><span class="p">(</span><span class="n">in</span><span class="p">,</span> <a class="reference internal" href="../api/groups/namespacengraph_1_1runtime_1_1reference.html#doxid-namespacengraph-1-1runtime-1-1reference-1ac9d07fc6d49867bb411a4f4132777aae"><span class="std std-ref">out</span></a><span></span><span class="p">,</span> <span class="n">ddepth</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">anchor</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span> <span class="n">border</span><span class="p">);</span>
     <span class="p">}</span>
 <span class="p">};</span></pre></div></div><p>Note how CPU (OpenCV) plugin has transformed the original kernel signature:</p>
 <ul class="simple">
@@ -1929,14 +1936,14 @@ G_TYPED_KERNEL<span></span><span class="p">(</span><span class="n">GFilter2D</sp
 <li><p>Output <code class="docutils literal notranslate"><span class="pre">cv::GMat</span></code> has been transformed into extra output parameter, thus <code class="docutils literal notranslate"><span class="pre">GCPUFilter2D::run()</span></code> takes one argument more than the original kernel signature.</p></li>
 </ul>
 <p>The basic intuition for kernel developer here is not to care where that cv::Mat objects come from instead of the original <code class="docutils literal notranslate"><span class="pre">cv::GMat</span></code> – and just follow the signature conventions defined by the plugin. G-API will call this method during execution and supply all the necessary information (and forward the original opaque data as-is).</p>
-</div>
-<div class="section" id="compound-kernels">
+</section>
+<section id="compound-kernels">
 <h2>Compound Kernels<a class="headerlink" href="#compound-kernels" title="Permalink to this headline">¶</a></h2>
 <p>Sometimes kernel is a single thing only on API level. It is convenient for users, but on a particular implementation side it would be better to have multiple kernels (a subgraph) doing the thing instead. An example is <code class="docutils literal notranslate"><span class="pre">goodFeaturesToTrack()</span></code> – while in OpenCV backend it may remain a single kernel, with Fluid it becomes compound – Fluid can handle Harris response calculation but can’t do sparse non-maxima suppression and point extraction to an STL vector:</p>
-<p>A compound kernel implementation can be defined using a generic macro <code class="docutils literal notranslate"><span class="pre">GAPI_COMPOUND_KERNEL()</span></code> :</p>
+<p>A compound kernel implementation can be defined using a generic macro <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/namespaceInferenceEngine_1_1gapi_1_1kernels.html#doxid-namespace-inference-engine-1-1gapi-1-1kernels-1a76f9eb54826de80615d653a43abc61b1"><span class="std std-ref"><span class="pre">GAPI_COMPOUND_KERNEL()</span></span></a></code> :</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;opencv2/gapi/gcompoundkernel.hpp&gt;       // GAPI_COMPOUND_KERNEL()</span><span class="cp"></span>
 <span class="k">using</span> <span class="n">PointArray2f</span> <span class="o">=</span> <span class="n">cv</span><span class="o">::</span><span class="n">GArray</span><span class="o">&lt;</span><span class="n">cv</span><span class="o">::</span><span class="n">Point2f</span><span class="o">&gt;</span><span class="p">;</span>
-G_TYPED_KERNEL<span></span><span class="p">(</span><span class="n">HarrisCorners</span><span class="p">,</span>
+<a class="reference internal" href="../api/groups/namespaceInferenceEngine_1_1gapi.html#doxid-namespace-inference-engine-1-1gapi-1aa790e0daed7c378173a497fee4adbbbf"><span class="std std-ref">G_TYPED_KERNEL</span></a><span></span><span class="p">(</span><span class="n">HarrisCorners</span><span class="p">,</span>
                <span class="o">&lt;</span><span class="n">PointArray2f</span><span class="p">(</span><span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">,</span><span class="kt">int</span><span class="p">,</span><span class="kt">double</span><span class="p">,</span><span class="kt">double</span><span class="p">,</span><span class="kt">int</span><span class="p">,</span><span class="kt">double</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span>
                <span class="s">&quot;org.opencv.imgproc.harris_corner&quot;</span><span class="p">)</span>
 <span class="p">{</span>
@@ -1952,7 +1959,7 @@ G_TYPED_KERNEL<span></span><span class="p">(</span><span class="n">HarrisCorners
     <span class="p">}</span>
 <span class="p">};</span>
 <span class="c1">// Define Fluid-backend-local kernels which form GoodFeatures</span>
-G_TYPED_KERNEL<span></span><span class="p">(</span><span class="n">HarrisResponse</span><span class="p">,</span>
+<a class="reference internal" href="../api/groups/namespaceInferenceEngine_1_1gapi.html#doxid-namespace-inference-engine-1-1gapi-1aa790e0daed7c378173a497fee4adbbbf"><span class="std std-ref">G_TYPED_KERNEL</span></a><span></span><span class="p">(</span><span class="n">HarrisResponse</span><span class="p">,</span>
                <span class="o">&lt;</span><span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">(</span><span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">,</span><span class="kt">double</span><span class="p">,</span><span class="kt">int</span><span class="p">,</span><span class="kt">double</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span>
                <span class="s">&quot;org.opencv.fluid.harris_response&quot;</span><span class="p">)</span>
 <span class="p">{</span>
@@ -1964,7 +1971,7 @@ G_TYPED_KERNEL<span></span><span class="p">(</span><span class="n">HarrisRespons
         <span class="k">return</span> <span class="n">in</span><span class="p">.</span><span class="n">withType</span><span class="p">(</span><span class="n">CV_32F</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
     <span class="p">}</span>
 <span class="p">};</span>
-G_TYPED_KERNEL<span></span><span class="p">(</span><span class="n">ArrayNMS</span><span class="p">,</span>
+<a class="reference internal" href="../api/groups/namespaceInferenceEngine_1_1gapi.html#doxid-namespace-inference-engine-1-1gapi-1aa790e0daed7c378173a497fee4adbbbf"><span class="std std-ref">G_TYPED_KERNEL</span></a><span></span><span class="p">(</span><span class="n">ArrayNMS</span><span class="p">,</span>
                <span class="o">&lt;</span><span class="n">PointArray2f</span><span class="p">(</span><span class="n">cv</span><span class="o">::</span><span class="n">GMat</span><span class="p">,</span><span class="kt">int</span><span class="p">,</span><span class="kt">double</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span>
                <span class="s">&quot;org.opencv.cpu.nms_array&quot;</span><span class="p">)</span>
 <span class="p">{</span>
@@ -1975,7 +1982,7 @@ G_TYPED_KERNEL<span></span><span class="p">(</span><span class="n">ArrayNMS</spa
         <span class="k">return</span> <span class="n">cv</span><span class="o">::</span><span class="n">empty_array_desc</span><span class="p">();</span>
     <span class="p">}</span>
 <span class="p">};</span>
-GAPI_COMPOUND_KERNEL<span></span><span class="p">(</span><span class="n">GFluidHarrisCorners</span><span class="p">,</span> <span class="n">HarrisCorners</span><span class="p">)</span>
+<a class="reference internal" href="../api/groups/namespaceInferenceEngine_1_1gapi_1_1kernels.html#doxid-namespace-inference-engine-1-1gapi-1-1kernels-1a76f9eb54826de80615d653a43abc61b1"><span class="std std-ref">GAPI_COMPOUND_KERNEL</span></a><span></span><span class="p">(</span><span class="n">GFluidHarrisCorners</span><span class="p">,</span> <span class="n">HarrisCorners</span><span class="p">)</span>
 <span class="p">{</span>
     <span class="k">static</span> <span class="n">PointArray2f</span>
     <span class="n">expand</span><span class="p">(</span><span class="n">cv</span><span class="o">::</span><span class="n">GMat</span> <span class="n">in</span><span class="p">,</span>
@@ -1991,8 +1998,8 @@ GAPI_COMPOUND_KERNEL<span></span><span class="p">(</span><span class="n">GFluidH
 <span class="p">};</span>
 <span class="c1">// Then implement HarrisResponse as Fluid kernel and NMSresponse</span>
 <span class="c1">// as a generic (OpenCV) kernel</span></pre></div></div><p>It is important to distinguish a compound kernel from G-API high-order function, i.e. a C++ function which looks like a kernel but in fact generates a subgraph. The core difference is that a compound kernel is an <em>implementation detail</em> and a kernel implementation may be either compound or not (depending on backend capabilities), while a high-order function is a “macro” in terms of G-API and so cannot act as an interface which then needs to be implemented by a backend.</p>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -2023,7 +2030,7 @@ GAPI_COMPOUND_KERNEL<span></span><span class="p">(</span><span class="n">GFluidH
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

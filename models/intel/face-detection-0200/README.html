@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>face-detection-0200 &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../../../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -2082,19 +2089,19 @@
             
                 <div>
                   
-  <div class="section" id="face-detection-0200">
+  <section id="face-detection-0200">
 <h1>face-detection-0200<a class="headerlink" href="#face-detection-0200" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="use-case-and-high-level-description">
+<section id="use-case-and-high-level-description">
 <h2>Use Case and High-Level Description<a class="headerlink" href="#use-case-and-high-level-description" title="Permalink to this headline">¶</a></h2>
 <p>Face detector based on MobileNetV2 as a backbone with a
 multiple SSD head for indoor and outdoor scenes shot by a front-facing camera.
 During the training of this model, training images were resized to 256x256.</p>
-</div>
-<div class="section" id="example">
+</section>
+<section id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <p><img alt="" src="../../../_images/face-detection-0200.png" /></p>
-</div>
-<div class="section" id="specification">
+</section>
+<section id="specification">
 <h2>Specification<a class="headerlink" href="#specification" title="Permalink to this headline">¶</a></h2>
 <table class="colwidths-auto table">
 <thead>
@@ -2121,8 +2128,8 @@ During the training of this model, training images were resized to 256x256.</p>
 <a class="reference external" href="https://en.wikipedia.org/wiki/Precision_and_recall">precision/recall</a>
 curve. All numbers were evaluated by taking into account only faces bigger than
 64 x 64 pixels.</p>
-</div>
-<div class="section" id="inputs">
+</section>
+<section id="inputs">
 <h2>Inputs<a class="headerlink" href="#inputs" title="Permalink to this headline">¶</a></h2>
 <p>Image, name: <code class="docutils literal notranslate"><span class="pre">image</span></code>, shape: <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">3,</span> <span class="pre">256,</span> <span class="pre">256</span></code> in the format <code class="docutils literal notranslate"><span class="pre">B,</span> <span class="pre">C,</span> <span class="pre">H,</span> <span class="pre">W</span></code>, where:</p>
 <ul class="simple">
@@ -2132,8 +2139,8 @@ curve. All numbers were evaluated by taking into account only faces bigger than
 <li><p><code class="docutils literal notranslate"><span class="pre">W</span></code> - image width</p></li>
 </ul>
 <p>Expected color order: <code class="docutils literal notranslate"><span class="pre">BGR</span></code>.</p>
-</div>
-<div class="section" id="outputs">
+</section>
+<section id="outputs">
 <h2>Outputs<a class="headerlink" href="#outputs" title="Permalink to this headline">¶</a></h2>
 <p>The net outputs blob with shape: <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">1,</span> <span class="pre">200,</span> <span class="pre">7</span></code> in the format <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">1,</span> <span class="pre">N,</span> <span class="pre">7</span></code>, where <code class="docutils literal notranslate"><span class="pre">N</span></code> is the number of detected
 bounding boxes. Each detection has the format [<code class="docutils literal notranslate"><span class="pre">image_id</span></code>, <code class="docutils literal notranslate"><span class="pre">label</span></code>, <code class="docutils literal notranslate"><span class="pre">conf</span></code>, <code class="docutils literal notranslate"><span class="pre">x_min</span></code>, <code class="docutils literal notranslate"><span class="pre">y_min</span></code>, <code class="docutils literal notranslate"><span class="pre">x_max</span></code>, <code class="docutils literal notranslate"><span class="pre">y_max</span></code>], where:</p>
@@ -2144,24 +2151,24 @@ bounding boxes. Each detection has the format [<code class="docutils literal not
 <li><p>(<code class="docutils literal notranslate"><span class="pre">x_min</span></code>, <code class="docutils literal notranslate"><span class="pre">y_min</span></code>) - coordinates of the top left bounding box corner</p></li>
 <li><p>(<code class="docutils literal notranslate"><span class="pre">x_max</span></code>, <code class="docutils literal notranslate"><span class="pre">y_max</span></code>) - coordinates of the bottom right bounding box corner</p></li>
 </ul>
-</div>
-<div class="section" id="training-pipeline">
+</section>
+<section id="training-pipeline">
 <h2>Training Pipeline<a class="headerlink" href="#training-pipeline" title="Permalink to this headline">¶</a></h2>
 <p>The OpenVINO <a class="reference external" href="https://github.com/openvinotoolkit/training_extensions/blob/misc/README.md">Training Extensions</a> provide a <a class="reference external" href="https://github.com/openvinotoolkit/training_extensions/blob/misc/models/object_detection/model_templates/face-detection/readme.md">training pipeline</a>, allowing to fine-tune the model on custom dataset.</p>
-</div>
-<div class="section" id="demo-usage">
+</section>
+<section id="demo-usage">
 <h2>Demo usage<a class="headerlink" href="#demo-usage" title="Permalink to this headline">¶</a></h2>
 <p>The model can be used in the following demos provided by the Open Model Zoo to show its capabilities:</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="../../../demos/object_detection_demo/cpp/README.html"><span class="doc std std-doc">Object Detection C++ Demo</span></a></p></li>
 <li><p><a class="reference internal" href="../../../demos/object_detection_demo/python/README.html"><span class="doc std std-doc">Object Detection Python* Demo</span></a></p></li>
 </ul>
-</div>
-<div class="section" id="legal-information">
+</section>
+<section id="legal-information">
 <h2>Legal Information<a class="headerlink" href="#legal-information" title="Permalink to this headline">¶</a></h2>
 <p>[*] Other names and brands may be claimed as the property of others.</p>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -2192,7 +2199,7 @@ bounding boxes. Each detection has the format [<code class="docutils literal not
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

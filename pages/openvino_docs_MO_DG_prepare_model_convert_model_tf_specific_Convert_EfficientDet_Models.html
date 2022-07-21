@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Convert TensorFlow EfficientDet Models &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -1837,13 +1844,13 @@
             
                 <div>
                   
-  <div class="section" id="convert-tensorflow-efficientdet-models">
+  <section id="convert-tensorflow-efficientdet-models">
 <span id="doxid-openvino-docs-m-o-d-g-prepare-model-convert-model-tf-specific-convert-efficient-det-models"></span><span id="index-0"></span><h1>Convert TensorFlow EfficientDet Models<a class="headerlink" href="#convert-tensorflow-efficientdet-models" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-openvino-docs-m-o-d-g-prepare-model-convert-model-tf-specific-convert-efficient-det-models-1md-openvino-docs-mo-dg-prepare-model-convert-model-tf-specific-convert-efficientdet-models"></span> This tutorial explains how to convert EfficientDet* public object detection models to the Intermediate Representation (IR).</p>
-<div class="section" id="convert-efficientdet-model-to-ir">
+<section id="convert-efficientdet-model-to-ir">
 <span id="efficientdet-to-ir"></span><h2>Convert EfficientDet Model to IR<a class="headerlink" href="#convert-efficientdet-model-to-ir" title="Permalink to this headline">¶</a></h2>
 <p>On GitHub*, you can find several public versions of EfficientDet model implementation. This tutorial explains how to convert models from the <a class="reference external" href="https://github.com/google/automl/tree/master/efficientdet">https://github.com/google/automl/tree/master/efficientdet</a> repository (commit 96e1fee) to IR.</p>
-<div class="section" id="get-frozen-tensorflow-model">
+<section id="get-frozen-tensorflow-model">
 <h3>Get Frozen TensorFlow* Model<a class="headerlink" href="#get-frozen-tensorflow-model" title="Permalink to this headline">¶</a></h3>
 <p>Follow the instructions below to get frozen TensorFlow EfficientDet model. We use EfficientDet-D4 model as an example:</p>
 <ol class="arabic">
@@ -1871,8 +1878,8 @@
 <p class="admonition-title">Note</p>
 <p>If you see an error AttributeError: module ‘tensorflow_core.python.keras.api._v2.keras.initializers has no attribute ‘variance_scaling’` apply the fix from the <a class="reference external" href="https://github.com/google/automl/pull/846">patch</a>.</p>
 </div>
-</div>
-<div class="section" id="convert-efficientdet-tensorflow-model-to-the-ir">
+</section>
+<section id="convert-efficientdet-tensorflow-model-to-the-ir">
 <h3>Convert EfficientDet TensorFlow Model to the IR<a class="headerlink" href="#convert-efficientdet-tensorflow-model-to-the-ir" title="Permalink to this headline">¶</a></h3>
 <p>To generate the IR of the EfficientDet TensorFlow model, run:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">mo</span> \
@@ -1886,9 +1893,9 @@
 <p>The color channel order (RGB or BGR) of an input data should match the channel order of the model training dataset. If they are different, perform the <code class="docutils literal notranslate"><span class="pre">RGB&lt;-&gt;BGR</span></code> conversion specifying the command-line parameter: <code class="docutils literal notranslate"><span class="pre">--reverse_input_channels</span></code>. Otherwise, inference results may be incorrect. For more information about the parameter, refer to <strong>When to Reverse Input Channels</strong> section of <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_Converting_Model.html#doxid-openvino-docs-m-o-d-g-prepare-model-convert-model-converting-model"><span class="std std-ref">Converting a Model to Intermediate Representation (IR)</span></a>.</p>
 </div>
 <p>OpenVINO toolkit provides samples that can be used to infer EfficientDet model. For more information, refer to Open Model Zoo Demos and</p>
-</div>
-</div>
-<div class="section" id="interpreting-results-of-the-tensorflow-model-and-the-ir">
+</section>
+</section>
+<section id="interpreting-results-of-the-tensorflow-model-and-the-ir">
 <span id="efficientdet-ir-results-interpretation"></span><h2>Interpreting Results of the TensorFlow Model and the IR<a class="headerlink" href="#interpreting-results-of-the-tensorflow-model-and-the-ir" title="Permalink to this headline">¶</a></h2>
 <p>The TensorFlow model produces as output a list of 7-element tuples: <code class="docutils literal notranslate"><span class="pre">[image_id,</span> <span class="pre">y_min,</span> <span class="pre">x_min,</span> <span class="pre">y_max,</span> <span class="pre">x_max,</span> <span class="pre">confidence,</span> <span class="pre">class_id]</span></code>, where:</p>
 <ul class="simple">
@@ -1911,8 +1918,8 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">y_max</span></code> normalized <code class="docutils literal notranslate"><span class="pre">y</span></code> coordinate of the upper right corner of the detected object.</p></li>
 </ul>
 <p>The first element with <code class="docutils literal notranslate"><span class="pre">image_id</span> <span class="pre">=</span> <span class="pre">-1</span></code> means end of data.</p>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -1943,7 +1950,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

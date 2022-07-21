@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Notebook Utils &#8212; OpenVINO™  documentation</title>
     
     
@@ -125,6 +126,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -377,7 +384,7 @@
             
                 <div>
                   
-  <div class="section" id="notebook-utils">
+  <section id="notebook-utils">
 <h1>Notebook Utils<a class="headerlink" href="#notebook-utils" title="Permalink to this headline">¶</a></h1>
 <p>This notebook contains helper functions and classes for use with
 OpenVINO Notebooks. The code is synchronized with the
@@ -418,7 +425,7 @@ functions in the section.</p>
 <span class="kn">from</span> <span class="nn">tqdm.notebook</span> <span class="kn">import</span> <span class="n">tqdm_notebook</span>
 </pre></div>
 </div>
-<div class="section" id="files">
+<section id="files">
 <h2>Files<a class="headerlink" href="#files" title="Permalink to this headline">¶</a></h2>
 <p>Load an image, download a file, download an IR model, and create a
 progress bar to show download progress.</p>
@@ -548,7 +555,7 @@ progress bar to show download progress.</p>
     <span class="k">return</span> <span class="n">model_xml_path</span>
 </pre></div>
 </div>
-<div class="section" id="test-file-functions">
+<section id="test-file-functions">
 <h3>Test File Functions<a class="headerlink" href="#test-file-functions" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_url</span> <span class="o">=</span> <span class="s2">&quot;https://github.com/openvinotoolkit/openvino_notebooks/raw/main/notebooks/002-openvino-api/model/segmentation.xml&quot;</span>
 <span class="n">download_ir_model</span><span class="p">(</span><span class="n">model_url</span><span class="p">,</span> <span class="s2">&quot;model&quot;</span><span class="p">)</span>
@@ -603,11 +610,11 @@ progress bar to show download progress.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">work</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">notebooks</span><span class="o">/</span><span class="n">utils</span><span class="o">/</span><span class="n">openvino_notebooks_readme</span><span class="o">.</span><span class="n">md</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="images">
+</section>
+</section>
+<section id="images">
 <h2>Images<a class="headerlink" href="#images" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="convert-pixel-data">
+<section id="convert-pixel-data">
 <h3>Convert Pixel Data<a class="headerlink" href="#convert-pixel-data" title="Permalink to this headline">¶</a></h3>
 <p>Normalize image pixel values between 0 and 1, and convert images to RGB
 and BGR.</p>
@@ -637,8 +644,8 @@ and BGR.</p>
     <span class="k">return</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">image_data</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_RGB2BGR</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="test-data-conversion-functions">
+</section>
+<section id="test-data-conversion-functions">
 <h3>Test Data Conversion Functions<a class="headerlink" href="#test-data-conversion-functions" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
 <span class="n">normalized_array</span> <span class="o">=</span> <span class="n">normalize_minmax</span><span class="p">(</span><span class="n">test_array</span><span class="p">)</span>
@@ -659,11 +666,11 @@ and BGR.</p>
 <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">bgr_array_converted</span> <span class="o">==</span> <span class="n">bgr_array</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="videos">
+</section>
+</section>
+<section id="videos">
 <h2>Videos<a class="headerlink" href="#videos" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="video-player">
+<section id="video-player">
 <h3>Video Player<a class="headerlink" href="#video-player" title="Permalink to this headline">¶</a></h3>
 <p>Custom video player to fulfill FPS requirements. You can set target FPS
 and output size, flip the video horizontally or skip first N frames.</p>
@@ -769,8 +776,8 @@ and output size, flip the video horizontally or skip first N frames.</p>
         <span class="k">return</span> <span class="n">frame</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="test-video-player">
+</section>
+<section id="test-video-player">
 <h3>Test Video Player<a class="headerlink" href="#test-video-player" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">video</span> <span class="o">=</span> <span class="s2">&quot;../201-vision-monodepth/data/Coco Walking in Berkeley.mp4&quot;</span>
 
@@ -791,11 +798,11 @@ and output size, flip the video horizontally or skip first N frames.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Finished</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="visualization">
+</section>
+</section>
+<section id="visualization">
 <h2>Visualization<a class="headerlink" href="#visualization" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="segmentation">
+<section id="segmentation">
 <h3>Segmentation<a class="headerlink" href="#segmentation" title="Permalink to this headline">¶</a></h3>
 <p>Define a SegmentationMap NamedTuple that keeps the labels and colormap
 for a segmentation project/dataset. Create CityScapesSegmentation and
@@ -922,8 +929,8 @@ segmentation result as an overlay over the original image.</p>
     <span class="k">return</span> <span class="n">cv2</span><span class="o">.</span><span class="n">addWeighted</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">alpha</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="network-results">
+</section>
+<section id="network-results">
 <h3>Network Results<a class="headerlink" href="#network-results" title="Permalink to this headline">¶</a></h3>
 <p>Show network result image, optionally together with the source image and
 a legend with labels.</p>
@@ -994,8 +1001,8 @@ a legend with labels.</p>
     <span class="k">return</span> <span class="n">fig</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="test-visualization-functions">
+</section>
+<section id="test-visualization-functions">
 <h3>Test Visualization Functions<a class="headerlink" href="#test-visualization-functions" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">testimage</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
 <span class="n">testimage</span><span class="p">[</span><span class="mi">30</span><span class="p">:</span><span class="mi">80</span><span class="p">,</span> <span class="mi">30</span><span class="p">:</span><span class="mi">80</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
@@ -1046,8 +1053,8 @@ a legend with labels.</p>
 <img alt="../_images/notebook_utils-with-output_29_1.png" src="../_images/notebook_utils-with-output_29_1.png" />
 <img alt="../_images/notebook_utils-with-output_29_2.png" src="../_images/notebook_utils-with-output_29_2.png" />
 <img alt="../_images/notebook_utils-with-output_29_3.png" src="../_images/notebook_utils-with-output_29_3.png" />
-</div>
-<div class="section" id="live-inference">
+</section>
+<section id="live-inference">
 <h3>Live Inference<a class="headerlink" href="#live-inference" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">showarray</span><span class="p">(</span><span class="n">frame</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">display_handle</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -1137,7 +1144,7 @@ a legend with labels.</p>
     <span class="k">del</span> <span class="n">pipeline</span>
 </pre></div>
 </div>
-<div class="section" id="test-live-inference">
+<section id="test-live-inference">
 <h4>Test Live Inference<a class="headerlink" href="#test-live-inference" title="Permalink to this headline">¶</a></h4>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Test binary segmentation</span>
 <span class="kn">from</span> <span class="nn">models.custom_segmentation</span> <span class="kn">import</span> <span class="n">SegmentationModel</span>
@@ -1197,10 +1204,10 @@ a legend with labels.</p>
 <span class="n">Total</span> <span class="n">time</span> <span class="k">for</span> <span class="mi">4</span> <span class="n">frames</span><span class="p">:</span> <span class="mf">2.47</span> <span class="n">seconds</span><span class="p">,</span> <span class="n">fps</span><span class="p">:</span><span class="mf">2.02</span>
 </pre></div>
 </div>
-</div>
-</div>
-</div>
-<div class="section" id="openvino-tools">
+</section>
+</section>
+</section>
+<section id="openvino-tools">
 <h2>OpenVINO Tools<a class="headerlink" href="#openvino-tools" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">benchmark_model</span><span class="p">(</span>
     <span class="n">model_path</span><span class="p">:</span> <span class="n">PathLike</span><span class="p">,</span>
@@ -1255,7 +1262,7 @@ a legend with labels.</p>
             <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Device: </span><span class="si">{</span><span class="n">ie</span><span class="o">.</span><span class="n">get_metric</span><span class="p">(</span><span class="n">device_name</span><span class="o">=</span><span class="n">device</span><span class="p">,</span> <span class="n">metric_name</span><span class="o">=</span><span class="s1">&#39;FULL_DEVICE_NAME&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="section" id="test-openvino-tools">
+<section id="test-openvino-tools">
 <h3>Test OpenVINO Tools<a class="headerlink" href="#test-openvino-tools" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ie</span> <span class="o">=</span> <span class="n">IECore</span><span class="p">()</span>
 <span class="n">model_url</span> <span class="o">=</span> <span class="s2">&quot;https://github.com/openvinotoolkit/openvino_notebooks/raw/main/notebooks/002-openvino-api/model/segmentation.xml&quot;</span>
@@ -1282,9 +1289,9 @@ inference</strong></p>
 <span class="n">Device</span><span class="p">:</span> <span class="n">Intel</span><span class="p">(</span><span class="n">R</span><span class="p">)</span> <span class="n">Xeon</span><span class="p">(</span><span class="n">R</span><span class="p">)</span> <span class="n">Platinum</span> <span class="mi">8272</span><span class="n">CL</span> <span class="n">CPU</span> <span class="o">@</span> <span class="mf">2.60</span><span class="n">GHz</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="checks-and-alerts">
+</section>
+</section>
+<section id="checks-and-alerts">
 <h2>Checks and Alerts<a class="headerlink" href="#checks-and-alerts" title="Permalink to this headline">¶</a></h2>
 <p>Create an alert class to show stylized info/error/warning messages and a
 <code class="docutils literal notranslate"><span class="pre">check_device</span></code> function that checks whether a given device is
@@ -1372,7 +1379,7 @@ available.</p>
         <span class="k">return</span> <span class="kc">True</span>
 </pre></div>
 </div>
-<div class="section" id="test-alerts">
+<section id="test-alerts">
 <h3>Test Alerts<a class="headerlink" href="#test-alerts" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">NotebookAlert</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;Hello, world!&quot;</span><span class="p">,</span> <span class="n">alert_class</span><span class="o">=</span><span class="s2">&quot;info&quot;</span><span class="p">)</span>
 <span class="n">DeviceNotFoundAlert</span><span class="p">(</span><span class="s2">&quot;GPU&quot;</span><span class="p">);</span>
@@ -1388,9 +1395,9 @@ available.</p>
 <div class="alert alert-warning">Running this cell requires a HELLOWORLD device, which is not available on this system. The following device is available: CPU<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">check_openvino_version</span><span class="p">(</span><span class="s2">&quot;2022.1&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
                 </div>
@@ -1419,7 +1426,7 @@ available.</p>
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

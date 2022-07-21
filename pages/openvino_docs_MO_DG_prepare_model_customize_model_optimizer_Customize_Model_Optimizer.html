@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Model Optimizer Extensibility &#8212; OpenVINO™  documentation</title>
     
     
@@ -128,6 +129,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -1985,7 +1992,7 @@
             
                 <div>
                   
-  <div class="section" id="model-optimizer-extensibility">
+  <section id="model-optimizer-extensibility">
 <span id="doxid-openvino-docs-m-o-d-g-prepare-model-customize-model-optimizer-customize-model-optimizer"></span><span id="index-0"></span><h1>Model Optimizer Extensibility<a class="headerlink" href="#model-optimizer-extensibility" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-openvino-docs-m-o-d-g-prepare-model-customize-model-optimizer-customize-model-optimizer-1md-openvino-docs-mo-dg-prepare-model-customize-model-optimizer-customize-model-optimizer"></span></p>
 <div class="toctree-wrapper compound">
@@ -2002,7 +2009,7 @@
 <p class="admonition-title">Note</p>
 <p>All paths in this document are provided relatively to the Model Optimizer installation directory if not stated otherwise.</p>
 </div>
-<div class="section" id="model-representation-in-memory">
+<section id="model-representation-in-memory">
 <span id="id1"></span><h2>Model Representation in Memory<a class="headerlink" href="#model-representation-in-memory" title="Permalink to this headline">¶</a></h2>
 <p>The model can be represented as a directed graph where nodes are operations and edges correspond to data passing from a producer operation (node) to a consumer operation (node).</p>
 <p>Model Optimizer uses Python class <code class="docutils literal notranslate"><span class="pre">mo.graph.graph.Graph</span></code> instance to represent the computation graph in memory during the model conversion. This class is inherited from the <code class="docutils literal notranslate"><span class="pre">networkx.MultiDiGraph</span></code> class of the standard <code class="docutils literal notranslate"><span class="pre">networkx</span></code> Python library and provides many convenient methods to traverse and modify the graph. Refer to the <code class="docutils literal notranslate"><span class="pre">mo/graph/graph.py</span></code> file for the examples.</p>
@@ -2010,13 +2017,13 @@
 <p>An operation may have several inputs and outputs. For example, operation <a class="reference internal" href="openvino_docs_ops_movement_Split_1.html#doxid-openvino-docs-ops-movement-split-1"><span class="std std-ref">Split</span></a> has two inputs: data to split and axis to split along, and variable number of outputs depending on a value of attribute <code class="docutils literal notranslate"><span class="pre">num_splits</span></code>. Each input data to the operation is passed to a specific operation <strong>input port</strong>. An operation produces an output data from an <strong>output port</strong>. Input and output ports are numbered from 0 independently. Model Optimizer uses classes <code class="docutils literal notranslate"><span class="pre">mo.graph.port.Port</span></code> and <code class="docutils literal notranslate"><span class="pre">mo.graph.connection.Connection</span></code>, which are useful abstraction to perform graph modifications like nodes connecting/re-connecting and graph traversing. These classes are widely used in the Model Optimizer code so it is easy to find a lot of usage examples.</p>
 <p>There is no dedicated class corresponding to an edge, so low-level graph manipulation is needed to get access to edge attributes if needed. Meanwhile, most manipulations with nodes connections should be done with help of the <code class="docutils literal notranslate"><span class="pre">mo.graph.connection.Connection</span></code> and <code class="docutils literal notranslate"><span class="pre">mo.graph.port.Port</span></code> classes. Thus, low-level graph manipulation is error prone and is strongly not recommended.</p>
 <p>Further details and examples related to a model representation in memory are provided in the sections below in a context for a better explanation. Also, refer to the <a class="reference external" href="#graph-ports-and-conneсtions">Graph Traversal and Modification Using s and s</a> for more information on how to use ports and connections.</p>
-</div>
-<div class="section" id="model-conversion-pipeline">
+</section>
+<section id="model-conversion-pipeline">
 <span id="id2"></span><h2>Model Conversion Pipeline<a class="headerlink" href="#model-conversion-pipeline" title="Permalink to this headline">¶</a></h2>
 <p>A model conversion pipeline can be represented with the following diagram:</p>
 <img alt="Model Conversion pipeline" src="../_images/MO_conversion_pipeline.png" />
 <p>Each conversion step is reviewed in details below.</p>
-<div class="section" id="model-loading">
+<section id="model-loading">
 <span id="id3"></span><h3>Model Loading<a class="headerlink" href="#model-loading" title="Permalink to this headline">¶</a></h3>
 <p>Model Optimizer gets a trained model file as an input. The model loader component of the Model Optimizer reads a model file using Python bindings provided with the framework and builds an in-memory representation of a computation graph. There is a separate loader for each supported framework. These loaders are implemented in the <code class="docutils literal notranslate"><span class="pre">extensions/load/&lt;FRAMEWORK&gt;/loader.py</span></code> files of the Model Optimizer.</p>
 <div class="admonition note">
@@ -2028,8 +2035,8 @@
 <p>Model Optimizer loader saves an operation instance framework description (usually it is a Protobuf message) into a node attribute usually with a name <code class="docutils literal notranslate"><span class="pre">pb</span></code> for each operation of an input model. It is important that this is a <strong>framework-specific</strong> description of an operation. This means that an operation, for example, <a class="reference internal" href="openvino_docs_ops_convolution_Convolution_1.html#doxid-openvino-docs-ops-convolution-convolution-1"><span class="std std-ref">Convolution</span></a> may be represented differently in, for example, Caffe* and TensorFlow* frameworks but performs the same calculations from a mathematical point of view.</p>
 <p>In the example above, the “Operation 2” has one input and two outputs. The tensor produced from the output port 0 is consumed with the “Operation 5” (the input port 0) and “Operation 3” (the input port 1). The tensor produced from the output port 1 is consumed with the “Operation 4” (the input port 0).</p>
 <p>Each edge has two attributes <code class="docutils literal notranslate"><span class="pre">in</span></code> and <code class="docutils literal notranslate"><span class="pre">out</span></code> containing the input port number of the consumer node and the output port number of the producer node. These attributes describe the fact that nodes are operations consuming some input tensors and producing some output tensors. But nodes themselves are “black boxes” from the Model Optimizer perspective because they do not contain required information about the operation they perform.</p>
-</div>
-<div class="section" id="operations-attributes-extracting">
+</section>
+<section id="operations-attributes-extracting">
 <span id="id4"></span><h3>Operations Attributes Extracting<a class="headerlink" href="#operations-attributes-extracting" title="Permalink to this headline">¶</a></h3>
 <p>The next step is to parse framework-dependent operation representation saved in a node attribute and update the node attributes with the operation specific attributes. There are three options to do this.</p>
 <ol class="arabic simple">
@@ -2045,8 +2052,8 @@
 <p>The result of operations attributes extracting step can be depicted like in the following example:</p>
 <img alt="Graph After Attributes Extraction" src="../_images/MO_graph_after_extractors.png" />
 <p>The only difference in the graph from the previous step is that nodes contain dictionary with extracted attributes and operation-specific attributes needed for the Model Optimizer. But starting from this step the Model Optimizer does not need the original representation of the operation/model and uses just Model Optimizer representation (there are some very specific cases when the Model Optimizer still uses the <code class="docutils literal notranslate"><span class="pre">pb</span></code> attribute and they are partially covered in this document). Detailed list of common node attributes and their values is provided below in the <a class="reference external" href="#extension-operation">Model Optimizer Operation</a>.</p>
-</div>
-<div class="section" id="front-phase">
+</section>
+<section id="front-phase">
 <span id="id5"></span><h3>Front Phase<a class="headerlink" href="#front-phase" title="Permalink to this headline">¶</a></h3>
 <p>For legacy reasons, you must specify shapes for all not fully-defined inputs of the model. In contrast, other machine learning frameworks like TensorFlow* let you create a model with undefined or partially defined input shapes. As an example, undefined dimension is marked with an integer value <code class="docutils literal notranslate"><span class="pre">-1</span></code> in a TensorFlow* model or has some string name in an ONNX* model.</p>
 <p>During the front phase, the Model Optimizer knows shape of the model inputs and constants only and does not know shapes (and even ranks) of the intermediate tensors. But information about shapes may not be needed to implement particular transformation. For example, the transformation <code class="docutils literal notranslate"><span class="pre">extensions/front/TopKNormalize.py</span></code> removes an attribute <code class="docutils literal notranslate"><span class="pre">k</span></code> from a <code class="docutils literal notranslate"><span class="pre">TopK</span></code> node and adds an input constant with the value <code class="docutils literal notranslate"><span class="pre">k</span></code>. The transformation is needed to convert a <code class="docutils literal notranslate"><span class="pre">TopK</span></code> operation that comes from frameworks where a number of output elements is defined as an attribute of the operation to the OpenVINO <a class="reference internal" href="openvino_docs_ops_sort_TopK_3.html#doxid-openvino-docs-ops-sort-top-k-3"><span class="std std-ref">TopK</span></a> operation semantic, which requires this value to be a separate input.</p>
@@ -2059,8 +2066,8 @@
 </ol>
 <p>It is highly recommended that you write shape-agnostic transformations to avoid model reshape-ability issues. Refer to <a class="reference internal" href="openvino_docs_OV_UG_ShapeInference.html#doxid-openvino-docs-o-v-u-g-shape-inference"><span class="std std-ref">Using Shape Inference</span></a> for more information related to the reshaping of a model.</p>
 <p>More information on how to develop front phase transformations and dedicated API description is provided in the <a class="reference external" href="#front-phase-transformations">Front Phase Transformations</a>.</p>
-</div>
-<div class="section" id="partial-inference">
+</section>
+<section id="partial-inference">
 <span id="id6"></span><h3>Partial Inference<a class="headerlink" href="#partial-inference" title="Permalink to this headline">¶</a></h3>
 <p>Model Optimizer performs a partial inference of a model during model conversion. This procedure includes output shapes calculation of all operations in a model and constant folding (value calculation for constant sub-graphs). The constant folding is needed for the shape inference because in some cases evaluation of constant sub-graph is needed to calculate output shapes. For example, the output shape for the <a class="reference internal" href="openvino_docs_ops_shape_Reshape_1.html#doxid-openvino-docs-ops-shape-reshape-1"><span class="std std-ref">Reshape</span></a> operation may be defined as a mathematical expression using the <a class="reference internal" href="openvino_docs_ops_shape_ShapeOf_3.html#doxid-openvino-docs-ops-shape-shape-of-3"><span class="std std-ref">ShapeOf</span></a> operation output.</p>
 <div class="admonition note">
@@ -2101,13 +2108,13 @@
 <p class="admonition-title">Note</p>
 <p>There is a legacy approach to read data node attribute like <code class="docutils literal notranslate"><span class="pre">input_shape</span> <span class="pre">=</span> <span class="pre">op_node.in_node(0).shape</span></code> and modify data nodes attributes like <code class="docutils literal notranslate"><span class="pre">op_node.out_node(0).shape</span> <span class="pre">=</span> <span class="pre">some_value</span></code>. This approach is still used in the Model Optimizer code but is not recommended. Instead, use the approach described in the <a class="reference external" href="#intro-ports">Ports</a>.</p>
 </div>
-</div>
-<div class="section" id="middle-phase">
+</section>
+<section id="middle-phase">
 <span id="id7"></span><h3>Middle Phase<a class="headerlink" href="#middle-phase" title="Permalink to this headline">¶</a></h3>
 <p>The middle phase starts after partial inference. At this phase, a graph contains data nodes and output shapes of all operations in the graph have been calculated. Any transformation implemented at this stage must update the <code class="docutils literal notranslate"><span class="pre">shape</span></code> attribute for all newly added operations. It is highly recommended to use API described in the <a class="reference external" href="#graph-ports-and-conneсtions">Graph Traversal and Modification Using s and s</a> because modification of a graph using this API causes automatic re-inference of affected nodes as well as necessary data nodes creation.</p>
 <p>More information on how to develop middle transformations and dedicated API description is provided in the <a class="reference external" href="#middle-phase-transformations">Middle Phase Transformations</a>.</p>
-</div>
-<div class="section" id="nhwc-to-nchw-layout-change">
+</section>
+<section id="nhwc-to-nchw-layout-change">
 <span id="layout-change"></span><h3>NHWC to NCHW Layout Change<a class="headerlink" href="#nhwc-to-nchw-layout-change" title="Permalink to this headline">¶</a></h3>
 <p>There are several middle transformations responsible for changing model layout from NHWC to NCHW. These transformations are triggered by default for TensorFlow models as TensorFlow supports Convolution operations in the NHWC layout.</p>
 <p>This layout change is disabled automatically if the model does not have operations that OpenVINO&amp;trade needs to execute in the NCHW layout, for example, Convolutions in NHWC layout.</p>
@@ -2119,8 +2126,8 @@
 <li><p>Model Optimizer inserts <a class="reference internal" href="openvino_docs_ops_movement_Transpose_1.html#doxid-openvino-docs-ops-movement-transpose-1"><span class="std std-ref">Transpose</span></a> operations for some operations with specific conditions identified during a model conversion to produce correct inference results.</p></li>
 </ol>
 <p>The list of main transformations responsible for a layout change are: <code class="docutils literal notranslate"><span class="pre">extensions/middle/ApplyPermutations.py</span></code>, <code class="docutils literal notranslate"><span class="pre">extensions/middle/InsertLayoutPropagationTransposes.py</span></code>, <code class="docutils literal notranslate"><span class="pre">extensions/middle/MarkSubgraphsWithCorrectLayout.py</span></code>, <code class="docutils literal notranslate"><span class="pre">extensions/middle/ApplyNHWCtoNCHWpermutation.py</span></code> and <code class="docutils literal notranslate"><span class="pre">extensions/middle/LayoutChangeForConstantShapePaths.py</span></code>. Refer to the source code of these transformations for more details on how the layout change works.</p>
-</div>
-<div class="section" id="back-phase">
+</section>
+<section id="back-phase">
 <span id="id8"></span><h3>Back Phase<a class="headerlink" href="#back-phase" title="Permalink to this headline">¶</a></h3>
 <p>The back phase starts after the layout change to NCHW. This phase contains mostly the following transformations:</p>
 <ol class="arabic simple">
@@ -2131,8 +2138,8 @@
 </ol>
 <p>A graph structure during the back phase is the same as during the middle phase. There is no difference in writing middle and back transformations.</p>
 <p>More information on how to develop back transformations and dedicated API description is provided in the <a class="reference external" href="#back-phase-transformations">Back Phase Transformations</a>.</p>
-</div>
-<div class="section" id="intermediate-representation-emitting">
+</section>
+<section id="intermediate-representation-emitting">
 <span id="ir-emitting"></span><h3>Intermediate Representation Emitting<a class="headerlink" href="#intermediate-representation-emitting" title="Permalink to this headline">¶</a></h3>
 <p>The last phase of a model conversion is the Intermediate Representation emitting. Model Optimizer performs the following steps:</p>
 <ol class="arabic simple">
@@ -2142,9 +2149,9 @@
 <li><p>Saves all Constants values to the <code class="docutils literal notranslate"><span class="pre">.bin</span></code> file. Constants with the same value are shared among different operations.</p></li>
 <li><p>Generates an <code class="docutils literal notranslate"><span class="pre">.xml</span></code> file defining a graph structure. The information about operation inputs and outputs are prepared uniformly for all operations regardless of their type. A list of attributes to be saved to the <code class="docutils literal notranslate"><span class="pre">.xml</span></code> file is defined with the <code class="docutils literal notranslate"><span class="pre">backend_attrs()</span></code> or <code class="docutils literal notranslate"><span class="pre">supported_attrs()</span></code> of the <code class="docutils literal notranslate"><span class="pre">Op</span></code> class used for a graph node instantiation. For more information on how the operation attributes are saved to XML, refer to the function <code class="docutils literal notranslate"><span class="pre">prepare_emit_ir()</span></code> in the <code class="docutils literal notranslate"><span class="pre">mo/pipeline/common.py</span></code> file and <a class="reference external" href="#extension-operation">Model Optimizer Operation</a>.</p></li>
 </ol>
-</div>
-</div>
-<div class="section" id="graph-traversal-and-modification-using-s-and-s">
+</section>
+</section>
+<section id="graph-traversal-and-modification-using-s-and-s">
 <span id="graph-ports-and-connetions"></span><h2>Graph Traversal and Modification Using s and s<a class="headerlink" href="#graph-traversal-and-modification-using-s-and-s" title="Permalink to this headline">¶</a></h2>
 <p>There are three APIs for a graph traversal and transformation used in the Model Optimizer:</p>
 <ol class="arabic simple">
@@ -2153,7 +2160,7 @@
 <li><p>The high-level API called Model Optimizer Graph API which uses <code class="docutils literal notranslate"><span class="pre">mo.graph.graph.Graph</span></code>, <code class="docutils literal notranslate"><span class="pre">mo.graph.port.Port</span></code> and <code class="docutils literal notranslate"><span class="pre">mo.graph.connection.Connection</span></code> classes. For example, the following methods belong to this API level: <code class="docutils literal notranslate"><span class="pre">node.in_port(x)</span></code>, <code class="docutils literal notranslate"><span class="pre">node.out_port(y)</span></code>, <code class="docutils literal notranslate"><span class="pre">port.get_connection()</span></code>, <code class="docutils literal notranslate"><span class="pre">connection.get_source()</span></code>, <code class="docutils literal notranslate"><span class="pre">connection.set_destination(dest_port)</span></code> etc. <strong>This is the recommended API to be used in the Model Optimizer transformations and operations implementation</strong>.</p></li>
 </ol>
 <p>The main benefit of using Model Optimizer Graph API is that it hides some internal implementation details (the fact that the graph contains data nodes), provides API to perform safe and predictable graph manipulations, and adds operation semantic to the graph. This is achieved with introduction of concepts of ports and connections. This chapter is dedicated to the Model Optimizer Graph API and does not cover other two non-recommended APIs.</p>
-<div class="section" id="ports">
+<section id="ports">
 <span id="intro-ports"></span><h3>Ports<a class="headerlink" href="#ports" title="Permalink to this headline">¶</a></h3>
 <p>An operation semantic describes how many inputs and outputs the operation has. For example, operations <a class="reference internal" href="openvino_docs_ops_infrastructure_Parameter_1.html#doxid-openvino-docs-ops-infrastructure-parameter-1"><span class="std std-ref">Parameter</span></a> and <a class="reference internal" href="openvino_docs_ops_infrastructure_Constant_1.html#doxid-openvino-docs-ops-infrastructure-constant-1"><span class="std std-ref">Const</span></a> have no inputs and have one output, operation <a class="reference internal" href="openvino_docs_ops_activation_ReLU_1.html#doxid-openvino-docs-ops-activation-re-l-u-1"><span class="std std-ref">ReLU</span></a> has one input and one output, operation <a class="reference internal" href="openvino_docs_ops_movement_Split_1.html#doxid-openvino-docs-ops-movement-split-1"><span class="std std-ref">Split</span></a> has 2 inputs and variable number of outputs depending on the value of the attribute <code class="docutils literal notranslate"><span class="pre">num_splits</span></code>.</p>
 <p>Each operation node in the graph (an instance of the <code class="docutils literal notranslate"><span class="pre">Node</span></code> class) has 0 or more input and output ports (instances of the <code class="docutils literal notranslate"><span class="pre">mo.graph.port.Port</span></code> class). The <code class="docutils literal notranslate"><span class="pre">Port</span></code> object has several attributes:</p>
@@ -2161,11 +2168,11 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">node</span></code> - the instance of the <code class="docutils literal notranslate"><span class="pre">Node</span></code> object the port belongs to.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">idx</span></code> - the port number. Input and output ports are numbered independently starting from <code class="docutils literal notranslate"><span class="pre">0</span></code>. Thus, operation <a class="reference internal" href="openvino_docs_ops_activation_ReLU_1.html#doxid-openvino-docs-ops-activation-re-l-u-1"><span class="std std-ref">ReLU</span></a> has one input port (with index <code class="docutils literal notranslate"><span class="pre">0</span></code>) and one output port (with index <code class="docutils literal notranslate"><span class="pre">0</span></code>).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">type</span></code> - the type of the port. Could be equal to either <code class="docutils literal notranslate"><span class="pre">&quot;in&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;out&quot;</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">data</span></code> - the object that should be used to get attributes of the corresponding data node. This object has methods <code class="docutils literal notranslate"><span class="pre">get_shape()</span></code> / <code class="docutils literal notranslate"><span class="pre">set_shape()</span></code> and <code class="docutils literal notranslate"><span class="pre">get_value()</span></code> / <code class="docutils literal notranslate"><span class="pre">set_value()</span></code> to get/set shape/value of the corresponding data node. For example, <code class="docutils literal notranslate"><span class="pre">in_port.data.get_shape()</span></code> returns an input shape of a tensor connected to input port <code class="docutils literal notranslate"><span class="pre">in_port</span></code> (in_port.type == ‘in <code class="docutils literal notranslate"><span class="pre">),</span></code> <span class="xref std std-ref">out_port.data.get_value()</span> <code class="docutils literal notranslate"><span class="pre">returns</span> <span class="pre">a</span> <span class="pre">value</span> <span class="pre">of</span> <span class="pre">a</span> <span class="pre">tensor</span> <span class="pre">produced</span> <span class="pre">from</span> <span class="pre">output</span> <span class="pre">port</span></code> out_port <code class="docutils literal notranslate"><span class="pre">(</span></code> out_port.type == ‘out’<a href="#id9"><span class="problematic" id="id10">`</span></a>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">data</span></code> - the object that should be used to get attributes of the corresponding data node. This object has methods <code class="docutils literal notranslate"><span class="pre">get_shape()</span></code> / <code class="docutils literal notranslate"><span class="pre">set_shape()</span></code> and <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/namespacengraph_1_1runtime_1_1reference_1_1detail.html#doxid-namespacengraph-1-1runtime-1-1reference-1-1detail-1ad9c8e24a4553eea531ddd4cbfcbc2610"><span class="std std-ref"><span class="pre">get_value()</span></span></a></code> / <code class="docutils literal notranslate"><span class="pre">set_value()</span></code> to get/set shape/value of the corresponding data node. For example, <code class="docutils literal notranslate"><span class="pre">in_port.data.get_shape()</span></code> returns an input shape of a tensor connected to input port <code class="docutils literal notranslate"><span class="pre">in_port</span></code> (in_port.type == ‘in <code class="docutils literal notranslate"><span class="pre">),</span></code> <a class="reference internal" href="../api/groups/namespacengraph_1_1runtime_1_1reference_1_1detail.html#doxid-namespacengraph-1-1runtime-1-1reference-1-1detail-1ad9c8e24a4553eea531ddd4cbfcbc2610"><span class="std std-ref">out_port.data.get_value()</span></a> <code class="docutils literal notranslate"><span class="pre">returns</span> <span class="pre">a</span> <span class="pre">value</span> <span class="pre">of</span> <span class="pre">a</span> <span class="pre">tensor</span> <span class="pre">produced</span> <span class="pre">from</span> <span class="pre">output</span> <span class="pre">port</span></code> out_port <code class="docutils literal notranslate"><span class="pre">(</span></code> out_port.type == ‘out’<a href="#id9"><span class="problematic" id="id10">`</span></a>).</p></li>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Functions <code class="docutils literal notranslate"><span class="pre">get_shape()</span></code> and <code class="docutils literal notranslate"><span class="pre">get_value()</span></code> return <code class="docutils literal notranslate"><span class="pre">None</span></code> until the partial inference phase. Refer to the <a class="reference external" href="#model-conversion-pipeline">Model Conversion Pipeline</a> for more information about model conversion phases and <a class="reference external" href="#partial-inference">Partial Inference</a> about partial inference phase.</p>
+<p>Functions <code class="docutils literal notranslate"><span class="pre">get_shape()</span></code> and <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/namespacengraph_1_1runtime_1_1reference_1_1detail.html#doxid-namespacengraph-1-1runtime-1-1reference-1-1detail-1ad9c8e24a4553eea531ddd4cbfcbc2610"><span class="std std-ref"><span class="pre">get_value()</span></span></a></code> return <code class="docutils literal notranslate"><span class="pre">None</span></code> until the partial inference phase. Refer to the <a class="reference external" href="#model-conversion-pipeline">Model Conversion Pipeline</a> for more information about model conversion phases and <a class="reference external" href="#partial-inference">Partial Inference</a> about partial inference phase.</p>
 </div>
 <p>There are several methods of the <code class="docutils literal notranslate"><span class="pre">Node</span></code> class to get the instance of a corresponding port:</p>
 <ul class="simple">
@@ -2190,8 +2197,8 @@
 <p>Refer to the <code class="docutils literal notranslate"><span class="pre">Node</span></code> class implementation in the <code class="docutils literal notranslate"><span class="pre">mo/graph/graph.py</span></code> and <code class="docutils literal notranslate"><span class="pre">Port</span></code> class implementation in the</p>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">mo/graph/port.py</span></code> for a full list of available methods.</p>
-</div>
-<div class="section" id="connections">
+</section>
+<section id="connections">
 <span id="intro-connetions"></span><h3>Connections<a class="headerlink" href="#connections" title="Permalink to this headline">¶</a></h3>
 <p>Connection is an concept introduced to easily and reliably perform graph modifications. Connection corresponds to a link between a source output port with one or more destination input ports or a link between a destination input port and source output port producing data. So each port is connected with one or more ports with help of a connection. Model Optimizer uses the <code class="docutils literal notranslate"><span class="pre">mo.graph.connection.Connection</span></code> class to represent a connection.</p>
 <p>There is only one method <code class="docutils literal notranslate"><span class="pre">get_connection()</span></code> of the <code class="docutils literal notranslate"><span class="pre">Port</span></code> class to get the instance of the corresponding <code class="docutils literal notranslate"><span class="pre">Connection</span></code> object. If the port is not connected, the returned value is <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
@@ -2211,9 +2218,9 @@
 <p>Refer to the <code class="docutils literal notranslate"><span class="pre">Connection</span></code> class implementation in the <code class="docutils literal notranslate"><span class="pre">mo/graph/connection.py</span></code> for a full list of available</p>
 </div>
 <p>methods.</p>
-</div>
-</div>
-<div class="section" id="model-optimizer-extensions">
+</section>
+</section>
+<section id="model-optimizer-extensions">
 <span id="extensions"></span><h2>Model Optimizer Extensions<a class="headerlink" href="#model-optimizer-extensions" title="Permalink to this headline">¶</a></h2>
 <p>Model Optimizer extensions enable you to inject some logic to the model conversion pipeline without changing the Model Optimizer core code. There are three types of the Model Optimizer extensions:</p>
 <ol class="arabic simple">
@@ -2238,7 +2245,7 @@
 <p class="admonition-title">Note</p>
 <p>Model Optimizer itself is built using these extensions so there is a huge number of examples on how to use them in the Model Optimizer code.</p>
 </div>
-<div class="section" id="model-optimizer-operation">
+<section id="model-optimizer-operation">
 <span id="extension-operation"></span><h3>Model Optimizer Operation<a class="headerlink" href="#model-optimizer-operation" title="Permalink to this headline">¶</a></h3>
 <p>Model Optimizer defines a class <code class="docutils literal notranslate"><span class="pre">mo.ops.Op</span></code> (<code class="docutils literal notranslate"><span class="pre">Op</span></code> will be used later in the document to be short), which is a base class for an operation used in the Model Optimizer. The instance of the <code class="docutils literal notranslate"><span class="pre">Op</span></code> class serves several purposes:</p>
 <ol class="arabic simple">
@@ -2294,11 +2301,11 @@
         <span class="s">&quot;some code calculating output shape and values&quot;</span></pre></div></div><p>There is a dedicated method called <code class="docutils literal notranslate"><span class="pre">backend_attrs()</span></code> defining a list of attributes to be saved to the IR. Consider an example from the <code class="docutils literal notranslate"><span class="pre">mo/ops/pooling.py</span></code> file:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">def</span> <span class="n">backend_attrs</span><span class="p">(</span><span class="n">self</span><span class="p">)</span><span class="o">:</span>
      <span class="k">return</span> <span class="p">[</span>
-         <span class="p">(</span><span class="sc">&#39;strides&#39;</span><span class="p">,</span> <span class="n">lambda</span> <span class="nl">node</span><span class="p">:</span> <span class="sc">&#39;,&#39;</span><span class="p">.</span>join<span></span><span class="p">(</span><span class="n">map</span><span class="p">(</span><span class="n">str</span><span class="p">,</span> <span class="n">node</span><span class="p">[</span><span class="sc">&#39;stride&#39;</span><span class="p">][</span><span class="n">node</span><span class="p">.</span><span class="n">spatial_dims</span><span class="p">]))),</span>
-         <span class="p">(</span><span class="sc">&#39;kernel&#39;</span><span class="p">,</span> <span class="n">lambda</span> <span class="nl">node</span><span class="p">:</span> <span class="sc">&#39;,&#39;</span><span class="p">.</span>join<span></span><span class="p">(</span><span class="n">map</span><span class="p">(</span><span class="n">str</span><span class="p">,</span> <span class="n">node</span><span class="p">[</span><span class="sc">&#39;window&#39;</span><span class="p">][</span><span class="n">node</span><span class="p">.</span><span class="n">spatial_dims</span><span class="p">]))),</span>
+         <span class="p">(</span><span class="sc">&#39;strides&#39;</span><span class="p">,</span> <span class="n">lambda</span> <span class="nl">node</span><span class="p">:</span> <span class="sc">&#39;,&#39;</span><span class="p">.</span><a class="reference internal" href="../api/groups/namespaceov_1_1util.html#doxid-namespaceov-1-1util-1a860e0918a7b731ba9e886baf48434318"><span class="std std-ref">join</span></a><span></span><span class="p">(</span><span class="n">map</span><span class="p">(</span><span class="n">str</span><span class="p">,</span> <span class="n">node</span><span class="p">[</span><span class="sc">&#39;stride&#39;</span><span class="p">][</span><span class="n">node</span><span class="p">.</span><span class="n">spatial_dims</span><span class="p">]))),</span>
+         <span class="p">(</span><span class="sc">&#39;kernel&#39;</span><span class="p">,</span> <span class="n">lambda</span> <span class="nl">node</span><span class="p">:</span> <span class="sc">&#39;,&#39;</span><span class="p">.</span><a class="reference internal" href="../api/groups/namespaceov_1_1util.html#doxid-namespaceov-1-1util-1a860e0918a7b731ba9e886baf48434318"><span class="std std-ref">join</span></a><span></span><span class="p">(</span><span class="n">map</span><span class="p">(</span><span class="n">str</span><span class="p">,</span> <span class="n">node</span><span class="p">[</span><span class="sc">&#39;window&#39;</span><span class="p">][</span><span class="n">node</span><span class="p">.</span><span class="n">spatial_dims</span><span class="p">]))),</span>
 
-         <span class="p">(</span><span class="sc">&#39;pads_begin&#39;</span><span class="p">,</span> <span class="n">lambda</span> <span class="nl">node</span><span class="p">:</span> <span class="sc">&#39;,&#39;</span><span class="p">.</span>join<span></span><span class="p">(</span><span class="n">map</span><span class="p">(</span><span class="n">str</span><span class="p">,</span> <span class="n">get_backend_pad</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="n">pad</span><span class="p">,</span> <span class="n">node</span><span class="p">.</span><span class="n">spatial_dims</span><span class="p">,</span> <span class="mi">0</span><span class="p">)))),</span>
-         <span class="p">(</span><span class="sc">&#39;pads_end&#39;</span><span class="p">,</span> <span class="n">lambda</span> <span class="nl">node</span><span class="p">:</span> <span class="sc">&#39;,&#39;</span><span class="p">.</span>join<span></span><span class="p">(</span><span class="n">map</span><span class="p">(</span><span class="n">str</span><span class="p">,</span> <span class="n">get_backend_pad</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="n">pad</span><span class="p">,</span> <span class="n">node</span><span class="p">.</span><span class="n">spatial_dims</span><span class="p">,</span> <span class="mi">1</span><span class="p">)))),</span>
+         <span class="p">(</span><span class="sc">&#39;pads_begin&#39;</span><span class="p">,</span> <span class="n">lambda</span> <span class="nl">node</span><span class="p">:</span> <span class="sc">&#39;,&#39;</span><span class="p">.</span><a class="reference internal" href="../api/groups/namespaceov_1_1util.html#doxid-namespaceov-1-1util-1a860e0918a7b731ba9e886baf48434318"><span class="std std-ref">join</span></a><span></span><span class="p">(</span><span class="n">map</span><span class="p">(</span><span class="n">str</span><span class="p">,</span> <span class="n">get_backend_pad</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="n">pad</span><span class="p">,</span> <span class="n">node</span><span class="p">.</span><span class="n">spatial_dims</span><span class="p">,</span> <span class="mi">0</span><span class="p">)))),</span>
+         <span class="p">(</span><span class="sc">&#39;pads_end&#39;</span><span class="p">,</span> <span class="n">lambda</span> <span class="nl">node</span><span class="p">:</span> <span class="sc">&#39;,&#39;</span><span class="p">.</span><a class="reference internal" href="../api/groups/namespaceov_1_1util.html#doxid-namespaceov-1-1util-1a860e0918a7b731ba9e886baf48434318"><span class="std std-ref">join</span></a><span></span><span class="p">(</span><span class="n">map</span><span class="p">(</span><span class="n">str</span><span class="p">,</span> <span class="n">get_backend_pad</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="n">pad</span><span class="p">,</span> <span class="n">node</span><span class="p">.</span><span class="n">spatial_dims</span><span class="p">,</span> <span class="mi">1</span><span class="p">)))),</span>
 
          <span class="p">(</span><span class="sc">&#39;pool-method&#39;</span><span class="p">,</span> <span class="sc">&#39;pool_method&#39;</span><span class="p">),</span>
          <span class="p">(</span><span class="sc">&#39;exclude-pad&#39;</span><span class="p">,</span> <span class="sc">&#39;exclude_pad&#39;</span><span class="p">),</span>
@@ -2311,8 +2318,8 @@
 <li><p>A tuple where the first element is a string defining the name of the attribute as it will appear in the IR and the second element is a function to produce the value for this attribute. The function gets an instance of the <code class="docutils literal notranslate"><span class="pre">Node</span></code> as the only parameter and returns a string with the value to be saved to the IR. Examples of this case are <code class="docutils literal notranslate"><span class="pre">strides</span></code>, <code class="docutils literal notranslate"><span class="pre">kernel</span></code>, <code class="docutils literal notranslate"><span class="pre">pads_begin</span></code> and <code class="docutils literal notranslate"><span class="pre">pads_end</span></code>.</p></li>
 <li><p>A tuple where the first element is a string defining the name of the attribute as it will appear in the IR and the second element is the name of the <code class="docutils literal notranslate"><span class="pre">Node</span></code> attribute to get the value from. Examples of this case are <code class="docutils literal notranslate"><span class="pre">pool-method</span></code> and <code class="docutils literal notranslate"><span class="pre">exclude-pad</span></code>.</p></li>
 </ol>
-</div>
-<div class="section" id="operation-extractor">
+</section>
+<section id="operation-extractor">
 <span id="extension-extractor"></span><h3>Operation Extractor<a class="headerlink" href="#operation-extractor" title="Permalink to this headline">¶</a></h3>
 <p>Model Optimizer runs specific extractor for each operation in the model during the model loading. Refer to the <a class="reference external" href="#operations-attributes-extracting">operations-attributes-extracting</a> for more information about this process.</p>
 <p>There are several types of Model Optimizer extractor extensions:</p>
@@ -2390,8 +2397,8 @@
 <p class="admonition-title">Note</p>
 <p>Model Optimizer uses numpy arrays to store values and numpy arrays of type <code class="docutils literal notranslate"><span class="pre">np.int64</span></code> to store shapes in the graph.</p>
 </div>
-</div>
-<div class="section" id="graph-transformation-extensions">
+</section>
+<section id="graph-transformation-extensions">
 <span id="graph-transformations"></span><h3>Graph Transformation Extensions<a class="headerlink" href="#graph-transformation-extensions" title="Permalink to this headline">¶</a></h3>
 <p>Model Optimizer provides various base classes to implement <a class="reference external" href="#front-phase-transformations">Front Phase Transformations</a>, <a class="reference external" href="#middle-phase-transformations">Middle Phase Transformations</a>, and <a class="reference external" href="#back-phase-transformations">Back Phase Transformations</a>. All classes have the following common class attributes and methods:</p>
 <ol class="arabic simple">
@@ -2415,7 +2422,7 @@
 <p class="admonition-title">Note</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">PreMiddleStart</span></code> and <code class="docutils literal notranslate"><span class="pre">PostMiddleStart</span></code> anchors were introduced due to historical reasons to refactor the Model Optimizer pipeline which initially had a hardcoded order of transformations.</p>
 </div>
-<div class="section" id="front-phase-transformations">
+<section id="front-phase-transformations">
 <span id="id11"></span><h4>Front Phase Transformations<a class="headerlink" href="#front-phase-transformations" title="Permalink to this headline">¶</a></h4>
 <p>There are several types of a front phase transformation:</p>
 <ol class="arabic simple">
@@ -2430,7 +2437,7 @@
 </ol>
 </li>
 </ol>
-<div class="section" id="pattern-defined-front-phase-transformations">
+<section id="pattern-defined-front-phase-transformations">
 <span id="id12"></span><h5>Pattern-Defined Front Phase Transformations<a class="headerlink" href="#pattern-defined-front-phase-transformations" title="Permalink to this headline">¶</a></h5>
 <p>This type of transformation is implemented using <code class="docutils literal notranslate"><span class="pre">mo.front.common.replacement.FrontReplacementSubgraph</span></code> and <code class="docutils literal notranslate"><span class="pre">mo.front.common.replacement.FrontReplacementPattern</span></code> as base classes and works the following way.</p>
 <ol class="arabic simple">
@@ -2506,8 +2513,8 @@
 
         <span class="cp"># rename the created Mish operation to have the name of the &quot;mul&quot; node which produced the value equal to the</span>
         <span class="cp"># Mish output</span>
-        <span class="n">rename_nodes</span><span class="p">([(</span><span class="n">mul</span><span class="p">,</span> <span class="n">mul_name</span> <span class="o">+</span> <span class="sc">&#39;/TBR&#39;</span><span class="p">),</span> <span class="p">(</span><span class="n">mish</span><span class="p">,</span> <span class="n">mul_name</span><span class="p">)])</span></pre></div></div></div>
-<div class="section" id="specific-operation-front-phase-transformations">
+        <span class="n">rename_nodes</span><span class="p">([(</span><span class="n">mul</span><span class="p">,</span> <span class="n">mul_name</span> <span class="o">+</span> <span class="sc">&#39;/TBR&#39;</span><span class="p">),</span> <span class="p">(</span><span class="n">mish</span><span class="p">,</span> <span class="n">mul_name</span><span class="p">)])</span></pre></div></div></section>
+<section id="specific-operation-front-phase-transformations">
 <span id="id13"></span><h5>Specific Operation Front Phase Transformations<a class="headerlink" href="#specific-operation-front-phase-transformations" title="Permalink to this headline">¶</a></h5>
 <p>This type of transformation is implemented using <code class="docutils literal notranslate"><span class="pre">mo.front.common.replacement.FrontReplacementOp</span></code> as base class and works the following way.</p>
 <ol class="arabic simple">
@@ -2549,8 +2556,8 @@
         <span class="cp"># rename the created Concat operation to have the name of the &quot;pack&quot; node which produced the value equal to the</span>
         <span class="cp"># Concat output</span>
         <span class="n">rename_nodes</span><span class="p">([(</span><span class="n">node</span><span class="p">,</span> <span class="n">pack_name</span> <span class="o">+</span> <span class="sc">&#39;/TBR&#39;</span><span class="p">),</span> <span class="p">(</span><span class="n">out_node</span><span class="p">,</span> <span class="n">pack_name</span><span class="p">)])</span>
-        <span class="k">return</span> <span class="p">[</span><span class="n">out_node</span><span class="p">.</span><span class="n">id</span><span class="p">]</span>  <span class="err">#</span> <span class="n">reconnect</span> <span class="n">the</span> <span class="n">Pack</span> <span class="n">operation</span> <span class="n">consumers</span>  <span class="n">to</span> <span class="n">get</span> <span class="n">input</span> <span class="n">from</span> <span class="n">Concat</span> <span class="n">instead</span></pre></div></div></div>
-<div class="section" id="generic-front-phase-transformations">
+        <span class="k">return</span> <span class="p">[</span><span class="n">out_node</span><span class="p">.</span><span class="n">id</span><span class="p">]</span>  <span class="err">#</span> <span class="n">reconnect</span> <span class="n">the</span> <span class="n">Pack</span> <span class="n">operation</span> <span class="n">consumers</span>  <span class="n">to</span> <span class="n">get</span> <span class="n">input</span> <span class="n">from</span> <span class="n">Concat</span> <span class="n">instead</span></pre></div></div></section>
+<section id="generic-front-phase-transformations">
 <span id="id14"></span><h5>Generic Front Phase Transformations<a class="headerlink" href="#generic-front-phase-transformations" title="Permalink to this headline">¶</a></h5>
 <p>Model Optimizer provides a mechanism to implement generic front phase transformation. This type of transformation is implemented using <code class="docutils literal notranslate"><span class="pre">mo.front.common.replacement.FrontReplacementSubgraph</span></code> or <code class="docutils literal notranslate"><span class="pre">mo.front.common.replacement.FrontReplacementPattern</span></code> as base classes. The only condition to execute the transformation is to check that it is enabled. Then the Model Optimizer executes the method <code class="docutils literal notranslate"><span class="pre">find_and_replace_pattern(self,</span> <span class="pre">graph)</span></code> and provides a <code class="docutils literal notranslate"><span class="pre">Graph</span></code> object as an input.</p>
 <p>Consider the example of a generic front transformation from a file <code class="docutils literal notranslate"><span class="pre">extensions/front/SqueezeNormalize.py</span></code> performing normalization of the <a class="reference internal" href="openvino_docs_ops_shape_Squeeze_1.html#doxid-openvino-docs-ops-shape-squeeze-1"><span class="std std-ref">Squeeze</span></a> operation. Older version of the operation had a list of axes to squeeze as an attribute, but now it is a separate input. For backward compatibility the Model Optimizer operation supports both semantics but before IR generation the operation should normalized according to the specification.</p>
@@ -2586,8 +2593,8 @@
             <span class="k">else</span><span class="o">:</span>
                 <span class="n">raise</span> <span class="n">Error</span><span class="p">(</span><span class="sc">&#39;The Squeeze layer &quot;{}&quot; should either have 2 inputs or one input and an &quot;squeeze_dims&quot; &#39;</span>
                             <span class="sc">&#39;attribute&#39;</span><span class="p">.</span><span class="n">format</span><span class="p">(</span><span class="n">squeeze_node</span><span class="p">.</span><span class="n">soft_get</span><span class="p">(</span><span class="sc">&#39;name&#39;</span><span class="p">)))</span></pre></div></div><p>Refer to <code class="docutils literal notranslate"><span class="pre">mo/front/common/replacement.py</span></code> for the implementation details on how these front phase transformations work.</p>
-</div>
-<div class="section" id="node-name-pattern-front-phase-transformations">
+</section>
+<section id="node-name-pattern-front-phase-transformations">
 <span id="id15"></span><h5>Node Name Pattern Front Phase Transformations<a class="headerlink" href="#node-name-pattern-front-phase-transformations" title="Permalink to this headline">¶</a></h5>
 <p>Let’s review a real life example before going into details how this type of transformation works.</p>
 <p>TensorFlow* uses a mechanism of scope to group related operation nodes. It is a good practice to put nodes performing particular task into the same scope. This approach divides a graph into logical blocks that are easier to review in the TensorBoard*. The scope, in fact, just defines a common name prefix for the nodes belonging to it.</p>
@@ -2667,8 +2674,8 @@
 <p>The order of items in the internal list describing nodes does not matter, but the order of elements in the top-level list is important. This order defines the order in which the Model Optimizer attaches input tensors to a new generated node if the sub-graph is replaced with a single node. The <code class="docutils literal notranslate"><span class="pre">i</span></code> -th input node of the sub-graph is obtained using call <code class="docutils literal notranslate"><span class="pre">match.single_input_node(i)</span></code> in the sub-graph transformation code. More information about API is given below. If it is necessary to change the order of input tensors, the configuration file can be edited in the text-editor.</p>
 <p>The value for the key <code class="docutils literal notranslate"><span class="pre">outputs</span></code> is a list describing nodes of the sub-graph producing tensor that goes outside of the sub-graph or does not have child nodes. Denote these nodes as output nodes of the sub-graph. The order of elements in the list is important. The i-th element of the list describes the <code class="docutils literal notranslate"><span class="pre">i</span></code> -th output tensor of the sub-graph, which could be obtained using call <code class="docutils literal notranslate"><span class="pre">match.output_node(i)</span></code>. The order of elements can be manually changed in the configuration file. Model Optimizer uses this order to connect output edges if the sub-graph is replaced with a single node.</p>
 <p>Refer to <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_tf_specific_Convert_Object_Detection_API_Models.html#doxid-openvino-docs-m-o-d-g-prepare-model-convert-model-tf-specific-convert-object-detection-a-p-i-models"><span class="std std-ref">Converting TensorFlow\* Object Detection API Models</span></a> for more examples of this type of transformation.</p>
-</div>
-<div class="section" id="front-phase-transformations-using-start-and-end-points">
+</section>
+<section id="front-phase-transformations-using-start-and-end-points">
 <span id="start-end-points-front-phase-transformations"></span><h5>Front Phase Transformations Using Start and End Points<a class="headerlink" href="#front-phase-transformations-using-start-and-end-points" title="Permalink to this headline">¶</a></h5>
 <p>This type of transformation is implemented using <code class="docutils literal notranslate"><span class="pre">mo.front.tf.replacement.FrontReplacementFromConfigFileSubGraph</span></code> as a base class and works the following way.</p>
 <ol class="arabic simple">
@@ -2722,8 +2729,8 @@
 <p>This sub-graph match algorithm has a limitation that each start node must have only one input. Therefore, it is not possible to specify, for example, the <a class="reference internal" href="openvino_docs_ops_convolution_Convolution_1.html#doxid-openvino-docs-ops-convolution-convolution-1"><span class="std std-ref">Convolution</span></a> node as input because it has two inputs: data tensor and tensor with weights.</p>
 </div>
 <p>For other examples of transformations with points, please refer to the <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_tf_specific_Convert_Object_Detection_API_Models.html#doxid-openvino-docs-m-o-d-g-prepare-model-convert-model-tf-specific-convert-object-detection-a-p-i-models"><span class="std std-ref">Converting TensorFlow\* Object Detection API Models</span></a>.</p>
-</div>
-<div class="section" id="generic-front-phase-transformations-enabled-with-transformations-configuration-file">
+</section>
+<section id="generic-front-phase-transformations-enabled-with-transformations-configuration-file">
 <span id="generic-transformations-config-front-phase-transformations"></span><h5>Generic Front Phase Transformations Enabled with Transformations Configuration File<a class="headerlink" href="#generic-front-phase-transformations-enabled-with-transformations-configuration-file" title="Permalink to this headline">¶</a></h5>
 <p>This type of transformation works similarly to the <a class="reference external" href="#generic-front-phase-transformations">Generic Front Phase Transformations</a> but require a JSON configuration file to enable it similarly to <a class="reference external" href="#node-name-pattern-front-phase-transformation">Node Name Pattern Front Phase Transformations</a> and <a class="reference external" href="#start-end-points-front-phase-transformations">Front Phase Transformations Using Start and End Points</a>.</p>
 <p>The base class for this type of transformation is <code class="docutils literal notranslate"><span class="pre">mo.front.common.replacement.FrontReplacementFromConfigFileGeneral</span></code>. The Model Optimizer executes the method <code class="docutils literal notranslate"><span class="pre">transform_graph(self,</span> <span class="pre">graph,</span> <span class="pre">replacement_descriptions)</span></code> and provides the <code class="docutils literal notranslate"><span class="pre">Graph</span></code> object and dictionary with values parsed from the <code class="docutils literal notranslate"><span class="pre">custom_attributes</span></code> attribute of the provided JSON configuration file.</p>
@@ -2771,16 +2778,16 @@
             <span class="n">region_layer_node</span><span class="p">.</span><span class="n">dim_attrs</span><span class="p">.</span><span class="n">remove</span><span class="p">(</span><span class="sc">&#39;axis&#39;</span><span class="p">)</span>
             <span class="n">Result</span><span class="p">(</span><span class="n">graph</span><span class="p">).</span><span class="n">create_node</span><span class="p">([</span><span class="n">region_layer_node</span><span class="p">])</span>
             <span class="n">graph</span><span class="p">.</span><span class="n">remove_node</span><span class="p">(</span><span class="n">op_output</span><span class="p">)</span></pre></div></div><p>The configuration file has only 3 parameters: identifier of the transformation <code class="docutils literal notranslate"><span class="pre">id</span></code>, <code class="docutils literal notranslate"><span class="pre">match_kind</span></code> (which should be equal to <code class="docutils literal notranslate"><span class="pre">general</span></code>) and the dictionary with custom attributes <code class="docutils literal notranslate"><span class="pre">custom_attributes</span></code> accessible in the transformation.</p>
-</div>
-</div>
-<div class="section" id="middle-phase-transformations">
+</section>
+</section>
+<section id="middle-phase-transformations">
 <span id="id16"></span><h4>Middle Phase Transformations<a class="headerlink" href="#middle-phase-transformations" title="Permalink to this headline">¶</a></h4>
 <p>There are two types of middle phase transformations:</p>
 <ol class="arabic simple">
 <li><p><a class="reference external" href="#pattern-defined-middle-phase-transformations">Pattern-Defined Middle Phase Transformations</a> triggered for each sub-graph of the original graph isomorphic to the specified pattern.</p></li>
 <li><p><a class="reference external" href="#generic-middle-phase-transformations">Generic Middle Phase Transformations</a>.</p></li>
 </ol>
-<div class="section" id="pattern-defined-middle-phase-transformations">
+<section id="pattern-defined-middle-phase-transformations">
 <span id="id17"></span><h5>Pattern-Defined Middle Phase Transformations<a class="headerlink" href="#pattern-defined-middle-phase-transformations" title="Permalink to this headline">¶</a></h5>
 <p>This type of transformation is implemented using <code class="docutils literal notranslate"><span class="pre">mo.middle.replacement.MiddleReplacementPattern</span></code> as a base class and works similarly to the <a class="reference external" href="#pattern-defined-middle-phase-transformations">Pattern-Defined Front Phase Transformations</a>. The are two differences:</p>
 <ol class="arabic simple">
@@ -2788,14 +2795,14 @@
 <li><p>The pattern defining the graph should contain data nodes because the structure of the graph is different between front and middle phases. Refer to the <a class="reference external" href="#partial-inference">Partial Inference</a> section for more information about the graph structure changes.</p></li>
 </ol>
 <p>Refer to the <code class="docutils literal notranslate"><span class="pre">extensions/middle/L2NormToNorm.py</span></code> for the example of a pattern-defined middle transformation.</p>
-</div>
-<div class="section" id="generic-middle-phase-transformations">
+</section>
+<section id="generic-middle-phase-transformations">
 <span id="id18"></span><h5>Generic Middle Phase Transformations<a class="headerlink" href="#generic-middle-phase-transformations" title="Permalink to this headline">¶</a></h5>
 <p>Model Optimizer provides a mechanism to implement generic middle phase transformations. This type of transformation is implemented using <code class="docutils literal notranslate"><span class="pre">mo.middle.replacement.MiddleReplacementPattern</span></code> as a base class and works similarly to the <a class="reference external" href="#generic-front-phase-transformations">Generic Front Phase Transformations</a>. The only difference is that the transformation entry function name is <code class="docutils literal notranslate"><span class="pre">find_and_replace_pattern(self,</span> <span class="pre">graph:</span> <span class="pre">Graph)</span></code>.</p>
 <p>Refer to the <code class="docutils literal notranslate"><span class="pre">extensions/middle/CheckForCycle.py</span></code> for the example of a such type of transformation.</p>
-</div>
-</div>
-<div class="section" id="back-phase-transformations">
+</section>
+</section>
+<section id="back-phase-transformations">
 <span id="id19"></span><h4>Back Phase Transformations<a class="headerlink" href="#back-phase-transformations" title="Permalink to this headline">¶</a></h4>
 <p>There are two types of back phase transformations:</p>
 <ol class="arabic simple">
@@ -2806,20 +2813,20 @@
 <p class="admonition-title">Note</p>
 <p>The graph layout during the back phase is always NCHW. However during the front and middle phases it could be NHWC if the original model was using it. Refer to <a class="reference external" href="#model-conversion-pipeline">Model Conversion Pipeline</a> for more details.</p>
 </div>
-<div class="section" id="pattern-defined-back-phase-transformations">
+<section id="pattern-defined-back-phase-transformations">
 <span id="id20"></span><h5>Pattern-Defined Back Phase Transformations<a class="headerlink" href="#pattern-defined-back-phase-transformations" title="Permalink to this headline">¶</a></h5>
 <p>This type of transformation is implemented using <code class="docutils literal notranslate"><span class="pre">mo.back.replacement.MiddleReplacementPattern</span></code> as a base class and works the same way as <a class="reference external" href="#pattern-defined-middle-phase-transformations">Pattern-Defined Front Phase Transformations</a>.</p>
 <p>Refer to the <code class="docutils literal notranslate"><span class="pre">extensions/back/ShufflenetReLUReorder.py</span></code> for the example of a pattern-defined back transformation.</p>
-</div>
-<div class="section" id="generic-back-phase-transformations">
+</section>
+<section id="generic-back-phase-transformations">
 <span id="id21"></span><h5>Generic Back Phase Transformations<a class="headerlink" href="#generic-back-phase-transformations" title="Permalink to this headline">¶</a></h5>
 <p>Model Optimizer provides mechanism to implement generic back phase transformations. This type of transformation is implemented using <code class="docutils literal notranslate"><span class="pre">mo.back.replacement.BackReplacementPattern</span></code> as a base class and works the same way as <a class="reference external" href="#generic-middle-phase-transformations">Generic Middle Phase Transformations</a>.</p>
 <p>Refer to the <code class="docutils literal notranslate"><span class="pre">extensions/back/GatherNormalizer.py</span></code> for the example of a such type of transformation.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="section" id="see-also">
+</section>
+</section>
+</section>
+</section>
+<section id="see-also">
 <span id="id22"></span><h2>See Also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="openvino_docs_MO_DG_IR_and_opsets.html#doxid-openvino-docs-m-o-d-g-i-r-and-opsets"><span class="std std-ref">Deep Learning Network Intermediate Representation and Operation Sets in OpenVINO™</span></a></p></li>
@@ -2828,8 +2835,8 @@
 <li><p><a class="reference internal" href="openvino_docs_Extensibility_UG_Intro.html#doxid-openvino-docs-extensibility-u-g-intro"><span class="std std-ref">OpenVINO™ Extensibility Mechanism</span></a></p></li>
 <li><p><a class="reference internal" href="openvino_docs_MO_DG_prepare_model_customize_model_optimizer_Extending_Model_Optimizer_With_Caffe_Python_Layers.html#doxid-openvino-docs-m-o-d-g-prepare-model-customize-model-optimizer-extending-model-optimizer-with-caffe-python-layers"><span class="std std-ref">Extending the Model Optimizer with Caffe* Python Layers</span></a></p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -2860,7 +2867,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

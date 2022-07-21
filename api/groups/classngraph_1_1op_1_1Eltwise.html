@@ -1,0 +1,3560 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>class ngraph::op::Eltwise &#8212; OpenVINO™  documentation</title>
+    
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/blank.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/doxyrest-pygments.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <link href="../../_static/css/media/favicon.ico" rel="shortcut icon">
+    <link rel="stylesheet" href="../../_static/css/openvino_sphinx_theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/css/button.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/css/input.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/css/textfield.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/css/tabs.css" type="text/css" />
+    <script src="../../_static/js/openvino_sphinx_theme.js"></script>
+    <link rel="stylesheet" href="../../_static/css/viewer.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/0.5.7/chartjs-plugin-annotation.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-barchart-background@1.3.0/build/Plugin.Barchart.Background.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-deferred@1"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.1/papaparse.min.js"></script>
+    <script src="../../_static/js/viewer.min.js"></script>
+    <script src="/assets/versions_raw.js"></script>
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/tabs.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/js/custom.js"></script>
+    <script src="../../_static/js/graphs.js"></script>
+    <script src="../../_static/js/graphs_ov_tf.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/target-highlight.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <link rel="canonical" href="https://docs.openvino.ai/latest/api/groups/classngraph_1_1op_1_1Eltwise.html" />
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+      <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+
+<a class="navbar-brand" href="../../index.html">
+  <img src="../../_static/logo.svg" class="logo" alt="logo">
+</a>
+
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../pages/get_started.html">
+  Get Started
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../pages/documentation.html">
+  Documentation
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../tutorials.html">
+  Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api_reference.html">
+  API Reference
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../model_zoo.html">
+  Model Zoo
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../pages/resources.html">
+  Resources
+ </a>
+</li>
+
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/openvinotoolkit/openvino" rel="noopener" target="_blank" title="GitHub">
+            <span><i class="sst-github"></i></span>
+            <label class="sr-only">GitHub</label>
+          </a>
+        </li>
+</ul>
+      </div>
+      
+      <div class="navbar-end-item">
+        
+<div class="dropdown sst-dropdown sst-dropdown-navbar">
+  <button class="btn sst-btn dropdown-toggle" type="button" id="version-selector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+  <div class="dropdown-menu" aria-labelledby="version-selector">
+  </div>
+</div>
+      </div>
+      
+      <div class="navbar-end-item">
+        
+
+<div class="dropdown sst-dropdown sst-dropdown-navbar">
+  <button class="btn sst-btn dropdown-toggle" type="button" id="language-selector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">English</button>
+  <div class="dropdown-menu" aria-labelledby="language-selector">
+    
+      
+        <a class="dropdown-item font-weight-bold" href="/latest/api/groups/classngraph_1_1op_1_1Eltwise.html">English</a>
+      
+    
+      
+        <a  class="dropdown-item" href="/cn/latest/api/groups/classngraph_1_1op_1_1Eltwise.html">Chinese</a>
+      
+    
+  </div>
+</div>
+
+      </div>
+      
+    </div>
+  </div>
+</div>
+        <div id="collapse-nav-wrapper" class="container-xl">
+          <button id="collapse-nav" class="button bttn-prm button-size-m" type="button" data-toggle="collapse" data-target="#nav-tree" aria-expanded="false" aria-controls="nav-tree">
+            Documentation navigation <i class="fas fa-chevron-down"></i>
+          </button>
+        </div>
+      </nav>
+      <div class="transition-banner container-fluid alert alert-info alert-dismissible fade show" role="alert">
+        <p>OpenVINO 2022.1 introduces a new version of OpenVINO API (API 2.0). For more information on the changes and transition steps, see the <a href="https://docs.openvino.ai/latest/openvino_2_0_transition_guide.html">transition guide</a></p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar" id="nav-tree"><form class="searchForm bd-search d-flex align-items-center" action="../../search.html" method="get">
+    <i class="icon fas fa-search"></i>
+    <input type="search" class="form-control" name="query" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    <ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="namespacengraph.html">
+   ngraph
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="namespacengraph_1_1builder.html">
+     builder
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+    <label for="toctree-checkbox-2">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="namespacengraph_1_1builder_1_1opset1.html">
+       opset1
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="enumngraph_1_1builder_1_1BiasMode.html">
+       BiasMode
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1builder_1_1numpy_autobroadcast_incompatible_shapes.html">
+       numpy_autobroadcast_incompatible_shapes
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="namespacengraph_1_1coordinates.html">
+     coordinates
+    </a>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="namespacengraph_1_1descriptor.html">
+     descriptor
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+    <label for="toctree-checkbox-3">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="namespacengraph_1_1descriptor_1_1layout.html">
+       layout
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="namespacengraph_1_1element.html">
+     element
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="namespacengraph_1_1file_util.html">
+     file_util
+    </a>
+   </li>
+   <li class="toctree-l2 current active has-children">
+    <a class="reference internal" href="namespacengraph_1_1op.html">
+     op
+    </a>
+    <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+    <label for="toctree-checkbox-4">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul class="current">
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="namespacengraph_1_1op_1_1internal.html">
+       internal
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+      <label for="toctree-checkbox-5">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="classngraph_1_1op_1_1internal_1_1MulticlassNmsIEInternal.html">
+         MulticlassNmsIEInternal
+        </a>
+       </li>
+       <li class="toctree-l4 has-children">
+        <a class="reference internal" href="classngraph_1_1op_1_1internal_1_1NmsStaticShapeIE.html">
+         NmsStaticShapeIE
+        </a>
+        <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+        <label for="toctree-checkbox-6">
+         <i class="fas fa-chevron-down">
+         </i>
+        </label>
+        <ul>
+         <li class="toctree-l5">
+          <a class="reference internal" href="structngraph_1_1op_1_1internal_1_1NmsStaticShapeIE_1_1init_rt_result.html">
+           init_rt_result
+          </a>
+         </li>
+        </ul>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="classngraph_1_1op_1_1internal_1_1NonMaxSuppressionIEInternal.html">
+         NonMaxSuppressionIEInternal
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="namespacengraph_1_1op_1_1util.html">
+       util
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+      <label for="toctree-checkbox-7">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="namespacengraph_1_1op_1_1util_1_1detail.html">
+         detail
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="namespacengraph_1_1op_1_1util_1_1error.html">
+         error
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="namespacengraph_1_1op_1_1v0.html">
+       v0
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="namespacengraph_1_1op_1_1v1.html">
+       v1
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="namespacengraph_1_1op_1_1v3.html">
+       v3
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="namespacengraph_1_1op_1_1v4.html">
+       v4
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="namespacengraph_1_1op_1_1v5.html">
+       v5
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="namespacengraph_1_1op_1_1v6.html">
+       v6
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="namespacengraph_1_1op_1_1v7.html">
+       v7
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="namespacengraph_1_1op_1_1v8.html">
+       v8
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="namespacengraph_1_1op_1_1v9.html">
+       v9
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="structngraph_1_1op_1_1InterpolateIEAttrs.html">
+       InterpolateIEAttrs
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="structngraph_1_1op_1_1ResampleIEAttrs.html">
+       ResampleIEAttrs
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1op_1_1ConvolutionIE.html">
+       ConvolutionIE
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1op_1_1CropIE.html">
+       CropIE
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1op_1_1DeconvolutionIE.html">
+       DeconvolutionIE
+      </a>
+     </li>
+     <li class="toctree-l3 current active">
+      <a class="current reference internal" href="#">
+       Eltwise
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1op_1_1FullyConnected.html">
+       FullyConnected
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1op_1_1GRUCellIE.html">
+       GRUCellIE
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1op_1_1GRUSequenceIE.html">
+       GRUSequenceIE
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1op_1_1GatherIE.html">
+       GatherIE
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1op_1_1GatherTreeIE.html">
+       GatherTreeIE
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1op_1_1HardSigmoid_IE.html">
+       HardSigmoid_IE
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1op_1_1Interp.html">
+       Interp
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1op_1_1LRN_IE.html">
+       LRN_IE
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1op_1_1LSTMCellIE.html">
+       LSTMCellIE
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1op_1_1LSTMSequenceIE.html">
+       LSTMSequenceIE
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1op_1_1NonMaxSuppressionIE.html">
+       NonMaxSuppressionIE
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1op_1_1NonMaxSuppressionIE2.html">
+       NonMaxSuppressionIE2
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1op_1_1NonMaxSuppressionIE3.html">
+       NonMaxSuppressionIE3
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1op_1_1NormalizeIE.html">
+       NormalizeIE
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1op_1_1OneHotIE.html">
+       OneHotIE
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1op_1_1PadIE.html">
+       PadIE
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1op_1_1PowerIE.html">
+       PowerIE
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1op_1_1ProposalIE.html">
+       ProposalIE
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1op_1_1RNNCellIE.html">
+       RNNCellIE
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1op_1_1RNNSequenceIE.html">
+       RNNSequenceIE
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1op_1_1ReLUIE.html">
+       ReLUIE
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1op_1_1ResampleV2.html">
+       ResampleV2
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1op_1_1ScaleShiftIE.html">
+       ScaleShiftIE
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1op_1_1SeluIE.html">
+       SeluIE
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1op_1_1SwishIE.html">
+       SwishIE
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1op_1_1TemporaryReplaceOutputType.html">
+       TemporaryReplaceOutputType
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1op_1_1TileIE.html">
+       TileIE
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1op_1_1TopKIE.html">
+       TopKIE
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1op_1_1TypeRelaxed.html">
+       TypeRelaxed
+      </a>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="classngraph_1_1op_1_1TypeRelaxedBase.html">
+       TypeRelaxedBase
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+      <label for="toctree-checkbox-8">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="structngraph_1_1op_1_1TypeRelaxedBase_1_1init_rt_result.html">
+         init_rt_result
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="namespacengraph_1_1opset1.html">
+     opset1
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="namespacengraph_1_1opset2.html">
+     opset2
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="namespacengraph_1_1opset3.html">
+     opset3
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="namespacengraph_1_1opset4.html">
+     opset4
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="namespacengraph_1_1opset5.html">
+     opset5
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="namespacengraph_1_1opset6.html">
+     opset6
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="namespacengraph_1_1opset7.html">
+     opset7
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="namespacengraph_1_1opset8.html">
+     opset8
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="namespacengraph_1_1opset9.html">
+     opset9
+    </a>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="namespacengraph_1_1pass.html">
+     pass
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+    <label for="toctree-checkbox-9">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="namespacengraph_1_1pass_1_1itt.html">
+       itt
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+      <label for="toctree-checkbox-10">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="namespacengraph_1_1pass_1_1itt_1_1domains.html">
+         domains
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="namespacengraph_1_1pass_1_1low_precision.html">
+       low_precision
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+      <label for="toctree-checkbox-11">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4 has-children">
+        <a class="reference internal" href="namespacengraph_1_1pass_1_1low_precision_1_1itt.html">
+         itt
+        </a>
+        <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+        <label for="toctree-checkbox-12">
+         <i class="fas fa-chevron-down">
+         </i>
+        </label>
+        <ul>
+         <li class="toctree-l5">
+          <a class="reference internal" href="namespacengraph_1_1pass_1_1low_precision_1_1itt_1_1domains.html">
+           domains
+          </a>
+         </li>
+        </ul>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="namespacengraph_1_1pass_1_1low_precision_1_1precision_set.html">
+         precision_set
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="enumngraph_1_1pass_1_1low_precision_1_1levels.html">
+         levels
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1AssignAndReadValueTransformation.html">
+         AssignAndReadValueTransformation
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1ConvertTransformation.html">
+         ConvertTransformation
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1DataPrecision.html">
+         DataPrecision
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1Exception.html">
+         Exception
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1FakeQuantizeDequantization.html">
+         FakeQuantizeDequantization
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1InferenceEngineLptException.html">
+         InferenceEngineLptException
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1LowPrecision.html">
+         LowPrecision
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1MarkupOptimizations.html">
+         MarkupOptimizations
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1MoveFakeQuantize.html">
+         MoveFakeQuantize
+        </a>
+       </li>
+       <li class="toctree-l4 has-children">
+        <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1NetworkHelper.html">
+         NetworkHelper
+        </a>
+        <input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
+        <label for="toctree-checkbox-13">
+         <i class="fas fa-chevron-down">
+         </i>
+        </label>
+        <ul>
+         <li class="toctree-l5">
+          <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1NetworkHelper_1_1InsertDequantizationResult.html">
+           InsertDequantizationResult
+          </a>
+         </li>
+        </ul>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1PortQuantizationGranularityRestriction.html">
+         PortQuantizationGranularityRestriction
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1PrecisionsRestriction.html">
+         PrecisionsRestriction
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1QuantizationDetails.html">
+         QuantizationDetails
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1QuantizationGranularityRestriction.html">
+         QuantizationGranularityRestriction
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1TypeRelaxedReplacer.html">
+         TypeRelaxedReplacer
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1AddAddFusion.html">
+       AddAddFusion
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1AddMultiplyFusion.html">
+       AddMultiplyFusion
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1AlignEltwiseInputRanks.html">
+       AlignEltwiseInputRanks
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1BatchNormDecomposition.html">
+       BatchNormDecomposition
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1CommonOptimizations.html">
+       CommonOptimizations
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1CompressQuantizeWeights.html">
+       CompressQuantizeWeights
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvAddFusion.html">
+       ConvAddFusion
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvFusion.html">
+       ConvFusion
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvMultiplyFusion.html">
+       ConvMultiplyFusion
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertBroadcast3.html">
+       ConvertBroadcast3
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertBroadcastToTiles.html">
+       ConvertBroadcastToTiles
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertConvertLike.html">
+       ConvertConvertLike
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertConvolution.html">
+       ConvertConvolution
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertConvolutions.html">
+       ConvertConvolutions
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertDeconvolution.html">
+       ConvertDeconvolution
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertDepthToSpace.html">
+       ConvertDepthToSpace
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertDivide.html">
+       ConvertDivide
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertDivideWithConstant.html">
+       ConvertDivideWithConstant
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertGELU.html">
+       ConvertGELU
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertGRUCellMatcher.html">
+       ConvertGRUCellMatcher
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertGatherToGatherIEMatcher.html">
+       ConvertGatherToGatherIEMatcher
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertGatherTreeToGatherTreeIEMatcher.html">
+       ConvertGatherTreeToGatherTreeIEMatcher
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertGroupConvolution.html">
+       ConvertGroupConvolution
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertGroupDeconvolution.html">
+       ConvertGroupDeconvolution
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertHardSigmoidToLegacyMatcher.html">
+       ConvertHardSigmoidToLegacyMatcher
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertInterpolateToInterpOrResampleMatcher.html">
+       ConvertInterpolateToInterpOrResampleMatcher
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertLRNToLegacyMatcher.html">
+       ConvertLRNToLegacyMatcher
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertLSTMCellMatcher.html">
+       ConvertLSTMCellMatcher
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertMatMulToFC.html">
+       ConvertMatMulToFC
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertMatMulToFCorGemm.html">
+       ConvertMatMulToFCorGemm
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertMatMulToGemm.html">
+       ConvertMatMulToGemm
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertMatrixNmsToMatrixNmsIE.html">
+       ConvertMatrixNmsToMatrixNmsIE
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertMinimum.html">
+       ConvertMinimum
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertMod.html">
+       ConvertMod
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertMulAddToScaleShiftOrPower.html">
+       ConvertMulAddToScaleShiftOrPower
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertMulOrAddFinally.html">
+       ConvertMulOrAddFinally
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertMulticlassNms8ToMulticlassNms9.html">
+       ConvertMulticlassNms8ToMulticlassNms9
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertMulticlassNmsToMulticlassNmsIE.html">
+       ConvertMulticlassNmsToMulticlassNmsIE
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertNMS1ToNMS5.html">
+       ConvertNMS1ToNMS5
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertNMS1ToNMS9.html">
+       ConvertNMS1ToNMS9
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertNMS3ToNMS5.html">
+       ConvertNMS3ToNMS5
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertNMS3ToNMS9.html">
+       ConvertNMS3ToNMS9
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertNMS4ToNMS5.html">
+       ConvertNMS4ToNMS5
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertNMS4ToNMS9.html">
+       ConvertNMS4ToNMS9
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertNMS5ToLegacyMatcher.html">
+       ConvertNMS5ToLegacyMatcher
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertNMS5ToNMS9.html">
+       ConvertNMS5ToNMS9
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertNMS9ToNMSIEInternal.html">
+       ConvertNMS9ToNMSIEInternal
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertNMSToNMSIEInternal.html">
+       ConvertNMSToNMSIEInternal
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertNMSToNMSIEMatcher.html">
+       ConvertNMSToNMSIEMatcher
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertNegative.html">
+       ConvertNegative
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertNormalizeL2ToLegacyMatcher.html">
+       ConvertNormalizeL2ToLegacyMatcher
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertNormalizeL2WithMulToNormalizeIE.html">
+       ConvertNormalizeL2WithMulToNormalizeIE
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertOneHotToOneHotIEMatcher.html">
+       ConvertOneHotToOneHotIEMatcher
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertOpSet1ToLegacy.html">
+       ConvertOpSet1ToLegacy
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertOpSet2ToOpSet1.html">
+       ConvertOpSet2ToOpSet1
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertOpSet3ToOpSet2.html">
+       ConvertOpSet3ToOpSet2
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertPReLUToReLUIE.html">
+       ConvertPReLUToReLUIE
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertPadToLegacyMatcher.html">
+       ConvertPadToLegacyMatcher
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertPowerToPowerIEMatcher.html">
+       ConvertPowerToPowerIEMatcher
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertPrecision.html">
+       ConvertPrecision
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertProposal4ToLegacyMatcher.html">
+       ConvertProposal4ToLegacyMatcher
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertProposalToLegacyMatcher.html">
+       ConvertProposalToLegacyMatcher
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertRNNCellMatcher.html">
+       ConvertRNNCellMatcher
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertReduceMaxToPooling.html">
+       ConvertReduceMaxToPooling
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertReduceMeanToPooling.html">
+       ConvertReduceMeanToPooling
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertReduceSumToPooling.html">
+       ConvertReduceSumToPooling
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertReduceToPooling.html">
+       ConvertReduceToPooling
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertSeluToSeluIEMatcher.html">
+       ConvertSeluToSeluIEMatcher
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertSequenceToTensorIterator.html">
+       ConvertSequenceToTensorIterator
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertShapeOf3.html">
+       ConvertShapeOf3
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertShuffleChannels3.html">
+       ConvertShuffleChannels3
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertSpaceToDepth.html">
+       ConvertSpaceToDepth
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertSqrtToPowerIEMatcher.html">
+       ConvertSqrtToPowerIEMatcher
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertStridedSliceToCropMatcher.html">
+       ConvertStridedSliceToCropMatcher
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertSubtract.html">
+       ConvertSubtract
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertSwishToSwishIEMatcher.html">
+       ConvertSwishToSwishIEMatcher
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertTensorIteratorToSequence.html">
+       ConvertTensorIteratorToSequence
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertTileToLegacyMatcher.html">
+       ConvertTileToLegacyMatcher
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertTopK3.html">
+       ConvertTopK3
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvertTopKToTopKIEMatcher.html">
+       ConvertTopKToTopKIEMatcher
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvolutionBackpropDataMultiplyFusion.html">
+       ConvolutionBackpropDataMultiplyFusion
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ConvolutionMultiplyFusion.html">
+       ConvolutionMultiplyFusion
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1DeconvAddFusion.html">
+       DeconvAddFusion
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1DisableConvertConstantFoldingOnConstPath.html">
+       DisableConvertConstantFoldingOnConstPath
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1DisableShapeOfConstantFolding.html">
+       DisableShapeOfConstantFolding
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1FullyConnectedBiasFusion.html">
+       FullyConnectedBiasFusion
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1FuseFilteringBoxesBySize.html">
+       FuseFilteringBoxesBySize
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1GenerateMappingFile.html">
+       GenerateMappingFile
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1GroupConvolutionBackpropDataMultiplyFusion.html">
+       GroupConvolutionBackpropDataMultiplyFusion
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1GroupConvolutionMultiplyFusion.html">
+       GroupConvolutionMultiplyFusion
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1MOCTransformations.html">
+       MOCTransformations
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1MatMulConstTransposesExtraction.html">
+       MatMulConstTransposesExtraction
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1MultiplyConvolutionBackpropDataFusion.html">
+       MultiplyConvolutionBackpropDataFusion
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1MultiplyGroupConvolutionBackpropDataFusion.html">
+       MultiplyGroupConvolutionBackpropDataFusion
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1MultiplyGroupConvolutionFusion.html">
+       MultiplyGroupConvolutionFusion
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1MultiplyMultiplyFusion.html">
+       MultiplyMultiplyFusion
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1NopElimination.html">
+       NopElimination
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1POTTransformations.html">
+       POTTransformations
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1PadFusion.html">
+       PadFusion
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1Proposal4Scales.html">
+       Proposal4Scales
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1PullTransposeThroughFQUp.html">
+       PullTransposeThroughFQUp
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1RemoveFilteringBoxesBySize.html">
+       RemoveFilteringBoxesBySize
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1Reshape1DAvgPool.html">
+       Reshape1DAvgPool
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1Reshape1DConvolution.html">
+       Reshape1DConvolution
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1Reshape1DMaxPool.html">
+       Reshape1DMaxPool
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1Reshape1DOps.html">
+       Reshape1DOps
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ReshapeBMatMul.html">
+       ReshapeBMatMul
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ReshapeFullyConnected.html">
+       ReshapeFullyConnected
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ReshapeFullyConnectedFusion.html">
+       ReshapeFullyConnectedFusion
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1SmartReshape.html">
+       SmartReshape
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1TransposeMatMul.html">
+       TransposeMatMul
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1pass_1_1ZeroPointOptimizer.html">
+       ZeroPointOptimizer
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="namespacengraph_1_1pattern.html">
+     pattern
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/>
+    <label for="toctree-checkbox-14">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="namespacengraph_1_1pattern_1_1op.html">
+       op
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="namespacengraph_1_1reduction.html">
+     reduction
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/>
+    <label for="toctree-checkbox-15">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="enumngraph_1_1reduction_1_1Type.html">
+       Type
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="namespacengraph_1_1runtime.html">
+     runtime
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/>
+    <label for="toctree-checkbox-16">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="namespacengraph_1_1runtime_1_1opt_kernel.html">
+       opt_kernel
+      </a>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="namespacengraph_1_1runtime_1_1reference.html">
+       reference
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/>
+      <label for="toctree-checkbox-17">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="namespacengraph_1_1runtime_1_1reference_1_1adaptive_pool.html">
+         adaptive_pool
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="namespacengraph_1_1runtime_1_1reference_1_1detail.html">
+         detail
+        </a>
+       </li>
+       <li class="toctree-l4 has-children">
+        <a class="reference internal" href="namespacengraph_1_1runtime_1_1reference_1_1details.html">
+         details
+        </a>
+        <input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" type="checkbox"/>
+        <label for="toctree-checkbox-18">
+         <i class="fas fa-chevron-down">
+         </i>
+        </label>
+        <ul>
+         <li class="toctree-l5">
+          <a class="reference internal" href="structngraph_1_1runtime_1_1reference_1_1details_1_1IsRandomAccessIt.html">
+           IsRandomAccessIt
+          </a>
+         </li>
+         <li class="toctree-l5">
+          <a class="reference internal" href="structngraph_1_1runtime_1_1reference_1_1details_1_1ProposalBox.html">
+           ProposalBox
+          </a>
+         </li>
+         <li class="toctree-l5">
+          <a class="reference internal" href="structngraph_1_1runtime_1_1reference_1_1details_1_1from_iterator.html">
+           from_iterator
+          </a>
+         </li>
+         <li class="toctree-l5">
+          <a class="reference internal" href="structngraph_1_1runtime_1_1reference_1_1details_1_1is_complete.html">
+           is_complete
+          </a>
+         </li>
+        </ul>
+       </li>
+       <li class="toctree-l4 has-children">
+        <a class="reference internal" href="namespacengraph_1_1runtime_1_1reference_1_1fake_quantize_details.html">
+         fake_quantize_details
+        </a>
+        <input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" type="checkbox"/>
+        <label for="toctree-checkbox-19">
+         <i class="fas fa-chevron-down">
+         </i>
+        </label>
+        <ul>
+         <li class="toctree-l5">
+          <a class="reference internal" href="classngraph_1_1runtime_1_1reference_1_1fake_quantize_details_1_1QuantizationBound.html">
+           QuantizationBound
+          </a>
+         </li>
+        </ul>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="namespacengraph_1_1runtime_1_1reference_1_1fft_common.html">
+         fft_common
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="namespacengraph_1_1runtime_1_1reference_1_1internal.html">
+         internal
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="namespacengraph_1_1runtime_1_1reference_1_1kernel.html">
+         kernel
+        </a>
+       </li>
+       <li class="toctree-l4 has-children">
+        <a class="reference internal" href="namespacengraph_1_1runtime_1_1reference_1_1nms_common.html">
+         nms_common
+        </a>
+        <input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" type="checkbox"/>
+        <label for="toctree-checkbox-20">
+         <i class="fas fa-chevron-down">
+         </i>
+        </label>
+        <ul>
+         <li class="toctree-l5">
+          <a class="reference internal" href="structngraph_1_1runtime_1_1reference_1_1nms_common_1_1BoxInfo.html">
+           BoxInfo
+          </a>
+         </li>
+         <li class="toctree-l5">
+          <a class="reference internal" href="structngraph_1_1runtime_1_1reference_1_1nms_common_1_1Rectangle.html">
+           Rectangle
+          </a>
+         </li>
+        </ul>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="enumngraph_1_1runtime_1_1reference_1_1CellType.html">
+         CellType
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="enumngraph_1_1runtime_1_1reference_1_1FFTKind.html">
+         FFTKind
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="enumngraph_1_1runtime_1_1reference_1_1PSROIPoolingMode.html">
+         PSROIPoolingMode
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="structngraph_1_1runtime_1_1reference_1_1CellArgs.html">
+         CellArgs
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="structngraph_1_1runtime_1_1reference_1_1convert_types.html">
+         convert_types
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="structngraph_1_1runtime_1_1reference_1_1widen.html">
+         widen
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="classngraph_1_1runtime_1_1reference_1_1GetNearestPixel.html">
+         GetNearestPixel
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="classngraph_1_1runtime_1_1reference_1_1GetOriginalCoordinate.html">
+         GetOriginalCoordinate
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="classngraph_1_1runtime_1_1reference_1_1InterpolateEval.html">
+         InterpolateEval
+        </a>
+       </li>
+       <li class="toctree-l4 has-children">
+        <a class="reference internal" href="classngraph_1_1runtime_1_1reference_1_1InterpolateEvalHelper.html">
+         InterpolateEvalHelper
+        </a>
+        <input class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" type="checkbox"/>
+        <label for="toctree-checkbox-21">
+         <i class="fas fa-chevron-down">
+         </i>
+        </label>
+        <ul>
+         <li class="toctree-l5">
+          <a class="reference internal" href="structngraph_1_1runtime_1_1reference_1_1InterpolateEvalHelper_1_1ICoords.html">
+           ICoords
+          </a>
+         </li>
+         <li class="toctree-l5">
+          <a class="reference internal" href="structngraph_1_1runtime_1_1reference_1_1InterpolateEvalHelper_1_1InfoForGenericLinearONNXMode.html">
+           InfoForGenericLinearONNXMode
+          </a>
+         </li>
+         <li class="toctree-l5">
+          <a class="reference internal" href="structngraph_1_1runtime_1_1reference_1_1InterpolateEvalHelper_1_1InfoForLinearMode.html">
+           InfoForLinearMode
+          </a>
+         </li>
+         <li class="toctree-l5">
+          <a class="reference internal" href="structngraph_1_1runtime_1_1reference_1_1InterpolateEvalHelper_1_1LinearModeInnerIterationResult.html">
+           LinearModeInnerIterationResult
+          </a>
+         </li>
+        </ul>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="classngraph_1_1runtime_1_1reference_1_1Span.html">
+         Span
+        </a>
+       </li>
+       <li class="toctree-l4 has-children">
+        <a class="reference internal" href="classngraph_1_1runtime_1_1reference_1_1referenceDetectionOutput.html">
+         referenceDetectionOutput
+        </a>
+        <input class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" type="checkbox"/>
+        <label for="toctree-checkbox-22">
+         <i class="fas fa-chevron-down">
+         </i>
+        </label>
+        <ul>
+         <li class="toctree-l5">
+          <a class="reference internal" href="structngraph_1_1runtime_1_1reference_1_1referenceDetectionOutput_1_1NormalizedBBox.html">
+           NormalizedBBox
+          </a>
+         </li>
+        </ul>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1runtime_1_1AlignedBuffer.html">
+       AlignedBuffer
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1runtime_1_1HostTensor.html">
+       HostTensor
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1runtime_1_1SharedBuffer.html">
+       SharedBuffer
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1runtime_1_1Tensor.html">
+       Tensor
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="namespacengraph_1_1snippets.html">
+     snippets
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-23" name="toctree-checkbox-23" type="checkbox"/>
+    <label for="toctree-checkbox-23">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="namespacengraph_1_1snippets_1_1isa.html">
+       isa
+      </a>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="namespacengraph_1_1snippets_1_1op.html">
+       op
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" type="checkbox"/>
+      <label for="toctree-checkbox-24">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="classngraph_1_1snippets_1_1op_1_1BlockedLoad.html">
+         BlockedLoad
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="classngraph_1_1snippets_1_1op_1_1BlockedParameter.html">
+         BlockedParameter
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="classngraph_1_1snippets_1_1op_1_1BroadcastLoad.html">
+         BroadcastLoad
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="classngraph_1_1snippets_1_1op_1_1BroadcastMove.html">
+         BroadcastMove
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="classngraph_1_1snippets_1_1op_1_1Kernel.html">
+         Kernel
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="classngraph_1_1snippets_1_1op_1_1Load.html">
+         Load
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="classngraph_1_1snippets_1_1op_1_1Nop.html">
+         Nop
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="classngraph_1_1snippets_1_1op_1_1PowerStatic.html">
+         PowerStatic
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="classngraph_1_1snippets_1_1op_1_1Scalar.html">
+         Scalar
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="classngraph_1_1snippets_1_1op_1_1ScalarLoad.html">
+         ScalarLoad
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="classngraph_1_1snippets_1_1op_1_1ScalarStore.html">
+         ScalarStore
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="classngraph_1_1snippets_1_1op_1_1Subgraph.html">
+         Subgraph
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="classngraph_1_1snippets_1_1op_1_1Tile.html">
+         Tile
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="classngraph_1_1snippets_1_1op_1_1VectorLoad.html">
+         VectorLoad
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="classngraph_1_1snippets_1_1op_1_1VectorStore.html">
+         VectorStore
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="classngraph_1_1snippets_1_1op_1_1Store.html">
+         Store
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="namespacengraph_1_1snippets_1_1pass.html">
+       pass
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-25" name="toctree-checkbox-25" type="checkbox"/>
+      <label for="toctree-checkbox-25">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="enumngraph_1_1snippets_1_1pass_1_1SnippetsNodeType.html">
+         SnippetsNodeType
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="classngraph_1_1snippets_1_1pass_1_1AssignRegisters.html">
+         AssignRegisters
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="classngraph_1_1snippets_1_1pass_1_1ConvertConstantsToScalars.html">
+         ConvertConstantsToScalars
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="classngraph_1_1snippets_1_1pass_1_1EnumerateNodes.html">
+         EnumerateNodes
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="classngraph_1_1snippets_1_1pass_1_1InsertLoad.html">
+         InsertLoad
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="classngraph_1_1snippets_1_1pass_1_1InsertMoveBroadcast.html">
+         InsertMoveBroadcast
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="classngraph_1_1snippets_1_1pass_1_1InsertStore.html">
+         InsertStore
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="classngraph_1_1snippets_1_1pass_1_1LoadMoveBroadcastToBroadcastLoad.html">
+         LoadMoveBroadcastToBroadcastLoad
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="classngraph_1_1snippets_1_1pass_1_1ReplaceLoadsWithScalarLoads.html">
+         ReplaceLoadsWithScalarLoads
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="classngraph_1_1snippets_1_1pass_1_1ReplaceStoresWithScalarStores.html">
+         ReplaceStoresWithScalarStores
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="classngraph_1_1snippets_1_1pass_1_1TokenizeSnippets.html">
+         TokenizeSnippets
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="classngraph_1_1snippets_1_1pass_1_1ConvertPowerToPowerStatic.html">
+         ConvertPowerToPowerStatic
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1snippets_1_1Emitter.html">
+       Emitter
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1snippets_1_1Generator.html">
+       Generator
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1snippets_1_1Schedule.html">
+       Schedule
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="classngraph_1_1snippets_1_1TargetMachine.html">
+       TargetMachine
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="structngraph_1_1NullLogger.html">
+     NullLogger
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="structngraph_1_1SlicePlan.html">
+     SlicePlan
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="classngraph_1_1ConstString.html">
+     ConstString
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="classngraph_1_1CoordinateIterator.html">
+     CoordinateIterator
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="classngraph_1_1CoordinateTransformBasic.html">
+     CoordinateTransformBasic
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="classngraph_1_1FactoryRegistry.html">
+     FactoryRegistry
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="classngraph_1_1HasTypeInfoMember.html">
+     HasTypeInfoMember
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="classngraph_1_1LogHelper.html">
+     LogHelper
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="classngraph_1_1Logger.html">
+     Logger
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="classngraph_1_1OpSet.html">
+     OpSet
+    </a>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="classngraph_1_1QuantizationModeAttribute.html">
+     QuantizationModeAttribute
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-26" name="toctree-checkbox-26" type="checkbox"/>
+    <label for="toctree-checkbox-26">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="enumngraph_1_1QuantizationModeAttribute_1_1Mode.html">
+       Mode
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="classngraph_1_1VariantImpl.html">
+     VariantImpl
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="classngraph_1_1VariantWrapper.html">
+     VariantWrapper
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1AddFakeQuantizeFusion.html">
+   AddFakeQuantizeFusion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classov_1_1pass_1_1AddOldApiMapToParameters.html">
+   AddOldApiMapToParameters
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1AddTransformation.html">
+   AddTransformation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1AlignQuantizationIntervals.html">
+   AlignQuantizationIntervals
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1AlignQuantizationParameters.html">
+   AlignQuantizationParameters
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1AvgPoolPrecisionPreservedAttribute.html">
+   AvgPoolPrecisionPreservedAttribute
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1AvgPoolTransformation.html">
+   AvgPoolTransformation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1BatchToSpaceFusion.html">
+   BatchToSpaceFusion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1BidirectionalGRUSequenceDecomposition.html">
+   BidirectionalGRUSequenceDecomposition
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1BidirectionalLSTMSequenceDecomposition.html">
+   BidirectionalLSTMSequenceDecomposition
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1BidirectionalRNNSequenceDecomposition.html">
+   BidirectionalRNNSequenceDecomposition
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1BidirectionalSequenceDecomposition.html">
+   BidirectionalSequenceDecomposition
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1BinarizeWeights.html">
+   BinarizeWeights
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1BroadcastConstRangeReplacement.html">
+   BroadcastConstRangeReplacement
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1BroadcastElementwiseFusion.html">
+   BroadcastElementwiseFusion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1ClampFusion.html">
+   ClampFusion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1ClampTransformation.html">
+   ClampTransformation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classov_1_1pass_1_1CompressFloatConstants.html">
+   CompressFloatConstants
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classov_1_1pass_1_1CompressFloatConstantsImpl.html">
+   CompressFloatConstantsImpl
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1ConcatReduceFusion.html">
+   ConcatReduceFusion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1ConcatTransformation.html">
+   ConcatTransformation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1ConvStridesPropagation.html">
+   ConvStridesPropagation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1ConvToBinaryConv.html">
+   ConvToBinaryConv
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1ConvertBatchToSpace.html">
+   ConvertBatchToSpace
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classov_1_1pass_1_1ConvertCompressedOnlyToLegacy.html">
+   ConvertCompressedOnlyToLegacy
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1ConvertDeformableConv8To1.html">
+   ConvertDeformableConv8To1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1ConvertDetectionOutput1ToDetectionOutput8.html">
+   ConvertDetectionOutput1ToDetectionOutput8
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1ConvertDetectionOutput8ToDetectionOutput1.html">
+   ConvertDetectionOutput8ToDetectionOutput1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1ConvertGRUSequenceMatcher.html">
+   ConvertGRUSequenceMatcher
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1ConvertGRUSequenceToTensorIterator.html">
+   ConvertGRUSequenceToTensorIterator
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1ConvertGather0D.html">
+   ConvertGather0D
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1ConvertGather1ToGather7.html">
+   ConvertGather1ToGather7
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1ConvertGather7ToGather1.html">
+   ConvertGather7ToGather1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1ConvertGather7ToGather8.html">
+   ConvertGather7ToGather8
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1ConvertGather8ToGather7.html">
+   ConvertGather8ToGather7
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1ConvertInterpolate1ToInterpolate4.html">
+   ConvertInterpolate1ToInterpolate4
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1ConvertLSTMSequenceMatcher.html">
+   ConvertLSTMSequenceMatcher
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1ConvertLSTMSequenceToTensorIterator.html">
+   ConvertLSTMSequenceToTensorIterator
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1ConvertMVN1ToMVN6.html">
+   ConvertMVN1ToMVN6
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1ConvertMaxPool1ToMaxPool8.html">
+   ConvertMaxPool1ToMaxPool8
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1ConvertMaxPool8ToMaxPool1.html">
+   ConvertMaxPool8ToMaxPool1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1ConvertNmsGatherPathToUnsigned.html">
+   ConvertNmsGatherPathToUnsigned
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1ConvertPadToGroupConvolution.html">
+   ConvertPadToGroupConvolution
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1ConvertPriorBox8To0.html">
+   ConvertPriorBox8To0
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1ConvertQuantizeDequantize.html">
+   ConvertQuantizeDequantize
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1ConvertRNNSequenceMatcher.html">
+   ConvertRNNSequenceMatcher
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1ConvertRNNSequenceToTensorIterator.html">
+   ConvertRNNSequenceToTensorIterator
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1ConvertROIAlign3To9.html">
+   ConvertROIAlign3To9
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1ConvertROIAlign9To3.html">
+   ConvertROIAlign9To3
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1ConvertScatterElementsToScatter.html">
+   ConvertScatterElementsToScatter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1ConvertSoftMax1ToSoftMax8.html">
+   ConvertSoftMax1ToSoftMax8
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1ConvertSoftMax8ToSoftMax1.html">
+   ConvertSoftMax8ToSoftMax1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1ConvertSpaceToBatch.html">
+   ConvertSpaceToBatch
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1ConvertSubtractConstant.html">
+   ConvertSubtractConstant
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1ConvertTensorIteratorToGRUSequence.html">
+   ConvertTensorIteratorToGRUSequence
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1ConvertTensorIteratorToLSTMSequence.html">
+   ConvertTensorIteratorToLSTMSequence
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1ConvertTensorIteratorToRNNSequence.html">
+   ConvertTensorIteratorToRNNSequence
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1ConvolutionBackpropDataTransformation.html">
+   ConvolutionBackpropDataTransformation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1ConvolutionTransformation.html">
+   ConvolutionTransformation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1CreateAttribute.html">
+   CreateAttribute
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1CreatePrecisionsDependentAttribute.html">
+   CreatePrecisionsDependentAttribute
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1DepthToSpaceFusion.html">
+   DepthToSpaceFusion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1DepthToSpaceTransformation.html">
+   DepthToSpaceTransformation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1DilatedConvolutionConverter.html">
+   DilatedConvolutionConverter
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classov_1_1pass_1_1DisableDecompressionConvertConstantFolding.html">
+   DisableDecompressionConvertConstantFolding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1DisableRandomUniformConstantFolding.html">
+   DisableRandomUniformConstantFolding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1DivideFusion.html">
+   DivideFusion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classov_1_1pass_1_1DivisionByZeroFP16Resolver.html">
+   DivisionByZeroFP16Resolver
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1DropoutWithRandomUniformReplacer.html">
+   DropoutWithRandomUniformReplacer
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1EinsumDecomposition.html">
+   EinsumDecomposition
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1EliminateConcat.html">
+   EliminateConcat
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1EliminateConvert.html">
+   EliminateConvert
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1EliminateConvertNonZero.html">
+   EliminateConvertNonZero
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1EliminateEltwise.html">
+   EliminateEltwise
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1EliminateGatherUnsqueeze.html">
+   EliminateGatherUnsqueeze
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1EliminatePad.html">
+   EliminatePad
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1EliminateSplit.html">
+   EliminateSplit
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1EliminateSqueeze.html">
+   EliminateSqueeze
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1EliminateTranspose.html">
+   EliminateTranspose
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1EliminateUnsqueezeGather.html">
+   EliminateUnsqueezeGather
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1EltwiseBaseTransformation.html">
+   EltwiseBaseTransformation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classov_1_1pass_1_1EnableDecompressionConvertConstantFolding.html">
+   EnableDecompressionConvertConstantFolding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1FakeQuantizeDecomposition.html">
+   FakeQuantizeDecomposition
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1FakeQuantizeDecompositionTransformation.html">
+   FakeQuantizeDecompositionTransformation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1FakeQuantizeMulFusion.html">
+   FakeQuantizeMulFusion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1FakeQuantizeReshapeFusion.html">
+   FakeQuantizeReshapeFusion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1FakeQuantizeTransformation.html">
+   FakeQuantizeTransformation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1FixRtInfo.html">
+   FixRtInfo
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1FoldConvertTransformation.html">
+   FoldConvertTransformation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1FoldFakeQuantizeTransformation.html">
+   FoldFakeQuantizeTransformation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1FuseConvertTransformation.html">
+   FuseConvertTransformation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1FuseMultiplyToFakeQuantizeTransformation.html">
+   FuseMultiplyToFakeQuantizeTransformation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1FuseSubtractToFakeQuantizeTransformation.html">
+   FuseSubtractToFakeQuantizeTransformation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1GRUCellDecomposition.html">
+   GRUCellDecomposition
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1GatherNegativeConstIndicesNormalize.html">
+   GatherNegativeConstIndicesNormalize
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1GatherNopElimination.html">
+   GatherNopElimination
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1Gelu7Downgrade.html">
+   Gelu7Downgrade
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1GeluFusion.html">
+   GeluFusion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1GeluFusionWithErfOne.html">
+   GeluFusionWithErfOne
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1GeluFusionWithErfThree.html">
+   GeluFusionWithErfThree
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1GeluFusionWithErfTwo.html">
+   GeluFusionWithErfTwo
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1GeluFusionWithTanh.html">
+   GeluFusionWithTanh
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1GroupConvolutionTransformation.html">
+   GroupConvolutionTransformation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1GroupedGatherElimination.html">
+   GroupedGatherElimination
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1GroupedStridedSliceOptimizer.html">
+   GroupedStridedSliceOptimizer
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1HSigmoidDecomposition.html">
+   HSigmoidDecomposition
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1HSigmoidFusion.html">
+   HSigmoidFusion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1HSigmoidFusionWithClampDiv.html">
+   HSigmoidFusionWithClampDiv
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1HSigmoidFusionWithClampMul.html">
+   HSigmoidFusionWithClampMul
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1HSigmoidFusionWithReluDiv.html">
+   HSigmoidFusionWithReluDiv
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1HSigmoidFusionWithReluMul.html">
+   HSigmoidFusionWithReluMul
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1HSigmoidFusionWithoutRelu.html">
+   HSigmoidFusionWithoutRelu
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1HSwishDecomposition.html">
+   HSwishDecomposition
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1HSwishFusion.html">
+   HSwishFusion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1HSwishFusionWithClamp.html">
+   HSwishFusionWithClamp
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1HSwishFusionWithHSigmoid.html">
+   HSwishFusionWithHSigmoid
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1HSwishFusionWithReluDiv.html">
+   HSwishFusionWithReluDiv
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1HSwishFusionWithReluMul.html">
+   HSwishFusionWithReluMul
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1InitConstMask.html">
+   InitConstMask
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1InitMasks.html">
+   InitMasks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1InitNodeInfo.html">
+   InitNodeInfo
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1InterpolateSequenceFusion.html">
+   InterpolateSequenceFusion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1InterpolateTransformation.html">
+   InterpolateTransformation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1IntervalsAlignmentAttribute.html">
+   IntervalsAlignmentAttribute
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="classngraph_1_1IntervalsAlignmentSharedValue.html">
+   IntervalsAlignmentSharedValue
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-27" name="toctree-checkbox-27" type="checkbox"/>
+  <label for="toctree-checkbox-27">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="classngraph_1_1IntervalsAlignmentSharedValue_1_1Interval.html">
+     Interval
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1LSTMCellDecomposition.html">
+   LSTMCellDecomposition
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1LayerTransformation.html">
+   LayerTransformation
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-28" name="toctree-checkbox-28" type="checkbox"/>
+  <label for="toctree-checkbox-28">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1LayerTransformation_1_1Params.html">
+     Params
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1LayerTransformation_1_1PrecisionDetails.html">
+     PrecisionDetails
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1LeakyReluFusion.html">
+   LeakyReluFusion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1LinOpSequenceFusion.html">
+   LinOpSequenceFusion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1LogSoftmaxDecomposition.html">
+   LogSoftmaxDecomposition
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1MVN6Decomposition.html">
+   MVN6Decomposition
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1MVNFusion.html">
+   MVNFusion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1MVNFusionWithConstantsInside.html">
+   MVNFusionWithConstantsInside
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1MVNFusionWithoutConstants.html">
+   MVNFusionWithoutConstants
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1MVNTransformation.html">
+   MVNTransformation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classov_1_1pass_1_1MarkPrecisionSensitiveDivides.html">
+   MarkPrecisionSensitiveDivides
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classov_1_1pass_1_1MarkPrecisionSensitiveSubgraphs.html">
+   MarkPrecisionSensitiveSubgraphs
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1MarkupAvgPoolPrecisionPreserved.html">
+   MarkupAvgPoolPrecisionPreserved
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1MarkupCanBeQuantized.html">
+   MarkupCanBeQuantized
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1MarkupPrecisions.html">
+   MarkupPrecisions
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-29" name="toctree-checkbox-29" type="checkbox"/>
+  <label for="toctree-checkbox-29">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1MarkupPrecisions_1_1Restriction.html">
+     Restriction
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1MarkupQuantizationGranularity.html">
+   MarkupQuantizationGranularity
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-30" name="toctree-checkbox-30" type="checkbox"/>
+  <label for="toctree-checkbox-30">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1MarkupQuantizationGranularity_1_1PerTensorQuantization.html">
+     PerTensorQuantization
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1MatMulMultiplyFusion.html">
+   MatMulMultiplyFusion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1MatMulTransformation.html">
+   MatMulTransformation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1MaxPoolTransformation.html">
+   MaxPoolTransformation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1MimicSetBatchSize.html">
+   MimicSetBatchSize
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1MishFusion.html">
+   MishFusion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1MulFakeQuantizeFusion.html">
+   MulFakeQuantizeFusion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1MultiplyConvolutionFusion.html">
+   MultiplyConvolutionFusion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1MultiplyToGroupConvolutionTransformation.html">
+   MultiplyToGroupConvolutionTransformation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1MultiplyTransformation.html">
+   MultiplyTransformation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1NearestNeighborUpsamplingFusion.html">
+   NearestNeighborUpsamplingFusion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1NormalizeL2Decomposition.html">
+   NormalizeL2Decomposition
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1NormalizeL2Fusion.html">
+   NormalizeL2Fusion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1NormalizeL2Transformation.html">
+   NormalizeL2Transformation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1PReluFusion.html">
+   PReluFusion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1PReluFusionMultiplyAdd.html">
+   PReluFusionMultiplyAdd
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1PReluFusionMultiplySub.html">
+   PReluFusionMultiplySub
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1PReluFusionNegativeAdd.html">
+   PReluFusionNegativeAdd
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1PReluFusionNegativeSub.html">
+   PReluFusionNegativeSub
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1PReluTransformation.html">
+   PReluTransformation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1PadFusionAvgPool.html">
+   PadFusionAvgPool
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1PadFusionConvolution.html">
+   PadFusionConvolution
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1PadFusionConvolutionBackpropData.html">
+   PadFusionConvolutionBackpropData
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1PadFusionGroupConvolution.html">
+   PadFusionGroupConvolution
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1PadFusionGroupConvolutionBackpropData.html">
+   PadFusionGroupConvolutionBackpropData
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1PadTransformation.html">
+   PadTransformation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1PrecisionPreservedAttribute.html">
+   PrecisionPreservedAttribute
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1PrecisionsAttribute.html">
+   PrecisionsAttribute
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1PropagateMasks.html">
+   PropagateMasks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1PropagatePrecisions.html">
+   PropagatePrecisions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1PropagateSharedValue.html">
+   PropagateSharedValue
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1PropagateThroughPrecisionPreserved.html">
+   PropagateThroughPrecisionPreserved
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1PropagateToInput.html">
+   PropagateToInput
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1Proposal1Scales.html">
+   Proposal1Scales
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1Pruning.html">
+   Pruning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1PullReshapeThroughDequantization.html">
+   PullReshapeThroughDequantization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1PullSqueezeThroughEltwise.html">
+   PullSqueezeThroughEltwise
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1PullTransposeThroughDequantization.html">
+   PullTransposeThroughDequantization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1QuantizationAlignmentAttribute.html">
+   QuantizationAlignmentAttribute
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="classngraph_1_1QuantizationGranularityAttribute.html">
+   QuantizationGranularityAttribute
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-31" name="toctree-checkbox-31" type="checkbox"/>
+  <label for="toctree-checkbox-31">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="enumngraph_1_1QuantizationGranularityAttribute_1_1Granularity.html">
+     Granularity
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1RNNCellDecomposition.html">
+   RNNCellDecomposition
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1RandomUniformFusion.html">
+   RandomUniformFusion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1ReduceBaseTransformation.html">
+   ReduceBaseTransformation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1ReduceL1Decomposition.html">
+   ReduceL1Decomposition
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1ReduceL2Decomposition.html">
+   ReduceL2Decomposition
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1ReduceMaxTransformation.html">
+   ReduceMaxTransformation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1ReduceMeanTransformation.html">
+   ReduceMeanTransformation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1ReduceMerge.html">
+   ReduceMerge
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1ReduceMinTransformation.html">
+   ReduceMinTransformation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1ReduceSumTransformation.html">
+   ReduceSumTransformation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1ReluFakeQuantizeFusion.html">
+   ReluFakeQuantizeFusion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1ReluTransformation.html">
+   ReluTransformation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classov_1_1pass_1_1RemoveConcatZeroDimInput.html">
+   RemoveConcatZeroDimInput
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1ReplaceConcatReduceByMinOrMax.html">
+   ReplaceConcatReduceByMinOrMax
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1ReshapeAMatMul.html">
+   ReshapeAMatMul
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1ReshapeSequenceFusion.html">
+   ReshapeSequenceFusion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1ReshapeTo1D.html">
+   ReshapeTo1D
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1ReshapeTransformation.html">
+   ReshapeTransformation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classov_1_1pass_1_1ResolveNameCollisions.html">
+   ResolveNameCollisions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1ReverseInputChannelsFusion.html">
+   ReverseInputChannelsFusion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1SetBatchSize.html">
+   SetBatchSize
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1SharedShapeOf.html">
+   SharedShapeOf
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1SharedSqueeze.html">
+   SharedSqueeze
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1SharedStridedSliceEraser.html">
+   SharedStridedSliceEraser
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1ShrinkWeights.html">
+   ShrinkWeights
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1ShuffleChannelsFusion.html">
+   ShuffleChannelsFusion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1ShuffleChannelsTransformation.html">
+   ShuffleChannelsTransformation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1SkipGatherBeforeTransposeAndReshape.html">
+   SkipGatherBeforeTransposeAndReshape
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1SliceToStridedSlice.html">
+   SliceToStridedSlice
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1SoftPlusDecomposition.html">
+   SoftPlusDecomposition
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1SoftPlusFusion.html">
+   SoftPlusFusion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1SoftPlusToMishFusion.html">
+   SoftPlusToMishFusion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1SoftSignDecomposition.html">
+   SoftSignDecomposition
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1SoftmaxDecomposition.html">
+   SoftmaxDecomposition
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1SoftmaxFusion.html">
+   SoftmaxFusion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1SpaceToBatchFusion.html">
+   SpaceToBatchFusion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1SplitConcatPairToInterpolateFusion.html">
+   SplitConcatPairToInterpolateFusion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1SplitSqueezeConcatFusion.html">
+   SplitSqueezeConcatFusion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1SplitTransformation.html">
+   SplitTransformation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1SqueezeStridedSlice.html">
+   SqueezeStridedSlice
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1SqueezeTransformation.html">
+   SqueezeTransformation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1StridedSliceOptimization.html">
+   StridedSliceOptimization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1StridedSliceSqueeze.html">
+   StridedSliceSqueeze
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1StridedSliceTransformation.html">
+   StridedSliceTransformation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1StridesOptimization.html">
+   StridesOptimization
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1SubtractFusion.html">
+   SubtractFusion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1SubtractTransformation.html">
+   SubtractTransformation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1SupportedNodesStridesPropagation.html">
+   SupportedNodesStridesPropagation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1SwishFusion.html">
+   SwishFusion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1SwishFusionWithBeta.html">
+   SwishFusionWithBeta
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1SwishFusionWithSigmoid.html">
+   SwishFusionWithSigmoid
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1SwishFusionWithSigmoidWithBeta.html">
+   SwishFusionWithSigmoidWithBeta
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1SwishFusionWithoutBeta.html">
+   SwishFusionWithoutBeta
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1TransformationContext.html">
+   TransformationContext
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1TransparentBaseTransformation.html">
+   TransparentBaseTransformation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1TransposeConvert.html">
+   TransposeConvert
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1TransposeEltwise.html">
+   TransposeEltwise
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1TransposeFQReduction.html">
+   TransposeFQReduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1TransposeFuse.html">
+   TransposeFuse
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1TransposeReduction.html">
+   TransposeReduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1TransposeReshapeEliminationForMatmul.html">
+   TransposeReshapeEliminationForMatmul
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1TransposeSinking.html">
+   TransposeSinking
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1TransposeToReshape.html">
+   TransposeToReshape
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1TransposeTransformation.html">
+   TransposeTransformation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1UnrollIf.html">
+   UnrollIf
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1UnrollTensorIterator.html">
+   UnrollTensorIterator
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1UnsqueezeTransformation.html">
+   UnsqueezeTransformation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1UnsupportedNodesStridesPropagation.html">
+   UnsupportedNodesStridesPropagation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1UpdateSharedPrecisionPreserved.html">
+   UpdateSharedPrecisionPreserved
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1UselessStridedSliceEraser.html">
+   UselessStridedSliceEraser
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1VariadicSplitTransformation.html">
+   VariadicSplitTransformation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1low_precision_1_1WeightableLayerTransformation.html">
+   WeightableLayerTransformation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1WeightsDequantizeToFakeQuantize.html">
+   WeightsDequantizeToFakeQuantize
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classngraph_1_1pass_1_1WrapInterpolateIntoTransposes.html">
+   WrapInterpolateIntoTransposes
+  </a>
+ </li>
+</ul>
+
+  </div>
+</nav>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+              
+              <div class="toc-item">
+                
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#overview">
+   Overview
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#inherited-members">
+     Inherited Members
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#detailed-documentation">
+   Detailed Documentation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#methods">
+     Methods
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+</nav>
+              </div>
+              
+              <div class="toc-item">
+                <div class="tocsection download-docs">
+  <div class="dropdown sst-dropdown">
+    <button class="button bttn-prm button-size-m" data-display="static" type="button" id="download-options"
+      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Download Docs
+    </button>
+    <div class="dropdown-menu" aria-labelledby="download-options">
+      <a class="dropdown-item" href="#" onclick="window.print()">.pdf</a>
+      <a id="download-zip-btn" class="dropdown-item" href="#">.zip</a>
+    </div>
+  </div>
+</div>
+              </div>
+              
+            
+          </div>
+          
+
+          
+          
+              
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+
+<div class="tocsection editthispage">
+    <a href="None">
+        <i class="fas fa-pencil-alt"></i> Edit this page
+    </a>
+</div>
+
+            
+                <div>
+                  
+  <section id="class-ngraph-op-eltwise">
+<span id="doxid-classngraph-1-1op-1-1-eltwise"></span><span id="index-0"></span><h1>class ngraph::op::Eltwise<a class="headerlink" href="#class-ngraph-op-eltwise" title="Permalink to this headline">¶</a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<div class="highlight doxyrest-overview-code-block"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;eltwise.hpp&gt;</span><span class="cp"></span>
+
+<span class="k">class</span> <span class="nl">Eltwise</span><span class="p">:</span> <span class="k">public</span> <a class="reference internal" href="classov_1_1op_1_1Op.html#doxid-classov-1-1op-1-1-op"><span class="std std-ref">ov::op::Op</span></a><span></span>
+<span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="c1">// fields</span>
+
+     <span class="doxyrest-code-target target" id="doxid-classngraph-1-1op-1-1-eltwise-1a5dda62218cdc21ee974545113538d986"><span></span><span class="n">BWDCMP_RTTI_DECLARATION</span></span><span></span><span class="p">;</span>
+    <a class="reference internal" href="enumELTWISE_TYPE.html#doxid-eltwise-8hpp-1aca2b664f1fd62f182b07693d53c56611"><span class="std std-ref">ELTWISE_TYPE</span></a><span></span> <span class="doxyrest-code-target target" id="doxid-classngraph-1-1op-1-1-eltwise-1a3bce05d1013b6a3167b5793093d6e0c2"><span></span><span class="n">eltwise_type</span></span><span></span><span class="p">;</span>
+
+    <span class="c1">// construction</span>
+
+    <span class="doxyrest-code-target target" id="doxid-classngraph-1-1op-1-1-eltwise-1ad9aebad4930e79d7d1ef9a1bf86e4b38"><span></span><span class="n">Eltwise</span></span><span></span><span class="p">(</span>
+        <span class="k">const</span> <a class="reference internal" href="classov_1_1Output.html#doxid-classov-1-1-output"><span class="std std-ref">Output</span></a><span></span><span class="o">&lt;</span><a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node"><span class="std std-ref">Node</span></a><span></span><span class="o">&gt;&amp;</span> <span class="n">data1</span><span class="p">,</span>
+        <span class="k">const</span> <a class="reference internal" href="classov_1_1Output.html#doxid-classov-1-1-output"><span class="std std-ref">Output</span></a><span></span><span class="o">&lt;</span><a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node"><span class="std std-ref">Node</span></a><span></span><span class="o">&gt;&amp;</span> <span class="n">data2</span><span class="p">,</span>
+        <span class="k">const</span> <a class="reference internal" href="enumELTWISE_TYPE.html#doxid-eltwise-8hpp-1aca2b664f1fd62f182b07693d53c56611"><span class="std std-ref">ELTWISE_TYPE</span></a><span></span> <span class="n">eltwise_type</span><span class="p">,</span>
+        <span class="k">const</span> <a class="reference internal" href="classov_1_1element_1_1Type.html#doxid-classov-1-1element-1-1-type"><span class="std std-ref">element::Type</span></a><span></span> <span class="n">output_type</span> <span class="o">=</span> <span class="n">element</span><span class="o">::</span><span class="n">undefined</span>
+        <span class="p">);</span>
+
+    <span class="c1">// methods</span>
+
+    <span class="doxyrest-code-target target" id="doxid-classngraph-1-1op-1-1-eltwise-1a9da4d42fea9be9775916db3c1901931a"><span></span><span class="n">OPENVINO_OP</span></span><span></span><span class="p">(</span><span class="s">&quot;Eltwise&quot;</span><span class="p">,</span> <span class="s">&quot;legacy&quot;</span><span class="p">);</span>
+    <span class="k">virtual</span> <span class="kt">bool</span> <span class="doxyrest-code-target target" id="doxid-classngraph-1-1op-1-1-eltwise-1ac6ba346874b56a8e2ad7ff3de4ead199"><span></span><span class="n">visit_attributes</span></span><span></span><span class="p">(</span><a class="reference internal" href="classov_1_1AttributeVisitor.html#doxid-classov-1-1-attribute-visitor"><span class="std std-ref">AttributeVisitor</span></a><span></span><span class="o">&amp;</span> <span class="n">visitor</span><span class="p">);</span>
+    <span class="k">virtual</span> <span class="kt">void</span> <a class="reference internal" href="#doxid-classngraph-1-1op-1-1-eltwise-1ab6c25911c06c8e600f4a2932459772e6"><span class="std std-ref">validate_and_infer_types</span></a><span></span><span class="p">();</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node"><span class="std std-ref">Node</span></a><span></span><span class="o">&gt;</span> <span class="doxyrest-code-target target" id="doxid-classngraph-1-1op-1-1-eltwise-1a3c8e0497069d5a25b8372a737a87e45a"><span></span><span class="n">clone_with_new_inputs</span></span><span></span><span class="p">(</span><span class="k">const</span> <a class="reference internal" href="classngraph.html#doxid-classngraph-1a161d36c81df2d1949272f525a8d73605"><span class="std std-ref">OutputVector</span></a><span></span><span class="o">&amp;</span> <span class="n">new_args</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+<span class="p">};</span></pre></div></div><section id="inherited-members">
+<h3>Inherited Members<a class="headerlink" href="#inherited-members" title="Permalink to this headline">¶</a></h3>
+<div class="highlight doxyrest-overview-inherited-code-block"><div class="highlight"><pre><span></span><span class="k">public</span><span class="o">:</span>
+    <span class="c1">// typedefs</span>
+
+    <span class="k">typedef</span> <a class="reference internal" href="structov_1_1DiscreteTypeInfo.html#doxid-structov-1-1-discrete-type-info"><span class="std std-ref">DiscreteTypeInfo</span></a><span></span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1af929e4dd70a66e0116a9d076753a2569"><span class="std std-ref">type_info_t</span></a><span></span><span class="p">;</span>
+    <span class="k">typedef</span> <span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span> <a class="reference internal" href="classov_1_1Any.html#doxid-classov-1-1-any"><span class="std std-ref">Any</span></a><span></span><span class="o">&gt;</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1ab5856aecf96a9989fa1bafb97e4be2aa"><span class="std std-ref">RTMap</span></a><span></span><span class="p">;</span>
+
+    <span class="c1">// methods</span>
+
+    <span class="k">virtual</span> <span class="kt">void</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1ac5224b5be848ec670d2078d9816d12e7"><span class="std std-ref">validate_and_infer_types</span></a><span></span><span class="p">();</span>
+    <span class="kt">void</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1aab98e14f28ac255819dfa4118174ece3"><span class="std std-ref">constructor_validate_and_infer_types</span></a><span></span><span class="p">();</span>
+    <span class="k">virtual</span> <span class="kt">bool</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1a9743b56d352970486d17dae2416d958e"><span class="std std-ref">visit_attributes</span></a><span></span><span class="p">(</span><a class="reference internal" href="classov_1_1AttributeVisitor.html#doxid-classov-1-1-attribute-visitor"><span class="std std-ref">AttributeVisitor</span></a><span></span><span class="o">&amp;</span><span class="p">);</span>
+    <span class="k">virtual</span> <span class="k">const</span> <a class="reference internal" href="structov_1_1op_1_1AutoBroadcastSpec.html#doxid-structov-1-1op-1-1-auto-broadcast-spec"><span class="std std-ref">ov::op::AutoBroadcastSpec</span></a><span></span><span class="o">&amp;</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1aa103a4246e297a1e9664dbeb354a6e1e"><span class="std std-ref">get_autob</span></a><span></span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+    <span class="k">virtual</span> <span class="kt">bool</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1a606a47a0c2d39dcc4032b985c04c209e"><span class="std std-ref">has_evaluate</span></a><span></span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+
+    <span class="k">virtual</span> <span class="kt">bool</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1acfb82acc8349d7138aeaa05217c7014e"><span class="std std-ref">evaluate</span></a><span></span><span class="p">(</span>
+        <span class="k">const</span> <a class="reference internal" href="namespaceov.html#doxid-namespaceov-1a2e5bf6dcca008b0147e825595f57c03b"><span class="std std-ref">ov::HostTensorVector</span></a><span></span><span class="o">&amp;</span> <span class="n">output_values</span><span class="p">,</span>
+        <span class="k">const</span> <a class="reference internal" href="namespaceov.html#doxid-namespaceov-1a2e5bf6dcca008b0147e825595f57c03b"><span class="std std-ref">ov::HostTensorVector</span></a><span></span><span class="o">&amp;</span> <span class="n">input_values</span>
+        <span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+
+    <span class="k">virtual</span> <span class="kt">bool</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1afe8b36f599d5f2f1f8b4ef0f1a56a65c"><span class="std std-ref">evaluate</span></a><span></span><span class="p">(</span>
+        <span class="k">const</span> <a class="reference internal" href="namespaceov.html#doxid-namespaceov-1a2e5bf6dcca008b0147e825595f57c03b"><span class="std std-ref">ov::HostTensorVector</span></a><span></span><span class="o">&amp;</span> <span class="n">output_values</span><span class="p">,</span>
+        <span class="k">const</span> <a class="reference internal" href="namespaceov.html#doxid-namespaceov-1a2e5bf6dcca008b0147e825595f57c03b"><span class="std std-ref">ov::HostTensorVector</span></a><span></span><span class="o">&amp;</span> <span class="n">input_values</span><span class="p">,</span>
+        <span class="k">const</span> <a class="reference internal" href="namespaceov.html#doxid-namespaceov-1a46b08f86068f674a4e0748651b85a4b6"><span class="std std-ref">EvaluationContext</span></a><span></span><span class="o">&amp;</span> <span class="n">evaluationContext</span>
+        <span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+
+    <span class="k">virtual</span> <span class="kt">bool</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1a214ae74aa0de1eeaadeafb719e6ff260"><span class="std std-ref">evaluate_lower</span></a><span></span><span class="p">(</span><span class="k">const</span> <a class="reference internal" href="namespaceov.html#doxid-namespaceov-1a2e5bf6dcca008b0147e825595f57c03b"><span class="std std-ref">ov::HostTensorVector</span></a><span></span><span class="o">&amp;</span> <span class="n">output_values</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+    <span class="k">virtual</span> <span class="kt">bool</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1ab509aeccf31f20473fa742df915f67e5"><span class="std std-ref">evaluate_upper</span></a><span></span><span class="p">(</span><span class="k">const</span> <a class="reference internal" href="namespaceov.html#doxid-namespaceov-1a2e5bf6dcca008b0147e825595f57c03b"><span class="std std-ref">ov::HostTensorVector</span></a><span></span><span class="o">&amp;</span> <span class="n">output_values</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+
+    <span class="k">virtual</span> <span class="kt">bool</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1a6096b644f59b1a7d1a1bf6bafe140472"><span class="std std-ref">evaluate</span></a><span></span><span class="p">(</span>
+        <a class="reference internal" href="namespaceov.html#doxid-namespaceov-1aa2127061451ba4f5a6e6904b88e72c6e"><span class="std std-ref">ov::TensorVector</span></a><span></span><span class="o">&amp;</span> <span class="n">output_values</span><span class="p">,</span>
+        <span class="k">const</span> <a class="reference internal" href="namespaceov.html#doxid-namespaceov-1aa2127061451ba4f5a6e6904b88e72c6e"><span class="std std-ref">ov::TensorVector</span></a><span></span><span class="o">&amp;</span> <span class="n">input_values</span>
+        <span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+
+    <span class="k">virtual</span> <span class="kt">bool</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1af17129ce66b7273dfe9328ef21e61494"><span class="std std-ref">evaluate</span></a><span></span><span class="p">(</span>
+        <a class="reference internal" href="namespaceov.html#doxid-namespaceov-1aa2127061451ba4f5a6e6904b88e72c6e"><span class="std std-ref">ov::TensorVector</span></a><span></span><span class="o">&amp;</span> <span class="n">output_values</span><span class="p">,</span>
+        <span class="k">const</span> <a class="reference internal" href="namespaceov.html#doxid-namespaceov-1aa2127061451ba4f5a6e6904b88e72c6e"><span class="std std-ref">ov::TensorVector</span></a><span></span><span class="o">&amp;</span> <span class="n">input_values</span><span class="p">,</span>
+        <span class="k">const</span> <a class="reference internal" href="namespaceov.html#doxid-namespaceov-1a46b08f86068f674a4e0748651b85a4b6"><span class="std std-ref">ov::EvaluationContext</span></a><span></span><span class="o">&amp;</span> <span class="n">evaluationContext</span>
+        <span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+
+    <span class="k">virtual</span> <span class="kt">bool</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1aed425e8df8114daefbfe2b90b6ccde59"><span class="std std-ref">evaluate_lower</span></a><span></span><span class="p">(</span><a class="reference internal" href="namespaceov.html#doxid-namespaceov-1aa2127061451ba4f5a6e6904b88e72c6e"><span class="std std-ref">ov::TensorVector</span></a><span></span><span class="o">&amp;</span> <span class="n">output_values</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+    <span class="k">virtual</span> <span class="kt">bool</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1a191a82c8acc6016e2991a2dff3c626f8"><span class="std std-ref">evaluate_upper</span></a><span></span><span class="p">(</span><a class="reference internal" href="namespaceov.html#doxid-namespaceov-1aa2127061451ba4f5a6e6904b88e72c6e"><span class="std std-ref">ov::TensorVector</span></a><span></span><span class="o">&amp;</span> <span class="n">output_values</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+    <span class="k">virtual</span> <span class="kt">bool</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1a5ac5781812584d5bec31381fa513cb75"><span class="std std-ref">evaluate_label</span></a><span></span><span class="p">(</span><a class="reference internal" href="namespaceov.html#doxid-namespaceov-1aa5b856e58283417ceeace7343237b623"><span class="std std-ref">TensorLabelVector</span></a><span></span><span class="o">&amp;</span> <span class="n">output_labels</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+
+    <span class="k">virtual</span> <span class="kt">bool</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1a54e3bc84a49870563abf07e0fdd92de9"><span class="std std-ref">constant_fold</span></a><span></span><span class="p">(</span>
+        <a class="reference internal" href="namespaceov.html#doxid-namespaceov-1a0a3841455b82c164b1b04b61a9c7c560"><span class="std std-ref">OutputVector</span></a><span></span><span class="o">&amp;</span> <span class="n">output_values</span><span class="p">,</span>
+        <span class="k">const</span> <a class="reference internal" href="namespaceov.html#doxid-namespaceov-1a0a3841455b82c164b1b04b61a9c7c560"><span class="std std-ref">OutputVector</span></a><span></span><span class="o">&amp;</span> <span class="n">inputs_values</span>
+        <span class="p">);</span>
+
+    <span class="k">virtual</span> <a class="reference internal" href="namespaceov.html#doxid-namespaceov-1a0a3841455b82c164b1b04b61a9c7c560"><span class="std std-ref">OutputVector</span></a><span></span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1add7ebde1542aef560a5d5135e8fe7b67"><span class="std std-ref">decompose_op</span></a><span></span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+    <span class="k">virtual</span> <span class="k">const</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1af929e4dd70a66e0116a9d076753a2569"><span class="std std-ref">type_info_t</span></a><span></span><span class="o">&amp;</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1a21eaf78313b6823ee7af4a099147f2a7"><span class="std std-ref">get_type_info</span></a><span></span><span class="p">()</span> <span class="k">const</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">const</span> <span class="kt">char</span> <span class="err">\</span><span class="o">*</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1a9562644f972dcff33ca212973a451e88"><span class="std std-ref">get_type_name</span></a><span></span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+    <span class="kt">void</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1a939c896986f4c0cfc9e47895d698b051"><span class="std std-ref">set_arguments</span></a><span></span><span class="p">(</span><span class="k">const</span> <a class="reference internal" href="namespaceov.html#doxid-namespaceov-1a750141ccb27d75af03e91a5295645c7f"><span class="std std-ref">NodeVector</span></a><span></span><span class="o">&amp;</span> <span class="n">arguments</span><span class="p">);</span>
+    <span class="kt">void</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1a9476f10de4bf8eaffbc3bc54abbd67bc"><span class="std std-ref">set_arguments</span></a><span></span><span class="p">(</span><span class="k">const</span> <a class="reference internal" href="namespaceov.html#doxid-namespaceov-1a0a3841455b82c164b1b04b61a9c7c560"><span class="std std-ref">OutputVector</span></a><span></span><span class="o">&amp;</span> <span class="n">arguments</span><span class="p">);</span>
+    <span class="kt">void</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1ab90cfad02a35d49500c1773dca71d09a"><span class="std std-ref">set_argument</span></a><span></span><span class="p">(</span><span class="kt">size_t</span> <span class="n">position</span><span class="p">,</span> <span class="k">const</span> <a class="reference internal" href="classov_1_1Output.html#doxid-classov-1-1-output"><span class="std std-ref">Output</span></a><span></span><span class="o">&lt;</span><a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node"><span class="std std-ref">Node</span></a><span></span><span class="o">&gt;&amp;</span> <span class="n">argument</span><span class="p">);</span>
+
+    <span class="kt">void</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1affde9025d41a4b200d726bee750b20e4"><span class="std std-ref">set_output_type</span></a><span></span><span class="p">(</span>
+        <span class="kt">size_t</span> <span class="n">i</span><span class="p">,</span>
+        <span class="k">const</span> <a class="reference internal" href="classov_1_1element_1_1Type.html#doxid-classov-1-1element-1-1-type"><span class="std std-ref">element::Type</span></a><span></span><span class="o">&amp;</span> <span class="n">element_type</span><span class="p">,</span>
+        <span class="k">const</span> <a class="reference internal" href="classov_1_1PartialShape.html#doxid-classov-1-1-partial-shape"><span class="std std-ref">PartialShape</span></a><span></span><span class="o">&amp;</span> <span class="n">pshape</span>
+        <span class="p">);</span>
+
+    <span class="kt">void</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1a27a4363bf01e836006ef0ff0ad1fb7e0"><span class="std std-ref">set_output_size</span></a><span></span><span class="p">(</span><span class="kt">size_t</span> <span class="n">output_size</span><span class="p">);</span>
+    <span class="kt">void</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1af4f961268c306511c2c28ee66bc81639"><span class="std std-ref">invalidate_values</span></a><span></span><span class="p">();</span>
+    <span class="k">virtual</span> <span class="kt">void</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1a474ccc02e97cb12224a339b843e30615"><span class="std std-ref">revalidate_and_infer_types</span></a><span></span><span class="p">();</span>
+    <span class="k">virtual</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1abb0f7c0a63ff520f7955378ec52b98d3"><span class="std std-ref">description</span></a><span></span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1a139699b95a29134701f0cc2521a53a73"><span class="std std-ref">get_name</span></a><span></span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+    <span class="kt">void</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1a7980b10e7fa641adb972bbfc27e94dc4"><span class="std std-ref">set_friendly_name</span></a><span></span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name</span><span class="p">);</span>
+    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1a8bef14ca0387b1f71c52339952182be0"><span class="std std-ref">get_friendly_name</span></a><span></span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+    <span class="k">virtual</span> <span class="kt">bool</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1a55033c8479e6c6e51a6d2cf47cc0575b"><span class="std std-ref">is_dynamic</span></a><span></span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+    <span class="kt">size_t</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1a97150e2017a476ce1b75580e084244d8"><span class="std std-ref">get_instance_id</span></a><span></span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+    <span class="k">virtual</span> <span class="n">std</span><span class="o">::</span><span class="n">ostream</span><span class="o">&amp;</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1ac5f0f56a2a3611fa867235a712eccdf2"><span class="std std-ref">write_description</span></a><span></span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="n">os</span><span class="p">,</span> <span class="kt">uint32_t</span> <span class="n">depth</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node"><span class="std std-ref">Node</span></a><span></span><span class="o">&gt;&gt;&amp;</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1a832b85663555189e090fcb2ce722f7e6"><span class="std std-ref">get_control_dependencies</span></a><span></span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node"><span class="std std-ref">Node</span></a><span></span> <span class="err">\</span><span class="o">*&gt;&amp;</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1aefb73173075dbe00ea310499539c37b1"><span class="std std-ref">get_control_dependents</span></a><span></span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+    <span class="kt">void</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1a47d1a4fb855f1156614846a477f69adb"><span class="std std-ref">add_control_dependency</span></a><span></span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node"><span class="std std-ref">Node</span></a><span></span><span class="o">&gt;</span> <span class="n">node</span><span class="p">);</span>
+    <span class="kt">void</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1a1037a77a8f0220d586b790906b6af488"><span class="std std-ref">remove_control_dependency</span></a><span></span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node"><span class="std std-ref">Node</span></a><span></span><span class="o">&gt;</span> <span class="n">node</span><span class="p">);</span>
+    <span class="kt">void</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1a97cf3538584ac88d8121c38c45fd3820"><span class="std std-ref">clear_control_dependencies</span></a><span></span><span class="p">();</span>
+    <span class="kt">void</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1a08a2dd9069a63d69b6d1ebc7ac3d4921"><span class="std std-ref">clear_control_dependents</span></a><span></span><span class="p">();</span>
+    <span class="kt">void</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1a5aeb2ec8bde867868c391a01dafc1870"><span class="std std-ref">add_node_control_dependencies</span></a><span></span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node"><span class="std std-ref">Node</span></a><span></span><span class="o">&gt;</span> <span class="n">source_node</span><span class="p">);</span>
+    <span class="kt">void</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1a54474d9cdeb16624f1fd488c88ecf2ca"><span class="std std-ref">add_node_control_dependents</span></a><span></span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node"><span class="std std-ref">Node</span></a><span></span><span class="o">&gt;</span> <span class="n">source_node</span><span class="p">);</span>
+    <span class="kt">void</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1af0593c95b56ff9723fa748325868db22"><span class="std std-ref">transfer_control_dependents</span></a><span></span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node"><span class="std std-ref">Node</span></a><span></span><span class="o">&gt;</span> <span class="n">replacement</span><span class="p">);</span>
+    <span class="kt">size_t</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1ac8706eab0c33f0effa522a6bbed8437e"><span class="std std-ref">get_output_size</span></a><span></span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+    <span class="k">const</span> <a class="reference internal" href="classov_1_1element_1_1Type.html#doxid-classov-1-1element-1-1-type"><span class="std std-ref">element::Type</span></a><span></span><span class="o">&amp;</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1acd5df9fde324e8808120b7c21cae14ee"><span class="std std-ref">get_output_element_type</span></a><span></span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+    <span class="k">const</span> <a class="reference internal" href="classov_1_1element_1_1Type.html#doxid-classov-1-1element-1-1-type"><span class="std std-ref">element::Type</span></a><span></span><span class="o">&amp;</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1ab45bb78358a8aac7a6b906fa81f8c810"><span class="std std-ref">get_element_type</span></a><span></span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+    <span class="k">const</span> <a class="reference internal" href="classov_1_1Shape.html#doxid-classov-1-1-shape"><span class="std std-ref">Shape</span></a><span></span><span class="o">&amp;</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1acf58d647eb679a1b2ac961004c3fd8cb"><span class="std std-ref">get_output_shape</span></a><span></span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+    <span class="k">const</span> <a class="reference internal" href="classov_1_1PartialShape.html#doxid-classov-1-1-partial-shape"><span class="std std-ref">PartialShape</span></a><span></span><span class="o">&amp;</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1a2b091fd7eec7d006c59fcd724a1db163"><span class="std std-ref">get_output_partial_shape</span></a><span></span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+    <a class="reference internal" href="classov_1_1Output.html#doxid-classov-1-1-output"><span class="std std-ref">Output</span></a><span></span><span class="o">&lt;</span><span class="k">const</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node"><span class="std std-ref">Node</span></a><span></span><span class="o">&gt;</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1a21b51f92026c599d29b77a6ab9bcb497"><span class="std std-ref">get_default_output</span></a><span></span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+    <a class="reference internal" href="classov_1_1Output.html#doxid-classov-1-1-output"><span class="std std-ref">Output</span></a><span></span><span class="o">&lt;</span><a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node"><span class="std std-ref">Node</span></a><span></span><span class="o">&gt;</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1ad7ebb7b9b8ee0e32a4dd81cd9c762558"><span class="std std-ref">get_default_output</span></a><span></span><span class="p">();</span>
+    <span class="k">virtual</span> <span class="kt">size_t</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1a0d31de32156b3afd0c6db698d888575a"><span class="std std-ref">get_default_output_index</span></a><span></span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+    <span class="kt">size_t</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1ad0035c4860b08e05b3e100966a570118"><span class="std std-ref">no_default_index</span></a><span></span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+    <span class="k">const</span> <a class="reference internal" href="classov_1_1Shape.html#doxid-classov-1-1-shape"><span class="std std-ref">Shape</span></a><span></span><span class="o">&amp;</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1a491fd5d7de4e2911a8e54664fb514ea2"><span class="std std-ref">get_shape</span></a><span></span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+    <a class="reference internal" href="classov_1_1descriptor_1_1Tensor.html#doxid-classov-1-1descriptor-1-1-tensor"><span class="std std-ref">descriptor::Tensor</span></a><span></span><span class="o">&amp;</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1ae9830659681ddc3ca807c5fa30ffccc4"><span class="std std-ref">get_output_tensor</span></a><span></span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+    <a class="reference internal" href="classov_1_1descriptor_1_1Tensor.html#doxid-classov-1-1descriptor-1-1-tensor"><span class="std std-ref">descriptor::Tensor</span></a><span></span><span class="o">&amp;</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1aa785686396e7bcae7a73c2d2f3a15f4b"><span class="std std-ref">get_input_tensor</span></a><span></span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1ad43a9b4d844872b64f58bd6a1538cf75"><span class="std std-ref">get_output_tensor_name</span></a><span></span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">set</span><span class="o">&lt;</span><a class="reference internal" href="classov_1_1Input.html#doxid-classov-1-1-input"><span class="std std-ref">Input</span></a><span></span><span class="o">&lt;</span><a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node"><span class="std std-ref">Node</span></a><span></span><span class="o">&gt;&gt;</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1a79c819df4f3c428741125d50ae4ced6e"><span class="std std-ref">get_output_target_inputs</span></a><span></span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+    <span class="kt">size_t</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1a19356bfdc8759abdb34f4269bbc6f821"><span class="std std-ref">get_input_size</span></a><span></span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+    <span class="k">const</span> <a class="reference internal" href="classov_1_1element_1_1Type.html#doxid-classov-1-1element-1-1-type"><span class="std std-ref">element::Type</span></a><span></span><span class="o">&amp;</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1af48387fca7509b51a3d9ef6cabd94f8e"><span class="std std-ref">get_input_element_type</span></a><span></span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+    <span class="k">const</span> <a class="reference internal" href="classov_1_1Shape.html#doxid-classov-1-1-shape"><span class="std std-ref">Shape</span></a><span></span><span class="o">&amp;</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1a2e7c8546d853dcc61b9d870502a78bfd"><span class="std std-ref">get_input_shape</span></a><span></span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+    <span class="k">const</span> <a class="reference internal" href="classov_1_1PartialShape.html#doxid-classov-1-1-partial-shape"><span class="std std-ref">PartialShape</span></a><span></span><span class="o">&amp;</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1aefda856416a13ff5652f7dccf742b67d"><span class="std std-ref">get_input_partial_shape</span></a><span></span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1a3b6dc6919bdfcfc1abced33349a4d223"><span class="std std-ref">get_input_tensor_name</span></a><span></span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+    <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node"><span class="std std-ref">Node</span></a><span></span> <span class="err">\</span><span class="o">*</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1a3b65a8d28719ee0e34cb313097073f70"><span class="std std-ref">get_input_node_ptr</span></a><span></span><span class="p">(</span><span class="kt">size_t</span> <span class="n">index</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node"><span class="std std-ref">Node</span></a><span></span><span class="o">&gt;</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1aee5919458cb906ac7c337bef769f3be2"><span class="std std-ref">get_input_node_shared_ptr</span></a><span></span><span class="p">(</span><span class="kt">size_t</span> <span class="n">index</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+    <a class="reference internal" href="classov_1_1Output.html#doxid-classov-1-1-output"><span class="std std-ref">Output</span></a><span></span><span class="o">&lt;</span><a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node"><span class="std std-ref">Node</span></a><span></span><span class="o">&gt;</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1af5cc7aaa3de8a8f7dc75a7f0dcb8368b"><span class="std std-ref">get_input_source_output</span></a><span></span><span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+    <span class="k">virtual</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node"><span class="std std-ref">Node</span></a><span></span><span class="o">&gt;</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1a04cb103fa069c3b7944ab7c44d94f5ff"><span class="std std-ref">clone_with_new_inputs</span></a><span></span><span class="p">(</span><span class="k">const</span> <a class="reference internal" href="namespaceov.html#doxid-namespaceov-1a0a3841455b82c164b1b04b61a9c7c560"><span class="std std-ref">OutputVector</span></a><span></span><span class="o">&amp;</span> <span class="n">inputs</span><span class="p">)</span> <span class="k">const</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node"><span class="std std-ref">Node</span></a><span></span><span class="o">&gt;</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1a9450b7ac144f707c27de671c2e240a1f"><span class="std std-ref">copy_with_new_inputs</span></a><span></span><span class="p">(</span><span class="k">const</span> <a class="reference internal" href="namespaceov.html#doxid-namespaceov-1a0a3841455b82c164b1b04b61a9c7c560"><span class="std std-ref">OutputVector</span></a><span></span><span class="o">&amp;</span> <span class="n">new_args</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node"><span class="std std-ref">Node</span></a><span></span><span class="o">&gt;</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1a330ca37c8668ca18afc5ae6ad42e8133"><span class="std std-ref">copy_with_new_inputs</span></a><span></span><span class="p">(</span>
+        <span class="k">const</span> <a class="reference internal" href="namespaceov.html#doxid-namespaceov-1a0a3841455b82c164b1b04b61a9c7c560"><span class="std std-ref">OutputVector</span></a><span></span><span class="o">&amp;</span> <span class="n">inputs</span><span class="p">,</span>
+        <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node"><span class="std std-ref">Node</span></a><span></span><span class="o">&gt;&gt;&amp;</span> <span class="n">control_dependencies</span>
+        <span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+
+    <span class="kt">bool</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1aa0d6ac1b94265535fd6604f504f24bc0"><span class="std std-ref">has_same_type</span></a><span></span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="k">const</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node"><span class="std std-ref">Node</span></a><span></span><span class="o">&gt;</span> <span class="n">node</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+    <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1ab5856aecf96a9989fa1bafb97e4be2aa"><span class="std std-ref">RTMap</span></a><span></span><span class="o">&amp;</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1a6941c753af92828d842297b74df1c45a"><span class="std std-ref">get_rt_info</span></a><span></span><span class="p">();</span>
+    <span class="k">const</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1ab5856aecf96a9989fa1bafb97e4be2aa"><span class="std std-ref">RTMap</span></a><span></span><span class="o">&amp;</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1a4a21f081d260995873b6f1c14fd6d617"><span class="std std-ref">get_rt_info</span></a><span></span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+    <a class="reference internal" href="namespaceov.html#doxid-namespaceov-1a750141ccb27d75af03e91a5295645c7f"><span class="std std-ref">NodeVector</span></a><span></span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1ac91febe368510da62e45d591255a4c6e"><span class="std std-ref">get_users</span></a><span></span><span class="p">(</span><span class="kt">bool</span> <span class="n">check_is_used</span> <span class="o">=</span> <span class="nb">false</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+    <span class="k">virtual</span> <span class="kt">size_t</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1a09b3d13897b7cadcc7a9967f7a5a41f9"><span class="std std-ref">get_version</span></a><span></span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+    <span class="k">virtual</span> <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node"><span class="std std-ref">Node</span></a><span></span><span class="o">&gt;</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1a8e4fb678e71a86887c7ccf66c58de940"><span class="std std-ref">get_default_value</span></a><span></span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+    <span class="kt">bool</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1a041846b4bc1cf064f6bc3f6770a947cf"><span class="std std-ref">operator &lt;</span></a><span></span> <span class="p">(</span><span class="k">const</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node"><span class="std std-ref">Node</span></a><span></span><span class="o">&amp;</span> <span class="n">other</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><a class="reference internal" href="classov_1_1Input.html#doxid-classov-1-1-input"><span class="std std-ref">Input</span></a><span></span><span class="o">&lt;</span><a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node"><span class="std std-ref">Node</span></a><span></span><span class="o">&gt;&gt;</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1a28dde1677b0bef3dbf978613b92f4f15"><span class="std std-ref">inputs</span></a><span></span><span class="p">();</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><a class="reference internal" href="classov_1_1Input.html#doxid-classov-1-1-input"><span class="std std-ref">Input</span></a><span></span><span class="o">&lt;</span><span class="k">const</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node"><span class="std std-ref">Node</span></a><span></span><span class="o">&gt;&gt;</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1ad39399f2b8d37e9a80a98b005e67437d"><span class="std std-ref">inputs</span></a><span></span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><a class="reference internal" href="classov_1_1Output.html#doxid-classov-1-1-output"><span class="std std-ref">Output</span></a><span></span><span class="o">&lt;</span><a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node"><span class="std std-ref">Node</span></a><span></span><span class="o">&gt;&gt;</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1a5bd9fbb6aa2b3fd2b618a9a4cbd6cb9a"><span class="std std-ref">input_values</span></a><span></span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><a class="reference internal" href="classov_1_1Output.html#doxid-classov-1-1-output"><span class="std std-ref">Output</span></a><span></span><span class="o">&lt;</span><a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node"><span class="std std-ref">Node</span></a><span></span><span class="o">&gt;&gt;</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1a37b3ab192ba2db2042757fdae9c6b3ab"><span class="std std-ref">outputs</span></a><span></span><span class="p">();</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><a class="reference internal" href="classov_1_1Output.html#doxid-classov-1-1-output"><span class="std std-ref">Output</span></a><span></span><span class="o">&lt;</span><span class="k">const</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node"><span class="std std-ref">Node</span></a><span></span><span class="o">&gt;&gt;</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1aeee558f53b4473dcadcd778cd13437ad"><span class="std std-ref">outputs</span></a><span></span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+    <a class="reference internal" href="classov_1_1Input.html#doxid-classov-1-1-input"><span class="std std-ref">Input</span></a><span></span><span class="o">&lt;</span><a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node"><span class="std std-ref">Node</span></a><span></span><span class="o">&gt;</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1a1b5cca0ff724c115604e48a18a79d25e"><span class="std std-ref">input</span></a><span></span><span class="p">(</span><span class="kt">size_t</span> <span class="n">input_index</span><span class="p">);</span>
+    <a class="reference internal" href="classov_1_1Input.html#doxid-classov-1-1-input"><span class="std std-ref">Input</span></a><span></span><span class="o">&lt;</span><span class="k">const</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node"><span class="std std-ref">Node</span></a><span></span><span class="o">&gt;</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1afbfc9879474e79f08998fae9b77d7d28"><span class="std std-ref">input</span></a><span></span><span class="p">(</span><span class="kt">size_t</span> <span class="n">input_index</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+    <a class="reference internal" href="classov_1_1Output.html#doxid-classov-1-1-output"><span class="std std-ref">Output</span></a><span></span><span class="o">&lt;</span><a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node"><span class="std std-ref">Node</span></a><span></span><span class="o">&gt;</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1a28107e02017bcb10480beb16563cfd43"><span class="std std-ref">input_value</span></a><span></span><span class="p">(</span><span class="kt">size_t</span> <span class="n">input_index</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+    <a class="reference internal" href="classov_1_1Output.html#doxid-classov-1-1-output"><span class="std std-ref">Output</span></a><span></span><span class="o">&lt;</span><a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node"><span class="std std-ref">Node</span></a><span></span><span class="o">&gt;</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1ac99614dc0669915105d5681cf3873251"><span class="std std-ref">output</span></a><span></span><span class="p">(</span><span class="kt">size_t</span> <span class="n">output_index</span><span class="p">);</span>
+    <a class="reference internal" href="classov_1_1Output.html#doxid-classov-1-1-output"><span class="std std-ref">Output</span></a><span></span><span class="o">&lt;</span><span class="k">const</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node"><span class="std std-ref">Node</span></a><span></span><span class="o">&gt;</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1aaa52f6baaff900b7d8dab95e9589c53e"><span class="std std-ref">output</span></a><span></span><span class="p">(</span><span class="kt">size_t</span> <span class="n">output_index</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+    OPENVINO_SUPPRESS_DEPRECATED_START<span></span> <span class="kt">void</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1a9d8680c016917426085ce1e18977428f"><span class="std std-ref">set_op_annotations</span></a><span></span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">ngraph</span><span class="o">::</span><span class="n">op</span><span class="o">::</span><span class="n">util</span><span class="o">::</span><span class="n">OpAnnotations</span><span class="o">&gt;</span> <span class="n">op_annotations</span><span class="p">);</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">ngraph</span><span class="o">::</span><span class="n">op</span><span class="o">::</span><span class="n">util</span><span class="o">::</span><span class="n">OpAnnotations</span><span class="o">&gt;</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1adca4d894371d7b3ce0453a2a4ad9dc47"><span class="std std-ref">get_op_annotations</span></a><span></span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+
+    <span class="k">virtual</span> OPENVINO_SUPPRESS_DEPRECATED_END<span></span> <span class="kt">bool</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1a91d357857f994496c0bfb62f840fa273"><span class="std std-ref">match_value</span></a><span></span><span class="p">(</span>
+        <a class="reference internal" href="classov_1_1pass_1_1pattern_1_1Matcher.html#doxid-classov-1-1pass-1-1pattern-1-1-matcher"><span class="std std-ref">ov::pass::pattern::Matcher</span></a><span></span> <span class="err">\</span><span class="o">*</span> <span class="n">matcher</span><span class="p">,</span>
+        <span class="k">const</span> <a class="reference internal" href="classov_1_1Output.html#doxid-classov-1-1-output"><span class="std std-ref">Output</span></a><span></span><span class="o">&lt;</span><a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node"><span class="std std-ref">Node</span></a><span></span><span class="o">&gt;&amp;</span> <span class="n">pattern_value</span><span class="p">,</span>
+        <span class="k">const</span> <a class="reference internal" href="classov_1_1Output.html#doxid-classov-1-1-output"><span class="std std-ref">Output</span></a><span></span><span class="o">&lt;</span><a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node"><span class="std std-ref">Node</span></a><span></span><span class="o">&gt;&amp;</span> <span class="n">graph_value</span>
+        <span class="p">);</span>
+
+    <span class="k">virtual</span> <span class="kt">bool</span> <a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1abdd7772bf5673526b64ddd6d310bb2f9"><span class="std std-ref">match_node</span></a><span></span><span class="p">(</span>
+        <a class="reference internal" href="classov_1_1pass_1_1pattern_1_1Matcher.html#doxid-classov-1-1pass-1-1pattern-1-1-matcher"><span class="std std-ref">ov::pass::pattern::Matcher</span></a><span></span> <span class="err">\</span><span class="o">*</span> <span class="n">matcher</span><span class="p">,</span>
+        <span class="k">const</span> <a class="reference internal" href="classov_1_1Output.html#doxid-classov-1-1-output"><span class="std std-ref">Output</span></a><span></span><span class="o">&lt;</span><a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node"><span class="std std-ref">Node</span></a><span></span><span class="o">&gt;&amp;</span> <span class="n">graph_value</span>
+        <span class="p">);</span>
+
+    <span class="k">static</span> <span class="n">_OPENVINO_HIDDEN_METHODconst</span> <span class="o">::</span><a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1af929e4dd70a66e0116a9d076753a2569"><span class="std std-ref">ov::Node::type_info_t</span></a><span></span><span class="o">&amp;</span> <a class="reference internal" href="classov_1_1op_1_1Op.html#doxid-classov-1-1op-1-1-op-1a67be7c9343aa67e8dcc9866c722cb097"><span class="std std-ref">get_type_info_static</span></a><span></span><span class="p">();</span>
+    <span class="k">virtual</span> <span class="k">const</span> <span class="o">::</span><a class="reference internal" href="classov_1_1Node.html#doxid-classov-1-1-node-1af929e4dd70a66e0116a9d076753a2569"><span class="std std-ref">ov::Node::type_info_t</span></a><span></span><span class="o">&amp;</span> <a class="reference internal" href="classov_1_1op_1_1Op.html#doxid-classov-1-1op-1-1-op-1a38f6f501e9e7c0ee100e23754460a449"><span class="std std-ref">get_type_info</span></a><span></span><span class="p">()</span> <span class="k">const</span><span class="p">;</span></pre></div></div></section>
+</section>
+<section id="detailed-documentation">
+<span id="details-classngraph-1-1op-1-1-eltwise"></span><h2>Detailed Documentation<a class="headerlink" href="#detailed-documentation" title="Permalink to this headline">¶</a></h2>
+<section id="methods">
+<h3>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h3>
+<span class="target" id="doxid-classngraph-1-1op-1-1-eltwise-1ab6c25911c06c8e600f4a2932459772e6"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><span></span><span class="k">virtual</span> <span class="kt">void</span> <span class="n">validate_and_infer_types</span><span class="p">()</span></pre></div></div><p>Verifies that attributes and inputs are consistent and computes output shapes and element types. Must be implemented by concrete child classes so that it can be run any number of times.</p>
+<p>Throws if the node is invalid.</p>
+</section>
+</section>
+</section>
+
+
+                </div>
+            
+            
+                <div class='prev-next-bottom'>
+                  
+
+                </div>
+            
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+<footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2021, Intel®.<br>
+</p>
+    </div>
+    
+    <div class="footer-item">
+      <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

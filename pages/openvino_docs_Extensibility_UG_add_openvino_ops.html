@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Custom OpenVINO™ Operations &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -1832,60 +1839,60 @@
             
                 <div>
                   
-  <div class="section" id="custom-openvino-operations">
+  <section id="custom-openvino-operations">
 <span id="doxid-openvino-docs-extensibility-u-g-add-openvino-ops"></span><span id="index-0"></span><h1>Custom OpenVINO™ Operations<a class="headerlink" href="#custom-openvino-operations" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-openvino-docs-extensibility-u-g-add-openvino-ops-1md-openvino-docs-extensibility-ug-add-openvino-ops"></span> OpenVINO™ Extension API allows you to register custom operations to support models with operations which OpenVINO™ does not support out-of-the-box.</p>
-<div class="section" id="operation-class">
+<section id="operation-class">
 <h2>Operation Class<a class="headerlink" href="#operation-class" title="Permalink to this headline">¶</a></h2>
-<p>To add your custom operation, create a new class that extends <code class="docutils literal notranslate"><span class="pre">ov::Op</span></code>, which is in turn derived from <code class="docutils literal notranslate"><span class="pre">ov::Node</span></code>, the base class for all graph operations in OpenVINO™. To add <code class="docutils literal notranslate"><span class="pre">ov::Op</span></code> please include next file:</p>
+<p>To add your custom operation, create a new class that extends <code class="docutils literal notranslate"><span class="pre">ov::Op</span></code>, which is in turn derived from <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1Node.html#doxid-classov-1-1-node"><span class="std std-ref"><span class="pre">ov::Node</span></span></a></code>, the base class for all graph operations in OpenVINO™. To add <code class="docutils literal notranslate"><span class="pre">ov::Op</span></code> please include next file:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;openvino/op/op.hpp&gt;</span></pre></div></div><p>Follow the steps below to add a custom operation:</p>
 <ol class="arabic simple">
 <li><p>Add the <code class="docutils literal notranslate"><span class="pre">OPENVINO_OP</span></code> macro which defines a <code class="docutils literal notranslate"><span class="pre">NodeTypeInfo</span></code> object that identifies the type of the operation to the graph users and helps with dynamic type resolution. The type info of an operation currently consists of a string operation identifier and a string for operation version.</p></li>
 <li><p>Implement default constructor and constructors that optionally take the operation inputs and attributes as parameters.</p></li>
-<li><p>Override the shape inference method <code class="docutils literal notranslate"><span class="pre">validate_and_infer_types</span></code>. This method is called multiple times during graph manipulations to determine the shapes and element types of the operations outputs. To access the input shapes and input element types, use the <code class="docutils literal notranslate"><span class="pre">get_input_partial_shape()</span></code> and <code class="docutils literal notranslate"><span class="pre">get_input_element_type()</span></code> methods of <code class="docutils literal notranslate"><span class="pre">ov::Node</span></code>. Set the inferred shape and element type of the output using <code class="docutils literal notranslate"><span class="pre">set_output_type</span></code>.</p></li>
+<li><p>Override the shape inference method <code class="docutils literal notranslate"><span class="pre">validate_and_infer_types</span></code>. This method is called multiple times during graph manipulations to determine the shapes and element types of the operations outputs. To access the input shapes and input element types, use the <code class="docutils literal notranslate"><span class="pre">get_input_partial_shape()</span></code> and <code class="docutils literal notranslate"><span class="pre">get_input_element_type()</span></code> methods of <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1Node.html#doxid-classov-1-1-node"><span class="std std-ref"><span class="pre">ov::Node</span></span></a></code>. Set the inferred shape and element type of the output using <code class="docutils literal notranslate"><span class="pre">set_output_type</span></code>.</p></li>
 <li><p>Override the <code class="docutils literal notranslate"><span class="pre">clone_with_new_inputs</span></code> method, which enables graph manipulation routines to create copies of this operation and connect it to different nodes during optimization.</p></li>
 <li><p>Override the <code class="docutils literal notranslate"><span class="pre">visit_attributes</span></code> method, which enables serialization and deserialization of operation attributes. An <code class="docutils literal notranslate"><span class="pre">AttributeVisitor</span></code> is passed to the method, and the implementation is expected to walk over all the attributes in the op using the type-aware <code class="docutils literal notranslate"><span class="pre">on_attribute</span></code> helper. Helpers are already implemented for standard C++ types like <code class="docutils literal notranslate"><span class="pre">int64_t</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>, <code class="docutils literal notranslate"><span class="pre">bool</span></code>, <code class="docutils literal notranslate"><span class="pre">vector</span></code>, and for existing OpenVINO defined types.</p></li>
 <li><p>Override <code class="docutils literal notranslate"><span class="pre">evaluate</span></code>, which is an optional method that enables fallback of some devices to this implementation and the application of constant folding if there is a custom operation on the constant branch. If your operation contains <code class="docutils literal notranslate"><span class="pre">evaluate</span></code> method you also need to override the <code class="docutils literal notranslate"><span class="pre">has_evaluate</span></code> method, this method allows to get information about availability of <code class="docutils literal notranslate"><span class="pre">evaluate</span></code> method for the operation.</p></li>
 </ol>
 <p>Based on that, declaration of an operation class can look as follows:</p>
-<div class="section" id="operation-constructors">
+<section id="operation-constructors">
 <h3>Operation Constructors<a class="headerlink" href="#operation-constructors" title="Permalink to this headline">¶</a></h3>
 <p>OpenVINO™ operation contains two constructors:</p>
 <ul class="simple">
 <li><p>Default constructor, which enables you to create an operation without attributes</p></li>
 <li><p>Constructor that creates and validates an operation with specified inputs and attributes</p></li>
 </ul>
-<div class="highlight"><div class="highlight"><pre><span></span><span class="n">Identity</span><span class="o">::</span><span class="n">Identity</span><span class="p">(</span><span class="k">const</span> ov::Output&lt;ov::Node&gt;<span></span><span class="o">&amp;</span> <span class="n">arg</span><span class="p">)</span> <span class="o">:</span> <span class="n">Op</span><span class="p">({</span><span class="n">arg</span><span class="p">})</span> <span class="p">{</span>
+<div class="highlight"><div class="highlight"><pre><span></span><span class="n">Identity</span><span class="o">::</span><span class="n">Identity</span><span class="p">(</span><span class="k">const</span> <a class="reference internal" href="../api/groups/classov_1_1Output.html#doxid-classov-1-1-output"><span class="std std-ref">ov::Output&lt;ov::Node&gt;</span></a><span></span><span class="o">&amp;</span> <span class="n">arg</span><span class="p">)</span> <span class="o">:</span> <span class="n">Op</span><span class="p">({</span><span class="n">arg</span><span class="p">})</span> <span class="p">{</span>
     <span class="n">constructor_validate_and_infer_types</span><span class="p">();</span>
-<span class="p">}</span></pre></div></div><p><code class="docutils literal notranslate"><span class="pre">ov::Node::validate_and_infer_types</span></code> method validates operation attributes and calculates output shapes using attributes of the operation.</p>
+<span class="p">}</span></pre></div></div><p><code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1Node.html#doxid-classov-1-1-node-1ac5224b5be848ec670d2078d9816d12e7"><span class="std std-ref"><span class="pre">ov::Node::validate_and_infer_types</span></span></a></code> method validates operation attributes and calculates output shapes using attributes of the operation.</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="n">Identity</span><span class="o">::</span><span class="n">validate_and_infer_types</span><span class="p">()</span> <span class="p">{</span>
     <span class="c1">// Operation doesn&#39;t change shapes end element type</span>
     <span class="n">set_output_type</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">get_input_element_type</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">get_input_partial_shape</span><span class="p">(</span><span class="mi">0</span><span class="p">));</span>
 <span class="p">}</span></pre></div></div><p><code class="docutils literal notranslate"><span class="pre">ov::Node::clone_with_new_inputs</span></code> method creates a copy of the operation with new inputs.</p>
-<div class="highlight"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">ov</span><span class="o">::</span><span class="n">Node</span><span class="o">&gt;</span> <span class="n">Identity</span><span class="o">::</span><span class="n">clone_with_new_inputs</span><span class="p">(</span><span class="k">const</span> ov::OutputVector<span></span><span class="o">&amp;</span> <span class="n">new_args</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+<div class="highlight"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">ov</span><span class="o">::</span><span class="n">Node</span><span class="o">&gt;</span> <span class="n">Identity</span><span class="o">::</span><span class="n">clone_with_new_inputs</span><span class="p">(</span><span class="k">const</span> <a class="reference internal" href="../api/groups/namespaceov.html#doxid-namespaceov-1a0a3841455b82c164b1b04b61a9c7c560"><span class="std std-ref">ov::OutputVector</span></a><span></span><span class="o">&amp;</span> <span class="n">new_args</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
     OPENVINO_ASSERT<span></span><span class="p">(</span><span class="n">new_args</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&quot;Incorrect number of new arguments&quot;</span><span class="p">);</span>
 
     <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">Identity</span><span class="o">&gt;</span><span class="p">(</span><span class="n">new_args</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="mi">0</span><span class="p">));</span>
-<span class="p">}</span></pre></div></div><p><code class="docutils literal notranslate"><span class="pre">ov::Node::visit_attributes</span></code> method enables you to visit all operation attributes.</p>
-<div class="highlight"><div class="highlight"><pre><span></span><span class="kt">bool</span> <span class="n">Identity</span><span class="o">::</span><span class="n">visit_attributes</span><span class="p">(</span>ov::AttributeVisitor<span></span><span class="o">&amp;</span> <span class="n">visitor</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">}</span></pre></div></div><p><code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1Node.html#doxid-classov-1-1-node-1a9743b56d352970486d17dae2416d958e"><span class="std std-ref"><span class="pre">ov::Node::visit_attributes</span></span></a></code> method enables you to visit all operation attributes.</p>
+<div class="highlight"><div class="highlight"><pre><span></span><span class="kt">bool</span> <span class="n">Identity</span><span class="o">::</span><span class="n">visit_attributes</span><span class="p">(</span><a class="reference internal" href="../api/groups/classov_1_1AttributeVisitor.html#doxid-classov-1-1-attribute-visitor"><span class="std std-ref">ov::AttributeVisitor</span></a><span></span><span class="o">&amp;</span> <span class="n">visitor</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
-<span class="p">}</span></pre></div></div></div>
-<div class="section" id="evaluate-and-has-evaluate">
+<span class="p">}</span></pre></div></div></section>
+<section id="evaluate-and-has-evaluate">
 <h3>evaluate() and has_evaluate()<a class="headerlink" href="#evaluate-and-has-evaluate" title="Permalink to this headline">¶</a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">ov::Node::evaluate</span></code> method enables you to apply constant folding to an operation.</p>
-<div class="highlight"><div class="highlight"><pre><span></span><span class="kt">bool</span> <span class="n">Identity</span><span class="o">::</span><span class="n">evaluate</span><span class="p">(</span>ov::TensorVector<span></span><span class="o">&amp;</span> <span class="n">outputs</span><span class="p">,</span> <span class="k">const</span> ov::TensorVector<span></span><span class="o">&amp;</span> <span class="n">inputs</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+<p><code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1Node.html#doxid-classov-1-1-node-1acfb82acc8349d7138aeaa05217c7014e"><span class="std std-ref"><span class="pre">ov::Node::evaluate</span></span></a></code> method enables you to apply constant folding to an operation.</p>
+<div class="highlight"><div class="highlight"><pre><span></span><span class="kt">bool</span> <span class="n">Identity</span><span class="o">::</span><span class="n">evaluate</span><span class="p">(</span><a class="reference internal" href="../api/groups/namespaceov.html#doxid-namespaceov-1aa2127061451ba4f5a6e6904b88e72c6e"><span class="std std-ref">ov::TensorVector</span></a><span></span><span class="o">&amp;</span> <span class="n">outputs</span><span class="p">,</span> <span class="k">const</span> <a class="reference internal" href="../api/groups/namespaceov.html#doxid-namespaceov-1aa2127061451ba4f5a6e6904b88e72c6e"><span class="std std-ref">ov::TensorVector</span></a><span></span><span class="o">&amp;</span> <span class="n">inputs</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
     <span class="k">auto</span> <span class="n">in</span> <span class="o">=</span> <span class="n">inputs</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
-    <span class="k">auto</span> out<span></span> <span class="o">=</span> <span class="n">outputs</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
-    out<span></span><span class="p">.</span><span class="n">set_shape</span><span class="p">(</span><span class="n">in</span><span class="p">.</span><span class="n">get_shape</span><span class="p">());</span>
-    <span class="n">memcpy</span><span class="p">(</span>out<span></span><span class="p">.</span><span class="n">data</span><span class="p">(),</span> <span class="n">in</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span> <span class="n">in</span><span class="p">.</span><span class="n">get_byte_size</span><span class="p">());</span>
+    <span class="k">auto</span> <a class="reference internal" href="../api/groups/namespacengraph_1_1runtime_1_1reference.html#doxid-namespacengraph-1-1runtime-1-1reference-1ac9d07fc6d49867bb411a4f4132777aae"><span class="std std-ref">out</span></a><span></span> <span class="o">=</span> <span class="n">outputs</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+    <a class="reference internal" href="../api/groups/namespacengraph_1_1runtime_1_1reference.html#doxid-namespacengraph-1-1runtime-1-1reference-1ac9d07fc6d49867bb411a4f4132777aae"><span class="std std-ref">out</span></a><span></span><span class="p">.</span><span class="n">set_shape</span><span class="p">(</span><span class="n">in</span><span class="p">.</span><span class="n">get_shape</span><span class="p">());</span>
+    <span class="n">memcpy</span><span class="p">(</span><a class="reference internal" href="../api/groups/namespacengraph_1_1runtime_1_1reference.html#doxid-namespacengraph-1-1runtime-1-1reference-1ac9d07fc6d49867bb411a4f4132777aae"><span class="std std-ref">out</span></a><span></span><span class="p">.</span><span class="n">data</span><span class="p">(),</span> <span class="n">in</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span> <span class="n">in</span><span class="p">.</span><span class="n">get_byte_size</span><span class="p">());</span>
     <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
 <span class="p">}</span>
 
 <span class="kt">bool</span> <span class="n">Identity</span><span class="o">::</span><span class="n">has_evaluate</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
     <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
-<span class="p">}</span></pre></div></div></div>
-</div>
-</div>
+<span class="p">}</span></pre></div></div></section>
+</section>
+</section>
 
 
                 </div>
@@ -1916,7 +1923,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

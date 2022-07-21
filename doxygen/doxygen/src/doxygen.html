@@ -1,0 +1,621 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Doxygen Internals {#mainpage} &#8212; OpenVINO™  documentation</title>
+    
+    
+  <link href="../../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/blank.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/doxyrest-pygments.css" />
+    
+  <link rel="preload" as="script" href="../../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <link href="../../../_static/css/media/favicon.ico" rel="shortcut icon">
+    <link rel="stylesheet" href="../../../_static/css/openvino_sphinx_theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/css/button.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/css/input.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/css/textfield.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/css/tabs.css" type="text/css" />
+    <script src="../../../_static/js/openvino_sphinx_theme.js"></script>
+    <link rel="stylesheet" href="../../../_static/css/viewer.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/0.5.7/chartjs-plugin-annotation.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-barchart-background@1.3.0/build/Plugin.Barchart.Background.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-deferred@1"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.1/papaparse.min.js"></script>
+    <script src="../../../_static/js/viewer.min.js"></script>
+    <script src="/assets/versions_raw.js"></script>
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/tabs.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/js/custom.js"></script>
+    <script src="../../../_static/js/graphs.js"></script>
+    <script src="../../../_static/js/graphs_ov_tf.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script src="../../../_static/target-highlight.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <link rel="canonical" href="https://docs.openvino.ai/latest/doxygen/doxygen/src/doxygen.html" />
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+      <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+
+<a class="navbar-brand" href="../../../index.html">
+  <img src="../../../_static/logo.svg" class="logo" alt="logo">
+</a>
+
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../pages/get_started.html">
+  Get Started
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../pages/documentation.html">
+  Documentation
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../tutorials.html">
+  Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../api/api_reference.html">
+  API Reference
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../model_zoo.html">
+  Model Zoo
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../pages/resources.html">
+  Resources
+ </a>
+</li>
+
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/openvinotoolkit/openvino" rel="noopener" target="_blank" title="GitHub">
+            <span><i class="sst-github"></i></span>
+            <label class="sr-only">GitHub</label>
+          </a>
+        </li>
+</ul>
+      </div>
+      
+      <div class="navbar-end-item">
+        
+<div class="dropdown sst-dropdown sst-dropdown-navbar">
+  <button class="btn sst-btn dropdown-toggle" type="button" id="version-selector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+  <div class="dropdown-menu" aria-labelledby="version-selector">
+  </div>
+</div>
+      </div>
+      
+      <div class="navbar-end-item">
+        
+
+<div class="dropdown sst-dropdown sst-dropdown-navbar">
+  <button class="btn sst-btn dropdown-toggle" type="button" id="language-selector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">English</button>
+  <div class="dropdown-menu" aria-labelledby="language-selector">
+    
+      
+        <a class="dropdown-item font-weight-bold" href="/latest/doxygen/doxygen/src/doxygen.html">English</a>
+      
+    
+      
+        <a  class="dropdown-item" href="/cn/latest/doxygen/doxygen/src/doxygen.html">Chinese</a>
+      
+    
+  </div>
+</div>
+
+      </div>
+      
+    </div>
+  </div>
+</div>
+        <div id="collapse-nav-wrapper" class="container-xl">
+          <button id="collapse-nav" class="button bttn-prm button-size-m" type="button" data-toggle="collapse" data-target="#nav-tree" aria-expanded="false" aria-controls="nav-tree">
+            Documentation navigation <i class="fas fa-chevron-down"></i>
+          </button>
+        </div>
+      </nav>
+      <div class="transition-banner container-fluid alert alert-info alert-dismissible fade show" role="alert">
+        <p>OpenVINO 2022.1 introduces a new version of OpenVINO API (API 2.0). For more information on the changes and transition steps, see the <a href="https://docs.openvino.ai/latest/openvino_2_0_transition_guide.html">transition guide</a></p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar" id="nav-tree"><form class="searchForm bd-search d-flex align-items-center" action="../../../search.html" method="get">
+    <i class="icon fas fa-search"></i>
+    <input type="search" class="form-control" name="query" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    
+  </div>
+</nav>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+              
+              <div class="toc-item">
+                
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Doxygen Internals {#mainpage}
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   Introduction
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#configuration-options">
+   Configuration options
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gathering-input-files">
+   Gathering Input files
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#parsing-input-files">
+   Parsing Input files
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#resolving-relations">
+   Resolving relations
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#producing-debug-output">
+   Producing debug output
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#producing-output">
+   Producing output
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#topics-todo">
+   Topics TODO
+  </a>
+ </li>
+</ul>
+
+</nav>
+              </div>
+              
+              <div class="toc-item">
+                <div class="tocsection download-docs">
+  <div class="dropdown sst-dropdown">
+    <button class="button bttn-prm button-size-m" data-display="static" type="button" id="download-options"
+      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Download Docs
+    </button>
+    <div class="dropdown-menu" aria-labelledby="download-options">
+      <a class="dropdown-item" href="#" onclick="window.print()">.pdf</a>
+      <a id="download-zip-btn" class="dropdown-item" href="#">.zip</a>
+    </div>
+  </div>
+</div>
+              </div>
+              
+            
+          </div>
+          
+
+          
+          
+              
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+
+<div class="tocsection editthispage">
+    <a href="None">
+        <i class="fas fa-pencil-alt"></i> Edit this page
+    </a>
+</div>
+
+            
+                <div>
+                  
+  <section id="doxygen-internals-mainpage">
+<h1>Doxygen Internals {#mainpage}<a class="headerlink" href="#doxygen-internals-mainpage" title="Permalink to this headline">¶</a></h1>
+</section>
+<section id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<p>This page provides a high-level overview of the internals of doxygen, with
+links to the relevant parts of the code. This document is intended for
+developers who want to work on doxygen. Users of doxygen are referred to the
+<a class="reference external" href="https://www.doxygen.nl/manual/index.html">User Manual</a>.</p>
+<p>The generic starting point of the application is of course the main() function.</p>
+</section>
+<section id="configuration-options">
+<h1>Configuration options<a class="headerlink" href="#configuration-options" title="Permalink to this headline">¶</a></h1>
+<p>Configuration file data is stored in singleton class Config and can be
+accessed using wrapper macros
+Config_getString(), Config_getInt(), Config_getList(),
+Config_getEnum(), and Config_getBool() depending on the type of the
+option.</p>
+<p>The format of the configuration file (options and types) is defined
+by the file <code class="docutils literal notranslate"><span class="pre">config.xml</span></code>. As part of the build process,
+the python script <code class="docutils literal notranslate"><span class="pre">configgen.py</span></code> will create a file <code class="docutils literal notranslate"><span class="pre">configoptions.cpp</span></code>
+from this, which serves as the input for the configuration file parser
+that is invoked using Config::parse(). The script <code class="docutils literal notranslate"><span class="pre">configgen.py</span></code> will also
+create the documentation for the configuration items, creating the file
+<code class="docutils literal notranslate"><span class="pre">config.doc</span></code>.</p>
+</section>
+<section id="gathering-input-files">
+<h1>Gathering Input files<a class="headerlink" href="#gathering-input-files" title="Permalink to this headline">¶</a></h1>
+<p>After the configuration is known, the input files are searched using
+searchInputFiles() and any tag files are read using readTagFile()</p>
+</section>
+<section id="parsing-input-files">
+<h1>Parsing Input files<a class="headerlink" href="#parsing-input-files" title="Permalink to this headline">¶</a></h1>
+<p>The function parseFiles() takes care of parsing all files.
+It uses the ParserManager singleton factory to create a suitable parser object
+for each file. Each parser implements the abstract interface ParserInterface.</p>
+<p>If the parser indicates it needs preprocessing
+via ParserInterface::needsPreprocessing(), doxygen will call preprocessFile()
+on the file.</p>
+<p>A second step is to convert multiline C++-style comments into C style comments
+for easier processing later on. As side effect of this step also
+aliases (ALIASES option) are resolved. The function that performs these
+2 tasks is called convertCppComments().</p>
+<p><em>Note:</em> Alias resolution should better be done in a separate step as it is
+now coupled to C/C++ code and does not work automatically for other languages!</p>
+<p>The third step is the actual language parsing and is done by calling
+ParserInterface::parseInput() on the parser interface returned by
+the ParserManager.</p>
+<p>The result of parsing is a tree of Entry objects.
+These Entry objects are wrapped in a EntryNav object and stored on disk using
+Entry::createNavigationIndex() on the root node of the tree.</p>
+<p>Each Entry object roughly contains the raw data for a symbol and is later
+converted into a Definition object.</p>
+<p>When a parser finds a special comment block in the input, it will do a first
+pass parsing via parseCommentBlock(). During this pass the comment block
+is split into multiple parts if needed. Some data that is later needed is
+extracted like section labels, xref items, and formulas.
+Also Markdown markup is processed using processMarkdown() during this pass.</p>
+</section>
+<section id="resolving-relations">
+<h1>Resolving relations<a class="headerlink" href="#resolving-relations" title="Permalink to this headline">¶</a></h1>
+<p>The Entry objects created and filled during parsing are stored on disk
+(to keep memory needs low). The name, parent/child relation, and
+location on disk of each Entry is stored as a tree of EntryNav nodes, which is
+kept in memory.</p>
+<p>Doxygen does a number of tree walks over the EntryNav nodes in the tree to
+build up the data structures needed to produce the output.</p>
+<p>The resulting data structures are all children of the generic base class
+called Definition which holds all non-specific data for a symbol definition.</p>
+<p>Definition is an abstract base class. Concrete subclasses are</p>
+<ul class="simple">
+<li><p>ClassDef: for storing class/struct/union related data</p></li>
+<li><p>NamespaceDef: for storing namespace related data</p></li>
+<li><p>FileDef: for storing file related data</p></li>
+<li><p>DirDef: for storing directory related data</p></li>
+</ul>
+<p>For doxygen specific concepts the following subclasses are available</p>
+<ul class="simple">
+<li><p>GroupDef: for storing grouping related data</p></li>
+<li><p>PageDef: for storing page related data</p></li>
+</ul>
+<p>Finally the data for members of classes, namespaces, and files is stored in
+the subclass MemberDef.</p>
+</section>
+<section id="producing-debug-output">
+<h1>Producing debug output<a class="headerlink" href="#producing-debug-output" title="Permalink to this headline">¶</a></h1>
+<p>Within doxygen there are a number of ways to obtain debug output. Besides the
+invasive method of  putting print statements in the code there are a number of
+easy ways to get debug information.</p>
+<ul class="simple">
+<li><p>Compilation of <code class="docutils literal notranslate"><span class="pre">.l</span></code> files<br>
+This is also an invasive method but it will be automatically done by the
+<code class="docutils literal notranslate"><span class="pre">flex</span> <span class="pre">/</span> <span class="pre">lex</span></code> command. The result is that of each input line the (lex) rule(s)
+that are applied on it are shown.</p>
+<ul>
+<li><p>windows</p>
+<ul>
+<li><p>in the Visual C++ GUI</p>
+<ul>
+<li><p>find the required <code class="docutils literal notranslate"><span class="pre">.l</span></code> file</p></li>
+<li><p>select the <code class="docutils literal notranslate"><span class="pre">Properties</span></code> of this file</p></li>
+<li><p>set the item <code class="docutils literal notranslate"><span class="pre">Write</span> <span class="pre">used</span> <span class="pre">lex</span> <span class="pre">rules</span></code> to <code class="docutils literal notranslate"><span class="pre">Yes</span></code></p></li>
+<li><p>see to it that the <code class="docutils literal notranslate"><span class="pre">.l</span></code> file is newer than the corresponding <code class="docutils literal notranslate"><span class="pre">.cpp</span></code> file
+or remove the corresponding <code class="docutils literal notranslate"><span class="pre">.cpp</span></code> file</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>unices</p>
+<ul>
+<li><p>global change<br>
+In the chapter “Doxygen’s internals” a <code class="docutils literal notranslate"><span class="pre">perl</span></code> script is given to toggle the
+possibility of having the rules debug information.</p></li>
+<li><p>command line change<br>
+It is possible to the option <code class="docutils literal notranslate"><span class="pre">LEX=&quot;flex</span> <span class="pre">-d&quot;</span></code> with the <code class="docutils literal notranslate"><span class="pre">make</span></code> command on the
+command line. In this case the <code class="docutils literal notranslate"><span class="pre">.l</span></code> that are converted to the corresponding
+<code class="docutils literal notranslate"><span class="pre">.cpp</span></code> files during this <code class="docutils literal notranslate"><span class="pre">make</span></code> get the rules debug information.<br>
+To undo the rules debug information output just recompile the file with
+just <code class="docutils literal notranslate"><span class="pre">make</span></code>.<br>
+Note this method applies for all the <code class="docutils literal notranslate"><span class="pre">.l</span></code> files that are rebuild to <code class="docutils literal notranslate"><span class="pre">.cpp</span></code>
+files so be sure that only the <code class="docutils literal notranslate"><span class="pre">.l</span></code> files(s) of which you want to have the
+rules debug information is (are) newer than the corresponding <code class="docutils literal notranslate"><span class="pre">.cpp</span></code>
+file(s).</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Running doxygen<br>
+During a run of doxygen it is possible to specify the <code class="docutils literal notranslate"><span class="pre">-d</span></code> option with the
+following possibilities (each option has to be preceded by <code class="docutils literal notranslate"><span class="pre">-d</span></code>):</p>
+<ul>
+<li><p>findmembers<br>
+Gives of global, class, module members its scope, arguments and other relevant information.</p></li>
+<li><p>functions<br>
+Gives of functions its scope, arguments and other relevant information.</p></li>
+<li><p>variables<br>
+Gives of variables its scope and other relevant information.</p></li>
+<li><p>classes<br>
+Gives of classes en modules its scope and other relevant information.</p></li>
+<li><p>preprocessor<br>
+Shows the results of the preprocessing phase, i.e. results from include files,
+<tt>#define</tt> statements etc., definitions in the doxygen configuration file like:
+<code class="docutils literal notranslate"><span class="pre">EXPAND_ONLY_PREDEF</span></code>, <code class="docutils literal notranslate"><span class="pre">PREDEFINED</span></code> and <code class="docutils literal notranslate"><span class="pre">MACRO_EXPANSION</span></code>.</p></li>
+<li><p>commentcnv<br>
+Shows the results of the comment conversion, the comment conversion does the
+following:</p>
+<ul>
+<li><p>It converts multi-line C++ style comment blocks (that are aligned)
+to C style comment blocks (if <code class="docutils literal notranslate"><span class="pre">MULTILINE_CPP_IS_BRIEF</span></code> is set to <code class="docutils literal notranslate"><span class="pre">NO</span></code>).</p></li>
+<li><p>It replaces aliases with their definition (see <code class="docutils literal notranslate"><span class="pre">ALIASES</span></code>)</p></li>
+<li><p>It handles conditional sections (<tt>\cond … \endcond</tt> blocks)</p></li>
+</ul>
+</li>
+<li><p>commentscan<br>
+Will print each comment block before and after the comment is interpreted by
+the comment scanner.</p></li>
+<li><p>printtree<br>
+Give the results in in pretty print way, i.e. in an XML like way with each
+level indented by a <code class="docutils literal notranslate"><span class="pre">&quot;.&quot;</span></code> (dot).</p></li>
+<li><p>time<br>
+Provides information of the different stages of the doxygen process.</p></li>
+<li><p>extcmd<br>
+Shows which external commands are executed and which pipes are opened.</p></li>
+<li><p>markdown<br>
+Will print each comment block before and after Markdown processing.</p></li>
+<li><p>filteroutput<br>
+Gives the output of the output as result of the filter command (when a filter
+command is specified)</p></li>
+<li><p>validate<br>
+Currently not used</p></li>
+<li><p>lex<br>
+Provide output of the <code class="docutils literal notranslate"><span class="pre">lex</span></code> files used. When a lexer is started and when a lexer
+ends the name of the <code class="docutils literal notranslate"><span class="pre">lex</span></code> file is given so it is possible to see in which lexer the
+problem occurs. This makes it easier to select the file to be compiled in <code class="docutils literal notranslate"><span class="pre">lex</span></code> debug mode.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="producing-output">
+<h1>Producing output<a class="headerlink" href="#producing-output" title="Permalink to this headline">¶</a></h1>
+<p>TODO</p>
+</section>
+<section id="topics-todo">
+<h1>Topics TODO<a class="headerlink" href="#topics-todo" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Grouping of files in Model / Parser / Generator categories</p></li>
+<li><p>Index files based on IndexIntf</p>
+<ul>
+<li><p>HTML navigation</p></li>
+<li><p>HTML Help (chm)</p></li>
+<li><p>Documentation Sets (XCode)</p></li>
+<li><p>Qt Help (qhp)</p></li>
+<li><p>Eclipse Help</p></li>
+</ul>
+</li>
+<li><p>Search index</p>
+<ul>
+<li><p>JavaScript based</p></li>
+<li><p>Server based</p></li>
+<li><p>External</p></li>
+</ul>
+</li>
+<li><p>Citations</p>
+<ul>
+<li><p>via bibtex</p></li>
+</ul>
+</li>
+<li><p>Various processing steps for a comment block</p>
+<ul>
+<li><p>comment conversion</p></li>
+<li><p>comment scanner</p></li>
+<li><p>markdown processor</p></li>
+<li><p>doc tokenizer</p></li>
+<li><p>doc parser</p></li>
+<li><p>doc visitors</p></li>
+</ul>
+</li>
+<li><p>Diagrams and Images</p>
+<ul>
+<li><p>builtin</p></li>
+<li><p>via Graphviz dot</p></li>
+<li><p>via mscgen</p></li>
+<li><p>PNG generation</p></li>
+</ul>
+</li>
+<li><p>Output formats: OutputGen, OutputList, and DocVisitor</p>
+<ul>
+<li><p>Html:  HtmlGenerator and HtmlDocVisitor</p></li>
+<li><p>Latex: LatexGenerator and LatexDocVisitor</p></li>
+<li><p>RTF:   RTFGenerator and RTFDocVisitor</p></li>
+<li><p>Man:   ManGenerator and ManDocVisitor</p></li>
+<li><p>XML:   generateXML() and XmlDocVisitor</p></li>
+<li><p>print: debugging via PrintDocVisitor</p></li>
+<li><p>text:  TextDocVisitor for tooltips</p></li>
+<li><p>perlmod</p></li>
+</ul>
+</li>
+<li><p>i18n via Translator and language.cpp</p></li>
+<li><p>Customizing the layout via LayoutDocManager</p></li>
+<li><p>Parsers</p>
+<ul>
+<li><p>C Preprocessing</p>
+<ul>
+<li><p>const expression evaluation</p></li>
+</ul>
+</li>
+<li><p>C link languages</p></li>
+<li><p>Python</p></li>
+<li><p>Fortran</p></li>
+<li><p>VHDL</p></li>
+<li><p>Tag files</p></li>
+</ul>
+</li>
+<li><p>Marshaling to/from disk</p></li>
+<li><p>Portability functions</p></li>
+<li><p>Utility functions</p></li>
+</ul>
+</section>
+
+
+                </div>
+            
+            
+                <div class='prev-next-bottom'>
+                  
+
+                </div>
+            
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="../../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+<footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2021, Intel®.<br>
+</p>
+    </div>
+    
+    <div class="footer-item">
+      <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

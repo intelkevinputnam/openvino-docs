@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>wav2vec2-base &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../../../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -2108,15 +2115,15 @@
             
                 <div>
                   
-  <div class="section" id="wav2vec2-base">
+  <section id="wav2vec2-base">
 <h1>wav2vec2-base<a class="headerlink" href="#wav2vec2-base" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="use-case-and-high-level-description">
+<section id="use-case-and-high-level-description">
 <h2>Use Case and High-Level Description<a class="headerlink" href="#use-case-and-high-level-description" title="Permalink to this headline">¶</a></h2>
 <p>Wav2Vec2.0-base is a model, which pre-trained to learn speech representations on unlabeled data as described in <a class="reference external" href="https://arxiv.org/abs/2006.11477">wav2vec 2.0: A Framework for Self-Supervised Learning of Speech Representations</a> paper and fine-tuned for speech recognition task with a Connectionist Temporal Classification (CTC) loss on LibriSpeech dataset containing 960 hours of audio.
 The model is composed of a multi-layer convolutional feature encoder which takes as input raw audio and outputs latent speech representations, then fed to a Transformer to build representations capturing information from the entire sequence. For base model Transformer consists of 12 transformer layers and has 768 as feature dimension.
 For details please also check <a class="reference external" href="https://github.com/pytorch/fairseq/tree/master/examples/wav2vec#wav2vec-20">repository</a> and <a class="reference external" href="https://huggingface.co/facebook/wav2vec2-base-960h">model card</a>.</p>
-</div>
-<div class="section" id="specification">
+</section>
+<section id="specification">
 <h2>Specification<a class="headerlink" href="#specification" title="Permalink to this headline">¶</a></h2>
 <table class="colwidths-auto table">
 <thead>
@@ -2139,8 +2146,8 @@ For details please also check <a class="reference external" href="https://github
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="accuracy">
+</section>
+<section id="accuracy">
 <h2>Accuracy<a class="headerlink" href="#accuracy" title="Permalink to this headline">¶</a></h2>
 <table class="colwidths-auto table">
 <thead>
@@ -2154,9 +2161,9 @@ For details please also check <a class="reference external" href="https://github
 </tr>
 </tbody>
 </table>
-<div class="section" id="input">
+<section id="input">
 <h3>Input<a class="headerlink" href="#input" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="original-model">
+<section id="original-model">
 <h4>Original model<a class="headerlink" href="#original-model" title="Permalink to this headline">¶</a></h4>
 <p>Normalized audio signal, name - <code class="docutils literal notranslate"><span class="pre">inputs</span></code>,  shape - <code class="docutils literal notranslate"><span class="pre">B,</span> <span class="pre">N</span></code>, format is <code class="docutils literal notranslate"><span class="pre">B,</span> <span class="pre">N</span></code>, where:</p>
 <ul class="simple">
@@ -2165,15 +2172,15 @@ For details please also check <a class="reference external" href="https://github
 </ul>
 <p>Model is dynamic and can working with different shapes of input.</p>
 <p><strong>NOTE</strong>: Model expects 16-bit, 16 kHz, mono-channel WAVE audio as input data.</p>
-</div>
-<div class="section" id="converted-model">
+</section>
+<section id="converted-model">
 <h4>Converted model<a class="headerlink" href="#converted-model" title="Permalink to this headline">¶</a></h4>
 <p>The converted model has the same parameters as the original model.</p>
-</div>
-</div>
-<div class="section" id="output">
+</section>
+</section>
+<section id="output">
 <h3>Output<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="id1">
+<section id="id1">
 <h4>Original model<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
 <p>Per-token probabilities (after LogSoftmax) for every symbol in the alphabet, name - <code class="docutils literal notranslate"><span class="pre">logits</span></code>,  shape - <code class="docutils literal notranslate"><span class="pre">B,</span> <span class="pre">N,</span> <span class="pre">32</span></code>, output data format is <code class="docutils literal notranslate"><span class="pre">B,</span> <span class="pre">N,</span> <span class="pre">C</span></code>, where:</p>
 <ul class="simple">
@@ -2190,14 +2197,14 @@ Model alphabet: “[pad]”, “[s]”, “[/s]”, “[unk]”, “|”, “E�
 <li><p><code class="docutils literal notranslate"><span class="pre">[unk]</span></code> - unknown symbol</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">|</span></code> - whitespace symbol used as separator between words.</p></li>
 </ul>
-</div>
-<div class="section" id="id2">
+</section>
+<section id="id2">
 <h4>Converted model<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
 <p>The converted model has the same parameters as the original model.</p>
-</div>
-</div>
-</div>
-<div class="section" id="download-a-model-and-convert-it-into-openvino-ir-format">
+</section>
+</section>
+</section>
+<section id="download-a-model-and-convert-it-into-openvino-ir-format">
 <h2>Download a Model and Convert it into OpenVINO™ IR Format<a class="headerlink" href="#download-a-model-and-convert-it-into-openvino-ir-format" title="Permalink to this headline">¶</a></h2>
 <p>You can download models and if necessary convert them into OpenVINO™ IR format using the <span class="xref myst">Model Downloader and other automation tools</span> as shown in the examples below.</p>
 <p>An example of using the Model Downloader:</p>
@@ -2208,15 +2215,15 @@ Model alphabet: “[pad]”, “[s]”, “[/s]”, “[unk]”, “|”, “E�
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">omz_converter</span> <span class="o">--</span><span class="n">name</span> <span class="o">&lt;</span><span class="n">model_name</span><span class="o">&gt;</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="demo-usage">
+</section>
+<section id="demo-usage">
 <h2>Demo usage<a class="headerlink" href="#demo-usage" title="Permalink to this headline">¶</a></h2>
 <p>The model can be used in the following demos provided by the Open Model Zoo to show its capabilities:</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="../../../demos/speech_recognition_wav2vec_demo/python/README.html"><span class="doc std std-doc">Speech Recognition Wav2Vec Python* Demo</span></a></p></li>
 </ul>
-</div>
-<div class="section" id="legal-information">
+</section>
+<section id="legal-information">
 <h2>Legal Information<a class="headerlink" href="#legal-information" title="Permalink to this headline">¶</a></h2>
 <p>The original model is distributed under the following <a class="reference external" href="https://raw.githubusercontent.com/pytorch/fairseq/master/LICENSE">license</a>.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">MIT</span> <span class="n">License</span>
@@ -2242,8 +2249,8 @@ Model alphabet: “[pad]”, “[s]”, “[/s]”, “[unk]”, “|”, “E�
 <span class="n">SOFTWARE</span><span class="o">.</span>
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -2274,7 +2281,7 @@ Model alphabet: “[pad]”, “[s]”, “[/s]”, “[unk]”, “|”, “E�
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

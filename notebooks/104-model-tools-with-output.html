@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Working with Open Model Zoo Models &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -534,13 +541,13 @@
             
                 <div>
                   
-  <div class="section" id="working-with-open-model-zoo-models">
+  <section id="working-with-open-model-zoo-models">
 <h1>Working with Open Model Zoo Models<a class="headerlink" href="#working-with-open-model-zoo-models" title="Permalink to this headline">¶</a></h1>
 <p>This tutorial shows how to download a model from the <a class="reference external" href="https://github.com/openvinotoolkit/open_model_zoo">Open Model
 Zoo</a>, convert it
 to OpenVINO’s IR format, show information about the model, and benchmark
 the model.</p>
-<div class="section" id="openvino-and-open-model-zoo-tools">
+<section id="openvino-and-open-model-zoo-tools">
 <h2>OpenVINO and Open Model Zoo Tools<a class="headerlink" href="#openvino-and-open-model-zoo-tools" title="Permalink to this headline">¶</a></h2>
 <p>The OpenVINO and Open Model Zoo tools are listed in the table below.</p>
 <table class="table">
@@ -585,10 +592,10 @@ computing inference time</p></td>
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="preparation">
+</section>
+<section id="preparation">
 <h2>Preparation<a class="headerlink" href="#preparation" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="model-name">
+<section id="model-name">
 <h3>Model Name<a class="headerlink" href="#model-name" title="Permalink to this headline">¶</a></h3>
 <p>Set <code class="docutils literal notranslate"><span class="pre">model_name</span></code> to the name of the Open Model Zoo model to use in
 this notebook. Refer to the list of
@@ -601,8 +608,8 @@ pre-trained models for a full list of models that can be used. Set the
 <span class="n">model_name</span> <span class="o">=</span> <span class="s2">&quot;mobilenet-v2-pytorch&quot;</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="imports">
+</section>
+<section id="imports">
 <h3>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">import</span> <span class="nn">sys</span>
@@ -615,8 +622,8 @@ pre-trained models for a full list of models that can be used. Set the
 <span class="kn">from</span> <span class="nn">notebook_utils</span> <span class="kn">import</span> <span class="n">DeviceNotFoundAlert</span><span class="p">,</span> <span class="n">NotebookAlert</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="settings-and-configuration">
+</section>
+<section id="settings-and-configuration">
 <h3>Settings and Configuration<a class="headerlink" href="#settings-and-configuration" title="Permalink to this headline">¶</a></h3>
 <p>Set the file and directory paths. By default, this demo notebook
 downloads models from Open Model Zoo to a directory
@@ -650,9 +657,9 @@ downloaded and converted.</p></li>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">base_model_dir</span><span class="p">:</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">open_model_zoo_models</span><span class="p">,</span> <span class="n">omz_cache_dir</span><span class="p">:</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">open_model_zoo_cache</span><span class="p">,</span> <span class="n">gpu_availble</span><span class="p">:</span> <span class="kc">False</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="download-model-from-open-model-zoo">
+</section>
+</section>
+<section id="download-model-from-open-model-zoo">
 <h2>Download Model from Open Model Zoo<a class="headerlink" href="#download-model-from-open-model-zoo" title="Permalink to this headline">¶</a></h2>
 <p>Specify, display and run the Model Downloader command to download the
 model</p>
@@ -677,8 +684,8 @@ model</p>
 <span class="o">==========</span> <span class="n">Downloading</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">open_model_zoo_models</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">mobilenet</span><span class="o">-</span><span class="n">v2</span><span class="o">-</span><span class="n">pytorch</span><span class="o">/</span><span class="n">mobilenet_v2</span><span class="o">-</span><span class="n">b0353104</span><span class="o">.</span><span class="n">pth</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="convert-model-to-openvino-ir-format">
+</section>
+<section id="convert-model-to-openvino-ir-format">
 <h2>Convert Model to OpenVINO IR format<a class="headerlink" href="#convert-model-to-openvino-ir-format" title="Permalink to this headline">¶</a></h2>
 <p>Specify, display and run the Model Converter command to convert the
 model to IR format. Model Conversion may take a while. The output of the
@@ -702,12 +709,12 @@ that are already in IR format, conversion will be skipped.</p>
 <code class="docutils literal notranslate"><span class="pre">omz_converter</span> <span class="pre">--name</span> <span class="pre">mobilenet-v2-pytorch</span> <span class="pre">--precisions</span> <span class="pre">FP16</span> <span class="pre">--download_dir</span> <span class="pre">/home/runner/open_model_zoo_models</span> <span class="pre">--output_dir</span> <span class="pre">/home/runner/open_model_zoo_models</span></code></p>
 <p>Converting mobilenet-v2-pytorch…</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">==========</span> <span class="n">Converting</span> <span class="n">mobilenet</span><span class="o">-</span><span class="n">v2</span><span class="o">-</span><span class="n">pytorch</span> <span class="n">to</span> <span class="n">ONNX</span>
-<span class="n">Conversion</span> <span class="n">to</span> <span class="n">ONNX</span> <span class="n">command</span><span class="p">:</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8</span><span class="o">.</span><span class="mi">12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">python</span> <span class="o">--</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8</span><span class="o">.</span><span class="mi">12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">openvino</span><span class="o">/</span><span class="n">model_zoo</span><span class="o">/</span><span class="n">internal_scripts</span><span class="o">/</span><span class="n">pytorch_to_onnx</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">model</span><span class="o">-</span><span class="n">name</span><span class="o">=</span><span class="n">mobilenet_v2</span> <span class="o">--</span><span class="n">weights</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">open_model_zoo_models</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">mobilenet</span><span class="o">-</span><span class="n">v2</span><span class="o">-</span><span class="n">pytorch</span><span class="o">/</span><span class="n">mobilenet_v2</span><span class="o">-</span><span class="n">b0353104</span><span class="o">.</span><span class="n">pth</span> <span class="o">--</span><span class="n">import</span><span class="o">-</span><span class="n">module</span><span class="o">=</span><span class="n">torchvision</span><span class="o">.</span><span class="n">models</span> <span class="o">--</span><span class="nb">input</span><span class="o">-</span><span class="n">shape</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">224</span><span class="p">,</span><span class="mi">224</span> <span class="o">--</span><span class="n">output</span><span class="o">-</span><span class="n">file</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">open_model_zoo_models</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">mobilenet</span><span class="o">-</span><span class="n">v2</span><span class="o">-</span><span class="n">pytorch</span><span class="o">/</span><span class="n">mobilenet</span><span class="o">-</span><span class="n">v2</span><span class="o">.</span><span class="n">onnx</span> <span class="o">--</span><span class="nb">input</span><span class="o">-</span><span class="n">names</span><span class="o">=</span><span class="n">data</span> <span class="o">--</span><span class="n">output</span><span class="o">-</span><span class="n">names</span><span class="o">=</span><span class="n">prob</span>
+<span class="n">Conversion</span> <span class="n">to</span> <span class="n">ONNX</span> <span class="n">command</span><span class="p">:</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">python</span> <span class="o">--</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">openvino</span><span class="o">/</span><span class="n">model_zoo</span><span class="o">/</span><span class="n">internal_scripts</span><span class="o">/</span><span class="n">pytorch_to_onnx</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">model</span><span class="o">-</span><span class="n">name</span><span class="o">=</span><span class="n">mobilenet_v2</span> <span class="o">--</span><span class="n">weights</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">open_model_zoo_models</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">mobilenet</span><span class="o">-</span><span class="n">v2</span><span class="o">-</span><span class="n">pytorch</span><span class="o">/</span><span class="n">mobilenet_v2</span><span class="o">-</span><span class="n">b0353104</span><span class="o">.</span><span class="n">pth</span> <span class="o">--</span><span class="n">import</span><span class="o">-</span><span class="n">module</span><span class="o">=</span><span class="n">torchvision</span><span class="o">.</span><span class="n">models</span> <span class="o">--</span><span class="nb">input</span><span class="o">-</span><span class="n">shape</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">224</span><span class="p">,</span><span class="mi">224</span> <span class="o">--</span><span class="n">output</span><span class="o">-</span><span class="n">file</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">open_model_zoo_models</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">mobilenet</span><span class="o">-</span><span class="n">v2</span><span class="o">-</span><span class="n">pytorch</span><span class="o">/</span><span class="n">mobilenet</span><span class="o">-</span><span class="n">v2</span><span class="o">.</span><span class="n">onnx</span> <span class="o">--</span><span class="nb">input</span><span class="o">-</span><span class="n">names</span><span class="o">=</span><span class="n">data</span> <span class="o">--</span><span class="n">output</span><span class="o">-</span><span class="n">names</span><span class="o">=</span><span class="n">prob</span>
 
 <span class="n">ONNX</span> <span class="n">check</span> <span class="n">passed</span> <span class="n">successfully</span><span class="o">.</span>
 
 <span class="o">==========</span> <span class="n">Converting</span> <span class="n">mobilenet</span><span class="o">-</span><span class="n">v2</span><span class="o">-</span><span class="n">pytorch</span> <span class="n">to</span> <span class="n">IR</span> <span class="p">(</span><span class="n">FP16</span><span class="p">)</span>
-<span class="n">Conversion</span> <span class="n">command</span><span class="p">:</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8</span><span class="o">.</span><span class="mi">12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">python</span> <span class="o">--</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8</span><span class="o">.</span><span class="mi">12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">mo</span> <span class="o">--</span><span class="n">framework</span><span class="o">=</span><span class="n">onnx</span> <span class="o">--</span><span class="n">data_type</span><span class="o">=</span><span class="n">FP16</span> <span class="o">--</span><span class="n">output_dir</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">open_model_zoo_models</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">mobilenet</span><span class="o">-</span><span class="n">v2</span><span class="o">-</span><span class="n">pytorch</span><span class="o">/</span><span class="n">FP16</span> <span class="o">--</span><span class="n">model_name</span><span class="o">=</span><span class="n">mobilenet</span><span class="o">-</span><span class="n">v2</span><span class="o">-</span><span class="n">pytorch</span> <span class="o">--</span><span class="nb">input</span><span class="o">=</span><span class="n">data</span> <span class="s1">&#39;--mean_values=data[123.675,116.28,103.53]&#39;</span> <span class="s1">&#39;--scale_values=data[58.624,57.12,57.375]&#39;</span> <span class="o">--</span><span class="n">reverse_input_channels</span> <span class="o">--</span><span class="n">output</span><span class="o">=</span><span class="n">prob</span> <span class="o">--</span><span class="n">input_model</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">open_model_zoo_models</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">mobilenet</span><span class="o">-</span><span class="n">v2</span><span class="o">-</span><span class="n">pytorch</span><span class="o">/</span><span class="n">mobilenet</span><span class="o">-</span><span class="n">v2</span><span class="o">.</span><span class="n">onnx</span> <span class="s1">&#39;--layout=data(NCHW)&#39;</span> <span class="s1">&#39;--input_shape=[1, 3, 224, 224]&#39;</span>
+<span class="n">Conversion</span> <span class="n">command</span><span class="p">:</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">python</span> <span class="o">--</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">mo</span> <span class="o">--</span><span class="n">framework</span><span class="o">=</span><span class="n">onnx</span> <span class="o">--</span><span class="n">data_type</span><span class="o">=</span><span class="n">FP16</span> <span class="o">--</span><span class="n">output_dir</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">open_model_zoo_models</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">mobilenet</span><span class="o">-</span><span class="n">v2</span><span class="o">-</span><span class="n">pytorch</span><span class="o">/</span><span class="n">FP16</span> <span class="o">--</span><span class="n">model_name</span><span class="o">=</span><span class="n">mobilenet</span><span class="o">-</span><span class="n">v2</span><span class="o">-</span><span class="n">pytorch</span> <span class="o">--</span><span class="nb">input</span><span class="o">=</span><span class="n">data</span> <span class="s1">&#39;--mean_values=data[123.675,116.28,103.53]&#39;</span> <span class="s1">&#39;--scale_values=data[58.624,57.12,57.375]&#39;</span> <span class="o">--</span><span class="n">reverse_input_channels</span> <span class="o">--</span><span class="n">output</span><span class="o">=</span><span class="n">prob</span> <span class="o">--</span><span class="n">input_model</span><span class="o">=/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">open_model_zoo_models</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">mobilenet</span><span class="o">-</span><span class="n">v2</span><span class="o">-</span><span class="n">pytorch</span><span class="o">/</span><span class="n">mobilenet</span><span class="o">-</span><span class="n">v2</span><span class="o">.</span><span class="n">onnx</span> <span class="s1">&#39;--layout=data(NCHW)&#39;</span> <span class="s1">&#39;--input_shape=[1, 3, 224, 224]&#39;</span>
 
 <span class="n">Model</span> <span class="n">Optimizer</span> <span class="n">arguments</span><span class="p">:</span>
 <span class="n">Common</span> <span class="n">parameters</span><span class="p">:</span>
@@ -734,21 +741,21 @@ that are already in IR format, conversion will be skipped.</p>
 <span class="n">Advanced</span> <span class="n">parameters</span><span class="p">:</span>
     <span class="o">-</span> <span class="n">Force</span> <span class="n">the</span> <span class="n">usage</span> <span class="n">of</span> <span class="n">legacy</span> <span class="n">Frontend</span> <span class="n">of</span> <span class="n">Model</span> <span class="n">Optimizer</span> <span class="k">for</span> <span class="n">model</span> <span class="n">conversion</span> <span class="n">into</span> <span class="n">IR</span><span class="p">:</span>   <span class="kc">False</span>
     <span class="o">-</span> <span class="n">Force</span> <span class="n">the</span> <span class="n">usage</span> <span class="n">of</span> <span class="n">new</span> <span class="n">Frontend</span> <span class="n">of</span> <span class="n">Model</span> <span class="n">Optimizer</span> <span class="k">for</span> <span class="n">model</span> <span class="n">conversion</span> <span class="n">into</span> <span class="n">IR</span><span class="p">:</span>  <span class="kc">False</span>
-<span class="n">OpenVINO</span> <span class="n">runtime</span> <span class="n">found</span> <span class="ow">in</span><span class="p">:</span>  <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8</span><span class="o">.</span><span class="mi">12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">openvino</span>
-<span class="n">OpenVINO</span> <span class="n">runtime</span> <span class="n">version</span><span class="p">:</span>   <span class="mf">2022.1</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="mi">7019</span><span class="o">-</span><span class="n">cdb9bec7210</span><span class="o">-</span><span class="n">releases</span><span class="o">/</span><span class="mi">2022</span><span class="o">/</span><span class="mi">1</span>
-<span class="n">Model</span> <span class="n">Optimizer</span> <span class="n">version</span><span class="p">:</span>    <span class="mf">2022.1</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="mi">7019</span><span class="o">-</span><span class="n">cdb9bec7210</span><span class="o">-</span><span class="n">releases</span><span class="o">/</span><span class="mi">2022</span><span class="o">/</span><span class="mi">1</span>
+<span class="n">OpenVINO</span> <span class="n">runtime</span> <span class="n">found</span> <span class="ow">in</span><span class="p">:</span>  <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">openvino</span>
+<span class="n">OpenVINO</span> <span class="n">runtime</span> <span class="n">version</span><span class="p">:</span>   <span class="mf">2022.1.0</span><span class="o">-</span><span class="mi">7019</span><span class="o">-</span><span class="n">cdb9bec7210</span><span class="o">-</span><span class="n">releases</span><span class="o">/</span><span class="mi">2022</span><span class="o">/</span><span class="mi">1</span>
+<span class="n">Model</span> <span class="n">Optimizer</span> <span class="n">version</span><span class="p">:</span>    <span class="mf">2022.1.0</span><span class="o">-</span><span class="mi">7019</span><span class="o">-</span><span class="n">cdb9bec7210</span><span class="o">-</span><span class="n">releases</span><span class="o">/</span><span class="mi">2022</span><span class="o">/</span><span class="mi">1</span>
 <span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">Generated</span> <span class="n">IR</span> <span class="n">version</span> <span class="mi">11</span> <span class="n">model</span><span class="o">.</span>
 <span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">XML</span> <span class="n">file</span><span class="p">:</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">open_model_zoo_models</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">mobilenet</span><span class="o">-</span><span class="n">v2</span><span class="o">-</span><span class="n">pytorch</span><span class="o">/</span><span class="n">FP16</span><span class="o">/</span><span class="n">mobilenet</span><span class="o">-</span><span class="n">v2</span><span class="o">-</span><span class="n">pytorch</span><span class="o">.</span><span class="n">xml</span>
 <span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">BIN</span> <span class="n">file</span><span class="p">:</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">open_model_zoo_models</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">mobilenet</span><span class="o">-</span><span class="n">v2</span><span class="o">-</span><span class="n">pytorch</span><span class="o">/</span><span class="n">FP16</span><span class="o">/</span><span class="n">mobilenet</span><span class="o">-</span><span class="n">v2</span><span class="o">-</span><span class="n">pytorch</span><span class="o">.</span><span class="n">bin</span>
 <span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">Total</span> <span class="n">execution</span> <span class="n">time</span><span class="p">:</span> <span class="mf">0.73</span> <span class="n">seconds</span><span class="o">.</span>
 <span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">Memory</span> <span class="n">consumed</span><span class="p">:</span> <span class="mi">95</span> <span class="n">MB</span><span class="o">.</span>
 <span class="n">It</span><span class="s1">&#39;s been a while, check for a new version of Intel(R) Distribution of OpenVINO(TM) toolkit here https://software.intel.com/content/www/us/en/develop/tools/openvino-toolkit/download.html?cid=other&amp;source=prod&amp;campid=ww_2022_bu_IOTG_OpenVINO-2022-1&amp;content=upg_all&amp;medium=organic or on the GitHub*</span>
-<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">The</span> <span class="n">model</span> <span class="n">was</span> <span class="n">converted</span> <span class="n">to</span> <span class="n">IR</span> <span class="n">v11</span><span class="p">,</span> <span class="n">the</span> <span class="n">latest</span> <span class="n">model</span> <span class="nb">format</span> <span class="n">that</span> <span class="n">corresponds</span> <span class="n">to</span> <span class="n">the</span> <span class="n">source</span> <span class="n">DL</span> <span class="n">framework</span> <span class="nb">input</span><span class="o">/</span><span class="n">output</span> <span class="nb">format</span><span class="o">.</span> <span class="n">While</span> <span class="n">IR</span> <span class="n">v11</span> <span class="ow">is</span> <span class="n">backwards</span> <span class="n">compatible</span> <span class="k">with</span> <span class="n">OpenVINO</span> <span class="n">Inference</span> <span class="n">Engine</span> <span class="n">API</span> <span class="n">v1</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span> <span class="n">please</span> <span class="n">use</span> <span class="n">API</span> <span class="n">v2</span><span class="o">.</span><span class="mi">0</span> <span class="p">(</span><span class="k">as</span> <span class="n">of</span> <span class="mf">2022.1</span><span class="p">)</span> <span class="n">to</span> <span class="n">take</span> <span class="n">advantage</span> <span class="n">of</span> <span class="n">the</span> <span class="n">latest</span> <span class="n">improvements</span> <span class="ow">in</span> <span class="n">IR</span> <span class="n">v11</span><span class="o">.</span>
-<span class="n">Find</span> <span class="n">more</span> <span class="n">information</span> <span class="n">about</span> <span class="n">API</span> <span class="n">v2</span><span class="o">.</span><span class="mi">0</span> <span class="ow">and</span> <span class="n">IR</span> <span class="n">v11</span> <span class="n">at</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">docs</span><span class="o">.</span><span class="n">openvino</span><span class="o">.</span><span class="n">ai</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">The</span> <span class="n">model</span> <span class="n">was</span> <span class="n">converted</span> <span class="n">to</span> <span class="n">IR</span> <span class="n">v11</span><span class="p">,</span> <span class="n">the</span> <span class="n">latest</span> <span class="n">model</span> <span class="nb">format</span> <span class="n">that</span> <span class="n">corresponds</span> <span class="n">to</span> <span class="n">the</span> <span class="n">source</span> <span class="n">DL</span> <span class="n">framework</span> <span class="nb">input</span><span class="o">/</span><span class="n">output</span> <span class="nb">format</span><span class="o">.</span> <span class="n">While</span> <span class="n">IR</span> <span class="n">v11</span> <span class="ow">is</span> <span class="n">backwards</span> <span class="n">compatible</span> <span class="k">with</span> <span class="n">OpenVINO</span> <span class="n">Inference</span> <span class="n">Engine</span> <span class="n">API</span> <span class="n">v1</span><span class="mf">.0</span><span class="p">,</span> <span class="n">please</span> <span class="n">use</span> <span class="n">API</span> <span class="n">v2</span><span class="mf">.0</span> <span class="p">(</span><span class="k">as</span> <span class="n">of</span> <span class="mf">2022.1</span><span class="p">)</span> <span class="n">to</span> <span class="n">take</span> <span class="n">advantage</span> <span class="n">of</span> <span class="n">the</span> <span class="n">latest</span> <span class="n">improvements</span> <span class="ow">in</span> <span class="n">IR</span> <span class="n">v11</span><span class="o">.</span>
+<span class="n">Find</span> <span class="n">more</span> <span class="n">information</span> <span class="n">about</span> <span class="n">API</span> <span class="n">v2</span><span class="mf">.0</span> <span class="ow">and</span> <span class="n">IR</span> <span class="n">v11</span> <span class="n">at</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">docs</span><span class="o">.</span><span class="n">openvino</span><span class="o">.</span><span class="n">ai</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="get-model-information">
+</section>
+<section id="get-model-information">
 <h2>Get Model Information<a class="headerlink" href="#get-model-information" title="Permalink to this headline">¶</a></h2>
 <p>The Info Dumper prints the following information for Open Model Zoo
 models:</p>
@@ -809,8 +816,8 @@ path to the model directory, and build the path to the IR file.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">open_model_zoo_models</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">mobilenet</span><span class="o">-</span><span class="n">v2</span><span class="o">-</span><span class="n">pytorch</span><span class="o">/</span><span class="n">FP16</span><span class="o">/</span><span class="n">mobilenet</span><span class="o">-</span><span class="n">v2</span><span class="o">-</span><span class="n">pytorch</span><span class="o">.</span><span class="n">xml</span> <span class="n">exists</span><span class="p">:</span> <span class="kc">True</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="run-benchmark-tool">
+</section>
+<section id="run-benchmark-tool">
 <h2>Run Benchmark Tool<a class="headerlink" href="#run-benchmark-tool" title="Permalink to this headline">¶</a></h2>
 <p>By default, Benchmark Tool runs inference for 60 seconds in asynchronous
 mode on CPU. It returns inference speed as latency (milliseconds per
@@ -883,7 +890,7 @@ Latency:
 Throughput: 284.46 FPS
 </pre></div>
 </div>
-<div class="section" id="benchmark-with-different-settings">
+<section id="benchmark-with-different-settings">
 <h3>Benchmark with Different Settings<a class="headerlink" href="#benchmark-with-different-settings" title="Permalink to this headline">¶</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">benchmark_app</span></code> displays logging information that is not always
 necessary. We parse the output with json and show a more compact result</p>
@@ -974,9 +981,9 @@ inference</strong></p>
 <div class="alert alert-warning">Running this cell requires a GPU device, which is not available on this system. The following device is available: CPU<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">benchmark_model</span><span class="p">(</span><span class="n">model_path</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="s2">&quot;MULTI:CPU,GPU&quot;</span><span class="p">,</span> <span class="n">seconds</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">api</span><span class="o">=</span><span class="s2">&quot;async&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="alert alert-warning">Running this cell requires a GPU device, which is not available on this system. The following device is available: CPU</div>
-</div>
-</div>
+<div class="alert alert-warning">Running this cell requires a GPU device, which is not available on this system. The following device is available: CPU</section>
+</section>
+</section>
 
 
                 </div>
@@ -1007,7 +1014,7 @@ inference</strong></p>
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

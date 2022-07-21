@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Speech Recognition DeepSpeech Python* Demo &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../../../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -2079,11 +2086,11 @@
             
                 <div>
                   
-  <div class="section" id="speech-recognition-deepspeech-python-demo">
+  <section id="speech-recognition-deepspeech-python-demo">
 <h1>Speech Recognition DeepSpeech Python* Demo<a class="headerlink" href="#speech-recognition-deepspeech-python-demo" title="Permalink to this headline">¶</a></h1>
 <p>This demo shows Automatic Speech Recognition (ASR) with a pretrained Mozilla* DeepSpeech 0.8.2 model.</p>
 <p>It works with version 0.6.1 as well, and should also work with other models trained with Mozilla DeepSpeech 0.6.x/0.7.x/0.8.x/0.9.x with ASCII alphabets.</p>
-<div class="section" id="how-it-works">
+<section id="how-it-works">
 <h2>How It Works<a class="headerlink" href="#how-it-works" title="Permalink to this headline">¶</a></h2>
 <p>The application accepts</p>
 <ul class="simple">
@@ -2096,8 +2103,8 @@
 <li><p><em>Normal mode</em> (default). Audio data is streamed in 10 second chunks into a streaming pipeline of: computation of audio features, running a neural network to get per-frame character probabilities, and CTC decoding. After processing the whole file, the demo prints the decoded text and the time spent.</p></li>
 <li><p>In <em>simulated real-time mode</em> the app simulates speech recognition of live recording by feeding audio data from input file and displaying the current partial result in a creeping line in console output. Data is fed at real-time speed by introducing the necessary delays. Audio data is fed in 0.32 sec chunks (size is controlled by <code class="docutils literal notranslate"><span class="pre">--block-size</span></code> option) into the same streaming pipeline. In this mode the pipeline provides updated recognition result after each data chunk.</p></li>
 </ul>
-</div>
-<div class="section" id="preparing-to-run">
+</section>
+<section id="preparing-to-run">
 <h2>Preparing to Run<a class="headerlink" href="#preparing-to-run" title="Permalink to this headline">¶</a></h2>
 <p>The list of models supported by the demo is in <code class="docutils literal notranslate"><span class="pre">&lt;omz_dir&gt;/demos/speech_recognition_deepspeech_demo/python/models.lst</span></code> file.
 This file can be used as a parameter for <span class="xref myst">Model Downloader</span> and Converter to download and, if necessary, convert models to OpenVINO IR format (*.xml + *.bin).
@@ -2111,14 +2118,14 @@ Don’t forget to configure Model Optimizer, which is a requirement for Model Do
 </pre></div>
 </div>
 <p>Please pay attention to the model license, <strong>Mozilla Public License 2.0</strong>.</p>
-</div>
-<div class="section" id="prerequisites">
+</section>
+<section id="prerequisites">
 <h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
 <p>The demo depends on the <code class="docutils literal notranslate"><span class="pre">ctcdecode_numpy</span></code> Python extension module, which implements CTC decoding in C++ for faster decoding.
 Please refer to <a class="reference internal" href="../../README.html"><span class="doc std std-doc">Open Model Zoo demos</span></a> for instructions
 on how to build the extension module and prepare the environment for running the demo.
 Alternatively, instead of using <code class="docutils literal notranslate"><span class="pre">cmake</span></code> you can run <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">pip</span> <span class="pre">install</span> <span class="pre">.</span></code> inside <code class="docutils literal notranslate"><span class="pre">ctcdecode-numpy</span></code> directory to build and install <code class="docutils literal notranslate"><span class="pre">ctcdecode-numpy</span></code>.</p>
-<div class="section" id="supported-models">
+<section id="supported-models">
 <h3>Supported Models<a class="headerlink" href="#supported-models" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>mozilla-deepspeech-0.6.1</p></li>
@@ -2128,9 +2135,9 @@ Alternatively, instead of using <code class="docutils literal notranslate"><span
 <blockquote>
 <div><p><strong>NOTE</strong>: Refer to the tables <a class="reference internal" href="../../../models/intel/device_support.html"><span class="doc std std-doc">Intel’s Pre-Trained Models Device Support</span></a> and <a class="reference internal" href="../../../models/public/device_support.html"><span class="doc std std-doc">Public Pre-Trained Models Device Support</span></a> for the details on models inference support at different devices.</p>
 </div></blockquote>
-</div>
-</div>
-<div class="section" id="running-demo">
+</section>
+</section>
+<section id="running-demo">
 <h2>Running Demo<a class="headerlink" href="#running-demo" title="Permalink to this headline">¶</a></h2>
 <p>Run the application with <code class="docutils literal notranslate"><span class="pre">-h</span></code> option to see help message.
 Here are the available command line options:</p>
@@ -2157,9 +2164,9 @@ Here are the available command line options:</p>
                         <span class="n">Optional</span><span class="o">.</span> <span class="n">Path</span> <span class="n">to</span> <span class="n">language</span> <span class="n">model</span> <span class="n">file</span>
   <span class="o">-</span><span class="n">p</span> <span class="n">NAME</span><span class="p">,</span> <span class="o">--</span><span class="n">profile</span> <span class="n">NAME</span>
                         <span class="n">Required</span><span class="o">.</span> <span class="n">Choose</span> <span class="n">pre</span><span class="o">/</span><span class="n">post</span><span class="o">-</span><span class="n">processing</span> <span class="n">profile</span><span class="p">:</span> <span class="n">mds06x_en</span>
-                        <span class="k">for</span> <span class="n">Mozilla</span> <span class="n">DeepSpeech</span> <span class="n">v0</span><span class="o">.</span><span class="mf">6.</span><span class="n">x</span><span class="p">,</span>
+                        <span class="k">for</span> <span class="n">Mozilla</span> <span class="n">DeepSpeech</span> <span class="n">v0</span><span class="mf">.6</span><span class="o">.</span><span class="n">x</span><span class="p">,</span>
                         <span class="n">mds07x_en</span><span class="o">/</span><span class="n">mds08x_en</span><span class="o">/</span><span class="n">mds09x_en</span> <span class="k">for</span> <span class="n">Mozilla</span> <span class="n">DeepSpeech</span>
-                        <span class="n">v0</span><span class="o">.</span><span class="mf">7.</span><span class="n">x</span><span class="o">/</span><span class="n">v0</span><span class="o">.</span><span class="mf">8.</span><span class="n">x</span><span class="o">/</span><span class="n">v0</span><span class="o">.</span><span class="mf">9.</span><span class="n">x</span><span class="p">(</span><span class="n">English</span><span class="p">),</span> <span class="n">other</span><span class="p">:</span> <span class="n">filename</span> <span class="n">of</span> <span class="n">a</span>
+                        <span class="n">v0</span><span class="mf">.7</span><span class="o">.</span><span class="n">x</span><span class="o">/</span><span class="n">v0</span><span class="mf">.8</span><span class="o">.</span><span class="n">x</span><span class="o">/</span><span class="n">v0</span><span class="mf">.9</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="n">English</span><span class="p">),</span> <span class="n">other</span><span class="p">:</span> <span class="n">filename</span> <span class="n">of</span> <span class="n">a</span>
                         <span class="n">YAML</span> <span class="n">file</span>
   <span class="o">-</span><span class="n">b</span> <span class="n">N</span><span class="p">,</span> <span class="o">--</span><span class="n">beam</span><span class="o">-</span><span class="n">width</span> <span class="n">N</span>  <span class="n">Beam</span> <span class="n">width</span> <span class="k">for</span> <span class="n">beam</span> <span class="n">search</span> <span class="ow">in</span> <span class="n">CTC</span> <span class="n">decoder</span> <span class="p">(</span><span class="n">default</span>
                         <span class="mi">500</span><span class="p">)</span>
@@ -2199,24 +2206,24 @@ Here are the available command line options:</p>
 </div></blockquote>
 <p>Optional (but highly recommended) language model files, <code class="docutils literal notranslate"><span class="pre">deepspeech-0.8.2-models.kenlm</span></code> or <code class="docutils literal notranslate"><span class="pre">lm.binary</span></code> are part of corresponding model downloaded content and will be located in the Model Downloader output folder after model downloading and conversion.
 An example audio file can be taken from OpenVINO <a class="reference external" href="https://storage.openvinotoolkit.org/data/test_data/">test data</a> folder.</p>
-</div>
-<div class="section" id="demo-output">
+</section>
+<section id="demo-output">
 <h2>Demo Output<a class="headerlink" href="#demo-output" title="Permalink to this headline">¶</a></h2>
 <p>The application shows time taken by the initialization and processing stages, and the decoded text for the audio file. In real-time mode the current recognition result is shown while the app is running as well.
 In offline mode the demo reports</p>
 <ul class="simple">
 <li><p><strong>Latency</strong>: total processing time required to process input data (from reading the data to displaying the results).</p></li>
 </ul>
-</div>
-<div class="section" id="see-also">
+</section>
+<section id="see-also">
 <h2>See Also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="../../README.html"><span class="doc std std-doc">Open Model Zoo Demos</span></a></p></li>
 <li><p><a class="reference external" href="https://docs.openvino.ai/latest/openvino_docs_MO_DG_Deep_Learning_Model_Optimizer_DevGuide.html">Model Optimizer</a></p></li>
 <li><p><span class="xref myst">Model Downloader</span></p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -2247,7 +2254,7 @@ In offline mode the demo reports</p>
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Post-Training Quantization Best Practices &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -1844,20 +1851,20 @@
             
                 <div>
                   
-  <div class="section" id="post-training-quantization-best-practices">
+  <section id="post-training-quantization-best-practices">
 <span id="doxid-pot-docs-best-practices"></span><span id="index-0"></span><h1>Post-Training Quantization Best Practices<a class="headerlink" href="#post-training-quantization-best-practices" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-pot-docs-best-practices-1md-openvino-tools-pot-docs-bestpractices"></span></p>
 <div class="toctree-wrapper compound">
 </div>
-<div class="section" id="introduction">
+<section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>The <a class="reference internal" href="pot_default_quantization_usage.html#doxid-pot-default-quantization-usage"><span class="std std-ref">Default Quantization</span></a> of the Post-training Optimization Tool (POT) is the fastest and easiest way to get a quantized model because it requires only some unannotated representative dataset to be provided in most cases. Thus, it is recommended to use it as a starting point when it comes to model optimization. However, it can lead to significant accuracy deviation in some cases. This document is aimed at providing tips to address this issue.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>POT uses inference on the CPU during model optimization. It means the ability to infer the original floating-point model is a prerequisite for model optimization. It is also worth mentioning that in the case of 8-bit quantization it is recommended to run POT on the same CPU architecture when optimizing for CPU or VNNI-based CPU when quantizing for a non-CPU device, such as GPU, VPU, or GNA. It should help to avoid the impact of the <a class="reference internal" href="pot_saturation_issue.html#doxid-pot-saturation-issue"><span class="std std-ref">saturation issue</span></a> that occurs on AVX and SSE based CPU devices.</p>
 </div>
-</div>
-<div class="section" id="improving-accuracy-after-the-default-quantization">
+</section>
+<section id="improving-accuracy-after-the-default-quantization">
 <h2>Improving accuracy after the Default Quantization<a class="headerlink" href="#improving-accuracy-after-the-default-quantization" title="Permalink to this headline">¶</a></h2>
 <p>Parameters of the Default Quantization algorithm with basic settings are shown below:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="p">{</span>
@@ -1875,7 +1882,7 @@
 <li><p>Hyperparameters tuning</p></li>
 <li><p>AccuracyAwareQuantization algorithm</p></li>
 </ol>
-<div class="section" id="tuning-hyperparameters-of-the-default-quantization">
+<section id="tuning-hyperparameters-of-the-default-quantization">
 <h3>Tuning Hyperparameters of the Default Quantization<a class="headerlink" href="#tuning-hyperparameters-of-the-default-quantization" title="Permalink to this headline">¶</a></h3>
 <p>The Default Quantization algorithm provides multiple hyperparameters which can be used in order to improve accuracy results for the fully-quantized model. Below is a list of best practices that can be applied to improve accuracy without a substantial performance reduction with respect to default settings:</p>
 <ol class="arabic">
@@ -1910,9 +1917,9 @@
 <li><p>The next option is <code class="docutils literal notranslate"><span class="pre">stat_subset_size</span></code>. It controls the size of the calibration dataset used by POT to collect statistics for quantization parameters initialization. It is assumed that this dataset should contain a sufficient number of representative samples. Thus, varying this parameter may affect accuracy (higher is better). However, we empirically found that 300 samples are sufficient to get representative statistics in most cases.</p></li>
 <li><p>The last option is <code class="docutils literal notranslate"><span class="pre">ignored_scope</span></code>. It allows excluding some layers from the quantization process, i.e. their inputs will not be quantized. It may be helpful for some patterns for which it is known in advance that they drop accuracy when executing in low-precision. For example, <code class="docutils literal notranslate"><span class="pre">DetectionOutput</span></code> layer of SSD model expressed as a subgraph should not be quantized to preserve the accuracy of Object Detection models. One of the sources for the ignored scope can be the Accuracy-aware algorithm which can revert layers back to the original precision (see details below).</p></li>
 </ol>
-</div>
-</div>
-<div class="section" id="accuracy-aware-quantization">
+</section>
+</section>
+<section id="accuracy-aware-quantization">
 <h2>Accuracy-aware Quantization<a class="headerlink" href="#accuracy-aware-quantization" title="Permalink to this headline">¶</a></h2>
 <p>In case when the steps above do not lead to the accurate quantized model you may use the so-called <a class="reference internal" href="pot_accuracyaware_usage.html#doxid-pot-accuracyaware-usage"><span class="std std-ref">Accuracy-aware Quantization</span></a> algorithm which leads to mixed-precision models. A fragment of Accuracy-aware Quantization configuration with default settings is shown below below:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="p">{</span>
@@ -1928,13 +1935,13 @@
 <p class="admonition-title">Note</p>
 <p>In general case, possible speedup after applying the Accuracy-aware Quantization algorithm is less than after the Default Quantization when the model gets fully quantized.</p>
 </div>
-<div class="section" id="reducing-the-performance-gap-of-accuracy-aware-quantization">
+<section id="reducing-the-performance-gap-of-accuracy-aware-quantization">
 <h3>Reducing the performance gap of Accuracy-aware Quantization<a class="headerlink" href="#reducing-the-performance-gap-of-accuracy-aware-quantization" title="Permalink to this headline">¶</a></h3>
 <p>To improve model performance after Accuracy-aware Quantization, you can try the <code class="docutils literal notranslate"><span class="pre">&quot;tune_hyperparams&quot;</span></code> setting and set it to <code class="docutils literal notranslate"><span class="pre">True</span></code>. It will enable searching for optimal quantization parameters before reverting layers to the “backup” precision. Note, that this can increase the overall quantization time.</p>
 <p>If you do not achieve the desired accuracy and performance after applying the Accuracy-aware Quantization algorithm or you need an accurate fully-quantized model, we recommend either using Quantization-Aware Training from <a class="reference internal" href="docs_nncf_introduction.html#doxid-docs-nncf-introduction"><span class="std std-ref">NNCF</span></a>.</p>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
                 </div>
@@ -1965,7 +1972,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

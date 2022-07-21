@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Human Action Recognition with OpenVINO &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -544,7 +551,7 @@
             
                 <div>
                   
-  <div class="section" id="human-action-recognition-with-openvino">
+  <section id="human-action-recognition-with-openvino">
 <h1>Human Action Recognition with OpenVINO<a class="headerlink" href="#human-action-recognition-with-openvino" title="Permalink to this headline">¶</a></h1>
 <p>This notebook demonstrates live human action recognition with OpenVINO.
 We use the <a class="reference external" href="https://docs.openvino.ai/2020.2/usergroup13.html">Action Recognition
@@ -578,7 +585,7 @@ Transformer</a>
 and <a class="reference external" href="https://www.kaggle.com/pytorch/resnet34">ResNet34</a>.
 <cite>:math:</cite>hookleftarrow` &lt;#a2&gt;`__</p>
 </div></blockquote>
-<div class="section" id="imports">
+<section id="imports">
 <h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">collections</span>
 <span class="kn">import</span> <span class="nn">os</span>
@@ -596,10 +603,10 @@ and <a class="reference external" href="https://www.kaggle.com/pytorch/resnet34"
 <span class="kn">import</span> <span class="nn">notebook_utils</span> <span class="k">as</span> <span class="nn">utils</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="the-models">
+</section>
+<section id="the-models">
 <h2>The models<a class="headerlink" href="#the-models" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="download-the-models">
+<section id="download-the-models">
 <h3>Download the models<a class="headerlink" href="#download-the-models" title="Permalink to this headline">¶</a></h3>
 <p>We use <code class="docutils literal notranslate"><span class="pre">omz_downloader</span></code>, which is a command-line tool from the
 <code class="docutils literal notranslate"><span class="pre">openvino-dev</span></code> package. <code class="docutils literal notranslate"><span class="pre">omz_downloader</span></code> automatically creates a
@@ -652,8 +659,8 @@ and post-processing.</em></p>
 <span class="o">==========</span> <span class="n">Downloading</span> <span class="n">model</span><span class="o">/</span><span class="n">intel</span><span class="o">/</span><span class="n">action</span><span class="o">-</span><span class="n">recognition</span><span class="o">-</span><span class="mi">0001</span><span class="o">/</span><span class="n">action</span><span class="o">-</span><span class="n">recognition</span><span class="o">-</span><span class="mi">0001</span><span class="o">-</span><span class="n">encoder</span><span class="o">/</span><span class="n">FP16</span><span class="o">/</span><span class="n">action</span><span class="o">-</span><span class="n">recognition</span><span class="o">-</span><span class="mi">0001</span><span class="o">-</span><span class="n">encoder</span><span class="o">.</span><span class="n">bin</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="load-your-labels">
+</section>
+<section id="load-your-labels">
 <h3>Load your labels<a class="headerlink" href="#load-your-labels" title="Permalink to this headline">¶</a></h3>
 <p>We are using <a class="reference external" href="https://deepmind.com/research/open-source/kinetics">Kinetics-400
 dataset</a>, and
@@ -674,8 +681,8 @@ model, change the txt file for ``”driver_actions.txt”``</em></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="s1">&#39;abseiling&#39;</span><span class="p">,</span> <span class="s1">&#39;air drumming&#39;</span><span class="p">,</span> <span class="s1">&#39;answering questions&#39;</span><span class="p">,</span> <span class="s1">&#39;applauding&#39;</span><span class="p">,</span> <span class="s1">&#39;applying cream&#39;</span><span class="p">,</span> <span class="s1">&#39;archery&#39;</span><span class="p">,</span> <span class="s1">&#39;arm wrestling&#39;</span><span class="p">,</span> <span class="s1">&#39;arranging flowers&#39;</span><span class="p">,</span> <span class="s1">&#39;assembling computer&#39;</span><span class="p">]</span> <span class="p">(</span><span class="mi">400</span><span class="p">,)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="load-the-models">
+</section>
+<section id="load-the-models">
 <h3>Load the models<a class="headerlink" href="#load-the-models" title="Permalink to this headline">¶</a></h3>
 <p>We will load the two models for this particular architecture, Encoder
 and Decoder. Downloaded models are located in a fixed structure,
@@ -687,7 +694,7 @@ indicating vendor, model name, and precision.</p>
 <li><p>Get input and output names of nodes.</p></li>
 </ol>
 <p>Only a few lines of code are required to run the model. Let’s see it.</p>
-<div class="section" id="model-initialization-function">
+<section id="model-initialization-function">
 <h4>Model Initialization function<a class="headerlink" href="#model-initialization-function" title="Permalink to this headline">¶</a></h4>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initialize inference engine</span>
 <span class="n">ie_core</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span>
@@ -715,8 +722,8 @@ indicating vendor, model name, and precision.</p>
     <span class="k">return</span> <span class="n">input_keys</span><span class="p">,</span> <span class="n">output_keys</span><span class="p">,</span> <span class="n">compiled_model</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="initialization-for-encoder-and-decoder">
+</section>
+<section id="initialization-for-encoder-and-decoder">
 <h4>Initialization for Encoder and Decoder<a class="headerlink" href="#initialization-for-encoder-and-decoder" title="Permalink to this headline">¶</a></h4>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Encoder initialization</span>
 <span class="n">input_key_en</span><span class="p">,</span> <span class="n">output_keys_en</span><span class="p">,</span> <span class="n">compiled_model_en</span> <span class="o">=</span> <span class="n">model_init</span><span class="p">(</span><span class="n">model_path_encoder</span><span class="p">)</span>
@@ -729,9 +736,9 @@ indicating vendor, model name, and precision.</p>
 <span class="n">frames2decode</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">input_key_de</span><span class="o">.</span><span class="n">shape</span><span class="p">)[</span><span class="mi">0</span><span class="p">:][</span><span class="mi">1</span><span class="p">]</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="helper-functions">
+</section>
+</section>
+<section id="helper-functions">
 <h3>Helper functions<a class="headerlink" href="#helper-functions" title="Permalink to this headline">¶</a></h3>
 <p>We will use the following helper functions for preprocessing and
 postprocessing frames:</p>
@@ -850,8 +857,8 @@ postprocessing frames:</p>
     <span class="n">cv2</span><span class="o">.</span><span class="n">putText</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">display_text</span><span class="p">,</span> <span class="n">text_loc</span><span class="p">,</span> <span class="n">FONT_STYLE</span><span class="p">,</span> <span class="n">FONT_SIZE</span><span class="p">,</span> <span class="n">FONT_COLOR</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="ai-functions">
+</section>
+<section id="ai-functions">
 <h3>AI Functions<a class="headerlink" href="#ai-functions" title="Permalink to this headline">¶</a></h3>
 <p>Following this pipeline,</p>
 <p>we will use the next functions to help us to:</p>
@@ -940,8 +947,8 @@ recognition label. (<code class="docutils literal notranslate"><span class="pre"
     <span class="k">return</span> <span class="n">exp</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">exp</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="main-processing-function">
+</section>
+<section id="main-processing-function">
 <h3>Main Processing Function<a class="headerlink" href="#main-processing-function" title="Permalink to this headline">¶</a></h3>
 <p>Run action recognition function will run in different operations, either
 a webcam or a video file. See the list of procedures below:</p>
@@ -1090,8 +1097,8 @@ a webcam or a video file. See the list of procedures below:</p>
             <span class="n">cv2</span><span class="o">.</span><span class="n">destroyAllWindows</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="run-action-recognition-on-a-video-file">
+</section>
+<section id="run-action-recognition-on-a-video-file">
 <h3>Run Action Recognition on a Video File<a class="headerlink" href="#run-action-recognition-on-a-video-file" title="Permalink to this headline">¶</a></h3>
 <p>Now let’s see how the model works in a video file. <a class="reference external" href="https://docs.opencv.org/4.5.1/dd/d43/tutorial_py_video_display.html">Any format
 supported</a>
@@ -1112,8 +1119,8 @@ format.</em></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Source</span> <span class="n">ended</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="run-action-recognition-using-your-webcam">
+</section>
+<section id="run-action-recognition-using-your-webcam">
 <h3>Run Action Recognition using your webcam<a class="headerlink" href="#run-action-recognition-using-your-webcam" title="Permalink to this headline">¶</a></h3>
 <p>Now let’s try to see ourselves in our webcam.</p>
 <blockquote>
@@ -1128,9 +1135,9 @@ step.</em></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Cannot</span> <span class="nb">open</span> <span class="n">camera</span> <span class="mi">0</span>
 </pre></div>
 </div>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
                 </div>
@@ -1161,7 +1168,7 @@ step.</em></p>
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

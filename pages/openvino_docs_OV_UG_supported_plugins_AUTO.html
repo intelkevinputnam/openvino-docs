@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Automatic device selection &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -1854,7 +1861,7 @@
             
                 <div>
                   
-  <div class="section" id="automatic-device-selection">
+  <section id="automatic-device-selection">
 <span id="doxid-openvino-docs-o-v-u-g-supported-plugins-a-u-t-o"></span><span id="index-0"></span><h1>Automatic device selection<a class="headerlink" href="#automatic-device-selection" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-openvino-docs-o-v-u-g-supported-plugins-a-u-t-o-1md-openvino-docs-ov-runtime-ug-auto-device-selection"></span></p>
 <div class="toctree-wrapper compound">
@@ -1864,7 +1871,7 @@
 <p>The logic behind the choice is as follows:</p>
 <ol class="arabic simple">
 <li><p>Check what supported devices are available.</p></li>
-<li><p>Check precisions of the input model (for detailed information on precisions read more on the <code class="docutils literal notranslate"><span class="pre">ov::device::capabilities</span></code>)</p></li>
+<li><p>Check precisions of the input model (for detailed information on precisions read more on the <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1gadb13d62787fc4485733329f044987294"><span class="std std-ref"><span class="pre">ov::device::capabilities</span></span></a></code>)</p></li>
 <li><p>Select the highest-priority device capable of supporting the given model, as listed in the table below.</p></li>
 <li><p>If model’s precision is FP32 but there is no device capable of supporting it, offload the model to a device supporting FP16.</p></li>
 </ol>
@@ -1883,7 +1890,7 @@
 <p class="admonition-title">Note</p>
 <p>The longer the process runs, the closer realtime performance will be to that of the best-suited device.</p>
 </div>
-<div class="section" id="using-the-auto-device-plugin">
+<section id="using-the-auto-device-plugin">
 <h2>Using the Auto-Device Plugin<a class="headerlink" href="#using-the-auto-device-plugin" title="Permalink to this headline">¶</a></h2>
 <p>Following the OpenVINO™ naming convention, the Automatic Device Selection mode is assigned the label of “AUTO.” It may be defined with no additional parameters, resulting in defaults being used, or configured further with the following setup options:</p>
 <table class="table">
@@ -1962,55 +1969,13 @@
 </tbody>
 </table>
 <p>Inference with AUTO is configured similarly to when device plugins are used: you compile the model on the plugin with configuration and execute inference.</p>
-<div class="section" id="device-candidate-list">
+<section id="device-candidate-list">
 <h3>Device candidate list<a class="headerlink" href="#device-candidate-list" title="Permalink to this headline">¶</a></h3>
 <p>The device candidate list allows users to customize the priority and limit the choice of devices available to the AUTO plugin. If not specified, the plugin assumes all the devices present in the system can be used. Note, that OpenVINO™ Runtime lets you use “GPU” as an alias for “GPU.0” in function calls. The following commands are accepted by the API:</p>
 <div class="tab-set docutils">
 <input checked="True" class="tab-input" id="tab-set--0-input--1" name="tab-set--0" type="radio"><label class="tab-label" for="tab-set--0-input--1">C++</label><div class="tab-content docutils">
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">ov</span><span class="o">::</span><span class="n">Core</span> <span class="n">core</span><span class="p">;</span>
-
-<span class="c1">// Read a network in IR, PaddlePaddle, or ONNX format:</span>
-<span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">ov</span><span class="o">::</span><span class="n">Model</span><span class="o">&gt;</span> <span class="n">model</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><span class="n">read_model</span><span class="p">(</span><span class="s">&quot;sample.xml&quot;</span><span class="p">);</span>
-
-<span class="c1">// compile a model on AUTO using the default list of device candidates.</span>
-<span class="c1">// The following lines are equivalent:</span>
-<span class="n">ov</span><span class="o">::</span><span class="n">CompiledModel</span> <span class="n">model0</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="p">);</span>
-<span class="n">ov</span><span class="o">::</span><span class="n">CompiledModel</span> <span class="n">model1</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s">&quot;AUTO&quot;</span><span class="p">);</span>
-
-<span class="c1">// Optional</span>
-<span class="c1">// You can also specify the devices to be used by AUTO.</span>
-<span class="c1">// The following lines are equivalent:</span>
-<span class="n">ov</span><span class="o">::</span><span class="n">CompiledModel</span> <span class="n">model3</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s">&quot;AUTO:GPU,CPU&quot;</span><span class="p">);</span>
-<span class="n">ov</span><span class="o">::</span><span class="n">CompiledModel</span> <span class="n">model4</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s">&quot;AUTO&quot;</span><span class="p">,</span> <span class="n">ov</span><span class="o">::</span><span class="n">device</span><span class="o">::</span><span class="n">priorities</span><span class="p">(</span><span class="s">&quot;GPU,CPU&quot;</span><span class="p">));</span>
-
-<span class="c1">//Optional</span>
-<span class="c1">// the AUTO plugin is pre-configured (globally) with the explicit option:</span>
-<span class="n">core</span><span class="p">.</span><span class="n">set_property</span><span class="p">(</span><span class="s">&quot;AUTO&quot;</span><span class="p">,</span> <span class="n">ov</span><span class="o">::</span><span class="n">device</span><span class="o">::</span><span class="n">priorities</span><span class="p">(</span><span class="s">&quot;GPU,CPU&quot;</span><span class="p">));</span>
-</pre></div>
-</div>
 </div>
 <input class="tab-input" id="tab-set--0-input--2" name="tab-set--0" type="radio"><label class="tab-label" for="tab-set--0-input--2">Python</label><div class="tab-content docutils">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="n">core</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span>
-
-    <span class="c1"># Read a network in IR, PaddlePaddle, or ONNX format:</span>
-    <span class="n">model</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">read_model</span><span class="p">(</span><span class="n">model_path</span><span class="p">)</span>
-
-    <span class="c1">#  compile a model on AUTO using the default list of device candidates.</span>
-    <span class="c1">#  The following lines are equivalent:</span>
-    <span class="n">compiled_model</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
-    <span class="n">compiled_model</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">device_name</span><span class="o">=</span><span class="s2">&quot;AUTO&quot;</span><span class="p">)</span>
-
-    <span class="c1"># Optional</span>
-    <span class="c1"># You can also specify the devices to be used by AUTO.</span>
-    <span class="c1"># The following lines are equivalent:</span>
-    <span class="n">compiled_model</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">device_name</span><span class="o">=</span><span class="s2">&quot;AUTO:GPU,CPU&quot;</span><span class="p">)</span>
-    <span class="n">compiled_model</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">device_name</span><span class="o">=</span><span class="s2">&quot;AUTO&quot;</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;MULTI_DEVICE_PRIORITIES&quot;</span><span class="p">:</span> <span class="s2">&quot;GPU,CPU&quot;</span><span class="p">})</span>
-
-    <span class="c1"># Optional</span>
-    <span class="c1"># the AUTO plugin is pre-configured (globally) with the explicit option:</span>
-    <span class="n">core</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="n">device_name</span><span class="o">=</span><span class="s2">&quot;AUTO&quot;</span><span class="p">,</span> <span class="n">properties</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;MULTI_DEVICE_PRIORITIES&quot;</span><span class="p">:</span><span class="s2">&quot;GPU,CPU&quot;</span><span class="p">})</span>
-</pre></div>
-</div>
 </div>
 </div>
 <p>To check what devices are present in the system, you can use Device API. For information on how to do it, check <a class="reference internal" href="openvino_docs_OV_UG_query_api.html#doxid-openvino-docs-o-v-u-g-query-api"><span class="std std-ref">Query device properties and configuration</span></a></p>
@@ -2022,132 +1987,46 @@
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>openvino.runtime.Core.available_devices <span class="o">(</span>see Hello Query Device Python Sample<span class="o">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="performance-hints">
+</section>
+<section id="performance-hints">
 <h3>Performance Hints<a class="headerlink" href="#performance-hints" title="Permalink to this headline">¶</a></h3>
-<p>The <code class="docutils literal notranslate"><span class="pre">ov::hint::performance_mode</span></code> property enables you to specify a performance mode for the plugin to be more efficient for particular use cases.</p>
-<div class="section" id="ov-hint-performancemode-throughput">
+<p>The <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga2691fe27acc8aa1d1700ad40b6da3ba2"><span class="std std-ref"><span class="pre">ov::hint::performance_mode</span></span></a></code> property enables you to specify a performance mode for the plugin to be more efficient for particular use cases.</p>
+<section id="ov-hint-performancemode-throughput">
 <h4>ov::hint::PerformanceMode::THROUGHPUT<a class="headerlink" href="#ov-hint-performancemode-throughput" title="Permalink to this headline">¶</a></h4>
 <p>This mode prioritizes high throughput, balancing between latency and power. It is best suited for tasks involving multiple jobs, like inference of video feeds or large numbers of images.</p>
-</div>
-<div class="section" id="ov-hint-performancemode-latency">
+</section>
+<section id="ov-hint-performancemode-latency">
 <h4>ov::hint::PerformanceMode::LATENCY<a class="headerlink" href="#ov-hint-performancemode-latency" title="Permalink to this headline">¶</a></h4>
-<p>This mode prioritizes low latency, providing short response time for each inference job. It performs best for tasks where inference is required for a single input image, like a medical analysis of an ultrasound scan image. It also fits the tasks of real-time or nearly real-time applications, such as an industrial robot’s response to actions in its environment or obstacle avoidance for autonomous vehicles. Note that currently the <code class="docutils literal notranslate"><span class="pre">ov::hint</span></code> property is supported by CPU and GPU devices only.</p>
+<p>This mode prioritizes low latency, providing short response time for each inference job. It performs best for tasks where inference is required for a single input image, like a medical analysis of an ultrasound scan image. It also fits the tasks of real-time or nearly real-time applications, such as an industrial robot’s response to actions in its environment or obstacle avoidance for autonomous vehicles. Note that currently the <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/namespaceov_1_1hint.html#doxid-namespaceov-1-1hint"><span class="std std-ref"><span class="pre">ov::hint</span></span></a></code> property is supported by CPU and GPU devices only.</p>
 <p>To enable performance hints for your application, use the following code:</p>
 <div class="tab-set docutils">
 <input checked="True" class="tab-input" id="tab-set--1-input--1" name="tab-set--1" type="radio"><label class="tab-label" for="tab-set--1-input--1">C++</label><div class="tab-content docutils">
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">ov</span><span class="o">::</span><span class="n">Core</span> <span class="n">core</span><span class="p">;</span>
-
-<span class="c1">// Read a network in IR, PaddlePaddle, or ONNX format:</span>
-<span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">ov</span><span class="o">::</span><span class="n">Model</span><span class="o">&gt;</span> <span class="n">model</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><span class="n">read_model</span><span class="p">(</span><span class="s">&quot;sample.xml&quot;</span><span class="p">);</span>
-
-<span class="c1">// compile a model on AUTO with Performance Hints enabled:</span>
-<span class="c1">// To use the “throughput” mode:</span>
-<span class="n">ov</span><span class="o">::</span><span class="n">CompiledModel</span> <span class="n">compiled_model</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s">&quot;AUTO&quot;</span><span class="p">,</span>
-    <span class="n">ov</span><span class="o">::</span><span class="n">hint</span><span class="o">::</span><span class="n">performance_mode</span><span class="p">(</span><span class="n">ov</span><span class="o">::</span><span class="n">hint</span><span class="o">::</span><span class="n">PerformanceMode</span><span class="o">::</span><span class="n">THROUGHPUT</span><span class="p">));</span>
-<span class="c1">// or the “latency” mode:</span>
-<span class="n">ov</span><span class="o">::</span><span class="n">CompiledModel</span> <span class="n">compiled_mode2</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s">&quot;AUTO&quot;</span><span class="p">,</span>
-    <span class="n">ov</span><span class="o">::</span><span class="n">hint</span><span class="o">::</span><span class="n">performance_mode</span><span class="p">(</span><span class="n">ov</span><span class="o">::</span><span class="n">hint</span><span class="o">::</span><span class="n">PerformanceMode</span><span class="o">::</span><span class="n">LATENCY</span><span class="p">));</span>
-</pre></div>
-</div>
 </div>
 <input class="tab-input" id="tab-set--1-input--2" name="tab-set--1" type="radio"><label class="tab-label" for="tab-set--1-input--2">Python</label><div class="tab-content docutils">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="n">core</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span>
-    <span class="c1"># Read a network in IR, PaddlePaddle, or ONNX format:</span>
-    <span class="n">model</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">read_model</span><span class="p">(</span><span class="n">model_path</span><span class="p">)</span>
-    <span class="c1"># compile a model on AUTO with Performance Hints enabled:</span>
-    <span class="c1"># To use the “throughput” mode:</span>
-    <span class="n">compiled_model</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">device_name</span><span class="o">=</span><span class="s2">&quot;AUTO&quot;</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;PERFORMANCE_HINT&quot;</span><span class="p">:</span><span class="s2">&quot;THROUGHPUT&quot;</span><span class="p">})</span>
-    <span class="c1"># or the “latency” mode:</span>
-    <span class="n">compiled_model</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">device_name</span><span class="o">=</span><span class="s2">&quot;AUTO&quot;</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;PERFORMANCE_HINT&quot;</span><span class="p">:</span><span class="s2">&quot;LATENCY&quot;</span><span class="p">})</span>
-</pre></div>
-</div>
 </div>
 </div>
 <p>The property enables you to control the priorities of models in the Auto-Device plugin. A high-priority model will be loaded to a supported high-priority device. A lower-priority model will not be loaded to a device that is occupied by a higher-priority model.</p>
 <div class="tab-set docutils">
 <input checked="True" class="tab-input" id="tab-set--2-input--1" name="tab-set--2" type="radio"><label class="tab-label" for="tab-set--2-input--1">C++</label><div class="tab-content docutils">
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// Example 1</span>
-<span class="n">ov</span><span class="o">::</span><span class="n">CompiledModel</span> <span class="n">compiled_model0</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s">&quot;AUTO&quot;</span><span class="p">,</span>
-    <span class="n">ov</span><span class="o">::</span><span class="n">hint</span><span class="o">::</span><span class="n">model_priority</span><span class="p">(</span><span class="n">ov</span><span class="o">::</span><span class="n">hint</span><span class="o">::</span><span class="n">Priority</span><span class="o">::</span><span class="n">HIGH</span><span class="p">));</span>
-<span class="n">ov</span><span class="o">::</span><span class="n">CompiledModel</span> <span class="n">compiled_model1</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s">&quot;AUTO&quot;</span><span class="p">,</span>
-    <span class="n">ov</span><span class="o">::</span><span class="n">hint</span><span class="o">::</span><span class="n">model_priority</span><span class="p">(</span><span class="n">ov</span><span class="o">::</span><span class="n">hint</span><span class="o">::</span><span class="n">Priority</span><span class="o">::</span><span class="n">MEDIUM</span><span class="p">));</span>
-<span class="n">ov</span><span class="o">::</span><span class="n">CompiledModel</span> <span class="n">compiled_model2</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s">&quot;AUTO&quot;</span><span class="p">,</span>
-    <span class="n">ov</span><span class="o">::</span><span class="n">hint</span><span class="o">::</span><span class="n">model_priority</span><span class="p">(</span><span class="n">ov</span><span class="o">::</span><span class="n">hint</span><span class="o">::</span><span class="n">Priority</span><span class="o">::</span><span class="n">LOW</span><span class="p">));</span>
-<span class="cm">/************</span>
-<span class="cm">  Assume that all the devices (CPU, GPU, and MYRIAD) can support all the networks.</span>
-<span class="cm">  Result: compiled_model0 will use GPU, compiled_model1 will use MYRIAD, compiled_model2 will use CPU.</span>
-<span class="cm"> ************/</span>
-
-<span class="c1">// Example 2</span>
-<span class="n">ov</span><span class="o">::</span><span class="n">CompiledModel</span> <span class="n">compiled_model3</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s">&quot;AUTO&quot;</span><span class="p">,</span>
-    <span class="n">ov</span><span class="o">::</span><span class="n">hint</span><span class="o">::</span><span class="n">model_priority</span><span class="p">(</span><span class="n">ov</span><span class="o">::</span><span class="n">hint</span><span class="o">::</span><span class="n">Priority</span><span class="o">::</span><span class="n">LOW</span><span class="p">));</span>
-<span class="n">ov</span><span class="o">::</span><span class="n">CompiledModel</span> <span class="n">compiled_model4</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s">&quot;AUTO&quot;</span><span class="p">,</span>
-    <span class="n">ov</span><span class="o">::</span><span class="n">hint</span><span class="o">::</span><span class="n">model_priority</span><span class="p">(</span><span class="n">ov</span><span class="o">::</span><span class="n">hint</span><span class="o">::</span><span class="n">Priority</span><span class="o">::</span><span class="n">MEDIUM</span><span class="p">));</span>
-<span class="n">ov</span><span class="o">::</span><span class="n">CompiledModel</span> <span class="n">compiled_model5</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s">&quot;AUTO&quot;</span><span class="p">,</span>
-    <span class="n">ov</span><span class="o">::</span><span class="n">hint</span><span class="o">::</span><span class="n">model_priority</span><span class="p">(</span><span class="n">ov</span><span class="o">::</span><span class="n">hint</span><span class="o">::</span><span class="n">Priority</span><span class="o">::</span><span class="n">LOW</span><span class="p">));</span>
-<span class="cm">/************</span>
-<span class="cm">  Assume that all the devices (CPU, GPU, and MYRIAD) can support all the networks.</span>
-<span class="cm">  Result: compiled_model3 will use GPU, compiled_model4 will use GPU, compiled_model5 will use MYRIAD.</span>
-<span class="cm"> ************/</span>
-</pre></div>
-</div>
 </div>
 <input class="tab-input" id="tab-set--2-input--2" name="tab-set--2" type="radio"><label class="tab-label" for="tab-set--2-input--2">Python</label><div class="tab-content docutils">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="n">core</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span>
-    <span class="n">model</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">read_model</span><span class="p">(</span><span class="n">model_path</span><span class="p">)</span>
-
-    <span class="c1"># Example 1</span>
-    <span class="n">compiled_model0</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">device_name</span><span class="o">=</span><span class="s2">&quot;AUTO&quot;</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;MODEL_PRIORITY&quot;</span><span class="p">:</span><span class="s2">&quot;HIGH&quot;</span><span class="p">})</span>
-    <span class="n">compiled_model1</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">device_name</span><span class="o">=</span><span class="s2">&quot;AUTO&quot;</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;MODEL_PRIORITY&quot;</span><span class="p">:</span><span class="s2">&quot;MEDIUM&quot;</span><span class="p">})</span>
-    <span class="n">compiled_model2</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">device_name</span><span class="o">=</span><span class="s2">&quot;AUTO&quot;</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;MODEL_PRIORITY&quot;</span><span class="p">:</span><span class="s2">&quot;LOW&quot;</span><span class="p">})</span>
-    <span class="c1"># Assume that all the devices (CPU, GPU, and MYRIAD) can support all the networks.</span>
-    <span class="c1"># Result: compiled_model0 will use GPU, compiled_model1 will use MYRIAD, compiled_model2 will use CPU.</span>
-
-    <span class="c1"># Example 2</span>
-    <span class="n">compiled_model3</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">device_name</span><span class="o">=</span><span class="s2">&quot;AUTO&quot;</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;MODEL_PRIORITY&quot;</span><span class="p">:</span><span class="s2">&quot;HIGH&quot;</span><span class="p">})</span>
-    <span class="n">compiled_model4</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">device_name</span><span class="o">=</span><span class="s2">&quot;AUTO&quot;</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;MODEL_PRIORITY&quot;</span><span class="p">:</span><span class="s2">&quot;MEDIUM&quot;</span><span class="p">})</span>
-    <span class="n">compiled_model5</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">device_name</span><span class="o">=</span><span class="s2">&quot;AUTO&quot;</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;MODEL_PRIORITY&quot;</span><span class="p">:</span><span class="s2">&quot;LOW&quot;</span><span class="p">})</span>
-    <span class="c1"># Assume that all the devices (CPU, GPU, and MYRIAD) can support all the networks.</span>
-    <span class="c1"># Result: compiled_model3 will use GPU, compiled_model4 will use GPU, compiled_model5 will use MYRIAD.</span>
-</pre></div>
 </div>
 </div>
-</div>
-</div>
-</div>
-</div>
-<div class="section" id="configuring-individual-devices-and-creating-the-auto-device-plugin-on-top">
+</section>
+</section>
+</section>
+<section id="configuring-individual-devices-and-creating-the-auto-device-plugin-on-top">
 <h2>Configuring Individual Devices and Creating the Auto-Device plugin on Top<a class="headerlink" href="#configuring-individual-devices-and-creating-the-auto-device-plugin-on-top" title="Permalink to this headline">¶</a></h2>
 <p>Although the methods described above are currently the preferred way to execute inference with AUTO, the following steps can be also used as an alternative. It is currently available as a legacy feature and used if the device candidate list includes Myriad devices, uncapable of utilizing the Performance Hints option.</p>
 <div class="tab-set docutils">
 <input checked="True" class="tab-input" id="tab-set--3-input--1" name="tab-set--3" type="radio"><label class="tab-label" for="tab-set--3-input--1">C++</label><div class="tab-content docutils">
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">ov</span><span class="o">::</span><span class="n">Core</span> <span class="n">core</span><span class="p">;</span>
-
-<span class="c1">// Read a network in IR, PaddlePaddle, or ONNX format:</span>
-<span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">ov</span><span class="o">::</span><span class="n">Model</span><span class="o">&gt;</span> <span class="n">model</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><span class="n">read_model</span><span class="p">(</span><span class="s">&quot;sample.xml&quot;</span><span class="p">);</span>
-
-<span class="c1">// Configure  CPU and the MYRIAD devices when compiled model</span>
-<span class="n">ov</span><span class="o">::</span><span class="n">CompiledModel</span> <span class="n">compiled_model</span> <span class="o">=</span> <span class="n">core</span><span class="p">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s">&quot;AUTO&quot;</span><span class="p">,</span>
-    <span class="n">ov</span><span class="o">::</span><span class="n">device</span><span class="o">::</span><span class="n">properties</span><span class="p">(</span><span class="s">&quot;CPU&quot;</span><span class="p">,</span> <span class="n">cpu_config</span><span class="p">),</span>
-    <span class="n">ov</span><span class="o">::</span><span class="n">device</span><span class="o">::</span><span class="n">properties</span><span class="p">(</span><span class="s">&quot;MYRIAD&quot;</span><span class="p">,</span> <span class="n">myriad_config</span><span class="p">));</span>
-</pre></div>
-</div>
 </div>
 <input class="tab-input" id="tab-set--3-input--2" name="tab-set--3" type="radio"><label class="tab-label" for="tab-set--3-input--2">Python</label><div class="tab-content docutils">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="n">core</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span>
-    <span class="n">model</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">read_model</span><span class="p">(</span><span class="n">model_path</span><span class="p">)</span>
-    <span class="n">core</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="n">device_name</span><span class="o">=</span><span class="s2">&quot;CPU&quot;</span><span class="p">,</span> <span class="n">properties</span><span class="o">=</span><span class="p">{})</span>
-    <span class="n">core</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="n">device_name</span><span class="o">=</span><span class="s2">&quot;MYRIAD&quot;</span><span class="p">,</span> <span class="n">properties</span><span class="o">=</span><span class="p">{})</span>
-    <span class="n">compiled_model</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
-    <span class="n">compiled_model</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">compile_model</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">device_name</span><span class="o">=</span><span class="s2">&quot;AUTO&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
 </div>
 </div>
 <p><span class="target" id="doxid-openvino-docs-o-v-u-g-supported-plugins-a-u-t-o-1benchmark-app-info"></span></p>
-</div>
-<div class="section" id="using-auto-with-openvino-samples-and-the-benchmark-app">
+</section>
+<section id="using-auto-with-openvino-samples-and-the-benchmark-app">
 <h2>Using AUTO with OpenVINO™ Samples and the Benchmark App<a class="headerlink" href="#using-auto-with-openvino-samples-and-the-benchmark-app" title="Permalink to this headline">¶</a></h2>
 <p>To see how the Auto-Device plugin is used in practice and test its performance, take a look at OpenVINO™ samples. All samples supporting the “-d” command-line option (which stands for “device”) will accept the plugin out-of-the-box. The Benchmark Application will be a perfect place to start – it presents the optimal performance of the plugin without the need for additional settings, like the number of requests or CPU threads. To evaluate the AUTO performance, you can use the following commands:</p>
 <p>For unlimited device choice:</p>
@@ -2165,8 +2044,8 @@
 <p>You can use the FP16 IR to work with auto-device.</p>
 <p>No demos are yet fully optimized for AUTO, by means of selecting the most suitable device, using the GPU streams/throttling, and so on.</p>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -2197,7 +2076,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

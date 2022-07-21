@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Image Classification Async C++ Sample &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -624,7 +631,7 @@
             
                 <div>
                   
-  <div class="section" id="image-classification-async-c-sample">
+  <section id="image-classification-async-c-sample">
 <span id="doxid-openvino-inference-engine-samples-classification-sample-async-r-e-a-d-m-e"></span><span id="index-0"></span><h1>Image Classification Async C++ Sample<a class="headerlink" href="#image-classification-async-c-sample" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-openvino-inference-engine-samples-classification-sample-async-r-e-a-d-m-e-1md-openvino-samples-cpp-classification-sample-async-readme"></span> This sample demonstrates how to do inference of image classification models using Asynchronous Inference Request API.</p>
 <p>Models with only one input and output are supported.</p>
@@ -644,19 +651,19 @@
 </thead>
 <tbody>
 <tr class="row-even"><td><p>Asynchronous Infer</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">ov::InferRequest::start_async</span></code> , <code class="docutils literal notranslate"><span class="pre">ov::InferRequest::set_callback</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1InferRequest.html#doxid-classov-1-1-infer-request-1a5a05ae4352f804c865e11f5d68b983d5"><span class="std std-ref"><span class="pre">ov::InferRequest::start_async</span></span></a></code> , <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1InferRequest.html#doxid-classov-1-1-infer-request-1afba2a10162ab356728ec8901973e8f02"><span class="std std-ref"><span class="pre">ov::InferRequest::set_callback</span></span></a></code></p></td>
 <td><p>Do asynchronous inference with callback.</p></td>
 </tr>
 <tr class="row-odd"><td><p>Model Operations</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">ov::Output::get_shape</span></code> , <code class="docutils literal notranslate"><span class="pre">ov::set_batch</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ov::Output::get_shape</span></code> , <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/namespaceov.html#doxid-namespaceov-1a3314e2ff91fcc9ffec05b1a77c37862b"><span class="std std-ref"><span class="pre">ov::set_batch</span></span></a></code></p></td>
 <td><p>Manage the model, operate with its batch size. Set batch size using input image count.</p></td>
 </tr>
 <tr class="row-even"><td><p>Infer Request Operations</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">ov::InferRequest::get_input_tensor</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1InferRequest.html#doxid-classov-1-1-infer-request-1a5f0bc1ab40de6a7a12136b4a4e6a8b54"><span class="std std-ref"><span class="pre">ov::InferRequest::get_input_tensor</span></span></a></code></p></td>
 <td><p>Get an input tensor.</p></td>
 </tr>
 <tr class="row-odd"><td><p>Tensor Operations</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">ov::shape_size</span></code> , <code class="docutils literal notranslate"><span class="pre">ov::Tensor::data</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/groupov_model_cpp_api.html#doxid-group-ov-model-cpp-api-1gafe8cdd6477ae9810c2bf368602d35883"><span class="std std-ref"><span class="pre">ov::shape_size</span></span></a></code> , <code class="docutils literal notranslate"><span class="pre">ov::Tensor::data</span></code></p></td>
 <td><p>Get a tensor shape size and its data.</p></td>
 </tr>
 </tbody>
@@ -687,19 +694,19 @@
 </tr>
 </tbody>
 </table>
-<div class="section" id="how-it-works">
+<section id="how-it-works">
 <h2>How It Works<a class="headerlink" href="#how-it-works" title="Permalink to this headline">¶</a></h2>
 <p>At startup, the sample application reads command line parameters and loads the specified model and input images (or a folder with images) to the OpenVINO™ Runtime plugin. The batch size of the model is set according to the number of read images. The batch mode is an independent attribute on the asynchronous mode. Asynchronous mode works efficiently with any batch size.</p>
 <p>Then, the sample creates an inference request object and assigns completion callback for it. In scope of the completion callback handling the inference request is executed again.</p>
 <p>After that, the application starts inference for the first infer request and waits of 10th inference request execution being completed. The asynchronous mode might increase the throughput of the pictures.</p>
 <p>When inference is done, the application outputs data to the standard output stream. You can place labels in .labels file near the model to get pretty output.</p>
 <p>You can see the explicit description of each sample step at <a class="reference internal" href="openvino_docs_OV_UG_Integrate_OV_with_your_application.html#doxid-openvino-docs-o-v-u-g-integrate-o-v-with-your-application"><span class="std std-ref">Integration Steps</span></a> section of “Integrate OpenVINO™ Runtime with Your Application” guide.</p>
-</div>
-<div class="section" id="building">
+</section>
+<section id="building">
 <h2>Building<a class="headerlink" href="#building" title="Permalink to this headline">¶</a></h2>
 <p>To build the sample, please use instructions available at <a class="reference internal" href="openvino_docs_OV_UG_Samples_Overview.html#doxid-openvino-docs-o-v-u-g-samples-overview"><span class="std std-ref">Build the Sample Applications</span></a> section in OpenVINO™ Toolkit Samples guide.</p>
-</div>
-<div class="section" id="running">
+</section>
+<section id="running">
 <h2>Running<a class="headerlink" href="#running" title="Permalink to this headline">¶</a></h2>
 <p>Run the application with the <code class="docutils literal notranslate"><span class="pre">-h</span></code> option to see the usage instructions:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">classification_sample_async</span> <span class="o">-</span><span class="n">h</span></pre></div></div><p>Usage instructions:</p>
@@ -725,7 +732,7 @@
 <li><p>Before running the sample with a trained model, make sure the model is converted to the intermediate representation (IR) format (*.xml + *.bin) using the <a class="reference internal" href="openvino_docs_MO_DG_Deep_Learning_Model_Optimizer_DevGuide.html#doxid-openvino-docs-m-o-d-g-deep-learning-model-optimizer-dev-guide"><span class="std std-ref">Model Optimizer tool</span></a>.</p></li>
 <li><p>The sample accepts models in ONNX format (.onnx) that do not require preprocessing.</p></li>
 </ul>
-<div class="section" id="example">
+<section id="example">
 <h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic simple">
 <li><p>Install the <code class="docutils literal notranslate"><span class="pre">openvino-dev</span></code> Python package to use Open Model Zoo Tools:</p></li>
@@ -739,9 +746,9 @@
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">omz_converter</span> <span class="o">--</span><span class="n">name</span> <span class="n">googlenet</span><span class="o">-</span><span class="n">v1</span></pre></div></div><ol class="arabic simple">
 <li><p>Perform inference of <code class="docutils literal notranslate"><span class="pre">dog.bmp</span></code> using <code class="docutils literal notranslate"><span class="pre">googlenet-v1</span></code> model on a <code class="docutils literal notranslate"><span class="pre">GPU</span></code>, for example:</p></li>
 </ol>
-<div class="highlight"><div class="highlight"><pre><span></span><span class="n">classification_sample_async</span> <span class="o">-</span><span class="n">m</span> <span class="n">googlenet</span><span class="o">-</span><span class="n">v1</span><span class="p">.</span><span class="n">xml</span> <span class="o">-</span><span class="n">i</span> <span class="n">dog</span><span class="p">.</span><span class="n">bmp</span> <span class="o">-</span><span class="n">d</span> <span class="n">GPU</span></pre></div></div></div>
-</div>
-<div class="section" id="sample-output">
+<div class="highlight"><div class="highlight"><pre><span></span><span class="n">classification_sample_async</span> <span class="o">-</span><span class="n">m</span> <span class="n">googlenet</span><span class="o">-</span><span class="n">v1</span><span class="p">.</span><span class="n">xml</span> <span class="o">-</span><span class="n">i</span> <span class="n">dog</span><span class="p">.</span><span class="n">bmp</span> <span class="o">-</span><span class="n">d</span> <span class="n">GPU</span></pre></div></div></section>
+</section>
+<section id="sample-output">
 <h2>Sample Output<a class="headerlink" href="#sample-output" title="Permalink to this headline">¶</a></h2>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">OpenVINO</span> <span class="n">Runtime</span> <span class="n">version</span> <span class="p">.........</span> <span class="o">&lt;</span><span class="n">version</span><span class="o">&gt;</span>
 <span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">Build</span> <span class="p">...........</span> <span class="o">&lt;</span><span class="n">build</span><span class="o">&gt;</span>
@@ -801,8 +808,8 @@
 <span class="mi">152</span>     <span class="mf">0.0018730</span>
 <span class="mi">157</span>     <span class="mf">0.0015745</span>
 <span class="mi">154</span>     <span class="mf">0.0012817</span>
-<span class="mi">220</span>     <span class="mf">0.0010099</span></pre></div></div></div>
-<div class="section" id="see-also">
+<span class="mi">220</span>     <span class="mf">0.0010099</span></pre></div></div></section>
+<section id="see-also">
 <h2>See Also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="openvino_docs_OV_UG_Integrate_OV_with_your_application.html#doxid-openvino-docs-o-v-u-g-integrate-o-v-with-your-application"><span class="std std-ref">Integrate the OpenVINO™ Runtime with Your Application</span></a></p></li>
@@ -810,8 +817,8 @@
 <li><p>Model Downloader</p></li>
 <li><p><a class="reference internal" href="openvino_docs_MO_DG_Deep_Learning_Model_Optimizer_DevGuide.html#doxid-openvino-docs-m-o-d-g-deep-learning-model-optimizer-dev-guide"><span class="std std-ref">Model Optimizer</span></a></p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -842,7 +849,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

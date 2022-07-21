@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Getting Performance Numbers &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -1840,10 +1847,10 @@
             
                 <div>
                   
-  <div class="section" id="getting-performance-numbers">
+  <section id="getting-performance-numbers">
 <span id="doxid-openvino-docs-m-o-d-g-getting-performance-numbers"></span><span id="index-0"></span><h1>Getting Performance Numbers<a class="headerlink" href="#getting-performance-numbers" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-openvino-docs-m-o-d-g-getting-performance-numbers-1md-openvino-docs-mo-dg-prepare-model-getting-performance-numbers"></span></p>
-<div class="section" id="tip-1-measure-the-proper-set-of-operations">
+<section id="tip-1-measure-the-proper-set-of-operations">
 <h2>Tip 1. Measure the Proper Set of Operations<a class="headerlink" href="#tip-1-measure-the-proper-set-of-operations" title="Permalink to this headline">¶</a></h2>
 <p>When evaluating performance of your model with the OpenVINO Runtime, you must measure the proper set of operations. To do so, consider the following tips:</p>
 <ul class="simple">
@@ -1854,8 +1861,8 @@
 <p class="admonition-title">Note</p>
 <p>Some image pre-processing can be baked into the IR and accelerated accordingly. For more information, refer to <a class="reference internal" href="openvino_docs_MO_DG_Additional_Optimization_Use_Cases.html#doxid-openvino-docs-m-o-d-g-additional-optimization-use-cases"><span class="std std-ref">Embedding the Preprocessing</span></a>. Also consider <a class="reference external" href="../../optimization_guide/dldt_deployment_optimization_common">Runtime Optimizations of the Preprocessing</a>.</p>
 </div>
-</div>
-<div class="section" id="tip-2-getting-credible-performance-numbers">
+</section>
+<section id="tip-2-getting-credible-performance-numbers">
 <h2>Tip 2. Getting Credible Performance Numbers<a class="headerlink" href="#tip-2-getting-credible-performance-numbers" title="Permalink to this headline">¶</a></h2>
 <p>You need to build your performance conclusions on reproducible data. Do the performance measurements with a large number of invocations of the same routine. Since the first iteration is almost always significantly slower than the subsequent ones, you can use an aggregated value for the execution time for final projections:</p>
 <ul class="simple">
@@ -1863,8 +1870,8 @@
 <li><p>For time values that range too much, consider geomean.</p></li>
 <li><p>Beware of the throttling and other power oddities. A device can exist in one of several different power states. When optimizing your model, for better performance data reproducibility consider fixing the device frequency. However the end to end (application) benchmarking should be also performed under real operational conditions.</p></li>
 </ul>
-</div>
-<div class="section" id="tip-3-measure-reference-performance-numbers-with-openvino-s-benchmark-app">
+</section>
+<section id="tip-3-measure-reference-performance-numbers-with-openvino-s-benchmark-app">
 <h2>Tip 3. Measure Reference Performance Numbers with OpenVINO’s benchmark_app<a class="headerlink" href="#tip-3-measure-reference-performance-numbers-with-openvino-s-benchmark-app" title="Permalink to this headline">¶</a></h2>
 <p>To get performance numbers, use the dedicated <a class="reference internal" href="openvino_inference_engine_samples_benchmark_app_README.html#doxid-openvino-inference-engine-samples-benchmark-app-r-e-a-d-m-e"><span class="std std-ref">Benchmark App</span></a> sample which is the best way to produce the performance reference. It has a lot of device-specific knobs, but the primary usage is as simple as:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="err">$</span> <span class="p">.</span><span class="o">/</span><span class="n">benchmark_app</span> <span class="err">–</span><span class="n">d</span> <span class="n">GPU</span> <span class="err">–</span><span class="n">m</span> <span class="o">&lt;</span><span class="n">model</span><span class="o">&gt;</span> <span class="o">-</span><span class="n">i</span> <span class="o">&lt;</span><span class="n">input</span><span class="o">&gt;</span></pre></div></div><p>to measure the performance of the model on the GPU. Or</p>
@@ -1874,8 +1881,8 @@
 <li><p>benchmark_app <strong>-hint tput</strong> -d ‘device’ -m ‘path to your model’</p></li>
 <li><p>benchmark_app <strong>-hint latency</strong> -d ‘device’ -m ‘path to your model’</p></li>
 </ul>
-</div>
-<div class="section" id="comparing-performance-with-native-framework-code">
+</section>
+<section id="comparing-performance-with-native-framework-code">
 <h2>Comparing Performance with Native/Framework Code<a class="headerlink" href="#comparing-performance-with-native-framework-code" title="Permalink to this headline">¶</a></h2>
 <p>When comparing the OpenVINO Runtime performance with the framework or another reference code, make sure that both versions are as similar as possible:</p>
 <ul class="simple">
@@ -1886,8 +1893,8 @@
 <li><p>When applicable, leverage the <a class="reference internal" href="openvino_docs_OV_UG_DynamicShapes.html#doxid-openvino-docs-o-v-u-g-dynamic-shapes"><span class="std std-ref">Dynamic Shapes support</span></a></p></li>
 <li><p>If possible, demand the same accuracy. For example, TensorFlow allows <code class="docutils literal notranslate"><span class="pre">FP16</span></code> execution, so when comparing to that, make sure to test the OpenVINO Runtime with the <code class="docutils literal notranslate"><span class="pre">FP16</span></code> as well.</p></li>
 </ul>
-</div>
-<div class="section" id="internal-inference-performance-counters-and-execution-graphs">
+</section>
+<section id="internal-inference-performance-counters-and-execution-graphs">
 <span id="performance-counters"></span><h2>Internal Inference Performance Counters and Execution Graphs<a class="headerlink" href="#internal-inference-performance-counters-and-execution-graphs" title="Permalink to this headline">¶</a></h2>
 <p>Further, finer-grained insights into inference performance breakdown can be achieved with device-specific performance counters and/or execution graphs. Both <a class="reference internal" href="openvino_inference_engine_samples_benchmark_app_README.html#doxid-openvino-inference-engine-samples-benchmark-app-r-e-a-d-m-e"><span class="std std-ref">C++</span></a> and <a class="reference internal" href="openvino_inference_engine_tools_benchmark_tool_README.html#doxid-openvino-inference-engine-tools-benchmark-tool-r-e-a-d-m-e"><span class="std std-ref">Python</span></a> versions of the <code class="docutils literal notranslate"><span class="pre">benchmark_app</span></code> supports a <code class="docutils literal notranslate"><span class="pre">-pc</span></code> command-line parameter that outputs internal execution breakdown.</p>
 <p>For example, below is the part of performance counters for quantized <a class="reference external" href="https://github.com/openvinotoolkit/open_model_zoo/tree/master/models/public/resnet-50-tf">TensorFlow* implementation of ResNet-50</a> model inference on <a class="reference internal" href="openvino_docs_OV_UG_supported_plugins_CPU.html#doxid-openvino-docs-o-v-u-g-supported-plugins-c-p-u"><span class="std std-ref">CPU Plugin</span></a>. Notice that since the device is CPU, the layers wall clock <code class="docutils literal notranslate"><span class="pre">realTime</span></code> and the <code class="docutils literal notranslate"><span class="pre">cpu</span></code> time are the same. Information about layer precision is also stored in the performance counters.</p>
@@ -1983,8 +1990,8 @@
 <p>Notice that on some devices, the execution graphs/counters may be pretty intrusive overhead-wise. Also, especially when performance-debugging the <a class="reference internal" href="openvino_docs_deployment_optimization_guide_latency.html#doxid-openvino-docs-deployment-optimization-guide-latency"><span class="std std-ref">latency case</span></a> notice that the counters do not reflect the time spent in the plugin/device/driver/etc queues. If the sum of the counters is too different from the latency of an inference request, consider testing with less inference requests. For example running single <a class="reference internal" href="openvino_docs_deployment_optimization_guide_tput.html#doxid-openvino-docs-deployment-optimization-guide-tput"><span class="std std-ref">OpenVINO stream</span></a> with multiple requests would produce nearly identical counters as running single inference request, yet the actual latency can be quite different.</p>
 <p>Finally, the performance statistics with both performance counters and execution graphs is averaged, so such a data for the <a class="reference internal" href="openvino_docs_OV_UG_DynamicShapes.html#doxid-openvino-docs-o-v-u-g-dynamic-shapes"><span class="std std-ref">dynamically-shaped inputs</span></a> should be measured carefully (ideally by isolating the specific shape and executing multiple times in a loop, to gather the reliable data).</p>
 <p>OpenVINO in general and individual plugins are heavily instrumented with Intel® instrumentation and tracing technology (ITT), so another option is to compile the OpenVINO from the source code with the ITT enabled and using tools like <a class="reference external" href="https://software.intel.com/en-us/vtune">Intel® VTune™ Profiler</a> to get detailed inference performance breakdown and additional insights in the application-level performance on the timeline view.</p>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -2015,7 +2022,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

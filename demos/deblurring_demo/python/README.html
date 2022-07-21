@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Image Deblurring Python* Demo &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../../../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -2084,11 +2091,11 @@
             
                 <div>
                   
-  <div class="section" id="image-deblurring-python-demo">
+  <section id="image-deblurring-python-demo">
 <h1>Image Deblurring Python* Demo<a class="headerlink" href="#image-deblurring-python-demo" title="Permalink to this headline">¶</a></h1>
 <p><img alt="example" src="../../../_images/deblurred_image.png" /></p>
 <p>This topic demonstrates how to run the Image Deblurring demo application, which does inference using deblurring networks.</p>
-<div class="section" id="how-it-works">
+<section id="how-it-works">
 <h2>How It Works<a class="headerlink" href="#how-it-works" title="Permalink to this headline">¶</a></h2>
 <p>On startup the demo application reads command line parameters and loads a model to OpenVINO™ Runtime plugin. The demo runs inference and shows results for each image captured from an input. Depending on number of inference requests processing simultaneously (-nireq parameter) the pipeline might minimize the time required to process each single image (for nireq 1) or maximize utilization of the device and overall processing performance.</p>
 <p>For each image demo performs the following steps:</p>
@@ -2101,13 +2108,13 @@
 <blockquote>
 <div><p><strong>NOTE</strong>: By default, Open Model Zoo demos expect input with BGR channels order. If you trained your model to work with RGB order, you need to manually rearrange the default channels order in the demo application or reconvert your model using the Model Optimizer tool with the <code class="docutils literal notranslate"><span class="pre">--reverse_input_channels</span></code> argument specified. For more information about the argument, refer to <strong>When to Reverse Input Channels</strong> section of [Embedding Preprocessing Computation](&#64;ref openvino_docs_MO_DG_Additional_Optimization_Use_Cases).</p>
 </div></blockquote>
-</div>
-<div class="section" id="model-api">
+</section>
+<section id="model-api">
 <h2>Model API<a class="headerlink" href="#model-api" title="Permalink to this headline">¶</a></h2>
 <p>The demo utilizes model wrappers, adapters and pipelines from <a class="reference internal" href="../../common/python/openvino/model_zoo/model_api/README.html"><span class="doc std std-doc">Python* Model API</span></a>.</p>
 <p>The generalized interface of wrappers with its unified results representation provides the support of multiple different deblurring model topologies in one demo.</p>
-</div>
-<div class="section" id="preparing-to-run">
+</section>
+<section id="preparing-to-run">
 <h2>Preparing to Run<a class="headerlink" href="#preparing-to-run" title="Permalink to this headline">¶</a></h2>
 <p>For demo input image or video files, refer to the section <strong>Media Files Available for Demos</strong> in the <a class="reference internal" href="../../README.html"><span class="doc std std-doc">Open Model Zoo Demos Overview</span></a>.
 The list of models supported by the demo is in <code class="docutils literal notranslate"><span class="pre">&lt;omz_dir&gt;/demos/deblurring_demo/python/models.lst</span></code> file.
@@ -2120,7 +2127,7 @@ This file can be used as a parameter for <span class="xref myst">Model Downloade
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>omz_converter --list models.lst
 </pre></div>
 </div>
-<div class="section" id="supported-models">
+<section id="supported-models">
 <h3>Supported Models<a class="headerlink" href="#supported-models" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>deblurgan-v2</p></li>
@@ -2128,9 +2135,9 @@ This file can be used as a parameter for <span class="xref myst">Model Downloade
 <blockquote>
 <div><p><strong>NOTE</strong>: Refer to the tables <a class="reference internal" href="../../../models/intel/device_support.html"><span class="doc std std-doc">Intel’s Pre-Trained Models Device Support</span></a> and <a class="reference internal" href="../../../models/public/device_support.html"><span class="doc std std-doc">Public Pre-Trained Models Device Support</span></a> for the details on models inference support at different devices.</p>
 </div></blockquote>
-</div>
-</div>
-<div class="section" id="running">
+</section>
+</section>
+<section id="running">
 <h2>Running<a class="headerlink" href="#running" title="Permalink to this headline">¶</a></h2>
 <p>Running the application with the <code class="docutils literal notranslate"><span class="pre">-h</span></code> option yields the following usage message:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">deblurring_demo</span><span class="o">.</span><span class="n">py</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="o">-</span><span class="n">m</span> <span class="n">MODEL</span> <span class="o">-</span><span class="n">i</span> <span class="n">INPUT</span> <span class="p">[</span><span class="o">--</span><span class="n">adapter</span> <span class="p">{</span><span class="n">openvino</span><span class="p">,</span><span class="n">ovms</span><span class="p">}]</span> <span class="p">[</span><span class="o">-</span><span class="n">d</span> <span class="n">DEVICE</span><span class="p">]</span>
@@ -2200,16 +2207,16 @@ To avoid disk space overrun in case of continuous input stream, like camera, you
 <blockquote>
 <div><p><strong>NOTE</strong>: Windows* systems may not have the Motion JPEG codec installed by default. If this is the case, you can download OpenCV FFMPEG back end using the PowerShell script provided with the OpenVINO ™ install package and located at <code class="docutils literal notranslate"><span class="pre">&lt;INSTALL_DIR&gt;/opencv/ffmpeg-download.ps1</span></code>. The script should be run with administrative privileges if OpenVINO ™ is installed in a system protected folder (this is a typical case). Alternatively, you can save results as images.</p>
 </div></blockquote>
-</div>
-<div class="section" id="running-with-openvino-model-server">
+</section>
+<section id="running-with-openvino-model-server">
 <h2>Running with OpenVINO Model Server<a class="headerlink" href="#running-with-openvino-model-server" title="Permalink to this headline">¶</a></h2>
 <p>You can also run this demo with model served in <a class="reference external" href="https://github.com/openvinotoolkit/model_server">OpenVINO Model Server</a>. Refer to <a class="reference internal" href="../../common/python/openvino/model_zoo/model_api/adapters/ovms_adapter.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">OVMSAdapter</span></code></span></a> to learn about running demos with OVMS.</p>
 <p>Exemplary command:</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>python3 deblurring_demo.py -i <span class="m">0</span> -m localhost:9000/models/deblurring --adapter ovms
 </pre></div>
 </div>
-</div>
-<div class="section" id="demo-output">
+</section>
+<section id="demo-output">
 <h2>Demo Output<a class="headerlink" href="#demo-output" title="Permalink to this headline">¶</a></h2>
 <p>The demo uses OpenCV to display the resulting images together with source images.
 The demo reports</p>
@@ -2227,16 +2234,16 @@ The demo reports</p>
 </li>
 </ul>
 <p>You can use these metrics to measure application-level performance.</p>
-</div>
-<div class="section" id="see-also">
+</section>
+<section id="see-also">
 <h2>See Also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="../../README.html"><span class="doc std std-doc">Open Model Zoo Demos</span></a></p></li>
 <li><p><a class="reference external" href="https://docs.openvino.ai/latest/openvino_docs_MO_DG_Deep_Learning_Model_Optimizer_DevGuide.html">Model Optimizer</a></p></li>
 <li><p><span class="xref myst">Model Downloader</span></p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -2267,7 +2274,7 @@ The demo reports</p>
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

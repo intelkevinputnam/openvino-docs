@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Deep Learning Network Intermediate Representation and Operation Sets in OpenVINO™ &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -1415,10 +1422,10 @@
             
                 <div>
                   
-  <div class="section" id="deep-learning-network-intermediate-representation-and-operation-sets-in-openvino">
+  <section id="deep-learning-network-intermediate-representation-and-operation-sets-in-openvino">
 <span id="doxid-openvino-docs-m-o-d-g-i-r-and-opsets"></span><span id="index-0"></span><h1>Deep Learning Network Intermediate Representation and Operation Sets in OpenVINO™<a class="headerlink" href="#deep-learning-network-intermediate-representation-and-operation-sets-in-openvino" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-openvino-docs-m-o-d-g-i-r-and-opsets-1md-openvino-docs-mo-dg-ir-and-opsets"></span> This document provides essential information on the format used for representation of deep learning models in OpenVINO™ toolkit and supported operation sets.</p>
-<div class="section" id="overview-of-artificial-neural-networks-representation">
+<section id="overview-of-artificial-neural-networks-representation">
 <h2>Overview of Artificial Neural Networks Representation<a class="headerlink" href="#overview-of-artificial-neural-networks-representation" title="Permalink to this headline">¶</a></h2>
 <p>This paragraph provides an overview of how a deep learning network is represented in various deep learning frameworks.</p>
 <p>A deep learning network is usually represented as a directed graph describing the flow of data from the network input data to the inference results. Input data can be represented as a photograph, video, audio information or some preprocessed data that represent object from the target area of interest in a convenient way.</p>
@@ -1428,8 +1435,8 @@
 <p>Each operation produces data on one or multiple output ports. For example, convolution produces output tensor with activations at a single output port. Split operation usually has multiple output ports each producing part of an input tensor.</p>
 <p>Depending on a deep learning framework, the graph can also contain extra nodes that explicitly represent tensors between operations. In such representations, operation nodes are not connected directly to each other, rather using data nodes as intermediate stops for data flow. If data nodes are not used, the produced data is associated with an output port of a corresponding operation node that produces the data.</p>
 <p>A set of various operations used in a network is usually fixed for each deep learning framework. It determines expressiveness and level of representation available in that framework. It may happen that a network that can be represented in one framework is hard or impossible to be represented in another one or should use significantly different graph because operation sets used in those two frameworks do not match.</p>
-</div>
-<div class="section" id="intermediate-representation-used-in-openvino">
+</section>
+<section id="intermediate-representation-used-in-openvino">
 <h2>Intermediate Representation Used in OpenVINO™<a class="headerlink" href="#intermediate-representation-used-in-openvino" title="Permalink to this headline">¶</a></h2>
 <p>OpenVINO™ toolkit introduces its own format of graph representation and its own operation set. A graph is represented with two files: an XML file and a binary file. This representation is commonly referred to as the <em>Intermediate Representation</em> or <em>IR</em>.</p>
 <p>The XML file describes a network topology using a <code class="docutils literal notranslate"><span class="pre">&lt;layer&gt;</span></code> tag for an operation node and an <code class="docutils literal notranslate"><span class="pre">&lt;edge&gt;</span></code> tag for a data-flow connection. Each operation has a fixed number of attributes that define operation flavor used for a node. For example, <code class="docutils literal notranslate"><span class="pre">Convolution</span></code> operation has such attributes as <code class="docutils literal notranslate"><span class="pre">dilation</span></code>, <code class="docutils literal notranslate"><span class="pre">stride</span></code>, <code class="docutils literal notranslate"><span class="pre">pads_begin</span></code> and <code class="docutils literal notranslate"><span class="pre">pads_end</span></code>.</p>
@@ -1538,8 +1545,8 @@
         <span class="o">&lt;/</span><span class="n">cli_parameters</span><span class="o">&gt;</span>
     <span class="o">&lt;/</span><span class="n">meta_data</span><span class="o">&gt;</span>
 <span class="o">&lt;/</span><span class="n">net</span><span class="o">&gt;</span></pre></div></div><p>The IR doesn’t use explicit data nodes described in the previous section. In contrast, properties of data such as tensor dimensions and their data types are described as properties of input and output ports of operations.</p>
-</div>
-<div class="section" id="operation-set">
+</section>
+<section id="operation-set">
 <h2>Operation Set<a class="headerlink" href="#operation-set" title="Permalink to this headline">¶</a></h2>
 <p>Operations in the OpenVINO™ Operation Set are selected based on capabilities of supported deep learning frameworks and hardware capabilities of the target inference device. It consists of several groups of operations:</p>
 <ul class="simple">
@@ -1552,8 +1559,8 @@
 <li><p>Specialized operations that implement complex algorithms dedicated for models of specific type: DetectionOutput, RegionYolo, PriorBox.</p></li>
 </ul>
 <p>Refer to the complete description of the supported operation sets in the <a class="reference internal" href="openvino_docs_ops_opset.html#doxid-openvino-docs-ops-opset"><span class="std std-ref">Available Operation Sets</span></a> document.</p>
-</div>
-<div class="section" id="ir-versions-vs-operation-set-versions">
+</section>
+<section id="ir-versions-vs-operation-set-versions">
 <h2>IR Versions vs Operation Set Versions<a class="headerlink" href="#ir-versions-vs-operation-set-versions" title="Permalink to this headline">¶</a></h2>
 <p>The expressiveness of operations in OpenVINO™ is highly dependent on the supported frameworks and target hardware capabilities. As the frameworks and hardware capabilities grow over time, the operation set is constantly evolving to support new models. To maintain backward compatibility and growing demands, both IR format and operation set have versioning.</p>
 <p>Version of IR specifies the rules which are used to read the XML and binary files that represent a model. It defines an XML schema and compatible operation set that can be used to describe operations.</p>
@@ -1581,14 +1588,14 @@
                     <span class="p">...</span></pre></div></div><p>The attributes <code class="docutils literal notranslate"><span class="pre">type=&quot;Parameter&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">version=&quot;opset1&quot;</span></code> in the example above mean “use that version of operation <cite>Parameter</cite> that is included into the operation set <cite>opset1</cite>”.</p>
 <p>When a new operation set is introduced, the significant part of the operations remains unchanged and it is just aliased from the previous operation set within a new one. The goal of operation set versions evolution is adding new operations, and probably changing of small fraction of existing operations (fixing bugs and extending semantics). However such changes affect only new versions of operations from a new operation set, while old operations are used by specifying an appropriate <code class="docutils literal notranslate"><span class="pre">version</span></code>. When the old <code class="docutils literal notranslate"><span class="pre">version</span></code> is specified, the behavior is kept unchanged from that specified version to provide the backward compatibility with older IRs.</p>
 <p>A single <code class="docutils literal notranslate"><span class="pre">xml</span></code> file with IR may contain operations from different opsets. An operation that is included into several opsets may be referred to with <code class="docutils literal notranslate"><span class="pre">version</span></code> which points to any opset that includes that operation. For example, the same <code class="docutils literal notranslate"><span class="pre">Convolution</span></code> can be used with <code class="docutils literal notranslate"><span class="pre">version=&quot;opset1&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">version=&quot;opset2&quot;</span></code> because both opsets have the same operations <code class="docutils literal notranslate"><span class="pre">Convolution</span></code>.</p>
-</div>
-<div class="section" id="how-to-read-the-specification">
+</section>
+<section id="how-to-read-the-specification">
 <h2>How to Read the Specification<a class="headerlink" href="#how-to-read-the-specification" title="Permalink to this headline">¶</a></h2>
 <p>In the <a class="reference internal" href="openvino_docs_ops_opset.html#doxid-openvino-docs-ops-opset"><span class="std std-ref">Available Operation Sets</span></a> there are opsets and there are operations. Each opset specification has a list of links to operations descriptions that are included into that specific opset. Two or more opsets may refer to the same operation. That means an operation is kept unchanged from one operation set to another.</p>
 <p>Each operation description has a field <code class="docutils literal notranslate"><span class="pre">Versioned</span> <span class="pre">name</span></code>. For example, <code class="docutils literal notranslate"><span class="pre">ReLU</span></code> entry point in :ref:<code class="docutils literal notranslate"><span class="pre">opset1`</span> <span class="pre">&lt;doxid-openvino_docs_ops_opset1&gt;`</span> <span class="pre">refers</span> <span class="pre">to</span> <span class="pre">`ReLU-1</span> <span class="pre">&lt;doxid-openvino_docs_ops_activation__re_l_u_1&gt;`</span> <span class="pre">as</span> <span class="pre">the</span> <span class="pre">versioned</span> <span class="pre">name.</span> <span class="pre">And</span> <span class="pre">``ReLU</span></code> in <code class="docutils literal notranslate"><span class="pre">opset2</span></code> refers to the same <code class="docutils literal notranslate"><span class="pre">ReLU-1</span></code> and both <code class="docutils literal notranslate"><span class="pre">ReLU</span></code> operations are the same operation and it has a single <a class="reference internal" href="openvino_docs_ops_activation_ReLU_1.html#doxid-openvino-docs-ops-activation-re-l-u-1"><span class="std std-ref">description</span></a>. So <code class="docutils literal notranslate"><span class="pre">opset1</span></code> and <code class="docutils literal notranslate"><span class="pre">opset2</span></code> share the same operation <code class="docutils literal notranslate"><span class="pre">ReLU</span></code>.</p>
 <p>To differentiate versions of the same operation type, like <code class="docutils literal notranslate"><span class="pre">ReLU</span></code>, the suffix <code class="docutils literal notranslate"><span class="pre">-N</span></code> is used in a versioned name of the operation. <code class="docutils literal notranslate"><span class="pre">N</span></code> usually refers to the first <code class="docutils literal notranslate"><span class="pre">opsetN</span></code> where this version of the operation is introduced. It is not guaranteed that new operations will be named according to that rule, the naming convention might be changed, but not for old operations which are frozen completely.</p>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -1619,7 +1626,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

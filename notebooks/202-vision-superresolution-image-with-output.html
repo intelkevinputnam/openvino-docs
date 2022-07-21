@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Single Image Super Resolution with OpenVINO &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -578,7 +585,7 @@
             
                 <div>
                   
-  <div class="section" id="single-image-super-resolution-with-openvino">
+  <section id="single-image-super-resolution-with-openvino">
 <h1>Single Image Super Resolution with OpenVINO<a class="headerlink" href="#single-image-super-resolution-with-openvino" title="Permalink to this headline">¶</a></h1>
 <p>Super Resolution is the process of enhancing the quality of an image by
 increasing the pixel count using deep learning. This notebook shows the
@@ -591,9 +598,9 @@ paper cited below.</p>
 Resolution,”</a> 2018 24th
 International Conference on Pattern Recognition (ICPR), 2018,
 pp. 2777-2784, doi: 10.1109/ICPR.2018.8545760.</p>
-<div class="section" id="preparation">
+<section id="preparation">
 <h2>Preparation<a class="headerlink" href="#preparation" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="imports">
+<section id="imports">
 <h3>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">time</span>
@@ -610,8 +617,8 @@ pp. 2777-2784, doi: 10.1109/ICPR.2018.8545760.</p>
 <span class="kn">from</span> <span class="nn">openvino.runtime</span> <span class="kn">import</span> <span class="n">Core</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="settings">
+</section>
+<section id="settings">
 <h3>Settings<a class="headerlink" href="#settings" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Device to use for inference. For example, &quot;CPU&quot;, or &quot;GPU&quot;</span>
 <span class="n">DEVICE</span> <span class="o">=</span> <span class="s2">&quot;CPU&quot;</span>
@@ -621,8 +628,8 @@ pp. 2777-2784, doi: 10.1109/ICPR.2018.8545760.</p>
 <span class="n">model_xml_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">MODEL_FILE</span><span class="p">)</span><span class="o">.</span><span class="n">with_suffix</span><span class="p">(</span><span class="s2">&quot;.xml&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="functions">
+</section>
+<section id="functions">
 <h3>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">write_text_on_image</span><span class="p">(</span><span class="n">image</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -700,9 +707,9 @@ pp. 2777-2784, doi: 10.1109/ICPR.2018.8545760.</p>
     <span class="k">return</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">image_data</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2RGB</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="load-the-superresolution-model">
+</section>
+</section>
+<section id="load-the-superresolution-model">
 <h2>Load the Superresolution Model<a class="headerlink" href="#load-the-superresolution-model" title="Permalink to this headline">¶</a></h2>
 <p>The Super Resolution model expects two inputs: 1) the input image, 2) a
 bicubic interpolation of the input image to a size of 1920x1080. It
@@ -743,8 +750,8 @@ about the network inputs and outputs.</p>
 <span class="n">The</span> <span class="n">image</span> <span class="n">sides</span> <span class="n">are</span> <span class="n">upsampled</span> <span class="n">by</span> <span class="n">a</span> <span class="n">factor</span> <span class="mf">4.</span> <span class="n">The</span> <span class="n">new</span> <span class="n">image</span> <span class="ow">is</span> <span class="mi">16</span> <span class="n">times</span> <span class="k">as</span> <span class="n">large</span> <span class="k">as</span> <span class="n">the</span> <span class="n">original</span> <span class="n">image</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="load-and-show-the-input-image">
+</section>
+<section id="load-and-show-the-input-image">
 <h2>Load and Show the Input Image<a class="headerlink" href="#load-and-show-the-input-image" title="Permalink to this headline">¶</a></h2>
 <p><strong>NOTE:</strong> For best results, use raw images (like TIFF, BMP or PNG).
 Compressed images (like JPEG) may appear distorted after processing with
@@ -768,10 +775,10 @@ the super resolution model.</p>
 </pre></div>
 </div>
 <img alt="../_images/202-vision-superresolution-image-with-output_10_1.png" src="../_images/202-vision-superresolution-image-with-output_10_1.png" />
-</div>
-<div class="section" id="superresolution-on-a-crop-of-the-image">
+</section>
+<section id="superresolution-on-a-crop-of-the-image">
 <h2>Superresolution on a Crop of the Image<a class="headerlink" href="#superresolution-on-a-crop-of-the-image" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="take-one-crop-of-the-input-image">
+<section id="take-one-crop-of-the-input-image">
 <h3>Take One Crop of the Input Image<a class="headerlink" href="#take-one-crop-of-the-input-image" title="Permalink to this headline">¶</a></h3>
 <p>Take a crop of network input size. Give the X (width) and Y (height)
 coordinates for the top left corner of the crop. Set the CROP_FACTOR
@@ -810,8 +817,8 @@ the side lengths are twice as large as the crop size.</p>
 </pre></div>
 </div>
 <img alt="../_images/202-vision-superresolution-image-with-output_12_1.png" src="../_images/202-vision-superresolution-image-with-output_12_1.png" />
-</div>
-<div class="section" id="reshape-resize-crop-for-model-input">
+</section>
+<section id="reshape-resize-crop-for-model-input">
 <h3>Reshape/Resize Crop for Model Input<a class="headerlink" href="#reshape-resize-crop-for-model-input" title="Permalink to this headline">¶</a></h3>
 <p>The input image is resized to network input size, and reshaped to
 (N,C,H,W) (N=number of images, C=number of channels, H=height, W=width).
@@ -831,8 +838,8 @@ interpolation. This bicubic image is the second input to the network.</p>
 <span class="n">input_image_bicubic</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">bicubic_image</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="do-inference">
+</section>
+<section id="do-inference">
 <h3>Do Inference<a class="headerlink" href="#do-inference" title="Permalink to this headline">¶</a></h3>
 <p>Do inference and convert the inference result to an RGB image</p>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">compiled_model</span><span class="p">(</span>
@@ -846,8 +853,8 @@ interpolation. This bicubic image is the second input to the network.</p>
 <span class="n">result_image</span> <span class="o">=</span> <span class="n">convert_result_to_image</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="show-and-save-results">
+</section>
+<section id="show-and-save-results">
 <h3>Show and Save Results<a class="headerlink" href="#show-and-save-results" title="Permalink to this headline">¶</a></h3>
 <p>Show the bicubic image and the enhanced superresolution image.</p>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">15</span><span class="p">))</span>
@@ -861,7 +868,7 @@ interpolation. This bicubic image is the second input to the network.</p>
 </pre></div>
 </div>
 <img alt="../_images/202-vision-superresolution-image-with-output_18_1.png" src="../_images/202-vision-superresolution-image-with-output_18_1.png" />
-<div class="section" id="save-superresolution-and-bicubic-image-crop">
+<section id="save-superresolution-and-bicubic-image-crop">
 <h4>Save Superresolution and Bicubic Image Crop<a class="headerlink" href="#save-superresolution-and-bicubic-image-crop" title="Permalink to this headline">¶</a></h4>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add text with &quot;SUPER&quot; or &quot;BICUBIC&quot; to the superresolution or bicubic image</span>
 <span class="n">image_super</span> <span class="o">=</span> <span class="n">write_text_on_image</span><span class="p">(</span><span class="n">image</span><span class="o">=</span><span class="n">result_image</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;SUPER&quot;</span><span class="p">)</span>
@@ -888,8 +895,8 @@ interpolation. This bicubic image is the second input to the network.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Images</span> <span class="n">written</span> <span class="n">to</span> <span class="n">directory</span><span class="p">:</span> <span class="n">output</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="write-animated-gif-with-bicubic-superresolution-comparison">
+</section>
+<section id="write-animated-gif-with-bicubic-superresolution-comparison">
 <h4>Write Animated GIF with Bicubic/Superresolution Comparison<a class="headerlink" href="#write-animated-gif-with-bicubic-superresolution-comparison" title="Permalink to this headline">¶</a></h4>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">image_bicubic</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">image_super</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
@@ -916,8 +923,8 @@ interpolation. This bicubic image is the second input to the network.</p>
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="../_images/202-vision-superresolution-image-with-output_22_1.png"><img alt="../_images/202-vision-superresolution-image-with-output_22_1.png" src="../_images/202-vision-superresolution-image-with-output_22_1.png" style="width: 960px;" /></a>
-</div>
-<div class="section" id="create-video-with-sliding-bicubic-superresolution-comparison">
+</section>
+<section id="create-video-with-sliding-bicubic-superresolution-comparison">
 <h4>Create video with sliding bicubic/superresolution comparison<a class="headerlink" href="#create-video-with-sliding-bicubic-superresolution-comparison" title="Permalink to this headline">¶</a></h4>
 <p>This may take a while. For the video, the superresolution and bicubic
 image are resized by a factor two to improve processing speed. This
@@ -973,10 +980,10 @@ it directly from the images directory, and play it locally.</p>
 <span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The video has been saved to </span><span class="si">{</span><span class="n">video_link</span><span class="o">.</span><span class="n">_repr_html_</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">))</span>
 </pre></div>
 </div>
-The video has been saved to output/flag_crop_comparison_2x.avi<br></div>
-</div>
-</div>
-<div class="section" id="superresolution-on-full-input-image">
+The video has been saved to output/flag_crop_comparison_2x.avi<br></section>
+</section>
+</section>
+<section id="superresolution-on-full-input-image">
 <h2>Superresolution on full input image<a class="headerlink" href="#superresolution-on-full-input-image" title="Permalink to this headline">¶</a></h2>
 <p>Superresolution on the full image is done by dividing the image into
 patches of equal size, doing superresolution on each path, and then
@@ -984,7 +991,7 @@ stitching the resulting patches together again. For this demo, patches
 near the border of the image are ignored.</p>
 <p>Adjust the <code class="docutils literal notranslate"><span class="pre">CROPLINES</span></code> setting in the next cell if you see boundary
 effects.</p>
-<div class="section" id="compute-patches">
+<section id="compute-patches">
 <h3>Compute patches<a class="headerlink" href="#compute-patches" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set the number of lines to crop from the network result to prevent</span>
 <span class="c1"># boundary effects. Should be an integer &gt;= 1.</span>
@@ -1024,8 +1031,8 @@ effects.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">The</span> <span class="n">output</span> <span class="n">image</span> <span class="n">will</span> <span class="n">have</span> <span class="n">a</span> <span class="n">width</span> <span class="n">of</span> <span class="mi">11280</span> <span class="ow">and</span> <span class="n">a</span> <span class="n">height</span> <span class="n">of</span> <span class="mi">7280</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="id1">
+</section>
+<section id="id1">
 <h3>Do Inference<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <p>The code in this cell reads one patch of the image at a time. Each patch
 is reshaped to network input shape and upsampled with bicubic
@@ -1141,8 +1148,8 @@ time to process each patch.</p>
 <span class="n">Inference</span> <span class="n">patches</span> <span class="n">per</span> <span class="n">second</span><span class="p">:</span> <span class="mf">2.69</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="save-superresolution-image-and-the-bicubic-image">
+</section>
+<section id="save-superresolution-image-and-the-bicubic-image">
 <h3>Save superresolution image and the bicubic image<a class="headerlink" href="#save-superresolution-image-and-the-bicubic-image" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">full_superresolution_image_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span>
     <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">OUTPUT_PATH</span><span class="o">.</span><span class="n">stem</span><span class="si">}</span><span class="s2">/full_superres_</span><span class="si">{</span><span class="n">adjusted_upsample_factor</span><span class="si">}</span><span class="s2">x.jpg&quot;</span>
@@ -1166,9 +1173,9 @@ time to process each patch.</p>
 <span class="p">)</span>
 </pre></div>
 </div>
-The images are saved in the images directory. You can also download them by clicking on these links:<ul><li>output/full_bicubic_2x.jpg<br></div>
-</div>
-</div>
+The images are saved in the images directory. You can also download them by clicking on these links:<ul><li>output/full_bicubic_2x.jpg<br></section>
+</section>
+</section>
 
 
                 </div>
@@ -1199,7 +1206,7 @@ The images are saved in the images directory. You can also download them by clic
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

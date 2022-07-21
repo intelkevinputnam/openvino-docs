@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Hello Reshape SSD C++ Sample &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -624,7 +631,7 @@
             
                 <div>
                   
-  <div class="section" id="hello-reshape-ssd-c-sample">
+  <section id="hello-reshape-ssd-c-sample">
 <span id="doxid-openvino-inference-engine-samples-hello-reshape-ssd-r-e-a-d-m-e"></span><span id="index-0"></span><h1>Hello Reshape SSD C++ Sample<a class="headerlink" href="#hello-reshape-ssd-c-sample" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-openvino-inference-engine-samples-hello-reshape-ssd-r-e-a-d-m-e-1md-openvino-samples-cpp-hello-reshape-ssd-readme"></span> This sample demonstrates how to do synchronous inference of object detection models using <a class="reference internal" href="openvino_docs_OV_UG_ShapeInference.html#doxid-openvino-docs-o-v-u-g-shape-inference"><span class="std std-ref">input reshape feature</span></a>. Models with only one input and output are supported.</p>
 <p>The following C++ API is used in the application:</p>
@@ -646,7 +653,7 @@
 <td><p>Get a node info</p></td>
 </tr>
 <tr class="row-odd"><td><p>Model Operations</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">ov::Model::get_ops</span></code> , <code class="docutils literal notranslate"><span class="pre">ov::Model::reshape</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ov::Model::get_ops</span></code> , <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1Model.html#doxid-classov-1-1-model-1aa21aff80598d5089d591888a4c7f33ae"><span class="std std-ref"><span class="pre">ov::Model::reshape</span></span></a></code></p></td>
 <td><p>Get model nodes, reshape input</p></td>
 </tr>
 <tr class="row-even"><td><p>Tensor Operations</p></td>
@@ -685,16 +692,16 @@
 </tr>
 </tbody>
 </table>
-<div class="section" id="how-it-works">
+<section id="how-it-works">
 <h2>How It Works<a class="headerlink" href="#how-it-works" title="Permalink to this headline">¶</a></h2>
 <p>Upon the start-up the sample application reads command line parameters, loads specified network and image to the Inference Engine plugin. Then, the sample creates an synchronous inference request object. When inference is done, the application creates output image and output data to the standard output stream.</p>
 <p>You can see the explicit description of each sample step at <a class="reference internal" href="openvino_docs_OV_UG_Integrate_OV_with_your_application.html#doxid-openvino-docs-o-v-u-g-integrate-o-v-with-your-application"><span class="std std-ref">Integration Steps</span></a> section of “Integrate OpenVINO™ Runtime with Your Application” guide.</p>
-</div>
-<div class="section" id="building">
+</section>
+<section id="building">
 <h2>Building<a class="headerlink" href="#building" title="Permalink to this headline">¶</a></h2>
 <p>To build the sample, please use instructions available at <a class="reference internal" href="openvino_docs_OV_UG_Samples_Overview.html#doxid-openvino-docs-o-v-u-g-samples-overview"><span class="std std-ref">Build the Sample Applications</span></a> section in OpenVINO™ Toolkit Samples guide.</p>
-</div>
-<div class="section" id="running">
+</section>
+<section id="running">
 <h2>Running<a class="headerlink" href="#running" title="Permalink to this headline">¶</a></h2>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">hello_reshape_ssd</span> <span class="o">&lt;</span><span class="n">path_to_model</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">path_to_image</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">device</span><span class="o">&gt;</span></pre></div></div><p>To run the sample, you need specify a model and image:</p>
 <ul class="simple">
@@ -707,7 +714,7 @@
 <li><p>Before running the sample with a trained model, make sure the model is converted to the intermediate representation (IR) format (*.xml + *.bin) using the <a class="reference internal" href="openvino_docs_MO_DG_Deep_Learning_Model_Optimizer_DevGuide.html#doxid-openvino-docs-m-o-d-g-deep-learning-model-optimizer-dev-guide"><span class="std std-ref">Model Optimizer tool</span></a>.</p></li>
 <li><p>The sample accepts models in ONNX format (*.onnx) that do not require preprocessing.</p></li>
 </ul>
-<div class="section" id="example">
+<section id="example">
 <h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic simple">
 <li><p>Install openvino-dev python package if you don’t have it to use Open Model Zoo Tools:</p></li>
@@ -721,9 +728,9 @@
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">omz_converter</span> <span class="o">--</span><span class="n">name</span> <span class="o">&lt;</span><span class="n">model_name</span><span class="o">&gt;</span></pre></div></div><ol class="arabic simple">
 <li><p>Perform inference of <code class="docutils literal notranslate"><span class="pre">person_detection.bmp</span></code> using <code class="docutils literal notranslate"><span class="pre">person-detection-retail-0013</span></code> model on a <code class="docutils literal notranslate"><span class="pre">GPU</span></code>, for example:</p></li>
 </ol>
-<div class="highlight"><div class="highlight"><pre><span></span><span class="n">hello_reshape_ssd</span> <span class="n">person</span><span class="o">-</span><span class="n">detection</span><span class="o">-</span><span class="n">retail</span><span class="o">-</span><span class="mf">0013.</span><span class="n">xml</span> <span class="n">person_detection</span><span class="p">.</span><span class="n">bmp</span> <span class="n">GPU</span></pre></div></div></div>
-</div>
-<div class="section" id="sample-output">
+<div class="highlight"><div class="highlight"><pre><span></span><span class="n">hello_reshape_ssd</span> <span class="n">person</span><span class="o">-</span><span class="n">detection</span><span class="o">-</span><span class="n">retail</span><span class="o">-</span><span class="mf">0013.</span><span class="n">xml</span> <span class="n">person_detection</span><span class="p">.</span><span class="n">bmp</span> <span class="n">GPU</span></pre></div></div></section>
+</section>
+<section id="sample-output">
 <h2>Sample Output<a class="headerlink" href="#sample-output" title="Permalink to this headline">¶</a></h2>
 <p>The application renders an image with detected objects enclosed in rectangles. It outputs the list of classes of the detected objects along with the respective confidence values and the coordinates of the rectangles to the standard output stream.</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">OpenVINO</span> <span class="n">Runtime</span> <span class="n">version</span> <span class="p">.........</span> <span class="o">&lt;</span><span class="n">version</span><span class="o">&gt;</span>
@@ -752,8 +759,8 @@
 <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="n">element</span><span class="p">,</span> <span class="n">prob</span> <span class="o">=</span> <span class="mf">0.716309</span><span class="p">,</span>    <span class="p">(</span><span class="mi">852</span><span class="p">,</span><span class="mi">187</span><span class="p">)</span><span class="o">-</span><span class="p">(</span><span class="mi">983</span><span class="p">,</span><span class="mi">520</span><span class="p">)</span>
 <span class="n">The</span> <span class="n">resulting</span> <span class="n">image</span> <span class="n">was</span> <span class="n">saved</span> <span class="n">in</span> <span class="n">the</span> <span class="nl">file</span><span class="p">:</span> <span class="n">hello_reshape_ssd_output</span><span class="p">.</span><span class="n">bmp</span>
 
-<span class="n">This</span> <span class="n">sample</span> <span class="n">is</span> <span class="n">an</span> <span class="n">API</span> <span class="n">example</span><span class="p">,</span> <span class="k">for</span> <span class="n">any</span> <span class="n">performance</span> <span class="n">measurements</span> <span class="n">please</span> <span class="n">use</span> <span class="n">the</span> <span class="n">dedicated</span> <span class="n">benchmark_app</span> <span class="n">tool</span></pre></div></div></div>
-<div class="section" id="see-also">
+<span class="n">This</span> <span class="n">sample</span> <span class="n">is</span> <span class="n">an</span> <span class="n">API</span> <span class="n">example</span><span class="p">,</span> <span class="k">for</span> <span class="n">any</span> <span class="n">performance</span> <span class="n">measurements</span> <span class="n">please</span> <span class="n">use</span> <span class="n">the</span> <span class="n">dedicated</span> <span class="n">benchmark_app</span> <span class="n">tool</span></pre></div></div></section>
+<section id="see-also">
 <h2>See Also<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="openvino_docs_OV_UG_Integrate_OV_with_your_application.html#doxid-openvino-docs-o-v-u-g-integrate-o-v-with-your-application"><span class="std std-ref">Integrate the OpenVINO™ Runtime with Your Application</span></a></p></li>
@@ -761,8 +768,8 @@
 <li><p>Model Downloader</p></li>
 <li><p><a class="reference internal" href="openvino_docs_MO_DG_Deep_Learning_Model_Optimizer_DevGuide.html#doxid-openvino-docs-m-o-d-g-deep-learning-model-optimizer-dev-guide"><span class="std std-ref">Model Optimizer</span></a></p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -793,7 +800,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Install Intel® Distribution of OpenVINO™ toolkit for Windows from Docker Image &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -670,10 +677,10 @@
             
                 <div>
                   
-  <div class="section" id="install-intel-distribution-of-openvino-toolkit-for-windows-from-docker-image">
+  <section id="install-intel-distribution-of-openvino-toolkit-for-windows-from-docker-image">
 <span id="doxid-openvino-docs-install-guides-installing-openvino-docker-windows"></span><span id="index-0"></span><h1>Install Intel® Distribution of OpenVINO™ toolkit for Windows from Docker Image<a class="headerlink" href="#install-intel-distribution-of-openvino-toolkit-for-windows-from-docker-image" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-openvino-docs-install-guides-installing-openvino-docker-windows-1md-openvino-docs-install-guides-installing-openvino-docker-windows"></span> This guide provides steps for creating a Docker image with Intel® Distribution of OpenVINO™ toolkit for Windows and using the Docker image on different devices.</p>
-<div class="section" id="system-requirements">
+<section id="system-requirements">
 <span id="system-requirments"></span><h2>System Requirements<a class="headerlink" href="#system-requirements" title="Permalink to this headline">¶</a></h2>
 <div class="tab-set docutils">
 <input checked="True" class="tab-input" id="tab-set--0-input--1" name="tab-set--0" type="radio"><label class="tab-label" for="tab-set--0-input--1">Target Operating System with Python Version</label><div class="tab-content docutils">
@@ -704,7 +711,7 @@
 </ul>
 </div>
 </div>
-<div class="section" id="additional-requirements-for-gpu">
+<section id="additional-requirements-for-gpu">
 <h3>Additional Requirements for GPU<a class="headerlink" href="#additional-requirements-for-gpu" title="Permalink to this headline">¶</a></h3>
 <p>To use GPU Acceleration in Windows containers, make sure that the following requirements for Windows host, OpenVINO and Docker are met:</p>
 <ul class="simple">
@@ -724,9 +731,9 @@
 </ul>
 </li>
 </ul>
-</div>
-</div>
-<div class="section" id="installation-flow">
+</section>
+</section>
+<section id="installation-flow">
 <h2>Installation Flow<a class="headerlink" href="#installation-flow" title="Permalink to this headline">¶</a></h2>
 <p>There are two ways to install OpenVINO with Docker. You can choose either of them according to your needs:</p>
 <ul class="simple">
@@ -744,24 +751,24 @@
 </ol>
 </li>
 </ul>
-</div>
-<div class="section" id="getting-a-prebuilt-image-from-provided-sources">
+</section>
+<section id="getting-a-prebuilt-image-from-provided-sources">
 <span id="get-prebuilt-image"></span><h2>Getting a Prebuilt Image from Provided Sources<a class="headerlink" href="#getting-a-prebuilt-image-from-provided-sources" title="Permalink to this headline">¶</a></h2>
 <p>You can find prebuilt images on:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://hub.docker.com/u/openvino">Docker Hub</a></p></li>
 <li><p><a class="reference external" href="https://azuremarketplace.microsoft.com/en-us/marketplace/apps/intel_corporation.openvino">Azure Marketplace</a></p></li>
 </ul>
-</div>
-<div class="section" id="preparing-a-dockerfile">
+</section>
+<section id="preparing-a-dockerfile">
 <span id="prepare-dockerfile"></span><h2>Preparing a Dockerfile<a class="headerlink" href="#preparing-a-dockerfile" title="Permalink to this headline">¶</a></h2>
 <p>You can use the <a class="reference external" href="https://github.com/openvinotoolkit/docker_ci/tree/master/dockerfiles">available Dockerfiles on GitHub</a> or generate a Dockerfile with your settings via <a class="reference external" href="https://github.com/openvinotoolkit/docker_ci">DockerHub CI Framework</a> which can generate a Dockerfile, build, test and deploy an image with the Intel® Distribution of OpenVINO™ toolkit.</p>
-</div>
-<div class="section" id="configuring-the-docker-image-for-different-devices">
+</section>
+<section id="configuring-the-docker-image-for-different-devices">
 <span id="configure-image"></span><h2>Configuring the Docker Image for Different Devices<a class="headerlink" href="#configuring-the-docker-image-for-different-devices" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="installing-additional-dependencies-for-cpu">
+<section id="installing-additional-dependencies-for-cpu">
 <h3>Installing Additional Dependencies for CPU<a class="headerlink" href="#installing-additional-dependencies-for-cpu" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="installing-cmake">
+<section id="installing-cmake">
 <h4>Installing CMake<a class="headerlink" href="#installing-cmake" title="Permalink to this headline">¶</a></h4>
 <p>To add CMake to the image, add the following commands to the Dockerfile:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">RUN</span> <span class="n">powershell</span><span class="p">.</span><span class="n">exe</span> <span class="o">-</span><span class="n">Command</span> <span class="err">`</span>
@@ -771,8 +778,8 @@
 
 <span class="n">RUN</span> <span class="n">SETX</span> <span class="o">/</span><span class="n">M</span> <span class="n">PATH</span> <span class="s">&quot;C:\Program Files\CMake\Bin;%PATH%&quot;</span></pre></div></div><p>In case of proxy issues, please add the <code class="docutils literal notranslate"><span class="pre">ARG</span> <span class="pre">HTTPS_PROXY</span></code> and <code class="docutils literal notranslate"><span class="pre">-Proxy</span> <span class="pre">%HTTPS_PROXY%</span></code> settings to the <code class="docutils literal notranslate"><span class="pre">powershell.exe</span></code> command to the Dockerfile. Then build a Docker image:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">build</span> <span class="p">.</span> <span class="o">-</span><span class="n">t</span> <span class="o">&lt;</span><span class="n">image_name</span><span class="o">&gt;</span> <span class="err">`</span>
-<span class="o">--</span><span class="n">build</span><span class="o">-</span><span class="n">arg</span> <span class="n">HTTPS_PROXY</span><span class="o">=&lt;</span><span class="nl">https</span><span class="p">:</span><span class="c1">//your_proxy_server:port&gt;</span></pre></div></div></div>
-<div class="section" id="installing-microsoft-visual-studio-build-tools">
+<span class="o">--</span><span class="n">build</span><span class="o">-</span><span class="n">arg</span> <span class="n">HTTPS_PROXY</span><span class="o">=&lt;</span><span class="nl">https</span><span class="p">:</span><span class="c1">//your_proxy_server:port&gt;</span></pre></div></div></section>
+<section id="installing-microsoft-visual-studio-build-tools">
 <h4>Installing Microsoft Visual Studio Build Tools<a class="headerlink" href="#installing-microsoft-visual-studio-build-tools" title="Permalink to this headline">¶</a></h4>
 <p>You can add Microsoft Visual Studio Build Tools to a Windows OS Docker image using the <a class="reference external" href="https://docs.microsoft.com/en-us/visualstudio/install/create-an-offline-installation-of-visual-studio?view=vs-2019">offline</a> or <a class="reference external" href="https://docs.microsoft.com/en-us/visualstudio/install/build-tools-container?view=vs-2019">online</a> installers for Build Tools.</p>
 <p>Microsoft Visual Studio Build Tools are licensed as a supplement your existing Microsoft Visual Studio license.</p>
@@ -789,9 +796,9 @@
      <span class="o">--</span><span class="n">remove</span> <span class="n">Microsoft</span><span class="p">.</span><span class="n">VisualStudio</span><span class="p">.</span><span class="n">Component</span><span class="p">.</span><span class="n">Windows10SDK</span><span class="mf">.10586</span> <span class="err">`</span>
      <span class="o">--</span><span class="n">remove</span> <span class="n">Microsoft</span><span class="p">.</span><span class="n">VisualStudio</span><span class="p">.</span><span class="n">Component</span><span class="p">.</span><span class="n">Windows10SDK</span><span class="mf">.14393</span> <span class="err">`</span>
      <span class="o">--</span><span class="n">remove</span> <span class="n">Microsoft</span><span class="p">.</span><span class="n">VisualStudio</span><span class="p">.</span><span class="n">Component</span><span class="p">.</span><span class="n">Windows81SDK</span> <span class="o">||</span> <span class="n">IF</span> <span class="s">&quot;%ERRORLEVEL%&quot;</span><span class="o">==</span><span class="s">&quot;3010&quot;</span> <span class="n">EXIT</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">powershell</span> <span class="n">set</span><span class="o">-</span><span class="n">executionpolicy</span> <span class="n">remotesigned</span></pre></div></div><p>In case of proxy issues, please use the <a class="reference external" href="https://docs.microsoft.com/en-us/visualstudio/install/create-an-offline-installation-of-visual-studio?view=vs-2019">offline installer for Build Tools</a>.</p>
-</div>
-</div>
-<div class="section" id="configuring-the-image-for-gpu">
+</section>
+</section>
+<section id="configuring-the-image-for-gpu">
 <span id="config-image-for-gpu"></span><h3>Configuring the Image for GPU<a class="headerlink" href="#configuring-the-image-for-gpu" title="Permalink to this headline">¶</a></h3>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -810,17 +817,17 @@
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="nl">C</span><span class="p">:</span><span class="err">\</span><span class="n">tmp</span>
 <span class="n">copy</span> <span class="nl">C</span><span class="p">:</span><span class="err">\</span><span class="n">Windows</span><span class="err">\</span><span class="n">System32</span><span class="err">\</span><span class="n">OpenCL</span><span class="p">.</span><span class="n">dll</span> <span class="nl">C</span><span class="p">:</span><span class="err">\</span><span class="n">tmp</span></pre></div></div></li>
 </ol>
-</div>
-</div>
-<div class="section" id="running-the-docker-image-on-different-devices">
+</section>
+</section>
+<section id="running-the-docker-image-on-different-devices">
 <span id="run-image"></span><h2>Running the Docker Image on Different Devices<a class="headerlink" href="#running-the-docker-image-on-different-devices" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="running-the-image-on-cpu">
+<section id="running-the-image-on-cpu">
 <h3>Running the Image on CPU<a class="headerlink" href="#running-the-image-on-cpu" title="Permalink to this headline">¶</a></h3>
 <p>To start the interactive session, run the following command:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">it</span> <span class="o">--</span><span class="n">rm</span> <span class="o">&lt;</span><span class="n">image_name</span><span class="o">&gt;</span></pre></div></div><p>If you want to try some samples, run the image with the following command:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">it</span> <span class="o">--</span><span class="n">rm</span> <span class="o">&lt;</span><span class="n">image_name</span><span class="o">&gt;</span>
-<span class="n">cmd</span> <span class="o">/</span><span class="n">S</span> <span class="o">/</span><span class="n">C</span> <span class="s">&quot;omz_downloader --name googlenet-v1 --precisions FP16 &amp;&amp; omz_converter --name googlenet-v1 --precision FP16 &amp;&amp; curl -kO https://storage.openvinotoolkit.org/data/test_data/images/car_1.bmp &amp;&amp; python samples\python\hello_classification\hello_classification.py public\googlenet-v1\FP16\googlenet-v1.xml car_1.bmp CPU&quot;</span></pre></div></div></div>
-<div class="section" id="running-the-image-on-gpu">
+<span class="n">cmd</span> <span class="o">/</span><span class="n">S</span> <span class="o">/</span><span class="n">C</span> <span class="s">&quot;omz_downloader --name googlenet-v1 --precisions FP16 &amp;&amp; omz_converter --name googlenet-v1 --precision FP16 &amp;&amp; curl -kO https://storage.openvinotoolkit.org/data/test_data/images/car_1.bmp &amp;&amp; python samples\python\hello_classification\hello_classification.py public\googlenet-v1\FP16\googlenet-v1.xml car_1.bmp CPU&quot;</span></pre></div></div></section>
+<section id="running-the-image-on-gpu">
 <h3>Running the Image on GPU<a class="headerlink" href="#running-the-image-on-gpu" title="Permalink to this headline">¶</a></h3>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -839,16 +846,16 @@
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">copy</span> <span class="nl">C</span><span class="p">:</span><span class="err">\</span><span class="n">tmp</span><span class="err">\</span><span class="n">OpenCL</span><span class="p">.</span><span class="n">dll</span> <span class="nl">C</span><span class="p">:</span><span class="err">\</span><span class="n">Windows</span><span class="err">\</span><span class="n">System32</span><span class="err">\</span> <span class="o">&amp;&amp;</span> <span class="n">reg</span> <span class="n">add</span> <span class="s">&quot;HKLM\SOFTWARE\Khronos\OpenCL\Vendors&quot;</span> <span class="o">/</span><span class="n">v</span> <span class="s">&quot;C:\Windows\System32\DriverStore\FileRepository\iigd_dch.inf_amd64_518f2921ba495409\ocl</span><span class="se">\b</span><span class="s">in</span><span class="se">\x64</span><span class="s">\intelocl64.dll&quot;</span> <span class="o">/</span><span class="n">t</span> <span class="n">REG_DWORD</span> <span class="o">/</span><span class="n">d</span> <span class="mi">0</span></pre></div></div><p>For example, run the <code class="docutils literal notranslate"><span class="pre">Hello</span> <span class="pre">Classification</span> <span class="pre">Python</span></code> sample with the following command:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">omz_downloader</span> <span class="o">--</span><span class="n">name</span> <span class="n">googlenet</span><span class="o">-</span><span class="n">v1</span> <span class="o">--</span><span class="n">precisions</span> <span class="n">FP16</span> <span class="o">&amp;&amp;</span> <span class="n">omz_converter</span> <span class="o">--</span><span class="n">name</span> <span class="n">googlenet</span><span class="o">-</span><span class="n">v1</span> <span class="o">--</span><span class="n">precision</span> <span class="n">FP16</span> <span class="o">&amp;&amp;</span> <span class="n">curl</span> <span class="o">-</span><span class="n">kO</span> <span class="nl">https</span><span class="p">:</span><span class="c1">//storage.openvinotoolkit.org/data/test_data/images/car_1.bmp &amp;&amp; python samples\python\hello_classification\hello_classification.py public\googlenet-v1\FP16\googlenet-v1.xml car_1.bmp GPU</span></pre></div></div></li>
 </ol>
-</div>
-</div>
-<div class="section" id="additional-resources">
+</section>
+</section>
+<section id="additional-resources">
 <h2>Additional Resources<a class="headerlink" href="#additional-resources" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://github.com/openvinotoolkit/docker_ci">DockerHub CI Framework</a> for Intel® Distribution of OpenVINO™ toolkit. The Framework can generate a Dockerfile, build, test, and deploy an image with the Intel® Distribution of OpenVINO™ toolkit. You can reuse available Dockerfiles, add your layer and customize the image of OpenVINO™ for your needs.</p></li>
 <li><p>Intel® Distribution of OpenVINO™ toolkit home page: <a class="reference external" href="https://software.intel.com/en-us/openvino-toolkit">https://software.intel.com/en-us/openvino-toolkit</a></p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -879,7 +886,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

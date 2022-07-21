@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Changing input shapes &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -1899,95 +1906,61 @@
             
                 <div>
                   
-  <div class="section" id="changing-input-shapes">
+  <section id="changing-input-shapes">
 <span id="doxid-openvino-docs-o-v-u-g-shape-inference"></span><span id="index-0"></span><h1>Changing input shapes<a class="headerlink" href="#changing-input-shapes" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-openvino-docs-o-v-u-g-shape-inference-1md-openvino-docs-ov-runtime-ug-shapeinference"></span></p>
-<div class="section" id="introduction-c">
+<section id="introduction-c">
 <h2>Introduction (C++)<a class="headerlink" href="#introduction-c" title="Permalink to this headline">¶</a></h2>
 <div id="switcher-cpp" class="switcher-anchor">C++</div><p>OpenVINO™ provides capabilities to change model input shape during the runtime. It may be useful in case you would like to feed model an input that has different size than model input shape. In case you need to do this only once <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_Converting_Model.html#doxid-openvino-docs-m-o-d-g-prepare-model-convert-model-converting-model-1when-to-specify-input-shapes"><span class="std std-ref">prepare a model with updated shapes via Model Optimizer</span></a> for all the other cases follow instructions further.</p>
-<div class="section" id="set-a-new-input-shape-with-reshape-method">
+<section id="set-a-new-input-shape-with-reshape-method">
 <h3>Set a new input shape with reshape method<a class="headerlink" href="#set-a-new-input-shape-with-reshape-method" title="Permalink to this headline">¶</a></h3>
-<p>The <code class="docutils literal notranslate"><span class="pre">ov::Model::reshape</span></code> method updates input shapes and propagates them down to the outputs of the model through all intermediate layers. Example: Changing the batch size and spatial dimensions of input of a model with an image input:</p>
+<p>The <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1Model.html#doxid-classov-1-1-model-1aa21aff80598d5089d591888a4c7f33ae"><span class="std std-ref"><span class="pre">ov::Model::reshape</span></span></a></code> method updates input shapes and propagates them down to the outputs of the model through all intermediate layers. Example: Changing the batch size and spatial dimensions of input of a model with an image input:</p>
 <img alt="shape_inference_explained" src="../_images/original_vs_reshaped_model.png" />
 <p>Please see the code to achieve that:</p>
-<div class="highlight"><div class="highlight"><pre>model<span></span><span class="o">-&gt;</span><span class="n">reshape</span><span class="p">({</span><span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">448</span><span class="p">,</span> <span class="mi">448</span><span class="p">});</span></pre></div></div></div>
-<div class="section" id="set-a-new-batch-size-with-set-batch-method">
+<div class="highlight"><div class="highlight"><pre><a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga461856fdfb6d7533dc53355aec9e9fad"><span class="std std-ref">model</span></a><span></span><span class="o">-&gt;</span><span class="n">reshape</span><span class="p">({</span><span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">448</span><span class="p">,</span> <span class="mi">448</span><span class="p">});</span></pre></div></div></section>
+<section id="set-a-new-batch-size-with-set-batch-method">
 <h3>Set a new batch size with set_batch method<a class="headerlink" href="#set-a-new-batch-size-with-set-batch-method" title="Permalink to this headline">¶</a></h3>
-<p>Meaning of the model batch may vary depending on the model design. In order to change the batch dimension of the model, <a class="reference internal" href="openvino_docs_OV_UG_Preprocessing_Overview.html#doxid-openvino-docs-o-v-u-g-preprocessing-overview-1declare-model-s-layout"><span class="std std-ref">set the ov::Layout</span></a> and call the <code class="docutils literal notranslate"><span class="pre">ov::set_batch</span></code> method.</p>
+<p>Meaning of the model batch may vary depending on the model design. In order to change the batch dimension of the model, <a class="reference internal" href="openvino_docs_OV_UG_Preprocessing_Overview.html#doxid-openvino-docs-o-v-u-g-preprocessing-overview-1declare-model-s-layout"><span class="std std-ref">set the ov::Layout</span></a> and call the <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/namespaceov.html#doxid-namespaceov-1a3314e2ff91fcc9ffec05b1a77c37862b"><span class="std std-ref"><span class="pre">ov::set_batch</span></span></a></code> method.</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="c1">// Mark up batch in the layout of the input(s) and reset batch to the new value</span>
-model<span></span><span class="o">-&gt;</span><span class="n">get_parameters</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">set_layout</span><span class="p">(</span><span class="s">&quot;N...&quot;</span><span class="p">);</span>
-ov::set_batch<span></span><span class="p">(</span>model<span></span><span class="p">,</span> <span class="n">new_batch</span><span class="p">);</span></pre></div></div><p><code class="docutils literal notranslate"><span class="pre">ov::set_batch</span></code> method is a high level API of <code class="docutils literal notranslate"><span class="pre">ov::Model::reshape</span></code> functionality, so all information about <code class="docutils literal notranslate"><span class="pre">ov::Model::reshape</span></code> method implications are applicable for <code class="docutils literal notranslate"><span class="pre">ov::set_batch</span></code> too, including the troubleshooting section.</p>
-<p>Once the input shape of <code class="docutils literal notranslate"><span class="pre">ov::Model</span></code> is set, call the <code class="docutils literal notranslate"><span class="pre">ov::Core::compile_model</span></code> method to get an <code class="docutils literal notranslate"><span class="pre">ov::CompiledModel</span></code> object for inference with updated shapes.</p>
+<a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga461856fdfb6d7533dc53355aec9e9fad"><span class="std std-ref">model</span></a><span></span><span class="o">-&gt;</span><span class="n">get_parameters</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">set_layout</span><span class="p">(</span><span class="s">&quot;N...&quot;</span><span class="p">);</span>
+<a class="reference internal" href="../api/groups/namespaceov.html#doxid-namespaceov-1a3314e2ff91fcc9ffec05b1a77c37862b"><span class="std std-ref">ov::set_batch</span></a><span></span><span class="p">(</span><a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga461856fdfb6d7533dc53355aec9e9fad"><span class="std std-ref">model</span></a><span></span><span class="p">,</span> <span class="n">new_batch</span><span class="p">);</span></pre></div></div><p><code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/namespaceov.html#doxid-namespaceov-1a3314e2ff91fcc9ffec05b1a77c37862b"><span class="std std-ref"><span class="pre">ov::set_batch</span></span></a></code> method is a high level API of <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1Model.html#doxid-classov-1-1-model-1aa21aff80598d5089d591888a4c7f33ae"><span class="std std-ref"><span class="pre">ov::Model::reshape</span></span></a></code> functionality, so all information about <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1Model.html#doxid-classov-1-1-model-1aa21aff80598d5089d591888a4c7f33ae"><span class="std std-ref"><span class="pre">ov::Model::reshape</span></span></a></code> method implications are applicable for <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/namespaceov.html#doxid-namespaceov-1a3314e2ff91fcc9ffec05b1a77c37862b"><span class="std std-ref"><span class="pre">ov::set_batch</span></span></a></code> too, including the troubleshooting section.</p>
+<p>Once the input shape of <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1Model.html#doxid-classov-1-1-model"><span class="std std-ref"><span class="pre">ov::Model</span></span></a></code> is set, call the <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1Core.html#doxid-classov-1-1-core-1a46555f0803e8c29524626be08e7f5c5a"><span class="std std-ref"><span class="pre">ov::Core::compile_model</span></span></a></code> method to get an <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1CompiledModel.html#doxid-classov-1-1-compiled-model"><span class="std std-ref"><span class="pre">ov::CompiledModel</span></span></a></code> object for inference with updated shapes.</p>
 <p>There are other approaches to change model input shapes during the stage of <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_Converting_Model.html#doxid-openvino-docs-m-o-d-g-prepare-model-convert-model-converting-model-1when-to-specify-input-shapes"><span class="std std-ref">IR generation</span></a> or <a class="reference internal" href="openvino_docs_OV_UG_Model_Representation.html#doxid-openvino-docs-o-v-u-g-model-representation"><span class="std std-ref">ov::Model creation</span></a>.</p>
-</div>
-<div class="section" id="dynamic-shape-notice">
+</section>
+<section id="dynamic-shape-notice">
 <h3>Dynamic Shape Notice<a class="headerlink" href="#dynamic-shape-notice" title="Permalink to this headline">¶</a></h3>
 <p>Shape-changing functionality could be used to turn dynamic model input into a static one and vice versa. It is recommended to always set static shapes in case if the shape of data is not going to change from one inference to another. Setting static shapes avoids possible functional limitations, memory and run time overheads for dynamic shapes that vary depending on hardware plugin and model used. To learn more about dynamic shapes in OpenVINO please see a <a class="reference internal" href="openvino_docs_OV_UG_DynamicShapes.html#doxid-openvino-docs-o-v-u-g-dynamic-shapes"><span class="std std-ref">dedicated article</span></a>.</p>
-</div>
-<div class="section" id="usage-of-reshape-method">
+</section>
+<section id="usage-of-reshape-method">
 <span id="id1"></span><h3>Usage of Reshape Method<a class="headerlink" href="#usage-of-reshape-method" title="Permalink to this headline">¶</a></h3>
-<p>The primary method of the feature is <code class="docutils literal notranslate"><span class="pre">ov::Model::reshape</span></code>. It is overloaded to better serve two main use cases:</p>
+<p>The primary method of the feature is <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1Model.html#doxid-classov-1-1-model-1aa21aff80598d5089d591888a4c7f33ae"><span class="std std-ref"><span class="pre">ov::Model::reshape</span></span></a></code>. It is overloaded to better serve two main use cases:</p>
 <ol class="arabic simple">
 <li><p>To change input shape of model with single input you may pass new shape into the method. Please see the example of adjusting spatial dimensions to the input image:</p></li>
 </ol>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="c1">// Read an image and adjust models single input for image to fit</span>
 <span class="n">cv</span><span class="o">::</span><span class="n">Mat</span> <span class="n">image</span> <span class="o">=</span> <span class="n">cv</span><span class="o">::</span><span class="n">imread</span><span class="p">(</span><span class="s">&quot;path/to/image&quot;</span><span class="p">);</span>
-model<span></span><span class="o">-&gt;</span><span class="n">reshape</span><span class="p">({</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">image</span><span class="p">.</span><span class="n">rows</span><span class="p">,</span> <span class="n">image</span><span class="p">.</span><span class="n">cols</span><span class="p">});</span></pre></div></div><p>To do the opposite - resize input image to the input shapes of the model, use the <a class="reference internal" href="openvino_docs_OV_UG_Preprocessing_Overview.html#doxid-openvino-docs-o-v-u-g-preprocessing-overview"><span class="std std-ref">pre-processing API</span></a>.</p>
+<a class="reference internal" href="../api/groups/groupov_runtime_cpp_prop_api.html#doxid-group-ov-runtime-cpp-prop-api-1ga461856fdfb6d7533dc53355aec9e9fad"><span class="std std-ref">model</span></a><span></span><span class="o">-&gt;</span><span class="n">reshape</span><span class="p">({</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">image</span><span class="p">.</span><span class="n">rows</span><span class="p">,</span> <span class="n">image</span><span class="p">.</span><span class="n">cols</span><span class="p">});</span></pre></div></div><p>To do the opposite - resize input image to the input shapes of the model, use the <a class="reference internal" href="openvino_docs_OV_UG_Preprocessing_Overview.html#doxid-openvino-docs-o-v-u-g-preprocessing-overview"><span class="std std-ref">pre-processing API</span></a>.</p>
 <ol class="arabic simple" start="2">
 <li><p>Otherwise, you can express reshape plan via mapping of input and its new shape:</p></li>
 </ol>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">map&lt;</span><span class="pre">ov::Output</span><span class="pre">&lt;</span><span class="pre">ov::Node</span><span class="pre">&gt;,</span> <span class="pre">ov::PartialShape</span></code> specifies input by passing actual input port</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">map&lt;size_t,</span> <span class="pre">ov::PartialShape</span><span class="pre">&gt;</span></code> specifies input by its index</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">map&lt;string,</span> <span class="pre">ov::PartialShape</span><span class="pre">&gt;</span></code> specifies input by its name</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">map&lt;</span><a class="reference internal" href="../api/groups/classov_1_1Output.html#doxid-classov-1-1-output"><span class="std std-ref"><span class="pre">ov::Output</span></span></a><span class="pre">&lt;</span><a class="reference internal" href="../api/groups/classov_1_1Node.html#doxid-classov-1-1-node"><span class="std std-ref"><span class="pre">ov::Node</span></span></a><span class="pre">&gt;,</span> <a class="reference internal" href="../api/groups/classov_1_1PartialShape.html#doxid-classov-1-1-partial-shape"><span class="std std-ref"><span class="pre">ov::PartialShape</span></span></a></code> specifies input by passing actual input port</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">map&lt;size_t,</span> <a class="reference internal" href="../api/groups/classov_1_1PartialShape.html#doxid-classov-1-1-partial-shape"><span class="std std-ref"><span class="pre">ov::PartialShape</span></span></a><span class="pre">&gt;</span></code> specifies input by its index</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">map&lt;string,</span> <a class="reference internal" href="../api/groups/classov_1_1PartialShape.html#doxid-classov-1-1-partial-shape"><span class="std std-ref"><span class="pre">ov::PartialShape</span></span></a><span class="pre">&gt;</span></code> specifies input by its name</p></li>
 </ul>
 <div class="tab-set docutils">
 <input checked="True" class="tab-input" id="tab-set--0-input--1" name="tab-set--0" type="radio"><label class="tab-label" for="tab-set--0-input--1">Port</label><div class="tab-content docutils">
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>    <span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="n">ov</span><span class="o">::</span><span class="n">Output</span><span class="o">&lt;</span><span class="n">ov</span><span class="o">::</span><span class="n">Node</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">ov</span><span class="o">::</span><span class="n">PartialShape</span><span class="o">&gt;</span> <span class="n">port_to_shape</span><span class="p">;</span>
-    <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="n">ov</span><span class="o">::</span><span class="n">Output</span><span class="o">&lt;</span><span class="n">ov</span><span class="o">::</span><span class="n">Node</span><span class="o">&gt;&amp;</span> <span class="nl">input</span> <span class="p">:</span> <span class="n">model</span><span class="o">-&gt;</span><span class="n">inputs</span><span class="p">())</span> <span class="p">{</span>
-        <span class="n">ov</span><span class="o">::</span><span class="n">PartialShape</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">input</span><span class="p">.</span><span class="n">get_partial_shape</span><span class="p">();</span>
-        <span class="c1">// Modify shape to fit your needs</span>
-        <span class="c1">// ...</span>
-        <span class="n">port_to_shape</span><span class="p">[</span><span class="n">input</span><span class="p">]</span> <span class="o">=</span> <span class="n">shape</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="n">model</span><span class="o">-&gt;</span><span class="n">reshape</span><span class="p">(</span><span class="n">port_to_shape</span><span class="p">);</span>
-</pre></div>
-</div>
 </div>
 <input class="tab-input" id="tab-set--0-input--2" name="tab-set--0" type="radio"><label class="tab-label" for="tab-set--0-input--2">Index</label><div class="tab-content docutils">
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>    <span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="p">,</span> <span class="n">ov</span><span class="o">::</span><span class="n">PartialShape</span><span class="o">&gt;</span> <span class="n">idx_to_shape</span><span class="p">;</span>
-    <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="n">ov</span><span class="o">::</span><span class="n">Output</span><span class="o">&lt;</span><span class="n">ov</span><span class="o">::</span><span class="n">Node</span><span class="o">&gt;&amp;</span> <span class="nl">input</span> <span class="p">:</span> <span class="n">model</span><span class="o">-&gt;</span><span class="n">inputs</span><span class="p">())</span> <span class="p">{</span>
-        <span class="n">ov</span><span class="o">::</span><span class="n">PartialShape</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">input</span><span class="p">.</span><span class="n">get_partial_shape</span><span class="p">();</span>
-        <span class="c1">// Modify shape to fit your needs</span>
-        <span class="c1">// ...</span>
-        <span class="n">idx_to_shape</span><span class="p">[</span><span class="n">i</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="n">shape</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="n">model</span><span class="o">-&gt;</span><span class="n">reshape</span><span class="p">(</span><span class="n">idx_to_shape</span><span class="p">);</span>
-</pre></div>
-</div>
 </div>
 <input class="tab-input" id="tab-set--0-input--3" name="tab-set--0" type="radio"><label class="tab-label" for="tab-set--0-input--3">Tensor Name</label><div class="tab-content docutils">
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>    <span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span> <span class="n">ov</span><span class="o">::</span><span class="n">PartialShape</span><span class="o">&gt;</span> <span class="n">name_to_shape</span><span class="p">;</span>
-    <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="n">ov</span><span class="o">::</span><span class="n">Output</span><span class="o">&lt;</span><span class="n">ov</span><span class="o">::</span><span class="n">Node</span><span class="o">&gt;&amp;</span> <span class="nl">input</span> <span class="p">:</span> <span class="n">model</span><span class="o">-&gt;</span><span class="n">inputs</span><span class="p">())</span> <span class="p">{</span>
-        <span class="n">ov</span><span class="o">::</span><span class="n">PartialShape</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">input</span><span class="p">.</span><span class="n">get_partial_shape</span><span class="p">();</span>
-        <span class="c1">// input may have no name, in such case use map based on input index or port instead</span>
-        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">input</span><span class="p">.</span><span class="n">get_names</span><span class="p">().</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
-        <span class="c1">// Modify shape to fit your needs</span>
-        <span class="c1">// ...</span>
-            <span class="n">name_to_shape</span><span class="p">[</span><span class="n">input</span><span class="p">.</span><span class="n">get_any_name</span><span class="p">()]</span> <span class="o">=</span> <span class="n">shape</span><span class="p">;</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-    <span class="n">model</span><span class="o">-&gt;</span><span class="n">reshape</span><span class="p">(</span><span class="n">name_to_shape</span><span class="p">);</span>
-</pre></div>
-</div>
 </div>
 </div>
 <p>Please find usage scenarios of <code class="docutils literal notranslate"><span class="pre">reshape</span></code> feature in our <a class="reference internal" href="openvino_docs_OV_UG_Samples_Overview.html#doxid-openvino-docs-o-v-u-g-samples-overview"><span class="std std-ref">samples</span></a> starting with <a class="reference internal" href="openvino_inference_engine_samples_hello_reshape_ssd_README.html#doxid-openvino-inference-engine-samples-hello-reshape-ssd-r-e-a-d-m-e"><span class="std std-ref">Hello Reshape Sample</span></a>.</p>
-<p>Practically, some models are not ready to be reshaped. In this case, a new input shape cannot be set with the Model Optimizer or the <code class="docutils literal notranslate"><span class="pre">ov::Model::reshape</span></code> method.</p>
+<p>Practically, some models are not ready to be reshaped. In this case, a new input shape cannot be set with the Model Optimizer or the <code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classov_1_1Model.html#doxid-classov-1-1-model-1aa21aff80598d5089d591888a4c7f33ae"><span class="std std-ref"><span class="pre">ov::Model::reshape</span></span></a></code> method.</p>
 <p><span class="target" id="doxid-openvino-docs-o-v-u-g-shape-inference-1troubleshooting-reshape-errors"></span></p>
-</div>
-<div class="section" id="troubleshooting-reshape-errors">
+</section>
+<section id="troubleshooting-reshape-errors">
 <h3>Troubleshooting Reshape Errors<a class="headerlink" href="#troubleshooting-reshape-errors" title="Permalink to this headline">¶</a></h3>
 <p>Operation semantics may impose restrictions on input shapes of the operation. Shape collision during shape propagation may be a sign that a new shape does not satisfy the restrictions. Changing the model input shape may result in intermediate operations shape collision.</p>
 <p>Examples of such operations:</p>
@@ -2001,8 +1974,8 @@ model<span></span><span class="o">-&gt;</span><span class="n">reshape</span><spa
 <li><p>Changing the model input shape may significantly affect its accuracy. For example, Object Detection models from TensorFlow have resizing restrictions by design. To keep the model valid after the reshape, choose a new input shape that satisfies conditions listed in the <code class="docutils literal notranslate"><span class="pre">pipeline.config</span></code> file. For details, refer to the <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_tf_specific_Convert_Object_Detection_API_Models.html#doxid-openvino-docs-m-o-d-g-prepare-model-convert-model-tf-specific-convert-object-detection-a-p-i-models-1custom-input-shape"><span class="std std-ref">Tensorflow Object Detection API models resizing techniques</span></a>.</p></li>
 </ul>
 <p><span class="target" id="doxid-openvino-docs-o-v-u-g-shape-inference-1how-to-fix-non-reshape-able-model"></span></p>
-</div>
-<div class="section" id="how-to-fix-non-reshape-able-model">
+</section>
+<section id="how-to-fix-non-reshape-able-model">
 <h3>How To Fix Non-Reshape-able Model<a class="headerlink" href="#how-to-fix-non-reshape-able-model" title="Permalink to this headline">¶</a></h3>
 <p>Some operators which prevent normal shape propagation can be fixed. To do so you can:</p>
 <ul>
@@ -2016,50 +1989,38 @@ model<span></span><span class="o">-&gt;</span><span class="n">reshape</span><spa
 <li><p>transform OpenVINO Model during the runtime. See <a class="reference internal" href="openvino_docs_transformations.html#doxid-openvino-docs-transformations"><span class="std std-ref">OpenVINO Runtime Transformations article</span></a></p></li>
 <li><p>modify the original model with the help of original framework</p></li>
 </ul>
-</div>
-<div class="section" id="extensibility">
+</section>
+<section id="extensibility">
 <h3>Extensibility<a class="headerlink" href="#extensibility" title="Permalink to this headline">¶</a></h3>
 <p>OpenVINO provides a special mechanism that allows adding support of shape inference for custom operations. This mechanism is described in the <a class="reference internal" href="openvino_docs_Extensibility_UG_Intro.html#doxid-openvino-docs-extensibility-u-g-intro"><span class="std std-ref">Extensibility documentation</span></a></p>
-</div>
-</div>
-<div class="section" id="introduction-python">
+</section>
+</section>
+<section id="introduction-python">
 <h2>Introduction (Python)<a class="headerlink" href="#introduction-python" title="Permalink to this headline">¶</a></h2>
 <div id="switcher-python" class="switcher-anchor">Python</div><p>OpenVINO™ provides capabilities to change model input shape during the runtime. It may be useful in case you would like to feed model an input that has different size than model input shape. In case you need to do this only once <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_Converting_Model.html#doxid-openvino-docs-m-o-d-g-prepare-model-convert-model-converting-model-1when-to-specify-input-shapes"><span class="std std-ref">prepare a model with updated shapes via Model Optimizer</span></a> for all the other cases follow instructions further.</p>
-<div class="section" id="id2">
+<section id="id2">
 <h3>Set a new input shape with reshape method<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <p>The <a class="reference external" href="api/ie_python_api/_autosummary/openvino.runtime.Model.html#openvino.runtime.Model.reshape">Model.reshape</a> method updates input shapes and propagates them down to the outputs of the model through all intermediate layers. Example: Changing the batch size and spatial dimensions of input of a model with an image input:</p>
 <img alt="shape_inference_explained" src="../_images/original_vs_reshaped_model.png" />
 <p>Please see the code to achieve that:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">reshape</span><span class="p">([</span><span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">448</span><span class="p">,</span> <span class="mi">448</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="id3">
+</section>
+<section id="id3">
 <h3>Set a new batch size with set_batch method<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <p>Meaning of the model batch may vary depending on the model design. In order to change the batch dimension of the model, <a class="reference internal" href="openvino_docs_OV_UG_Preprocessing_Overview.html#doxid-openvino-docs-o-v-u-g-preprocessing-overview-1declare-model-s-layout"><span class="std std-ref">set the layout</span></a> for inputs and call the <a class="reference external" href="api/ie_python_api/_autosummary/openvino.runtime.set_batch.html">set_batch</a> method.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">get_parameters</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_layout</span><span class="p">(</span><span class="n">Layout</span><span class="p">(</span><span class="s2">&quot;N...&quot;</span><span class="p">))</span>
-<span class="n">set_batch</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-</pre></div>
-</div>
 <p><a class="reference external" href="api/ie_python_api/_autosummary/openvino.runtime.set_batch.html">set_batch</a> method is a high level API of <a class="reference external" href="api/ie_python_api/_autosummary/openvino.runtime.Model.html#openvino.runtime.Model.reshape">Model.reshape</a> functionality, so all information about <a class="reference external" href="api/ie_python_api/_autosummary/openvino.runtime.Model.html#openvino.runtime.Model.reshape">Model.reshape</a> method implications are applicable for <a class="reference external" href="api/ie_python_api/_autosummary/openvino.runtime.set_batch.html">set_batch</a> too, including the troubleshooting section.</p>
 <p>Once the input shape of <a class="reference external" href="api/ie_python_api/_autosummary/openvino.runtime.Model.html">Model</a> is set, call the <a class="reference external" href="api/ie_python_api/_autosummary/openvino.runtime.compile_model.html">compile_model</a> method to get a <a class="reference external" href="api/ie_python_api/_autosummary/openvino.runtime.CompiledModel.html">CompiledModel</a> object for inference with updated shapes.</p>
 <p>There are other approaches to change model input shapes during the stage of <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_Converting_Model.html#doxid-openvino-docs-m-o-d-g-prepare-model-convert-model-converting-model-1when-to-specify-input-shapes"><span class="std std-ref">IR generation</span></a> or <a class="reference internal" href="openvino_docs_OV_UG_Model_Representation.html#doxid-openvino-docs-o-v-u-g-model-representation"><span class="std std-ref">Model creation</span></a>.</p>
-</div>
-<div class="section" id="id4">
+</section>
+<section id="id4">
 <h3>Dynamic Shape Notice<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
 <p>Shape-changing functionality could be used to turn dynamic model input into a static one and vice versa. It is recommended to always set static shapes in case if the shape of data is not going to change from one inference to another. Setting static shapes avoids possible functional limitations, memory and run time overheads for dynamic shapes that vary depending on hardware plugin and model used. To learn more about dynamic shapes in OpenVINO please see a <a class="reference internal" href="openvino_docs_OV_UG_DynamicShapes.html#doxid-openvino-docs-o-v-u-g-dynamic-shapes"><span class="std std-ref">dedicated article</span></a>.</p>
-</div>
-<div class="section" id="id5">
+</section>
+<section id="id5">
 <span id="id6"></span><h3>Usage of Reshape Method<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
 <p>The primary method of the feature is <a class="reference external" href="api/ie_python_api/_autosummary/openvino.runtime.Model.html#openvino.runtime.Model.reshape">Model.reshape</a>. It is overloaded to better serve two main use cases:</p>
 <ol class="arabic simple">
 <li><p>To change input shape of model with single input you may pass new shape into the method. Please see the example of adjusting spatial dimensions to the input image:</p></li>
 </ol>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cv2</span> <span class="kn">import</span> <span class="n">imread</span>
-<span class="n">image</span> <span class="o">=</span> <span class="n">imread</span><span class="p">(</span><span class="s2">&quot;path/to/image&quot;</span><span class="p">)</span>
-<span class="n">model</span><span class="o">.</span><span class="n">reshape</span><span class="p">({</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]})</span>
-</pre></div>
-</div>
 <p>To do the opposite - resize input image to the input shapes of the model, use the <a class="reference internal" href="openvino_docs_OV_UG_Preprocessing_Overview.html#doxid-openvino-docs-o-v-u-g-preprocessing-overview"><span class="std std-ref">pre-processing API</span></a>.</p>
 <ol class="arabic simple" start="2">
 <li><p>Otherwise, you can express reshape plan via dictionary mapping input and its new shape: Dictionary keys could be</p></li>
@@ -2077,47 +2038,16 @@ model<span></span><span class="o">-&gt;</span><span class="n">reshape</span><spa
 </ul>
 <div class="tab-set docutils">
 <input checked="True" class="tab-input" id="tab-set--1-input--1" name="tab-set--1" type="radio"><label class="tab-label" for="tab-set--1-input--1">Port</label><div class="tab-content docutils">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">port_to_shape</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
-<span class="k">for</span> <span class="n">input_obj</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">inputs</span><span class="p">:</span>
-    <span class="n">shape</span> <span class="o">=</span> <span class="n">input_obj</span><span class="o">.</span><span class="n">get_partial_shape</span><span class="p">()</span>
-    <span class="c1"># modify shape to fit your needs</span>
-    <span class="c1"># ...</span>
-    <span class="n">port_to_shape</span><span class="p">[</span><span class="n">input_obj</span><span class="p">]</span> <span class="o">=</span> <span class="n">shape</span>
-<span class="n">model</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">port_to_shape</span><span class="p">)</span>
-</pre></div>
-</div>
 </div>
 <input class="tab-input" id="tab-set--1-input--2" name="tab-set--1" type="radio"><label class="tab-label" for="tab-set--1-input--2">Index</label><div class="tab-content docutils">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">idx_to_shape</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
-<span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="k">for</span> <span class="n">input_obj</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">inputs</span><span class="p">:</span>
-    <span class="n">shape</span> <span class="o">=</span> <span class="n">input_obj</span><span class="o">.</span><span class="n">get_partial_shape</span><span class="p">()</span>
-    <span class="c1"># modify shape to fit your needs</span>
-    <span class="c1"># ...</span>
-    <span class="n">idx_to_shape</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">shape</span>
-    <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
-<span class="n">model</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">idx_to_shape</span><span class="p">)</span>
-</pre></div>
-</div>
 </div>
 <input class="tab-input" id="tab-set--1-input--3" name="tab-set--1" type="radio"><label class="tab-label" for="tab-set--1-input--3">Tensor Name</label><div class="tab-content docutils">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">name_to_shape</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
-<span class="k">for</span> <span class="n">input_obj</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">inputs</span><span class="p">:</span>
-    <span class="n">shape</span> <span class="o">=</span> <span class="n">input_obj</span><span class="o">.</span><span class="n">get_partial_shape</span><span class="p">()</span>
-    <span class="c1"># input may have no name, in such case use map based on input index or port instead</span>
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">input_obj</span><span class="o">.</span><span class="n">get_names</span><span class="p">())</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="c1"># modify shape to fit your needs</span>
-        <span class="c1"># ...</span>
-        <span class="n">name_to_shape</span><span class="p">[</span><span class="n">input_obj</span><span class="o">.</span><span class="n">get_any_name</span><span class="p">()]</span> <span class="o">=</span> <span class="n">shape</span>
-<span class="n">model</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">name_to_shape</span><span class="p">)</span>
-</pre></div>
-</div>
 </div>
 </div>
 <p>Please find usage scenarios of <code class="docutils literal notranslate"><span class="pre">reshape</span></code> feature in our <a class="reference internal" href="openvino_docs_OV_UG_Samples_Overview.html#doxid-openvino-docs-o-v-u-g-samples-overview"><span class="std std-ref">samples</span></a>, starting with <a class="reference internal" href="openvino_inference_engine_ie_bridges_python_sample_hello_reshape_ssd_README.html#doxid-openvino-inference-engine-ie-bridges-python-sample-hello-reshape-ssd-r-e-a-d-m-e"><span class="std std-ref">Hello Reshape Sample</span></a>.</p>
 <p>Practically, some models are not ready to be reshaped. In this case, a new input shape cannot be set with the Model Optimizer or the <code class="docutils literal notranslate"><span class="pre">Model.reshape</span></code> method.</p>
-</div>
-<div class="section" id="id7">
+</section>
+<section id="id7">
 <h3>Troubleshooting Reshape Errors<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
 <p>Operation semantics may impose restrictions on input shapes of the operation. Shape collision during shape propagation may be a sign that a new shape does not satisfy the restrictions. Changing the model input shape may result in intermediate operations shape collision.</p>
 <p>Examples of such operations:</p>
@@ -2130,8 +2060,8 @@ model<span></span><span class="o">-&gt;</span><span class="n">reshape</span><spa
 <li><p>The Global Pooling operation is commonly used to reduce output feature map of classification models output. Having the input of the shape [N, C, H, W], Global Pooling returns the output of the shape [N, C, 1, 1]. Model architects usually express Global Pooling with the help of the <code class="docutils literal notranslate"><span class="pre">Pooling</span></code> operation with the fixed kernel size [H, W]. During spatial reshape, having the input of the shape [N, C, H1, W1], Pooling with the fixed kernel size [H, W] returns the output of the shape [N, C, H2, W2], where H2 and W2 are commonly not equal to <code class="docutils literal notranslate"><span class="pre">1</span></code>. It breaks the classification model structure. For example, <a class="reference external" href="https://github.com/tensorflow/models/tree/master/research/slim#pre-trained-models">publicly available Inception family models from TensorFlow*</a> have this issue.</p></li>
 <li><p>Changing the model input shape may significantly affect its accuracy. For example, Object Detection models from TensorFlow have resizing restrictions by design. To keep the model valid after the reshape, choose a new input shape that satisfies conditions listed in the <code class="docutils literal notranslate"><span class="pre">pipeline.config</span></code> file. For details, refer to the <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_tf_specific_Convert_Object_Detection_API_Models.html#doxid-openvino-docs-m-o-d-g-prepare-model-convert-model-tf-specific-convert-object-detection-a-p-i-models-1custom-input-shape"><span class="std std-ref">Tensorflow Object Detection API models resizing techniques</span></a>.</p></li>
 </ul>
-</div>
-<div class="section" id="id8">
+</section>
+<section id="id8">
 <h3>How To Fix Non-Reshape-able Model<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
 <p>Some operators which prevent normal shape propagation can be fixed. To do so you can:</p>
 <ul>
@@ -2145,13 +2075,13 @@ model<span></span><span class="o">-&gt;</span><span class="n">reshape</span><spa
 <li><p>transform OpenVINO Model during the runtime. See <a class="reference internal" href="openvino_docs_transformations.html#doxid-openvino-docs-transformations"><span class="std std-ref">OpenVINO Runtime Transformations article</span></a></p></li>
 <li><p>modify the original model with the help of original framework</p></li>
 </ul>
-</div>
-<div class="section" id="id9">
+</section>
+<section id="id9">
 <h3>Extensibility<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
 <p>OpenVINO provides a special mechanism that allows adding support of shape inference for custom operations. This mechanism is described in the <a class="reference internal" href="openvino_docs_Extensibility_UG_Intro.html#doxid-openvino-docs-extensibility-u-g-intro"><span class="std std-ref">Extensibility documentation</span></a></p>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
                 </div>
@@ -2182,7 +2112,7 @@ model<span></span><span class="o">-&gt;</span><span class="n">reshape</span><spa
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

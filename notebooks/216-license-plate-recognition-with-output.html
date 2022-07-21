@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>License Plate Recognition with OpenVINO &#8212; OpenVINO™  documentation</title>
     
     
@@ -125,6 +126,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -351,7 +358,7 @@
             
                 <div>
                   
-  <div class="section" id="license-plate-recognition-with-openvino">
+  <section id="license-plate-recognition-with-openvino">
 <h1>License Plate Recognition with OpenVINO<a class="headerlink" href="#license-plate-recognition-with-openvino" title="Permalink to this headline">¶</a></h1>
 <p>This notebook demonstrates license plate recognition with OpenVINO. We
 use the <a class="reference external" href="https://github.com/openvinotoolkit/open_model_zoo/tree/master/models/intel/license-plate-recognition-barrier-0001">License Plate Recognition
@@ -366,10 +373,12 @@ can be any size. It will be resized and augmented before put into the
 model. After matching the result to correct character, we can get the
 license plate number. In the notebook we show how to create the
 following pipeline:</p>
-<div class="figure align-default" id="id1">
+<figure class="align-default" id="id1">
 <img alt="flowchart.png" src="https://user-images.githubusercontent.com/15709723/162659593-3f620d7a-44d2-4f49-a558-94c35a244a8e.png" />
-<p class="caption"><span class="caption-text">flowchart.png</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
-</div>
+<figcaption>
+<p><span class="caption-text">flowchart.png</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
 <blockquote>
 <div><p>Note: Augmentation method on image is optional and it may lead to the
 wrong recognition result. Thus, we recommend you to use it under
@@ -377,7 +386,7 @@ special conditions like image overexposure or too dark.</p>
 </div></blockquote>
 <p>Example image data comes from <a class="reference external" href="https://github.com/detectRecog/CCPD">CCPD (Chinese City Parking Dataset,
 ECCV)</a></p>
-<div class="section" id="imports">
+<section id="imports">
 <h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cv2</span>
 <span class="kn">import</span> <span class="nn">matplotlib</span>
@@ -386,10 +395,10 @@ ECCV)</a></p>
 <span class="kn">from</span> <span class="nn">openvino.runtime</span> <span class="kn">import</span> <span class="n">Core</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="the-model">
+</section>
+<section id="the-model">
 <h2>The Model<a class="headerlink" href="#the-model" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="download-the-model">
+<section id="download-the-model">
 <h3>Download the Model<a class="headerlink" href="#download-the-model" title="Permalink to this headline">¶</a></h3>
 <p>We use <code class="docutils literal notranslate"><span class="pre">omz_downloader</span></code>, the tool from the <code class="docutils literal notranslate"><span class="pre">openvino-dev</span></code> package to
 download the selected model. It will be retrieved from the cache if the
@@ -424,8 +433,8 @@ model is already downloaded.</p>
 <span class="o">==========</span> <span class="n">Downloading</span> <span class="n">model</span><span class="o">/</span><span class="n">intel</span><span class="o">/</span><span class="n">license</span><span class="o">-</span><span class="n">plate</span><span class="o">-</span><span class="n">recognition</span><span class="o">-</span><span class="n">barrier</span><span class="o">-</span><span class="mi">0001</span><span class="o">/</span><span class="n">FP16</span><span class="o">/</span><span class="n">license</span><span class="o">-</span><span class="n">plate</span><span class="o">-</span><span class="n">recognition</span><span class="o">-</span><span class="n">barrier</span><span class="o">-</span><span class="mf">0001.</span><span class="n">bin</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="load-the-model">
+</section>
+<section id="load-the-model">
 <h3>Load the Model<a class="headerlink" href="#load-the-model" title="Permalink to this headline">¶</a></h3>
 <p>First, we initialize OpenVINO Runtime. Then we read the network
 architecture and model weights from the .bin and .xml files to compile
@@ -451,25 +460,25 @@ performance, you need to use <code class="docutils literal notranslate"><span cl
 <span class="n">input_height</span><span class="p">,</span> <span class="n">input_width</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">input_layer</span><span class="o">.</span><span class="n">shape</span><span class="p">)[</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="inference">
+</section>
+</section>
+<section id="inference">
 <h2>Inference<a class="headerlink" href="#inference" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="using-imageloader-to-process-image">
+<section id="using-imageloader-to-process-image">
 <h3>Using ImageLoader to Process Image<a class="headerlink" href="#using-imageloader-to-process-image" title="Permalink to this headline">¶</a></h3>
 <blockquote>
 <div><p><em>Model Limitations: Only “blue” license plates, which are common in
 public, were tested thoroughly. Other types of license plates may
 underperform.</em></p>
 </div></blockquote>
-<div class="section" id="model-input">
+<section id="model-input">
 <h4>Model Input:<a class="headerlink" href="#model-input" title="Permalink to this headline">¶</a></h4>
 <p>name: “data” , shape: [1x3x24x94] - An input image in following format
 [1xCxHxW]. Expected color order is BGR.</p>
 <p>name: “seq_ind” , shape: [88, 1] - An auxiliary blob that is needed for
 correct decoding. Set this to [1, 1, …, 1].</p>
-</div>
-<div class="section" id="notes">
+</section>
+<section id="notes">
 <h4>Notes:<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h4>
 <p>Since the license plate image could be any size, we need to use
 ImageLoader to resize it to fit the model input requirements.
@@ -549,13 +558,13 @@ conditions like image overexposure or too dark.</p>
     <span class="k">return</span> <span class="n">input_img</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="do-the-inference">
+</section>
+</section>
+<section id="do-the-inference">
 <h3>Do the Inference<a class="headerlink" href="#do-the-inference" title="Permalink to this headline">¶</a></h3>
 <p>Match the output array into correct recognition results Run license
 plate recognition model with the input and then match the result.</p>
-<div class="section" id="process-the-image">
+<section id="process-the-image">
 <h4>Process the Image<a class="headerlink" href="#process-the-image" title="Permalink to this headline">¶</a></h4>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># the path of the test license plate image.</span>
 <span class="n">test_image_path</span> <span class="o">=</span> <span class="s2">&quot;data/example.png&quot;</span>
@@ -567,8 +576,8 @@ plate recognition model with the input and then match the result.</p>
 </pre></div>
 </div>
 <img alt="../_images/216-license-plate-recognition-with-output_11_1.png" src="../_images/216-license-plate-recognition-with-output_11_1.png" />
-</div>
-<div class="section" id="input-the-data-and-get-the-result">
+</section>
+<section id="input-the-data-and-get-the-result">
 <h4>Input the Data and Get the Result<a class="headerlink" href="#input-the-data-and-get-the-result" title="Permalink to this headline">¶</a></h4>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># an auxiliary blob that is needed for correct decoding.</span>
 <span class="c1"># set this to [1, 1, ..., 1].</span>
@@ -580,8 +589,8 @@ plate recognition model with the input and then match the result.</p>
 <span class="n">result</span> <span class="o">=</span> <span class="n">compiled_model</span><span class="p">([</span><span class="n">input_img</span><span class="p">,</span> <span class="n">auxiliary_blob</span><span class="p">])[</span><span class="n">output_layer</span><span class="p">]</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="match-the-output-array-into-correct-recognition-results">
+</section>
+<section id="match-the-output-array-into-correct-recognition-results">
 <h4>Match the Output Array into Correct Recognition Results<a class="headerlink" href="#match-the-output-array-into-correct-recognition-results" title="Permalink to this headline">¶</a></h4>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">result_to_string</span><span class="p">(</span><span class="n">result</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -606,8 +615,8 @@ plate recognition model with the input and then match the result.</p>
     <span class="k">return</span> <span class="n">ans</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="print-out-the-result">
+</section>
+<section id="print-out-the-result">
 <h4>Print out the result<a class="headerlink" href="#print-out-the-result" title="Permalink to this headline">¶</a></h4>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># get the result.</span>
 <span class="n">plate_recognition</span> <span class="o">=</span> <span class="n">result_to_string</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
@@ -628,10 +637,10 @@ plate recognition model with the input and then match the result.</p>
 </pre></div>
 </div>
 <img alt="../_images/216-license-plate-recognition-with-output_17_1.png" src="../_images/216-license-plate-recognition-with-output_17_1.png" />
-</div>
-</div>
-</div>
-<div class="section" id="references">
+</section>
+</section>
+</section>
+<section id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
 <li><p><a class="reference external" href="https://github.com/openvinotoolkit/open_model_zoo/tree/master/models/intel/license-plate-recognition-barrier-0001">License Plate Recognition
@@ -639,8 +648,8 @@ Model</a></p></li>
 <li><p><a class="reference external" href="https://github.com/openvinotoolkit/open_model_zoo/">Open Model
 Zoo</a></p></li>
 </ol>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -669,7 +678,7 @@ Zoo</a></p></li>
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

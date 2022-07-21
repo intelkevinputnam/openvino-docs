@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Broadcast Rules For Elementwise Operations &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -1432,14 +1439,14 @@
             
                 <div>
                   
-  <div class="section" id="broadcast-rules-for-elementwise-operations">
+  <section id="broadcast-rules-for-elementwise-operations">
 <span id="doxid-openvino-docs-ops-broadcast-rules"></span><span id="index-0"></span><h1>Broadcast Rules For Elementwise Operations<a class="headerlink" href="#broadcast-rules-for-elementwise-operations" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-openvino-docs-ops-broadcast-rules-1md-openvino-docs-ops-broadcast-rules"></span> The purpose of this document is to provide a set of common rules which are applicable for ops using broadcasting.</p>
-<div class="section" id="description">
+<section id="description">
 <h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
 <p>Broadcast allows to perform element-wise operation for inputs of arbitrary number of dimensions. There are 2 types of broadcasts supported: Numpy and PDPD.</p>
-</div>
-<div class="section" id="rules">
+</section>
+<section id="rules">
 <h2>Rules<a class="headerlink" href="#rules" title="Permalink to this headline">¶</a></h2>
 <p><strong>None broadcast</strong> :</p>
 <ol class="arabic simple">
@@ -1462,8 +1469,8 @@
 <li><p>If <em>axis</em> is set to default (-1) calculate new value: <code class="docutils literal notranslate"><span class="pre">axis</span> <span class="pre">=</span> <span class="pre">rank(A)</span> <span class="pre">-</span> <span class="pre">rank(B)</span></code>.</p></li>
 <li><p>The trailing dimensions of size 1 for input B will be ignored for the consideration of subsequence, such as <code class="docutils literal notranslate"><span class="pre">shape(B)</span> <span class="pre">=</span> <span class="pre">(3,</span> <span class="pre">1)</span> <span class="pre">=&gt;</span> <span class="pre">(3)</span></code>.</p></li>
 </ol>
-</div>
-<div class="section" id="numpy-examples">
+</section>
+<section id="numpy-examples">
 <h2>Numpy examples<a class="headerlink" href="#numpy-examples" title="Permalink to this headline">¶</a></h2>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">A:</span> <span class="pre">Shape(,)</span> <span class="pre">-&gt;</span> <span class="pre">scalar</span></code></p>
@@ -1511,8 +1518,8 @@
 <p><code class="docutils literal notranslate"><span class="pre">Result:</span> <span class="pre">broadcast</span> <span class="pre">won't</span> <span class="pre">happen</span> <span class="pre">due</span> <span class="pre">to</span> <span class="pre">dimensions</span> <span class="pre">mismatch</span> <span class="pre">on</span> <span class="pre">the</span> <span class="pre">leftmost</span> <span class="pre">axis</span></code></p>
 </li>
 </ul>
-</div>
-<div class="section" id="pdpd-examples">
+</section>
+<section id="pdpd-examples">
 <h2>PDPD examples<a class="headerlink" href="#pdpd-examples" title="Permalink to this headline">¶</a></h2>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">A:</span> <span class="pre">Shape(2,</span> <span class="pre">3,</span> <span class="pre">4,</span> <span class="pre">5)</span></code></p>
@@ -1540,14 +1547,14 @@
 <p><code class="docutils literal notranslate"><span class="pre">Result:</span> <span class="pre">Shape(2,</span> <span class="pre">3,</span> <span class="pre">4,</span> <span class="pre">5)</span></code></p>
 </li>
 </ul>
-</div>
-<div class="section" id="bidirectional-broadcast-rules">
+</section>
+<section id="bidirectional-broadcast-rules">
 <span id="doxid-openvino-docs-ops-broadcast-rules-1openvino-docs-ops-bidirectional-broadcast-rules"></span><h2>Bidirectional Broadcast Rules<a class="headerlink" href="#bidirectional-broadcast-rules" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id1">
+<section id="id1">
 <h3>Description<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <p>Bidirectional Broadcast is not intended for element-wise operations. Its purpose is to broadcast an array to a given shape.</p>
-</div>
-<div class="section" id="id2">
+</section>
+<section id="id2">
 <h3>Rules<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <p><strong>Bidirectional broadcast</strong> :</p>
 <ol class="arabic simple">
@@ -1561,8 +1568,8 @@
 </ul>
 </li>
 </ol>
-</div>
-<div class="section" id="bidirectional-examples">
+</section>
+<section id="bidirectional-examples">
 <h3>Bidirectional examples<a class="headerlink" href="#bidirectional-examples" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">A:</span> <span class="pre">Shape(5)</span></code></p>
@@ -1586,9 +1593,9 @@
 <p><code class="docutils literal notranslate"><span class="pre">Result:</span> <span class="pre">Shape(2,</span> <span class="pre">3,</span> <span class="pre">6)</span></code></p>
 </li>
 </ul>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
                 </div>
@@ -1619,7 +1626,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

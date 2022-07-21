@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>From Training to Deployment with TensorFlow and OpenVINO &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -605,7 +612,7 @@
             
                 <div>
                   
-  <div class="section" id="from-training-to-deployment-with-tensorflow-and-openvino">
+  <section id="from-training-to-deployment-with-tensorflow-and-openvino">
 <h1>From Training to Deployment with TensorFlow and OpenVINO<a class="headerlink" href="#from-training-to-deployment-with-tensorflow-and-openvino" title="Permalink to this headline">¶</a></h1>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># @title Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
 <span class="c1"># you may not use this file except in compliance with the License.</span>
@@ -638,7 +645,7 @@ Tutorial</a>.</p>
 <p>The <strong>flower_ir.bin</strong> and <strong>flower_ir.xml</strong> (pre-trained models) can be
 obtained by executing the code with ‘Runtime-&gt;Run All’ or the Ctrl+F9
 command.</p>
-<div class="section" id="tensorflow-image-classification-training">
+<section id="tensorflow-image-classification-training">
 <h2>TensorFlow Image Classification Training<a class="headerlink" href="#tensorflow-image-classification-training" title="Permalink to this headline">¶</a></h2>
 <p>The first part of the tutorial shows how to classify images of flowers
 (based on the TensorFlow’s official tutorial). It creates an image
@@ -658,8 +665,8 @@ including data augmentation and Dropout.</p></li>
 <li><p>Train the model</p></li>
 <li><p>Test the model</p></li>
 </ol>
-</div>
-<div class="section" id="import-tensorflow-and-other-libraries">
+</section>
+<section id="import-tensorflow-and-other-libraries">
 <h2>Import TensorFlow and Other Libraries<a class="headerlink" href="#import-tensorflow-and-other-libraries" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">sys</span>
@@ -680,8 +687,8 @@ including data augmentation and Dropout.</p></li>
 <span class="kn">from</span> <span class="nn">notebook_utils</span> <span class="kn">import</span> <span class="n">download_file</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="download-and-explore-the-dataset">
+</section>
+<section id="download-and-explore-the-dataset">
 <h2>Download and Explore the Dataset<a class="headerlink" href="#download-and-explore-the-dataset" title="Permalink to this headline">¶</a></h2>
 <p>This tutorial uses a dataset of about 3,700 photos of flowers. The
 dataset contains 5 sub-directories, one per class:</p>
@@ -728,8 +735,8 @@ There are 3,670 total images:</p>
 </pre></div>
 </div>
 <img alt="../_images/301-tensorflow-training-openvino-with-output_17_0.png" src="../_images/301-tensorflow-training-openvino-with-output_17_0.png" />
-</div>
-<div class="section" id="load-using-keras-preprocessing">
+</section>
+<section id="load-using-keras-preprocessing">
 <h2>Load Using keras.preprocessing<a class="headerlink" href="#load-using-keras-preprocessing" title="Permalink to this headline">¶</a></h2>
 <p>Let’s load these images off disk using the helpful
 <a class="reference external" href="https://www.tensorflow.org/api_docs/python/tf/keras/preprocessing/image_dataset_from_directory">image_dataset_from_directory</a>
@@ -738,8 +745,8 @@ utility. This will take you from a directory of images on disk to a
 also write your own data loading code from scratch by visiting the <a class="reference external" href="https://www.tensorflow.org/tutorials/load_data/images">load
 images</a>
 tutorial.</p>
-</div>
-<div class="section" id="create-a-dataset">
+</section>
+<section id="create-a-dataset">
 <h2>Create a Dataset<a class="headerlink" href="#create-a-dataset" title="Permalink to this headline">¶</a></h2>
 <p>Define some parameters for the loader:</p>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">batch_size</span> <span class="o">=</span> <span class="mi">32</span>
@@ -784,8 +791,8 @@ datasets. These correspond to the directory names in alphabetical order.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="s1">&#39;daisy&#39;</span><span class="p">,</span> <span class="s1">&#39;dandelion&#39;</span><span class="p">,</span> <span class="s1">&#39;roses&#39;</span><span class="p">,</span> <span class="s1">&#39;sunflowers&#39;</span><span class="p">,</span> <span class="s1">&#39;tulips&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="visualize-the-data">
+</section>
+<section id="visualize-the-data">
 <h2>Visualize the Data<a class="headerlink" href="#visualize-the-data" title="Permalink to this headline">¶</a></h2>
 <p>Here are the first 9 images from the training dataset.</p>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
@@ -817,8 +824,8 @@ refers to color channels RGB). The <code class="docutils literal notranslate"><s
 shape <code class="docutils literal notranslate"><span class="pre">(32,)</span></code>, these are corresponding labels to the 32 images.</p>
 <p>You can call <code class="docutils literal notranslate"><span class="pre">.numpy()</span></code> on the <code class="docutils literal notranslate"><span class="pre">image_batch</span></code> and <code class="docutils literal notranslate"><span class="pre">labels_batch</span></code>
 tensors to convert them to a <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>.</p>
-</div>
-<div class="section" id="configure-the-dataset-for-performance">
+</section>
+<section id="configure-the-dataset-for-performance">
 <h2>Configure the Dataset for Performance<a class="headerlink" href="#configure-the-dataset-for-performance" title="Permalink to this headline">¶</a></h2>
 <p>Let’s make sure to use buffered prefetching so you can yield data from
 disk without having I/O become blocking. These are two important methods
@@ -839,8 +846,8 @@ guide</a>.</p>
 <span class="n">val_ds</span> <span class="o">=</span> <span class="n">val_ds</span><span class="o">.</span><span class="n">cache</span><span class="p">()</span><span class="o">.</span><span class="n">prefetch</span><span class="p">(</span><span class="n">buffer_size</span><span class="o">=</span><span class="n">AUTOTUNE</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="standardize-the-data">
+</section>
+<section id="standardize-the-data">
 <h2>Standardize the Data<a class="headerlink" href="#standardize-the-data" title="Permalink to this headline">¶</a></h2>
 <p>The RGB channel values are in the <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">255]</span></code> range. This is not ideal
 for a neural network; in general you should seek to make your input
@@ -870,8 +877,8 @@ simplify deployment. Let’s use the second approach here.</p>
 logic in your model as well, you can use the
 <a class="reference external" href="https://www.tensorflow.org/api_docs/python/tf/keras/layers/experimental/preprocessing/Resizing">Resizing</a>
 layer.</p>
-</div>
-<div class="section" id="create-the-model">
+</section>
+<section id="create-the-model">
 <h2>Create the Model<a class="headerlink" href="#create-the-model" title="Permalink to this headline">¶</a></h2>
 <p>The model consists of three convolution blocks with a max pool layer in
 each of them. There’s a fully connected layer with 128 units on top of
@@ -894,8 +901,8 @@ standard approach.</p>
 <span class="p">])</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="compile-the-model">
+</section>
+<section id="compile-the-model">
 <h2>Compile the Model<a class="headerlink" href="#compile-the-model" title="Permalink to this headline">¶</a></h2>
 <p>For this tutorial, choose the <code class="docutils literal notranslate"><span class="pre">optimizers.Adam</span></code> optimizer and
 <code class="docutils literal notranslate"><span class="pre">losses.SparseCategoricalCrossentropy</span></code> loss function. To view training
@@ -906,8 +913,8 @@ argument.</p>
               <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="model-summary">
+</section>
+<section id="model-summary">
 <h2>Model Summary<a class="headerlink" href="#model-summary" title="Permalink to this headline">¶</a></h2>
 <p>View all the layers of the network using the model’s <code class="docutils literal notranslate"><span class="pre">summary</span></code> method.</p>
 <blockquote>
@@ -917,8 +924,8 @@ Please feel free to uncomment these to compare the results.</p>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># model.summary()</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="train-the-model">
+</section>
+<section id="train-the-model">
 <h2>Train the Model<a class="headerlink" href="#train-the-model" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># epochs=10</span>
 <span class="c1"># history = model.fit(</span>
@@ -928,8 +935,8 @@ Please feel free to uncomment these to compare the results.</p>
 <span class="c1"># )</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="visualize-training-results">
+</section>
+<section id="visualize-training-results">
 <h2>Visualize Training Results<a class="headerlink" href="#visualize-training-results" title="Permalink to this headline">¶</a></h2>
 <p>Create plots of loss and accuracy on the training and validation sets.</p>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># acc = history.history[&#39;accuracy&#39;]</span>
@@ -960,8 +967,8 @@ are off by large margin and the model has achieved only around 60%
 accuracy on the validation set.</p>
 <p>Let’s look at what went wrong and try to increase the overall
 performance of the model.</p>
-</div>
-<div class="section" id="overfitting">
+</section>
+<section id="overfitting">
 <h2>Overfitting<a class="headerlink" href="#overfitting" title="Permalink to this headline">¶</a></h2>
 <p>In the plots above, the training accuracy is increasing linearly over
 time, whereas validation accuracy stalls around 60% in the training
@@ -976,8 +983,8 @@ model will have a difficult time generalizing on a new dataset.</p>
 <p>There are multiple ways to fight overfitting in the training process. In
 this tutorial, you’ll use <em>data augmentation</em> and add <em>Dropout</em> to your
 model.</p>
-</div>
-<div class="section" id="data-augmentation">
+</section>
+<section id="data-augmentation">
 <h2>Data Augmentation<a class="headerlink" href="#data-augmentation" title="Permalink to this headline">¶</a></h2>
 <p>Overfitting generally occurs when there are a small number of training
 examples. <a class="reference external" href="https://www.tensorflow.org/tutorials/images/data_augmentation">Data
@@ -1014,8 +1021,8 @@ augmentation to the same image several times:</p>
 </div>
 <img alt="../_images/301-tensorflow-training-openvino-with-output_56_0.png" src="../_images/301-tensorflow-training-openvino-with-output_56_0.png" />
 <p>You will use data augmentation to train a model in a moment.</p>
-</div>
-<div class="section" id="dropout">
+</section>
+<section id="dropout">
 <h2>Dropout<a class="headerlink" href="#dropout" title="Permalink to this headline">¶</a></h2>
 <p>Another technique to reduce overfitting is to introduce
 <a class="reference external" href="https://developers.google.com/machine-learning/glossary#dropout_regularization">Dropout</a>
@@ -1043,8 +1050,8 @@ it using augmented images.</p>
 <span class="p">])</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="compile-and-train-the-model">
+</section>
+<section id="compile-and-train-the-model">
 <h2>Compile and Train the Model<a class="headerlink" href="#compile-and-train-the-model" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;adam&#39;</span><span class="p">,</span>
               <span class="n">loss</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">losses</span><span class="o">.</span><span class="n">SparseCategoricalCrossentropy</span><span class="p">(</span><span class="n">from_logits</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
@@ -1128,8 +1135,8 @@ it using augmented images.</p>
 <span class="mi">92</span><span class="o">/</span><span class="mi">92</span> <span class="p">[</span><span class="o">==============================</span><span class="p">]</span> <span class="o">-</span> <span class="mi">53</span><span class="n">s</span> <span class="mi">579</span><span class="n">ms</span><span class="o">/</span><span class="n">step</span> <span class="o">-</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">0.5639</span> <span class="o">-</span> <span class="n">accuracy</span><span class="p">:</span> <span class="mf">0.7864</span> <span class="o">-</span> <span class="n">val_loss</span><span class="p">:</span> <span class="mf">0.7957</span> <span class="o">-</span> <span class="n">val_accuracy</span><span class="p">:</span> <span class="mf">0.6935</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="id1">
+</section>
+<section id="id1">
 <h2>Visualize Training Results<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>After applying data augmentation and Dropout, there is less overfitting
 than before, and training and validation accuracy are closer aligned.</p>
@@ -1157,8 +1164,8 @@ than before, and training and validation accuracy are closer aligned.</p>
 </pre></div>
 </div>
 <img alt="../_images/301-tensorflow-training-openvino-with-output_65_0.png" src="../_images/301-tensorflow-training-openvino-with-output_65_0.png" />
-</div>
-<div class="section" id="predict-on-new-data">
+</section>
+<section id="predict-on-new-data">
 <h2>Predict on New Data<a class="headerlink" href="#predict-on-new-data" title="Permalink to this headline">¶</a></h2>
 <p>Finally, let’s use our model to classify an image that wasn’t included
 in the training or validation sets.</p>
@@ -1185,8 +1192,8 @@ time.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">This</span> <span class="n">image</span> <span class="n">most</span> <span class="n">likely</span> <span class="n">belongs</span> <span class="n">to</span> <span class="n">sunflowers</span> <span class="k">with</span> <span class="n">a</span> <span class="mf">99.76</span> <span class="n">percent</span> <span class="n">confidence</span><span class="o">.</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="save-the-tensorflow-model">
+</section>
+<section id="save-the-tensorflow-model">
 <h2>Save the TensorFlow Model<a class="headerlink" href="#save-the-tensorflow-model" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#save the trained model - a new folder flower will be created</span>
 <span class="c1">#and the file &quot;saved_model.pb&quot; is the pre-trained model</span>
@@ -1198,8 +1205,8 @@ time.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">INFO</span><span class="p">:</span><span class="n">tensorflow</span><span class="p">:</span><span class="n">Assets</span> <span class="n">written</span> <span class="n">to</span><span class="p">:</span> <span class="n">model</span><span class="o">/</span><span class="n">flower</span><span class="o">/</span><span class="n">assets</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="convert-the-tensorflow-model-with-openvino-model-optimizer">
+</section>
+<section id="convert-the-tensorflow-model-with-openvino-model-optimizer">
 <h2>Convert the TensorFlow model with OpenVINO Model Optimizer<a class="headerlink" href="#convert-the-tensorflow-model-with-openvino-model-optimizer" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The paths of the source and converted models</span>
 <span class="n">model_name</span> <span class="o">=</span> <span class="s2">&quot;flower&quot;</span>
@@ -1265,21 +1272,21 @@ time.</p>
     <span class="o">-</span> <span class="n">Update</span> <span class="n">the</span> <span class="n">configuration</span> <span class="n">file</span> <span class="k">with</span> <span class="nb">input</span><span class="o">/</span><span class="n">output</span> <span class="n">node</span> <span class="n">names</span><span class="p">:</span>   <span class="kc">None</span>
     <span class="o">-</span> <span class="n">Use</span> <span class="n">configuration</span> <span class="n">file</span> <span class="n">used</span> <span class="n">to</span> <span class="n">generate</span> <span class="n">the</span> <span class="n">model</span> <span class="k">with</span> <span class="n">Object</span> <span class="n">Detection</span> <span class="n">API</span><span class="p">:</span>  <span class="kc">None</span>
     <span class="o">-</span> <span class="n">Use</span> <span class="n">the</span> <span class="n">config</span> <span class="n">file</span><span class="p">:</span>  <span class="kc">None</span>
-<span class="n">OpenVINO</span> <span class="n">runtime</span> <span class="n">found</span> <span class="ow">in</span><span class="p">:</span>  <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8</span><span class="o">.</span><span class="mi">12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">openvino</span>
-<span class="n">OpenVINO</span> <span class="n">runtime</span> <span class="n">version</span><span class="p">:</span>   <span class="mf">2022.1</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="mi">7019</span><span class="o">-</span><span class="n">cdb9bec7210</span><span class="o">-</span><span class="n">releases</span><span class="o">/</span><span class="mi">2022</span><span class="o">/</span><span class="mi">1</span>
-<span class="n">Model</span> <span class="n">Optimizer</span> <span class="n">version</span><span class="p">:</span>    <span class="mf">2022.1</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="mi">7019</span><span class="o">-</span><span class="n">cdb9bec7210</span><span class="o">-</span><span class="n">releases</span><span class="o">/</span><span class="mi">2022</span><span class="o">/</span><span class="mi">1</span>
+<span class="n">OpenVINO</span> <span class="n">runtime</span> <span class="n">found</span> <span class="ow">in</span><span class="p">:</span>  <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">openvino</span>
+<span class="n">OpenVINO</span> <span class="n">runtime</span> <span class="n">version</span><span class="p">:</span>   <span class="mf">2022.1.0</span><span class="o">-</span><span class="mi">7019</span><span class="o">-</span><span class="n">cdb9bec7210</span><span class="o">-</span><span class="n">releases</span><span class="o">/</span><span class="mi">2022</span><span class="o">/</span><span class="mi">1</span>
+<span class="n">Model</span> <span class="n">Optimizer</span> <span class="n">version</span><span class="p">:</span>    <span class="mf">2022.1.0</span><span class="o">-</span><span class="mi">7019</span><span class="o">-</span><span class="n">cdb9bec7210</span><span class="o">-</span><span class="n">releases</span><span class="o">/</span><span class="mi">2022</span><span class="o">/</span><span class="mi">1</span>
 <span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">Generated</span> <span class="n">IR</span> <span class="n">version</span> <span class="mi">11</span> <span class="n">model</span><span class="o">.</span>
 <span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">XML</span> <span class="n">file</span><span class="p">:</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">work</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">notebooks</span><span class="o">/</span><span class="mi">301</span><span class="o">-</span><span class="n">tensorflow</span><span class="o">-</span><span class="n">training</span><span class="o">-</span><span class="n">openvino</span><span class="o">/</span><span class="n">model</span><span class="o">/</span><span class="n">flower</span><span class="o">/</span><span class="n">flower_ir</span><span class="o">.</span><span class="n">xml</span>
 <span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">BIN</span> <span class="n">file</span><span class="p">:</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">work</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">notebooks</span><span class="o">/</span><span class="mi">301</span><span class="o">-</span><span class="n">tensorflow</span><span class="o">-</span><span class="n">training</span><span class="o">-</span><span class="n">openvino</span><span class="o">/</span><span class="n">model</span><span class="o">/</span><span class="n">flower</span><span class="o">/</span><span class="n">flower_ir</span><span class="o">.</span><span class="n">bin</span>
 <span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">Total</span> <span class="n">execution</span> <span class="n">time</span><span class="p">:</span> <span class="mf">5.32</span> <span class="n">seconds</span><span class="o">.</span>
 <span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">Memory</span> <span class="n">consumed</span><span class="p">:</span> <span class="mi">582</span> <span class="n">MB</span><span class="o">.</span>
 <span class="n">It</span><span class="s1">&#39;s been a while, check for a new version of Intel(R) Distribution of OpenVINO(TM) toolkit here https://software.intel.com/content/www/us/en/develop/tools/openvino-toolkit/download.html?cid=other&amp;source=prod&amp;campid=ww_2022_bu_IOTG_OpenVINO-2022-1&amp;content=upg_all&amp;medium=organic or on the GitHub*</span>
-<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">The</span> <span class="n">model</span> <span class="n">was</span> <span class="n">converted</span> <span class="n">to</span> <span class="n">IR</span> <span class="n">v11</span><span class="p">,</span> <span class="n">the</span> <span class="n">latest</span> <span class="n">model</span> <span class="nb">format</span> <span class="n">that</span> <span class="n">corresponds</span> <span class="n">to</span> <span class="n">the</span> <span class="n">source</span> <span class="n">DL</span> <span class="n">framework</span> <span class="nb">input</span><span class="o">/</span><span class="n">output</span> <span class="nb">format</span><span class="o">.</span> <span class="n">While</span> <span class="n">IR</span> <span class="n">v11</span> <span class="ow">is</span> <span class="n">backwards</span> <span class="n">compatible</span> <span class="k">with</span> <span class="n">OpenVINO</span> <span class="n">Inference</span> <span class="n">Engine</span> <span class="n">API</span> <span class="n">v1</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span> <span class="n">please</span> <span class="n">use</span> <span class="n">API</span> <span class="n">v2</span><span class="o">.</span><span class="mi">0</span> <span class="p">(</span><span class="k">as</span> <span class="n">of</span> <span class="mf">2022.1</span><span class="p">)</span> <span class="n">to</span> <span class="n">take</span> <span class="n">advantage</span> <span class="n">of</span> <span class="n">the</span> <span class="n">latest</span> <span class="n">improvements</span> <span class="ow">in</span> <span class="n">IR</span> <span class="n">v11</span><span class="o">.</span>
-<span class="n">Find</span> <span class="n">more</span> <span class="n">information</span> <span class="n">about</span> <span class="n">API</span> <span class="n">v2</span><span class="o">.</span><span class="mi">0</span> <span class="ow">and</span> <span class="n">IR</span> <span class="n">v11</span> <span class="n">at</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">docs</span><span class="o">.</span><span class="n">openvino</span><span class="o">.</span><span class="n">ai</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">The</span> <span class="n">model</span> <span class="n">was</span> <span class="n">converted</span> <span class="n">to</span> <span class="n">IR</span> <span class="n">v11</span><span class="p">,</span> <span class="n">the</span> <span class="n">latest</span> <span class="n">model</span> <span class="nb">format</span> <span class="n">that</span> <span class="n">corresponds</span> <span class="n">to</span> <span class="n">the</span> <span class="n">source</span> <span class="n">DL</span> <span class="n">framework</span> <span class="nb">input</span><span class="o">/</span><span class="n">output</span> <span class="nb">format</span><span class="o">.</span> <span class="n">While</span> <span class="n">IR</span> <span class="n">v11</span> <span class="ow">is</span> <span class="n">backwards</span> <span class="n">compatible</span> <span class="k">with</span> <span class="n">OpenVINO</span> <span class="n">Inference</span> <span class="n">Engine</span> <span class="n">API</span> <span class="n">v1</span><span class="mf">.0</span><span class="p">,</span> <span class="n">please</span> <span class="n">use</span> <span class="n">API</span> <span class="n">v2</span><span class="mf">.0</span> <span class="p">(</span><span class="k">as</span> <span class="n">of</span> <span class="mf">2022.1</span><span class="p">)</span> <span class="n">to</span> <span class="n">take</span> <span class="n">advantage</span> <span class="n">of</span> <span class="n">the</span> <span class="n">latest</span> <span class="n">improvements</span> <span class="ow">in</span> <span class="n">IR</span> <span class="n">v11</span><span class="o">.</span>
+<span class="n">Find</span> <span class="n">more</span> <span class="n">information</span> <span class="n">about</span> <span class="n">API</span> <span class="n">v2</span><span class="mf">.0</span> <span class="ow">and</span> <span class="n">IR</span> <span class="n">v11</span> <span class="n">at</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">docs</span><span class="o">.</span><span class="n">openvino</span><span class="o">.</span><span class="n">ai</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="preprocessing-image-function">
+</section>
+<section id="preprocessing-image-function">
 <h2>Preprocessing Image Function<a class="headerlink" href="#preprocessing-image-function" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">pre_process_image</span><span class="p">(</span><span class="n">imagePath</span><span class="p">,</span> <span class="n">img_height</span><span class="o">=</span><span class="mi">180</span><span class="p">):</span>
     <span class="c1"># Model input format</span>
@@ -1294,8 +1301,8 @@ time.</p>
     <span class="k">return</span> <span class="n">input_image</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="openvino-inference-engine-setup">
+</section>
+<section id="openvino-inference-engine-setup">
 <h2>OpenVINO Inference Engine Setup<a class="headerlink" href="#openvino-inference-engine-setup" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">class_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;daisy&quot;</span><span class="p">,</span> <span class="s2">&quot;dandelion&quot;</span><span class="p">,</span> <span class="s2">&quot;roses&quot;</span><span class="p">,</span> <span class="s2">&quot;sunflowers&quot;</span><span class="p">,</span> <span class="s2">&quot;tulips&quot;</span><span class="p">]</span>
 
@@ -1315,8 +1322,8 @@ time.</p>
 <span class="n">output_layer</span> <span class="o">=</span> <span class="n">compiled_model</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="run-the-inference-step">
+</section>
+<section id="run-the-inference-step">
 <h2>Run the Inference Step<a class="headerlink" href="#run-the-inference-step" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run inference on the input image...</span>
 <span class="n">inp_img_url</span> <span class="o">=</span> <span class="s2">&quot;https://upload.wikimedia.org/wikipedia/commons/4/48/A_Close_Up_Photo_of_a_Dandelion.jpg&quot;</span>
@@ -1358,8 +1365,8 @@ time.</p>
 </pre></div>
 </div>
 <img alt="../_images/301-tensorflow-training-openvino-with-output_78_2.png" src="../_images/301-tensorflow-training-openvino-with-output_78_2.png" />
-</div>
-<div class="section" id="the-next-steps">
+</section>
+<section id="the-next-steps">
 <h2>The Next Steps<a class="headerlink" href="#the-next-steps" title="Permalink to this headline">¶</a></h2>
 <p>This tutorial showed how to train a TensorFlow model, how to convert
 that model to OpenVINO’s IR format, and how to do inference on the
@@ -1368,8 +1375,8 @@ model. To see how to quantize this model with OpenVINO’s <a class="reference e
 Optimization Tool</a>,
 check out the <a class="reference external" href="./301-tensorflow-training-openvino-pot.ipynb">Post-Training Quantization with TensorFlow Classification
 Model</a> notebook.</p>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -1400,7 +1407,7 @@ Model</a> notebook.</p>
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

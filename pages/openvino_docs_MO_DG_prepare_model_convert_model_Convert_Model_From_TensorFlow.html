@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Converting a TensorFlow Model &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -1879,17 +1886,17 @@
             
                 <div>
                   
-  <div class="section" id="converting-a-tensorflow-model">
+  <section id="converting-a-tensorflow-model">
 <span id="doxid-openvino-docs-m-o-d-g-prepare-model-convert-model-convert-model-from-tensor-flow"></span><span id="index-0"></span><h1>Converting a TensorFlow Model<a class="headerlink" href="#converting-a-tensorflow-model" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-openvino-docs-m-o-d-g-prepare-model-convert-model-convert-model-from-tensor-flow-1md-openvino-docs-mo-dg-prepare-model-convert-model-convert-model-from-tensorflow"></span> This page provides general instructions on how to convert a model from a TensorFlow format to the OpenVINO IR format using Model Optimizer. The instructions are different depending on whether your model was created with TensorFlow v1.X or TensorFlow v2.X.</p>
 <p>To use Model Optimizer, install OpenVINO Development Tools by following the <a class="reference internal" href="openvino_docs_install_guides_install_dev_tools.html#doxid-openvino-docs-install-guides-install-dev-tools"><span class="std std-ref">installation instructions</span></a>.</p>
-<div class="section" id="convert-tensorflow-1-models">
+<section id="convert-tensorflow-1-models">
 <span id="convert-from-tf2x"></span><h2>Convert TensorFlow 1 Models<a class="headerlink" href="#convert-tensorflow-1-models" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="convert-frozen-model-format">
+<section id="convert-frozen-model-format">
 <span id="convert-from-tf"></span><h3>Convert Frozen Model Format<a class="headerlink" href="#convert-frozen-model-format" title="Permalink to this headline">¶</a></h3>
 <p>To convert a TensorFlow model, use the <code class="docutils literal notranslate"><span class="pre">mo</span></code> script to simply convert a model with the path to the input model <code class="docutils literal notranslate"><span class="pre">.pb</span></code> file:</p>
-<div class="highlight"><div class="highlight"><pre><span></span><span class="n">mo</span> <span class="o">--</span><span class="n">input_model</span> <span class="o">&lt;</span><span class="n">INPUT_MODEL</span><span class="o">&gt;</span><span class="p">.</span><span class="n">pb</span></pre></div></div></div>
-<div class="section" id="convert-non-frozen-model-formats">
+<div class="highlight"><div class="highlight"><pre><span></span><span class="n">mo</span> <span class="o">--</span><span class="n">input_model</span> <span class="o">&lt;</span><span class="n">INPUT_MODEL</span><span class="o">&gt;</span><span class="p">.</span><span class="n">pb</span></pre></div></div></section>
+<section id="convert-non-frozen-model-formats">
 <span id="loading-nonfrozen-models"></span><h3>Convert Non-Frozen Model Formats<a class="headerlink" href="#convert-non-frozen-model-formats" title="Permalink to this headline">¶</a></h3>
 <p>There are three ways to store non-frozen TensorFlow models and convert them by Model Optimizer:</p>
 <ol class="arabic">
@@ -1904,8 +1911,8 @@
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">mo</span> <span class="o">--</span><span class="n">saved_model_dir</span> <span class="o">&lt;</span><span class="n">SAVED_MODEL_DIRECTORY</span><span class="o">&gt;</span></pre></div></div></li>
 </ol>
 <p>You can convert TensorFlow 1.x SavedModel format in the environment that has a 1.x or 2.x version of TensorFlow. However, TensorFlow 2.x SavedModel format strictly requires the 2.x version of TensorFlow. If a model contains operations currently unsupported by OpenVINO, prune these operations by explicit specification of input nodes using the <code class="docutils literal notranslate"><span class="pre">--input</span></code> option. To determine custom input nodes, display a graph of the model in TensorBoard. To generate TensorBoard logs of the graph, use the <code class="docutils literal notranslate"><span class="pre">--tensorboard_logs</span></code> option. TensorFlow 2.x SavedModel format has a specific graph due to eager execution. In case of pruning, find custom input nodes in the <code class="docutils literal notranslate"><span class="pre">StatefulPartitionedCall/\*</span></code> subgraph of TensorFlow 2.x SavedModel format.</p>
-</div>
-<div class="section" id="freezing-custom-models-in-python">
+</section>
+<section id="freezing-custom-models-in-python">
 <span id="freeze-the-tensorflow-model"></span><h3>Freezing Custom Models in Python*<a class="headerlink" href="#freezing-custom-models-in-python" title="Permalink to this headline">¶</a></h3>
 <p>When a network is defined in Python* code, you have to create an inference graph file. Usually graphs are built in a form that allows model training. That means that all trainable parameters are represented as variables in the graph. To be able to use such graph with Model Optimizer such graph should be frozen. The graph is frozen and dumped to a file with the following code:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">import</span> <span class="n">tensorflow</span> <span class="n">as</span> <span class="n">tf</span>
@@ -1919,20 +1926,20 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">inference_graph.pb</span></code> is the name of the generated inference graph file.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">as_text</span></code> specifies whether the generated file should be in human readable text format or binary.</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="convert-tensorflow-2-models">
+</section>
+</section>
+<section id="convert-tensorflow-2-models">
 <span id="id1"></span><h2>Convert TensorFlow 2 Models<a class="headerlink" href="#convert-tensorflow-2-models" title="Permalink to this headline">¶</a></h2>
 <p>To convert TensorFlow* 2 models, ensure that <code class="docutils literal notranslate"><span class="pre">openvino-dev[tensorflow2]</span></code> is installed via <code class="docutils literal notranslate"><span class="pre">pip</span></code>. TensorFlow* 2.X officially supports two model formats: SavedModel and Keras H5 (or HDF5). Below are the instructions on how to convert each of them.</p>
-<div class="section" id="savedmodel-format">
+<section id="savedmodel-format">
 <h3>SavedModel Format<a class="headerlink" href="#savedmodel-format" title="Permalink to this headline">¶</a></h3>
 <p>A model in the SavedModel format consists of a directory with a <code class="docutils literal notranslate"><span class="pre">saved_model.pb</span></code> file and two subfolders: <code class="docutils literal notranslate"><span class="pre">variables</span></code> and <code class="docutils literal notranslate"><span class="pre">assets</span></code>. To convert such a model, run the <code class="docutils literal notranslate"><span class="pre">mo</span></code> script with a path to the SavedModel directory:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">mo</span> <span class="o">--</span><span class="n">saved_model_dir</span> <span class="o">&lt;</span><span class="n">SAVED_MODEL_DIRECTORY</span><span class="o">&gt;</span></pre></div></div><p>TensorFlow* 2 SavedModel format strictly requires the 2.x version of TensorFlow installed in the environment for conversion to the Intermediate Representation (IR).</p>
 <p>If a model contains operations currently unsupported by OpenVINO™, prune these operations by explicit specification of input nodes using the <code class="docutils literal notranslate"><span class="pre">--input</span></code> or <code class="docutils literal notranslate"><span class="pre">--output</span></code> options. To determine custom input nodes, visualize a model graph in the TensorBoard.</p>
 <p>To generate TensorBoard logs of the graph, use the Model Optimizer <code class="docutils literal notranslate"><span class="pre">--tensorboard_logs</span></code> command-line option.</p>
 <p>TensorFlow* 2 SavedModel format has a specific graph structure due to eager execution. In case of pruning, find custom input nodes in the <code class="docutils literal notranslate"><span class="pre">StatefulPartitionedCall/\*</span></code> subgraph.</p>
-</div>
-<div class="section" id="keras-h5">
+</section>
+<section id="keras-h5">
 <h3>Keras H5<a class="headerlink" href="#keras-h5" title="Permalink to this headline">¶</a></h3>
 <p>If you have a model in the HDF5 format, load the model using TensorFlow* 2 and serialize it in the SavedModel format. Here is an example of how to do it:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">import</span> <span class="n">tensorflow</span> <span class="n">as</span> <span class="n">tf</span>
@@ -1946,9 +1953,9 @@
 <p class="admonition-title">Note</p>
 <p>Do not use other hacks to resave TensorFlow* 2 models into TensorFlow* 1 formats.</p>
 </div>
-</div>
-</div>
-<div class="section" id="command-line-interface-cli-examples-using-tensorflow-specific-parameters">
+</section>
+</section>
+<section id="command-line-interface-cli-examples-using-tensorflow-specific-parameters">
 <h2>Command-Line Interface (CLI) Examples Using TensorFlow*-Specific Parameters<a class="headerlink" href="#command-line-interface-cli-examples-using-tensorflow-specific-parameters" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>Launching the Model Optimizer for Inception V1 frozen model when model file is a plain text protobuf:</p></li>
@@ -1959,16 +1966,16 @@
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">mo</span> <span class="o">--</span><span class="n">input_model</span> <span class="n">inception_v1</span><span class="p">.</span><span class="n">pb</span> <span class="o">-</span><span class="n">b</span> <span class="mi">1</span> <span class="o">--</span><span class="n">tensorboard_logdir</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">log_dir</span></pre></div></div><ul class="simple">
 <li><p>Launching the Model Optimizer for BERT model in the SavedModel format, with three inputs. Explicitly specify input shapes where the batch size and the sequence length equal 2 and 30 respectively.</p></li>
 </ul>
-<div class="highlight"><div class="highlight"><pre><span></span><span class="n">mo</span> <span class="o">--</span><span class="n">saved_model_dir</span> <span class="n">BERT</span> <span class="o">--</span><span class="n">input</span> <span class="n">mask</span><span class="p">,</span><span class="n">word_ids</span><span class="p">,</span><span class="n">type_ids</span> <span class="o">--</span><span class="n">input_shape</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">30</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">30</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">30</span><span class="p">]</span></pre></div></div></div>
-<div class="section" id="supported-tensorflow-and-tensorflow-2-keras-layers">
+<div class="highlight"><div class="highlight"><pre><span></span><span class="n">mo</span> <span class="o">--</span><span class="n">saved_model_dir</span> <span class="n">BERT</span> <span class="o">--</span><span class="n">input</span> <span class="n">mask</span><span class="p">,</span><span class="n">word_ids</span><span class="p">,</span><span class="n">type_ids</span> <span class="o">--</span><span class="n">input_shape</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">30</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">30</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">30</span><span class="p">]</span></pre></div></div></section>
+<section id="supported-tensorflow-and-tensorflow-2-keras-layers">
 <h2>Supported TensorFlow* and TensorFlow 2 Keras* Layers<a class="headerlink" href="#supported-tensorflow-and-tensorflow-2-keras-layers" title="Permalink to this headline">¶</a></h2>
 <p>Refer to <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_Supported_Frameworks_Layers.html#doxid-openvino-docs-m-o-d-g-prepare-model-supported-frameworks-layers"><span class="std std-ref">Supported Framework Layers</span></a> for the list of supported standard layers.</p>
-</div>
-<div class="section" id="frequently-asked-questions-faq">
+</section>
+<section id="frequently-asked-questions-faq">
 <h2>Frequently Asked Questions (FAQ)<a class="headerlink" href="#frequently-asked-questions-faq" title="Permalink to this headline">¶</a></h2>
 <p>The Model Optimizer provides explanatory messages if it is unable to run to completion due to issues like typographical errors, incorrectly used options, or other issues. The message describes the potential cause of the problem and gives a link to the <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_Model_Optimizer_FAQ.html#doxid-openvino-docs-m-o-d-g-prepare-model-model-optimizer-f-a-q"><span class="std std-ref">Model Optimizer FAQ</span></a>. The FAQ has instructions on how to resolve most issues. The FAQ also includes links to relevant sections in the Model Optimizer Developer Guide to help you understand what went wrong.</p>
-</div>
-<div class="section" id="summary">
+</section>
+<section id="summary">
 <h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
 <p>In this document, you learned:</p>
 <ul class="simple">
@@ -1977,8 +1984,8 @@
 <li><p>How to freeze a TensorFlow 1 model</p></li>
 <li><p>How to convert a trained TensorFlow model using the Model Optimizer with both framework-agnostic and TensorFlow-specific command-line options</p></li>
 </ul>
-</div>
-<div class="section" id="additional-resources">
+</section>
+<section id="additional-resources">
 <h2>Additional Resources<a class="headerlink" href="#additional-resources" title="Permalink to this headline">¶</a></h2>
 <p>For step-by-step instructions on how to convert specific TensorFlow models, see the <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_tutorials.html#doxid-openvino-docs-m-o-d-g-prepare-model-convert-model-tutorials"><span class="std std-ref">Model Conversion Tutorials</span></a> page. Here are some examples:</p>
 <ul class="simple">
@@ -1986,8 +1993,8 @@
 <li><p><a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_tf_specific_Convert_FaceNet_From_Tensorflow.html#doxid-openvino-docs-m-o-d-g-prepare-model-convert-model-tf-specific-convert-face-net-from-tensorflow"><span class="std std-ref">Convert TensorFlow FaceNet Models</span></a></p></li>
 <li><p><a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_tf_specific_Convert_Object_Detection_API_Models.html#doxid-openvino-docs-m-o-d-g-prepare-model-convert-model-tf-specific-convert-object-detection-a-p-i-models"><span class="std std-ref">Convert TensorFlow Object Detection API Models</span></a></p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -2018,7 +2025,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

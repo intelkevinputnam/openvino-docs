@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Automatic Device Selection with OpenVINO™ &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -555,7 +562,7 @@
             
                 <div>
                   
-  <div class="section" id="automatic-device-selection-with-openvino">
+  <section id="automatic-device-selection-with-openvino">
 <h1>Automatic Device Selection with OpenVINO™<a class="headerlink" href="#automatic-device-selection-with-openvino" title="Permalink to this headline">¶</a></h1>
 <p>The <a class="reference external" href="https://docs.openvino.ai/latest/openvino_docs_OV_UG_supported_plugins_AUTO.html">Auto
 device</a>
@@ -580,7 +587,7 @@ require fast first inference response, AUTO starts inferencing
 immediately on the CPU and then transparently shifts inferencing to the
 GPU once it is ready. This dramatically reduces the time to first
 inference.</p>
-<center></center><div class="section" id="download-and-convert-the-model">
+<center></center><section id="download-and-convert-the-model">
 <h2>Download and convert the model<a class="headerlink" href="#download-and-convert-the-model" title="Permalink to this headline">¶</a></h2>
 <p>This tutorials uses the
 <a class="reference external" href="https://docs.openvino.ai/latest/omz_models_model_googlenet_v1.html">googlenet-v1</a>
@@ -642,7 +649,7 @@ information about Open Model Zoo tools, please refer to the
 <code class="docutils literal notranslate"><span class="pre">omz_converter</span> <span class="pre">--name</span> <span class="pre">googlenet-v1</span> <span class="pre">--precisions</span> <span class="pre">FP16</span> <span class="pre">--download_dir</span> <span class="pre">model</span></code></p>
 <p>Converting googlenet-v1…</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">==========</span> <span class="n">Converting</span> <span class="n">googlenet</span><span class="o">-</span><span class="n">v1</span> <span class="n">to</span> <span class="n">IR</span> <span class="p">(</span><span class="n">FP16</span><span class="p">)</span>
-<span class="n">Conversion</span> <span class="n">command</span><span class="p">:</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8</span><span class="o">.</span><span class="mi">12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">python</span> <span class="o">--</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8</span><span class="o">.</span><span class="mi">12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">mo</span> <span class="o">--</span><span class="n">framework</span><span class="o">=</span><span class="n">caffe</span> <span class="o">--</span><span class="n">data_type</span><span class="o">=</span><span class="n">FP16</span> <span class="o">--</span><span class="n">output_dir</span><span class="o">=</span><span class="n">model</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">googlenet</span><span class="o">-</span><span class="n">v1</span><span class="o">/</span><span class="n">FP16</span> <span class="o">--</span><span class="n">model_name</span><span class="o">=</span><span class="n">googlenet</span><span class="o">-</span><span class="n">v1</span> <span class="o">--</span><span class="nb">input</span><span class="o">=</span><span class="n">data</span> <span class="s1">&#39;--mean_values=data[104.0,117.0,123.0]&#39;</span> <span class="o">--</span><span class="n">output</span><span class="o">=</span><span class="n">prob</span> <span class="o">--</span><span class="n">input_model</span><span class="o">=</span><span class="n">model</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">googlenet</span><span class="o">-</span><span class="n">v1</span><span class="o">/</span><span class="n">googlenet</span><span class="o">-</span><span class="n">v1</span><span class="o">.</span><span class="n">caffemodel</span> <span class="o">--</span><span class="n">input_proto</span><span class="o">=</span><span class="n">model</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">googlenet</span><span class="o">-</span><span class="n">v1</span><span class="o">/</span><span class="n">googlenet</span><span class="o">-</span><span class="n">v1</span><span class="o">.</span><span class="n">prototxt</span> <span class="s1">&#39;--layout=data(NCHW)&#39;</span> <span class="s1">&#39;--input_shape=[1, 3, 224, 224]&#39;</span>
+<span class="n">Conversion</span> <span class="n">command</span><span class="p">:</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">python</span> <span class="o">--</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">mo</span> <span class="o">--</span><span class="n">framework</span><span class="o">=</span><span class="n">caffe</span> <span class="o">--</span><span class="n">data_type</span><span class="o">=</span><span class="n">FP16</span> <span class="o">--</span><span class="n">output_dir</span><span class="o">=</span><span class="n">model</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">googlenet</span><span class="o">-</span><span class="n">v1</span><span class="o">/</span><span class="n">FP16</span> <span class="o">--</span><span class="n">model_name</span><span class="o">=</span><span class="n">googlenet</span><span class="o">-</span><span class="n">v1</span> <span class="o">--</span><span class="nb">input</span><span class="o">=</span><span class="n">data</span> <span class="s1">&#39;--mean_values=data[104.0,117.0,123.0]&#39;</span> <span class="o">--</span><span class="n">output</span><span class="o">=</span><span class="n">prob</span> <span class="o">--</span><span class="n">input_model</span><span class="o">=</span><span class="n">model</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">googlenet</span><span class="o">-</span><span class="n">v1</span><span class="o">/</span><span class="n">googlenet</span><span class="o">-</span><span class="n">v1</span><span class="o">.</span><span class="n">caffemodel</span> <span class="o">--</span><span class="n">input_proto</span><span class="o">=</span><span class="n">model</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">googlenet</span><span class="o">-</span><span class="n">v1</span><span class="o">/</span><span class="n">googlenet</span><span class="o">-</span><span class="n">v1</span><span class="o">.</span><span class="n">prototxt</span> <span class="s1">&#39;--layout=data(NCHW)&#39;</span> <span class="s1">&#39;--input_shape=[1, 3, 224, 224]&#39;</span>
 
 <span class="n">Model</span> <span class="n">Optimizer</span> <span class="n">arguments</span><span class="p">:</span>
 <span class="n">Common</span> <span class="n">parameters</span><span class="p">:</span>
@@ -670,27 +677,27 @@ information about Open Model Zoo tools, please refer to the
     <span class="o">-</span> <span class="n">Force</span> <span class="n">the</span> <span class="n">usage</span> <span class="n">of</span> <span class="n">legacy</span> <span class="n">Frontend</span> <span class="n">of</span> <span class="n">Model</span> <span class="n">Optimizer</span> <span class="k">for</span> <span class="n">model</span> <span class="n">conversion</span> <span class="n">into</span> <span class="n">IR</span><span class="p">:</span>   <span class="kc">False</span>
     <span class="o">-</span> <span class="n">Force</span> <span class="n">the</span> <span class="n">usage</span> <span class="n">of</span> <span class="n">new</span> <span class="n">Frontend</span> <span class="n">of</span> <span class="n">Model</span> <span class="n">Optimizer</span> <span class="k">for</span> <span class="n">model</span> <span class="n">conversion</span> <span class="n">into</span> <span class="n">IR</span><span class="p">:</span>  <span class="kc">False</span>
 <span class="n">Caffe</span> <span class="n">specific</span> <span class="n">parameters</span><span class="p">:</span>
-    <span class="o">-</span> <span class="n">Path</span> <span class="n">to</span> <span class="n">Python</span> <span class="n">Caffe</span><span class="o">*</span> <span class="n">parser</span> <span class="n">generated</span> <span class="kn">from</span> <span class="nn">caffe.proto</span><span class="p">:</span>  <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8</span><span class="o">.</span><span class="mi">12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">openvino</span><span class="o">/</span><span class="n">tools</span><span class="o">/</span><span class="n">mo</span><span class="o">/</span><span class="n">utils</span><span class="o">/../</span><span class="n">front</span><span class="o">/</span><span class="n">caffe</span><span class="o">/</span><span class="n">proto</span>
+    <span class="o">-</span> <span class="n">Path</span> <span class="n">to</span> <span class="n">Python</span> <span class="n">Caffe</span><span class="o">*</span> <span class="n">parser</span> <span class="n">generated</span> <span class="kn">from</span> <span class="nn">caffe.proto</span><span class="p">:</span>  <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">openvino</span><span class="o">/</span><span class="n">tools</span><span class="o">/</span><span class="n">mo</span><span class="o">/</span><span class="n">utils</span><span class="o">/../</span><span class="n">front</span><span class="o">/</span><span class="n">caffe</span><span class="o">/</span><span class="n">proto</span>
     <span class="o">-</span> <span class="n">Enable</span> <span class="n">resnet</span> <span class="n">optimization</span><span class="p">:</span>   <span class="kc">True</span>
     <span class="o">-</span> <span class="n">Path</span> <span class="n">to</span> <span class="n">the</span> <span class="n">Input</span> <span class="n">prototxt</span><span class="p">:</span>   <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">work</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">notebooks</span><span class="o">/</span><span class="mi">106</span><span class="o">-</span><span class="n">auto</span><span class="o">-</span><span class="n">device</span><span class="o">/</span><span class="n">model</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">googlenet</span><span class="o">-</span><span class="n">v1</span><span class="o">/</span><span class="n">googlenet</span><span class="o">-</span><span class="n">v1</span><span class="o">.</span><span class="n">prototxt</span>
-    <span class="o">-</span> <span class="n">Path</span> <span class="n">to</span> <span class="n">CustomLayersMapping</span><span class="o">.</span><span class="n">xml</span><span class="p">:</span>  <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8</span><span class="o">.</span><span class="mi">12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">openvino</span><span class="o">/</span><span class="n">tools</span><span class="o">/</span><span class="n">mo</span><span class="o">/</span><span class="n">utils</span><span class="o">/../../</span><span class="n">extensions</span><span class="o">/</span><span class="n">front</span><span class="o">/</span><span class="n">caffe</span><span class="o">/</span><span class="n">CustomLayersMapping</span><span class="o">.</span><span class="n">xml</span>
+    <span class="o">-</span> <span class="n">Path</span> <span class="n">to</span> <span class="n">CustomLayersMapping</span><span class="o">.</span><span class="n">xml</span><span class="p">:</span>  <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">openvino</span><span class="o">/</span><span class="n">tools</span><span class="o">/</span><span class="n">mo</span><span class="o">/</span><span class="n">utils</span><span class="o">/../../</span><span class="n">extensions</span><span class="o">/</span><span class="n">front</span><span class="o">/</span><span class="n">caffe</span><span class="o">/</span><span class="n">CustomLayersMapping</span><span class="o">.</span><span class="n">xml</span>
     <span class="o">-</span> <span class="n">Path</span> <span class="n">to</span> <span class="n">a</span> <span class="n">mean</span> <span class="n">file</span><span class="p">:</span>  <span class="n">Not</span> <span class="n">specified</span>
     <span class="o">-</span> <span class="n">Offsets</span> <span class="k">for</span> <span class="n">a</span> <span class="n">mean</span> <span class="n">file</span><span class="p">:</span>  <span class="n">Not</span> <span class="n">specified</span>
-<span class="n">OpenVINO</span> <span class="n">runtime</span> <span class="n">found</span> <span class="ow">in</span><span class="p">:</span>  <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8</span><span class="o">.</span><span class="mi">12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">openvino</span>
-<span class="n">OpenVINO</span> <span class="n">runtime</span> <span class="n">version</span><span class="p">:</span>   <span class="mf">2022.1</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="mi">7019</span><span class="o">-</span><span class="n">cdb9bec7210</span><span class="o">-</span><span class="n">releases</span><span class="o">/</span><span class="mi">2022</span><span class="o">/</span><span class="mi">1</span>
-<span class="n">Model</span> <span class="n">Optimizer</span> <span class="n">version</span><span class="p">:</span>    <span class="mf">2022.1</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="mi">7019</span><span class="o">-</span><span class="n">cdb9bec7210</span><span class="o">-</span><span class="n">releases</span><span class="o">/</span><span class="mi">2022</span><span class="o">/</span><span class="mi">1</span>
+<span class="n">OpenVINO</span> <span class="n">runtime</span> <span class="n">found</span> <span class="ow">in</span><span class="p">:</span>  <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">openvino</span>
+<span class="n">OpenVINO</span> <span class="n">runtime</span> <span class="n">version</span><span class="p">:</span>   <span class="mf">2022.1.0</span><span class="o">-</span><span class="mi">7019</span><span class="o">-</span><span class="n">cdb9bec7210</span><span class="o">-</span><span class="n">releases</span><span class="o">/</span><span class="mi">2022</span><span class="o">/</span><span class="mi">1</span>
+<span class="n">Model</span> <span class="n">Optimizer</span> <span class="n">version</span><span class="p">:</span>    <span class="mf">2022.1.0</span><span class="o">-</span><span class="mi">7019</span><span class="o">-</span><span class="n">cdb9bec7210</span><span class="o">-</span><span class="n">releases</span><span class="o">/</span><span class="mi">2022</span><span class="o">/</span><span class="mi">1</span>
 <span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">Generated</span> <span class="n">IR</span> <span class="n">version</span> <span class="mi">11</span> <span class="n">model</span><span class="o">.</span>
 <span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">XML</span> <span class="n">file</span><span class="p">:</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">work</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">notebooks</span><span class="o">/</span><span class="mi">106</span><span class="o">-</span><span class="n">auto</span><span class="o">-</span><span class="n">device</span><span class="o">/</span><span class="n">model</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">googlenet</span><span class="o">-</span><span class="n">v1</span><span class="o">/</span><span class="n">FP16</span><span class="o">/</span><span class="n">googlenet</span><span class="o">-</span><span class="n">v1</span><span class="o">.</span><span class="n">xml</span>
 <span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">BIN</span> <span class="n">file</span><span class="p">:</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">work</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">notebooks</span><span class="o">/</span><span class="mi">106</span><span class="o">-</span><span class="n">auto</span><span class="o">-</span><span class="n">device</span><span class="o">/</span><span class="n">model</span><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">googlenet</span><span class="o">-</span><span class="n">v1</span><span class="o">/</span><span class="n">FP16</span><span class="o">/</span><span class="n">googlenet</span><span class="o">-</span><span class="n">v1</span><span class="o">.</span><span class="n">bin</span>
 <span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">Total</span> <span class="n">execution</span> <span class="n">time</span><span class="p">:</span> <span class="mf">11.92</span> <span class="n">seconds</span><span class="o">.</span>
 <span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">Memory</span> <span class="n">consumed</span><span class="p">:</span> <span class="mi">191</span> <span class="n">MB</span><span class="o">.</span>
 <span class="n">It</span><span class="s1">&#39;s been a while, check for a new version of Intel(R) Distribution of OpenVINO(TM) toolkit here https://software.intel.com/content/www/us/en/develop/tools/openvino-toolkit/download.html?cid=other&amp;source=prod&amp;campid=ww_2022_bu_IOTG_OpenVINO-2022-1&amp;content=upg_all&amp;medium=organic or on the GitHub*</span>
-<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">The</span> <span class="n">model</span> <span class="n">was</span> <span class="n">converted</span> <span class="n">to</span> <span class="n">IR</span> <span class="n">v11</span><span class="p">,</span> <span class="n">the</span> <span class="n">latest</span> <span class="n">model</span> <span class="nb">format</span> <span class="n">that</span> <span class="n">corresponds</span> <span class="n">to</span> <span class="n">the</span> <span class="n">source</span> <span class="n">DL</span> <span class="n">framework</span> <span class="nb">input</span><span class="o">/</span><span class="n">output</span> <span class="nb">format</span><span class="o">.</span> <span class="n">While</span> <span class="n">IR</span> <span class="n">v11</span> <span class="ow">is</span> <span class="n">backwards</span> <span class="n">compatible</span> <span class="k">with</span> <span class="n">OpenVINO</span> <span class="n">Inference</span> <span class="n">Engine</span> <span class="n">API</span> <span class="n">v1</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span> <span class="n">please</span> <span class="n">use</span> <span class="n">API</span> <span class="n">v2</span><span class="o">.</span><span class="mi">0</span> <span class="p">(</span><span class="k">as</span> <span class="n">of</span> <span class="mf">2022.1</span><span class="p">)</span> <span class="n">to</span> <span class="n">take</span> <span class="n">advantage</span> <span class="n">of</span> <span class="n">the</span> <span class="n">latest</span> <span class="n">improvements</span> <span class="ow">in</span> <span class="n">IR</span> <span class="n">v11</span><span class="o">.</span>
-<span class="n">Find</span> <span class="n">more</span> <span class="n">information</span> <span class="n">about</span> <span class="n">API</span> <span class="n">v2</span><span class="o">.</span><span class="mi">0</span> <span class="ow">and</span> <span class="n">IR</span> <span class="n">v11</span> <span class="n">at</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">docs</span><span class="o">.</span><span class="n">openvino</span><span class="o">.</span><span class="n">ai</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">The</span> <span class="n">model</span> <span class="n">was</span> <span class="n">converted</span> <span class="n">to</span> <span class="n">IR</span> <span class="n">v11</span><span class="p">,</span> <span class="n">the</span> <span class="n">latest</span> <span class="n">model</span> <span class="nb">format</span> <span class="n">that</span> <span class="n">corresponds</span> <span class="n">to</span> <span class="n">the</span> <span class="n">source</span> <span class="n">DL</span> <span class="n">framework</span> <span class="nb">input</span><span class="o">/</span><span class="n">output</span> <span class="nb">format</span><span class="o">.</span> <span class="n">While</span> <span class="n">IR</span> <span class="n">v11</span> <span class="ow">is</span> <span class="n">backwards</span> <span class="n">compatible</span> <span class="k">with</span> <span class="n">OpenVINO</span> <span class="n">Inference</span> <span class="n">Engine</span> <span class="n">API</span> <span class="n">v1</span><span class="mf">.0</span><span class="p">,</span> <span class="n">please</span> <span class="n">use</span> <span class="n">API</span> <span class="n">v2</span><span class="mf">.0</span> <span class="p">(</span><span class="k">as</span> <span class="n">of</span> <span class="mf">2022.1</span><span class="p">)</span> <span class="n">to</span> <span class="n">take</span> <span class="n">advantage</span> <span class="n">of</span> <span class="n">the</span> <span class="n">latest</span> <span class="n">improvements</span> <span class="ow">in</span> <span class="n">IR</span> <span class="n">v11</span><span class="o">.</span>
+<span class="n">Find</span> <span class="n">more</span> <span class="n">information</span> <span class="n">about</span> <span class="n">API</span> <span class="n">v2</span><span class="mf">.0</span> <span class="ow">and</span> <span class="n">IR</span> <span class="n">v11</span> <span class="n">at</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">docs</span><span class="o">.</span><span class="n">openvino</span><span class="o">.</span><span class="n">ai</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="import-modules">
+</section>
+<section id="import-modules">
 <h2>Import modules<a class="headerlink" href="#import-modules" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cv2</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -709,10 +716,10 @@ information about Open Model Zoo tools, please refer to the
 <p>Warning: A GPU device is not available. This notebook requires GPU
 device to have meaningful results.</p>
 </div>
-</div>
-<div class="section" id="simplify-selection-logic">
+</section>
+<section id="simplify-selection-logic">
 <h2>(1) Simplify selection logic<a class="headerlink" href="#simplify-selection-logic" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="default-behavior-of-core-compile-model-api-without-device-name">
+<section id="default-behavior-of-core-compile-model-api-without-device-name">
 <h3>Default behavior of Core::compile_model API without device_name<a class="headerlink" href="#default-behavior-of-core-compile-model-api-without-device-name" title="Permalink to this headline">¶</a></h3>
 <p>By default, <code class="docutils literal notranslate"><span class="pre">compile_model</span></code> API will select <strong>AUTO</strong> as
 <code class="docutils literal notranslate"><span class="pre">device_name</span></code> if no device is specified.</p>
@@ -740,8 +747,8 @@ device to have meaningful results.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Deleted</span> <span class="n">compiled_model</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="explicitly-pass-auto-as-device-name-to-core-compile-model-api">
+</section>
+<section id="explicitly-pass-auto-as-device-name-to-core-compile-model-api">
 <h3>Explicitly pass AUTO as device_name to Core::compile_model API<a class="headerlink" href="#explicitly-pass-auto-as-device-name-to-core-compile-model-api" title="Permalink to this headline">¶</a></h3>
 <p>It is optional, but explicitly passing AUTO as device_name may improve
 readability of your code.</p>
@@ -765,9 +772,9 @@ readability of your code.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Deleted</span> <span class="n">compiled_model</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="improve-first-inference-latency">
+</section>
+</section>
+<section id="improve-first-inference-latency">
 <h2>(2) Improve first inference latency<a class="headerlink" href="#improve-first-inference-latency" title="Permalink to this headline">¶</a></h2>
 <p>One of the benefits of using AUTO device selection is reducing FIL
 (first inference latency). FIL is model compilation time combined with
@@ -802,7 +809,7 @@ inference device until the GPU is ready. ### Load an Image</p>
 </pre></div>
 </div>
 <img alt="../_images/106-auto-device-with-output_12_0.png" src="../_images/106-auto-device-with-output_12_0.png" />
-<div class="section" id="load-the-model-to-gpu-device-and-perform-inference">
+<section id="load-the-model-to-gpu-device-and-perform-inference">
 <h3>Load the model to GPU device and perform inference<a class="headerlink" href="#load-the-model-to-gpu-device-and-perform-inference" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="s2">&quot;GPU&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ie</span><span class="o">.</span><span class="n">available_devices</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;A GPU device is not available. Available devices are: </span><span class="si">{</span><span class="n">ie</span><span class="o">.</span><span class="n">available_devices</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -828,8 +835,8 @@ inference device until the GPU is ready. ### Load an Image</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="n">GPU</span> <span class="n">device</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">available</span><span class="o">.</span> <span class="n">Available</span> <span class="n">devices</span> <span class="n">are</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;CPU&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="load-the-model-using-auto-device-and-perform-inference">
+</section>
+<section id="load-the-model-using-auto-device-and-perform-inference">
 <h3>Load the model using AUTO device and perform inference<a class="headerlink" href="#load-the-model-using-auto-device-and-perform-inference" title="Permalink to this headline">¶</a></h3>
 <p>When GPU is the best available device, the first few inferences will be
 executed on CPU until GPU is ready.</p>
@@ -858,9 +865,9 @@ executed on CPU until GPU is ready.</p>
 <span class="k">del</span> <span class="n">compiled_model</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="achieve-different-performance-for-different-targets">
+</section>
+</section>
+<section id="achieve-different-performance-for-different-targets">
 <h2>(3) Achieve different performance for different targets<a class="headerlink" href="#achieve-different-performance-for-different-targets" title="Permalink to this headline">¶</a></h2>
 <p>Another advantage when using AUTO device selection with the
 <strong>performance hint</strong>. By specifying a <strong>THROUGHPUT</strong> or <strong>LATENCY</strong>
@@ -872,7 +879,7 @@ completely portable between devices – meaning AUTO can configure the
 performance hint on whichever device is being used.</p>
 <p>More information about using performance hints with AUTO:
 <a class="reference external" href="https://docs.openvino.ai/latest/openvino_docs_OV_UG_supported_plugins_AUTO.html#performance-hints">AUTO#performance-hints</a></p>
-<div class="section" id="class-and-callback-definition">
+<section id="class-and-callback-definition">
 <h3>Class and callback definition<a class="headerlink" href="#class-and-callback-definition" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">PerformanceMetrics</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -969,8 +976,8 @@ performance hint on whichever device is being used.</p>
 <span class="n">metrics_update_num</span> <span class="o">=</span> <span class="mi">6</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="inference-when-using-throughput-hint">
+</section>
+<section id="inference-when-using-throughput-hint">
 <h3>Inference when using <strong>THROUGHPUT</strong> hint<a class="headerlink" href="#inference-when-using-throughput-hint" title="Permalink to this headline">¶</a></h3>
 <p>Loop for the inference and updates to the FPS/Latency every
 &#64;metrics_update_interval seconds</p>
@@ -1012,8 +1019,8 @@ performance hint on whichever device is being used.</p>
 <span class="n">Done</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="inference-with-latency-hint">
+</section>
+<section id="inference-with-latency-hint">
 <h3>Inference with LATENCY hint<a class="headerlink" href="#inference-with-latency-hint" title="Permalink to this headline">¶</a></h3>
 <p>Loop for the inference and update the FPS/Latency for each
 &#64;metrics_update_interval seconds</p>
@@ -1056,8 +1063,8 @@ performance hint on whichever device is being used.</p>
 <span class="n">Done</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="difference-in-fps-and-latency">
+</section>
+<section id="difference-in-fps-and-latency">
 <h3>Difference in FPS and latency<a class="headerlink" href="#difference-in-fps-and-latency" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">TPUT</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="n">LAT</span> <span class="o">=</span> <span class="mi">1</span>
@@ -1115,9 +1122,9 @@ performance hint on whichever device is being used.</p>
 </pre></div>
 </div>
 <img alt="../_images/106-auto-device-with-output_26_0.png" src="../_images/106-auto-device-with-output_26_0.png" />
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
                 </div>
@@ -1148,7 +1155,7 @@ performance hint on whichever device is being used.</p>
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

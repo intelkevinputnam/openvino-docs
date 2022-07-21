@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Asynchronous Inference Request &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -1827,30 +1834,30 @@
             
                 <div>
                   
-  <div class="section" id="asynchronous-inference-request">
+  <section id="asynchronous-inference-request">
 <span id="doxid-openvino-docs-ie-plugin-dg-async-infer-request"></span><span id="index-0"></span><h1>Asynchronous Inference Request<a class="headerlink" href="#asynchronous-inference-request" title="Permalink to this headline">¶</a></h1>
-<p><span class="target" id="doxid-openvino-docs-ie-plugin-dg-async-infer-request-1md-openvino-docs-ie-plugin-dg-asyncinferrequest"></span> Asynchronous Inference Request runs an inference pipeline asynchronously in one or several task executors depending on a device pipeline structure. OpenVINO Runtime Plugin API provides the base <span class="xref std std-ref">InferenceEngine::AsyncInferRequestThreadSafeDefault</span> class:</p>
+<p><span class="target" id="doxid-openvino-docs-ie-plugin-dg-async-infer-request-1md-openvino-docs-ie-plugin-dg-asyncinferrequest"></span> Asynchronous Inference Request runs an inference pipeline asynchronously in one or several task executors depending on a device pipeline structure. OpenVINO Runtime Plugin API provides the base <a class="reference internal" href="../api/groups/classInferenceEngine_1_1AsyncInferRequestThreadSafeDefault.html#doxid-class-inference-engine-1-1-async-infer-request-thread-safe-default"><span class="std std-ref">InferenceEngine::AsyncInferRequestThreadSafeDefault</span></a> class:</p>
 <ul class="simple">
 <li><p>The class has the <code class="docutils literal notranslate"><span class="pre">_pipeline</span></code> field of <code class="docutils literal notranslate"><span class="pre">std::vector&lt;std::pair&lt;ITaskExecutor::Ptr,</span> <span class="pre">Task&gt;</span> <span class="pre">&gt;</span></code>, which contains pairs of an executor and executed task.</p></li>
 <li><p>All executors are passed as arguments to a class constructor and they are in the running state and ready to run tasks.</p></li>
 <li><p>The class has the <span class="xref std std-ref">InferenceEngine::AsyncInferRequestThreadSafeDefault::StopAndWait</span> method, which waits for <code class="docutils literal notranslate"><span class="pre">_pipeline</span></code> to finish in a class destructor. The method does not stop task executors and they are still in the running stage, because they belong to the executable network instance and are not destroyed.</p></li>
 </ul>
-<div class="section" id="class">
+<section id="class">
 <h2>Class<a class="headerlink" href="#class" title="Permalink to this headline">¶</a></h2>
-<p>OpenVINO Runtime Plugin API provides the base <span class="xref std std-ref">InferenceEngine::AsyncInferRequestThreadSafeDefault</span> class for a custom asynchronous inference request implementation:</p>
-<div class="highlight"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nl">TemplateAsyncInferRequest</span> <span class="p">:</span> <span class="k">public</span> InferenceEngine::AsyncInferRequestThreadSafeDefault<span></span> <span class="p">{</span>
+<p>OpenVINO Runtime Plugin API provides the base <a class="reference internal" href="../api/groups/classInferenceEngine_1_1AsyncInferRequestThreadSafeDefault.html#doxid-class-inference-engine-1-1-async-infer-request-thread-safe-default"><span class="std std-ref">InferenceEngine::AsyncInferRequestThreadSafeDefault</span></a> class for a custom asynchronous inference request implementation:</p>
+<div class="highlight"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nl">TemplateAsyncInferRequest</span> <span class="p">:</span> <span class="k">public</span> <a class="reference internal" href="../api/groups/classInferenceEngine_1_1AsyncInferRequestThreadSafeDefault.html#doxid-class-inference-engine-1-1-async-infer-request-thread-safe-default"><span class="std std-ref">InferenceEngine::AsyncInferRequestThreadSafeDefault</span></a><span></span> <span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
     <span class="n">TemplateAsyncInferRequest</span><span class="p">(</span><span class="k">const</span> <span class="n">TemplateInferRequest</span><span class="o">::</span><span class="n">Ptr</span><span class="o">&amp;</span> <span class="n">inferRequest</span><span class="p">,</span>
-                              <span class="k">const</span> InferenceEngine::ITaskExecutor::Ptr<span></span><span class="o">&amp;</span> <span class="n">taskExecutor</span><span class="p">,</span>
-                              <span class="k">const</span> InferenceEngine::ITaskExecutor::Ptr<span></span><span class="o">&amp;</span> <span class="n">waitExecutor</span><span class="p">,</span>
-                              <span class="k">const</span> InferenceEngine::ITaskExecutor::Ptr<span></span><span class="o">&amp;</span> <span class="n">callbackExecutor</span><span class="p">);</span>
+                              <span class="k">const</span> <a class="reference internal" href="../api/groups/classInferenceEngine_1_1ITaskExecutor.html#doxid-class-inference-engine-1-1-i-task-executor-1a8ba60f739a36331eb8ed3492ffc55eb5"><span class="std std-ref">InferenceEngine::ITaskExecutor::Ptr</span></a><span></span><span class="o">&amp;</span> <span class="n">taskExecutor</span><span class="p">,</span>
+                              <span class="k">const</span> <a class="reference internal" href="../api/groups/classInferenceEngine_1_1ITaskExecutor.html#doxid-class-inference-engine-1-1-i-task-executor-1a8ba60f739a36331eb8ed3492ffc55eb5"><span class="std std-ref">InferenceEngine::ITaskExecutor::Ptr</span></a><span></span><span class="o">&amp;</span> <span class="n">waitExecutor</span><span class="p">,</span>
+                              <span class="k">const</span> <a class="reference internal" href="../api/groups/classInferenceEngine_1_1ITaskExecutor.html#doxid-class-inference-engine-1-1-i-task-executor-1a8ba60f739a36331eb8ed3492ffc55eb5"><span class="std std-ref">InferenceEngine::ITaskExecutor::Ptr</span></a><span></span><span class="o">&amp;</span> <span class="n">callbackExecutor</span><span class="p">);</span>
 
     <span class="o">~</span><span class="n">TemplateAsyncInferRequest</span><span class="p">();</span>
 
 <span class="k">private</span><span class="o">:</span>
     <span class="n">TemplateInferRequest</span><span class="o">::</span><span class="n">Ptr</span> <span class="n">_inferRequest</span><span class="p">;</span>
-    InferenceEngine::ITaskExecutor::Ptr<span></span> <span class="n">_waitExecutor</span><span class="p">;</span>
-<span class="p">};</span></pre></div></div><div class="section" id="class-fields">
+    <a class="reference internal" href="../api/groups/classInferenceEngine_1_1ITaskExecutor.html#doxid-class-inference-engine-1-1-i-task-executor-1a8ba60f739a36331eb8ed3492ffc55eb5"><span class="std std-ref">InferenceEngine::ITaskExecutor::Ptr</span></a><span></span> <span class="n">_waitExecutor</span><span class="p">;</span>
+<span class="p">};</span></pre></div></div><section id="class-fields">
 <h3>Class Fields<a class="headerlink" href="#class-fields" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">_inferRequest</span></code> - a reference to the <a class="reference internal" href="openvino_docs_ie_plugin_dg_infer_request.html#doxid-openvino-docs-ie-plugin-dg-infer-request"><span class="std std-ref">synchronous inference request</span></a> implementation. Its methods are reused in the <code class="docutils literal notranslate"><span class="pre">AsyncInferRequest</span></code> constructor to define a device pipeline.</p></li>
@@ -1868,9 +1875,9 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">inferPostprocess</span></code> is a CPU compute task.</p></li>
 </ul>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">TemplateAsyncInferRequest</span><span class="o">::</span><span class="n">TemplateAsyncInferRequest</span><span class="p">(</span><span class="k">const</span> <span class="n">TemplateInferRequest</span><span class="o">::</span><span class="n">Ptr</span><span class="o">&amp;</span> <span class="n">inferRequest</span><span class="p">,</span>
-                                                     <span class="k">const</span> InferenceEngine::ITaskExecutor::Ptr<span></span><span class="o">&amp;</span> <span class="n">cpuTaskExecutor</span><span class="p">,</span>
-                                                     <span class="k">const</span> InferenceEngine::ITaskExecutor::Ptr<span></span><span class="o">&amp;</span> <span class="n">waitExecutor</span><span class="p">,</span>
-                                                     <span class="k">const</span> InferenceEngine::ITaskExecutor::Ptr<span></span><span class="o">&amp;</span> <span class="n">callbackExecutor</span><span class="p">)</span>
+                                                     <span class="k">const</span> <a class="reference internal" href="../api/groups/classInferenceEngine_1_1ITaskExecutor.html#doxid-class-inference-engine-1-1-i-task-executor-1a8ba60f739a36331eb8ed3492ffc55eb5"><span class="std std-ref">InferenceEngine::ITaskExecutor::Ptr</span></a><span></span><span class="o">&amp;</span> <span class="n">cpuTaskExecutor</span><span class="p">,</span>
+                                                     <span class="k">const</span> <a class="reference internal" href="../api/groups/classInferenceEngine_1_1ITaskExecutor.html#doxid-class-inference-engine-1-1-i-task-executor-1a8ba60f739a36331eb8ed3492ffc55eb5"><span class="std std-ref">InferenceEngine::ITaskExecutor::Ptr</span></a><span></span><span class="o">&amp;</span> <span class="n">waitExecutor</span><span class="p">,</span>
+                                                     <span class="k">const</span> <a class="reference internal" href="../api/groups/classInferenceEngine_1_1ITaskExecutor.html#doxid-class-inference-engine-1-1-i-task-executor-1a8ba60f739a36331eb8ed3492ffc55eb5"><span class="std std-ref">InferenceEngine::ITaskExecutor::Ptr</span></a><span></span><span class="o">&amp;</span> <span class="n">callbackExecutor</span><span class="p">)</span>
     <span class="o">:</span> <span class="n">AsyncInferRequestThreadSafeDefault</span><span class="p">(</span><span class="n">inferRequest</span><span class="p">,</span> <span class="n">cpuTaskExecutor</span><span class="p">,</span> <span class="n">callbackExecutor</span><span class="p">),</span>
       <span class="n">_inferRequest</span><span class="p">(</span><span class="n">inferRequest</span><span class="p">),</span>
       <span class="n">_waitExecutor</span><span class="p">(</span><span class="n">waitExecutor</span><span class="p">)</span> <span class="p">{</span>
@@ -1884,18 +1891,18 @@
     <span class="k">if</span> <span class="p">(</span><span class="n">remoteDevice</span><span class="p">)</span> <span class="p">{</span>
         <span class="n">_pipeline</span> <span class="o">=</span> <span class="p">{{</span><span class="n">cpuTaskExecutor</span><span class="p">,</span>
                       <span class="p">[</span><span class="k">this</span><span class="p">]</span> <span class="p">{</span>
-                          OV_ITT_SCOPED_TASK<span></span><span class="p">(</span><span class="n">itt</span><span class="o">::</span><span class="n">domains</span><span class="o">::</span><span class="n">TemplatePlugin</span><span class="p">,</span>
+                          <a class="reference internal" href="../api/groups/groupie_dev_profiling.html#doxid-group-ie-dev-profiling-1gac1e4b5bdc6097e2afd26b75d05dfe1ef"><span class="std std-ref">OV_ITT_SCOPED_TASK</span></a><span></span><span class="p">(</span><span class="n">itt</span><span class="o">::</span><span class="n">domains</span><span class="o">::</span><span class="n">TemplatePlugin</span><span class="p">,</span>
                                              <span class="s">&quot;TemplateAsyncInferRequest::PreprocessingAndStartPipeline&quot;</span><span class="p">);</span>
                           <span class="n">_inferRequest</span><span class="o">-&gt;</span><span class="n">inferPreprocess</span><span class="p">();</span>
                           <span class="n">_inferRequest</span><span class="o">-&gt;</span><span class="n">startPipeline</span><span class="p">();</span>
                       <span class="p">}},</span>
                      <span class="p">{</span><span class="n">_waitExecutor</span><span class="p">,</span>
                       <span class="p">[</span><span class="k">this</span><span class="p">]</span> <span class="p">{</span>
-                          OV_ITT_SCOPED_TASK<span></span><span class="p">(</span><span class="n">itt</span><span class="o">::</span><span class="n">domains</span><span class="o">::</span><span class="n">TemplatePlugin</span><span class="p">,</span> <span class="s">&quot;TemplateAsyncInferRequest::WaitPipeline&quot;</span><span class="p">);</span>
+                          <a class="reference internal" href="../api/groups/groupie_dev_profiling.html#doxid-group-ie-dev-profiling-1gac1e4b5bdc6097e2afd26b75d05dfe1ef"><span class="std std-ref">OV_ITT_SCOPED_TASK</span></a><span></span><span class="p">(</span><span class="n">itt</span><span class="o">::</span><span class="n">domains</span><span class="o">::</span><span class="n">TemplatePlugin</span><span class="p">,</span> <span class="s">&quot;TemplateAsyncInferRequest::WaitPipeline&quot;</span><span class="p">);</span>
                           <span class="n">_inferRequest</span><span class="o">-&gt;</span><span class="n">waitPipeline</span><span class="p">();</span>
                       <span class="p">}},</span>
                      <span class="p">{</span><span class="n">cpuTaskExecutor</span><span class="p">,</span> <span class="p">[</span><span class="k">this</span><span class="p">]</span> <span class="p">{</span>
-                          OV_ITT_SCOPED_TASK<span></span><span class="p">(</span><span class="n">itt</span><span class="o">::</span><span class="n">domains</span><span class="o">::</span><span class="n">TemplatePlugin</span><span class="p">,</span> <span class="s">&quot;TemplateAsyncInferRequest::Postprocessing&quot;</span><span class="p">);</span>
+                          <a class="reference internal" href="../api/groups/groupie_dev_profiling.html#doxid-group-ie-dev-profiling-1gac1e4b5bdc6097e2afd26b75d05dfe1ef"><span class="std std-ref">OV_ITT_SCOPED_TASK</span></a><span></span><span class="p">(</span><span class="n">itt</span><span class="o">::</span><span class="n">domains</span><span class="o">::</span><span class="n">TemplatePlugin</span><span class="p">,</span> <span class="s">&quot;TemplateAsyncInferRequest::Postprocessing&quot;</span><span class="p">);</span>
                           <span class="n">_inferRequest</span><span class="o">-&gt;</span><span class="n">inferPostprocess</span><span class="p">();</span>
                       <span class="p">}}};</span>
     <span class="p">}</span>
@@ -1907,15 +1914,15 @@
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p><code class="docutils literal notranslate"><span class="pre">callbackExecutor</span></code> is also passed to the constructor and it is used in the base <span class="xref std std-ref">InferenceEngine::AsyncInferRequestThreadSafeDefault</span> class, which adds a pair of <code class="docutils literal notranslate"><span class="pre">callbackExecutor</span></code> and a callback function set by the user to the end of the pipeline.</p>
+<p><code class="docutils literal notranslate"><span class="pre">callbackExecutor</span></code> is also passed to the constructor and it is used in the base <a class="reference internal" href="../api/groups/classInferenceEngine_1_1AsyncInferRequestThreadSafeDefault.html#doxid-class-inference-engine-1-1-async-infer-request-thread-safe-default"><span class="std std-ref">InferenceEngine::AsyncInferRequestThreadSafeDefault</span></a> class, which adds a pair of <code class="docutils literal notranslate"><span class="pre">callbackExecutor</span></code> and a callback function set by the user to the end of the pipeline.</p>
 </div>
 <p>Inference request stages are also profiled using IE_PROFILING_AUTO_SCOPE, which shows how pipelines of multiple asynchronous inference requests are run in parallel via the <a class="reference external" href="https://software.intel.com/en-us/vtune">Intel® VTune™ Profiler</a> tool.</p>
 <p>In the asynchronous request destructor, it is necessary to wait for a pipeline to finish. It can be done using the <span class="xref std std-ref">InferenceEngine::AsyncInferRequestThreadSafeDefault::StopAndWait</span> method of the base class.</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">TemplateAsyncInferRequest</span><span class="o">::~</span><span class="n">TemplateAsyncInferRequest</span><span class="p">()</span> <span class="p">{</span>
     InferenceEngine::AsyncInferRequestThreadSafeDefault::StopAndWait<span></span><span class="p">();</span>
-<span class="p">}</span></pre></div></div></div>
-</div>
-</div>
+<span class="p">}</span></pre></div></div></section>
+</section>
+</section>
 
 
                 </div>
@@ -1946,7 +1953,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

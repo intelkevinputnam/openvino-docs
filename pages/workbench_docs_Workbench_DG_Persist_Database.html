@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Restore DL Workbench State &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -1847,7 +1854,7 @@
             
                 <div>
                   
-  <div class="section" id="restore-dl-workbench-state">
+  <section id="restore-dl-workbench-state">
 <span id="doxid-workbench-docs-workbench-d-g-persist-database"></span><span id="index-0"></span><h1>Restore DL Workbench State<a class="headerlink" href="#restore-dl-workbench-state" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-workbench-docs-workbench-d-g-persist-database-1md-openvino-workbench-docs-workbench-dg-persist-database"></span></p>
 <p>DL Workbench enables performing multiple experiments to analyze performance and accuracy data. To always have access to your data in the DL Workbench, use additional parameters when you <a class="reference internal" href="workbench_docs_Workbench_DG_Run_Locally.html#doxid-workbench-docs-workbench-d-g-run-locally"><span class="std std-ref">run the DL Workbench</span></a> that enable DL Workbench state preservation.</p>
@@ -1879,7 +1886,7 @@
 </li>
 <li><p>When you remove a container, all data is present in the mounted host folder. To continue working with the data in a new DL Workbench container, start the DL Workbench with the mounted folder or volume using <code class="docutils literal notranslate"><span class="pre">--assets-directory</span></code> or <code class="docutils literal notranslate"><span class="pre">--volume</span></code>.</p></li>
 </ol>
-<div class="section" id="preserve-dl-workbench-state-on-linux-and-macos">
+<section id="preserve-dl-workbench-state-on-linux-and-macos">
 <span id="preserve-linux-macos"></span><h2>Preserve DL Workbench State on Linux and macOS<a class="headerlink" href="#preserve-dl-workbench-state-on-linux-and-macos" title="Permalink to this headline">¶</a></h2>
 <p>To enable DL Workbench state preservation, mount a host directory to a Docker container. The example below shows how to mount a local folder while running a Docker container on Linux* with a CPU enabled as a profiling target and in detached mode. To learn how to run the application on different targets, operating system, or in a different mode, see <a class="reference internal" href="workbench_docs_Workbench_DG_Advanced_Configurations.html#doxid-workbench-docs-workbench-d-g-advanced-configurations"><span class="std std-ref">Advanced Configurations</span></a> page.</p>
 <ol class="arabic">
@@ -1896,8 +1903,8 @@
   <span class="o">|--</span> <span class="n">datasets</span><span class="o">/</span>
   <span class="o">|--</span> <span class="n">models</span><span class="o">/</span>
   <span class="o">|--</span> <span class="n">postgresql_data_directory</span><span class="o">/</span>
-  <span class="o">|--</span> <span class="n">tutorials</span><span class="o">/</span></pre></div></div></div>
-<div class="section" id="preserve-dl-workbench-state-on-windows">
+  <span class="o">|--</span> <span class="n">tutorials</span><span class="o">/</span></pre></div></div></section>
+<section id="preserve-dl-workbench-state-on-windows">
 <span id="preserve-windows"></span><h2>Preserve DL Workbench State on Windows<a class="headerlink" href="#preserve-dl-workbench-state-on-windows" title="Permalink to this headline">¶</a></h2>
 <p>Due to <a class="reference external" href="https://github.com/docker/for-win/issues/77">problems of mounting a local folder to a Docker container on Windows</a>, the best way to preserve the state on Windows is to use Docker <a class="reference external" href="https://docs.docker.com/storage/volumes/">volumes</a> :</p>
 <ol class="arabic">
@@ -1914,8 +1921,8 @@
 <div class="highlight"><div class="highlight"><pre><span></span><span class="o">|--</span> <span class="n">token</span><span class="p">.</span><span class="n">txt</span>
 <span class="o">|--</span> <span class="n">datasets</span><span class="o">/</span>
 <span class="o">|--</span> <span class="n">models</span><span class="o">/</span>
-<span class="o">|--</span> <span class="n">postgresql_data_directory</span><span class="o">/</span></pre></div></div></div>
-<div class="section" id="share-profiling-data">
+<span class="o">|--</span> <span class="n">postgresql_data_directory</span><span class="o">/</span></pre></div></div></section>
+<section id="share-profiling-data">
 <h2>Share Profiling Data<a class="headerlink" href="#share-profiling-data" title="Permalink to this headline">¶</a></h2>
 <p>DL Workbench <code class="docutils literal notranslate"><span class="pre">--assets-directory</span></code> contains sensitive data such as a token, models, and datasets. Share this data only in a trusted environment. DL Workbench supports a scenario when you share only system files with profiling data, and not models and datasets.</p>
 <p>Choose instructions for your operating system:</p>
@@ -1926,7 +1933,7 @@
 <p>When you share only profiling data, the DL Workbench marks models, datasets, and projects as <em>Read-only</em>. <em>Read-only</em> means that it is not possible to run optimizations, profiling, or measurements on removed assets, while you can continue with importing new models and datasets.</p>
 <p>Read-only model:</p>
 <img alt="../_images/read-only.png" src="../_images/read-only.png" />
-<div class="section" id="share-profiling-data-on-linux-and-macos">
+<section id="share-profiling-data-on-linux-and-macos">
 <span id="share-linux-macos"></span><h3>Share Profiling Data on Linux and macOS<a class="headerlink" href="#share-profiling-data-on-linux-and-macos" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic">
 <li><p>Remove models and datasets directories from the <code class="docutils literal notranslate"><span class="pre">~/.workbench</span></code> folder, so that it contains only the <code class="docutils literal notranslate"><span class="pre">postgresql_data_directory/</span></code> folder:</p>
@@ -1935,8 +1942,8 @@
 <li><p>Transfer the <code class="docutils literal notranslate"><span class="pre">~/.workbench</span></code> folder to another machine and import it with the following command:</p>
 <div class="highlight"><div class="highlight"><pre><span></span><span class="n">openvino</span><span class="o">-</span><span class="n">workbench</span> <span class="o">--</span><span class="n">image</span> <span class="n">openvino</span><span class="o">/</span><span class="nl">workbench</span><span class="p">:</span><span class="mf">2022.1</span> <span class="o">--</span><span class="n">assets</span><span class="o">-</span><span class="n">directory</span> <span class="o">~/</span><span class="p">.</span><span class="n">workbench</span></pre></div></div></li>
 </ol>
-</div>
-<div class="section" id="share-profiling-data-on-windows">
+</section>
+<section id="share-profiling-data-on-windows">
 <span id="share-windows"></span><h3>Share Profiling Data on Windows<a class="headerlink" href="#share-profiling-data-on-windows" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic">
 <li><p>Create an empty local folder.</p></li>
@@ -1955,14 +1962,14 @@
     <span class="o">--</span><span class="n">volume</span> <span class="nl">workbench_volume</span><span class="p">:</span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">workbench</span><span class="o">/</span><span class="p">.</span><span class="n">workbench</span> <span class="err">`</span>
     <span class="o">-</span><span class="n">it</span> <span class="n">openvino</span><span class="o">/</span><span class="nl">workbench</span><span class="p">:</span><span class="n">latest</span></pre></div></div></li>
 </ol>
-</div>
-</div>
-<div class="section" id="troubleshooting">
+</section>
+</section>
+<section id="troubleshooting">
 <h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h2>
 <p>When importing assets, DL Workbench validates their consistency. If any assets have different checksum to what the DL Workbench stores, these artifacts are considered as threatening security of the DL Workbench. Remove these assets and try to run the DL Workbench again.</p>
 <p>DL Workbench fails to start if the provided assets cannot be imported due to aforementioned versioning policy. In that case, create new assets directory and mount it instead of the existing one.</p>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -1993,7 +2000,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

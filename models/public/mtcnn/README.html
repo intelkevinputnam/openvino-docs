@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>mtcnn (composite) &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../../../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -2195,14 +2202,14 @@
             
                 <div>
                   
-  <div class="section" id="mtcnn-composite">
+  <section id="mtcnn-composite">
 <h1>mtcnn (composite)<a class="headerlink" href="#mtcnn-composite" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="use-case-and-high-level-description">
+<section id="use-case-and-high-level-description">
 <h2>Use Case and High-Level Description<a class="headerlink" href="#use-case-and-high-level-description" title="Permalink to this headline">¶</a></h2>
 <p>The composite <code class="docutils literal notranslate"><span class="pre">mtcnn</span></code> model is <a class="reference external" href="https://arxiv.org/abs/1604.02878">mtcnn</a> group of models designed to perform face detection. Short for “Multi-task Cascaded Convolutional Neural Network”, it is implemented using the Caffe* framework.  For details about this family of models, check out the <a class="reference external" href="https://github.com/DuinoDu/mtcnn">repository</a>.</p>
 <p>The input for each models is a blob with specific face data. The mean values need to be subtracted as follows: [127.5, 127.5, 127.5] before passing the image blob into the network. In addition, values must be divided by 128.</p>
-</div>
-<div class="section" id="composite-model-specification">
+</section>
+<section id="composite-model-specification">
 <h2>Composite model specification<a class="headerlink" href="#composite-model-specification" title="Permalink to this headline">¶</a></h2>
 <table class="colwidths-auto table">
 <thead>
@@ -2219,8 +2226,8 @@
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="accuracy">
+</section>
+<section id="accuracy">
 <h2>Accuracy<a class="headerlink" href="#accuracy" title="Permalink to this headline">¶</a></h2>
 <table class="colwidths-auto table">
 <thead>
@@ -2237,8 +2244,8 @@
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="mtcnn-p-model-specification">
+</section>
+<section id="mtcnn-p-model-specification">
 <h2>mtcnn-p model specification<a class="headerlink" href="#mtcnn-p-model-specification" title="Permalink to this headline">¶</a></h2>
 <p>The “p” designation indicates that the <code class="docutils literal notranslate"><span class="pre">mtcnn-p</span></code> model is the “proposal” network intended to find the initial set of faces.</p>
 <p>The model input is an image containing the data to be analyzed.</p>
@@ -2258,9 +2265,9 @@
 </tr>
 </tbody>
 </table>
-<div class="section" id="input">
+<section id="input">
 <h3>Input<a class="headerlink" href="#input" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="original-model">
+<section id="original-model">
 <h4>Original model<a class="headerlink" href="#original-model" title="Permalink to this headline">¶</a></h4>
 <p>Image, shape - <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">3,</span> <span class="pre">720,</span> <span class="pre">1280</span></code>, format is <code class="docutils literal notranslate"><span class="pre">B,</span> <span class="pre">C,</span> <span class="pre">W,</span> <span class="pre">H</span></code>, where:</p>
 <ul class="simple">
@@ -2271,8 +2278,8 @@
 </ul>
 <p>Expected color order: <code class="docutils literal notranslate"><span class="pre">RGB</span></code>.
 Mean values - [127.5, 127.5, 127.5], scale value - 128</p>
-</div>
-<div class="section" id="converted-model">
+</section>
+<section id="converted-model">
 <h4>Converted model<a class="headerlink" href="#converted-model" title="Permalink to this headline">¶</a></h4>
 <p>Image, shape - <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">3,</span> <span class="pre">720,</span> <span class="pre">1280</span></code>, format is <code class="docutils literal notranslate"><span class="pre">B,</span> <span class="pre">C,</span> <span class="pre">W,</span> <span class="pre">H</span></code>, where:</p>
 <ul class="simple">
@@ -2282,27 +2289,27 @@ Mean values - [127.5, 127.5, 127.5], scale value - 128</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">H</span></code> - height</p></li>
 </ul>
 <p>Expected color order: <code class="docutils literal notranslate"><span class="pre">RGB</span></code>.</p>
-</div>
-</div>
-<div class="section" id="output">
+</section>
+</section>
+<section id="output">
 <h3>Output<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="id1">
+<section id="id1">
 <h4>Original model<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
 <ol class="arabic simple">
 <li><p>Face detection, name - <code class="docutils literal notranslate"><span class="pre">prob1</span></code>, shape - <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">2,</span> <span class="pre">W,</span> <span class="pre">H</span></code>, contains scores across two classes (0 - no face, 1 - face) for each pixel whether it contains face or not.</p></li>
 <li><p>Face location, name - <code class="docutils literal notranslate"><span class="pre">conv4-2</span></code>, contains regions with detected faces.</p></li>
 </ol>
-</div>
-<div class="section" id="id2">
+</section>
+<section id="id2">
 <h4>Converted model<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
 <ol class="arabic simple">
 <li><p>Face detection, name - <code class="docutils literal notranslate"><span class="pre">prob1</span></code>, shape - <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">2,</span> <span class="pre">W,</span> <span class="pre">H</span></code>, contains scores across two classes (0 - no face, 1 - face) for each pixel whether it contains face or not.</p></li>
 <li><p>Face location, name - <code class="docutils literal notranslate"><span class="pre">conv4-2</span></code>, contains regions with detected faces.</p></li>
 </ol>
-</div>
-</div>
-</div>
-<div class="section" id="mtcnn-r-model-specification">
+</section>
+</section>
+</section>
+<section id="mtcnn-r-model-specification">
 <h2>mtcnn-r model specification<a class="headerlink" href="#mtcnn-r-model-specification" title="Permalink to this headline">¶</a></h2>
 <p>The “r” designation indicates that the <code class="docutils literal notranslate"><span class="pre">mtcnn-r</span></code> model is the “refine” network intended to refine the data returned as output from the “proposal” <code class="docutils literal notranslate"><span class="pre">mtcnn-p</span></code> network.</p>
 <p>The model input is a blob with a vector containing the first pass of face data, as returned by the <code class="docutils literal notranslate"><span class="pre">mtcnn-p</span></code> model.</p>
@@ -2322,9 +2329,9 @@ Mean values - [127.5, 127.5, 127.5], scale value - 128</p>
 </tr>
 </tbody>
 </table>
-<div class="section" id="id3">
+<section id="id3">
 <h3>Input<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="id4">
+<section id="id4">
 <h4>Original model<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h4>
 <p>Image, name - <code class="docutils literal notranslate"><span class="pre">data</span></code>, shape - <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">3,</span> <span class="pre">24,</span> <span class="pre">24</span></code> in <code class="docutils literal notranslate"><span class="pre">B,</span> <span class="pre">C,</span> <span class="pre">W,</span> <span class="pre">H</span></code> format, where:</p>
 <ul class="simple">
@@ -2335,8 +2342,8 @@ Mean values - [127.5, 127.5, 127.5], scale value - 128</p>
 </ul>
 <p>Expected color order: <code class="docutils literal notranslate"><span class="pre">RGB</span></code>
 Mean values - [127.5, 127.5, 127.5], scale value - 128</p>
-</div>
-<div class="section" id="id5">
+</section>
+<section id="id5">
 <h4>Converted model<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h4>
 <p>Image, name - <code class="docutils literal notranslate"><span class="pre">data</span></code>, shape - <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">3,</span> <span class="pre">24,</span> <span class="pre">24</span></code> in <code class="docutils literal notranslate"><span class="pre">B,</span> <span class="pre">C,</span> <span class="pre">W,</span> <span class="pre">H</span></code> format, where:</p>
 <ul class="simple">
@@ -2346,27 +2353,27 @@ Mean values - [127.5, 127.5, 127.5], scale value - 128</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">H</span></code> - height</p></li>
 </ul>
 <p>Expected color order: <code class="docutils literal notranslate"><span class="pre">RGB</span></code></p>
-</div>
-</div>
-<div class="section" id="id6">
+</section>
+</section>
+<section id="id6">
 <h3>Output<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="id7">
+<section id="id7">
 <h4>Original model<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h4>
 <ol class="arabic simple">
 <li><p>Face detection, name - <code class="docutils literal notranslate"><span class="pre">prob1</span></code>, shape - <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">2,</span> <span class="pre">B</span></code>, contains scores across two classes (<code class="docutils literal notranslate"><span class="pre">0</span></code>- no face, <code class="docutils literal notranslate"><span class="pre">1</span></code> - face) for each input in batch. This is necessary to refine face regions from <code class="docutils literal notranslate"><span class="pre">mtcnn-p</span></code>.</p></li>
 <li><p>Face location, name - <code class="docutils literal notranslate"><span class="pre">conv5-2</span></code>, contains clarifications for boxes produced by <code class="docutils literal notranslate"><span class="pre">mtcnn-p</span></code>.</p></li>
 </ol>
-</div>
-<div class="section" id="id8">
+</section>
+<section id="id8">
 <h4>Converted model<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h4>
 <ol class="arabic simple">
 <li><p>Face detection, name - <code class="docutils literal notranslate"><span class="pre">prob1</span></code>, shape - <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">2,</span> <span class="pre">B</span></code>, contains scores across two classes (<code class="docutils literal notranslate"><span class="pre">0</span></code>- no face, <code class="docutils literal notranslate"><span class="pre">1</span></code> - face) for each input in batch. This is necessary to refine face regions from <code class="docutils literal notranslate"><span class="pre">mtcnn-p</span></code>.</p></li>
 <li><p>Face location, name - <code class="docutils literal notranslate"><span class="pre">conv5-2</span></code>, contains clarifications for boxes produced by <code class="docutils literal notranslate"><span class="pre">mtcnn-p</span></code>.</p></li>
 </ol>
-</div>
-</div>
-</div>
-<div class="section" id="mtcnn-o-model-specification">
+</section>
+</section>
+</section>
+<section id="mtcnn-o-model-specification">
 <h2>mtcnn-o model specification<a class="headerlink" href="#mtcnn-o-model-specification" title="Permalink to this headline">¶</a></h2>
 <p>The “o” designation indicates that the <code class="docutils literal notranslate"><span class="pre">mtcnn-o</span></code> model is the “output” network intended to take the data returned from the “refine” <code class="docutils literal notranslate"><span class="pre">mtcnn-r</span></code> network, and transform it into the final output data.</p>
 <p>The model input is a blob with a vector containing the refined face data, as returned by the <code class="docutils literal notranslate"><span class="pre">mtcnn-r</span></code> model.</p>
@@ -2386,9 +2393,9 @@ Mean values - [127.5, 127.5, 127.5], scale value - 128</p>
 </tr>
 </tbody>
 </table>
-<div class="section" id="id9">
+<section id="id9">
 <h3>Input<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="id10">
+<section id="id10">
 <h4>Original model<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h4>
 <p>Image, name - <code class="docutils literal notranslate"><span class="pre">data</span></code>, shape - <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">3,</span> <span class="pre">48,</span> <span class="pre">48</span></code> in <code class="docutils literal notranslate"><span class="pre">B,</span> <span class="pre">C,</span> <span class="pre">W,</span> <span class="pre">H</span></code> format, where:</p>
 <ul class="simple">
@@ -2399,8 +2406,8 @@ Mean values - [127.5, 127.5, 127.5], scale value - 128</p>
 </ul>
 <p>Expected color order: <code class="docutils literal notranslate"><span class="pre">RGB</span></code>.
 Mean values - [127.5, 127.5, 127.5], scale value - 128</p>
-</div>
-<div class="section" id="id11">
+</section>
+<section id="id11">
 <h4>Converted model<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h4>
 <p>Image, name - <code class="docutils literal notranslate"><span class="pre">data</span></code>, shape - <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">3,</span> <span class="pre">48,</span> <span class="pre">48</span></code> in <code class="docutils literal notranslate"><span class="pre">B,</span> <span class="pre">C,</span> <span class="pre">W,</span> <span class="pre">H</span></code> format, where:</p>
 <ul class="simple">
@@ -2410,29 +2417,29 @@ Mean values - [127.5, 127.5, 127.5], scale value - 128</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">H</span></code> - height</p></li>
 </ul>
 <p>Expected color order: <code class="docutils literal notranslate"><span class="pre">RGB</span></code>.</p>
-</div>
-</div>
-<div class="section" id="id12">
+</section>
+</section>
+<section id="id12">
 <h3>Output<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="id13">
+<section id="id13">
 <h4>Original model<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h4>
 <ol class="arabic simple">
 <li><p>Face detection, name - <code class="docutils literal notranslate"><span class="pre">prob1</span></code>, shape  - <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">2,</span> <span class="pre">B</span></code>, contains scores across two classes (<code class="docutils literal notranslate"><span class="pre">0</span></code>- no face, <code class="docutils literal notranslate"><span class="pre">1</span></code> - face) for each input in batch. This is necessary for final face regions refining after<code class="docutils literal notranslate"><span class="pre">mtcnn-p</span></code> and <code class="docutils literal notranslate"><span class="pre">mtcnn-r</span></code>.</p></li>
 <li><p>Face location, name - <code class="docutils literal notranslate"><span class="pre">conv6-2</span></code>, contains final clarifications for boxes produced by <code class="docutils literal notranslate"><span class="pre">mtcnn-p</span></code> and refined by <code class="docutils literal notranslate"><span class="pre">mtcnn-r</span></code>.</p></li>
 <li><p>Control points, name - <code class="docutils literal notranslate"><span class="pre">conv6-3</span></code>, contains five facial landmarks: <code class="docutils literal notranslate"><span class="pre">left</span> <span class="pre">eye</span></code>, <code class="docutils literal notranslate"><span class="pre">right</span> <span class="pre">eye</span></code>, <code class="docutils literal notranslate"><span class="pre">nose</span></code>, <code class="docutils literal notranslate"><span class="pre">left</span> <span class="pre">mouth</span> <span class="pre">corner</span></code>, <code class="docutils literal notranslate"><span class="pre">right</span> <span class="pre">mouth</span> <span class="pre">corner</span></code> coordinates for each face region.</p></li>
 </ol>
-</div>
-<div class="section" id="id14">
+</section>
+<section id="id14">
 <h4>Converted model<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h4>
 <ol class="arabic simple">
 <li><p>Face detection, name - <code class="docutils literal notranslate"><span class="pre">prob1</span></code>, shape  - <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">2,</span> <span class="pre">B</span></code>, contains scores across two classes (<code class="docutils literal notranslate"><span class="pre">0</span></code>- no face, <code class="docutils literal notranslate"><span class="pre">1</span></code> - face) for each input in batch. This is necessary for final face regions refining after<code class="docutils literal notranslate"><span class="pre">mtcnn-p</span></code> and <code class="docutils literal notranslate"><span class="pre">mtcnn-r</span></code>.</p></li>
 <li><p>Face location, name - <code class="docutils literal notranslate"><span class="pre">conv6-2</span></code>, contains final clarifications for boxes produced by <code class="docutils literal notranslate"><span class="pre">mtcnn-p</span></code> and refined by <code class="docutils literal notranslate"><span class="pre">mtcnn-r</span></code>.</p></li>
 <li><p>Control points, name - <code class="docutils literal notranslate"><span class="pre">conv6-3</span></code>, contains five facial landmarks: <code class="docutils literal notranslate"><span class="pre">left</span> <span class="pre">eye</span></code>, <code class="docutils literal notranslate"><span class="pre">right</span> <span class="pre">eye</span></code>, <code class="docutils literal notranslate"><span class="pre">nose</span></code>, <code class="docutils literal notranslate"><span class="pre">left</span> <span class="pre">mouth</span> <span class="pre">corner</span></code>, <code class="docutils literal notranslate"><span class="pre">right</span> <span class="pre">mouth</span> <span class="pre">corner</span></code> coordinates for each face region.</p></li>
 </ol>
-</div>
-</div>
-</div>
-<div class="section" id="download-a-model-and-convert-it-into-openvino-ir-format">
+</section>
+</section>
+</section>
+<section id="download-a-model-and-convert-it-into-openvino-ir-format">
 <h2>Download a Model and Convert it into OpenVINO™ IR Format<a class="headerlink" href="#download-a-model-and-convert-it-into-openvino-ir-format" title="Permalink to this headline">¶</a></h2>
 <p>You can download models and if necessary convert them into OpenVINO™ IR format using the <span class="xref myst">Model Downloader and other automation tools</span> as shown in the examples below.</p>
 <p>An example of using the Model Downloader:</p>
@@ -2443,16 +2450,16 @@ Mean values - [127.5, 127.5, 127.5], scale value - 128</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">omz_converter</span> <span class="o">--</span><span class="n">name</span> <span class="o">&lt;</span><span class="n">model_name</span><span class="o">&gt;</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="demo-usage">
+</section>
+<section id="demo-usage">
 <h2>Demo usage<a class="headerlink" href="#demo-usage" title="Permalink to this headline">¶</a></h2>
 <p>The model can be used in the following demos provided by the Open Model Zoo to show its capabilities:</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="../../../demos/face_detection_mtcnn_demo/cpp_gapi/README.html"><span class="doc std std-doc">G-API Face Detection MTCNN Demo</span></a></p></li>
 <li><p><a class="reference internal" href="../../../demos/face_detection_mtcnn_demo/python/README.html"><span class="doc std std-doc">Face Detection MTCNN Python* Demo</span></a></p></li>
 </ul>
-</div>
-<div class="section" id="legal-information">
+</section>
+<section id="legal-information">
 <h2>Legal Information<a class="headerlink" href="#legal-information" title="Permalink to this headline">¶</a></h2>
 <p>The original model is distributed under the following
 <a class="reference external" href="https://raw.githubusercontent.com/DuinoDu/mtcnn/master/LICENSE">license</a>:</p>
@@ -2479,8 +2486,8 @@ Mean values - [127.5, 127.5, 127.5], scale value - 128</p>
 <span class="n">SOFTWARE</span><span class="o">.</span>
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -2511,7 +2518,7 @@ Mean values - [127.5, 127.5, 127.5], scale value - 128</p>
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

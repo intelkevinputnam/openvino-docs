@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Live Inference and Benchmark CT-scan Data with OpenVINO &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -522,7 +529,7 @@
             
                 <div>
                   
-  <div class="section" id="live-inference-and-benchmark-ct-scan-data-with-openvino">
+  <section id="live-inference-and-benchmark-ct-scan-data-with-openvino">
 <h1>Live Inference and Benchmark CT-scan Data with OpenVINO<a class="headerlink" href="#live-inference-and-benchmark-ct-scan-data-with-openvino" title="Permalink to this headline">¶</a></h1>
 <p>This tutorial is part of a series on how to train, optimize, quantize
 and show live inference on a medical segmentation model. The goal is to
@@ -539,7 +546,7 @@ scratch; the data is from
 Quantize a UNet Model and Show Live
 Inference</a>
 tutorial.</p>
-<div class="section" id="instructions">
+<section id="instructions">
 <h2>Instructions<a class="headerlink" href="#instructions" title="Permalink to this headline">¶</a></h2>
 <p>This notebook needs a quantized OpenVINO IR model. We provide a
 pretrained model trained for 20 epochs with the full
@@ -550,8 +557,8 @@ Training</a>
 notebook. It also needs images from the Kits19 dataset, converted to 2D
 images. For demonstration purposes, this tutorial will download one
 converted CT scan to use for inference.</p>
-</div>
-<div class="section" id="imports">
+</section>
+<section id="imports">
 <h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">sys</span>
@@ -567,8 +574,8 @@ converted CT scan to use for inference.</p>
 <span class="kn">from</span> <span class="nn">notebook_utils</span> <span class="kn">import</span> <span class="n">benchmark_model</span><span class="p">,</span> <span class="n">download_file</span><span class="p">,</span> <span class="n">show_live_inference</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="settings">
+</section>
+<section id="settings">
 <h2>Settings<a class="headerlink" href="#settings" title="Permalink to this headline">¶</a></h2>
 <p>To use the pretrained models, set <code class="docutils literal notranslate"><span class="pre">IR_PATH</span></code> to
 <code class="docutils literal notranslate"><span class="pre">&quot;pretrained_model/unet44.xml&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">COMPRESSED_MODEL_PATH</span></code> to
@@ -580,8 +587,8 @@ trained or optimized yourself, adjust the model paths.</p>
 <span class="c1"># MODEL_PATH = &quot;pretrained_model/unet_kits19.xml&quot;</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="benchmark-model-performance">
+</section>
+<section id="benchmark-model-performance">
 <h2>Benchmark Model Performance<a class="headerlink" href="#benchmark-model-performance" title="Permalink to this headline">¶</a></h2>
 <p>To measure the inference performance of the IR model, we use <a class="reference external" href="https://docs.openvino.ai/latest/openvino_inference_engine_tools_benchmark_tool_README.html">Benchmark
 Tool</a>,
@@ -622,8 +629,8 @@ inference</strong></p>
 <span class="n">Device</span><span class="p">:</span> <span class="n">Intel</span><span class="p">(</span><span class="n">R</span><span class="p">)</span> <span class="n">Xeon</span><span class="p">(</span><span class="n">R</span><span class="p">)</span> <span class="n">Platinum</span> <span class="mi">8272</span><span class="n">CL</span> <span class="n">CPU</span> <span class="o">@</span> <span class="mf">2.60</span><span class="n">GHz</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="download-and-prepare-data">
+</section>
+<section id="download-and-prepare-data">
 <h2>Download and Prepare Data<a class="headerlink" href="#download-and-prepare-data" title="Permalink to this headline">¶</a></h2>
 <p>Download one validation video for live inference. We reuse the
 KitsDataset class that was also used in the training and quantization
@@ -656,8 +663,8 @@ it will be downloaded and extracted in the next cell.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Data</span> <span class="k">for</span> <span class="n">case_00117</span> <span class="n">exists</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="show-live-inference">
+</section>
+<section id="show-live-inference">
 <h2>Show Live Inference<a class="headerlink" href="#show-live-inference" title="Permalink to this headline">¶</a></h2>
 <p>To show live inference on the model in the notebook, we use the
 asynchronous processing feature of OpenVINO Inference Engine.</p>
@@ -676,7 +683,7 @@ AsyncPipeline and Model API to perform asynchronous inference. After
 inference on the specified CT scan has completed, the total time and
 throughput (fps), including preprocessing and displaying, will be
 printed.</p>
-<div class="section" id="load-model-and-list-of-image-files">
+<section id="load-model-and-list-of-image-files">
 <h3>Load Model and List of Image Files<a class="headerlink" href="#load-model-and-list-of-image-files" title="Permalink to this headline">¶</a></h3>
 <p>Load the segmentation model to Inference Engine with
 <code class="docutils literal notranslate"><span class="pre">SegmentationModel</span></code>, based on the <a class="reference external" href="https://github.com/openvinotoolkit/open_model_zoo/">Open Model
@@ -700,8 +707,8 @@ the next cell to see the implementation.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">case_00117</span><span class="p">,</span> <span class="mi">69</span> <span class="n">images</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="show-inference">
+</section>
+<section id="show-inference">
 <h3>Show Inference<a class="headerlink" href="#show-inference" title="Permalink to this headline">¶</a></h3>
 <p>In the next cell, we run the <code class="docutils literal notranslate"><span class="pre">show</span> <span class="pre">live_inference</span></code> function, which
 loads the <code class="docutils literal notranslate"><span class="pre">segmentation_model</span></code> to the specified <code class="docutils literal notranslate"><span class="pre">device</span></code> (using
@@ -726,9 +733,9 @@ tutorial.</p>
 <span class="n">Total</span> <span class="n">time</span> <span class="k">for</span> <span class="mi">68</span> <span class="n">frames</span><span class="p">:</span> <span class="mf">9.61</span> <span class="n">seconds</span><span class="p">,</span> <span class="n">fps</span><span class="p">:</span><span class="mf">7.18</span>
 </pre></div>
 </div>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
                 </div>
@@ -759,7 +766,7 @@ tutorial.</p>
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

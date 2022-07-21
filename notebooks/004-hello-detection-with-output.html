@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Hello Object Detection &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -505,7 +512,7 @@
             
                 <div>
                   
-  <div class="section" id="hello-object-detection">
+  <section id="hello-object-detection">
 <h1>Hello Object Detection<a class="headerlink" href="#hello-object-detection" title="Permalink to this headline">¶</a></h1>
 <p>A very basic introduction to using object detection models with
 OpenVINO.</p>
@@ -519,7 +526,7 @@ horizontal text in images and returns a blob of data in the shape of
 coordinates of the top left bounding box corner, <code class="docutils literal notranslate"><span class="pre">(x_max,</span> <span class="pre">y_max)</span></code> are
 the coordinates of the bottom right bounding box corner and <code class="docutils literal notranslate"><span class="pre">conf</span></code> is
 the confidence for the predicted class.</p>
-<div class="section" id="imports">
+<section id="imports">
 <h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cv2</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -527,8 +534,8 @@ the confidence for the predicted class.</p>
 <span class="kn">from</span> <span class="nn">openvino.runtime</span> <span class="kn">import</span> <span class="n">Core</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="load-the-model">
+</section>
+<section id="load-the-model">
 <h2>Load the Model<a class="headerlink" href="#load-the-model" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ie</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span>
 
@@ -539,8 +546,8 @@ the confidence for the predicted class.</p>
 <span class="n">output_layer_ir</span> <span class="o">=</span> <span class="n">compiled_model</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="s2">&quot;boxes&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="load-an-image">
+</section>
+<section id="load-an-image">
 <h2>Load an Image<a class="headerlink" href="#load-an-image" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Text detection models expects image in BGR format</span>
 <span class="n">image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">&quot;data/intel_rnb.jpg&quot;</span><span class="p">)</span>
@@ -558,8 +565,8 @@ the confidence for the predicted class.</p>
 </pre></div>
 </div>
 <img alt="../_images/004-hello-detection-with-output_6_0.png" src="../_images/004-hello-detection-with-output_6_0.png" />
-</div>
-<div class="section" id="do-inference">
+</section>
+<section id="do-inference">
 <h2>Do Inference<a class="headerlink" href="#do-inference" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create inference request</span>
 <span class="n">boxes</span> <span class="o">=</span> <span class="n">compiled_model</span><span class="p">([</span><span class="n">input_image</span><span class="p">])[</span><span class="n">output_layer_ir</span><span class="p">]</span>
@@ -568,8 +575,8 @@ the confidence for the predicted class.</p>
 <span class="n">boxes</span> <span class="o">=</span> <span class="n">boxes</span><span class="p">[</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">boxes</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="visualize-results">
+</section>
+<section id="visualize-results">
 <h2>Visualize Results<a class="headerlink" href="#visualize-results" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># For each detection, the description has the format: [x_min, y_min, x_max, y_max, conf]</span>
 <span class="c1"># Image passed here is in BGR format with changed width and height. To display it in colors expected by matplotlib we use cvtColor function</span>
@@ -624,8 +631,8 @@ the confidence for the predicted class.</p>
 </pre></div>
 </div>
 <img alt="../_images/004-hello-detection-with-output_11_0.png" src="../_images/004-hello-detection-with-output_11_0.png" />
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -656,7 +663,7 @@ the confidence for the predicted class.</p>
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Convert a PyTorch Model to ONNX and OpenVINO IR &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -563,7 +570,7 @@
             
                 <div>
                   
-  <div class="section" id="convert-a-pytorch-model-to-onnx-and-openvino-ir">
+  <section id="convert-a-pytorch-model-to-onnx-and-openvino-ir">
 <h1>Convert a PyTorch Model to ONNX and OpenVINO IR<a class="headerlink" href="#convert-a-pytorch-model-to-onnx-and-openvino-ir" title="Permalink to this headline">¶</a></h1>
 <p>This tutorial demonstrates step-by-step instructions to perform
 inference on a PyTorch semantic segmentation model using OpenVINO’s
@@ -574,9 +581,9 @@ models are loaded in OpenVINO Inference Engine to show model
 predictions. The model is pre-trained on the
 <a class="reference external" href="https://www.cityscapes-dataset.com">CityScapes</a> dataset. The source
 of the model is <a class="reference external" href="https://github.com/ekzhang/fastseg">FastSeg</a>.</p>
-<div class="section" id="preparation">
+<section id="preparation">
 <h2>Preparation<a class="headerlink" href="#preparation" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="imports">
+<section id="imports">
 <h3>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">time</span>
@@ -593,8 +600,8 @@ of the model is <a class="reference external" href="https://github.com/ekzhang/f
 <span class="kn">from</span> <span class="nn">notebook_utils</span> <span class="kn">import</span> <span class="n">CityScapesSegmentation</span><span class="p">,</span> <span class="n">segmentation_map_to_image</span><span class="p">,</span> <span class="n">viz_result_image</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="settings">
+</section>
+<section id="settings">
 <h3>Settings<a class="headerlink" href="#settings" title="Permalink to this headline">¶</a></h3>
 <p>Set the name for the model, and the image width and height that will be
 used for the network. CityScapes is pretrained on images of 2048x1024.
@@ -612,8 +619,8 @@ inference speed.</p>
 <span class="n">ir_path</span> <span class="o">=</span> <span class="n">model_path</span><span class="o">.</span><span class="n">with_suffix</span><span class="p">(</span><span class="s2">&quot;.xml&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="download-the-fastseg-model">
+</section>
+<section id="download-the-fastseg-model">
 <h3>Download the Fastseg Model<a class="headerlink" href="#download-the-fastseg-model" title="Permalink to this headline">¶</a></h3>
 <p>Download, load and save the model with pretrained weights. This may take
 some time if you have not downloaded the model before.</p>
@@ -644,11 +651,11 @@ some time if you have not downloaded the model before.</p>
 <span class="n">Model</span> <span class="n">saved</span> <span class="n">at</span> <span class="n">model</span><span class="o">/</span><span class="n">fastseg1024</span><span class="o">.</span><span class="n">pth</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="onnx-model-conversion">
+</section>
+</section>
+<section id="onnx-model-conversion">
 <h2>ONNX Model Conversion<a class="headerlink" href="#onnx-model-conversion" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="convert-pytorch-model-to-onnx">
+<section id="convert-pytorch-model-to-onnx">
 <h3>Convert PyTorch model to ONNX<a class="headerlink" href="#convert-pytorch-model-to-onnx" title="Permalink to this headline">¶</a></h3>
 <p>The output for this cell will show some warnings. These are most likely
 harmless. Conversion succeeded if the last line of the output says
@@ -670,19 +677,19 @@ harmless. Conversion succeeded if the last line of the output says
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ONNX model </span><span class="si">{</span><span class="n">onnx_path</span><span class="si">}</span><span class="s2"> already exists.&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8</span><span class="o">.</span><span class="mi">12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">geffnet</span><span class="o">/</span><span class="n">conv2d_layers</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">39</span><span class="p">:</span> <span class="n">TracerWarning</span><span class="p">:</span> <span class="n">Converting</span> <span class="n">a</span> <span class="n">tensor</span> <span class="n">to</span> <span class="n">a</span> <span class="n">Python</span> <span class="nb">float</span> <span class="n">might</span> <span class="n">cause</span> <span class="n">the</span> <span class="n">trace</span> <span class="n">to</span> <span class="n">be</span> <span class="n">incorrect</span><span class="o">.</span> <span class="n">We</span> <span class="n">can</span><span class="s1">&#39;t record the data flow of Python values, so this value will be treated as a constant in the future. This means that the trace might not generalize to other inputs!</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">geffnet</span><span class="o">/</span><span class="n">conv2d_layers</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">39</span><span class="p">:</span> <span class="n">TracerWarning</span><span class="p">:</span> <span class="n">Converting</span> <span class="n">a</span> <span class="n">tensor</span> <span class="n">to</span> <span class="n">a</span> <span class="n">Python</span> <span class="nb">float</span> <span class="n">might</span> <span class="n">cause</span> <span class="n">the</span> <span class="n">trace</span> <span class="n">to</span> <span class="n">be</span> <span class="n">incorrect</span><span class="o">.</span> <span class="n">We</span> <span class="n">can</span><span class="s1">&#39;t record the data flow of Python values, so this value will be treated as a constant in the future. This means that the trace might not generalize to other inputs!</span>
   <span class="k">return</span> <span class="nb">max</span><span class="p">((</span><span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">i</span> <span class="o">/</span> <span class="n">s</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">s</span> <span class="o">+</span> <span class="p">(</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">d</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-<span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8</span><span class="o">.</span><span class="mi">12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">geffnet</span><span class="o">/</span><span class="n">conv2d_layers</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">39</span><span class="p">:</span> <span class="n">TracerWarning</span><span class="p">:</span> <span class="n">Converting</span> <span class="n">a</span> <span class="n">tensor</span> <span class="n">to</span> <span class="n">a</span> <span class="n">Python</span> <span class="n">boolean</span> <span class="n">might</span> <span class="n">cause</span> <span class="n">the</span> <span class="n">trace</span> <span class="n">to</span> <span class="n">be</span> <span class="n">incorrect</span><span class="o">.</span> <span class="n">We</span> <span class="n">can</span><span class="s1">&#39;t record the data flow of Python values, so this value will be treated as a constant in the future. This means that the trace might not generalize to other inputs!</span>
+<span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">geffnet</span><span class="o">/</span><span class="n">conv2d_layers</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">39</span><span class="p">:</span> <span class="n">TracerWarning</span><span class="p">:</span> <span class="n">Converting</span> <span class="n">a</span> <span class="n">tensor</span> <span class="n">to</span> <span class="n">a</span> <span class="n">Python</span> <span class="n">boolean</span> <span class="n">might</span> <span class="n">cause</span> <span class="n">the</span> <span class="n">trace</span> <span class="n">to</span> <span class="n">be</span> <span class="n">incorrect</span><span class="o">.</span> <span class="n">We</span> <span class="n">can</span><span class="s1">&#39;t record the data flow of Python values, so this value will be treated as a constant in the future. This means that the trace might not generalize to other inputs!</span>
   <span class="k">return</span> <span class="nb">max</span><span class="p">((</span><span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">i</span> <span class="o">/</span> <span class="n">s</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">s</span> <span class="o">+</span> <span class="p">(</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">d</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-<span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8</span><span class="o">.</span><span class="mi">12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">geffnet</span><span class="o">/</span><span class="n">conv2d_layers</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">63</span><span class="p">:</span> <span class="n">TracerWarning</span><span class="p">:</span> <span class="n">Converting</span> <span class="n">a</span> <span class="n">tensor</span> <span class="n">to</span> <span class="n">a</span> <span class="n">Python</span> <span class="n">boolean</span> <span class="n">might</span> <span class="n">cause</span> <span class="n">the</span> <span class="n">trace</span> <span class="n">to</span> <span class="n">be</span> <span class="n">incorrect</span><span class="o">.</span> <span class="n">We</span> <span class="n">can</span><span class="s1">&#39;t record the data flow of Python values, so this value will be treated as a constant in the future. This means that the trace might not generalize to other inputs!</span>
+<span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">geffnet</span><span class="o">/</span><span class="n">conv2d_layers</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">63</span><span class="p">:</span> <span class="n">TracerWarning</span><span class="p">:</span> <span class="n">Converting</span> <span class="n">a</span> <span class="n">tensor</span> <span class="n">to</span> <span class="n">a</span> <span class="n">Python</span> <span class="n">boolean</span> <span class="n">might</span> <span class="n">cause</span> <span class="n">the</span> <span class="n">trace</span> <span class="n">to</span> <span class="n">be</span> <span class="n">incorrect</span><span class="o">.</span> <span class="n">We</span> <span class="n">can</span><span class="s1">&#39;t record the data flow of Python values, so this value will be treated as a constant in the future. This means that the trace might not generalize to other inputs!</span>
   <span class="k">if</span> <span class="n">pad_h</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">pad_w</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ONNX</span> <span class="n">model</span> <span class="n">exported</span> <span class="n">to</span> <span class="n">model</span><span class="o">/</span><span class="n">fastseg1024</span><span class="o">.</span><span class="n">onnx</span><span class="o">.</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="convert-onnx-model-to-openvino-ir-format">
+</section>
+<section id="convert-onnx-model-to-openvino-ir-format">
 <h3>Convert ONNX Model to OpenVINO IR Format<a class="headerlink" href="#convert-onnx-model-to-openvino-ir-format" title="Permalink to this headline">¶</a></h3>
 <p>Call the OpenVINO Model Optimizer tool to convert the ONNX model to
 OpenVINO IR with FP16 precision. The models are saved to the current
@@ -749,26 +756,26 @@ lines of the output include
 <span class="n">Advanced</span> <span class="n">parameters</span><span class="p">:</span>
     <span class="o">-</span> <span class="n">Force</span> <span class="n">the</span> <span class="n">usage</span> <span class="n">of</span> <span class="n">legacy</span> <span class="n">Frontend</span> <span class="n">of</span> <span class="n">Model</span> <span class="n">Optimizer</span> <span class="k">for</span> <span class="n">model</span> <span class="n">conversion</span> <span class="n">into</span> <span class="n">IR</span><span class="p">:</span>   <span class="kc">False</span>
     <span class="o">-</span> <span class="n">Force</span> <span class="n">the</span> <span class="n">usage</span> <span class="n">of</span> <span class="n">new</span> <span class="n">Frontend</span> <span class="n">of</span> <span class="n">Model</span> <span class="n">Optimizer</span> <span class="k">for</span> <span class="n">model</span> <span class="n">conversion</span> <span class="n">into</span> <span class="n">IR</span><span class="p">:</span>  <span class="kc">False</span>
-<span class="n">OpenVINO</span> <span class="n">runtime</span> <span class="n">found</span> <span class="ow">in</span><span class="p">:</span>  <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8</span><span class="o">.</span><span class="mi">12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">openvino</span>
-<span class="n">OpenVINO</span> <span class="n">runtime</span> <span class="n">version</span><span class="p">:</span>   <span class="mf">2022.1</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="mi">7019</span><span class="o">-</span><span class="n">cdb9bec7210</span><span class="o">-</span><span class="n">releases</span><span class="o">/</span><span class="mi">2022</span><span class="o">/</span><span class="mi">1</span>
-<span class="n">Model</span> <span class="n">Optimizer</span> <span class="n">version</span><span class="p">:</span>    <span class="mf">2022.1</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="mi">7019</span><span class="o">-</span><span class="n">cdb9bec7210</span><span class="o">-</span><span class="n">releases</span><span class="o">/</span><span class="mi">2022</span><span class="o">/</span><span class="mi">1</span>
+<span class="n">OpenVINO</span> <span class="n">runtime</span> <span class="n">found</span> <span class="ow">in</span><span class="p">:</span>  <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">openvino</span>
+<span class="n">OpenVINO</span> <span class="n">runtime</span> <span class="n">version</span><span class="p">:</span>   <span class="mf">2022.1.0</span><span class="o">-</span><span class="mi">7019</span><span class="o">-</span><span class="n">cdb9bec7210</span><span class="o">-</span><span class="n">releases</span><span class="o">/</span><span class="mi">2022</span><span class="o">/</span><span class="mi">1</span>
+<span class="n">Model</span> <span class="n">Optimizer</span> <span class="n">version</span><span class="p">:</span>    <span class="mf">2022.1.0</span><span class="o">-</span><span class="mi">7019</span><span class="o">-</span><span class="n">cdb9bec7210</span><span class="o">-</span><span class="n">releases</span><span class="o">/</span><span class="mi">2022</span><span class="o">/</span><span class="mi">1</span>
 <span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">Generated</span> <span class="n">IR</span> <span class="n">version</span> <span class="mi">11</span> <span class="n">model</span><span class="o">.</span>
 <span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">XML</span> <span class="n">file</span><span class="p">:</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">work</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">notebooks</span><span class="o">/</span><span class="mi">102</span><span class="o">-</span><span class="n">pytorch</span><span class="o">-</span><span class="n">onnx</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">openvino</span><span class="o">/</span><span class="n">model</span><span class="o">/</span><span class="n">fastseg1024</span><span class="o">.</span><span class="n">xml</span>
 <span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">BIN</span> <span class="n">file</span><span class="p">:</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">runner</span><span class="o">/</span><span class="n">work</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">openvino_notebooks</span><span class="o">/</span><span class="n">notebooks</span><span class="o">/</span><span class="mi">102</span><span class="o">-</span><span class="n">pytorch</span><span class="o">-</span><span class="n">onnx</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">openvino</span><span class="o">/</span><span class="n">model</span><span class="o">/</span><span class="n">fastseg1024</span><span class="o">.</span><span class="n">bin</span>
 <span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">Total</span> <span class="n">execution</span> <span class="n">time</span><span class="p">:</span> <span class="mf">1.21</span> <span class="n">seconds</span><span class="o">.</span>
 <span class="p">[</span> <span class="n">SUCCESS</span> <span class="p">]</span> <span class="n">Memory</span> <span class="n">consumed</span><span class="p">:</span> <span class="mi">109</span> <span class="n">MB</span><span class="o">.</span>
 <span class="n">It</span><span class="s1">&#39;s been a while, check for a new version of Intel(R) Distribution of OpenVINO(TM) toolkit here https://software.intel.com/content/www/us/en/develop/tools/openvino-toolkit/download.html?cid=other&amp;source=prod&amp;campid=ww_2022_bu_IOTG_OpenVINO-2022-1&amp;content=upg_all&amp;medium=organic or on the GitHub*</span>
-<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">The</span> <span class="n">model</span> <span class="n">was</span> <span class="n">converted</span> <span class="n">to</span> <span class="n">IR</span> <span class="n">v11</span><span class="p">,</span> <span class="n">the</span> <span class="n">latest</span> <span class="n">model</span> <span class="nb">format</span> <span class="n">that</span> <span class="n">corresponds</span> <span class="n">to</span> <span class="n">the</span> <span class="n">source</span> <span class="n">DL</span> <span class="n">framework</span> <span class="nb">input</span><span class="o">/</span><span class="n">output</span> <span class="nb">format</span><span class="o">.</span> <span class="n">While</span> <span class="n">IR</span> <span class="n">v11</span> <span class="ow">is</span> <span class="n">backwards</span> <span class="n">compatible</span> <span class="k">with</span> <span class="n">OpenVINO</span> <span class="n">Inference</span> <span class="n">Engine</span> <span class="n">API</span> <span class="n">v1</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span> <span class="n">please</span> <span class="n">use</span> <span class="n">API</span> <span class="n">v2</span><span class="o">.</span><span class="mi">0</span> <span class="p">(</span><span class="k">as</span> <span class="n">of</span> <span class="mf">2022.1</span><span class="p">)</span> <span class="n">to</span> <span class="n">take</span> <span class="n">advantage</span> <span class="n">of</span> <span class="n">the</span> <span class="n">latest</span> <span class="n">improvements</span> <span class="ow">in</span> <span class="n">IR</span> <span class="n">v11</span><span class="o">.</span>
-<span class="n">Find</span> <span class="n">more</span> <span class="n">information</span> <span class="n">about</span> <span class="n">API</span> <span class="n">v2</span><span class="o">.</span><span class="mi">0</span> <span class="ow">and</span> <span class="n">IR</span> <span class="n">v11</span> <span class="n">at</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">docs</span><span class="o">.</span><span class="n">openvino</span><span class="o">.</span><span class="n">ai</span>
+<span class="p">[</span> <span class="n">INFO</span> <span class="p">]</span> <span class="n">The</span> <span class="n">model</span> <span class="n">was</span> <span class="n">converted</span> <span class="n">to</span> <span class="n">IR</span> <span class="n">v11</span><span class="p">,</span> <span class="n">the</span> <span class="n">latest</span> <span class="n">model</span> <span class="nb">format</span> <span class="n">that</span> <span class="n">corresponds</span> <span class="n">to</span> <span class="n">the</span> <span class="n">source</span> <span class="n">DL</span> <span class="n">framework</span> <span class="nb">input</span><span class="o">/</span><span class="n">output</span> <span class="nb">format</span><span class="o">.</span> <span class="n">While</span> <span class="n">IR</span> <span class="n">v11</span> <span class="ow">is</span> <span class="n">backwards</span> <span class="n">compatible</span> <span class="k">with</span> <span class="n">OpenVINO</span> <span class="n">Inference</span> <span class="n">Engine</span> <span class="n">API</span> <span class="n">v1</span><span class="mf">.0</span><span class="p">,</span> <span class="n">please</span> <span class="n">use</span> <span class="n">API</span> <span class="n">v2</span><span class="mf">.0</span> <span class="p">(</span><span class="k">as</span> <span class="n">of</span> <span class="mf">2022.1</span><span class="p">)</span> <span class="n">to</span> <span class="n">take</span> <span class="n">advantage</span> <span class="n">of</span> <span class="n">the</span> <span class="n">latest</span> <span class="n">improvements</span> <span class="ow">in</span> <span class="n">IR</span> <span class="n">v11</span><span class="o">.</span>
+<span class="n">Find</span> <span class="n">more</span> <span class="n">information</span> <span class="n">about</span> <span class="n">API</span> <span class="n">v2</span><span class="mf">.0</span> <span class="ow">and</span> <span class="n">IR</span> <span class="n">v11</span> <span class="n">at</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">docs</span><span class="o">.</span><span class="n">openvino</span><span class="o">.</span><span class="n">ai</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="show-results">
+</section>
+</section>
+<section id="show-results">
 <h2>Show Results<a class="headerlink" href="#show-results" title="Permalink to this headline">¶</a></h2>
 <p>Confirm that the segmentation results look as expected, by comparing
 model predictions on the ONNX, IR and PyTorch model</p>
-<div class="section" id="load-and-preprocess-an-input-image">
+<section id="load-and-preprocess-an-input-image">
 <h3>Load and Preprocess an Input Image<a class="headerlink" href="#load-and-preprocess-an-input-image" title="Permalink to this headline">¶</a></h3>
 <p>For the OpenVINO model, normalization is moved to the model. For the
 ONNX and PyTorch models, images need to be normalized before propagating
@@ -800,8 +807,8 @@ for inference.</p>
 <span class="n">normalized_input_image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">normalized_image</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span> <span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="load-the-openvino-ir-network-and-run-inference-on-the-onnx-model">
+</section>
+<section id="load-the-openvino-ir-network-and-run-inference-on-the-onnx-model">
 <h3>Load the OpenVINO IR Network and Run Inference on the ONNX model<a class="headerlink" href="#load-the-openvino-ir-network-and-run-inference-on-the-onnx-model" title="Permalink to this headline">¶</a></h3>
 <p>Inference Engine can load ONNX models directly. We first load the ONNX
 model, do inference and show the results. After that we load the model
@@ -809,7 +816,7 @@ that was converted to Intermediate Representation (IR) with Model
 Optimizer and do inference on that model and show the results on an
 image from <a class="reference external" href="https://www.mapillary.com/dataset/vistas">Mapillary
 Vistas</a>.</p>
-<div class="section" id="onnx-model-in-inference-engine">
+<section id="onnx-model-in-inference-engine">
 <h4>1. ONNX Model in Inference Engine<a class="headerlink" href="#onnx-model-in-inference-engine" title="Permalink to this headline">¶</a></h4>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load network to Inference Engine</span>
 <span class="n">ie</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span>
@@ -832,8 +839,8 @@ Vistas</a>.</p>
 </pre></div>
 </div>
 <img alt="../_images/102-pytorch-onnx-to-openvino-with-output_19_0.png" src="../_images/102-pytorch-onnx-to-openvino-with-output_19_0.png" />
-</div>
-<div class="section" id="ir-model-in-inference-engine">
+</section>
+<section id="ir-model-in-inference-engine">
 <h4>2. IR Model in Inference Engine<a class="headerlink" href="#ir-model-in-inference-engine" title="Permalink to this headline">¶</a></h4>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load the network in Inference Engine</span>
 <span class="n">ie</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span>
@@ -856,10 +863,10 @@ Vistas</a>.</p>
 </pre></div>
 </div>
 <img alt="../_images/102-pytorch-onnx-to-openvino-with-output_22_0.png" src="../_images/102-pytorch-onnx-to-openvino-with-output_22_0.png" />
-</div>
-</div>
-</div>
-<div class="section" id="pytorch-comparison">
+</section>
+</section>
+</section>
+<section id="pytorch-comparison">
 <h2>PyTorch Comparison<a class="headerlink" href="#pytorch-comparison" title="Permalink to this headline">¶</a></h2>
 <p>Do inference on the PyTorch model to verify that the output visually
 looks the same as the output on the ONNX/IR models.</p>
@@ -875,8 +882,8 @@ looks the same as the output on the ONNX/IR models.</p>
 </pre></div>
 </div>
 <img alt="../_images/102-pytorch-onnx-to-openvino-with-output_24_0.png" src="../_images/102-pytorch-onnx-to-openvino-with-output_24_0.png" />
-</div>
-<div class="section" id="performance-comparison">
+</section>
+<section id="performance-comparison">
 <h2>Performance Comparison<a class="headerlink" href="#performance-comparison" title="Permalink to this headline">¶</a></h2>
 <p>Measure the time it takes to do inference on twenty images. This gives
 an indication of performance. For more accurate benchmarking, use the
@@ -955,8 +962,8 @@ Note that many optimizations are possible to improve the performance.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CPU</span><span class="p">:</span> <span class="n">Intel</span><span class="p">(</span><span class="n">R</span><span class="p">)</span> <span class="n">Xeon</span><span class="p">(</span><span class="n">R</span><span class="p">)</span> <span class="n">Platinum</span> <span class="mi">8272</span><span class="n">CL</span> <span class="n">CPU</span> <span class="o">@</span> <span class="mf">2.60</span><span class="n">GHz</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="references">
+</section>
+<section id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://github.com/ekzhang/fastseg">Fastseg</a></p></li>
@@ -967,8 +974,8 @@ support</a></p></li>
 <li><p><a class="reference external" href="https://docs.openvino.ai/latest/openvino_docs_MO_DG_prepare_model_convert_model_Converting_Model_General.html">Model Optimizer
 Documentation</a></p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -999,7 +1006,7 @@ Documentation</a></p></li>
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

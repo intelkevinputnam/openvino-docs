@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Transition to OpenVINO™ API 2.0 &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -1835,12 +1842,12 @@
             
                 <div>
                   
-  <div class="section" id="transition-to-openvino-api-2-0">
+  <section id="transition-to-openvino-api-2-0">
 <span id="doxid-openvino-2-0-transition-guide"></span><span id="index-0"></span><h1>Transition to OpenVINO™ API 2.0<a class="headerlink" href="#transition-to-openvino-api-2-0" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-openvino-2-0-transition-guide-1md-openvino-docs-ov-runtime-ug-migration-ov-2-0-intro"></span></p>
 <div class="toctree-wrapper compound">
 </div>
-<div class="section" id="introduction">
+<section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>Versions of OpenVINO™ prior to 2022.1 required changes in the application logic when migrating an app from other frameworks, like TensorFlow, ONNX Runtime, PyTorch, PaddlePaddle, etc. The changes were required because:</p>
 <ul>
@@ -1848,7 +1855,7 @@
 <li><p>Model Optimizer changed layouts for TensorFlow models (see the <a class="reference internal" href="openvino_docs_OV_UG_Layout_Overview.html#doxid-openvino-docs-o-v-u-g-layout-overview"><span class="std std-ref">Layouts in OpenVINO</span></a>). It lead to unusual requirement of using the input data with a different layout than that of the framework:</p>
 <img alt="../_images/tf_openvino.png" src="../_images/tf_openvino.png" />
 </li>
-<li><p>Inference Engine API (<code class="docutils literal notranslate"><span class="pre">InferenceEngine::CNNNetwork</span></code>) applied some conversion rules for input and output precisions due to limitations in device plugins.</p></li>
+<li><p>Inference Engine API (<code class="docutils literal notranslate"><a class="reference internal" href="../api/groups/classInferenceEngine_1_1CNNNetwork.html#doxid-class-inference-engine-1-1-c-n-n-network"><span class="std std-ref"><span class="pre">InferenceEngine::CNNNetwork</span></span></a></code>) applied some conversion rules for input and output precisions due to limitations in device plugins.</p></li>
 <li><p>Users needed to specify input shapes during model conversions in Model Optimizer, and work with static shapes in the application.</p></li>
 </ul>
 <p>The new OpenVINO™ introduces API 2.0 (also called OpenVINO API v2) to align the logic of working with models as it is done in their origin frameworks - no layout and precision changes, operating with tensor names and indices to address inputs and outputs. OpenVINO Runtime has combined Inference Engine API used for inference and nGraph API targeted to work with models and operations. API 2.0 has a common structure, naming convention styles, namespaces, and removes duplicated structures. For more details, see the <a class="reference internal" href="openvino_2_0_inference_pipeline.html#doxid-openvino-2-0-inference-pipeline"><span class="std std-ref">Changes to Inference Pipeline in OpenVINO API v2</span></a>.</p>
@@ -1856,14 +1863,14 @@
 <p class="admonition-title">Note</p>
 <p>Your existing applications will continue to work with OpenVINO Runtime 2022.1, as normal. Although, migration to API 2.0 is strongly recommended. This will allow you to use additional features, like <a class="reference internal" href="openvino_docs_OV_UG_Preprocessing_Overview.html#doxid-openvino-docs-o-v-u-g-preprocessing-overview"><span class="std std-ref">Preprocessing</span></a> and <a class="reference internal" href="openvino_docs_OV_UG_DynamicShapes.html#doxid-openvino-docs-o-v-u-g-dynamic-shapes"><span class="std std-ref">Dynamic shapes support</span></a>.</p>
 </div>
-</div>
-<div class="section" id="introducing-ir-v11">
+</section>
+<section id="introducing-ir-v11">
 <h2>Introducing IR v11<a class="headerlink" href="#introducing-ir-v11" title="Permalink to this headline">¶</a></h2>
 <p>To support these features, OpenVINO has introduced IR v11, which is now the default version for Model Optimizer. The model represented in IR v11 fully matches the original model in the original framework format in terms of inputs, and outputs. It is also not required to specify input shapes during conversion, which results in IR v11 containing <code class="docutils literal notranslate"><span class="pre">-1</span></code> to denote undefined dimensions. For more details on how to fully utilize this feature, see the <a class="reference internal" href="openvino_docs_OV_UG_DynamicShapes.html#doxid-openvino-docs-o-v-u-g-dynamic-shapes"><span class="std std-ref">Working with dynamic shapes</span></a> guide. For information on how to reshape to static shapes in the application, see the <a class="reference internal" href="openvino_docs_OV_UG_ShapeInference.html#doxid-openvino-docs-o-v-u-g-shape-inference"><span class="std std-ref">Changing input shapes</span></a>.</p>
 <p>IR v11 is fully compatible with old applications written with the Inference Engine API used by older versions of OpenVINO. This backward compatibility is allowed thanks to additional runtime information included in IR v11. This means that if the IR v11 is read by an application based on Inference Engine, it is internally converted to IR v10.</p>
 <p>IR v11 is supported by all OpenVINO Development tools including Post-Training Optimization tool, Benchmark app, etc.</p>
-</div>
-<div class="section" id="ir-v10-compatibility">
+</section>
+<section id="ir-v10-compatibility">
 <h2>IR v10 Compatibility<a class="headerlink" href="#ir-v10-compatibility" title="Permalink to this headline">¶</a></h2>
 <p>API 2.0 also supports backward compatibility for models in IR v10. If you have IR v10 files, they can also be fed to OpenVINO Runtime (For more details, see the <a class="reference internal" href="openvino_2_0_inference_pipeline.html#doxid-openvino-2-0-inference-pipeline"><span class="std std-ref">migration steps</span></a>).</p>
 <p>Some OpenVINO Development Tools also support both IR v10 and IR v11 as an input:</p>
@@ -1876,8 +1883,8 @@
 <p class="admonition-title">Note</p>
 <p>If you need to quantize your IR v10 models to run with OpenVINO 2022.1, it is recommended to download, and use Post-Training Optimization tool from the OpenVINO 2021.4 release.</p>
 </div>
-</div>
-<div class="section" id="differences-between-inference-engine-and-openvino-runtime-2022-1">
+</section>
+<section id="differences-between-inference-engine-and-openvino-runtime-2022-1">
 <h2>Differences between Inference Engine and OpenVINO Runtime 2022.1<a class="headerlink" href="#differences-between-inference-engine-and-openvino-runtime-2022-1" title="Permalink to this headline">¶</a></h2>
 <p>Inference Engine and nGraph APIs have not become deprecated with the introduction of the new API, and they can still be used in applications. However, it is highly recommended to migrate to API 2.0, as it offers more features (further extended in future releases), such as:</p>
 <ul class="simple">
@@ -1890,7 +1897,7 @@
 <ul>
 <li><p>Model Optimizer can change input element types, order of dimensions (layouts) for the model from the original framework.</p></li>
 <li><p>Inference Engine can override input and output element types.</p></li>
-<li><p>Inference Engine API uses operation names to address inputs and outputs (e.g. <span class="xref std std-ref">InferenceEngine::InferRequest::GetBlob</span>).</p></li>
+<li><p>Inference Engine API uses operation names to address inputs and outputs (e.g. <a class="reference internal" href="../api/groups/classInferenceEngine_1_1InferRequest.html#doxid-class-inference-engine-1-1-infer-request-1a9601a4cda3f309181af34feedf1b914c"><span class="std std-ref">InferenceEngine::InferRequest::GetBlob</span></a>).</p></li>
 <li><p>Inference Engine API does not support compiling of models with dynamic input shapes.</p></li>
 </ul>
 </li>
@@ -1943,8 +1950,8 @@
 <li><p><a class="reference internal" href="openvino_2_0_configure_devices.html#doxid-openvino-2-0-configure-devices"><span class="std std-ref">Configure device</span></a></p></li>
 <li><p><a class="reference internal" href="openvino_2_0_model_creation.html#doxid-openvino-2-0-model-creation"><span class="std std-ref">OpenVINO™ Model Creation</span></a></p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -1975,7 +1982,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

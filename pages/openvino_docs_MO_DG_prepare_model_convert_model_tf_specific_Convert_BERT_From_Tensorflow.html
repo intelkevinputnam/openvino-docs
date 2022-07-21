@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Convert TensorFlow BERT Model &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -1835,10 +1842,10 @@
             
                 <div>
                   
-  <div class="section" id="convert-tensorflow-bert-model">
+  <section id="convert-tensorflow-bert-model">
 <span id="doxid-openvino-docs-m-o-d-g-prepare-model-convert-model-tf-specific-convert-b-e-r-t-from-tensorflow"></span><span id="index-0"></span><h1>Convert TensorFlow BERT Model<a class="headerlink" href="#convert-tensorflow-bert-model" title="Permalink to this headline">¶</a></h1>
 <p><span class="target" id="doxid-openvino-docs-m-o-d-g-prepare-model-convert-model-tf-specific-convert-b-e-r-t-from-tensorflow-1md-openvino-docs-mo-dg-prepare-model-convert-model-tf-specific-convert-bert-from-tensorflow"></span> Pre-trained models for BERT (Bidirectional Encoder Representations from Transformers) are <a class="reference external" href="https://github.com/google-research/bert">publicly available</a>.</p>
-<div class="section" id="supported-models">
+<section id="supported-models">
 <span id="id1"></span><h2>Supported Models<a class="headerlink" href="#supported-models" title="Permalink to this headline">¶</a></h2>
 <p>Currently, the following models from the <a class="reference external" href="https://github.com/google-research/bert#pre-trained-models">pre-trained BERT model list</a> are supported:</p>
 <ul class="simple">
@@ -1850,8 +1857,8 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">BERT-Large,</span> <span class="pre">Cased</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">BERT-Large,</span> <span class="pre">Uncased</span></code></p></li>
 </ul>
-</div>
-<div class="section" id="download-the-pre-trained-bert-model">
+</section>
+<section id="download-the-pre-trained-bert-model">
 <h2>Download the Pre-Trained BERT Model<a class="headerlink" href="#download-the-pre-trained-bert-model" title="Permalink to this headline">¶</a></h2>
 <p>Download and unzip an archive with the <a class="reference external" href="https://storage.googleapis.com/bert_models/2018_11_03/multilingual_L-12_H-768_A-12.zip">BERT-Base, Multilingual Uncased Model</a>.</p>
 <p>After the archive is unzipped, the directory <code class="docutils literal notranslate"><span class="pre">uncased_L-12_H-768_A-12</span></code> is created and contains the following files:</p>
@@ -1863,16 +1870,16 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">vocab.txt</span></code></p></li>
 </ul>
 <p>Pre-trained model meta-graph files are <code class="docutils literal notranslate"><span class="pre">bert_model.ckpt.\*</span></code>.</p>
-</div>
-<div class="section" id="convert-tensorflow-bert-model-to-ir">
+</section>
+<section id="convert-tensorflow-bert-model-to-ir">
 <h2>Convert TensorFlow BERT Model to IR<a class="headerlink" href="#convert-tensorflow-bert-model-to-ir" title="Permalink to this headline">¶</a></h2>
 <p>To generate the BERT Intermediate Representation (IR) of the model, run the Model Optimizer with the following parameters:</p>
 <div class="highlight"><div class="highlight"><pre><span></span> <span class="n">mo</span> \
 <span class="o">--</span><span class="n">input_meta_graph</span> <span class="n">uncased_L</span><span class="o">-</span><span class="mi">12</span><span class="n">_H</span><span class="o">-</span><span class="mi">768</span><span class="n">_A</span><span class="o">-</span><span class="mi">12</span><span class="o">/</span><span class="n">bert_model</span><span class="p">.</span><span class="n">ckpt</span><span class="p">.</span><span class="n">meta</span> \
 <span class="o">--</span><span class="n">output</span> <span class="n">bert</span><span class="o">/</span><span class="n">pooler</span><span class="o">/</span><span class="n">dense</span><span class="o">/</span><span class="n">Tanh</span>                                 \
 <span class="o">--</span><span class="n">input</span> <span class="n">Placeholder</span><span class="p">{</span><span class="n">i32</span><span class="p">},</span><span class="n">Placeholder_1</span><span class="p">{</span><span class="n">i32</span><span class="p">},</span><span class="n">Placeholder_2</span><span class="p">{</span><span class="n">i32</span><span class="p">}</span></pre></div></div><p>Pre-trained models are not suitable for batch reshaping out-of-the-box because of multiple hardcoded shapes in the model.</p>
-</div>
-<div class="section" id="convert-reshape-able-tensorflow-bert-model-to-the-intermediate-representation">
+</section>
+<section id="convert-reshape-able-tensorflow-bert-model-to-the-intermediate-representation">
 <h2>Convert Reshape-able TensorFlow* BERT Model to the Intermediate Representation<a class="headerlink" href="#convert-reshape-able-tensorflow-bert-model-to-the-intermediate-representation" title="Permalink to this headline">¶</a></h2>
 <p>Follow these steps to make pre-trained TensorFlow BERT model reshape-able over batch dimension:</p>
 <ol class="arabic">
@@ -1934,8 +1941,8 @@
 <span class="o">--</span><span class="n">input_model</span> <span class="n">inference_graph</span><span class="p">.</span><span class="n">pb</span> \
 <span class="o">--</span><span class="n">input</span> <span class="s">&quot;IteratorGetNext:0{i32}[1 128],IteratorGetNext:1{i32}[1 128],IteratorGetNext:4{i32}[1 128]&quot;</span></pre></div></div><p>For other applicable parameters, refer to <a class="reference internal" href="openvino_docs_MO_DG_prepare_model_convert_model_Convert_Model_From_TensorFlow.html#doxid-openvino-docs-m-o-d-g-prepare-model-convert-model-convert-model-from-tensor-flow"><span class="std std-ref">Convert Model from TensorFlow</span></a>.</p>
 <p>For more information about reshape abilities, refer to <a class="reference internal" href="openvino_docs_OV_UG_ShapeInference.html#doxid-openvino-docs-o-v-u-g-shape-inference"><span class="std std-ref">Using Shape Inference</span></a>.</p>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -1966,7 +1973,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

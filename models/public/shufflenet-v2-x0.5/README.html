@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>shufflenet-v2-x0.5 &#8212; OpenVINO™  documentation</title>
     
     
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../../../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -2106,15 +2113,15 @@
             
                 <div>
                   
-  <div class="section" id="shufflenet-v2-x0-5">
+  <section id="shufflenet-v2-x0-5">
 <h1>shufflenet-v2-x0.5<a class="headerlink" href="#shufflenet-v2-x0-5" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="use-case-and-high-level-description">
+<section id="use-case-and-high-level-description">
 <h2>Use Case and High-Level Description<a class="headerlink" href="#use-case-and-high-level-description" title="Permalink to this headline">¶</a></h2>
 <p>Shufflenet V2 x0.5 is a light-weight classification model based on <code class="docutils literal notranslate"><span class="pre">channel</span> <span class="pre">split</span></code> and <code class="docutils literal notranslate"><span class="pre">channel</span> <span class="pre">shuffle</span></code> operations. This is Caffe* implementation based on architecture described in paper <a class="reference external" href="https://arxiv.org/abs/1807.11164">“ShuffleNet V2: Practical Guidelines for Efficient CNN Architecture Design”</a>. For details about implementation, check out the <a class="reference external" href="https://github.com/miaow1988/ShuffleNet_V2_pytorch_caffe">repository</a>. The model was pre-trained on the ImageNet dataset.</p>
 <p>The model input is a blob that consists of a single image of <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">3,</span> <span class="pre">224,</span> <span class="pre">224</span></code> in <code class="docutils literal notranslate"><span class="pre">RGB</span></code> order.</p>
 <p>The model output is typical object classifier for the 1000 different classifications matching with those in the ImageNet dataset.</p>
-</div>
-<div class="section" id="specification">
+</section>
+<section id="specification">
 <h2>Specification<a class="headerlink" href="#specification" title="Permalink to this headline">¶</a></h2>
 <table class="colwidths-auto table">
 <thead>
@@ -2137,8 +2144,8 @@
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="accuracy">
+</section>
+<section id="accuracy">
 <h2>Accuracy<a class="headerlink" href="#accuracy" title="Permalink to this headline">¶</a></h2>
 <table class="colwidths-auto table">
 <thead>
@@ -2155,10 +2162,10 @@
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="input">
+</section>
+<section id="input">
 <h2>Input<a class="headerlink" href="#input" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="original-model">
+<section id="original-model">
 <h3>Original model<a class="headerlink" href="#original-model" title="Permalink to this headline">¶</a></h3>
 <p>Image, name - <code class="docutils literal notranslate"><span class="pre">data</span></code>,  shape - <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">3,</span> <span class="pre">224,</span> <span class="pre">224</span></code>, format is <code class="docutils literal notranslate"><span class="pre">B,</span> <span class="pre">C,</span> <span class="pre">H,</span> <span class="pre">W</span></code>, where:</p>
 <ul class="simple">
@@ -2169,8 +2176,8 @@
 </ul>
 <p>Channel order is <code class="docutils literal notranslate"><span class="pre">RGB</span></code>.
 Scale factor - 255.</p>
-</div>
-<div class="section" id="converted-model">
+</section>
+<section id="converted-model">
 <h3>Converted model<a class="headerlink" href="#converted-model" title="Permalink to this headline">¶</a></h3>
 <p>Image, name - <code class="docutils literal notranslate"><span class="pre">data</span></code>,  shape - <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">3,</span> <span class="pre">224,</span> <span class="pre">224</span></code>, format is <code class="docutils literal notranslate"><span class="pre">B,</span> <span class="pre">C,</span> <span class="pre">H,</span> <span class="pre">W</span></code>, where:</p>
 <ul class="simple">
@@ -2180,24 +2187,24 @@ Scale factor - 255.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">W</span></code> - width</p></li>
 </ul>
 <p>Channel order is <code class="docutils literal notranslate"><span class="pre">BGR</span></code></p>
-</div>
-</div>
-<div class="section" id="output">
+</section>
+</section>
+<section id="output">
 <h2>Output<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id1">
+<section id="id1">
 <h3>Original model<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <p>Object classifier according to ImageNet classes, name - <code class="docutils literal notranslate"><span class="pre">fc</span></code>,  shape - <code class="docutils literal notranslate"><span class="pre">1,</span> <span class="pre">1000</span></code>, output data format is <code class="docutils literal notranslate"><span class="pre">B,</span> <span class="pre">C</span></code>, where:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">B</span></code> - batch size</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">C</span></code> - predicted probabilities for each class in [0, 1] range</p></li>
 </ul>
-</div>
-<div class="section" id="id2">
+</section>
+<section id="id2">
 <h3>Converted model<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <p>The converted model has the same parameters as the original model.</p>
-</div>
-</div>
-<div class="section" id="download-a-model-and-convert-it-into-openvino-ir-format">
+</section>
+</section>
+<section id="download-a-model-and-convert-it-into-openvino-ir-format">
 <h2>Download a Model and Convert it into OpenVINO™ IR Format<a class="headerlink" href="#download-a-model-and-convert-it-into-openvino-ir-format" title="Permalink to this headline">¶</a></h2>
 <p>You can download models and if necessary convert them into OpenVINO™ IR format using the <span class="xref myst">Model Downloader and other automation tools</span> as shown in the examples below.</p>
 <p>An example of using the Model Downloader:</p>
@@ -2208,16 +2215,16 @@ Scale factor - 255.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">omz_converter</span> <span class="o">--</span><span class="n">name</span> <span class="o">&lt;</span><span class="n">model_name</span><span class="o">&gt;</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="demo-usage">
+</section>
+<section id="demo-usage">
 <h2>Demo usage<a class="headerlink" href="#demo-usage" title="Permalink to this headline">¶</a></h2>
 <p>The model can be used in the following demos provided by the Open Model Zoo to show its capabilities:</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="../../../demos/classification_benchmark_demo/cpp/README.html"><span class="doc std std-doc">Classification Benchmark C++ Demo</span></a></p></li>
 <li><p><a class="reference internal" href="../../../demos/classification_demo/python/README.html"><span class="doc std std-doc">Classification Python* Demo</span></a></p></li>
 </ul>
-</div>
-<div class="section" id="legal-information">
+</section>
+<section id="legal-information">
 <h2>Legal Information<a class="headerlink" href="#legal-information" title="Permalink to this headline">¶</a></h2>
 <p>The original model is distributed under the following
 <a class="reference external" href="https://raw.githubusercontent.com/miaow1988/ShuffleNet_V2_pytorch_caffe/master/LICENSE">license</a>:</p>
@@ -2248,8 +2255,8 @@ Scale factor - 255.</p>
 <span class="n">OF</span> <span class="n">THIS</span> <span class="n">SOFTWARE</span><span class="p">,</span> <span class="n">EVEN</span> <span class="n">IF</span> <span class="n">ADVISED</span> <span class="n">OF</span> <span class="n">THE</span> <span class="n">POSSIBILITY</span> <span class="n">OF</span> <span class="n">SUCH</span> <span class="n">DAMAGE</span><span class="o">.</span>
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -2280,7 +2287,7 @@ Scale factor - 255.</p>
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     

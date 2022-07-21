@@ -1,0 +1,999 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>class InferenceEngine::Core &#8212; OpenVINO™  documentation</title>
+    
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/blank.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/doxyrest-pygments.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <link href="../../_static/css/media/favicon.ico" rel="shortcut icon">
+    <link rel="stylesheet" href="../../_static/css/openvino_sphinx_theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/css/button.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/css/input.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/css/textfield.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/css/tabs.css" type="text/css" />
+    <script src="../../_static/js/openvino_sphinx_theme.js"></script>
+    <link rel="stylesheet" href="../../_static/css/viewer.min.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/0.5.7/chartjs-plugin-annotation.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-barchart-background@1.3.0/build/Plugin.Barchart.Background.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-deferred@1"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.1/papaparse.min.js"></script>
+    <script src="../../_static/js/viewer.min.js"></script>
+    <script src="/assets/versions_raw.js"></script>
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/tabs.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/js/custom.js"></script>
+    <script src="../../_static/js/graphs.js"></script>
+    <script src="../../_static/js/graphs_ov_tf.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/target-highlight.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <link rel="canonical" href="https://docs.openvino.ai/latest/api/groups/classInferenceEngine_1_1Core.html" />
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+      <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+
+<a class="navbar-brand" href="../../index.html">
+  <img src="../../_static/logo.svg" class="logo" alt="logo">
+</a>
+
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../pages/get_started.html">
+  Get Started
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../pages/documentation.html">
+  Documentation
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../tutorials.html">
+  Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api_reference.html">
+  API Reference
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../model_zoo.html">
+  Model Zoo
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../pages/resources.html">
+  Resources
+ </a>
+</li>
+
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/openvinotoolkit/openvino" rel="noopener" target="_blank" title="GitHub">
+            <span><i class="sst-github"></i></span>
+            <label class="sr-only">GitHub</label>
+          </a>
+        </li>
+</ul>
+      </div>
+      
+      <div class="navbar-end-item">
+        
+<div class="dropdown sst-dropdown sst-dropdown-navbar">
+  <button class="btn sst-btn dropdown-toggle" type="button" id="version-selector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+  <div class="dropdown-menu" aria-labelledby="version-selector">
+  </div>
+</div>
+      </div>
+      
+      <div class="navbar-end-item">
+        
+
+<div class="dropdown sst-dropdown sst-dropdown-navbar">
+  <button class="btn sst-btn dropdown-toggle" type="button" id="language-selector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">English</button>
+  <div class="dropdown-menu" aria-labelledby="language-selector">
+    
+      
+        <a class="dropdown-item font-weight-bold" href="/latest/api/groups/classInferenceEngine_1_1Core.html">English</a>
+      
+    
+      
+        <a  class="dropdown-item" href="/cn/latest/api/groups/classInferenceEngine_1_1Core.html">Chinese</a>
+      
+    
+  </div>
+</div>
+
+      </div>
+      
+    </div>
+  </div>
+</div>
+        <div id="collapse-nav-wrapper" class="container-xl">
+          <button id="collapse-nav" class="button bttn-prm button-size-m" type="button" data-toggle="collapse" data-target="#nav-tree" aria-expanded="false" aria-controls="nav-tree">
+            Documentation navigation <i class="fas fa-chevron-down"></i>
+          </button>
+        </div>
+      </nav>
+      <div class="transition-banner container-fluid alert alert-info alert-dismissible fade show" role="alert">
+        <p>OpenVINO 2022.1 introduces a new version of OpenVINO API (API 2.0). For more information on the changes and transition steps, see the <a href="https://docs.openvino.ai/latest/openvino_2_0_transition_guide.html">transition guide</a></p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar" id="nav-tree"><form class="searchForm bd-search d-flex align-items-center" action="../../search.html" method="get">
+    <i class="icon fas fa-search"></i>
+    <input type="search" class="form-control" name="query" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    
+  </div>
+</nav>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+              
+              <div class="toc-item">
+                
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#overview">
+   Overview
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#detailed-documentation">
+   Detailed Documentation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#construction">
+     Construction
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#methods">
+     Methods
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+</nav>
+              </div>
+              
+              <div class="toc-item">
+                <div class="tocsection download-docs">
+  <div class="dropdown sst-dropdown">
+    <button class="button bttn-prm button-size-m" data-display="static" type="button" id="download-options"
+      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Download Docs
+    </button>
+    <div class="dropdown-menu" aria-labelledby="download-options">
+      <a class="dropdown-item" href="#" onclick="window.print()">.pdf</a>
+      <a id="download-zip-btn" class="dropdown-item" href="#">.zip</a>
+    </div>
+  </div>
+</div>
+              </div>
+              
+            
+          </div>
+          
+
+          
+          
+              
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+
+<div class="tocsection editthispage">
+    <a href="None">
+        <i class="fas fa-pencil-alt"></i> Edit this page
+    </a>
+</div>
+
+            
+                <div>
+                  
+  <section id="class-inferenceengine-core">
+<span id="doxid-class-inference-engine-1-1-core"></span><span id="index-0"></span><h1>class InferenceEngine::Core<a class="headerlink" href="#class-inferenceengine-core" title="Permalink to this headline">¶</a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>This class represents Inference Engine <a class="reference internal" href="#doxid-class-inference-engine-1-1-core"><span class="std std-ref">Core</span></a> entity. <a class="reference internal" href="#details-class-inference-engine-1-1-core"><span class="std std-ref">More…</span></a></p>
+<div class="highlight doxyrest-overview-code-block"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;ie_core.hpp&gt;</span><span class="cp"></span>
+
+<span class="k">class</span> <span class="n">Core</span>
+<span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="c1">// construction</span>
+
+    <a class="reference internal" href="#doxid-class-inference-engine-1-1-core-1ab582cc865fc264fd798399ad34c4c490"><span class="std std-ref">Core</span></a><span></span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">xmlConfigFile</span> <span class="o">=</span> <span class="p">{});</span>
+
+    <span class="c1">// methods</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span> <a class="reference internal" href="structInferenceEngine_1_1Version.html#doxid-struct-inference-engine-1-1-version"><span class="std std-ref">Version</span></a><span></span><span class="o">&gt;</span> <a class="reference internal" href="#doxid-class-inference-engine-1-1-core-1adc108cb23420db01c5f3f4bbf0296e12"><span class="std std-ref">GetVersions</span></a><span></span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">deviceName</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+
+    <a class="reference internal" href="classInferenceEngine_1_1CNNNetwork.html#doxid-class-inference-engine-1-1-c-n-n-network"><span class="std std-ref">CNNNetwork</span></a><span></span> <a class="reference internal" href="#doxid-class-inference-engine-1-1-core-1ac716dda382aefd09264b60ea40def3ef"><span class="std std-ref">ReadNetwork</span></a><span></span><span class="p">(</span>
+        <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">modelPath</span><span class="p">,</span>
+        <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">binPath</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+
+    <a class="reference internal" href="classInferenceEngine_1_1CNNNetwork.html#doxid-class-inference-engine-1-1-c-n-n-network"><span class="std std-ref">CNNNetwork</span></a><span></span> <a class="reference internal" href="#doxid-class-inference-engine-1-1-core-1a251861e52a979d6e61848babae3673ef"><span class="std std-ref">ReadNetwork</span></a><span></span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">model</span><span class="p">,</span> <span class="k">const</span> <a class="reference internal" href="classInferenceEngine_1_1Blob.html#doxid-class-inference-engine-1-1-blob-1a22946ecdb18fd8a9e8394087930d2092"><span class="std std-ref">Blob::CPtr</span></a><span></span><span class="o">&amp;</span> <span class="n">weights</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+
+    <a class="reference internal" href="classInferenceEngine_1_1ExecutableNetwork.html#doxid-class-inference-engine-1-1-executable-network"><span class="std std-ref">ExecutableNetwork</span></a><span></span> <a class="reference internal" href="#doxid-class-inference-engine-1-1-core-1a7b0b5ab0009abc572762422105b5c666"><span class="std std-ref">LoadNetwork</span></a><span></span><span class="p">(</span>
+        <span class="k">const</span> <a class="reference internal" href="classInferenceEngine_1_1CNNNetwork.html#doxid-class-inference-engine-1-1-c-n-n-network"><span class="std std-ref">CNNNetwork</span></a><span></span><span class="o">&amp;</span> <span class="n">network</span><span class="p">,</span>
+        <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&amp;</span> <span class="n">config</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="p">);</span>
+
+    <a class="reference internal" href="classInferenceEngine_1_1ExecutableNetwork.html#doxid-class-inference-engine-1-1-executable-network"><span class="std std-ref">ExecutableNetwork</span></a><span></span> <a class="reference internal" href="#doxid-class-inference-engine-1-1-core-1a7ac4bd8bc351fae833aaa0db84fab738"><span class="std std-ref">LoadNetwork</span></a><span></span><span class="p">(</span>
+        <span class="k">const</span> <a class="reference internal" href="classInferenceEngine_1_1CNNNetwork.html#doxid-class-inference-engine-1-1-c-n-n-network"><span class="std std-ref">CNNNetwork</span></a><span></span><span class="o">&amp;</span> <span class="n">network</span><span class="p">,</span>
+        <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">deviceName</span><span class="p">,</span>
+        <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&amp;</span> <span class="n">config</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="p">);</span>
+
+    <a class="reference internal" href="classInferenceEngine_1_1ExecutableNetwork.html#doxid-class-inference-engine-1-1-executable-network"><span class="std std-ref">ExecutableNetwork</span></a><span></span> <a class="reference internal" href="#doxid-class-inference-engine-1-1-core-1a6753da75547ffee37862c30c8f30f9e7"><span class="std std-ref">LoadNetwork</span></a><span></span><span class="p">(</span>
+        <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">modelPath</span><span class="p">,</span>
+        <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&amp;</span> <span class="n">config</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="p">);</span>
+
+    <a class="reference internal" href="classInferenceEngine_1_1ExecutableNetwork.html#doxid-class-inference-engine-1-1-executable-network"><span class="std std-ref">ExecutableNetwork</span></a><span></span> <a class="reference internal" href="#doxid-class-inference-engine-1-1-core-1a58dfdb97a5a965688e0aa59dd2ffb476"><span class="std std-ref">LoadNetwork</span></a><span></span><span class="p">(</span>
+        <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">modelPath</span><span class="p">,</span>
+        <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">deviceName</span><span class="p">,</span>
+        <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&amp;</span> <span class="n">config</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="p">);</span>
+
+    <span class="kt">void</span> <a class="reference internal" href="#doxid-class-inference-engine-1-1-core-1aac8284a60791abd6e50ddab0c695e38f"><span class="std std-ref">AddExtension</span></a><span></span><span class="p">(</span><span class="k">const</span> <a class="reference internal" href="namespaceInferenceEngine.html#doxid-namespace-inference-engine-1a7a4456ae150afbff5140be2d92680fa4"><span class="std std-ref">IExtensionPtr</span></a><span></span><span class="o">&amp;</span> <span class="n">extension</span><span class="p">);</span>
+
+    <a class="reference internal" href="classInferenceEngine_1_1ExecutableNetwork.html#doxid-class-inference-engine-1-1-executable-network"><span class="std std-ref">ExecutableNetwork</span></a><span></span> <a class="reference internal" href="#doxid-class-inference-engine-1-1-core-1aade061d5cccfab48d149ec989eb7e3f4"><span class="std std-ref">LoadNetwork</span></a><span></span><span class="p">(</span>
+        <span class="k">const</span> <a class="reference internal" href="classInferenceEngine_1_1CNNNetwork.html#doxid-class-inference-engine-1-1-c-n-n-network"><span class="std std-ref">CNNNetwork</span></a><span></span><span class="o">&amp;</span> <span class="n">network</span><span class="p">,</span>
+        <a class="reference internal" href="classInferenceEngine_1_1RemoteContext.html#doxid-class-inference-engine-1-1-remote-context-1adc79805c11b6939c51a794b90b8bfa93"><span class="std std-ref">RemoteContext::Ptr</span></a><span></span> <span class="n">context</span><span class="p">,</span>
+        <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&amp;</span> <span class="n">config</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="p">);</span>
+
+    <span class="kt">void</span> <a class="reference internal" href="#doxid-class-inference-engine-1-1-core-1aa1ddb53f4160bf0735239f4aa0c12320"><span class="std std-ref">AddExtension</span></a><span></span><span class="p">(</span><a class="reference internal" href="namespaceInferenceEngine.html#doxid-namespace-inference-engine-1a7a4456ae150afbff5140be2d92680fa4"><span class="std std-ref">IExtensionPtr</span></a><span></span> <span class="n">extension</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">deviceName</span><span class="p">);</span>
+
+    <a class="reference internal" href="classInferenceEngine_1_1ExecutableNetwork.html#doxid-class-inference-engine-1-1-executable-network"><span class="std std-ref">ExecutableNetwork</span></a><span></span> <a class="reference internal" href="#doxid-class-inference-engine-1-1-core-1af5dd52e92164a99ce9ed90f78b14d013"><span class="std std-ref">ImportNetwork</span></a><span></span><span class="p">(</span>
+        <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">modelFileName</span><span class="p">,</span>
+        <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">deviceName</span><span class="p">,</span>
+        <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&amp;</span> <span class="n">config</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="p">);</span>
+
+    <a class="reference internal" href="classInferenceEngine_1_1ExecutableNetwork.html#doxid-class-inference-engine-1-1-executable-network"><span class="std std-ref">ExecutableNetwork</span></a><span></span> <a class="reference internal" href="#doxid-class-inference-engine-1-1-core-1a0c4dc9377db2e03d016102d5beee0d7c"><span class="std std-ref">ImportNetwork</span></a><span></span><span class="p">(</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">istream</span><span class="o">&amp;</span> <span class="n">networkModel</span><span class="p">,</span>
+        <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">deviceName</span><span class="p">,</span>
+        <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&amp;</span> <span class="n">config</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="p">);</span>
+
+    <a class="reference internal" href="classInferenceEngine_1_1ExecutableNetwork.html#doxid-class-inference-engine-1-1-executable-network"><span class="std std-ref">ExecutableNetwork</span></a><span></span> <a class="reference internal" href="#doxid-class-inference-engine-1-1-core-1a91273c76ba8495be1b73b03deeb9093f"><span class="std std-ref">ImportNetwork</span></a><span></span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">istream</span><span class="o">&amp;</span> <span class="n">networkModel</span><span class="p">);</span>
+
+    <a class="reference internal" href="classInferenceEngine_1_1ExecutableNetwork.html#doxid-class-inference-engine-1-1-executable-network"><span class="std std-ref">ExecutableNetwork</span></a><span></span> <a class="reference internal" href="#doxid-class-inference-engine-1-1-core-1a81f8ced8acf4c0302fc242cc2618175d"><span class="std std-ref">ImportNetwork</span></a><span></span><span class="p">(</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">istream</span><span class="o">&amp;</span> <span class="n">networkModel</span><span class="p">,</span>
+        <span class="k">const</span> <a class="reference internal" href="classInferenceEngine_1_1RemoteContext.html#doxid-class-inference-engine-1-1-remote-context-1adc79805c11b6939c51a794b90b8bfa93"><span class="std std-ref">RemoteContext::Ptr</span></a><span></span><span class="o">&amp;</span> <span class="n">context</span><span class="p">,</span>
+        <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&amp;</span> <span class="n">config</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="p">);</span>
+
+    <a class="reference internal" href="structInferenceEngine_1_1QueryNetworkResult.html#doxid-struct-inference-engine-1-1-query-network-result"><span class="std std-ref">QueryNetworkResult</span></a><span></span> <a class="reference internal" href="#doxid-class-inference-engine-1-1-core-1a0852259214fd9faf2b46bb9720ec825a"><span class="std std-ref">QueryNetwork</span></a><span></span><span class="p">(</span>
+        <span class="k">const</span> <a class="reference internal" href="classInferenceEngine_1_1CNNNetwork.html#doxid-class-inference-engine-1-1-c-n-n-network"><span class="std std-ref">CNNNetwork</span></a><span></span><span class="o">&amp;</span> <span class="n">network</span><span class="p">,</span>
+        <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">deviceName</span><span class="p">,</span>
+        <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&amp;</span> <span class="n">config</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+
+    <span class="kt">void</span> <a class="reference internal" href="#doxid-class-inference-engine-1-1-core-1a34aa9ac6fb237b634d5bf08b288e88d4"><span class="std std-ref">SetConfig</span></a><span></span><span class="p">(</span>
+        <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&amp;</span> <span class="n">config</span><span class="p">,</span>
+        <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">deviceName</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="p">);</span>
+
+    <a class="reference internal" href="namespaceInferenceEngine.html#doxid-namespace-inference-engine-1aff2231f886c9f8fc9c226fd343026789"><span class="std std-ref">Parameter</span></a><span></span> <a class="reference internal" href="#doxid-class-inference-engine-1-1-core-1a415077386694f95b57e4cccb0d334a55"><span class="std std-ref">GetConfig</span></a><span></span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">deviceName</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+
+    <a class="reference internal" href="namespaceInferenceEngine.html#doxid-namespace-inference-engine-1aff2231f886c9f8fc9c226fd343026789"><span class="std std-ref">Parameter</span></a><span></span> <a class="reference internal" href="#doxid-class-inference-engine-1-1-core-1a27b1476aa8095c237eeabacfce73b38e"><span class="std std-ref">GetMetric</span></a><span></span><span class="p">(</span>
+        <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">deviceName</span><span class="p">,</span>
+        <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name</span><span class="p">,</span>
+        <span class="k">const</span> <a class="reference internal" href="namespaceInferenceEngine.html#doxid-namespace-inference-engine-1ab952963217c4a8b098fd90ba51708a9f"><span class="std std-ref">ParamMap</span></a><span></span><span class="o">&amp;</span> <span class="n">options</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <a class="reference internal" href="#doxid-class-inference-engine-1-1-core-1a16000a7a2ba2859ac5b20440dc1dea51"><span class="std std-ref">GetAvailableDevices</span></a><span></span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+
+    <span class="kt">void</span> <a class="reference internal" href="#doxid-class-inference-engine-1-1-core-1a56acaf7ba719bae5d7d2992e6c5fe0f5"><span class="std std-ref">RegisterPlugin</span></a><span></span><span class="p">(</span>
+        <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">pluginName</span><span class="p">,</span>
+        <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">deviceName</span>
+        <span class="p">);</span>
+
+    <span class="kt">void</span> <a class="reference internal" href="#doxid-class-inference-engine-1-1-core-1a5bf42b2543fc4fb79af7c5da8b06209d"><span class="std std-ref">UnregisterPlugin</span></a><span></span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">deviceName</span><span class="p">);</span>
+    <span class="kt">void</span> <a class="reference internal" href="#doxid-class-inference-engine-1-1-core-1a6d5eb76c849a82d870a0a6f848641edd"><span class="std std-ref">RegisterPlugins</span></a><span></span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">xmlConfigFile</span><span class="p">);</span>
+
+    <a class="reference internal" href="classInferenceEngine_1_1RemoteContext.html#doxid-class-inference-engine-1-1-remote-context-1adc79805c11b6939c51a794b90b8bfa93"><span class="std std-ref">RemoteContext::Ptr</span></a><span></span> <a class="reference internal" href="#doxid-class-inference-engine-1-1-core-1afeaad400e079f7b24fe9106702215c7f"><span class="std std-ref">CreateContext</span></a><span></span><span class="p">(</span>
+        <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">deviceName</span><span class="p">,</span>
+        <span class="k">const</span> <a class="reference internal" href="namespaceInferenceEngine.html#doxid-namespace-inference-engine-1ab952963217c4a8b098fd90ba51708a9f"><span class="std std-ref">ParamMap</span></a><span></span><span class="o">&amp;</span> <span class="n">params</span>
+        <span class="p">);</span>
+
+    <a class="reference internal" href="classInferenceEngine_1_1RemoteContext.html#doxid-class-inference-engine-1-1-remote-context-1adc79805c11b6939c51a794b90b8bfa93"><span class="std std-ref">RemoteContext::Ptr</span></a><span></span> <a class="reference internal" href="#doxid-class-inference-engine-1-1-core-1a3f7e984891b16d3825d0184698562802"><span class="std std-ref">GetDefaultContext</span></a><span></span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">deviceName</span><span class="p">);</span>
+<span class="p">};</span></pre></div></div></section>
+<section id="detailed-documentation">
+<span id="details-class-inference-engine-1-1-core"></span><h2>Detailed Documentation<a class="headerlink" href="#detailed-documentation" title="Permalink to this headline">¶</a></h2>
+<p>This class represents Inference Engine <a class="reference internal" href="#doxid-class-inference-engine-1-1-core"><span class="std std-ref">Core</span></a> entity.</p>
+<p>It can throw exceptions safely for the application, where it is properly handled.</p>
+<section id="construction">
+<h3>Construction<a class="headerlink" href="#construction" title="Permalink to this headline">¶</a></h3>
+<span class="target" id="doxid-class-inference-engine-1-1-core-1ab582cc865fc264fd798399ad34c4c490"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><span></span><span class="n">Core</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">xmlConfigFile</span> <span class="o">=</span> <span class="p">{})</span></pre></div></div><p>Constructs an OpenVINO <a class="reference internal" href="#doxid-class-inference-engine-1-1-core"><span class="std std-ref">Core</span></a> instance with devices and their plugins description.</p>
+<p>There are two ways how to configure device plugins:</p>
+<ol class="arabic simple">
+<li><p>(default) Use XML configuration file in case of dynamic libraries build;</p></li>
+<li><p>Use strictly defined configuration in case of static libraries build.</p></li>
+</ol>
+<p class="rubric">Parameters:</p>
+<table class="colwidths-given table">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>xml_config_file</p></td>
+<td><p>Path to the .xml file with plugins to load from. If the XML configuration file is not specified, default OpenVINO Runtime plugins are loaded from:</p>
+<ol class="arabic simple">
+<li><p>(dynamic build) default <code class="docutils literal notranslate"><span class="pre">plugins.xml</span></code> file located in the same folder as OpenVINO runtime shared library;</p></li>
+<li><p>(static build) statically defined configuration. In this case path to the .xml file is ignored.</p></li>
+</ol>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="methods">
+<h3>Methods<a class="headerlink" href="#methods" title="Permalink to this headline">¶</a></h3>
+<span class="target" id="doxid-class-inference-engine-1-1-core-1adc108cb23420db01c5f3f4bbf0296e12"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span> <a class="reference internal" href="structInferenceEngine_1_1Version.html#doxid-struct-inference-engine-1-1-version"><span class="std std-ref">Version</span></a><span></span><span class="o">&gt;</span> <span class="n">GetVersions</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">deviceName</span><span class="p">)</span> <span class="k">const</span></pre></div></div><p>Returns plugins version information.</p>
+<p class="rubric">Parameters:</p>
+<table class="colwidths-given table">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>deviceName</p></td>
+<td><p>Device name to identify plugin</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Returns:</p>
+<p>A vector of versions</p>
+<span class="target" id="doxid-class-inference-engine-1-1-core-1ac716dda382aefd09264b60ea40def3ef"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><a class="reference internal" href="classInferenceEngine_1_1CNNNetwork.html#doxid-class-inference-engine-1-1-c-n-n-network"><span class="std std-ref">CNNNetwork</span></a><span></span> <span class="n">ReadNetwork</span><span class="p">(</span>
+    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">modelPath</span><span class="p">,</span>
+    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">binPath</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="p">)</span> <span class="k">const</span></pre></div></div><p>Reads models from IR and ONNX formats.</p>
+<p class="rubric">Parameters:</p>
+<table class="colwidths-given table">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>modelPath</p></td>
+<td><p>path to model</p></td>
+</tr>
+<tr class="row-even"><td><p>binPath</p></td>
+<td><p>path to data file For IR format (*.bin):</p>
+<ul class="simple">
+<li><p>if path is empty, will try to read bin file with the same name as xml and</p></li>
+<li><p>if bin file with the same name was not found, will load IR without weights. For ONNX format (*.onnx):</p></li>
+<li><p>binPath parameter is not used.</p></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Returns:</p>
+<p><a class="reference internal" href="classInferenceEngine_1_1CNNNetwork.html#doxid-class-inference-engine-1-1-c-n-n-network"><span class="std std-ref">CNNNetwork</span></a></p>
+<span class="target" id="doxid-class-inference-engine-1-1-core-1a251861e52a979d6e61848babae3673ef"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><a class="reference internal" href="classInferenceEngine_1_1CNNNetwork.html#doxid-class-inference-engine-1-1-c-n-n-network"><span class="std std-ref">CNNNetwork</span></a><span></span> <span class="n">ReadNetwork</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">model</span><span class="p">,</span> <span class="k">const</span> <a class="reference internal" href="classInferenceEngine_1_1Blob.html#doxid-class-inference-engine-1-1-blob-1a22946ecdb18fd8a9e8394087930d2092"><span class="std std-ref">Blob::CPtr</span></a><span></span><span class="o">&amp;</span> <span class="n">weights</span><span class="p">)</span> <span class="k">const</span></pre></div></div><p>Reads models from IR and ONNX formats.</p>
+<p>Created <a class="reference internal" href="classInferenceEngine_1_1CNNNetwork.html#doxid-class-inference-engine-1-1-c-n-n-network"><span class="std std-ref">InferenceEngine::CNNNetwork</span></a> object shares the weights with <code class="docutils literal notranslate"><span class="pre">weights</span></code> object. So, do not create <code class="docutils literal notranslate"><span class="pre">weights</span></code> on temporary data which can be later freed, since the network constant data becomes to point to invalid memory.</p>
+<p class="rubric">Parameters:</p>
+<table class="colwidths-given table">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>model</p></td>
+<td><p>string with model in IR or ONNX format</p></td>
+</tr>
+<tr class="row-even"><td><p>weights</p></td>
+<td><p>shared pointer to constant blob with weights Reading ONNX models doesn’t support loading weights from data blobs. If you are using an ONNX model with external data files, please use the <code class="docutils literal notranslate"><a class="reference internal" href="#doxid-class-inference-engine-1-1-core-1a251861e52a979d6e61848babae3673ef"><span class="std std-ref"><span class="pre">InferenceEngine::Core::ReadNetwork(const</span> <span class="pre">std::string&amp;</span> <span class="pre">model,</span> <span class="pre">const</span> <span class="pre">Blob::CPtr&amp;</span> <span class="pre">weights)</span> <span class="pre">const</span></span></a></code> function overload which takes a filesystem path to the model. For ONNX case the second parameter should contain empty blob.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Returns:</p>
+<p><a class="reference internal" href="classInferenceEngine_1_1CNNNetwork.html#doxid-class-inference-engine-1-1-c-n-n-network"><span class="std std-ref">CNNNetwork</span></a></p>
+<span class="target" id="doxid-class-inference-engine-1-1-core-1a7b0b5ab0009abc572762422105b5c666"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><a class="reference internal" href="classInferenceEngine_1_1ExecutableNetwork.html#doxid-class-inference-engine-1-1-executable-network"><span class="std std-ref">ExecutableNetwork</span></a><span></span> <span class="n">LoadNetwork</span><span class="p">(</span>
+    <span class="k">const</span> <a class="reference internal" href="classInferenceEngine_1_1CNNNetwork.html#doxid-class-inference-engine-1-1-c-n-n-network"><span class="std std-ref">CNNNetwork</span></a><span></span><span class="o">&amp;</span> <span class="n">network</span><span class="p">,</span>
+    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&amp;</span> <span class="n">config</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="p">)</span></pre></div></div><p>Creates an executable network from a network object and uses AUTO plugin as the default device to load executable network.</p>
+<p>Users can create as many networks as they need and use them simultaneously (up to the limitation of the hardware resources)</p>
+<p class="rubric">Parameters:</p>
+<table class="colwidths-given table">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>network</p></td>
+<td><p><a class="reference internal" href="classInferenceEngine_1_1CNNNetwork.html#doxid-class-inference-engine-1-1-c-n-n-network"><span class="std std-ref">CNNNetwork</span></a> object acquired from <a class="reference internal" href="#doxid-class-inference-engine-1-1-core-1ac716dda382aefd09264b60ea40def3ef"><span class="std std-ref">Core::ReadNetwork</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>config</p></td>
+<td><p>Optional map of pairs: (config parameter name, config parameter value) relevant only for this load operation</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Returns:</p>
+<p>An executable network reference</p>
+<span class="target" id="doxid-class-inference-engine-1-1-core-1a7ac4bd8bc351fae833aaa0db84fab738"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><a class="reference internal" href="classInferenceEngine_1_1ExecutableNetwork.html#doxid-class-inference-engine-1-1-executable-network"><span class="std std-ref">ExecutableNetwork</span></a><span></span> <span class="n">LoadNetwork</span><span class="p">(</span>
+    <span class="k">const</span> <a class="reference internal" href="classInferenceEngine_1_1CNNNetwork.html#doxid-class-inference-engine-1-1-c-n-n-network"><span class="std std-ref">CNNNetwork</span></a><span></span><span class="o">&amp;</span> <span class="n">network</span><span class="p">,</span>
+    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">deviceName</span><span class="p">,</span>
+    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&amp;</span> <span class="n">config</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="p">)</span></pre></div></div><p>Creates an executable network from a network object.</p>
+<p>Users can create as many networks as they need and use them simultaneously (up to the limitation of the hardware resources)</p>
+<p class="rubric">Parameters:</p>
+<table class="colwidths-given table">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>network</p></td>
+<td><p><a class="reference internal" href="classInferenceEngine_1_1CNNNetwork.html#doxid-class-inference-engine-1-1-c-n-n-network"><span class="std std-ref">CNNNetwork</span></a> object acquired from <a class="reference internal" href="#doxid-class-inference-engine-1-1-core-1ac716dda382aefd09264b60ea40def3ef"><span class="std std-ref">Core::ReadNetwork</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>deviceName</p></td>
+<td><p>Name of device to load network to</p></td>
+</tr>
+<tr class="row-odd"><td><p>config</p></td>
+<td><p>Optional map of pairs: (config parameter name, config parameter value) relevant only for this load operation</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Returns:</p>
+<p>An executable network reference</p>
+<span class="target" id="doxid-class-inference-engine-1-1-core-1a6753da75547ffee37862c30c8f30f9e7"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><a class="reference internal" href="classInferenceEngine_1_1ExecutableNetwork.html#doxid-class-inference-engine-1-1-executable-network"><span class="std std-ref">ExecutableNetwork</span></a><span></span> <span class="n">LoadNetwork</span><span class="p">(</span>
+    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">modelPath</span><span class="p">,</span>
+    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&amp;</span> <span class="n">config</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="p">)</span></pre></div></div><p>Reads model and creates an executable network from IR or ONNX file and uses AUTO plugin as the default device to load executable network.</p>
+<p>This can be more efficient than using ReadNetwork + LoadNetwork(CNNNetwork) flow especially for cases when caching is enabled and cached model is available</p>
+<p class="rubric">Parameters:</p>
+<table class="colwidths-given table">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>modelPath</p></td>
+<td><p>path to model</p></td>
+</tr>
+<tr class="row-even"><td><p>config</p></td>
+<td><p>Optional map of pairs: (config parameter name, config parameter value) relevant only for this load operation/</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Returns:</p>
+<p>An executable network reference</p>
+<span class="target" id="doxid-class-inference-engine-1-1-core-1a58dfdb97a5a965688e0aa59dd2ffb476"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><a class="reference internal" href="classInferenceEngine_1_1ExecutableNetwork.html#doxid-class-inference-engine-1-1-executable-network"><span class="std std-ref">ExecutableNetwork</span></a><span></span> <span class="n">LoadNetwork</span><span class="p">(</span>
+    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">modelPath</span><span class="p">,</span>
+    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">deviceName</span><span class="p">,</span>
+    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&amp;</span> <span class="n">config</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="p">)</span></pre></div></div><p>Reads model and creates an executable network from IR or ONNX file.</p>
+<p>This can be more efficient than using ReadNetwork + LoadNetwork(CNNNetwork) flow especially for cases when caching is enabled and cached model is available</p>
+<p class="rubric">Parameters:</p>
+<table class="colwidths-given table">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>modelPath</p></td>
+<td><p>path to model</p></td>
+</tr>
+<tr class="row-even"><td><p>deviceName</p></td>
+<td><p>Name of device to load network to</p></td>
+</tr>
+<tr class="row-odd"><td><p>config</p></td>
+<td><p>Optional map of pairs: (config parameter name, config parameter value) relevant only for this load operation/</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Returns:</p>
+<p>An executable network reference</p>
+<span class="target" id="doxid-class-inference-engine-1-1-core-1aac8284a60791abd6e50ddab0c695e38f"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="n">AddExtension</span><span class="p">(</span><span class="k">const</span> <a class="reference internal" href="namespaceInferenceEngine.html#doxid-namespace-inference-engine-1a7a4456ae150afbff5140be2d92680fa4"><span class="std std-ref">IExtensionPtr</span></a><span></span><span class="o">&amp;</span> <span class="n">extension</span><span class="p">)</span></pre></div></div><p>Registers extension.</p>
+<p class="rubric">Parameters:</p>
+<table class="colwidths-given table">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>extension</p></td>
+<td><p>Pointer to already loaded extension</p></td>
+</tr>
+</tbody>
+</table>
+<span class="target" id="doxid-class-inference-engine-1-1-core-1aade061d5cccfab48d149ec989eb7e3f4"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><a class="reference internal" href="classInferenceEngine_1_1ExecutableNetwork.html#doxid-class-inference-engine-1-1-executable-network"><span class="std std-ref">ExecutableNetwork</span></a><span></span> <span class="n">LoadNetwork</span><span class="p">(</span>
+    <span class="k">const</span> <a class="reference internal" href="classInferenceEngine_1_1CNNNetwork.html#doxid-class-inference-engine-1-1-c-n-n-network"><span class="std std-ref">CNNNetwork</span></a><span></span><span class="o">&amp;</span> <span class="n">network</span><span class="p">,</span>
+    <a class="reference internal" href="classInferenceEngine_1_1RemoteContext.html#doxid-class-inference-engine-1-1-remote-context-1adc79805c11b6939c51a794b90b8bfa93"><span class="std std-ref">RemoteContext::Ptr</span></a><span></span> <span class="n">context</span><span class="p">,</span>
+    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&amp;</span> <span class="n">config</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="p">)</span></pre></div></div><p>Creates an executable network from a network object within a specified remote context.</p>
+<p class="rubric">Parameters:</p>
+<table class="colwidths-given table">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>network</p></td>
+<td><p><a class="reference internal" href="classInferenceEngine_1_1CNNNetwork.html#doxid-class-inference-engine-1-1-c-n-n-network"><span class="std std-ref">CNNNetwork</span></a> object acquired from <a class="reference internal" href="#doxid-class-inference-engine-1-1-core-1ac716dda382aefd09264b60ea40def3ef"><span class="std std-ref">Core::ReadNetwork</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>context</p></td>
+<td><p>Pointer to <a class="reference internal" href="classInferenceEngine_1_1RemoteContext.html#doxid-class-inference-engine-1-1-remote-context"><span class="std std-ref">RemoteContext</span></a> object</p></td>
+</tr>
+<tr class="row-odd"><td><p>config</p></td>
+<td><p>Optional map of pairs: (config parameter name, config parameter value) relevant only for this load operation</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Returns:</p>
+<p>An executable network object</p>
+<span class="target" id="doxid-class-inference-engine-1-1-core-1aa1ddb53f4160bf0735239f4aa0c12320"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="n">AddExtension</span><span class="p">(</span><a class="reference internal" href="namespaceInferenceEngine.html#doxid-namespace-inference-engine-1a7a4456ae150afbff5140be2d92680fa4"><span class="std std-ref">IExtensionPtr</span></a><span></span> <span class="n">extension</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">deviceName</span><span class="p">)</span></pre></div></div><p>Registers extension for the specified plugin.</p>
+<p class="rubric">Parameters:</p>
+<table class="colwidths-given table">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>extension</p></td>
+<td><p>Pointer to already loaded extension</p></td>
+</tr>
+<tr class="row-even"><td><p>deviceName</p></td>
+<td><p>Device name to identify plugin to add an executable extension</p></td>
+</tr>
+</tbody>
+</table>
+<span class="target" id="doxid-class-inference-engine-1-1-core-1af5dd52e92164a99ce9ed90f78b14d013"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><a class="reference internal" href="classInferenceEngine_1_1ExecutableNetwork.html#doxid-class-inference-engine-1-1-executable-network"><span class="std std-ref">ExecutableNetwork</span></a><span></span> <span class="n">ImportNetwork</span><span class="p">(</span>
+    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">modelFileName</span><span class="p">,</span>
+    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">deviceName</span><span class="p">,</span>
+    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&amp;</span> <span class="n">config</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="p">)</span></pre></div></div><p>Creates an executable network from a previously exported network.</p>
+<p class="rubric">Parameters:</p>
+<table class="colwidths-given table">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>modelFileName</p></td>
+<td><p>Path to the location of the exported file</p></td>
+</tr>
+<tr class="row-even"><td><p>deviceName</p></td>
+<td><p>Name of device load executable network on</p></td>
+</tr>
+<tr class="row-odd"><td><p>config</p></td>
+<td><p>Optional map of pairs: (config parameter name, config parameter value) relevant only for this load operation*</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Returns:</p>
+<p>An executable network reference</p>
+<span class="target" id="doxid-class-inference-engine-1-1-core-1a0c4dc9377db2e03d016102d5beee0d7c"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><a class="reference internal" href="classInferenceEngine_1_1ExecutableNetwork.html#doxid-class-inference-engine-1-1-executable-network"><span class="std std-ref">ExecutableNetwork</span></a><span></span> <span class="n">ImportNetwork</span><span class="p">(</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">istream</span><span class="o">&amp;</span> <span class="n">networkModel</span><span class="p">,</span>
+    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">deviceName</span><span class="p">,</span>
+    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&amp;</span> <span class="n">config</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="p">)</span></pre></div></div><p>Creates an executable network from a previously exported network.</p>
+<p class="rubric">Parameters:</p>
+<table class="colwidths-given table">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>networkModel</p></td>
+<td><p>network model stream</p></td>
+</tr>
+<tr class="row-even"><td><p>deviceName</p></td>
+<td><p>Name of device load executable network on</p></td>
+</tr>
+<tr class="row-odd"><td><p>config</p></td>
+<td><p>Optional map of pairs: (config parameter name, config parameter value) relevant only for this load operation*</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Returns:</p>
+<p>An executable network reference</p>
+<span class="target" id="doxid-class-inference-engine-1-1-core-1a91273c76ba8495be1b73b03deeb9093f"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><a class="reference internal" href="classInferenceEngine_1_1ExecutableNetwork.html#doxid-class-inference-engine-1-1-executable-network"><span class="std std-ref">ExecutableNetwork</span></a><span></span> <span class="n">ImportNetwork</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">istream</span><span class="o">&amp;</span> <span class="n">networkModel</span><span class="p">)</span></pre></div></div><p>Creates an executable network from a previously exported network.</p>
+<p>Deprecated Use <a class="reference internal" href="#doxid-class-inference-engine-1-1-core-1af5dd52e92164a99ce9ed90f78b14d013"><span class="std std-ref">Core::ImportNetwork</span></a> with explicit device name</p>
+<p class="rubric">Parameters:</p>
+<table class="colwidths-given table">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>networkModel</p></td>
+<td><p>network model stream</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Returns:</p>
+<p>An executable network reference</p>
+<span class="target" id="doxid-class-inference-engine-1-1-core-1a81f8ced8acf4c0302fc242cc2618175d"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><a class="reference internal" href="classInferenceEngine_1_1ExecutableNetwork.html#doxid-class-inference-engine-1-1-executable-network"><span class="std std-ref">ExecutableNetwork</span></a><span></span> <span class="n">ImportNetwork</span><span class="p">(</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">istream</span><span class="o">&amp;</span> <span class="n">networkModel</span><span class="p">,</span>
+    <span class="k">const</span> <a class="reference internal" href="classInferenceEngine_1_1RemoteContext.html#doxid-class-inference-engine-1-1-remote-context-1adc79805c11b6939c51a794b90b8bfa93"><span class="std std-ref">RemoteContext::Ptr</span></a><span></span><span class="o">&amp;</span> <span class="n">context</span><span class="p">,</span>
+    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&amp;</span> <span class="n">config</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="p">)</span></pre></div></div><p>Creates an executable network from a previously exported network within a specified remote context.</p>
+<p class="rubric">Parameters:</p>
+<table class="colwidths-given table">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>networkModel</p></td>
+<td><p>Network model stream</p></td>
+</tr>
+<tr class="row-even"><td><p>context</p></td>
+<td><p>Pointer to <a class="reference internal" href="classInferenceEngine_1_1RemoteContext.html#doxid-class-inference-engine-1-1-remote-context"><span class="std std-ref">RemoteContext</span></a> object</p></td>
+</tr>
+<tr class="row-odd"><td><p>config</p></td>
+<td><p>Optional map of pairs: (config parameter name, config parameter value) relevant only for this load operation</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Returns:</p>
+<p>An executable network reference</p>
+<span class="target" id="doxid-class-inference-engine-1-1-core-1a0852259214fd9faf2b46bb9720ec825a"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><a class="reference internal" href="structInferenceEngine_1_1QueryNetworkResult.html#doxid-struct-inference-engine-1-1-query-network-result"><span class="std std-ref">QueryNetworkResult</span></a><span></span> <span class="n">QueryNetwork</span><span class="p">(</span>
+    <span class="k">const</span> <a class="reference internal" href="classInferenceEngine_1_1CNNNetwork.html#doxid-class-inference-engine-1-1-c-n-n-network"><span class="std std-ref">CNNNetwork</span></a><span></span><span class="o">&amp;</span> <span class="n">network</span><span class="p">,</span>
+    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">deviceName</span><span class="p">,</span>
+    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&amp;</span> <span class="n">config</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="p">)</span> <span class="k">const</span></pre></div></div><p>Query device if it supports specified network with specified configuration.</p>
+<p class="rubric">Parameters:</p>
+<table class="colwidths-given table">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>deviceName</p></td>
+<td><p>A name of a device to query</p></td>
+</tr>
+<tr class="row-even"><td><p>network</p></td>
+<td><p>Network object to query</p></td>
+</tr>
+<tr class="row-odd"><td><p>config</p></td>
+<td><p>Optional map of pairs: (config parameter name, config parameter value)</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Returns:</p>
+<p>An object containing a map of pairs a layer name -&gt; a device name supporting this layer.</p>
+<span class="target" id="doxid-class-inference-engine-1-1-core-1a34aa9ac6fb237b634d5bf08b288e88d4"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="n">SetConfig</span><span class="p">(</span>
+    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;&amp;</span> <span class="n">config</span><span class="p">,</span>
+    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">deviceName</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="p">)</span></pre></div></div><p>Sets configuration for device, acceptable keys can be found in <code class="docutils literal notranslate"><span class="pre">ie_plugin_config.hpp</span></code>.</p>
+<p class="rubric">Parameters:</p>
+<table class="colwidths-given table">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>deviceName</p></td>
+<td><p>An optional name of a device. If device name is not specified, the config is set for all the registered devices.</p></td>
+</tr>
+<tr class="row-even"><td><p>config</p></td>
+<td><p>Map of pairs: (config parameter name, config parameter value)</p></td>
+</tr>
+</tbody>
+</table>
+<span class="target" id="doxid-class-inference-engine-1-1-core-1a415077386694f95b57e4cccb0d334a55"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><a class="reference internal" href="namespaceInferenceEngine.html#doxid-namespace-inference-engine-1aff2231f886c9f8fc9c226fd343026789"><span class="std std-ref">Parameter</span></a><span></span> <span class="n">GetConfig</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">deviceName</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name</span><span class="p">)</span> <span class="k">const</span></pre></div></div><p>Gets configuration dedicated to device behaviour.</p>
+<p>The method is targeted to extract information which can be set via SetConfig method.</p>
+<p class="rubric">Parameters:</p>
+<table class="colwidths-given table">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>deviceName</p></td>
+<td><ul class="simple">
+<li><p>A name of a device to get a configuration value.</p></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><p>name</p></td>
+<td><ul class="simple">
+<li><p>config key.</p></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Returns:</p>
+<p>Value of config corresponding to config key.</p>
+<span class="target" id="doxid-class-inference-engine-1-1-core-1a27b1476aa8095c237eeabacfce73b38e"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><a class="reference internal" href="namespaceInferenceEngine.html#doxid-namespace-inference-engine-1aff2231f886c9f8fc9c226fd343026789"><span class="std std-ref">Parameter</span></a><span></span> <span class="n">GetMetric</span><span class="p">(</span>
+    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">deviceName</span><span class="p">,</span>
+    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name</span><span class="p">,</span>
+    <span class="k">const</span> <a class="reference internal" href="namespaceInferenceEngine.html#doxid-namespace-inference-engine-1ab952963217c4a8b098fd90ba51708a9f"><span class="std std-ref">ParamMap</span></a><span></span><span class="o">&amp;</span> <span class="n">options</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="p">)</span> <span class="k">const</span></pre></div></div><p>Gets general runtime metric for dedicated hardware.</p>
+<p>The method is needed to request common device properties which are executable network agnostic. It can be device name, temperature, other devices-specific values.</p>
+<p class="rubric">Parameters:</p>
+<table class="colwidths-given table">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>deviceName</p></td>
+<td><ul class="simple">
+<li><p>A name of a device to get a metric value.</p></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><p>name</p></td>
+<td><ul class="simple">
+<li><p>metric name to request.</p></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>options</p></td>
+<td><ul class="simple">
+<li><p>optional parameters to get a metric value</p></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Returns:</p>
+<p>Metric value corresponding to metric key.</p>
+<span class="target" id="doxid-class-inference-engine-1-1-core-1a16000a7a2ba2859ac5b20440dc1dea51"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">GetAvailableDevices</span><span class="p">()</span> <span class="k">const</span></pre></div></div><p>Returns devices available for neural networks inference.</p>
+<p class="rubric">Returns:</p>
+<p>A vector of devices. The devices are returned as { CPU, GPU.0, GPU.1, MYRIAD } If there more than one device of specific type, they are enumerated with .# suffix.</p>
+<span class="target" id="doxid-class-inference-engine-1-1-core-1a56acaf7ba719bae5d7d2992e6c5fe0f5"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="n">RegisterPlugin</span><span class="p">(</span>
+    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">pluginName</span><span class="p">,</span>
+    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">deviceName</span>
+    <span class="p">)</span></pre></div></div><p>Register new device and plugin which implement this device inside Inference Engine.</p>
+<p class="rubric">Parameters:</p>
+<table class="colwidths-given table">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>pluginName</p></td>
+<td><p>A name of plugin. Depending on platform pluginName is wrapped with shared library suffix and prefix to identify library full name</p></td>
+</tr>
+<tr class="row-even"><td><p>deviceName</p></td>
+<td><p>A device name to register plugin for. If device name is not specified, then it’s taken from plugin itself.</p></td>
+</tr>
+</tbody>
+</table>
+<span class="target" id="doxid-class-inference-engine-1-1-core-1a5bf42b2543fc4fb79af7c5da8b06209d"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="n">UnregisterPlugin</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">deviceName</span><span class="p">)</span></pre></div></div><p>Unloads previously loaded plugin with a specified name from Inference Engine The method is needed to remove plugin instance and free its resources. If plugin for a specified device has not been created before, the method throws an exception.</p>
+<p class="rubric">Parameters:</p>
+<table class="colwidths-given table">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>deviceName</p></td>
+<td><p>Device name identifying plugin to remove from Inference Engine</p></td>
+</tr>
+</tbody>
+</table>
+<span class="target" id="doxid-class-inference-engine-1-1-core-1a6d5eb76c849a82d870a0a6f848641edd"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><span></span><span class="kt">void</span> <span class="n">RegisterPlugins</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">xmlConfigFile</span><span class="p">)</span></pre></div></div><p>Registers plugin to Inference Engine <a class="reference internal" href="#doxid-class-inference-engine-1-1-core"><span class="std std-ref">Core</span></a> instance using XML configuration file with plugins description.</p>
+<p>XML file has the following structure:</p>
+<div class="highlight"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">ie</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">plugins</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">plugin</span> <span class="n">name</span><span class="o">=</span><span class="s">&quot;&quot;</span> <span class="n">location</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="n">extensions</span><span class="o">&gt;</span>
+                <span class="o">&lt;</span><span class="n">extension</span> <span class="n">location</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="o">/&gt;</span>
+            <span class="o">&lt;/</span><span class="n">extensions</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="n">properties</span><span class="o">&gt;</span>
+                <span class="o">&lt;</span><span class="n">property</span> <span class="n">key</span><span class="o">=</span><span class="s">&quot;&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="o">/&gt;</span>
+            <span class="o">&lt;/</span><span class="n">properties</span><span class="o">&gt;</span>
+        <span class="o">&lt;/</span><span class="n">plugin</span><span class="o">&gt;</span>
+    <span class="o">&lt;/</span><span class="n">plugins</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">ie</span><span class="o">&gt;</span></pre></div></div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code> identifies name of device enabled by plugin</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">location</span></code> specifies absolute path to dynamic library with plugin. A path can also be relative to inference engine shared library. It allows to have common config for different systems with different configurations.</p></li>
+<li><p>Properties are set to plugin via the <code class="docutils literal notranslate"><span class="pre">SetConfig</span></code> method.</p></li>
+<li><p>Extensions are set to plugin via the <code class="docutils literal notranslate"><span class="pre">AddExtension</span></code> method.</p></li>
+</ul>
+<p class="rubric">Parameters:</p>
+<table class="colwidths-given table">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>xmlConfigFile</p></td>
+<td><p>A path to .xml file with plugins to register.</p></td>
+</tr>
+</tbody>
+</table>
+<span class="target" id="doxid-class-inference-engine-1-1-core-1afeaad400e079f7b24fe9106702215c7f"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><a class="reference internal" href="classInferenceEngine_1_1RemoteContext.html#doxid-class-inference-engine-1-1-remote-context-1adc79805c11b6939c51a794b90b8bfa93"><span class="std std-ref">RemoteContext::Ptr</span></a><span></span> <span class="n">CreateContext</span><span class="p">(</span>
+    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">deviceName</span><span class="p">,</span>
+    <span class="k">const</span> <a class="reference internal" href="namespaceInferenceEngine.html#doxid-namespace-inference-engine-1ab952963217c4a8b098fd90ba51708a9f"><span class="std std-ref">ParamMap</span></a><span></span><span class="o">&amp;</span> <span class="n">params</span>
+    <span class="p">)</span></pre></div></div><p>Create a new shared context object on specified accelerator device using specified plugin-specific low level device API parameters (device handle, pointer, etc.)</p>
+<p class="rubric">Parameters:</p>
+<table class="colwidths-given table">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>deviceName</p></td>
+<td><p>Name of a device to create new shared context on.</p></td>
+</tr>
+<tr class="row-even"><td><p>params</p></td>
+<td><p>Map of device-specific shared context parameters.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Returns:</p>
+<p>A shared pointer to a created remote context.</p>
+<span class="target" id="doxid-class-inference-engine-1-1-core-1a3f7e984891b16d3825d0184698562802"></span><div class="highlight doxyrest-title-code-block"><div class="highlight"><pre><a class="reference internal" href="classInferenceEngine_1_1RemoteContext.html#doxid-class-inference-engine-1-1-remote-context-1adc79805c11b6939c51a794b90b8bfa93"><span class="std std-ref">RemoteContext::Ptr</span></a><span></span> <span class="n">GetDefaultContext</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">deviceName</span><span class="p">)</span></pre></div></div><p>Get a pointer to default(plugin-supplied) shared context object for specified accelerator device.</p>
+<p class="rubric">Parameters:</p>
+<table class="colwidths-given table">
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>deviceName</p></td>
+<td><ul class="simple">
+<li><p>A name of a device to get create shared context from.</p></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Returns:</p>
+<p>A shared pointer to a default remote context.</p>
+</section>
+</section>
+</section>
+
+
+                </div>
+            
+            
+                <div class='prev-next-bottom'>
+                  
+
+                </div>
+            
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+<footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2021, Intel®.<br>
+</p>
+    </div>
+    
+    <div class="footer-item">
+      <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

@@ -4,7 +4,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>PaddleOCR with OpenVINO &#8212; OpenVINO™  documentation</title>
     
     
@@ -74,7 +75,7 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Model Zoo" href="../model_zoo.html" />
+    <link rel="next" title="API Reference" href="../api/api_reference.html" />
     <link rel="prev" title="Human Action Recognition with OpenVINO" href="403-action-recognition-webcam-with-output.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en">
@@ -127,6 +128,12 @@
 <li class="toctree-l1 nav-item">
  <a class="reference internal nav-link" href="../tutorials.html">
   Tutorials
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api/api_reference.html">
+  API Reference
  </a>
 </li>
 
@@ -547,7 +554,7 @@
             
                 <div>
                   
-  <div class="section" id="paddleocr-with-openvino">
+  <section id="paddleocr-with-openvino">
 <h1>PaddleOCR with OpenVINO<a class="headerlink" href="#paddleocr-with-openvino" title="Permalink to this headline">¶</a></h1>
 <p>This demo shows how to run PPOCR model on OpenVINO natively. Instead of
 exporting the PaddlePaddle model to ONNX and then convert to the
@@ -569,7 +576,7 @@ notebook on a computer with a webcam. If you run the notebook on a
 server, the webcam will not work. You can still do inference on a
 video.</em></p>
 </div></blockquote>
-<div class="section" id="imports">
+<section id="imports">
 <h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">os</span>
@@ -593,21 +600,21 @@ video.</em></p>
 <span class="kn">import</span> <span class="nn">pre_post_processing</span> <span class="k">as</span> <span class="nn">processing</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8</span><span class="o">.</span><span class="mi">12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">paddle</span><span class="o">/</span><span class="n">vision</span><span class="o">/</span><span class="n">transforms</span><span class="o">/</span><span class="n">functional_pil</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">36</span><span class="p">:</span> <span class="ne">DeprecationWarning</span><span class="p">:</span> <span class="n">NEAREST</span> <span class="ow">is</span> <span class="n">deprecated</span> <span class="ow">and</span> <span class="n">will</span> <span class="n">be</span> <span class="n">removed</span> <span class="ow">in</span> <span class="n">Pillow</span> <span class="mi">10</span> <span class="p">(</span><span class="mi">2023</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">01</span><span class="p">)</span><span class="o">.</span> <span class="n">Use</span> <span class="n">Resampling</span><span class="o">.</span><span class="n">NEAREST</span> <span class="ow">or</span> <span class="n">Dither</span><span class="o">.</span><span class="n">NONE</span> <span class="n">instead</span><span class="o">.</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">paddle</span><span class="o">/</span><span class="n">vision</span><span class="o">/</span><span class="n">transforms</span><span class="o">/</span><span class="n">functional_pil</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">36</span><span class="p">:</span> <span class="ne">DeprecationWarning</span><span class="p">:</span> <span class="n">NEAREST</span> <span class="ow">is</span> <span class="n">deprecated</span> <span class="ow">and</span> <span class="n">will</span> <span class="n">be</span> <span class="n">removed</span> <span class="ow">in</span> <span class="n">Pillow</span> <span class="mi">10</span> <span class="p">(</span><span class="mi">2023</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">01</span><span class="p">)</span><span class="o">.</span> <span class="n">Use</span> <span class="n">Resampling</span><span class="o">.</span><span class="n">NEAREST</span> <span class="ow">or</span> <span class="n">Dither</span><span class="o">.</span><span class="n">NONE</span> <span class="n">instead</span><span class="o">.</span>
   <span class="s1">&#39;nearest&#39;</span><span class="p">:</span> <span class="n">Image</span><span class="o">.</span><span class="n">NEAREST</span><span class="p">,</span>
-<span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8</span><span class="o">.</span><span class="mi">12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">paddle</span><span class="o">/</span><span class="n">vision</span><span class="o">/</span><span class="n">transforms</span><span class="o">/</span><span class="n">functional_pil</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">37</span><span class="p">:</span> <span class="ne">DeprecationWarning</span><span class="p">:</span> <span class="n">BILINEAR</span> <span class="ow">is</span> <span class="n">deprecated</span> <span class="ow">and</span> <span class="n">will</span> <span class="n">be</span> <span class="n">removed</span> <span class="ow">in</span> <span class="n">Pillow</span> <span class="mi">10</span> <span class="p">(</span><span class="mi">2023</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">01</span><span class="p">)</span><span class="o">.</span> <span class="n">Use</span> <span class="n">Resampling</span><span class="o">.</span><span class="n">BILINEAR</span> <span class="n">instead</span><span class="o">.</span>
+<span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">paddle</span><span class="o">/</span><span class="n">vision</span><span class="o">/</span><span class="n">transforms</span><span class="o">/</span><span class="n">functional_pil</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">37</span><span class="p">:</span> <span class="ne">DeprecationWarning</span><span class="p">:</span> <span class="n">BILINEAR</span> <span class="ow">is</span> <span class="n">deprecated</span> <span class="ow">and</span> <span class="n">will</span> <span class="n">be</span> <span class="n">removed</span> <span class="ow">in</span> <span class="n">Pillow</span> <span class="mi">10</span> <span class="p">(</span><span class="mi">2023</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">01</span><span class="p">)</span><span class="o">.</span> <span class="n">Use</span> <span class="n">Resampling</span><span class="o">.</span><span class="n">BILINEAR</span> <span class="n">instead</span><span class="o">.</span>
   <span class="s1">&#39;bilinear&#39;</span><span class="p">:</span> <span class="n">Image</span><span class="o">.</span><span class="n">BILINEAR</span><span class="p">,</span>
-<span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8</span><span class="o">.</span><span class="mi">12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">paddle</span><span class="o">/</span><span class="n">vision</span><span class="o">/</span><span class="n">transforms</span><span class="o">/</span><span class="n">functional_pil</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">38</span><span class="p">:</span> <span class="ne">DeprecationWarning</span><span class="p">:</span> <span class="n">BICUBIC</span> <span class="ow">is</span> <span class="n">deprecated</span> <span class="ow">and</span> <span class="n">will</span> <span class="n">be</span> <span class="n">removed</span> <span class="ow">in</span> <span class="n">Pillow</span> <span class="mi">10</span> <span class="p">(</span><span class="mi">2023</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">01</span><span class="p">)</span><span class="o">.</span> <span class="n">Use</span> <span class="n">Resampling</span><span class="o">.</span><span class="n">BICUBIC</span> <span class="n">instead</span><span class="o">.</span>
+<span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">paddle</span><span class="o">/</span><span class="n">vision</span><span class="o">/</span><span class="n">transforms</span><span class="o">/</span><span class="n">functional_pil</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">38</span><span class="p">:</span> <span class="ne">DeprecationWarning</span><span class="p">:</span> <span class="n">BICUBIC</span> <span class="ow">is</span> <span class="n">deprecated</span> <span class="ow">and</span> <span class="n">will</span> <span class="n">be</span> <span class="n">removed</span> <span class="ow">in</span> <span class="n">Pillow</span> <span class="mi">10</span> <span class="p">(</span><span class="mi">2023</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">01</span><span class="p">)</span><span class="o">.</span> <span class="n">Use</span> <span class="n">Resampling</span><span class="o">.</span><span class="n">BICUBIC</span> <span class="n">instead</span><span class="o">.</span>
   <span class="s1">&#39;bicubic&#39;</span><span class="p">:</span> <span class="n">Image</span><span class="o">.</span><span class="n">BICUBIC</span><span class="p">,</span>
-<span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8</span><span class="o">.</span><span class="mi">12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">paddle</span><span class="o">/</span><span class="n">vision</span><span class="o">/</span><span class="n">transforms</span><span class="o">/</span><span class="n">functional_pil</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">39</span><span class="p">:</span> <span class="ne">DeprecationWarning</span><span class="p">:</span> <span class="n">BOX</span> <span class="ow">is</span> <span class="n">deprecated</span> <span class="ow">and</span> <span class="n">will</span> <span class="n">be</span> <span class="n">removed</span> <span class="ow">in</span> <span class="n">Pillow</span> <span class="mi">10</span> <span class="p">(</span><span class="mi">2023</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">01</span><span class="p">)</span><span class="o">.</span> <span class="n">Use</span> <span class="n">Resampling</span><span class="o">.</span><span class="n">BOX</span> <span class="n">instead</span><span class="o">.</span>
+<span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">paddle</span><span class="o">/</span><span class="n">vision</span><span class="o">/</span><span class="n">transforms</span><span class="o">/</span><span class="n">functional_pil</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">39</span><span class="p">:</span> <span class="ne">DeprecationWarning</span><span class="p">:</span> <span class="n">BOX</span> <span class="ow">is</span> <span class="n">deprecated</span> <span class="ow">and</span> <span class="n">will</span> <span class="n">be</span> <span class="n">removed</span> <span class="ow">in</span> <span class="n">Pillow</span> <span class="mi">10</span> <span class="p">(</span><span class="mi">2023</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">01</span><span class="p">)</span><span class="o">.</span> <span class="n">Use</span> <span class="n">Resampling</span><span class="o">.</span><span class="n">BOX</span> <span class="n">instead</span><span class="o">.</span>
   <span class="s1">&#39;box&#39;</span><span class="p">:</span> <span class="n">Image</span><span class="o">.</span><span class="n">BOX</span><span class="p">,</span>
-<span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8</span><span class="o">.</span><span class="mi">12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">paddle</span><span class="o">/</span><span class="n">vision</span><span class="o">/</span><span class="n">transforms</span><span class="o">/</span><span class="n">functional_pil</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">40</span><span class="p">:</span> <span class="ne">DeprecationWarning</span><span class="p">:</span> <span class="n">LANCZOS</span> <span class="ow">is</span> <span class="n">deprecated</span> <span class="ow">and</span> <span class="n">will</span> <span class="n">be</span> <span class="n">removed</span> <span class="ow">in</span> <span class="n">Pillow</span> <span class="mi">10</span> <span class="p">(</span><span class="mi">2023</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">01</span><span class="p">)</span><span class="o">.</span> <span class="n">Use</span> <span class="n">Resampling</span><span class="o">.</span><span class="n">LANCZOS</span> <span class="n">instead</span><span class="o">.</span>
+<span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">paddle</span><span class="o">/</span><span class="n">vision</span><span class="o">/</span><span class="n">transforms</span><span class="o">/</span><span class="n">functional_pil</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">40</span><span class="p">:</span> <span class="ne">DeprecationWarning</span><span class="p">:</span> <span class="n">LANCZOS</span> <span class="ow">is</span> <span class="n">deprecated</span> <span class="ow">and</span> <span class="n">will</span> <span class="n">be</span> <span class="n">removed</span> <span class="ow">in</span> <span class="n">Pillow</span> <span class="mi">10</span> <span class="p">(</span><span class="mi">2023</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">01</span><span class="p">)</span><span class="o">.</span> <span class="n">Use</span> <span class="n">Resampling</span><span class="o">.</span><span class="n">LANCZOS</span> <span class="n">instead</span><span class="o">.</span>
   <span class="s1">&#39;lanczos&#39;</span><span class="p">:</span> <span class="n">Image</span><span class="o">.</span><span class="n">LANCZOS</span><span class="p">,</span>
-<span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8</span><span class="o">.</span><span class="mi">12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">paddle</span><span class="o">/</span><span class="n">vision</span><span class="o">/</span><span class="n">transforms</span><span class="o">/</span><span class="n">functional_pil</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">41</span><span class="p">:</span> <span class="ne">DeprecationWarning</span><span class="p">:</span> <span class="n">HAMMING</span> <span class="ow">is</span> <span class="n">deprecated</span> <span class="ow">and</span> <span class="n">will</span> <span class="n">be</span> <span class="n">removed</span> <span class="ow">in</span> <span class="n">Pillow</span> <span class="mi">10</span> <span class="p">(</span><span class="mi">2023</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">01</span><span class="p">)</span><span class="o">.</span> <span class="n">Use</span> <span class="n">Resampling</span><span class="o">.</span><span class="n">HAMMING</span> <span class="n">instead</span><span class="o">.</span>
+<span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.8.12</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.8</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">paddle</span><span class="o">/</span><span class="n">vision</span><span class="o">/</span><span class="n">transforms</span><span class="o">/</span><span class="n">functional_pil</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">41</span><span class="p">:</span> <span class="ne">DeprecationWarning</span><span class="p">:</span> <span class="n">HAMMING</span> <span class="ow">is</span> <span class="n">deprecated</span> <span class="ow">and</span> <span class="n">will</span> <span class="n">be</span> <span class="n">removed</span> <span class="ow">in</span> <span class="n">Pillow</span> <span class="mi">10</span> <span class="p">(</span><span class="mi">2023</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">01</span><span class="p">)</span><span class="o">.</span> <span class="n">Use</span> <span class="n">Resampling</span><span class="o">.</span><span class="n">HAMMING</span> <span class="n">instead</span><span class="o">.</span>
   <span class="s1">&#39;hamming&#39;</span><span class="p">:</span> <span class="n">Image</span><span class="o">.</span><span class="n">HAMMING</span>
 </pre></div>
 </div>
-<div class="section" id="models-for-paddleocr">
+<section id="models-for-paddleocr">
 <h3>Models for PaddleOCR<a class="headerlink" href="#models-for-paddleocr" title="Permalink to this headline">¶</a></h3>
 <p>PaddleOCR includes two parts of deep learning models, text detection and
 text recognition. Pre-trained models used in the demo are downloaded and
@@ -651,7 +658,7 @@ files to load onto the CPU.</p>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error Extracting the model. Please check the network.&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="section" id="download-the-model-for-text-detection">
+<section id="download-the-model-for-text-detection">
 <h4>Download the Model for Text <strong>Detection</strong><a class="headerlink" href="#download-the-model-for-text-detection" title="Permalink to this headline">¶</a></h4>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Directory where model will be downloaded</span>
 
@@ -663,11 +670,11 @@ files to load onto the CPU.</p>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Downloading</span> <span class="n">the</span> <span class="n">pre</span><span class="o">-</span><span class="n">trained</span> <span class="n">model</span><span class="o">...</span> <span class="n">May</span> <span class="n">take</span> <span class="n">a</span> <span class="k">while</span><span class="o">...</span>
 <span class="n">Model</span> <span class="n">Downloaded</span>
-<span class="n">Model</span> <span class="n">Extracted</span> <span class="n">to</span> <span class="n">model</span><span class="o">/</span><span class="n">ch_ppocr_mobile_v2</span><span class="o">.</span><span class="mi">0</span><span class="n">_det_infer</span><span class="o">/</span><span class="n">inference</span><span class="o">.</span><span class="n">pdmodel</span><span class="o">.</span>
+<span class="n">Model</span> <span class="n">Extracted</span> <span class="n">to</span> <span class="n">model</span><span class="o">/</span><span class="n">ch_ppocr_mobile_v2</span><span class="mf">.0</span><span class="n">_det_infer</span><span class="o">/</span><span class="n">inference</span><span class="o">.</span><span class="n">pdmodel</span><span class="o">.</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="load-the-model-for-text-detection">
+</section>
+<section id="load-the-model-for-text-detection">
 <h4>Load the Model for Text <strong>Detection</strong><a class="headerlink" href="#load-the-model-for-text-detection" title="Permalink to this headline">¶</a></h4>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># initialize inference engine for text detection</span>
 <span class="n">core</span> <span class="o">=</span> <span class="n">Core</span><span class="p">()</span>
@@ -679,8 +686,8 @@ files to load onto the CPU.</p>
 <span class="n">det_output_layer</span> <span class="o">=</span> <span class="n">det_compiled_model</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="download-the-model-for-text-recognition">
+</section>
+<section id="download-the-model-for-text-recognition">
 <h4>Download the Model for Text <strong>Recognition</strong><a class="headerlink" href="#download-the-model-for-text-recognition" title="Permalink to this headline">¶</a></h4>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rec_model_url</span> <span class="o">=</span> <span class="s2">&quot;https://paddleocr.bj.bcebos.com/dygraph_v2.0/ch/ch_ppocr_mobile_v2.0_rec_infer.tar&quot;</span>
 <span class="n">rec_model_file_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;model/ch_ppocr_mobile_v2.0_rec_infer/inference.pdmodel&quot;</span><span class="p">)</span>
@@ -690,11 +697,11 @@ files to load onto the CPU.</p>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Downloading</span> <span class="n">the</span> <span class="n">pre</span><span class="o">-</span><span class="n">trained</span> <span class="n">model</span><span class="o">...</span> <span class="n">May</span> <span class="n">take</span> <span class="n">a</span> <span class="k">while</span><span class="o">...</span>
 <span class="n">Model</span> <span class="n">Downloaded</span>
-<span class="n">Model</span> <span class="n">Extracted</span> <span class="n">to</span> <span class="n">model</span><span class="o">/</span><span class="n">ch_ppocr_mobile_v2</span><span class="o">.</span><span class="mi">0</span><span class="n">_rec_infer</span><span class="o">/</span><span class="n">inference</span><span class="o">.</span><span class="n">pdmodel</span><span class="o">.</span>
+<span class="n">Model</span> <span class="n">Extracted</span> <span class="n">to</span> <span class="n">model</span><span class="o">/</span><span class="n">ch_ppocr_mobile_v2</span><span class="mf">.0</span><span class="n">_rec_infer</span><span class="o">/</span><span class="n">inference</span><span class="o">.</span><span class="n">pdmodel</span><span class="o">.</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="load-the-model-for-text-recognition-with-dynamic-shape">
+</section>
+<section id="load-the-model-for-text-recognition-with-dynamic-shape">
 <h4>Load the Model for Text <strong>Recognition</strong> with Dynamic Shape<a class="headerlink" href="#load-the-model-for-text-recognition-with-dynamic-shape" title="Permalink to this headline">¶</a></h4>
 <p>Input to text recognition model refers to detected bounding boxes with
 different image sizes, i.e, dynamic input shapes. Hence:</p>
@@ -721,9 +728,9 @@ Dimension(1, 512)</p></li>
 <span class="n">rec_output_layer</span> <span class="o">=</span> <span class="n">rec_compiled_model</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="preprocessing-image-functions-for-text-detection-and-recognition">
+</section>
+</section>
+<section id="preprocessing-image-functions-for-text-detection-and-recognition">
 <h3>Preprocessing image functions for text detection and recognition<a class="headerlink" href="#preprocessing-image-functions-for-text-detection-and-recognition" title="Permalink to this headline">¶</a></h3>
 <p>Define preprosessing functions for text detection and recognition: 1.
 Preprocessing for text detection: resize and normalize input images 2.
@@ -827,8 +834,8 @@ text) for easy batching in inference</p>
     <span class="k">return</span> <span class="n">norm_img_batch</span><span class="p">,</span> <span class="n">rec_res</span><span class="p">,</span> <span class="n">indices</span><span class="p">,</span> <span class="n">beg_img_no</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="postprocessing-image-for-text-detection">
+</section>
+<section id="postprocessing-image-for-text-detection">
 <h3>Postprocessing image for text detection<a class="headerlink" href="#postprocessing-image-for-text-detection" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">post_processing_detection</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">det_results</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -865,8 +872,8 @@ text) for easy batching in inference</p>
     <span class="k">return</span> <span class="n">dt_boxes</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="main-processing-function-for-paddleocr">
+</section>
+<section id="main-processing-function-for-paddleocr">
 <h3>Main processing function for PaddleOCR<a class="headerlink" href="#main-processing-function-for-paddleocr" title="Permalink to this headline">¶</a></h3>
 <p>Run paddleOCR function in different operations, either a webcam or a
 video file. See the list of procedures below:</p>
@@ -1004,9 +1011,9 @@ video file. See the list of procedures below:</p>
             <span class="n">cv2</span><span class="o">.</span><span class="n">destroyAllWindows</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="run-live-paddleocr-with-openvino">
+</section>
+</section>
+<section id="run-live-paddleocr-with-openvino">
 <h2>Run Live PaddleOCR with OpenVINO<a class="headerlink" href="#run-live-paddleocr-with-openvino" title="Permalink to this headline">¶</a></h2>
 <p>Run using a webcam as the video input. By default, the primary webcam is
 set with <code class="docutils literal notranslate"><span class="pre">source=0</span></code>. If you have multiple webcams, each one will be
@@ -1035,8 +1042,8 @@ will work.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Source</span> <span class="n">ended</span>
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
                 </div>
@@ -1045,7 +1052,7 @@ will work.</p>
                 <div class='prev-next-bottom'>
                   
     <a class='button bttn-sec button-size-l' id="prev-link" href="403-action-recognition-webcam-with-output.html" title="previous page">Prev</a>
-    <a class='button bttn-sec button-size-l' id="next-link" href="../model_zoo.html" title="next page">Next</a>
+    <a class='button bttn-sec button-size-l' id="next-link" href="../api/api_reference.html" title="next page">Next</a>
 
                 </div>
             
@@ -1067,7 +1074,7 @@ will work.</p>
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br>
 </p>
     </div>
     
